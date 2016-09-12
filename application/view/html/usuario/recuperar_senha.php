@@ -1,0 +1,20 @@
+<?php require_once(RAIZ.'/application/view/src/usuario/recuperar_senha.php'); ?>
+<?php use application\view\src\usuario\Recuperar_Senha; ?>
+<!DOCTYPE HTML>
+<html lang="PT-BR">
+<head>
+	<?php include_once(RAIZ.'/application/view/html/include_page/head.php'); ?>
+	<title>Recuperar-Senha | Feralten</title>
+</head>
+<body>
+    <header>
+        <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>    
+    </header>
+    <section class="ui container" role="main">
+		
+    </section>
+    <footer>
+        <?php include_once(RAIZ.'/application/view/html/include_page/rodape.php'); ?>
+    </footer>
+</body>
+</html>

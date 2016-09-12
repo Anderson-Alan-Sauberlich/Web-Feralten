@@ -1,0 +1,14 @@
+{
+    "name": "Feralten",
+    "description": "Site de Publicidade",
+    "authors": [
+        {
+            "name": "Anderson Alan Sauberlich",
+            "email": "andersonalansauberlich@outlook.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8",
+		"slim/slim": "*"
+    }
+}
