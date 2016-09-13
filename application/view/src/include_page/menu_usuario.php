@@ -2,14 +2,12 @@
 namespace application\view\src\include_page;
 
     require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
     
     use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
     
     @session_start();
-
-    new Menu_Usuario();
 
     class Menu_Usuario {
 
@@ -28,16 +26,16 @@ namespace application\view\src\include_page;
             
 			if ($status == null) {
 				if (empty($_SESSION['menu']['cadastro_incompleto'])) {
-			    	include_once($_SERVER['DOCUMENT_ROOT']."/include-page/mensagens/cadastro-incompleto.php");
+			    	include_once(RAIZ.'application/view/html/include_page/mensagens/cadastro_incompleto.php');
 				}
 				
 				unset($_SESSION['menu']);
 			} else if ($status == 1) {
 				unset($_SESSION['menu']);
 			} else if ($status == 2) {
-				include_once($_SERVER['DOCUMENT_ROOT']."/include-page/mensagens/pagamento-atrasado.php");
+				include_once(RAIZ.'application/view/html/include_page/mensagens/pagamento_atrasado.php');
 			} else if ($status == 3) {
-				include_once($_SERVER['DOCUMENT_ROOT']."/include-page/mensagens/conta-desativada.php");
+				include_once(RAIZ.'application/view/html/include_page/mensagens/conta_desativada.php');
 			}
 			
 			

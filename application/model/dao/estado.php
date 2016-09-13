@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_estado.php');
+    require_once(RAIZ.'/application/model/object/estado.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Estado;
+    use application\model\object\Estado as Object_Estado;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Estado {
+    class Estado {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Estado $estado) {
+        public static function Inserir(Object_Estado $object_estado) {
             try {
                                  
                 $sql = "INSERT INTO tb_estado (estado_id, estado_uf, estado_nome) 
@@ -23,9 +23,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $estado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":uf", $estado->get_uf(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $estado->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_estado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":uf", $object_estado->get_uf(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_estado->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
                 
@@ -34,7 +34,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Editar(Estado $estado) {
+        public static function Editar(Object_Estado $object_estado) {
             try {
                 $sql = "UPDATE tb_estado SET
                 estado_id = :id,
@@ -44,9 +44,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $estado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":uf", $estado->get_uf(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $estado->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_estado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":uf", $object_estado->get_uf(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_estado->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -98,13 +98,13 @@ namespace application\model\dao;
             $estados = array();
             
             foreach ($rows as $row) {
-                $estado = new Estado();
+                $object_estado = new Object_Estado();
                 
-                $estado->set_id($row['estado_id']);
-                $estado->set_uf($row['estado_uf']);
-                $estado->set_nome($row['estado_nome']);
+                $object_estado->set_id($row['estado_id']);
+                $object_estado->set_uf($row['estado_uf']);
+                $object_estado->set_nome($row['estado_nome']);
                 
-                $estados[] = $estado;
+                $estados[] = $object_estado;
             }
             
             return $estados;

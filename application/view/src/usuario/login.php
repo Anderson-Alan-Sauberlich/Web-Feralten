@@ -2,14 +2,12 @@
 namespace application\view\src\usuario;
 
     require_once(RAIZ.'/application/controller/usuario/login.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
 
     use application\controller\usuario\Login as Controller_Login;
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
 
     @session_start();
-
-    new Login();
 
     class Login {
 
@@ -17,6 +15,10 @@ namespace application\view\src\usuario;
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->Autenticar();
             }
+        }
+        
+        public static function Carregar_Pagina_HTML() {
+        	require_once(RAIZ.'/application/view/html/usuario/login.php');
         }
         
         private function Salvar_Post() {

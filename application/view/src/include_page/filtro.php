@@ -7,8 +7,6 @@ namespace application\view\src\include_page;
 
 	@session_start();
 	
-	new Filtro();
-	
 	class Filtro {
 		
 	    function __construct() {

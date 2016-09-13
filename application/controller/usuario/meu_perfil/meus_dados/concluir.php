@@ -1,24 +1,24 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/object/class_dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_endereco.php');
-    require_once(RAIZ.'/application/model/object/class_contato.php');
-    require_once(RAIZ.'/application/model/dao/dao_contato.php');
-	require_once(RAIZ.'/application/model/dao/dao_endereco.php');
-	require_once(RAIZ.'/application/model/dao/dao_dados_usuario.php');
-    require_once(RAIZ.'/application/model/dao/dao_estado.php');
-    require_once(RAIZ.'/application/model/dao/dao_cidade.php');
+    require_once(RAIZ.'/application/model/object/dados_usuario.php');
+    require_once(RAIZ.'/application/model/object/endereco.php');
+    require_once(RAIZ.'/application/model/object/contato.php');
+    require_once(RAIZ.'/application/model/dao/contato.php');
+	require_once(RAIZ.'/application/model/dao/endereco.php');
+	require_once(RAIZ.'/application/model/dao/dados_usuario.php');
+    require_once(RAIZ.'/application/model/dao/estado.php');
+    require_once(RAIZ.'/application/model/dao/cidade.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
     
-    use application\model\object\Dados_Usuario;
-    use application\model\object\Endereco;
-    use application\model\object\Contato;
-    use application\model\dao\DAO_Contato;
-	use application\model\dao\DAO_Dados_Usuario;
-	use application\model\dao\DAO_Endereco;
-    use application\model\dao\DAO_Estado;
-    use application\model\dao\DAO_Cidade;
+    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\object\Endereco as Object_Endereco;
+    use application\model\object\Contato as Object_Contato;
+    use application\model\dao\Contato as DAO_Contato;
+	use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
+	use application\model\dao\Endereco as DAO_Endereco;
+    use application\model\dao\Estado as DAO_Estado;
+    use application\model\dao\Cidade as DAO_Cidade;
     use application\model\util\Gerenciar_Imagens;
 	
     @session_start;
@@ -31,7 +31,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         private static $erros_concluir;
         
-        public static function Cadastrar(Contato $contato, Endereco $endereco, Dados_Usuario $dados_usuario) {
+        public static function Cadastrar(Object_Contato $contato, Object_Endereco $endereco, Object_Dados_Usuario $dados_usuario) {
            	self::$erros_concluir = array();
             $cnclr_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo", 'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
             

@@ -1,11 +1,13 @@
 <?php
 namespace application\controller\usuario;
 
-    require_once(RAIZ.'/application/model/dao/dao_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/dao/usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/view/src/usuario/login.php');
 
-    use application\model\object\Usuario;
-    use application\model\dao\DAO_Usuario;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\dao\Usuario as DAO_Usuario;
+    use application\view\src\usuario\Login as View_Login;
 
     @session_start();
 
@@ -13,6 +15,10 @@ namespace application\controller\usuario;
 
         function __construct() {
             
+        }
+        
+        public static function Mostrar_Pagina() {
+        	View_Login::Carregar_Pagina_HTML();
         }
 		
 		public static function Autenticar_Usuario_Cookie($id_usuario, $token) {

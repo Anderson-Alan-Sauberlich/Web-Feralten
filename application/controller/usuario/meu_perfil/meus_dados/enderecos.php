@@ -1,21 +1,21 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-	require_once(RAIZ.'/application/model/object/class_endereco.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_cidade.php');
-    require_once(RAIZ.'/application/model/dao/dao_cidade.php');
-	require_once(RAIZ.'/application/model/dao/dao_endereco.php');
-    require_once(RAIZ.'/application/model/dao/dao_estado.php');
-	require_once(RAIZ.'/application/model/object/class_estado.php');
+	require_once(RAIZ.'/application/model/object/endereco.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/cidade.php');
+    require_once(RAIZ.'/application/model/object/estado.php');
+    require_once(RAIZ.'/application/model/dao/cidade.php');
+	require_once(RAIZ.'/application/model/dao/endereco.php');
+    require_once(RAIZ.'/application/model/dao/estado.php');
 	
-	use application\model\object\Endereco;
-    use application\model\object\Usuario;
-    use application\model\object\Cidade;
-	use application\model\object\Estado;
-	use application\model\dao\DAO_Endereco;
-    use application\model\dao\DAO_Cidade;
-    use application\model\dao\DAO_Estado;
+	use application\model\object\Endereco as Object_Endereco;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Cidade as Object_Cidade;
+	use application\model\object\Estado as Object_Estado;
+	use application\model\dao\Endereco as DAO_Endereco;
+    use application\model\dao\Cidade as DAO_Cidade;
+    use application\model\dao\Estado as DAO_Estado;
 
     @session_start;
 
@@ -25,7 +25,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
 		
-        public static function Atualizar_Endereco(Endereco $endereco) {
+        public static function Atualizar_Endereco(Object_Endereco $endereco) {
             $erros_enderecos = array();
             $enderecos_campos = array('erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo", 'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo");
             
@@ -66,7 +66,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Cidade() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -84,7 +84,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Numero() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -102,7 +102,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Estado() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -120,7 +120,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_CEP() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -138,7 +138,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Bairro() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -156,7 +156,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Complemento() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -174,7 +174,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 
         public static function Pegar_Endereco_Rua() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             if (isset($_SESSION['endereco'])) {
                 $endereco = $_SESSION['endereco'];
@@ -191,7 +191,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
         }
 
-        private function Pegar_Endereco(Endereco $endereco) {
+        private function Pegar_Endereco(Object_Endereco $endereco) {
             $endereco = DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
             
             $_SESSION['endereco'] = $endereco;

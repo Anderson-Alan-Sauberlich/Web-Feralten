@@ -2,14 +2,12 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
     
     use application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha as Controller_Alterar_Senha;
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
     
     @session_start();
-    
-    new Alterar_Senha();
     
     class Alterar_Senha {
     

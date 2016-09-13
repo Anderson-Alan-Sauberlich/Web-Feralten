@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_status_usuario.php');
+    require_once(RAIZ.'/application/model/object/status_usuario.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
 
-    use application\model\object\Status_Usuario;
+    use application\model\object\Status_Usuario as Object_Status_Usuario;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Status_Usuario {
+    class Status_Usuario {
         
         function __construct() {
             
         }
         
-        public static function Inserir(Status_Usuario $status) {
+        public static function Inserir(Object_Status_Usuario $object_status_usuario) {
             try {
                                  
                 $sql = "INSERT INTO tb_status_usuario (status_usuario_id, status_usuario_nome, status_usuario_descricao) 
@@ -23,9 +23,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $status->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $status->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":descricao", $status->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_status_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_status_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":descricao", $object_status_usuario->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
                 
@@ -34,7 +34,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Editar(Status_Usuario $status) {
+        public static function Editar(Object_Status_Usuario $status) {
             try {
                 $sql = "UPDATE tb_status_usuario SET
                 status_usuario_id = :id,
@@ -44,9 +44,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $status->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $status->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":descricao", $status->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_status_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_status_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":descricao", $object_status_usuario->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -82,11 +82,13 @@ namespace application\model\dao;
         }
         
         private function PopulaStatus($row) {
-            $status = new Status_Usuario();
-            $status->set_id($row['status_usuario_id']);
-            $status->set_nome($row['status_usuario_nome']);
-            $status->set_descricao($row['status_usuario_descricao']);
-            return $status;
+            $object_status_usuario = new Object_Status_Usuario();
+            
+            $object_status_usuario->set_id($row['status_usuario_id']);
+            $object_status_usuario->set_nome($row['status_usuario_nome']);
+            $object_status_usuario->set_descricao($row['status_usuario_descricao']);
+            
+            return $object_status_usuario;
         }                
     }
 ?>

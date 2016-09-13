@@ -1,64 +1,64 @@
 <?php
 namespace application\controller\usuario\meu_perfil\auto_pecas;
 
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_categoria.php');
-    require_once(RAIZ.'/application/model/object/class_marca.php');
-    require_once(RAIZ.'/application/model/object/class_modelo.php');
-	require_once(RAIZ.'/application/model/object/class_versao.php');
-	require_once(RAIZ.'/application/model/object/class_categoria_compativel.php');
-	require_once(RAIZ.'/application/model/object/class_marca_compativel.php');
-	require_once(RAIZ.'/application/model/object/class_modelo_compativel.php');
-	require_once(RAIZ.'/application/model/object/class_versao_compativel.php');
-	require_once(RAIZ.'/application/model/object/class_peca.php');
-	require_once(RAIZ.'/application/model/object/class_lista_pativel.php');
-	require_once(RAIZ.'/application/model/object/class_contato.php');
-	require_once(RAIZ.'/application/model/object/class_endereco.php');
-	require_once(RAIZ.'/application/model/object/class_foto_peca.php');
-    require_once(RAIZ.'/application/model/dao/dao_categoria.php');
-    require_once(RAIZ.'/application/model/dao/dao_marca.php');
-    require_once(RAIZ.'/application/model/dao/dao_modelo.php');
-    require_once(RAIZ.'/application/model/dao/dao_versao.php');
-    require_once(RAIZ.'/application/model/dao/dao_categoria_compativel.php');
-    require_once(RAIZ.'/application/model/dao/dao_marca_compativel.php');
-    require_once(RAIZ.'/application/model/dao/dao_modelo_compativel.php');
-    require_once(RAIZ.'/application/model/dao/dao_versao_compativel.php');
-	require_once(RAIZ.'/application/model/dao/dao_status_peca.php');
-	require_once(RAIZ.'/application/model/dao/dao_lista_pativel.php');
-	require_once(RAIZ.'/application/model/dao/dao_peca.php');
-	require_once(RAIZ.'/application/model/dao/dao_contato.php');
-	require_once(RAIZ.'/application/model/dao/dao_endereco.php');
-	require_once(RAIZ.'/application/model/dao/dao_foto_peca.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/categoria.php');
+    require_once(RAIZ.'/application/model/object/marca.php');
+    require_once(RAIZ.'/application/model/object/modelo.php');
+	require_once(RAIZ.'/application/model/object/versao.php');
+	require_once(RAIZ.'/application/model/object/categoria_compativel.php');
+	require_once(RAIZ.'/application/model/object/marca_compativel.php');
+	require_once(RAIZ.'/application/model/object/modelo_compativel.php');
+	require_once(RAIZ.'/application/model/object/versao_compativel.php');
+	require_once(RAIZ.'/application/model/object/peca.php');
+	require_once(RAIZ.'/application/model/object/lista_pativel.php');
+	require_once(RAIZ.'/application/model/object/contato.php');
+	require_once(RAIZ.'/application/model/object/endereco.php');
+	require_once(RAIZ.'/application/model/object/foto_peca.php');
+    require_once(RAIZ.'/application/model/dao/categoria.php');
+    require_once(RAIZ.'/application/model/dao/marca.php');
+    require_once(RAIZ.'/application/model/dao/modelo.php');
+    require_once(RAIZ.'/application/model/dao/versao.php');
+    require_once(RAIZ.'/application/model/dao/categoria_compativel.php');
+    require_once(RAIZ.'/application/model/dao/marca_compativel.php');
+    require_once(RAIZ.'/application/model/dao/modelo_compativel.php');
+    require_once(RAIZ.'/application/model/dao/versao_compativel.php');
+	require_once(RAIZ.'/application/model/dao/status_peca.php');
+	require_once(RAIZ.'/application/model/dao/lista_pativel.php');
+	require_once(RAIZ.'/application/model/dao/peca.php');
+	require_once(RAIZ.'/application/model/dao/contato.php');
+	require_once(RAIZ.'/application/model/dao/endereco.php');
+	require_once(RAIZ.'/application/model/dao/foto_peca.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
 	
-    use application\model\object\Usuario;
-    use application\model\object\Categoria;
-    use application\model\object\Marca;
-    use application\model\object\Modelo;
-	use application\model\object\Versao;
-	use application\model\object\Categoria_Compativel;
-	use application\model\object\Marca_Compativel;
-	use application\model\object\Modelo_Compativel;
-	use application\model\object\Versao_Compativel;
-	use application\model\object\Peca;
-	use application\model\object\Lista_Pativel;
-	use application\model\object\Contato;
-	use application\model\object\Endereco;
-	use application\model\object\Foto_Peca;
-    use application\model\dao\DAO_Categoria;
-    use application\model\dao\DAO_Marca;
-    use application\model\dao\DAO_Modelo;
-    use application\model\dao\DAO_Versao;
-    use application\model\dao\DAO_Categoria_Compativel;
-    use application\model\dao\DAO_Marca_Compativel;
-    use application\model\dao\DAO_Modelo_Compativel;
-    use application\model\dao\DAO_Versao_Compativel;
-	use application\model\dao\DAO_Status_Peca;
-	use application\model\dao\DAO_Peca;
-	use application\model\dao\DAO_Lista_Pativel;
-	use application\model\dao\DAO_Contato;
-	use application\model\dao\DAO_Endereco;
-	use application\model\dao\DAO_Foto_Peca;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Categoria as Object_Categoria;
+    use application\model\object\Marca as Object_Marca;
+    use application\model\object\Modelo as Object_Modelo;
+	use application\model\object\Versao as Object_Versao;
+	use application\model\object\Categoria_Compativel as Object_Categoria_Compativel;
+	use application\model\object\Marca_Compativel as Object_Marca_Compativel;
+	use application\model\object\Modelo_Compativel as Object_Modelo_Compativel;
+	use application\model\object\Versao_Compativel as Object_Versao_Compativel;
+	use application\model\object\Peca as Object_Peca;
+	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
+	use application\model\object\Contato as Object_Contato;
+	use application\model\object\Endereco as Object_Endereco;
+	use application\model\object\Foto_Peca as Object_Foto_Peca;
+    use application\model\dao\Categoria as DAO_Categoria;
+    use application\model\dao\Marca as DAO_Marca;
+    use application\model\dao\Modelo as DAO_Modelo;
+    use application\model\dao\Versao as DAO_Versao;
+    use application\model\dao\Categoria_Compativel as DAO_Categoria_Compativel;
+    use application\model\dao\Marca_Compativel as DAO_Marca_Compativel;
+    use application\model\dao\Modelo_Compativel as DAO_Modelo_Compativel;
+    use application\model\dao\Versao_Compativel as DAO_Versao_Compativel;
+	use application\model\dao\Status_Peca as DAO_Status_Peca;
+	use application\model\dao\Peca as DAO_Peca;
+	use application\model\dao\Lista_Pativel as DAO_Lista_Pativel;
+	use application\model\dao\Contato as DAO_Contato;
+	use application\model\dao\Endereco as DAO_Endereco;
+	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
 	
 	@session_start();
@@ -69,7 +69,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
             
         }
 		
-		public static function Cadastrar(Peca $peca, $pativeis) {
+		public static function Cadastrar(Object_Peca $peca, $pativeis) {
 			$erros_cadastrar_peca = array();
 			$sucesso_cadastrar_peca = array();
 			$campos_cadastrar_peca = array('erro_peca' => "certo");
@@ -126,7 +126,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 						$indice = 0;
 						
 						foreach ($diretorios_imagens as $diretorio) {
-							$foto_peca = new Foto_Peca();
+							$foto_peca = new Object_Foto_Peca();
 							$indice++;
 							
 							$foto_peca->set_peca_id($id_peca);
@@ -148,22 +148,6 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				
 				return false;
 			}
-		}
-
-		public static function Cadastrar_Nova_Marca(Marca $marca) {
-			DAO_Marca::Inserir($marca);
-		}
-		
-		public static function Cadastrar_Novo_Modelo(Modelo $modelo) {
-			DAO_Modelo::Inserir($modelo);
-		}
-		
-		public static function Verificar_Limite_Nova_Marca() {
-			return true;
-		}
-		
-		public static function Verificar_Limite_Novo_Modelo() {
-			return true;
 		}
 		
 		public static function Salvar_Imagem_TMP($arquivo) {

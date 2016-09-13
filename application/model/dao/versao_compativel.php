@@ -1,29 +1,29 @@
 <?php
 namespace application\model\dao;
 	
-	require_once(RAIZ.'/application/model/object/class_versao_compativel.php');
+	require_once(RAIZ.'/application/model/object/versao_compativel.php');
 	require_once(RAIZ.'/application/model/util/conexao.php');
 	
-	use application\model\object\Versao_Compativel;
+	use application\model\object\Versao_Compativel as Object_Versao_Compativel;
 	use application\model\util\Conexao;
 	use \PDO;
 	use \PDOException;
 	
-	class DAO_Versao_Compativel {
+	class Versao_Compativel {
 	
 		function __construct() {
 	
 		}
 	
-		public static function Inserir(Versao_Compativel $versao_compativel) {
+		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) {
 			try {
 				$sql = "INSERT INTO tb_versao_compativel (versao_compativel_da_id_vs, versao_compativel_com_id_vs)
 	                    VALUES (:da_id, :com_id);";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 	
-				$p_sql->bindValue(":da_id", $versao_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $versao_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":da_id", $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":com_id", $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 	
@@ -32,14 +32,14 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Versao_Compativel $versao_compativel) {
+		public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) {
 			try {
 				$sql = "UPDATE tb_versao_compativel SET versao_compativel_da_id_vs = :da_id, versao_compativel_com_id_vs = :com_id WHERE versao_compativel_da_id_vs = :da_id";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 	
-				$p_sql->bindValue(":da_id", $versao_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $versao_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":da_id", $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":com_id", $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (Exception $e) {
@@ -88,12 +88,12 @@ namespace application\model\dao;
 		}
 	
 		private function PopulaVersaoCompativel($row) {
-			$versao_compativel = new Versao_Compativel();
+			$object_versao_compativel = new Object_Versao_Compativel();
 	
-			$versao_compativel->set_da_id($row['versao_compativel_da_id_vs']);
-			$versao_compativel->set_com_id($row['versao_compativel_com_id_vs']);
+			$object_versao_compativel->set_da_id($row['versao_compativel_da_id_vs']);
+			$object_versao_compativel->set_com_id($row['versao_compativel_com_id_vs']);
 	
-			return $versao_compativel;
+			return $object_versao_compativel;
 		}
 	
 		private function PopulaVersoesCompativeis($rows) {

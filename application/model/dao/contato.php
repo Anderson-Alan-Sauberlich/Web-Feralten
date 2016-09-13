@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_contato.php');
+    require_once(RAIZ.'/application/model/object/contato.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Contato;
+    use application\model\object\Contato as Object_Contato;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Contato {
+    class Contato {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Contato $contato) {
+        public static function Inserir(Object_Contato $object_contato) {
             try {
                 
                 $sql = "INSERT INTO tb_contato (contato_id, contato_du_us_id, contato_telefone1, contato_telefone2, contato_email) 
@@ -23,11 +23,11 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(":id", $contato->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":du_ud_id", $contato->get_dados_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":fone1", $contato->get_telefone1(), PDO::PARAM_STR);
-                $p_sql->bindValue(":fone2", $contato->get_telefone2(), PDO::PARAM_STR);
-                $p_sql->bindValue(":email", $contato->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_contato->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":du_ud_id", $object_contato->get_dados_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":fone1", $object_contato->get_telefone1(), PDO::PARAM_STR);
+                $p_sql->bindValue(":fone2", $object_contato->get_telefone2(), PDO::PARAM_STR);
+                $p_sql->bindValue(":email", $object_contato->get_email(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
                 
@@ -36,7 +36,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Contato $contato) {
+        public static function Atualizar(Object_Contato $object_contato) {
             try {
                 $sql = "UPDATE tb_contato SET
                 contato_telefone1 = :fone1, 
@@ -46,10 +46,10 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(":du_ud_id", $contato->get_dados_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":fone1", $contato->get_telefone1(), PDO::PARAM_STR);
-                $p_sql->bindValue(":fone2", $contato->get_telefone2(), PDO::PARAM_STR);
-                $p_sql->bindValue(":email", $contato->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(":du_ud_id", $object_contato->get_dados_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":fone1", $object_contato->get_telefone1(), PDO::PARAM_STR);
+                $p_sql->bindValue(":fone2", $object_contato->get_telefone2(), PDO::PARAM_STR);
+                $p_sql->bindValue(":email", $object_contato->get_email(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -85,15 +85,15 @@ namespace application\model\dao;
         }
         
         private function PopulaCategoria($row) {
-            $contato = new Contato();
+            $object_contato = new Object_Contato();
             
-            $contato->set_id($row['contato_id']);
-            $contato->set_dados_usuario_id($row['contato_du_us_id']);
-            $contato->set_telefone1($row['contato_telefone1']);
-            $contato->set_telefone2($row['contato_telefone2']);
-            $contato->set_email($row['contato_email']);
+            $object_contato->set_id($row['contato_id']);
+            $object_contato->set_dados_usuario_id($row['contato_du_us_id']);
+            $object_contato->set_telefone1($row['contato_telefone1']);
+            $object_contato->set_telefone2($row['contato_telefone2']);
+            $object_contato->set_email($row['contato_email']);
             
-            return $contato;
+            return $object_contato;
         }
     }
 ?>

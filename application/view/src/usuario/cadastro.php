@@ -2,14 +2,12 @@
 namespace application\view\src\usuario;
 
     require_once(RAIZ.'/application/controller/usuario/cadastro.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
 
     use application\controller\usuario\Cadastro as Controller_Cadastro;
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
 
     @session_start();
-
-    new Cadastro();
 
     class Cadastro {
 
@@ -31,7 +29,7 @@ namespace application\view\src\usuario;
         }
 
         private function Cadastrar() {
-            $usuario = new Usuario();
+            $usuario = new Object_Usuario();
             
             $usuario->set_id(0);
             $usuario->set_nome($_POST['nome']);

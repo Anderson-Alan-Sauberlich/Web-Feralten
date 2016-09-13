@@ -1,20 +1,20 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/object/class_dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_contato.php');
-    require_once(RAIZ.'/application/model/dao/dao_usuario.php');
-    require_once(RAIZ.'/application/model/dao/dao_dados_usuario.php');
-    require_once(RAIZ.'/application/model/dao/dao_contato.php');
+    require_once(RAIZ.'/application/model/object/dados_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/contato.php');
+    require_once(RAIZ.'/application/model/dao/usuario.php');
+    require_once(RAIZ.'/application/model/dao/dados_usuario.php');
+    require_once(RAIZ.'/application/model/dao/contato.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
     
-    use application\model\object\Usuario;
-    use application\model\object\Dados_Usuario;
-    use application\model\object\Contato;
-    use application\model\dao\DAO_Usuario;
-    use application\model\dao\DAO_Contato;
-    use application\model\dao\DAO_Dados_Usuario;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\object\Contato as Object_Contato;
+    use application\model\dao\Usuario as DAO_Usuario;
+    use application\model\dao\Contato as DAO_Contato;
+    use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\util\Gerenciar_Imagens;
     
     @session_start;
@@ -27,7 +27,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         private static $erros_dadosusuario;
         
-        public static function Atualizar_Contato(Contato $contato) {
+        public static function Atualizar_Contato(Object_Contato $contato) {
             $erros_contato = array();
             $alt_campos = array('erro_fone1' => "certo");
             
@@ -47,7 +47,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             $_SESSION['alt_campos'] = $alt_campos;
         }
         
-        public static function Atualizar_DadosUsuario(Dados_Usuario $dados_usuario) {
+        public static function Atualizar_DadosUsuario(Object_Dados_Usuario $dados_usuario) {
             self::$erros_dadosusuario = array();
             $alt_campos = array('erro_cpf_cnpj' => "certo");
             
@@ -78,7 +78,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             $_SESSION['alt_campos'] = $alt_campos;
         }
         
-        public static function Atualizar_Usuario(Usuario $usuario) {
+        public static function Atualizar_Usuario(Object_Usuario $usuario) {
             $erros_usuario = array();
             $alt_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' =>  "certo");
             
@@ -124,7 +124,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_DadosUsuario_Nome() {
-            $dados_usuario = new Dados_Usuario();
+            $dados_usuario = new Object_Dados_Usuario();
             
             if (isset($_SESSION['dados_usuario'])) {
                 $dados_usuario = $_SESSION['dados_usuario'];
@@ -142,7 +142,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_DadosUsuario_CPF_CNPJ() {
-            $dados_usuario = new Dados_Usuario();
+            $dados_usuario = new Object_Dados_Usuario();
             
             if (isset($_SESSION['dados_usuario'])) {
                 $dados_usuario = $_SESSION['dados_usuario'];
@@ -160,7 +160,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_DadosUsuario_Imagem() {
-            $dados_usuario = new Dados_Usuario();
+            $dados_usuario = new Object_Dados_Usuario();
             
             if (isset($_SESSION['dados_usuario'])) {
                 $dados_usuario = $_SESSION['dados_usuario'];
@@ -178,7 +178,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_DadosUsuario_Site() {
-            $dados_usuario = new Dados_Usuario();
+            $dados_usuario = new Object_Dados_Usuario();
             
             if (isset($_SESSION['dados_usuario'])) {
                 $dados_usuario = $_SESSION['dados_usuario'];
@@ -196,7 +196,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_Contato_Fone1() {
-            $contato = new Contato();
+            $contato = new Object_Contato();
             
             if (isset($_SESSION['contato'])) {
                 $contato = $_SESSION['contato'];
@@ -214,7 +214,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_Contato_Fone2() {
-            $contato = new Contato();
+            $contato = new Object_Contato();
             
             if (isset($_SESSION['contato'])) {
                 $contato = $_SESSION['contato'];
@@ -232,7 +232,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Pegar_Contato_Email() {
-            $contato = new Contato();
+            $contato = new Object_Contato();
             
             if (isset($_SESSION['contato'])) {
                 $contato = $_SESSION['contato'];
@@ -249,7 +249,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
         }
                 
-        private function Pegar_DadosUsuario(Dados_Usuario $dados_usuario) {
+        private function Pegar_DadosUsuario(Object_Dados_Usuario $dados_usuario) {
             $dados_usuario = DAO_Dados_Usuario::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
             
             $_SESSION['dados_usuario'] = $dados_usuario;
@@ -257,7 +257,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             return $dados_usuario;
         }
         
-        private function Pegar_Contato(Contato $contato) {
+        private function Pegar_Contato(Object_Contato $contato) {
             $contato = DAO_Contato::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
             
             $_SESSION['contato'] = $contato;

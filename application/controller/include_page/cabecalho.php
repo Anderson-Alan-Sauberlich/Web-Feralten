@@ -1,10 +1,10 @@
 <?php
 namespace application\controller\include_page;
 
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/controller/usuario/login.php');
 
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\Login;
 
     @session_start();

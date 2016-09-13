@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_cidade.php');
+    require_once(RAIZ.'/application/model/object/cidade.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Cidade;
+    use application\model\object\Cidade as Object_Cidade;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Cidade {
+    class Cidade {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Cidade $cidade) {
+        public static function Inserir(Object_Cidade $object_cidade) {
             try {
                                  
                 $sql = "INSERT INTO tb_cidade (cidade_id, cidade_es_id, cidade_nome) 
@@ -23,9 +23,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $cidade->get_es_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
                 
@@ -34,7 +34,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Editar(Cidade $cidade) {
+        public static function Editar(Object_Cidade $object_cidade) {
             try {
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
@@ -44,9 +44,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $cidade->get_es_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -99,26 +99,26 @@ namespace application\model\dao;
             $cidades = array();
             
             foreach ($rows as $row) {
-                $cidade = new Cidade();
+                $object_cidade = new Object_Cidade();
             
-                $cidade->set_id($row['cidade_id']);
-                $cidade->set_estado_id($row['cidade_es_id']);
-                $cidade->set_nome($row['cidade_nome']);
+                $object_cidade->set_id($row['cidade_id']);
+                $object_cidade->set_estado_id($row['cidade_es_id']);
+                $object_cidade->set_nome($row['cidade_nome']);
                 
-                $cidades[] = $cidade;
+                $cidades[] = $object_cidade;
             }
 
             return $cidades;
         }
         
         private function PopulaCidade($row) {
-            $cidade = new Cidade();
+            $object_cidade = new Object_Cidade();
             
-            $cidade->set_id($row['cidade_id']);
-            $cidade->set_estado_id($row['cidade_es_id']);
-            $cidade->set_nome($row['cidade_nome']);
+            $object_cidade->set_id($row['cidade_id']);
+            $object_cidade->set_estado_id($row['cidade_es_id']);
+            $object_cidade->set_nome($row['cidade_nome']);
             
-            return $cidade;
+            return $object_cidade;
         }
     }
 ?>

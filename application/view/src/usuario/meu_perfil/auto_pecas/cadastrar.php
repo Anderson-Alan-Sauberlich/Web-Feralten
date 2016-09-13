@@ -2,26 +2,24 @@
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_categoria.php');
-    require_once(RAIZ.'/application/model/object/class_marca.php');
-    require_once(RAIZ.'/application/model/object/class_modelo.php');
-	require_once(RAIZ.'/application/model/object/class_versao.php');
-	require_once(RAIZ.'/application/model/object/class_peca.php');
-	require_once(RAIZ.'/application/model/object/class_lista_pativel.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/categoria.php');
+    require_once(RAIZ.'/application/model/object/marca.php');
+    require_once(RAIZ.'/application/model/object/modelo.php');
+	require_once(RAIZ.'/application/model/object/versao.php');
+	require_once(RAIZ.'/application/model/object/peca.php');
+	require_once(RAIZ.'/application/model/object/lista_pativel.php');
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Cadastrar as Controller_Cadastrar;
-    use application\model\object\Usuario;
-    use application\model\object\Categoria;
-    use application\model\object\Marca;
-    use application\model\object\Modelo;
-	use application\model\object\Versao;
-	use application\model\object\Peca;
-	use application\model\object\Lista_Pativel;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Categoria as Object_Categoria;
+    use application\model\object\Marca as Object_Marca;
+    use application\model\object\Modelo as Object_Modelo;
+	use application\model\object\Versao as Object_Versao;
+	use application\model\object\Peca as Object_Peca;
+	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
 	
     @session_start();
-	
-    new Cadastrar();
 	
     class Cadastrar {
 		
@@ -313,7 +311,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 		}
 		
 		private function Cadastrar_Peca() {
-			$peca = new Peca();
+			$peca = new Object_Peca();
 			$pativeis = array();
 			
 			$peca->set_data_anuncio(date('Y-m-d H:i:s'));
@@ -365,14 +363,14 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 			if (isset($_POST['categoria'])) {
 				foreach ($_POST['categoria'] as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {
-						$pativel = new Lista_Pativel();
+						$pativel = new Object_Lista_Pativel();
 						$pativel->set_categoria_id($categoria_selecionada);
 						
 						if (isset($_POST['marca'])) {
 							foreach ($_POST['marca'] as $marca_selecionada) {
 								if (in_array($marca_selecionada, $marcas_compativeis)) {
 									if (Controller_Cadastrar::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
-										$pativel = new Lista_Pativel();
+										$pativel = new Object_Lista_Pativel();
 										$pativel->set_categoria_id($categoria_selecionada);
 										$pativel->set_marca_id($marca_selecionada);
 										
@@ -387,7 +385,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 											foreach ($_POST['modelo'] as $modelo_selecionado) {
 												if (in_array($modelo_selecionado, $modelos_compativeis)) {
 													if (Controller_Cadastrar::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
-														$pativel = new Lista_Pativel();
+														$pativel = new Object_Lista_Pativel();
 														$pativel->set_categoria_id($categoria_selecionada);
 														$pativel->set_marca_id($marca_selecionada);
 														$pativel->set_modelo_id($modelo_selecionado);
@@ -403,7 +401,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 															foreach ($_POST['versao'] as $versao_selecionada) {
 																if (in_array($versao_selecionada, $versoes_compativeis)) {
 																	if (Controller_Cadastrar::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
-																		$pativel = new Lista_Pativel();
+																		$pativel = new Object_Lista_Pativel();
 																		$pativel->set_categoria_id($categoria_selecionada);
 																		$pativel->set_marca_id($marca_selecionada);
 																		$pativel->set_modelo_id($modelo_selecionado);

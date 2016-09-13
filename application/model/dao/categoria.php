@@ -1,29 +1,29 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_categoria.php');
+    require_once(RAIZ.'/application/model/object/categoria.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Categoria;
+    use application\model\object\Categoria as Object_Categoria;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Categoria {
+    class Categoria {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Categoria $categoria) {
+        public static function Inserir(Object_Categoria $object_categoria) {
             try {
                 $sql = "INSERT INTO tb_categoria (categoria_id, categoria_nome) 
                         VALUES (:id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $categoria->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_categoria->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
                 
@@ -32,7 +32,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Categoria $categoria) {
+        public static function Atualizar(Object_Categoria $object_categoria) {
             try {
                 $sql = "UPDATE tb_categoria SET
                 categoria_id = :id,
@@ -41,8 +41,8 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $categoria->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_categoria->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -91,24 +91,24 @@ namespace application\model\dao;
         }
         
         private function PopulaCategoria($row) {
-            $categoria = new Categoria();
+            $object_categoria = new Object_Categoria();
             
-            $categoria->set_id($row['categoria_id']);
-            $categoria->set_nome($row['categoria_nome']);
+            $object_categoria->set_id($row['categoria_id']);
+            $object_categoria->set_nome($row['categoria_nome']);
             
-            return $categoria;
+            return $object_categoria;
         }
         
         private function PopulaCategorias($rows) {
             $categorias = array();
             
             foreach ($rows as $row) {
-                $categoria = new Categoria();
+                $object_categoria = new Object_Categoria();
                 
-                $categoria->set_id($row['categoria_id']);
-                $categoria->set_nome($row['categoria_nome']);
+                $object_categoria->set_id($row['categoria_id']);
+                $object_categoria->set_nome($row['categoria_nome']);
                 
-                $categorias[] = $categoria;
+                $categorias[] = $object_categoria;
             }
             
             return $categorias;

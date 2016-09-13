@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_status_peca.php');
+    require_once(RAIZ.'/application/model/object/status_peca.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
 
-    use application\model\object\Status_Peca;
+    use application\model\object\Status_Peca as Object_Status_Peca;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Status_Peca {
+    class Status_Peca {
         
         function __construct() {
             
         }
         
-        public static function Inserir(Status_Peca $status) {
+        public static function Inserir(Object_Status_Peca $object_status_peca) {
             try {
                                  
                 $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_descricao) 
@@ -23,8 +23,8 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $status->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $status->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
                 
@@ -33,14 +33,14 @@ namespace application\model\dao;
             }
         }
         
-        public static function Editar(Status_Peca $status) {
+        public static function Editar(Object_Status_Peca $object_status_peca) {
             try {
                 $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome WHERE status_peca_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $status->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $status->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -89,24 +89,24 @@ namespace application\model\dao;
         }
         
         private function Popular_Status_Peca($row) {
-            $status = new Status_Peca();
+            $object_status_peca = new Object_Status_Peca();
             
-            $status->set_id($row['status_peca_id']);
-            $status->set_nome($row['status_peca_nome']);
+            $object_status_peca->set_id($row['status_peca_id']);
+            $object_status_peca->set_nome($row['status_peca_nome']);
             
-            return $status;
+            return $object_status_peca;
         }
 		
 		private function Popular_Status_Pecas($rows) {
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
-	            $status_peca = new Status_Peca();
+	            $object_status_peca = new Object_Status_Peca();
 	            
-	            $status_peca->set_id($row['status_peca_id']);
-	            $status_peca->set_nome($row['status_peca_nome']);
+	            $object_status_peca->set_id($row['status_peca_id']);
+	            $object_status_peca->set_nome($row['status_peca_nome']);
 	            
-	            $status_pecas[] = $status_peca;
+	            $status_pecas[] = $object_status_peca;
 			}
 			
 			return $status_pecas;

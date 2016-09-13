@@ -1,13 +1,13 @@
 <?php
 namespace application\controller\include_page;
 
-	require_once(RAIZ.'/application/model/dao/dao_categoria.php');
-	require_once(RAIZ.'/application/model/dao/dao_marca.php');
-	require_once(RAIZ.'/application/model/dao/dao_modelo.php');
+	require_once(RAIZ.'/application/model/dao/categoria.php');
+	require_once(RAIZ.'/application/model/dao/marca.php');
+	require_once(RAIZ.'/application/model/dao/modelo.php');
 
-	use application\model\dao\DAO_Categoria;
-	use application\model\dao\DAO_Marca;
-	use application\model\dao\DAO_Modelo;
+	use application\model\dao\Categoria as DAO_Categoria;
+	use application\model\dao\Marca as DAO_Marca;
+	use application\model\dao\Modelo as DAO_Modelo;
 	
     class Menu {
 

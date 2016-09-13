@@ -2,20 +2,18 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
-	require_once(RAIZ.'/application/model/object/class_endereco.php');
-	require_once(RAIZ.'/application/model/object/class_cidade.php');
-	require_once(RAIZ.'/application/model/object/class_estado.php');
-	require_once(RAIZ.'/application/model/object/class_usuario.php');
+	require_once(RAIZ.'/application/model/object/endereco.php');
+	require_once(RAIZ.'/application/model/object/cidade.php');
+	require_once(RAIZ.'/application/model/object/estado.php');
+	require_once(RAIZ.'/application/model/object/usuario.php');
 	
 	use application\controller\usuario\meu_perfil\meus_dados\Enderecos as Controller_Enderecos;
-	use application\model\object\Endereco;
-    use application\model\object\Estado;
-    use application\model\object\Cidade;
-	use application\model\object\Usuario;
+	use application\model\object\Endereco as Object_Endereco;
+    use application\model\object\Estado as Object_Estado;
+    use application\model\object\Cidade as Object_Cidade;
+	use application\model\object\Usuario as Object_Usuario;
     
     @session_start;
-	
-	new Enderecos();
 
     class Enderecos {
 
@@ -32,7 +30,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
 		
         private function Atualizar_Endereco() {
-            $endereco = new Endereco();
+            $endereco = new Object_Endereco();
             
             $endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
             $endereco->set_cidade_id($_POST['cidade']);

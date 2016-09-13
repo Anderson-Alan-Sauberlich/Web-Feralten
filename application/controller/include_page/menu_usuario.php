@@ -1,12 +1,12 @@
 <?php
 namespace application\controller\include_page;
     
-    require_once(RAIZ.'/application/model/object/class_dados_usuario.php');
-    require_once(RAIZ.'/application/model/dao/dao_dados_usuario.php');
+    require_once(RAIZ.'/application/model/object/dados_usuario.php');
+    require_once(RAIZ.'/application/model/dao/dados_usuario.php');
     require_once(RAIZ.'/application/model/object/class_usuario.php');
     
-    use application\model\object\Dados_Usuario;
-    use application\model\dao\DAO_Dados_Usuario;
+    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
     use application\model\object\Usuario;
     
     @session_start();

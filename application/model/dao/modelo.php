@@ -1,30 +1,30 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_marca.php');
+    require_once(RAIZ.'/application/model/object/modelo.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Marca;
+    use application\model\object\Modelo as Object_Modelo;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Marca {
-
+    class Modelo {
+        
         function __construct() {
             
         }
         
-        public static function Inserir(Marca $marca) {
+        public static function Inserir(Object_Modelo $object_modelo) {
             try {
-                $sql = "INSERT INTO tb_marca (marca_id, marca_ca_id, marca_nome) 
-                        VALUES (:id, :ca_id, :nome);";
+                $sql = "INSERT INTO tb_modelo (modelo_id, modelo_ma_id, modelo_nome) 
+                        VALUES (:id, :ma_id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $marca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ca_id", $marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_modelo->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -32,19 +32,19 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Marca $marca) {
+        public static function Atualizar(Object_Modelo $object_modelo) {
             try {
-                $sql = "UPDATE tb_marca SET
-                marca_id = :id,
-                marca_ca_id = :ca_id,
-                marca_nome = :nome 
-                WHERE marca_id = :id";
+                $sql = "UPDATE tb_modelo SET
+                modelo_id = :id,
+                modelo_ma_id = :ma_id,
+                modelo_nome = :nome 
+                WHERE modelo_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $marca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ca_id", $marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_modelo->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -54,7 +54,7 @@ namespace application\model\dao;
         
         public static function Deletar($id) {
             try {
-                $sql = "DELETE FROM tb_marca WHERE marca_id = :id";
+                $sql = "DELETE FROM tb_modelo WHERE modelo_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -67,21 +67,21 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD($id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome FROM tb_marca WHERE marca_id = :id";
+                $sql = "SELECT modelo_id, modelo_ma_id, modelo_nome FROM tb_modelo WHERE modelo_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaMarca($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (Exception $e) {
                 print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
             }
         }
         
-        public static function Buscar_Categoria_Id($id) {
+        public static function Buscar_Marca_Id($id) {
             try {
-                $sql = "SELECT marca_ca_id FROM tb_marca WHERE marca_id = :id";
+                $sql = "SELECT modelo_ma_id FROM tb_modelo WHERE modelo_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -89,50 +89,49 @@ namespace application\model\dao;
                 
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
-                return $row['marca_ca_id'];
+                return $row['modelo_ma_id'];
             } catch (Exception $e) {
                 print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
             }
         }
         
-        public static function Buscar_Por_ID_Categorai($id) {
+        public static function Buscar_Por_ID_Marca($id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome FROM tb_marca WHERE marca_ca_id = :id";
+                $sql = "SELECT modelo_id, modelo_ma_id, modelo_nome FROM tb_modelo WHERE modelo_ma_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaMarcas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (Exception $e) {
                 print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
             }
         }
         
-        private function PopulaMarca($row) {
-            $marca = new Marca();
+        private function PopulaModelo($row) {
+            $object_modelo = new Object_Modelo();
             
-            $marca->set_id($row['marca_id']);
-            $marca->set_categoria_id($row['marca_ca_id']);
-            $marca->set_nome($row['marca_nome']);
-
-            return $marca;
+            $object_modelo->set_id($row['modelo_id']);
+            $object_modelo->set_marca_id($row['modelo_ma_id']);
+            $object_modelo->set_nome($row['modelo_nome']);
+            
+            return $object_modelo;
         }
         
-        private function PopulaMarcas($rows) {
-            $marcas = array();
+        private function PopulaModelos($rows) {
+            $modelos = array();
             
             foreach ($rows as $row) {
-                $marca = new Marca();
+                $object_modelo = new Object_Modelo();
                 
-                $marca->set_id($row['marca_id']);
-                $marca->set_categoria_id($row['marca_ca_id']);
-                $marca->set_nome($row['marca_nome']);
+                $object_modelo->set_id($row['modelo_id']);
+                $object_modelo->set_marca_id($row['modelo_ma_id']);
+                $object_modelo->set_nome($row['modelo_nome']);
                 
-                $marcas[] = $marca;
+                $modelos[] = $object_modelo;
             }
-
-            return $marcas;
+            return $modelos;
         }
     }
 ?>

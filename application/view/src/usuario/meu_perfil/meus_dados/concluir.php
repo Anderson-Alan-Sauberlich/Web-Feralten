@@ -2,24 +2,22 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 
     require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_endereco.php');
-    require_once(RAIZ.'/application/model/object/class_contato.php');
-    require_once(RAIZ.'/application/model/object/class_estado.php');
-    require_once(RAIZ.'/application/model/object/class_cidade.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/dados_usuario.php');
+    require_once(RAIZ.'/application/model/object/endereco.php');
+    require_once(RAIZ.'/application/model/object/contato.php');
+    require_once(RAIZ.'/application/model/object/estado.php');
+    require_once(RAIZ.'/application/model/object/cidade.php');
     
     use application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
-    use application\model\object\Usuario;
-    use application\model\object\Dados_Usuario;
-    use application\model\object\Endereco;
-    use application\model\object\Contato;
-    use application\model\object\Estado;
-    use application\model\object\Cidade;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\object\Endereco as Object_Endereco;
+    use application\model\object\Contato as Object_Contato;
+    use application\model\object\Estado as Object_Estado;
+    use application\model\object\Cidade as Object_Cidade;
 
     @session_start();
-
-    new Concluir();
 
     class Concluir {
             
@@ -40,9 +38,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         private function Cadastrar_Dados_Usuario_Endereco() {
-            $contato = new Contato();
-            $endereco = new Endereco();
-            $dados_usuario = new Dados_Usuario();
+            $contato = new Object_Contato();
+            $endereco = new Object_Endereco();
+            $dados_usuario = new Object_Dados_Usuario();
             
             $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
             $contato->set_telefone1($_POST['fone1']);

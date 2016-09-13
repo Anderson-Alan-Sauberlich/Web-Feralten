@@ -1,12 +1,12 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/dao/dao_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/dao/usuario.php');
 	require_once(RAIZ.'/application/controller/usuario/login.php');
     
-    use application\model\object\Usuario;
-    use application\model\dao\DAO_Usuario;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;
     
     @session_start;

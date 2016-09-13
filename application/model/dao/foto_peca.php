@@ -1,30 +1,30 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_foto_peca.php');
+    require_once(RAIZ.'/application/model/object/foto_peca.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Foto_Peca;
+    use application\model\object\Foto_Peca as Object_Foto_Peca;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Foto_Peca {
+    class Foto_Peca {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Foto_Peca $foto_peca) {
+        public static function Inserir(Object_Foto_Peca $object_foto_peca) {
             try {
                 $sql = "INSERT INTO tb_foto_peca (foto_peca_pc_id, foto_peca_endereco, foto_peca_numero) 
                         VALUES (:pc_id, :endereco, :num);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":pc_id", $foto_peca->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":endereco", $foto_peca->get_endereco(), PDO::PARAM_STR);
-                $p_sql->bindValue(":num", $foto_peca->get_numero(), PDO::PARAM_INT);
+                $p_sql->bindValue(":pc_id", $object_foto_peca->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":endereco", $object_foto_peca->get_endereco(), PDO::PARAM_STR);
+                $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -32,15 +32,15 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Foto_Peca $foto_peca) {
+        public static function Atualizar(Object_Foto_Peca $object_foto_peca) {
             try {
                 $sql = "UPDATE tb_foto_peca SET foto_peca_pc_id = :pc_id, foto_peca_endereco = :endereco, foto_peca_numero = :num WHERE foto_peca_pc_id = :pc_id AND foto_peca_numero = :num";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":pc_id", $foto_peca->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":endereco", $foto_peca->get_endereco(), PDO::PARAM_STR);
-                $p_sql->bindValue(":num", $foto_peca->get_numero(), PDO::PARAM_INT);
+                $p_sql->bindValue(":pc_id", $object_foto_peca->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":endereco", $object_foto_peca->get_endereco(), PDO::PARAM_STR);
+                $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -105,26 +105,26 @@ namespace application\model\dao;
         }
 		
         private function PopulaFotoPeca($row) {
-            $foto_peca = new Foto_Peca();
+            $object_foto_peca = new Object_Foto_Peca();
             
-            $foto_peca->set_peca_id($row['foto_peca_pc_id']);
-            $foto_peca->set_endereco($row['foto_peca_endereco']);
-            $foto_peca->set_numero($row['foto_peca_numero']);
+            $object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
+            $object_foto_peca->set_endereco($row['foto_peca_endereco']);
+            $object_foto_peca->set_numero($row['foto_peca_numero']);
 
-            return $foto_peca;
+            return $object_foto_peca;
         }
         
         private function PopulaFotosPecas($rows) {
             $fotos_pecas = array();
             
             foreach ($rows as $row) {
-                $foto_peca = new Foto_Peca();
+                $object_foto_peca = new Object_Foto_Peca();
                 
-                $foto_peca->set_peca_id($row['foto_peca_pc_id']);
-                $foto_peca->set_endereco($row['foto_peca_endereco']);
-                $foto_peca->set_numero($row['foto_peca_numero']);
+                $object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
+                $object_foto_peca->set_endereco($row['foto_peca_endereco']);
+                $object_foto_peca->set_numero($row['foto_peca_numero']);
                 
-                $fotos_pecas[] = $foto_peca;
+                $fotos_pecas[] = $object_foto_peca;
             }
 
             return $fotos_pecas;

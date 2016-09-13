@@ -1,34 +1,34 @@
 <?php
 namespace application\model\dao;
     
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Usuario;
+    use application\model\object\Usuario as Object_Usuario;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 	
 	@session_start();
     
-    class DAO_Usuario {
+    class Usuario {
 
         function __construct() {
             
         }
         
-        public static function Inserir(Usuario $usuario) {
+        public static function Inserir(Object_Usuario $object_usuario) {
             try {
                 $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_senha, usuario_ultimo_login) 
                         VALUES (:id, :email, :nome, :senha, :login);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":email", $usuario->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $usuario->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":senha", $usuario->get_senha(), PDO::PARAM_STR);
-				$p_sql->bindValue(":login", $usuario->get_ultimo_login(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":email", $object_usuario->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":senha", $object_usuario->get_senha(), PDO::PARAM_STR);
+				$p_sql->bindValue(":login", $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -36,7 +36,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Usuario $usuario) {
+        public static function Atualizar(Object_Usuario $object_usuario) {
             try {
                 $sql = "UPDATE tb_usuario SET
                 usuario_nome = :nome,
@@ -45,9 +45,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $usuario->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":email", $usuario->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":email", $object_usuario->get_email(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -189,16 +189,16 @@ namespace application\model\dao;
         }
         
         private function PopulaUsuario($row) {
-            $usuario = new Usuario();
+            $object_usuario = new Object_Usuario();
 			
-            $usuario->set_id($row['usuario_id']);
-            $usuario->set_nome($row['usuario_nome']);
-            $usuario->set_email($row['usuario_email']);
-            $usuario->set_senha($row['usuario_senha']);
-			$usuario->set_ultimo_login($row['usuario_ultimo_login']);
-			$usuario->set_token($row['usuario_token_login']);
+            $object_usuario->set_id($row['usuario_id']);
+            $object_usuario->set_nome($row['usuario_nome']);
+            $object_usuario->set_email($row['usuario_email']);
+            $object_usuario->set_senha($row['usuario_senha']);
+			$object_usuario->set_ultimo_login($row['usuario_ultimo_login']);
+			$object_usuario->set_token($row['usuario_token_login']);
 			
-            return $usuario;
+            return $object_usuario;
         }
     }
 ?>

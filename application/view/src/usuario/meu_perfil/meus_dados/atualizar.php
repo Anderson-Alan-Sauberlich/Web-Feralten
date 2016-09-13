@@ -2,18 +2,16 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_contato.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/model/object/dados_usuario.php');
+    require_once(RAIZ.'/application/model/object/contato.php');
     
     use application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
-    use application\model\object\Usuario;
-    use application\model\object\Dados_Usuario;
-    use application\model\object\Contato;
+    use application\model\object\Usuario as Object_Usuario;
+    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\object\Contato as Object_Contato;
     
     @session_start();
-    
-    new Atualizar();
     
     class Atualizar {
     
@@ -63,7 +61,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         private function Atualizar_Login() {
-            $usuario = new Usuario();
+            $usuario = new Object_Usuario();
             
             $usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
             $usuario->set_nome($_POST["nome"]);
@@ -88,7 +86,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         private function Atualizar_DadosUsuario() {
-            $dados_usuario = new Dados_Usuario();
+            $dados_usuario = new Object_Dados_Usuario();
             
             $dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
             $dados_usuario->set_cpf_cnpj($_POST['cpf_cnpj']);
@@ -103,7 +101,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         private function Atualizar_Contato() {
-            $contato = new Contato();
+            $contato = new Object_Contato();
             
             $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
             $contato->set_telefone1($_POST['fone1']);

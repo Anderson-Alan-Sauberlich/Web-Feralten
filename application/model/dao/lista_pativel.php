@@ -1,21 +1,21 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/class_lista_pativel.php');
+    require_once(RAIZ.'/application/model/object/lista_pativel.php');
     require_once(RAIZ.'/application/model/util/conexao.php');
     
-    use application\model\object\Lista_Pativel;
+    use application\model\object\Lista_Pativel as Object_Lista_Pativel;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
 
-    class DAO_Lista_Pativel {
+    class Lista_Pativel {
         
         function __construct() {
             
         }
         
-        public static function Inserir(Lista_Pativel $lista_pativel) {
+        public static function Inserir(Object_Lista_Pativel $object_lista_pativel) {
             try {
                                  
                 $sql = "INSERT INTO tb_lista_pativel (lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate) 
@@ -23,13 +23,13 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":pc_id", $lista_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ca_id", $lista_pativel->get_categoria_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ma_id", $lista_pativel->get_marca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":mo_id", $lista_pativel->get_modelo_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":vs_id", $lista_pativel->get_versao_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $lista_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $lista_pativel->get_ano_ate(), PDO::PARAM_INT);
+                $p_sql->bindValue(":pc_id", $object_lista_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ca_id", $object_lista_pativel->get_categoria_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ma_id", $object_lista_pativel->get_marca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":mo_id", $object_lista_pativel->get_modelo_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":vs_id", $object_lista_pativel->get_versao_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ano_de", $object_lista_pativel->get_ano_de(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ano_ate", $object_lista_pativel->get_ano_ate(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
                 
@@ -38,7 +38,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Lista_Pativel $lista_pativel) {
+        public static function Atualizar(Object_Lista_Pativel $object_lista_pativel) {
             try {
                 $sql = "UPDATE tb_lista_pativel SET
                 lista_pativel_pc_id = :pc_id,
@@ -52,13 +52,13 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":pc_id", $lista_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ca_id", $lista_pativel->get_categoria_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ma_id", $lista_pativel->get_marca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":mo_id", $lista_pativel->get_modelo_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":vs_id", $lista_pativel->get_versao_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $lista_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $lista_pativel->get_ano_ate(), PDO::PARAM_INT);
+                $p_sql->bindValue(":pc_id", $object_lista_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ca_id", $object_lista_pativel->get_categoria_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ma_id", $object_lista_pativel->get_marca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":mo_id", $object_lista_pativel->get_modelo_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":vs_id", $object_lista_pativel->get_versao_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ano_de", $object_lista_pativel->get_ano_de(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ano_ate", $object_lista_pativel->get_ano_ate(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -97,17 +97,17 @@ namespace application\model\dao;
         	$pativeis = array();
 			
 			foreach ($rows as $row) {
-	            $pativel = new Lista_Pativel();
+	            $object_lista_pativel = new Object_Lista_Pativel();
 	            
-	            $pativel->set_peca_id($row['lista_pativel_pc_id']);
-	            $pativel->set_categoria_id($row['lista_pativel_ca_id']);
-	            $pativel->set_marca_id($row['lista_pativel_ma_id']);
-				$pativel->set_modelo_id($row['lista_pativel_mo_id']);
-				$pativel->set_versao_id($row['lista_pativel_vs_id']);
-	            $pativel->set_ano_de($row['lista_pativel_ano_de']);
-	            $pativel->set_ano_ate($row['lista_pativel_ano_ate']);
+	            $object_lista_pativel->set_peca_id($row['lista_pativel_pc_id']);
+	            $object_lista_pativel->set_categoria_id($row['lista_pativel_ca_id']);
+	            $object_lista_pativel->set_marca_id($row['lista_pativel_ma_id']);
+				$object_lista_pativel->set_modelo_id($row['lista_pativel_mo_id']);
+				$object_lista_pativel->set_versao_id($row['lista_pativel_vs_id']);
+	            $object_lista_pativel->set_ano_de($row['lista_pativel_ano_de']);
+	            $object_lista_pativel->set_ano_ate($row['lista_pativel_ano_ate']);
 				
-				$pativeis[] = $pativel;
+				$pativeis[] = $object_lista_pativel;
 			}
             
             return $pativeis;

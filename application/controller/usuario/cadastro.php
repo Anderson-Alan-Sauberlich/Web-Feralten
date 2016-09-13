@@ -1,12 +1,12 @@
 <?php
 namespace application\controller\usuario;
 
-    require_once(RAIZ.'/application/model/dao/dao_usuario.php');
-    require_once(RAIZ.'/application/model/object/class_usuario.php');
+    require_once(RAIZ.'/application/model/dao/usuario.php');
+    require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/controller/usuario/login.php');
 
-    use application\model\dao\DAO_Usuario;
-    use application\model\object\Usuario;
+    use application\model\dao\Usuario as DAO_Usuario;
+    use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\Login;
     
     @session_start();
@@ -17,7 +17,7 @@ namespace application\controller\usuario;
             
         }
 
-        public function Cadastrar_Usuario(Usuario $usuario) {
+        public function Cadastrar_Usuario(Object_Usuario $usuario) {
             $erros_cadastrar = array();
             $cad_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
 

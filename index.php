@@ -10,13 +10,17 @@
 	$app = new \Slim\App(["settings" => $config]);
 	
 	$app->get('/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/view/html/pagina_inicial.php');
+		require_once(RAIZ.'/application/controller/pagina_inicial.php');
+		
+		application\controller\Pagina_Inicial::Mostrar_Pagina();
 		
 		return $response;
 	});
 	
 	$app->get('/usuario/login/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/view/html/usuario/login.php');
+		require_once(RAIZ.'/application/controller/usuario/login.php');
+		
+		application\controller\usuario\Login::Mostrar_Pagina();
 		
 		return $response;
 	});

@@ -6,8 +6,6 @@ namespace application\view\src\include_page;
 	use application\controller\include_page\Cabecalho as Controller_Cabecalho;
 
     @session_start();
-	
-	new Cabecalho();
 
     class Cabecalho {
 

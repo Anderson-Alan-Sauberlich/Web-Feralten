@@ -1,19 +1,17 @@
 <?php
 namespace application\view\src\include_page;
 
-    require_once(RAIZ.'/application/model/object/class_categoria.php');
-    require_once(RAIZ.'/application/model/object/class_marca.php');
-    require_once(RAIZ.'/application/model/object/class_modelo.php');
+    require_once(RAIZ.'/application/model/object/categoria.php');
+    require_once(RAIZ.'/application/model/object/marca.php');
+    require_once(RAIZ.'/application/model/object/modelo.php');
     require_once(RAIZ.'/application/controller/include_page/menu.php');
     
-    use application\model\object\Categoria;
-    use application\model\object\Marca;
-    use application\model\object\modelo;
+    use application\model\object\Categoria as Object_Categoria;
+    use application\model\object\Marca as Object_Marca;
+    use application\model\object\Modelo as Object_Modelo;
     use application\controller\include_page\Menu as Controller_Menu;
     
     @session_start();
-    
-    new Menu();
 
     class Menu {
 
