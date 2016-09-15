@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/usuario/meu_perfil/perfil.php'); ?>
-<?php use application\view\src\usuario\meu_perfil\Perfil; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>

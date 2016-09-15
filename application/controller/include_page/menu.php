@@ -4,15 +4,27 @@ namespace application\controller\include_page;
 	require_once(RAIZ.'/application/model/dao/categoria.php');
 	require_once(RAIZ.'/application/model/dao/marca.php');
 	require_once(RAIZ.'/application/model/dao/modelo.php');
+	require_once(RAIZ.'/application/view/src/include_page/menu.php');
 
 	use application\model\dao\Categoria as DAO_Categoria;
 	use application\model\dao\Marca as DAO_Marca;
 	use application\model\dao\Modelo as DAO_Modelo;
+	use application\view\src\include_page\Menu as View_Menu;
+	
+	@session_start();
 	
     class Menu {
 
         function __construct() {
             
+        }
+        
+        public static function Retornar_Marcas_Por_Categoria() {
+        	View_Menu::Carregar_Marcas($_GET['categoria']);
+        }
+        
+        public static function Retornar_Modelos_Por_Marca() {
+        	View_Menu::Carregar_Modelos($_GET['marca']);
         }
         
         public static function Buscar_Todas_Categorias() {

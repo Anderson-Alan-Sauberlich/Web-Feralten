@@ -2,15 +2,17 @@
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
     
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
-
+	require_once(RAIZ.'/application/view/src/include_page/menu.php');
+	
 	use application\controller\usuario\meu_perfil\auto_pecas\Visualizar as Controller_Visualizar;
-
+	use application\view\src\include_page\Menu;
+	
     @session_start();
 
-    class Visualizar {
+    class Visualizar extends Menu {
 
         function __construct() {
-            ob_start();
+            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php');
         }
         
         public static function Mostrar_Card_Peca() {

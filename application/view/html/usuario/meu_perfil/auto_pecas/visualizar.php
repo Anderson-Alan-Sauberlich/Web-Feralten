@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/visualizar.php'); ?>
-<?php use application\view\src\usuario\meu_perfil\auto_pecas\Visualizar; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -26,7 +24,7 @@
 							<div class="ui horizontal divider"></div>
 						</div>
 						<div class="ui three stackable doubling link cards" id="div_pecas">
-							<?php Visualizar::Mostrar_Card_Peca(); ?>
+							<?php self::Mostrar_Card_Peca(); ?>
 						</div>
 					</div>
 				</div>

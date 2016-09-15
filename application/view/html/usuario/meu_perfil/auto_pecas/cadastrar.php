@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php'); ?>
-<?php use application\view\src\usuario\meu_perfil\auto_pecas\Cadastrar; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -15,8 +13,8 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
         <div class="panel-group">
             <form id="form_cadastrar_peca" name="form_cadastrar_peca" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/application/view/usuario/meu_perfil/auto_pecas/cadastrar.php" method="post" role="form">
-                <?php Cadastrar::Mostrar_Sucesso(); ?>
-                <?php Cadastrar::Mostrar_Erros(); ?>
+                <?php self::Mostrar_Sucesso(); ?>
+                <?php self::Mostrar_Erros(); ?>
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
                         <label class="lbPanel">Compatibilidade Com Marcas e Modelos dos Veiculos</label>
@@ -27,7 +25,7 @@
 							<div class="well well-sm">
 			                    <div class="container-fluid">
 			                    	<div id="div_categoria" class="row">
-										<?php Cadastrar::Carregar_Categorias(); ?>
+										<?php self::Carregar_Categorias(); ?>
 			                        </div>
 			                    </div>
 	                        </div>
@@ -35,7 +33,7 @@
 							<div class="well well-sm">
 			                    <div class="container-fluid">
 			                    	<div id="div_marca" class="row">
-										<?php Cadastrar::Carregar_Marcas(); ?>
+										<?php self::Carregar_Marcas(); ?>
 			                        </div>
 			                    </div>
 	                        </div>
@@ -43,7 +41,7 @@
 							<div class="well well-sm">
 			                    <div class="container-fluid">
 			                    	<div id="div_modelo" class="row">
-										<?php Cadastrar::Carregar_Modelos(); ?>
+										<?php self::Carregar_Modelos(); ?>
 			                        </div>
 			                    </div>
 	                        </div>
@@ -51,7 +49,7 @@
 							<div class="well well-sm">
 			                    <div class="container-fluid">
 			                    	<div id="div_versao" class="row">
-										<?php Cadastrar::Carregar_Versoes(); ?>
+										<?php self::Carregar_Versoes(); ?>
 			                        </div>
 			                    </div>
 	                        </div>
@@ -59,7 +57,7 @@
 							<div class="well well-sm">
 			                    <div class="container-fluid">
 			                    	<div id="div_ano" class="row">
-										<?php Cadastrar::Carregar_Anos(); ?>
+										<?php self::Carregar_Anos(); ?>
 			                        </div>
 			                    </div>
 	                        </div>
@@ -75,41 +73,41 @@
                            	<div class="row">
                            		<div class="col-sm-6">
 		                            <label for="peca" class="lbPanel">Digite o Nome da Peça:</label>
-		                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("peca"); ?>">
+		                            <div class="input-group <?php self::Incluir_Classe_Erros("peca"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-		                                <input id="peca" name="peca" type="text" class="form-control" value="<?php Cadastrar::Manter_Valor("peca") ?>" placeholder="Nome da Peça, Ex: Porta" />
+		                                <input id="peca" name="peca" type="text" class="form-control" value="<?php self::Manter_Valor("peca") ?>" placeholder="Nome da Peça, Ex: Porta" />
 		                            </div>
 	                            </div>
 	                            <div class="col-sm-6">
 		                            <label for="fabricante" class="lbPanel">Digite o Nome do Fabricante/Marca:</label>
-		                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("fabricante"); ?>">
+		                            <div class="input-group <?php self::Incluir_Classe_Erros("fabricante"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
-		                                <input id="fabricante" name="fabricante" type="text" class="form-control" value="<?php Cadastrar::Manter_Valor("fabricante") ?>" placeholder="Nome do Fabricante/Marca, Ex: Original" />
+		                                <input id="fabricante" name="fabricante" type="text" class="form-control" value="<?php self::Manter_Valor("fabricante") ?>" placeholder="Nome do Fabricante/Marca, Ex: Original" />
 		                            </div>
 	                            </div>
                             </div>
                             <div class="row">
                                	<div class="col-sm-6">
 		                            <label for="serie" class="lbPanel">Digite o Numero de Serie da Peça:</label>
-		                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("serie"); ?>">
+		                            <div class="input-group <?php self::Incluir_Classe_Erros("serie"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-		                                <input id="serie" name="serie" type="text" class="form-control" value="<?php Cadastrar::Manter_Valor("serie") ?>" placeholder="Numero de Serie da Peça" />
+		                                <input id="serie" name="serie" type="text" class="form-control" value="<?php self::Manter_Valor("serie") ?>" placeholder="Numero de Serie da Peça" />
 		                            </div>
 		                        </div>
                                	<div class="col-sm-3">
 		                            <label for="preco" class="lbPanel">Digite Preço da Peça:</label>
-		                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("preco"); ?>">
+		                            <div class="input-group <?php self::Incluir_Classe_Erros("preco"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-		                                <input id="preco" name="preco" type="text" class="form-control" value="<?php Cadastrar::Manter_Valor("preco") ?>" placeholder="Preço da Peça" />
+		                                <input id="preco" name="preco" type="text" class="form-control" value="<?php self::Manter_Valor("preco") ?>" placeholder="Preço da Peça" />
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3">
 		                            <label for="status" class="lbPanel">Selecione o Estado da Peça:</label>
-		                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("status"); ?>">
+		                            <div class="input-group <?php self::Incluir_Classe_Erros("status"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty"></i></span>
 		                                <select id="status" name="status" class="form-control form_select">
 		                                    <option value="0">Selecione</option>
-		                                    <?php Cadastrar::Mostrar_Status(); ?>
+		                                    <?php self::Mostrar_Status(); ?>
 		                                </select>
 		                                <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
                                    	</div>
@@ -117,15 +115,15 @@
 	                        </div>
 	                        <div class="row-fluid">
 		                        <div class="ui checkbox">
-									<input type="checkbox" id="prioridade" name="prioridade" <?php Cadastrar::Manter_Valor("prioridade") ?> value="checked"/>
+									<input type="checkbox" id="prioridade" name="prioridade" <?php self::Manter_Valor("prioridade") ?> value="checked"/>
 									<label for="prioridade" class="lbPanel">Acresentar Alta Prioridade Para a Peça. <small>(Será uma das primeiras a ser exibida por um custo a mais de R$: 5,00)</small></label>
 								</div>
 							</div>
 							<div class="row-fluid">
 	                            <label for="descricao" class="lbPanel">Digite a Descrição da Peça:</label>
-	                            <div class="input-group <?php Cadastrar::Incluir_Classe_Erros("descricao"); ?>">
+	                            <div class="input-group <?php self::Incluir_Classe_Erros("descricao"); ?>">
 	                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-	                                <textarea rows="3" id="descricao" name="descricao" type="text" class="form-control" placeholder="Descrição da Peça, detalhes e observações inportantes para tornar a peça mais facil de ser encontrada na pesquisa."><?php Cadastrar::Manter_Valor("descricao") ?></textarea>
+	                                <textarea rows="3" id="descricao" name="descricao" type="text" class="form-control" placeholder="Descrição da Peça, detalhes e observações inportantes para tornar a peça mais facil de ser encontrada na pesquisa."><?php self::Manter_Valor("descricao") ?></textarea>
 	                            </div>
                             </div>
                         </div>
@@ -135,7 +133,7 @@
                     <div class="panel-heading sombra_painel centralizar">
                         <label class="lbPanel">Adicionar Fotos</label>
                     </div>
-                    <div class="panel-body <?php Cadastrar::Incluir_Classe_Erros("imagem"); ?>">
+                    <div class="panel-body <?php self::Incluir_Classe_Erros("imagem"); ?>">
                         <div id="drop_zone" class="row-fluid">
                 	       	<div class="col-md-3 col-sm-4 col-xs-12">
                            		<div class="row-fluid">
@@ -152,17 +150,17 @@
 								<div class="ui medium bordered image imagemPeca">
 									<div id="img1" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
 									<a onclick="limparCampoFile(1);" class="ui corner red label"><i class="remove circle icon"></i></a>
-									<img id="foto1" name="foto1" src="<?php Cadastrar::Manter_Imagens("foto1") ?>">
+									<img id="foto1" name="foto1" src="<?php self::Manter_Imagens("foto1") ?>">
 								</div>
 								<div class="ui small bordered image imagemPeca">
 									<div id="img2" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
 									<a onclick="limparCampoFile(2);" class="ui corner red label"><i class="remove circle icon"></i></a>
-									<img id="foto2" name="foto2" src="<?php Cadastrar::Manter_Imagens("foto2") ?>">
+									<img id="foto2" name="foto2" src="<?php self::Manter_Imagens("foto2") ?>">
 								</div>
 								<div class="ui small bordered image imagemPeca">
 									<div id="img3" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
 									<a onclick="limparCampoFile(3);" class="ui corner red label"><i class="remove circle icon"></i></a>
-									<img id="foto3" name="foto3" src="<?php Cadastrar::Manter_Imagens("foto3") ?>">
+									<img id="foto3" name="foto3" src="<?php self::Manter_Imagens("foto3") ?>">
 								</div>
 							</div>
                         </div>

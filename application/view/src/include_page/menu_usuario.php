@@ -55,7 +55,7 @@ namespace application\view\src\include_page;
                             if ($dir_list[3] == $id_pill) {
                                 if (empty($status)) {
                                 	$_SESSION['menu']['cadastro_incompleto'] = "0";
-                                    header("location: /usuario/meu-perfil/meus-dados/concluir/");
+                                    //header("location: /usuario/meu-perfil/meus-dados/concluir/");
                                 }
                             } else {
                                 unset($class);
@@ -72,7 +72,7 @@ namespace application\view\src\include_page;
                             if ($dir_list[4] == $id_pill) {
                                 if (empty($status)) {
                                 	$_SESSION['menu']['cadastro_incompleto'] = "0";
-                                    header("location: /usuario/meu-perfil/meus-dados/concluir/");
+                                    //header("location: /usuario/meu-perfil/meus-dados/concluir/");
                                 }
                             } else {
                                 unset($class);
@@ -90,7 +90,7 @@ namespace application\view\src\include_page;
                                 if (empty($status)) {
                                     if ($id_pill != "concluir" AND $id_pill != "alterar-senha") {
                                     	$_SESSION['menu']['cadastro_incompleto'] = "0";
-                                        header("location: /usuario/meu-perfil/meus-dados/concluir/");
+                                        //header("location: /usuario/meu-perfil/meus-dados/concluir/");
                                     } else if (isset($_SESSION['menu']['cadastro_incompleto'])) {
                                     	if ($_SESSION['menu']['cadastro_incompleto'] == "0") {
                                     		unset($_SESSION['menu']['cadastro_incompleto']);
@@ -99,7 +99,7 @@ namespace application\view\src\include_page;
                                 		$_SESSION['menu']['cadastro_incompleto'] = true;
                                 	}
                                 } else if ($id_pill == "concluir") {
-                                    header("location: /usuario/meu-perfil/");
+                                    //header("location: /usuario/meu-perfil/");
                                 }
                             } else {
                                 unset($class);
@@ -119,7 +119,7 @@ namespace application\view\src\include_page;
                             if ($dir_list[4] == $id_pill) {
                                 if (empty($status)) {
                                 	$_SESSION['menu']['cadastro_incompleto'] = "0";
-                                    header("location: /usuario/meu-perfil/meus-dados/concluir/");
+                                    //header("location: /usuario/meu-perfil/meus-dados/concluir/");
                                 }
                             } else {
                                 unset($class);
@@ -136,7 +136,7 @@ namespace application\view\src\include_page;
                             if ($dir_list[4] == $id_pill) {
                                 if (empty($_SESSION['menu']['status'])) {
                                 	$_SESSION['menu']['cadastro_incompleto'] = "0";
-                                    header("location: /usuario/meu-perfil/meus-dados/concluir/");
+                                    //header("location: /usuario/meu-perfil/meus-dados/concluir/");
                                 }
                             } else {
                                 unset($class);

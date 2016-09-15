@@ -1,55 +1,16 @@
 <?php
 namespace application\view\src\usuario;
 
-    require_once(RAIZ.'/application/controller/usuario/login.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
+	require_once(RAIZ.'/application/controller/usuario/login.php');
 
-    use application\controller\usuario\Login as Controller_Login;
-    use application\model\object\Usuario as Object_Usuario;
-
+	use application\controller\usuario\Login as Controller_Login;
+	
     @session_start();
 
     class Login {
 
         function __construct() {
         	require_once(RAIZ.'/application/view/html/usuario/login.php');
-        	
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $this->Autenticar();
-            }
-        }
-        
-        private function Salvar_Post() {
-            $form_login = array();
-            
-            $form_login['email'] = $_POST['email'];
-            
-            $_SESSION['form_login'] = $form_login;
-        }
-
-        private function Autenticar() {
-        	$email = null;
-        	$senha = null;
-        	$manter_login = null;
-        	
-        	if (isset($_POST["email"])) {
-        		$email = $_POST["email"];
-        	}
-            if (isset($_POST["password"])) {
-            	$senha = $_POST["password"];
-            }
-            if (isset($_POST['manter_login'])) {
-            	$manter_login = $_POST['manter_login'];
-            }
-            
-            Controller_Login::Autenticar_Usuario_Login($email, $senha, $manter_login);
-            
-            if (isset($_SESSION['login_erros'])) {
-            	$this->Salvar_Post();
-                header("location: /usuario/login/");
-            } else {
-                header("location: /usuario/meu-perfil/");
-            }
         }
         
         public static function Manter_Valor($campo) {

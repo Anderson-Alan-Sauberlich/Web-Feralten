@@ -24,7 +24,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
     class Cadastrar {
 		
         function __construct() {
-            ob_start();
+            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/cadastrar.php');
 			
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				if (isset($_FILES['imagem1'])) {

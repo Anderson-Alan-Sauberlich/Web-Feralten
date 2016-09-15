@@ -30,6 +30,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 	require_once(RAIZ.'/application/model/dao/endereco.php');
 	require_once(RAIZ.'/application/model/dao/foto_peca.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
+	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php');
 	
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Categoria as Object_Categoria;
@@ -60,6 +61,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 	use application\model\dao\Endereco as DAO_Endereco;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
+	use application\view\src\usuario\meu_perfil\auto_pecas\Cadastrar as View_Cadastrar;
 	
 	@session_start();
 	
@@ -67,6 +69,10 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 
         function __construct() {
             
+        }
+        
+        public static function Carregar_Pagina() {
+        	new View_Cadastrar();
         }
 		
 		public static function Cadastrar(Object_Peca $peca, $pativeis) {

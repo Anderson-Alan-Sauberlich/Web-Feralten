@@ -2,10 +2,8 @@
 namespace application\controller\usuario;
 
     require_once(RAIZ.'/application/model/dao/usuario.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/view/src/usuario/login.php');
 
-    use application\model\object\Usuario as Object_Usuario;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\view\src\usuario\Login as View_Login;
 
@@ -68,16 +66,19 @@ namespace application\controller\usuario;
             $login_campos = array();
             $login_erros = array();
             
-            if (empty($email)){
+            if (empty($email)) {
                 $login_erros[] = "Digite seu Email.";
                 $login_campos['erro_email'] = "erro";
+                
                 if (empty($senha)) {
                     $login_erros[] = "Digite sua Senha.";
                     $login_campos['erro_senha'] = "erro";
                 }
+                
             } else if (DAO_Usuario::Verificar_Email($email) <= 0) {
                 $login_erros[] = "Email não Cadastrado.";
                 $login_campos['erro_email'] = "erro";
+                
             } else if (empty($senha)) {
                 $login_campos['erro_email'] = "certo";
                 $login_erros[] = "Digite sua Senha.";
@@ -119,6 +120,14 @@ namespace application\controller\usuario;
                 setcookie("f_m_l", null, time()-3600, "/");
                 $_SESSION['login_erros'] = $login_erros;
                 $_SESSION['login_campos'] = $login_campos;
+                $form_login['email'] = $email;
+                $_SESSION['form_login'] = $form_login;
+            }
+            
+            if (empty($login_erros)) {
+            	return true;
+            } else {
+            	return false;
             }
         }
     }
