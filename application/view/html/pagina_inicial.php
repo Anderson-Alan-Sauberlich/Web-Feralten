@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/pagina_inicial.php'); ?>
-<?php use application\view\src\Pagina_Inicial; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>

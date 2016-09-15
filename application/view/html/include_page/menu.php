@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/include_page/menu.php'); ?>
-<?php use application\view\src\include_page\Menu; ?>
 <script type="text/javascript" src="/application/view/js/include_page/menu.js"></script>
 <section>
 	<div class="page-header">
@@ -10,24 +8,21 @@
                         <div class="col-md-3 col-sm-6 col-xs-12">
                         	<div class="row-fluid buscaDropEspaco">
 								<select id="categoria" name="categoria" class="ui fluid search dropdown">
-									<option value="0">Categoria</option>
-									<?php Menu::Carregar_Categorias(); ?>
+									<?php self::Carregar_Categorias(); ?>
 								</select>
 							</div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                         	<div class="row-fluid buscaDropEspaco">
 		                       	<select id="marca" name="marca" class="ui fluid search dropdown">
-									<option value="0">Marca</option>
-									<?php //Menu::Carregar_Marcas(); ?>
+									<?php self::Carregar_Marcas(); ?>
 								</select>
 							</div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                         	<div class="row-fluid buscaDropEspaco">
 		                       	<select id="modelo" name="modelo" class="ui fluid search dropdown">
-									<option value="0">Modelo</option>
-									<?php //Menu::Carregar_Modelos(); ?>
+									<?php self::Carregar_Modelos(); ?>
 								</select>
 							</div>
                         </div>
@@ -37,7 +32,7 @@
                                 	<div class="row-fluid buscaDropEspaco">
 			                        	<select id="ano_de" name="ano_de" class="ui fluid search dropdown">
 											<option value="0">Ano De</option>
-											<?php Menu::Carregar_Anos(); ?>
+											<?php self::Carregar_Anos(); ?>
 										</select>
 									</div>
                                 </div>
@@ -45,7 +40,7 @@
                                 	<div class="row-fluid buscaDropEspaco">
 		                               	<select id="ano_ate" name="ano_ate" class="ui fluid search dropdown">
 											<option value="0">Ano Até</option>
-											<?php Menu::Carregar_Anos(); ?>
+											<?php self::Carregar_Anos(); ?>
 										</select>
 									</div>
                                 </div>

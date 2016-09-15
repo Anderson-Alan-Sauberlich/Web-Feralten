@@ -1,13 +1,13 @@
 <?php
 namespace application\view\src;
 
-    class Pagina_Inicial {
+	require_once(RAIZ.'/application/view/src/include_page/menu.php');
+
+	use application\view\src\include_page\Menu;
+			
+    class Pagina_Inicial extends Menu {
 
         function __construct() {
-        	
-        }
-        
-        public static function Carregar_Pagina_HTML() {
         	require_once(RAIZ.'/application/view/html/pagina_inicial.php');
         }
     }

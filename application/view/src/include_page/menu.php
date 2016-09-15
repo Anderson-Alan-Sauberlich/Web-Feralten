@@ -16,6 +16,8 @@ namespace application\view\src\include_page;
     class Menu {
 
         function __construct() {
+        	require_once(RAIZ.'/application/view/html/include_page/menu.php');
+        	
         	if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         		if (isset($_GET['categoria'])) {
         			self::Carregar_Marcas($_GET['categoria']);
@@ -38,7 +40,7 @@ namespace application\view\src\include_page;
         
         public static function Carregar_Categorias() {
             $categorias = Controller_Menu::Buscar_Todas_Categorias();
-            
+            echo "<option value=\"0\">Categoria</option>";
             foreach ($categorias as $categoria) {
                 echo "<option value=\"".$categoria->get_id()."\">".$categoria->get_nome()."</option>";
             }

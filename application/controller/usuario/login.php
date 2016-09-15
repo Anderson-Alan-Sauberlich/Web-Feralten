@@ -17,8 +17,8 @@ namespace application\controller\usuario;
             
         }
         
-        public static function Mostrar_Pagina() {
-        	View_Login::Carregar_Pagina_HTML();
+        public static function Carregar_Pagina() {
+        	new View_Login();
         }
 		
 		public static function Autenticar_Usuario_Cookie($id_usuario, $token) {

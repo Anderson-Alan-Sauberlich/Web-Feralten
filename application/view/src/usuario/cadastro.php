@@ -12,6 +12,8 @@ namespace application\view\src\usuario;
     class Cadastro {
 
         function __construct() {
+        	require_once(RAIZ.'/application/view/html/usuario/cadastro.php');
+        	
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->Cadastrar();
             }

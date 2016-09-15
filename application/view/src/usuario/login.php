@@ -12,13 +12,11 @@ namespace application\view\src\usuario;
     class Login {
 
         function __construct() {
+        	require_once(RAIZ.'/application/view/html/usuario/login.php');
+        	
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $this->Autenticar();
             }
-        }
-        
-        public static function Carregar_Pagina_HTML() {
-        	require_once(RAIZ.'/application/view/html/usuario/login.php');
         }
         
         private function Salvar_Post() {

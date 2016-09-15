@@ -12,7 +12,7 @@
 	$app->get('/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/pagina_inicial.php');
 		
-		application\controller\Pagina_Inicial::Mostrar_Pagina();
+		application\controller\Pagina_Inicial::Carregar_Pagina();
 		
 		return $response;
 	});
@@ -20,26 +20,32 @@
 	$app->get('/usuario/login/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/login.php');
 		
-		application\controller\usuario\Login::Mostrar_Pagina();
-		
-		return $response;
-	});
-	
-	$app->post('/usuario/login/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/view/src/usuario/login.php');
+		application\controller\usuario\Login::Carregar_Pagina();
 		
 		return $response;
 	});
 	
 	$app->get('/usuario/cadastro/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/view/html/usuario/cadastro.php');
+		require_once(RAIZ.'/application/controller/usuario/cadastro.php');
+		
+		application\controller\usuario\Cadastro::Carregar_Pagina();
 		
 		return $response;
 	});
 	
-	$app->get('/menu_pesquisa/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/view/src/include_page/menu.php');
+	$app->get('/menu_pesquisa/marca/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/include_page/menu.php');
 		
+		//application\controller\include_page\Menu::
+		
+		return $response;
+	});
+	
+	$app->get('/menu_pesquisa/modelo/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/include_page/menu.php');
+	
+		//application\controller\include_page\Menu::
+	
 		return $response;
 	});
 	
@@ -70,6 +76,14 @@
 	$app->get('/teste/', function (Request $request, Response $response) use ($app) {
 		
 		return $response->withRedirect('/');
+	});
+	
+	$app->post('/usuario/login/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/login.php');
+	
+		//application\controller\usuario\Cadastro::
+	
+		return $response;
 	});
 	
 	$app->run();

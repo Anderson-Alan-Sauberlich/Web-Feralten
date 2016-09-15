@@ -4,10 +4,12 @@ namespace application\controller\usuario;
     require_once(RAIZ.'/application/model/dao/usuario.php');
     require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/controller/usuario/login.php');
+    require_once(RAIZ.'/application/view/src/usuario/cadastro.php');
 
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\Login;
+    use application\view\src\usuario\Cadastro as View_Cadastro;
     
     @session_start();
 
@@ -15,6 +17,10 @@ namespace application\controller\usuario;
 
         function __construct() {
             
+        }
+        
+        public static function Carregar_Pagina() {
+        	new View_Cadastro();
         }
 
         public function Cadastrar_Usuario(Object_Usuario $usuario) {

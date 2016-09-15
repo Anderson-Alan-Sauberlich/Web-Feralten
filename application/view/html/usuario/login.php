@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/usuario/login.php'); ?>
-<?php use application\view\src\usuario\Login; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -13,8 +11,8 @@
     </header>
     <section class="ui container" role="main">
     	<div class="row margem-inferior-pouco margem-superior-pouco">
-            <?php Login::Mostrar_Erros(); ?>
-            <?php Login::Mostrar_Sucesso(); ?>
+            <?php self::Mostrar_Erros(); ?>
+            <?php self::Mostrar_Sucesso(); ?>
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             	<div class="panel panel-default borderPainel sombra_painel">
 	                <form id="loginform" name="loginform" data-toggle="validator" method="post" action="/usuario/login/" role="form">
@@ -23,12 +21,12 @@
 	                    </div>
 	                    <div class="panel-body loginPanel">
                             <label for="email" class="lbPanel">Digite seu E-mail:</label>
-                            <div class="input-group menuRowMD <?php Login::Incluir_Classe_Erros("email"); ?>">
+                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros("email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" type="email" class="form-control" name="email" value="<?php Login::Manter_Valor("email"); ?>" placeholder="Endereço de Email" autofocus="" />
+                                <input id="email" type="email" class="form-control" name="email" value="<?php self::Manter_Valor("email"); ?>" placeholder="Endereço de Email" autofocus="" />
                             </div>
                             <label for="password" class="lbPanel">Digite sua Senha:</label>
-                            <div class="input-group menuRowMD <?php Login::Incluir_Classe_Erros("senha"); ?>">
+                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros("senha"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="password" type="password" class="form-control" name="password" placeholder="Senha" />
 		          				<span class="input-group-addon">

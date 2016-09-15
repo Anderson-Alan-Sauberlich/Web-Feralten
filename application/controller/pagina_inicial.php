@@ -11,8 +11,8 @@ namespace application\controller;
             
         }
         
-        public static function Mostrar_Pagina() {
-        	View_Pagina_Inicial::Carregar_Pagina_HTML();
+        public static function Carregar_Pagina() {
+        	new View_Pagina_Inicial();
         }
     }
 ?>
