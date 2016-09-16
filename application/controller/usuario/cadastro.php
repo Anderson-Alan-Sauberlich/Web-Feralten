@@ -23,10 +23,27 @@ namespace application\controller\usuario;
         	new View_Cadastro();
         }
 
-        public function Cadastrar_Usuario(Object_Usuario $usuario) {
+        public function Cadastrar_Usuario() {
             $erros_cadastrar = array();
             $cad_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
 
+            $usuario = new Object_Usuario();
+            
+            $usuario->set_id(0);
+            $usuario->set_nome($_POST['nome']);
+            $usuario->set_senha($_POST['password']);
+            $usuario->set_ultimo_login(date("Y-m-d H:i:s"));
+            	
+            if ($_POST['confemail'] == $_POST['email']) {
+            	$usuario->set_email($_POST['email']);
+            } else if (isset($_POST['confemail']) AND empty($_POST['email'])) {
+            	$usuario->set_email("erro1");
+            } else if (isset($_POST['email']) AND empty($_POST['confemail'])) {
+            	$usuario->set_email("erro2");
+            } else {
+            	$usuario->set_email("erro");
+            }
+            
             if (empty($usuario->get_nome())) {
                 $erros_cadastrar[] = "Digite seu Nome Completo";
                 $cad_campos['erro_nome'] = "erro";
@@ -66,9 +83,22 @@ namespace application\controller\usuario;
                 DAO_Usuario::Inserir($usuario);
 				
                 Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
+                
+                return true;
             } else {
                 $_SESSION['erros_cadastrar'] = $erros_cadastrar;
-                $_SESSION['cad_campos'] = $cad_campos;                
+                $_SESSION['cad_campos'] = $cad_campos;
+                
+                $form_cadastro = array();
+                
+                $form_cadastro['nome'] = $_POST['nome'];
+                $form_cadastro['email'] = $_POST['email'];
+                $form_cadastro['confemail'] = $_POST['confemail'];
+                $form_cadastro['senha'] = $_POST['password'];
+                
+                $_SESSION['form_cadastro'] = $form_cadastro;
+                
+                return false;
             }
         }
     }

@@ -14,7 +14,7 @@
         	<?php self::Mostrar_Erros(); ?>
            	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <div class="panel panel-default borderPainel sombra_painel">
-                    <form id="cadform" name="cadform" data-toggle="validator" action="/application/view/usuario/cadastro.php" method="post" role="form">
+                    <form id="cadform" name="cadform" data-toggle="validator" action="/usuario/cadastro/" method="post" role="form">
                         <div class="panel-title titulo">
                            	<label>Crie uma conta</label>
                         </div>

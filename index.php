@@ -33,6 +33,16 @@
 		return $response;
 	});
 	
+	$app->post('/usuario/cadastro/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/cadastro.php');
+	
+		if (application\controller\usuario\Cadastro::Cadastrar_Usuario()) {
+			return $response->withRedirect('/usuario/meu-perfil/');
+		} else {
+			return $response->withRedirect('/usuario/cadastro/');
+		}
+	});
+	
 	$app->get('/menu_pesquisa/marca/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/include_page/menu.php');
 		
@@ -94,7 +104,7 @@
 	
 		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Post_Request();
 	
-		return $response;
+		return $response->withRedirect('/usuario/meu-perfil/meus-dados/atualizar/');
 	});
 	
 	$app->post('/usuario/login/', function (Request $request, Response $response) use ($app) {

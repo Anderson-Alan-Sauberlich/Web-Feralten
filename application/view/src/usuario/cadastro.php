@@ -13,49 +13,6 @@ namespace application\view\src\usuario;
 
         function __construct() {
         	require_once(RAIZ.'/application/view/html/usuario/cadastro.php');
-        	
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $this->Cadastrar();
-            }
-        }
-
-        private function Salvar_Post() {
-            $form_cadastro = array();
-            
-            $form_cadastro['nome'] = $_POST['nome'];
-            $form_cadastro['email'] = $_POST['email'];
-			$form_cadastro['confemail'] = $_POST['confemail'];
-			$form_cadastro['senha'] = $_POST['password'];
-            
-            $_SESSION['form_cadastro'] = $form_cadastro;
-        }
-
-        private function Cadastrar() {
-            $usuario = new Object_Usuario();
-            
-            $usuario->set_id(0);
-            $usuario->set_nome($_POST['nome']);
-            $usuario->set_senha($_POST['password']);
-			$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
-			
-			if ($_POST['confemail'] == $_POST['email']) {
-				$usuario->set_email($_POST['email']);
-			} else if (isset($_POST['confemail']) AND empty($_POST['email'])) {
-				$usuario->set_email("erro1");
-			} else if (isset($_POST['email']) AND empty($_POST['confemail'])) {
-				$usuario->set_email("erro2");
-			} else {
-				$usuario->set_email("erro");
-			}
-            
-            Controller_Cadastro::Cadastrar_Usuario($usuario);
-            
-            if (isset($_SESSION['erros_cadastrar'])) {
-            	$this->Salvar_Post();
-                header("location: /usuario/cadastro/");
-            } else {
-                header("location: /usuario/meu-perfil/");
-            }
         }
         
         public static function Mostrar_Erros() {

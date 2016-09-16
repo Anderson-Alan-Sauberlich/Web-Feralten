@@ -63,7 +63,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		self::Salvar_Dados_Usuario();
         		self::Salvar_Usuario();
         		$_SESSION['form_atualizar'] = self::form_atualizar;
-        		header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        		break;
         	}
         
         	$_SESSION['form_atualizar'] = self::form_atualizar;
@@ -72,7 +72,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private static function Restaurar_Usuario() {
         	self::Salvar_Contato();
         	self::Salvar_Dados_Usuario();
-        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        	break;
         }
         
         private static function Restaurar_DadosUsuario() {
@@ -80,13 +80,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	self::Salvar_Contato();
         	Controller_Atualizar::Deletar_Imagem();
         	unset($_SESSION['imagem_tmp']);
-        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        	break;
         }
         
         private static function Restaurar_Contato() {
         	self::Salvar_Usuario();
         	self::Salvar_Dados_Usuario();
-        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        	break;
         }
         
         private static function Salvar_Usuario() {
@@ -135,7 +135,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $this->Salvar_Usuario();
             $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
         private static function Atualizar_DadosUsuario() {
@@ -177,7 +176,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $this->Salvar_Contato();
             $this->Salvar_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
         private static function Atualizar_Usuario() {
@@ -235,7 +233,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $this->Salvar_Contato();
             $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
         public static function Pegar_Usuario_Nome() {
