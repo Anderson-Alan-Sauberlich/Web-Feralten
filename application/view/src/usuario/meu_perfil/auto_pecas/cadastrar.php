@@ -537,7 +537,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 					if (isset($_SESSION['imagens_tmp'][1])) {
 						echo Controller_Cadastrar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][1]);
 					} else {
-						echo "/resources/img/imagem_Indisponivel.png";
+						echo "/application/view/resources/img/imagem_Indisponivel.png";
 					}
 					break;
 				
@@ -545,7 +545,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 					if (isset($_SESSION['imagens_tmp'][2])) {
 						echo Controller_Cadastrar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][2]);
 					} else {
-						echo "/resources/img/imagem_Indisponivel.png";
+						echo "/application/view/resources/img/imagem_Indisponivel.png";
 					}
 					break;
 				
@@ -553,7 +553,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 					if (isset($_SESSION['imagens_tmp'][3])) {
 						echo Controller_Cadastrar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][3]);
 					} else {
-						echo "/resources/img/imagem_Indisponivel.png";
+						echo "/application/view/resources/img/imagem_Indisponivel.png";
 					}
 					break;
 			}

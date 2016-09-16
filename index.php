@@ -73,6 +73,30 @@
 		return $response;
 	});
 	
+	$app->get('/usuario/meu-perfil/auto-pecas/atualizar/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/atualizar.php');
+	
+		application\controller\usuario\meu_perfil\auto_pecas\Atualizar::Carregar_Pagina();
+	
+		return $response;
+	});
+	
+	$app->get('/usuario/meu-perfil/meus-dados/atualizar/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Carregar_Pagina();
+	
+		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/atualizar/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Post_Request();
+	
+		return $response;
+	});
+	
 	$app->post('/usuario/login/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/login.php');
 		

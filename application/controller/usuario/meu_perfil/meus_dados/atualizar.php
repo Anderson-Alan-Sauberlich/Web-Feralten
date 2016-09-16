@@ -8,6 +8,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once(RAIZ.'/application/model/dao/dados_usuario.php');
     require_once(RAIZ.'/application/model/dao/contato.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
+	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php');
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
@@ -16,8 +17,9 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Contato as DAO_Contato;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\util\Gerenciar_Imagens;
-    
-    @session_start;
+    use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
+	
+    @session_start();
     
     class Atualizar {
 
@@ -25,11 +27,96 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        private static $erros_dadosusuario;
+        private static $form_atualizar;
         
-        public static function Atualizar_Contato(Object_Contato $contato) {
+        public static function Carregar_Pagina() {
+        	new View_Atualizar();
+        }
+        
+        public static function Post_Request() {
+        	if (isset($_FILES['imagem1'])) {
+        		echo self::Salvar_Imagem_TMP($_FILES['imagem1']);
+        	} else if (isset($_POST['del_img'])) {
+        		self::Deletar_Imagem();
+        	} else {
+        		self::Verificar_Evento();
+        	}
+        }
+        
+        private static function Verificar_Evento() {
+        	self::$form_atualizar = array();
+        
+        	if (isset($_POST['restaurar_login'])) {
+        		self::Restaurar_Usuario();
+        	} else if (isset($_POST['salvar_login'])) {
+        		self::Atualizar_Usuario();
+        	} else if (isset($_POST['restaurar_dadosusuario'])) {
+        		self::Restaurar_DadosUsuario();
+        	} else if (isset($_POST['salvar_dadosusuario'])) {
+        		self::Atualizar_DadosUsuario();
+        	} else if (isset($_POST['restaurar_contato'])) {
+        		self::Restaurar_Contato();
+        	} else if (isset($_POST['salvar_contato'])) {
+        		self::Atualizar_Contato();
+        	} else {
+        		self::Salvar_Contato();
+        		self::Salvar_Dados_Usuario();
+        		self::Salvar_Usuario();
+        		$_SESSION['form_atualizar'] = self::form_atualizar;
+        		header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        	}
+        
+        	$_SESSION['form_atualizar'] = self::form_atualizar;
+        }
+        
+        private static function Restaurar_Usuario() {
+        	self::Salvar_Contato();
+        	self::Salvar_Dados_Usuario();
+        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        }
+        
+        private static function Restaurar_DadosUsuario() {
+        	self::Salvar_Usuario();
+        	self::Salvar_Contato();
+        	Controller_Atualizar::Deletar_Imagem();
+        	unset($_SESSION['imagem_tmp']);
+        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        }
+        
+        private static function Restaurar_Contato() {
+        	self::Salvar_Usuario();
+        	self::Salvar_Dados_Usuario();
+        	header("location: /usuario/meu-perfil/meus-dados/atualizar/");
+        }
+        
+        private static function Salvar_Usuario() {
+        	self::form_atualizar['nome'] = $_POST['nome'];
+        	self::form_atualizar['email'] = $_POST['email'];
+        	self::form_atualizar['confemail'] = $_POST['confemail'];
+        }
+        
+        private static function Salvar_Dados_Usuario() {
+        	self::form_atualizar['nomedadosusuario'] = $_POST['nomedadosusuario'];
+        	self::form_atualizar['cpf_cnpj'] = $_POST['cpf_cnpj'];
+        	self::form_atualizar['site'] = $_POST['site'];
+        }
+        
+        private static function Salvar_Contato() {
+        	self::form_atualizar['fone1'] = $_POST['fone1'];
+        	self::form_atualizar['fone2'] = $_POST['fone2'];
+        	self::form_atualizar['emailcontato'] = $_POST['emailcontato'];
+        }
+        
+        private static function Atualizar_Contato() {
             $erros_contato = array();
             $alt_campos = array('erro_fone1' => "certo");
+            
+            $contato = new Object_Contato();
+            
+            $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            $contato->set_telefone1($_POST['fone1']);
+            $contato->set_telefone2($_POST['fone2']);
+            $contato->set_email($_POST['emailcontato']);
             
             if (empty($contato->get_telefone1())) {
                 $erros_contato[] = "Informe um Nº de Telefone para Telefone 1";
@@ -45,11 +132,22 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
             
             $_SESSION['alt_campos'] = $alt_campos;
+            
+            $this->Salvar_Usuario();
+            $this->Salvar_Dados_Usuario();
+            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
-        public static function Atualizar_DadosUsuario(Object_Dados_Usuario $dados_usuario) {
+        private static function Atualizar_DadosUsuario() {
             self::$erros_dadosusuario = array();
             $alt_campos = array('erro_cpf_cnpj' => "certo");
+            
+            $dados_usuario = new Object_Dados_Usuario();
+            
+            $dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            $dados_usuario->set_cpf_cnpj($_POST['cpf_cnpj']);
+            $dados_usuario->set_nome_fantasia($_POST['nomedadosusuario']);
+            $dados_usuario->set_site($_POST['site']);
             
             if (empty($dados_usuario->get_cpf_cnpj())) {
                 self::$erros_dadosusuario[] = "Informe um CPF ou CNPJ";
@@ -76,11 +174,32 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
             
             $_SESSION['alt_campos'] = $alt_campos;
+            
+            $this->Salvar_Contato();
+            $this->Salvar_Usuario();
+            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
-        public static function Atualizar_Usuario(Object_Usuario $usuario) {
+        private static function Atualizar_Usuario() {
             $erros_usuario = array();
             $alt_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' =>  "certo");
+            
+            $usuario = new Object_Usuario();
+            
+            $usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
+            $usuario->set_nome($_POST["nome"]);
+            $usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
+            $usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
+            
+            if ($_POST['confemail'] == $_POST['email']) {
+            	$usuario->set_email($_POST['email']);
+            } else if (isset($_POST['confemail']) AND empty($_POST['email'])) {
+            	$usuario->set_email("erro1");
+            } else if (isset($_POST['email']) AND empty($_POST['confemail'])) {
+            	$usuario->set_email("erro2");
+            } else {
+            	$usuario->set_email("erro");
+            }
             
             if (empty($usuario->get_nome())) {
                 $erros_usuario[] = "Digite seu Nome Completo";
@@ -113,13 +232,17 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
             
             $_SESSION['alt_campos'] = $alt_campos;
+            
+            $this->Salvar_Contato();
+            $this->Salvar_Dados_Usuario();
+            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
         }
         
-        public static function Pegar_Login_Nome() {
+        public static function Pegar_Usuario_Nome() {
             return unserialize($_SESSION['usuario'])->get_nome();
         }
         
-        public static function Pegar_Login_Email() {
+        public static function Pegar_Usuario_Email() {
             return unserialize($_SESSION['usuario'])->get_email();
         }
         

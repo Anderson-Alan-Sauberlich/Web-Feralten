@@ -16,175 +16,10 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     class Atualizar {
     
         function __construct() {
-            ob_start();
-            
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            	if (isset($_FILES['imagem1'])) {
-					echo Controller_Atualizar::Salvar_Imagem_TMP($_FILES['imagem1']);
-				} else if (isset($_POST['del_img'])) {
-					Controller_Atualizar::Deletar_Imagem();
-				} else {
-                	$this->Verificar_Evento();
-            	}
-			} else {
-				Controller_Atualizar::Deletar_Imagem();
-				unset($_SESSION['imagem_tmp']);
-			}
-        }
-        
-        private $form_atualizar;
-        
-        private function Verificar_Evento() {
-            $this->form_atualizar = array();
-            
-            if (isset($_POST['restaurar_login'])) {
-                $this->Restaurar_Login();
-            } else if (isset($_POST['salvar_login'])) {
-                $this->Atualizar_Login();
-            } else if (isset($_POST['restaurar_dadosusuario'])) {
-                $this->Restaurar_DadosUsuario();
-            } else if (isset($_POST['salvar_dadosusuario'])) {
-                $this->Atualizar_DadosUsuario();
-            } else if (isset($_POST['restaurar_contato'])) {
-                $this->Restaurar_Contato();
-            } else if (isset($_POST['salvar_contato'])) {
-                $this->Atualizar_Contato();
-            } else {
-                $this->Salvar_Contato();
-                $this->Salvar_Dados_Usuario();
-                $this->Salvar_Login();
-                $_SESSION['form_atualizar'] = $this->form_atualizar;
-                header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-            }
-            
-            $_SESSION['form_atualizar'] = $this->form_atualizar;
-        }
-        
-        private function Atualizar_Login() {
-            $usuario = new Object_Usuario();
-            
-            $usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
-            $usuario->set_nome($_POST["nome"]);
-            $usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
-			$usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
-            
-			if ($_POST['confemail'] == $_POST['email']) {
-				$usuario->set_email($_POST['email']);
-			} else if (isset($_POST['confemail']) AND empty($_POST['email'])) {
-				$usuario->set_email("erro1");
-			} else if (isset($_POST['email']) AND empty($_POST['confemail'])) {
-				$usuario->set_email("erro2");
-			} else {
-				$usuario->set_email("erro");
-			}
-			
-            Controller_Atualizar::Atualizar_Usuario($usuario);
-            
-            $this->Salvar_Contato();
-            $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Atualizar_DadosUsuario() {
-            $dados_usuario = new Object_Dados_Usuario();
-            
-            $dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $dados_usuario->set_cpf_cnpj($_POST['cpf_cnpj']);
-            $dados_usuario->set_nome_fantasia($_POST['nomedadosusuario']);
-            $dados_usuario->set_site($_POST['site']);
-			            
-            Controller_Atualizar:: Atualizar_DadosUsuario($dados_usuario);
-            
-            $this->Salvar_Contato();
-            $this->Salvar_Login();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Atualizar_Contato() {
-            $contato = new Object_Contato();
-            
-            $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $contato->set_telefone1($_POST['fone1']);
-            $contato->set_telefone2($_POST['fone2']);
-            $contato->set_email($_POST['emailcontato']);
-            
-            Controller_Atualizar::Atualizar_Contato($contato);
-            
-            $this->Salvar_Login();
-            $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Restaurar_Login() {
-            $this->Salvar_Contato();
-            $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Restaurar_DadosUsuario() {
-            $this->Salvar_Login();
-            $this->Salvar_Contato();
-			Controller_Atualizar::Deletar_Imagem();
-			unset($_SESSION['imagem_tmp']);
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Restaurar_Contato() {
-            $this->Salvar_Login();
-            $this->Salvar_Dados_Usuario();
-            header("location: /usuario/meu-perfil/meus-dados/atualizar/");
-        }
-        
-        private function Salvar_Login() {            
-            $this->form_atualizar['nome'] = $_POST['nome'];
-            $this->form_atualizar['email'] = $_POST['email'];
-			$this->form_atualizar['confemail'] = $_POST['confemail'];
-        }
-        
-        private function Salvar_Dados_Usuario() {
-            $this->form_atualizar['nomedadosusuario'] = $_POST['nomedadosusuario'];
-            $this->form_atualizar['cpf_cnpj'] = $_POST['cpf_cnpj'];
-            $this->form_atualizar['site'] = $_POST['site'];
-        }
-        
-        private function Salvar_Contato() {
-            $this->form_atualizar['fone1'] = $_POST['fone1'];
-            $this->form_atualizar['fone2'] = $_POST['fone2'];
-            $this->form_atualizar['emailcontato'] = $_POST['emailcontato'];
-        }
-        
-        private static function Pegar_Valor($quadro, $campo) {
-            switch ($quadro) {
-                case "login":
-                    if ($campo == "nome") {
-                        echo Controller_Atualizar::Pegar_Login_Nome();
-                    } else if ($campo == "email") {
-                        echo Controller_Atualizar::Pegar_Login_Email();
-                    } else if ($campo == "confemail") {
-                        echo Controller_Atualizar::Pegar_Login_Email();
-                    }
-                    break;
-                    
-                case "dadosusuario":
-                    if ($campo == "nomedadosusuario") {
-                        echo Controller_Atualizar::Pegar_DadosUsuario_Nome();
-                    } else if ($campo == "cpf_cnpj") {
-                        echo Controller_Atualizar::Pegar_DadosUsuario_CPF_CNPJ();
-                    } else if ($campo == "site") {
-                        echo Controller_Atualizar::Pegar_DadosUsuario_Site();
-                    }
-                    break;
-                    
-                case "contato":
-                    if ($campo == "fone1") {
-                        echo Controller_Atualizar::Pegar_Contato_Fone1();
-                    } else if ($campo == "fone2") {
-                        echo Controller_Atualizar::Pegar_Contato_Fone2();
-                    } else if ($campo == "emailcontato") {
-                        echo Controller_Atualizar::Pegar_Contato_Email();
-                    }
-                    break;
-            }
+        	Controller_Atualizar::Deletar_Imagem(); // testar ser nessessario
+        	unset($_SESSION['imagem_tmp']); // testar ser nessessario
+        	
+            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/atualizar.php');
         }
         
         public static function Manter_Valor($quadro, $campo) {
@@ -210,7 +45,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 		public static function Manter_Imagem() {
 			if (isset($_SESSION['imagem_tmp'])) {
 				if ($_SESSION['imagem_tmp'] == "del") {
-					echo "/resources/img/imagem_Indisponivel.png";
+					echo "/application/view/resources/img/imagem_Indisponivel.png";
 				} else {
 					echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 				}
@@ -220,7 +55,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 				if (isset($imagem)) {
 					echo str_replace("@", "200x150", $imagem);
 				} else {
-					echo "/resources/img/imagem_Indisponivel.png";
+					echo "/application/view/resources/img/imagem_Indisponivel.png";
 				}
 			}
 		}
@@ -297,7 +132,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             switch ($quadro) {
                 
                 case "login":
-                    self::Incluir_Classe_Erros_Login($campo);
+                    self::Incluir_Classe_Erros_Usuario($campo);
                     break;
                     
                 case "dadosusuario":
@@ -310,7 +145,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }            
         }
         
-        private function Incluir_Classe_Erros_Login($campo) {
+        private function Incluir_Classe_Erros_Usuario($campo) {
         	if (isset($_SESSION['alt_campos'])) {
 	            $alt_campos = $_SESSION['alt_campos'];
 	            
@@ -449,6 +284,40 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             		unset($_SESSION['alt_campos']);
             	}
 			}
+        }
+        
+        private static function Pegar_Valor($quadro, $campo) {
+        	switch ($quadro) {
+        		case "login":
+        			if ($campo == "nome") {
+        				echo Controller_Atualizar::Pegar_Usuario_Nome();
+        			} else if ($campo == "email") {
+        				echo Controller_Atualizar::Pegar_Usuario_Email();
+        			} else if ($campo == "confemail") {
+        				echo Controller_Atualizar::Pegar_Usuario_Email();
+        			}
+        			break;
+        
+        		case "dadosusuario":
+        			if ($campo == "nomedadosusuario") {
+        				echo Controller_Atualizar::Pegar_DadosUsuario_Nome();
+        			} else if ($campo == "cpf_cnpj") {
+        				echo Controller_Atualizar::Pegar_DadosUsuario_CPF_CNPJ();
+        			} else if ($campo == "site") {
+        				echo Controller_Atualizar::Pegar_DadosUsuario_Site();
+        			}
+        			break;
+        
+        		case "contato":
+        			if ($campo == "fone1") {
+        				echo Controller_Atualizar::Pegar_Contato_Fone1();
+        			} else if ($campo == "fone2") {
+        				echo Controller_Atualizar::Pegar_Contato_Fone2();
+        			} else if ($campo == "emailcontato") {
+        				echo Controller_Atualizar::Pegar_Contato_Email();
+        			}
+        			break;
+        	}
         }
     }
 ?>
