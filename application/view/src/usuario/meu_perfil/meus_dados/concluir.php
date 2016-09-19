@@ -22,76 +22,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     class Concluir {
             
         function __construct() {
-            ob_start();
-            
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-				if (isset($_FILES['imagem1'])) {
-					echo Controller_Concluir::Salvar_Imagem_TMP($_FILES['imagem1']);
-				} else if (isset($_POST['del_img'])) {
-					Controller_Concluir::Deletar_Imagem();
-				} else if (isset($_POST['concluir'])) {
-                    $this->Cadastrar_Dados_Usuario_Endereco();
-                } else {
-                	self::Mostrar_Cidades();
-                }
-            }
-        }
-        
-        private function Cadastrar_Dados_Usuario_Endereco() {
-            $contato = new Object_Contato();
-            $endereco = new Object_Endereco();
-            $dados_usuario = new Object_Dados_Usuario();
-            
-            $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $contato->set_telefone1($_POST['fone1']);
-            $contato->set_telefone2($_POST['fone2']);
-            $contato->set_email($_POST['emailcontato']);
-            
-            $endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $endereco->set_cidade_id($_POST['cidade']);
-            $endereco->set_estado_id($_POST['estado']);
-            $endereco->set_numero($_POST['numero']);
-            $endereco->set_cep($_POST['cep']);
-            $endereco->set_rua($_POST['rua']);
-            $endereco->set_complemento($_POST['complemento']);
-            $endereco->set_bairro($_POST['bairro']);
-            
-            $dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $dados_usuario->set_cpf_cnpj($_POST['cpf_cnpj']);
-			$dados_usuario->set_site($_POST['site']);
-            $dados_usuario->set_nome_fantasia($_POST['nomedadosusuario']);
-            $dados_usuario->set_status_id(1);
-            $dados_usuario->set_data(date('Y-m-d H:i:s'));
-            
-            Controller_Concluir::Cadastrar($contato, $endereco, $dados_usuario);
-            
-            if (isset($_SESSION['erros_concluir'])) {
-            	$this->Salvar_Post();
-                header("location: /usuario/meu-perfil/meus-dados/concluir/");
-            } else {
-				unset($_SESSION['imagem_tmp']);
-                header("location: /usuario/meu-perfil/");
-            }
-        }
-        
-        private function Salvar_Post() {
-            $form_concluir = array();
-            
-            $form_concluir['fone1'] = $_POST['fone1'];
-            $form_concluir['fone2'] = $_POST['fone2'];
-            $form_concluir['cidade'] = $_POST['cidade'];
-            $form_concluir['estado'] = $_POST['estado'];
-            $form_concluir['numero'] = $_POST['numero'];
-            $form_concluir['cep'] = $_POST['cep'];
-            $form_concluir['rua'] = $_POST['rua'];
-            $form_concluir['complemento'] = $_POST['complemento'];
-            $form_concluir['bairro'] = $_POST['bairro'];
-            $form_concluir['cpf_cnpj'] = $_POST['cpf_cnpj'];
-            $form_concluir['nomedadosusuario'] = $_POST['nomedadosusuario'];
-            $form_concluir['emailcontato'] = $_POST['emailcontato'];
-			$form_concluir['site'] = $_POST['site'];
-            
-            $_SESSION['form_concluir'] = $form_concluir;
+            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/concluir.php');
         }
         
         public static function Manter_Valor($campo) {
@@ -114,7 +45,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			if (isset($_SESSION['imagem_tmp'])) {
 				echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 			} else {
-				echo "/resources/img/imagem_Indisponivel.png";
+				echo "/application/view/resources/img/imagem_Indisponivel.png";
 			}
 		}
         
@@ -150,11 +81,11 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			}
         }
         
-        public static function Mostrar_Cidades() {
+        public static function Mostrar_Cidades($estado = null) {
 			$id_estado;
 				
-			if (isset($_POST['estado'])) {
-				$id_estado = $_POST['estado'];
+			if (isset($estado)) {
+				$id_estado = $estado;
 			} else if (isset($_SESSION['form_concluir']['estado'])) {
 				$id_estado = $_SESSION['form_concluir']['estado'];
 			}

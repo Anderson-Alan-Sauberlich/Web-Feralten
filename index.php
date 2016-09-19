@@ -33,16 +33,6 @@
 		return $response;
 	});
 	
-	$app->post('/usuario/cadastro/', function (Request $request, Response $response) use ($app) {
-		require_once(RAIZ.'/application/controller/usuario/cadastro.php');
-	
-		if (application\controller\usuario\Cadastro::Cadastrar_Usuario()) {
-			return $response->withRedirect('/usuario/meu-perfil/');
-		} else {
-			return $response->withRedirect('/usuario/cadastro/');
-		}
-	});
-	
 	$app->get('/menu_pesquisa/marca/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/include_page/menu.php');
 		
@@ -99,6 +89,48 @@
 		return $response;
 	});
 	
+	$app->get('/usuario/meu-perfil/meus-dados/concluir/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Concluir::Carregar_Pagina();
+	
+		return $response;
+	});
+	
+	$app->get('/usuario/meu-perfil/meus-dados/concluir/cidades/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Concluir::Retornar_Cidades_Por_Estado();
+	
+		return $response;
+	});
+	
+	$app->delete('/usuario/meu-perfil/meus-dados/concluir/imagem/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Concluir::Deletar_Imagem();
+	
+		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/concluir/imagem/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Concluir::Salvar_Imagem_TMP();
+	
+		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/concluir/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
+	
+		if (application\controller\usuario\meu_perfil\meus_dados\Concluir::Concluir_Cadastro()) {
+			return $response->withRedirect('/usuario/meu-perfil/');
+		} else {
+			return $response->withRedirect('/usuario/meu-perfil/meus-dados/concluir/');
+		}
+	});
+	
 	$app->post('/usuario/meu-perfil/meus-dados/atualizar/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 	
@@ -114,6 +146,16 @@
 			return $response->withRedirect('/usuario/meu-perfil/');
 		} else {
 			return $response->withRedirect('/usuario/login/');
+		}
+	});
+	
+	$app->post('/usuario/cadastro/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/cadastro.php');
+	
+		if (application\controller\usuario\Cadastro::Cadastrar_Usuario()) {
+			return $response->withRedirect('/usuario/meu-perfil/');
+		} else {
+			return $response->withRedirect('/usuario/cadastro/');
 		}
 	});
 	

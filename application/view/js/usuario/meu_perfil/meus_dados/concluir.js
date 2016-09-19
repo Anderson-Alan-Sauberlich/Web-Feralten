@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('select[name=estado]').change(function(){
     	$('select[name=cidade]').html('<option value="0">Carregando...</option>');
-        $.post('/application/view/usuario/meu_perfil/meus_dados/concluir.php', 
+        $.get('/usuario/meu-perfil/meus-dados/concluir/cidades/', 
         {estado:$(this).val()},
         function(valor){
         	$('select[name=cidade]').html(valor);
@@ -17,7 +17,7 @@ var loadFile = function(event) {
 			var data1 = new FormData();
 			data1.append('imagem1',imagem1);
 			$.ajax({
-				url:'/application/view/usuario/meu_perfil/meus_dados/concluir.php',
+				url:'/usuario/meu-perfil/meus-dados/concluir/imagem/',
 				data:data1,
 				processData:false,
 				contentType:false,
@@ -39,11 +39,13 @@ var loadFile = function(event) {
 };
 function limparCampoFile() {
 	$("#div_img").addClass("active");
-	$.post("/application/view/usuario/meu_perfil/meus_dados/concluir.php",
-	{del_img:true}).done(function() {
-	document.getElementById("imagem").value = "";
-	document.getElementById("foto").src = "/resources/img/imagem_Indisponivel.png";
-	$("#div_img").removeClass("active");
+	$.ajax({
+		method: "DELETE",
+		url: "/usuario/meu-perfil/meus-dados/concluir/imagem/",
+	}).done(function() {
+		document.getElementById("imagem").value = "";
+		document.getElementById("foto").src = "/application/view/resources/img/imagem_Indisponivel.png";
+		$("#div_img").removeClass("active");
 	});
 }
 $(document).ready(function() {
