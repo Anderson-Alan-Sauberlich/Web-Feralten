@@ -24,26 +24,29 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     class Atualizar {
 
         function __construct() {
-            
+			
         }
         
         private static $form_atualizar;
         
         public static function Carregar_Pagina() {
-        	new View_Atualizar();
-        }
-        
-        public static function Post_Request() {
-        	if (isset($_FILES['imagem1'])) {
-        		echo self::Salvar_Imagem_TMP($_FILES['imagem1']);
-        	} else if (isset($_POST['del_img'])) {
+        	if (empty($_SESSION['form_atualizar'])) {
         		self::Deletar_Imagem();
-        	} else {
-        		self::Verificar_Evento();
+        		unset($_SESSION['imagem_tmp']);
+        	}
+        	
+        	new View_Atualizar();
+        	
+            if (isset($_SESSION['dados_usuario'])) {
+        		unset($_SESSION['dados_usuario']);
+        	}
+        	
+        	if (isset($_SESSION['contato'])) {
+        		unset($_SESSION['contato']);
         	}
         }
         
-        private static function Verificar_Evento() {
+        public static function Verificar_Evento() {
         	self::$form_atualizar = array();
         
         	if (isset($_POST['restaurar_login'])) {
@@ -62,49 +65,45 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		self::Salvar_Contato();
         		self::Salvar_Dados_Usuario();
         		self::Salvar_Usuario();
-        		$_SESSION['form_atualizar'] = self::form_atualizar;
-        		break;
         	}
         
-        	$_SESSION['form_atualizar'] = self::form_atualizar;
+        	$_SESSION['form_atualizar'] = self::$form_atualizar;
         }
         
         private static function Restaurar_Usuario() {
         	self::Salvar_Contato();
         	self::Salvar_Dados_Usuario();
-        	break;
         }
         
         private static function Restaurar_DadosUsuario() {
         	self::Salvar_Usuario();
         	self::Salvar_Contato();
-        	Controller_Atualizar::Deletar_Imagem();
+        	self::Deletar_Imagem();
+        	
         	unset($_SESSION['imagem_tmp']);
-        	break;
         }
         
         private static function Restaurar_Contato() {
         	self::Salvar_Usuario();
         	self::Salvar_Dados_Usuario();
-        	break;
         }
         
         private static function Salvar_Usuario() {
-        	self::form_atualizar['nome'] = $_POST['nome'];
-        	self::form_atualizar['email'] = $_POST['email'];
-        	self::form_atualizar['confemail'] = $_POST['confemail'];
+        	self::$form_atualizar['nome'] = $_POST['nome'];
+        	self::$form_atualizar['email'] = $_POST['email'];
+        	self::$form_atualizar['confemail'] = $_POST['confemail'];
         }
         
         private static function Salvar_Dados_Usuario() {
-        	self::form_atualizar['nomedadosusuario'] = $_POST['nomedadosusuario'];
-        	self::form_atualizar['cpf_cnpj'] = $_POST['cpf_cnpj'];
-        	self::form_atualizar['site'] = $_POST['site'];
+        	self::$form_atualizar['nomedadosusuario'] = $_POST['nomedadosusuario'];
+        	self::$form_atualizar['cpf_cnpj'] = $_POST['cpf_cnpj'];
+        	self::$form_atualizar['site'] = $_POST['site'];
         }
         
         private static function Salvar_Contato() {
-        	self::form_atualizar['fone1'] = $_POST['fone1'];
-        	self::form_atualizar['fone2'] = $_POST['fone2'];
-        	self::form_atualizar['emailcontato'] = $_POST['emailcontato'];
+        	self::$form_atualizar['fone1'] = $_POST['fone1'];
+        	self::$form_atualizar['fone2'] = $_POST['fone2'];
+        	self::$form_atualizar['emailcontato'] = $_POST['emailcontato'];
         }
         
         private static function Atualizar_Contato() {
@@ -133,12 +132,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $_SESSION['alt_campos'] = $alt_campos;
             
-            $this->Salvar_Usuario();
-            $this->Salvar_Dados_Usuario();
+            self::Salvar_Usuario();
+            self::Salvar_Dados_Usuario();
         }
         
         private static function Atualizar_DadosUsuario() {
-            self::$erros_dadosusuario = array();
+            $erros_dadosusuario = array();
             $alt_campos = array('erro_cpf_cnpj' => "certo");
             
             $dados_usuario = new Object_Dados_Usuario();
@@ -149,15 +148,15 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             $dados_usuario->set_site($_POST['site']);
             
             if (empty($dados_usuario->get_cpf_cnpj())) {
-                self::$erros_dadosusuario[] = "Informe um CPF ou CNPJ";
+                $erros_dadosusuario[] = "Informe um CPF ou CNPJ";
                 $alt_campos['erro_cpf_cnpj'] = "erro";
             }
 
-            if (empty(self::$erros_dadosusuario)) {
+            if (empty($erros_dadosusuario)) {
 				$dados_usuario->set_imagem(self::Salvar_Imagem());
             }
 
-            if (empty(self::$erros_dadosusuario)) {
+            if (empty($erros_dadosusuario)) {
             	if (empty($dados_usuario->get_imagem())) {
             		DAO_Dados_Usuario::Atualizar_Dados($dados_usuario);
             	} else if ($dados_usuario->get_imagem() == "del") {
@@ -169,13 +168,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 
                 $_SESSION['success_dadosusuario'][] = "Seus Dados de Usuario foram Atualizados com Sucesso!";
             } else {
-                $_SESSION['erros_dadosusuario'] = self::$erros_dadosusuario;
+                $_SESSION['erros_dadosusuario'] = $erros_dadosusuario;
             }
             
             $_SESSION['alt_campos'] = $alt_campos;
             
-            $this->Salvar_Contato();
-            $this->Salvar_Usuario();
+            self::Salvar_Contato();
+            self::Salvar_Usuario();
         }
         
         private static function Atualizar_Usuario() {
@@ -231,8 +230,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $_SESSION['alt_campos'] = $alt_campos;
             
-            $this->Salvar_Contato();
-            $this->Salvar_Dados_Usuario();
+            self::Salvar_Contato();
+            self::Salvar_Dados_Usuario();
         }
         
         public static function Pegar_Usuario_Nome() {
@@ -369,7 +368,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
         }
                 
-        private function Pegar_DadosUsuario(Object_Dados_Usuario $dados_usuario) {
+        private static function Pegar_DadosUsuario(Object_Dados_Usuario $dados_usuario) {
             $dados_usuario = DAO_Dados_Usuario::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
             
             $_SESSION['dados_usuario'] = $dados_usuario;
@@ -377,7 +376,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             return $dados_usuario;
         }
         
-        private function Pegar_Contato(Object_Contato $contato) {
+        private static function Pegar_Contato(Object_Contato $contato) {
             $contato = DAO_Contato::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
             
             $_SESSION['contato'] = $contato;
@@ -385,14 +384,16 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             return $contato;
         }
 		
-		public static function Salvar_Imagem_TMP($arquivo) {
-			$imagens = new Gerenciar_Imagens();
-			
-			$imagens->Armazenar_Imagem_Temporaria($arquivo);
-			
-			$_SESSION['imagem_tmp'] = $imagens->get_nome();
-			
-			return $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+		public static function Salvar_Imagem_TMP() {
+			if (isset($_FILES['imagem'])) {
+				$imagens = new Gerenciar_Imagens();
+				
+				$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
+				
+				$_SESSION['imagem_tmp'] = $imagens->get_nome();
+				
+				echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+			}
 		}
 		
 		public static function Deletar_Imagem() {
@@ -419,7 +420,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        private function Salvar_Imagem() {
+        private static function Salvar_Imagem() {
         	if (isset($_SESSION['imagem_tmp'])) {
         		$imagens = new Gerenciar_Imagens();
 				

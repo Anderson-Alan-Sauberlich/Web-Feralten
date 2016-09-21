@@ -13,7 +13,7 @@
 		require_once(RAIZ.'/application/controller/pagina_inicial.php');
 		
 		application\controller\Pagina_Inicial::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -21,7 +21,7 @@
 		require_once(RAIZ.'/application/controller/usuario/login.php');
 		
 		application\controller\usuario\Login::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -29,7 +29,7 @@
 		require_once(RAIZ.'/application/controller/usuario/cadastro.php');
 		
 		application\controller\usuario\Cadastro::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -53,7 +53,7 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/perfil.php');
 		
 		application\controller\usuario\meu_perfil\Perfil::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 
@@ -61,7 +61,7 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
 		
 		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -69,7 +69,7 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
 		
 		application\controller\usuario\meu_perfil\auto_pecas\Visualizar::Carregar_Pagina();
-		
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -77,15 +77,15 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/atualizar.php');
 	
 		application\controller\usuario\meu_perfil\auto_pecas\Atualizar::Carregar_Pagina();
-	
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
 	$app->get('/usuario/meu-perfil/meus-dados/atualizar/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
-	
+		
 		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Carregar_Pagina();
-	
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -93,7 +93,7 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 	
 		application\controller\usuario\meu_perfil\meus_dados\Concluir::Carregar_Pagina();
-	
+		echo var_dump($_SESSION);
 		return $response;
 	});
 	
@@ -113,11 +113,51 @@
 		return $response;
 	});
 	
+	$app->delete('/usuario/meu-perfil/meus-dados/atualizar/imagem/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Deletar_Imagem();
+	
+		return $response;
+	});
+	
+	$app->delete('/usuario/meu-perfil/auto-pecas/cadastrar/imagem/{img}', function (Request $request, Response $response, $args) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+		
+		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Deletar_Imagem($args['img']);
+		
+		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/auto-pecas/cadastrar/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+		
+		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Verificar_Evento();
+		
+		return $response->withRedirect('/usuario/meu-perfil/auto-pecas/cadastrar/');
+	});
+	
+	$app->post('/usuario/meu-perfil/auto-pecas/cadastrar/imagem/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+		
+		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Salvar_Imagem_TMP();
+		
+		return $response;
+	});
+	
 	$app->post('/usuario/meu-perfil/meus-dados/concluir/imagem/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 	
 		application\controller\usuario\meu_perfil\meus_dados\Concluir::Salvar_Imagem_TMP();
 	
+		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/atualizar/imagem/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
+		
+		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Salvar_Imagem_TMP();
+		
 		return $response;
 	});
 	
@@ -134,8 +174,8 @@
 	$app->post('/usuario/meu-perfil/meus-dados/atualizar/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 	
-		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Post_Request();
-	
+		application\controller\usuario\meu_perfil\meus_dados\Atualizar::Verificar_Evento();
+		
 		return $response->withRedirect('/usuario/meu-perfil/meus-dados/atualizar/');
 	});
 	

@@ -142,10 +142,10 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
 		public static function Salvar_Imagem_TMP() {
-			if (isset($_FILES['imagem1'])) {
+			if (isset($_FILES['imagem'])) {
 				$imagens = new Gerenciar_Imagens();
 					
-				$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem1']);
+				$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
 					
 				$_SESSION['imagem_tmp'] = $imagens->get_nome();
 					
@@ -179,7 +179,11 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	if (isset($_SESSION['imagem_tmp'])) {
         		$imagens = new Gerenciar_Imagens();
 			
-				return $imagens->Arquivar_Imagem_Usuario($_SESSION['imagem_tmp']);
+        		$imagem_tmp = $_SESSION['imagem_tmp'];
+        		
+        		unset($_SESSION['imagem_tmp']);
+        		
+				return $imagens->Arquivar_Imagem_Usuario($imagem_tmp);
 			}
         }
 

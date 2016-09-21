@@ -15,10 +15,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     class Atualizar {
     
-        function __construct() {
-        	Controller_Atualizar::Deletar_Imagem(); // testar ser nessessario
-        	unset($_SESSION['imagem_tmp']); // testar ser nessessario
-        	
+        function __construct() {        	
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/atualizar.php');
         }
         

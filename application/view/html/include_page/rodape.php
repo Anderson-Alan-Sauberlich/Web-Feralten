@@ -52,4 +52,3 @@
     	</div>
     </div>
 </section>
-<?php var_dump($_SESSION); ?>

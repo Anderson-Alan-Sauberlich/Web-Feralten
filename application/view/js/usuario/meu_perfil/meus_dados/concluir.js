@@ -9,13 +9,13 @@ $(document).ready(function(){
    });
 });
 var loadFile = function(event) {
-	if (event.target.files.length <= 3) {
-		var imagem1 = event.target.files[0];
+	if (event.target.files.length = 1) {
+		var imagem = event.target.files[0];
 		
-		if (imagem1 != null && imagem1.type.match('image.*')) {
+		if (imagem != null && imagem.type.match('image.*')) {
 			$("#div_img").addClass("active");
 			var data1 = new FormData();
-			data1.append('imagem1',imagem1);
+			data1.append('imagem',imagem);
 			$.ajax({
 				url:'/usuario/meu-perfil/meus-dados/concluir/imagem/',
 				data:data1,
@@ -31,8 +31,6 @@ var loadFile = function(event) {
 		} else {
 			$("#div_img").removeClass("active");
 		}
-	} else {
-		alert("Selecione no Maximo Uma Imagem");
 	}
 	
 	document.getElementById("imagens").value = "";

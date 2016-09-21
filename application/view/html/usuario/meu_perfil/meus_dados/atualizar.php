@@ -2,7 +2,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once(RAIZ.'/application/view/html/include_page/head.php'); ?>
-	<script type="text/javascript" src="/applicatoin/view/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
+	<script type="text/javascript" src="/application/view/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
 	<title>Atualizar | Feralten</title>
 </head>
 <body>
@@ -41,7 +41,7 @@
 	                        <div class="ui buttons linha_inteira btnAtualizar">
 								<button id="salvar_login" name="salvar_login" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
 								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_login" name="restaurar_login" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
+								<button id="restaurar_login" name="restaurar_login" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
 							</div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
 											<i class="glyphicon glyphicon-upload"></i> Adicionar Imagem
 											<input id="imagem" value="" accept="image/*" name="imagem" onchange="loadFile(event);" type="file">
 										</span>
-										<button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile();" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
+										<button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile()" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
 									</div>
 									<div class="col-md-5 col-sm-12 col-xs-12">
 										<div class="ui small bordered image imagemPeca">
@@ -93,7 +93,7 @@
 	                        <div class="ui buttons linha_inteira btnAtualizar">
 								<button id="salvar_dadosusuario" name="salvar_dadosusuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
 								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_dadosusuario" name="restaurar_dadosusuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
+								<button id="restaurar_dadosusuario" name="restaurar_dadosusuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
 							</div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
 	                        <div class="ui buttons linha_inteira btnAtualizar">
 								<button id="salvar_contato" name="salvar_contato" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
 								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_contato" name="restaurar_contato" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
+								<button id="restaurar_contato" name="restaurar_contato" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
 							</div>
                         </div>
                     </div>
@@ -139,5 +139,3 @@
     </footer>
 </body>
 </html>
-<?php unset($_SESSION['dados_usuario']); ?>
-<?php unset($_SESSION['contato']); ?>
