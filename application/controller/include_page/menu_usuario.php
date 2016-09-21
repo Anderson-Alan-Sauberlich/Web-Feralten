@@ -18,7 +18,6 @@ namespace application\controller\include_page;
         }
         
         public static function Verificar_Autenticacao() {
-        	
             if (empty($_SESSION['usuario'])) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";

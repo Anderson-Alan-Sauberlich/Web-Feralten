@@ -4,12 +4,14 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/model/dao/usuario.php');
 	require_once(RAIZ.'/application/controller/usuario/login.php');
+	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php');
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;
-    
-    @session_start;
+    use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
+	
+    @session_start();
     
     class Alterar_Senha {
 
@@ -17,9 +19,26 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Atualizar_Senha_Usuario($senha_antiga_usuario, $senha_nova_usuario) {
+        public static function Carregar_Pagina() {
+        	new View_Alterar_Senha();
+        }
+        
+        public static function Atualizar_Senha_Usuario() {
             $erros_alterar_senha = array();
             $alt_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_confsenha_nova' => "certo");
+            
+            $senha_antiga_usuario = $_POST["senha_antiga"];
+            $senha_nova_usuario = $_POST["confsenha_nova"] == $_POST['senha_nova'] ? $_POST['senha_nova'] : "erro";
+            
+            if ($_POST['confsenha_nova'] == $_POST['senha_nova']) {
+            	$senha_nova_usuario = $_POST['senha_nova'];
+            } else if (isset($_POST['confsenha_nova']) AND empty($_POST['senha_nova'])) {
+            	$senha_nova_usuario = "erro1";
+            } else if (isset($_POST['senha_nova']) AND empty($_POST['confsenha_nova'])) {
+            	$senha_nova_usuario = "erro2";
+            } else {
+            	$senha_nova_usuario = "erro";
+            }
             
 			if (empty($senha_antiga_usuario)) {
 				$erros_alterar_senha[] = "Digite a Senha Antiga";
@@ -59,9 +78,21 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 DAO_Usuario::Atualizar_Senha($senha_nova_usuario, unserialize($_SESSION['usuario'])->get_id());
                 
 				Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova_usuario);
+				
+				return true;
             } else {
                 $_SESSION['erros_alterar_senha'] = $erros_alterar_senha;
 				$_SESSION['alt_campos'] = $alt_campos;
+				
+				$form_alterar_senha = array();
+					
+				$form_alterar_senha['senha_antiga'] = $_POST['senha_antiga'];
+				$form_alterar_senha['senha_nova'] = $_POST['senha_nova'];
+				$form_alterar_senha['confsenha_nova'] = $_POST['confsenha_nova'];
+					
+				$_SESSION['form_alterar_senha'] = $form_alterar_senha;
+				
+				return false;
             }
         }
     }

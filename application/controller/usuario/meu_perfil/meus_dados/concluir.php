@@ -138,7 +138,9 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public static function Retornar_Cidades_Por_Estado() {
-        	View_Concluir::Mostrar_Cidades($_GET['estado']);
+        	if (isset($_GET['estado'])) {
+        		View_Concluir::Mostrar_Cidades($_GET['estado']);
+        	}
         }
         
 		public static function Salvar_Imagem_TMP() {

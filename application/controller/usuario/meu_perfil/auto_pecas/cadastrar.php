@@ -89,6 +89,168 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         		self::Deletar_Imagem(123);
         	}
         }
+        
+        public static function Carregar_Compatibilidade() {
+        	if (isset($_GET['categoria'])) {
+        		if ($_GET['categoria'] == "verificar") {
+        			View_Cadastrar::Carregar_Marcas();
+        		} else {
+        			self::Salvar_Session_Compatibilidade();
+        			View_Cadastrar::Carregar_Categorias();
+        		}
+        	}
+        		
+        	if (isset($_GET['marca'])) {
+        		if ($_GET['marca'] == "verificar") {
+        			View_Cadastrar::Carregar_Modelos();
+        		} else {
+        			self::Salvar_Session_Compatibilidade();
+        			View_Cadastrar::Carregar_Marcas();
+        		}
+        	}
+        		
+        	if (isset($_GET['modelo'])) {
+        		if ($_GET['modelo'] == "verificar") {
+        			View_Cadastrar::Carregar_Versoes();
+        		} else {
+        			self::Salvar_Session_Compatibilidade();
+        			View_Cadastrar::Carregar_Modelos();
+        		}
+        	}
+        		
+        	if (isset($_GET['versao'])) {
+        		if ($_GET['versao'] == "verificar") {
+        			View_Cadastrar::Carregar_Anos();
+        		} else {
+        			self::Salvar_Session_Compatibilidade();
+        			View_Cadastrar::Carregar_Versoes();
+        		}
+        	}
+        }
+        
+        private static function Salvar_Session_Compatibilidade() {
+        	$compatibilidade = array();
+        		
+        	$compatibilidade['categoria'] = array();
+        	$compatibilidade['marca'] = array();
+        	$compatibilidade['modelo'] = array();
+        	$compatibilidade['versao'] = array();
+        	$compatibilidade['ano'] = array();
+        		
+        	if (isset($_SESSION['compatibilidade'])) {
+        		$compatibilidade = $_SESSION['compatibilidade'];
+        	}
+        		
+        	if (isset($_GET['categoria'])) {
+        		if (isset($compatibilidade['categoria'])) {
+        			if (isset($compatibilidade['categoria'][$_GET['categoria']])) {
+        				unset($compatibilidade['categoria'][$_GET['categoria']]);
+        
+        				if (isset($compatibilidade['marca'])) {
+        					$marcas = self::Buscar_Marcas_Por_Categoria($_GET['categoria']);
+        						
+        					foreach ($marcas as $marca) {
+        						if (isset($compatibilidade['marca'][$marca->get_id()])) {
+        							unset($compatibilidade['marca'][$marca->get_id()]);
+        								
+        							if (isset($compatibilidade['modelo'])) {
+        								$modelos = self::Buscar_Modelos_Por_Marca($marca->get_id());
+        
+        								foreach ($modelos as $modelo) {
+        									if (isset($compatibilidade['modelo'][$modelo->get_id()])) {
+        										unset($compatibilidade['modelo'][$modelo->get_id()]);
+        
+        										if (isset($compatibilidade['versao'])) {
+        											$versoes = self::Buscar_Versoes_Por_Modelo($modelo->get_id());
+        												
+        											foreach ($versoes as $versao) {
+        												if (isset($compatibilidade['versao'][$versao->get_id()])) {
+        													unset($compatibilidade['versao'][$versao->get_id()]);
+        												}
+        											}
+        										}
+        									}
+        								}
+        							}
+        						}
+        					}
+        				}
+        			} else {
+        				$compatibilidade['categoria'][$_GET['categoria']] = $_GET['categoria'];
+        			}
+        		} else {
+        			$compatibilidade['categoria'][$_GET['categoria']] = $_GET['categoria'];
+        		}
+        	}
+        		
+        	if (isset($_GET['marca'])) {
+        		if (isset($compatibilidade['marca'])) {
+        			if (isset($compatibilidade['marca'][$_GET['marca']])) {
+        				unset($compatibilidade['marca'][$_GET['marca']]);
+        
+        				if (isset($compatibilidade['modelo'])) {
+        					$modelos = self::Buscar_Modelos_Por_Marca($_GET['marca']);
+        						
+        					foreach ($modelos as $modelo) {
+        						if (isset($compatibilidade['modelo'][$modelo->get_id()])) {
+        							unset($compatibilidade['modelo'][$modelo->get_id()]);
+        								
+        							if (isset($compatibilidade['versao'])) {
+        								$versoes = self::Buscar_Versoes_Por_Modelo($modelo->get_id());
+        
+        								foreach ($versoes as $versao) {
+        									if (isset($compatibilidade['versao'][$versao->get_id()])) {
+        										unset($compatibilidade['versao'][$versao->get_id()]);
+        									}
+        								}
+        							}
+        						}
+        					}
+        				}
+        			} else {
+        				$compatibilidade['marca'][$_GET['marca']] = $_GET['marca'];
+        			}
+        		} else {
+        			$compatibilidade['marca'][$_GET['marca']] = $_GET['marca'];
+        		}
+        	}
+        		
+        	if (isset($_GET['modelo'])) {
+        		if (isset($compatibilidade['modelo'])) {
+        			if (isset($compatibilidade['modelo'][$_GET['modelo']])) {
+        				unset($compatibilidade['modelo'][$_GET['modelo']]);
+        
+        				if (isset($compatibilidade['versao'])) {
+        					$versoes = self::Buscar_Versoes_Por_Modelo($_GET['modelo']);
+        						
+        					foreach ($versoes as $versao) {
+        						if (isset($compatibilidade['versao'][$versao->get_id()])) {
+        							unset($compatibilidade['versao'][$versao->get_id()]);
+        						}
+        					}
+        				}
+        			} else {
+        				$compatibilidade['modelo'][$_GET['modelo']] = $_GET['modelo'];
+        			}
+        		} else {
+        			$compatibilidade['modelo'][$_GET['modelo']] = $_GET['modelo'];
+        		}
+        	}
+        		
+        	if (isset($_GET['versao'])) {
+        		if (isset($compatibilidade['versao'])) {
+        			if (isset($compatibilidade['versao'][$_GET['versao']])) {
+        				unset($compatibilidade['versao'][$_GET['versao']]);
+        			} else {
+        				$compatibilidade['versao'][$_GET['versao']] = $_GET['versao'];
+        			}
+        		} else {
+        			$compatibilidade['versao'][$_GET['versao']] = $_GET['versao'];
+        		}
+        	}
+        		
+        	$_SESSION['compatibilidade'] = $compatibilidade;
+        }
 		
 		private static function Cadastrar_Peca() {
 			$erros_cadastrar_peca = array();

@@ -13,37 +13,12 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     use application\model\object\Cidade as Object_Cidade;
 	use application\model\object\Usuario as Object_Usuario;
     
-    @session_start;
+    @session_start();
 
     class Enderecos {
 
         function __construct() {
-            ob_start();
-			
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-               	if (isset($_POST['enderecos'])) {
-                	$this->Atualizar_Endereco();
-				} else {
-					self::Mostrar_Cidades();
-				}
-            }
-        }
-		
-        private function Atualizar_Endereco() {
-            $endereco = new Object_Endereco();
-            
-            $endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $endereco->set_cidade_id($_POST['cidade']);
-            $endereco->set_estado_id($_POST['estado']);
-            $endereco->set_numero($_POST['numero']);
-            $endereco->set_cep($_POST['cep']);
-            $endereco->set_rua($_POST['rua']);
-            $endereco->set_complemento($_POST['complemento']);
-            $endereco->set_bairro($_POST['bairro']);
-            
-            Controller_Enderecos::Atualizar_Endereco($endereco);
-			
-            header("location: /usuario/meu-perfil/meus-dados/enderecos/");
+            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/enderecos.php');
         }
 		
         public static function Incluir_Classe_Erros($campo) {
@@ -170,11 +145,11 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Cidades() {
+        public static function Mostrar_Cidades($estado = null) {
         	$cidades = array();
         	
-            if (isset($_POST['estado'])) {
-                $cidades = Controller_Enderecos::Buscar_Cidade_Por_Estado($_POST['estado']);
+            if (isset($estado)) {
+                $cidades = Controller_Enderecos::Buscar_Cidade_Por_Estado($estado);
             } else {
                 $cidades = Controller_Enderecos::Buscar_Cidade_Por_Estado_Usuario();
             }

@@ -26,16 +26,16 @@ namespace application\view\src\include_page;
             
 			if ($status == null) {
 				if (empty($_SESSION['menu']['cadastro_incompleto'])) {
-			    	include_once(RAIZ.'application/view/html/include_page/mensagens/cadastro_incompleto.php');
+			    	include_once(RAIZ.'/application/view/html/include_page/mensagens/cadastro_incompleto.php');
 				}
 				
 				unset($_SESSION['menu']);
 			} else if ($status == 1) {
 				unset($_SESSION['menu']);
 			} else if ($status == 2) {
-				include_once(RAIZ.'application/view/html/include_page/mensagens/pagamento_atrasado.php');
+				include_once(RAIZ.'/application/view/html/include_page/mensagens/pagamento_atrasado.php');
 			} else if ($status == 3) {
-				include_once(RAIZ.'application/view/html/include_page/mensagens/conta_desativada.php');
+				include_once(RAIZ.'/application/view/html/include_page/mensagens/conta_desativada.php');
 			}
 			
 			

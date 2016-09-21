@@ -65,6 +65,14 @@
 		return $response;
 	});
 	
+	$app->get('/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+		
+		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Carregar_Compatibilidade();
+		
+		return $response;
+	});
+	
 	$app->get('/usuario/meu-perfil/auto-pecas/visualizar/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
 		
@@ -89,6 +97,22 @@
 		return $response;
 	});
 	
+	$app->get('/usuario/meu-perfil/meus-dados/alterar-senha/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
+		
+		application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha::Carregar_Pagina();
+		echo var_dump($_SESSION);
+		return $response;
+	});
+	
+	$app->get('/usuario/meu-perfil/meus-dados/enderecos/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Enderecos::Carregar_Pagina();
+		echo var_dump($_SESSION);
+		return $response;
+	});
+	
 	$app->get('/usuario/meu-perfil/meus-dados/concluir/', function (Request $request, Response $response) use ($app) {
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 	
@@ -101,6 +125,14 @@
 		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 	
 		application\controller\usuario\meu_perfil\meus_dados\Concluir::Retornar_Cidades_Por_Estado();
+	
+		return $response;
+	});
+	
+	$app->get('/usuario/meu-perfil/meus-dados/enderecos/cidades/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
+	
+		application\controller\usuario\meu_perfil\meus_dados\Enderecos::Retornar_Cidades_Por_Estado();
 	
 		return $response;
 	});
@@ -127,6 +159,24 @@
 		application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Deletar_Imagem($args['img']);
 		
 		return $response;
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/enderecos/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
+		
+		application\controller\usuario\meu_perfil\meus_dados\Enderecos::Atualizar_Endereco();
+		
+		return $response->withRedirect('/usuario/meu-perfil/meus-dados/enderecos/');
+	});
+	
+	$app->post('/usuario/meu-perfil/meus-dados/alterar-senha/', function (Request $request, Response $response) use ($app) {
+		require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
+	
+		if (application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha::Atualizar_Senha_Usuario()) {
+			return $response->withRedirect('/usuario/meu-perfil/');
+		} else {
+			return $response->withRedirect('/usuario/meu-perfil/meus-dados/alterar-senha/');
+		}
 	});
 	
 	$app->post('/usuario/meu-perfil/auto-pecas/cadastrar/', function (Request $request, Response $response) use ($app) {

@@ -8,6 +8,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once(RAIZ.'/application/model/dao/cidade.php');
 	require_once(RAIZ.'/application/model/dao/endereco.php');
     require_once(RAIZ.'/application/model/dao/estado.php');
+    require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php');
 	
 	use application\model\object\Endereco as Object_Endereco;
     use application\model\object\Usuario as Object_Usuario;
@@ -16,18 +17,40 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;
+    use application\view\src\usuario\meu_perfil\meus_dados\Enderecos as View_Enderecos;
 
-    @session_start;
+    @session_start();
 
     class Enderecos {
 
         function __construct() {
             
         }
+        
+        public static function Carregar_Pagina() {
+        	new View_Enderecos();
+        }
+        
+        public static function Retornar_Cidades_Por_Estado() {
+        	if (isset($_GET['estado'])) {
+        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
+        	}
+        }
 		
-        public static function Atualizar_Endereco(Object_Endereco $endereco) {
+        public static function Atualizar_Endereco() {
             $erros_enderecos = array();
             $enderecos_campos = array('erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo", 'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo");
+            
+            $endereco = new Object_Endereco();
+            
+            $endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            $endereco->set_cidade_id($_POST['cidade']);
+            $endereco->set_estado_id($_POST['estado']);
+            $endereco->set_numero($_POST['numero']);
+            $endereco->set_cep($_POST['cep']);
+            $endereco->set_rua($_POST['rua']);
+            $endereco->set_complemento($_POST['complemento']);
+            $endereco->set_bairro($_POST['bairro']);
             
             if ($endereco->get_cidade_id() <= 0) {
                 $erros_enderecos[] = "Seleciona sua Cidade";

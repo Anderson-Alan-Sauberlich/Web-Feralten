@@ -1,5 +1,3 @@
-<?php require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php'); ?>
-<?php use application\view\src\usuario\meu_perfil\meus_dados\Enderecos; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -13,9 +11,9 @@
     </header>
     <section class="ui container" role="main">
         <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
-        <?php Enderecos::Mostrar_Erros(); ?>
-        <?php Enderecos::Mostrar_Sucesso("atualizar_endereco"); ?>
-        <form id="ender_form" name="ender_form" data-toggle="validator" action="/application/view/usuario/meu_perfil/meus_dados/enderecos.php" method="post" role="form">
+        <?php self::Mostrar_Erros(); ?>
+        <?php self::Mostrar_Sucesso("atualizar_endereco"); ?>
+        <form id="ender_form" name="ender_form" data-toggle="validator" action="/usuario/meu-perfil/meus-dados/enderecos/" method="post" role="form">
             <div class="panel panel-default sombra_painel">
                 <div class="panel-heading sombra_painel centralizar">
                     <label class="lbPanel">Gerenciar Endereços</label>
@@ -24,48 +22,48 @@
                     <div class="row dadosPanel">
                         <div class="col-sm-6">
                             <label for="estado" class="lbPanel">Selecione Seu Estado:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("estado"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("estado"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
                                 <select id="estado" name="estado" class="form-control form_select">
                                     <option>Selecione seu Estado</option>
-                                    <?php Enderecos::Mostrar_Estados(); ?>
+                                    <?php self::Mostrar_Estados(); ?>
                                 </select>
                                 <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
                             </div>
                             <label for="cidade" class="lbPanel">Selecione Sua Cidade:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("cidade"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("cidade"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
                                 <select id="cidade" name="cidade" class="form-control form_select">
-                                    <?php Enderecos::Mostrar_Cidades(); ?>
+                                    <?php self::Mostrar_Cidades(); ?>
                                 </select>
                                 <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
                             </div>
                             <label for="bairro" class="lbPanel">Digite o Nome do Bairro:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("bairro"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("bairro"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                <input id="bairro" name="bairro" type="text" class="form-control" value="<?php Enderecos::Pegar_Valor("bairro") ?>" placeholder="Bairro" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o Nome Completo do Bairro. (Campo Obrigatório)" />
+                                <input id="bairro" name="bairro" type="text" class="form-control" value="<?php self::Pegar_Valor("bairro") ?>" placeholder="Bairro" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o Nome Completo do Bairro. (Campo Obrigatório)" />
                             </div>
                             <label for="rua" class="lbPanel">Digite o Nome da Rua:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("rua"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("rua"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                                <input id="rua" name="rua" type="text" class="form-control" value="<?php Enderecos::Pegar_Valor("rua") ?>" placeholder="Rua" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o nome Completo da Rua. (Campo Obrigatório)" />
+                                <input id="rua" name="rua" type="text" class="form-control" value="<?php self::Pegar_Valor("rua") ?>" placeholder="Rua" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o nome Completo da Rua. (Campo Obrigatório)" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="numero" class="lbPanel">Digite o Numero do Estabelecimento:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("numero"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("numero"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                <input id="numero" name="numero" type="text" class="form-control" value="<?php Enderecos::Pegar_Valor("numero") ?>" placeholder="Numero" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o Numero do Endereço. (Campo Obrigatório)" />
+                                <input id="numero" name="numero" type="text" class="form-control" value="<?php self::Pegar_Valor("numero") ?>" placeholder="Numero" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite o Numero do Endereço. (Campo Obrigatório)" />
                             </div>
                             <label for="cep" class="lbPanel">Digite Seu CEP:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("cep"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("cep"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                <input id="cep" name="cep" type="text" class="form-control" value="<?php Enderecos::Pegar_Valor("cep") ?>" placeholder="CEP" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os numeros do seu CEP. (Campo Obrigatório)" />
+                                <input id="cep" name="cep" type="text" class="form-control" value="<?php self::Pegar_Valor("cep") ?>" placeholder="CEP" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os numeros do seu CEP. (Campo Obrigatório)" />
                             </div>
                             <label for="complemento" class="lbPanel">Digite um Complemento do Endereço:</label>
-                            <div class="input-group <?php Enderecos::Incluir_Classe_Erros("complemento"); ?>">
+                            <div class="input-group <?php self::Incluir_Classe_Erros("complemento"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                <input id="complemento" name="complemento" type="text" class="form-control" value="<?php Enderecos::Pegar_Valor("complemento") ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complememento de Referencia para o Endereço.  (Campo Obcional)" />
+                                <input id="complemento" name="complemento" type="text" class="form-control" value="<?php self::Pegar_Valor("complemento") ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complememento de Referencia para o Endereço.  (Campo Obcional)" />
                             </div>
                         </div>
                    </div>

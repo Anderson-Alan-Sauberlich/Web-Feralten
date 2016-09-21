@@ -4,7 +4,7 @@ $(document).ready(function() {
 function Carregar_Categoria(ca) {
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { categoria:$(ca).val() }
 	}).done(function(valor) {
@@ -14,7 +14,7 @@ function Carregar_Categoria(ca) {
 	$("#div_marca").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { categoria:"verificar" }
 	}).done(function(valor) {
@@ -24,7 +24,7 @@ function Carregar_Categoria(ca) {
 	$("#div_modelo").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { marca:"verificar" }
 	}).done(function(valor) {
@@ -34,7 +34,7 @@ function Carregar_Categoria(ca) {
 	$("#div_versao").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { modelo:"verificar" }
 	}).done(function(valor) {
@@ -44,7 +44,7 @@ function Carregar_Categoria(ca) {
 	$("#div_ano").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { versao:"verificar" }
 	}).done(function(valor) {
@@ -54,7 +54,7 @@ function Carregar_Categoria(ca) {
 function Carregar_Marca(ma) {
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { marca:$(ma).val() }
 	}).done(function(valor) {
@@ -64,7 +64,7 @@ function Carregar_Marca(ma) {
 	$("#div_modelo").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { marca:"verificar" }
 	}).done(function(valor) {
@@ -74,7 +74,7 @@ function Carregar_Marca(ma) {
 	$("#div_versao").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { modelo:"verificar" }
 	}).done(function(valor) {
@@ -84,7 +84,7 @@ function Carregar_Marca(ma) {
 	$("#div_ano").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { versao:"verificar" }
 	}).done(function(valor) {
@@ -94,7 +94,7 @@ function Carregar_Marca(ma) {
 function Carregar_Modelo(mo) {
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { modelo:$(mo).val() }
 	}).done(function(valor) {
@@ -104,7 +104,7 @@ function Carregar_Modelo(mo) {
 	$("#div_versao").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { modelo:"verificar" }
 	}).done(function(valor) {
@@ -114,7 +114,7 @@ function Carregar_Modelo(mo) {
 	$("#div_ano").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { versao:"verificar" }
 	}).done(function(valor) {
@@ -124,7 +124,7 @@ function Carregar_Modelo(mo) {
 function Carregar_Versao(vs) {
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { versao:$(vs).val() }
 	}).done(function(valor) {
@@ -134,7 +134,7 @@ function Carregar_Versao(vs) {
 	$("#div_ano").html('Carregando...');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/auto-pecas/cadastrar/",
+		url: "/usuario/meu-perfil/auto-pecas/cadastrar/compatibilidade/",
 		async: false,
 		data: { versao:"verificar" }
 	}).done(function(valor) {
