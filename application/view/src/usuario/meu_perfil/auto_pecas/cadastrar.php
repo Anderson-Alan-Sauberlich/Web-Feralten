@@ -2,22 +2,8 @@
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/object/categoria.php');
-    require_once(RAIZ.'/application/model/object/marca.php');
-    require_once(RAIZ.'/application/model/object/modelo.php');
-	require_once(RAIZ.'/application/model/object/versao.php');
-	require_once(RAIZ.'/application/model/object/peca.php');
-	require_once(RAIZ.'/application/model/object/lista_pativel.php');
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Cadastrar as Controller_Cadastrar;
-    use application\model\object\Usuario as Object_Usuario;
-    use application\model\object\Categoria as Object_Categoria;
-    use application\model\object\Marca as Object_Marca;
-    use application\model\object\Modelo as Object_Modelo;
-	use application\model\object\Versao as Object_Versao;
-	use application\model\object\Peca as Object_Peca;
-	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
 	
     @session_start();
 	

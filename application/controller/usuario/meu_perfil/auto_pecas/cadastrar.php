@@ -1,19 +1,8 @@
 <?php
 namespace application\controller\usuario\meu_perfil\auto_pecas;
 
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/object/categoria.php');
-    require_once(RAIZ.'/application/model/object/marca.php');
-    require_once(RAIZ.'/application/model/object/modelo.php');
-	require_once(RAIZ.'/application/model/object/versao.php');
-	require_once(RAIZ.'/application/model/object/categoria_compativel.php');
-	require_once(RAIZ.'/application/model/object/marca_compativel.php');
-	require_once(RAIZ.'/application/model/object/modelo_compativel.php');
-	require_once(RAIZ.'/application/model/object/versao_compativel.php');
 	require_once(RAIZ.'/application/model/object/peca.php');
 	require_once(RAIZ.'/application/model/object/lista_pativel.php');
-	require_once(RAIZ.'/application/model/object/contato.php');
-	require_once(RAIZ.'/application/model/object/endereco.php');
 	require_once(RAIZ.'/application/model/object/foto_peca.php');
     require_once(RAIZ.'/application/model/dao/categoria.php');
     require_once(RAIZ.'/application/model/dao/marca.php');
@@ -32,19 +21,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
 	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php');
 	
-    use application\model\object\Usuario as Object_Usuario;
-    use application\model\object\Categoria as Object_Categoria;
-    use application\model\object\Marca as Object_Marca;
-    use application\model\object\Modelo as Object_Modelo;
-	use application\model\object\Versao as Object_Versao;
-	use application\model\object\Categoria_Compativel as Object_Categoria_Compativel;
-	use application\model\object\Marca_Compativel as Object_Marca_Compativel;
-	use application\model\object\Modelo_Compativel as Object_Modelo_Compativel;
-	use application\model\object\Versao_Compativel as Object_Versao_Compativel;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
-	use application\model\object\Contato as Object_Contato;
-	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
     use application\model\dao\Categoria as DAO_Categoria;
     use application\model\dao\Marca as DAO_Marca;
