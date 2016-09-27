@@ -18,6 +18,23 @@ namespace application\controller\usuario;
         public static function Carregar_Pagina() {
         	new View_Login();
         }
+        
+        public static function LogOut() {
+        	if (isset($_GET['logout'])) {
+	        	if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
+	        		if (isset($_COOKIE['f_m_l'])) {
+	        			if (isset($_SESSION['usuario'])) {
+	        				DAO_Usuario::Atualizar_Token(null, unserialize($_SESSION['usuario'])->get_id());
+	        			}
+	        			 
+	        			setcookie("f_m_l", null, time()-3600, "/");
+	        		}
+	        
+	        		unset($_SESSION['usuario']);
+	        		$_SESSION['login_success'][] = "LogOut efetuado com Sucesso!";
+	        	}
+        	}
+        }
 		
 		public static function Autenticar_Usuario_Cookie($id_usuario, $token) {
 			$usuario_login = DAO_Usuario::Buscar_Usuario($id_usuario);
@@ -57,10 +74,6 @@ namespace application\controller\usuario;
             	}
             }
         }
-		
-		public static function Apagar_Token($usuario_id) {
-			DAO_Usuario::Atualizar_Token(null, $usuario_id);
-		}
 
         public static function Autenticar_Usuario_Login($email, $senha, $manter_login) {
             $login_campos = array();

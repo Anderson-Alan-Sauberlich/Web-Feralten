@@ -1,6 +1,7 @@
 <?php
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
+use application;
 	
 	require_once('config.php');
 	require_once('vendor/autoload.php');
@@ -54,6 +55,14 @@
 			} else {
 				return $response->withRedirect('/usuario/login/');
 			}
+		});
+		
+		$app->get('sair/', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/login.php');
+			
+			application\controller\usuario\Login::LogOut();
+			
+			return $response->withRedirect('/usuario/login/');
 		});
 	});
 	
