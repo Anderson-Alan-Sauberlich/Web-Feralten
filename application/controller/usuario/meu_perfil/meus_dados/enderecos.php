@@ -2,18 +2,12 @@
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
 	require_once(RAIZ.'/application/model/object/endereco.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/object/cidade.php');
-    require_once(RAIZ.'/application/model/object/estado.php');
     require_once(RAIZ.'/application/model/dao/cidade.php');
 	require_once(RAIZ.'/application/model/dao/endereco.php');
     require_once(RAIZ.'/application/model/dao/estado.php');
     require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php');
 	
 	use application\model\object\Endereco as Object_Endereco;
-    use application\model\object\Usuario as Object_Usuario;
-    use application\model\object\Cidade as Object_Cidade;
-	use application\model\object\Estado as Object_Estado;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;

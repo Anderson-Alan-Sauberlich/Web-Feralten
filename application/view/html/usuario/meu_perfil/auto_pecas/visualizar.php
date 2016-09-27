@@ -10,10 +10,10 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>    
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+        <?php self::Incluir_Menu_Usuario(); ?>
 		<div class="container-fluid margem-inferior-pouco">
 			<div class="row">
-				<?php include_once(RAIZ.'/application/view/html/include_page/menu.php'); ?>
+				<?php self::Incluir_Menu_Pesquisa(); ?>
 				<div class="col-sm-4 col-md-3 col-lg-3">
 					<?php include_once(RAIZ.'/application/view/html/include_page/filtro.php'); ?>
 				</div>

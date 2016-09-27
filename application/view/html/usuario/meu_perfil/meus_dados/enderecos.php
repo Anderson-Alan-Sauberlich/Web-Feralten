@@ -10,7 +10,7 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+        <?php self::Incluir_Menu_Usuario(); ?>
         <?php self::Mostrar_Erros(); ?>
         <?php self::Mostrar_Sucesso("atualizar_endereco"); ?>
         <form id="ender_form" name="ender_form" data-toggle="validator" action="/usuario/meu-perfil/meus-dados/enderecos/" method="post" role="form">

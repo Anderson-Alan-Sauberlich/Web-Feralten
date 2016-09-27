@@ -10,7 +10,7 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>    
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+        <?php self::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
             <form id="form_cadastrar_peca" name="form_cadastrar_peca" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/auto-pecas/cadastrar/" method="post" role="form">
                 <?php self::Mostrar_Sucesso(); ?>

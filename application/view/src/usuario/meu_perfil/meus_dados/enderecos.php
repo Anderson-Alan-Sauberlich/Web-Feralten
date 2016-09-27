@@ -2,23 +2,21 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
-	require_once(RAIZ.'/application/model/object/endereco.php');
-	require_once(RAIZ.'/application/model/object/cidade.php');
-	require_once(RAIZ.'/application/model/object/estado.php');
-	require_once(RAIZ.'/application/model/object/usuario.php');
+	require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
 	
 	use application\controller\usuario\meu_perfil\meus_dados\Enderecos as Controller_Enderecos;
-	use application\model\object\Endereco as Object_Endereco;
-    use application\model\object\Estado as Object_Estado;
-    use application\model\object\Cidade as Object_Cidade;
-	use application\model\object\Usuario as Object_Usuario;
-    
+    use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
+	
     @session_start();
 
     class Enderecos {
 
         function __construct() {
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/enderecos.php');
+        }
+        
+        public static function Incluir_Menu_Usuario() {
+        	new View_Menu_Usuario();
         }
 		
         public static function Incluir_Classe_Erros($campo) {

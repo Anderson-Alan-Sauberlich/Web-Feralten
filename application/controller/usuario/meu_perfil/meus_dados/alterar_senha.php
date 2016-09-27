@@ -1,12 +1,10 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/object/usuario.php');
     require_once(RAIZ.'/application/model/dao/usuario.php');
 	require_once(RAIZ.'/application/controller/usuario/login.php');
 	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php');
     
-    use application\model\object\Usuario as Object_Usuario;
     use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;

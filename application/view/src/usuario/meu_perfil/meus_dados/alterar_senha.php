@@ -2,10 +2,10 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
     
     use application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha as Controller_Alterar_Senha;
-    use application\model\object\Usuario as Object_Usuario;
+    use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
     
     @session_start();
     
@@ -15,6 +15,10 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/alterar_senha.php');
         }
 		
+        public static function Incluir_Menu_Usuario() {
+        	new View_Menu_Usuario();
+        }
+        
         public static function Manter_Valor($campo) {
             if (isset($_SESSION['form_alterar_senha'])) {
                 $form_alterar_senha = $_SESSION['form_alterar_senha'];

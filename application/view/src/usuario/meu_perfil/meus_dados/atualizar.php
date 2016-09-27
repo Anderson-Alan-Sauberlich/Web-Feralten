@@ -2,14 +2,10 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/object/dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/contato.php');
+    require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
     
     use application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
-    use application\model\object\Usuario as Object_Usuario;
-    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
-    use application\model\object\Contato as Object_Contato;
+    use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
     
     @session_start();
     
@@ -17,6 +13,10 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     
         function __construct() {        	
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/atualizar.php');
+        }
+        
+        public static function Incluir_Menu_Usuario() {
+        	new View_Menu_Usuario();
         }
         
         public static function Manter_Valor($quadro, $campo) {

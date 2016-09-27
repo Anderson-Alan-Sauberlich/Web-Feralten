@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$("#categoria").change(function() {
     	$("#marca").html('<option>Carregando...</option>');
-        $.get('/menu_pesquisa/marca/', 
+        $.get('/menu-pesquisa/marca/', 
         {categoria:$(this).val()},
         function(valor) {
         	$("#marca").html(valor);
@@ -11,7 +11,7 @@ $(document).ready(function() {
 $(document).ready(function( ) {
 	$("#marca").change(function() {
     	$("#modelo").html('<option>Carregando...</option>');
-        $.get('/menu_pesquisa/modelo/', 
+        $.get('/menu-pesquisa/modelo/', 
         {marca:$(this).val()},
         function(valor) {
         	$("#modelo").html(valor);

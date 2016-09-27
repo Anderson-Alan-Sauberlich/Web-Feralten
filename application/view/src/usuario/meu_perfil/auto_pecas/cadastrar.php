@@ -2,8 +2,10 @@
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+	require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Cadastrar as Controller_Cadastrar;
+	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
     @session_start();
 	
@@ -13,6 +15,10 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/cadastrar.php');
         }
 
+        public static function Incluir_Menu_Usuario() {
+        	new View_Menu_Usuario();
+        }
+        
 		public static function Mostrar_Sucesso() {
             if (isset($_SESSION['sucesso_cadastrar_peca'])) {
                 $sucesso_cadastrar_peca = $_SESSION['sucesso_cadastrar_peca'];

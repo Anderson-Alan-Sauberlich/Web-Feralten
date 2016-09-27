@@ -1,9 +1,9 @@
-<script type="text/javascript" src="/application/view/js/include_page/menu.js"></script>
+<script type="text/javascript" src="/application/view/js/include_page/menu_pesquisa.js"></script>
 <section>
 	<div class="page-header">
 		<div class="well borderPainel sombra_painel">
 		    <div class="container-fluid menuPesquisaPanel">
-    			<form id="searschform" name="searschform" action="/application/view/src/include_page/menu.php" method="get" role="form">
+    			<form id="searschform" name="searschform" action="/menu-pesquisa/" method="get" role="form">
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-12">
                         	<div class="row-fluid buscaDropEspaco">

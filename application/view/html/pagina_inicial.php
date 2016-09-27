@@ -9,7 +9,7 @@
     	<?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu.php'); ?>
+        <?php self::Incluir_Menu_Pesquisa(); ?>
         <div class="container-fluid">
             <div class="row-fluid">
                 <img src="/application/view/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />

@@ -2,17 +2,27 @@
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
     
 	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
-	require_once(RAIZ.'/application/view/src/include_page/menu.php');
+	require_once(RAIZ.'/application/view/src/include_page/menu_pesquisa.php');
+	require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Visualizar as Controller_Visualizar;
-	use application\view\src\include_page\Menu;
+	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
+	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
     @session_start();
 
-    class Visualizar extends Menu {
+    class Visualizar {
 
         function __construct() {
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php');
+        }
+        
+        public static function Incluir_Menu_Pesquisa() {
+        	new View_Menu_Pesquisa();
+        }
+        
+        public static function Incluir_Menu_Usuario() {
+        	new View_Menu_Usuario();
         }
         
         public static function Mostrar_Card_Peca() {
@@ -22,7 +32,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         		echo "<div class=\"meta\">Nome da Peça</div>";
         		echo "</div>";
         		echo "<div class=\"ui medium bordered image\">";
-        		echo "<img src=\"/resources/img/imagem_Indisponivel.png\">";
+        		echo "<img src=\"/application/view/resources/img/imagem_Indisponivel.png\">";
         		echo "</div>";
         		echo "<div class=\"content\">";
         		echo "<div class=\"header\">Molly</div>";

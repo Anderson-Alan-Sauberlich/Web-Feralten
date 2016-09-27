@@ -10,7 +10,7 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>
     </header>
     <section class="ui container" role="main">
-    	<?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+    	<?php self::Incluir_Menu_Usuario(); ?>
         <?php self::Mostrar_Erros(); ?>
         <form id="cnclr_form" name="cnclr_form" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/concluir/" method="post" role="form">
         	<div class="panel panel-default sombra_painel">

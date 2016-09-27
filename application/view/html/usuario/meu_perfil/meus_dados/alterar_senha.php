@@ -10,7 +10,7 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+        <?php self::Incluir_Menu_Usuario(); ?>
         <?php self::Mostrar_Erros(); ?>
         <form id="form_alterar_senha" name="form_alterar_senha" data-toggle="validator" action="/usuario/meu-perfil/meus-dados/alterar-senha/" method="post" role="form">
             <div class="panel panel-default sombra_painel">

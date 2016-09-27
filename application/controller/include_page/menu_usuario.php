@@ -22,8 +22,6 @@ namespace application\controller\include_page;
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
                 $_SESSION['login_erros'] = $login_erros;
-                //header("location: /usuario/login/");
-                //ob_end_flush();
             }
         }
         

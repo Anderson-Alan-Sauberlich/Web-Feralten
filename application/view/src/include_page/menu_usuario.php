@@ -12,6 +12,8 @@ namespace application\view\src\include_page;
     class Menu_Usuario {
 
         function __construct() {
+        	require_once(RAIZ.'/application/view/html/include_page/menu_usuario.php');
+        	
             Controller_Menu_Usuario::Verificar_Autenticacao();
 			
 			$_SESSION['menu']['status'] = Controller_Menu_Usuario::Pegar_Status_Usuario();

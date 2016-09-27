@@ -9,7 +9,7 @@
         <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>
     </header>
     <section class="ui container" role="main">
-        <?php include_once(RAIZ.'/application/view/html/include_page/menu_usuario.php'); ?>
+        <?php self::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">

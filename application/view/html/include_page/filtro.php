@@ -1,6 +1,6 @@
 <?php require_once(RAIZ.'/application/view/src/include_page/filtro.php'); ?>
 <?php use application\view\src\include_page\Filtro; ?>
-<script type="text/javascript" src="/resources/javaScript/menu.js"></script>
+<script type="text/javascript" src="/application/view/js/include_page/filtro.js"></script>
 <div class="visible-xs">
 	<div class="ui sidebar vertical inverted blue menu">
 		<div class="item">
