@@ -11,12 +11,16 @@ namespace application\view\src\usuario\meu_perfil;
 
     class Perfil {
 
-        function __construct() {
+    	private static $status_usuario;
+    	
+        function __construct($status) {
+            self::$status_usuario = $status;
+        	
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/perfil.php');
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario();
+        	new View_Menu_Usuario(self::$status_usuario, array('meu-perfil', null));
         }
     }
 ?>

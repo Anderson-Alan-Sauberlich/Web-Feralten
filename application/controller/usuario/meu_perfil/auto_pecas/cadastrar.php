@@ -20,6 +20,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 	require_once(RAIZ.'/application/model/dao/foto_peca.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
 	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php');
+	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
 	
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
@@ -40,6 +41,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
 	use application\view\src\usuario\meu_perfil\auto_pecas\Cadastrar as View_Cadastrar;
+	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
 	@session_start();
 	
@@ -50,59 +52,84 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         }
         
         public static function Carregar_Pagina() {
-        	if (empty($_SESSION['form_cadastrar_peca'])) {
-        		unset($_SESSION['compatibilidade']);
-        		self::Deletar_Imagem(123);
+        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        		
+        		if ($status == 1) {
+        			if (empty($_SESSION['form_cadastrar_peca'])) {
+        				unset($_SESSION['compatibilidade']);
+        				self::Deletar_Imagem(123);
+        			}
+        			
+        			new View_Cadastrar($status);
+        		}
+        		
+        		return $status;
+
+        	} else {
+        		return false;
         	}
-        	
-        	new View_Cadastrar();
         }
         
         public static function Verificar_Evento() {
-        	if (isset($_POST['salvar'])) {
-        		self::Cadastrar_Peca();
-        	} else if (isset($_POST['restaurar'])) {
-        		unset($_SESSION['form_cadastrar_peca']);
-        		unset($_SESSION['compatibilidade']);
-        		self::Deletar_Imagem(123);
+        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        		
+        		if ($status == 1) {
+		        	if (isset($_POST['salvar'])) {
+		        		self::Cadastrar_Peca();
+		        	} else if (isset($_POST['restaurar'])) {
+		        		unset($_SESSION['form_cadastrar_peca']);
+		        		unset($_SESSION['compatibilidade']);
+		        		self::Deletar_Imagem(123);
+		        	}
+        		}
+        		
+        		return $status;
+        	} else {
+        		return false;
         	}
         }
         
         public static function Carregar_Compatibilidade() {
-        	if (isset($_GET['categoria'])) {
-        		if ($_GET['categoria'] == "verificar") {
-        			View_Cadastrar::Carregar_Marcas();
-        		} else {
-        			self::Salvar_Session_Compatibilidade();
-        			View_Cadastrar::Carregar_Categorias();
-        		}
-        	}
-        		
-        	if (isset($_GET['marca'])) {
-        		if ($_GET['marca'] == "verificar") {
-        			View_Cadastrar::Carregar_Modelos();
-        		} else {
-        			self::Salvar_Session_Compatibilidade();
-        			View_Cadastrar::Carregar_Marcas();
-        		}
-        	}
-        		
-        	if (isset($_GET['modelo'])) {
-        		if ($_GET['modelo'] == "verificar") {
-        			View_Cadastrar::Carregar_Versoes();
-        		} else {
-        			self::Salvar_Session_Compatibilidade();
-        			View_Cadastrar::Carregar_Modelos();
-        		}
-        	}
-        		
-        	if (isset($_GET['versao'])) {
-        		if ($_GET['versao'] == "verificar") {
-        			View_Cadastrar::Carregar_Anos();
-        		} else {
-        			self::Salvar_Session_Compatibilidade();
-        			View_Cadastrar::Carregar_Versoes();
-        		}
+        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+	        	if (isset($_GET['categoria'])) {
+	        		if ($_GET['categoria'] == "verificar") {
+	        			View_Cadastrar::Carregar_Marcas();
+	        		} else {
+	        			self::Salvar_Session_Compatibilidade();
+	        			View_Cadastrar::Carregar_Categorias();
+	        		}
+	        	}
+	        		
+	        	if (isset($_GET['marca'])) {
+	        		if ($_GET['marca'] == "verificar") {
+	        			View_Cadastrar::Carregar_Modelos();
+	        		} else {
+	        			self::Salvar_Session_Compatibilidade();
+	        			View_Cadastrar::Carregar_Marcas();
+	        		}
+	        	}
+	        		
+	        	if (isset($_GET['modelo'])) {
+	        		if ($_GET['modelo'] == "verificar") {
+	        			View_Cadastrar::Carregar_Versoes();
+	        		} else {
+	        			self::Salvar_Session_Compatibilidade();
+	        			View_Cadastrar::Carregar_Modelos();
+	        		}
+	        	}
+	        		
+	        	if (isset($_GET['versao'])) {
+	        		if ($_GET['versao'] == "verificar") {
+	        			View_Cadastrar::Carregar_Anos();
+	        		} else {
+	        			self::Salvar_Session_Compatibilidade();
+	        			View_Cadastrar::Carregar_Versoes();
+	        		}
+	        	}
+        	} else {
+        		return false;
         	}
         }
         
@@ -533,56 +560,73 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 		}
 		
 		public static function Salvar_Imagem_TMP() {
-			$arquivo = null;
-			
-			if (isset($_FILES['imagem1'])) {
-				$arquivo = $_FILES['imagem1'];
-			} else if (isset($_FILES['imagem2'])) {
-				$arquivo = $_FILES['imagem2'];
-			} else if (isset($_FILES['imagem3'])) {
-				$arquivo = $_FILES['imagem3'];
-			}
-			
-			if (isset($arquivo)) {
-				$imagens = new Gerenciar_Imagens();
+			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+				$arquivo = null;
 				
-				$imagens->Armazenar_Imagem_Temporaria($arquivo);
-				
-				if (empty($_SESSION['imagens_tmp'][1])) {
-					$_SESSION['imagens_tmp'][1] = $imagens->get_nome();
-				} else if (empty($_SESSION['imagens_tmp'][2])) {
-					$_SESSION['imagens_tmp'][2] = $imagens->get_nome();
-				} else if (empty($_SESSION['imagens_tmp'][3])) {
-					$_SESSION['imagens_tmp'][3] = $imagens->get_nome();
+				if (isset($_FILES['imagem1'])) {
+					$arquivo = $_FILES['imagem1'];
+				} else if (isset($_FILES['imagem2'])) {
+					$arquivo = $_FILES['imagem2'];
+				} else if (isset($_FILES['imagem3'])) {
+					$arquivo = $_FILES['imagem3'];
 				}
 				
-				echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+				if (isset($arquivo)) {
+					$imagens = new Gerenciar_Imagens();
+					
+					$imagens->Armazenar_Imagem_Temporaria($arquivo);
+					
+					if (empty($_SESSION['imagens_tmp'][1])) {
+						$_SESSION['imagens_tmp'][1] = $imagens->get_nome();
+					} else if (empty($_SESSION['imagens_tmp'][2])) {
+						$_SESSION['imagens_tmp'][2] = $imagens->get_nome();
+					} else if (empty($_SESSION['imagens_tmp'][3])) {
+						$_SESSION['imagens_tmp'][3] = $imagens->get_nome();
+					}
+					
+					echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+				}
+			} else {
+				return false;
 			}
 		}
 		
 		public static function Deletar_Imagem($num_img) {
-			if (isset($_SESSION['imagens_tmp'])) {
-				if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
-					$imagens_tmp = $_SESSION['imagens_tmp'];
-					$imagens = new Gerenciar_Imagens();
-					
-					if ($num_img == 123) {
-						if (isset($imagens_tmp[1])) {
+			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+				if (isset($_SESSION['imagens_tmp'])) {
+					if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
+						$imagens_tmp = $_SESSION['imagens_tmp'];
+						$imagens = new Gerenciar_Imagens();
+						
+						if ($num_img == 123) {
+							if (isset($imagens_tmp[1])) {
+								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
+							}
+							if (isset($imagens_tmp[2])) {
+								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
+							}
+							if (isset($imagens_tmp[3])) {
+								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
+							}
+							
+							unset($imagens_tmp);
+						} else if ($num_img == 1) {
 							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
-						}
-						if (isset($imagens_tmp[2])) {
+							
+							if (isset($imagens_tmp[2])) {
+								$imagens_tmp[1] = $imagens_tmp[2];
+								
+								if (isset($imagens_tmp[3])) {
+									$imagens_tmp[2] = $imagens_tmp[3];
+									unset($imagens_tmp[3]);
+								} else {
+									unset($imagens_tmp[2]);
+								}
+							} else {
+								unset($imagens_tmp[1]);
+							}
+						} else if ($num_img == 2) {
 							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
-						}
-						if (isset($imagens_tmp[3])) {
-							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
-						}
-						
-						unset($imagens_tmp);
-					} else if ($num_img == 1) {
-						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
-						
-						if (isset($imagens_tmp[2])) {
-							$imagens_tmp[1] = $imagens_tmp[2];
 							
 							if (isset($imagens_tmp[3])) {
 								$imagens_tmp[2] = $imagens_tmp[3];
@@ -590,38 +634,29 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 							} else {
 								unset($imagens_tmp[2]);
 							}
-						} else {
-							unset($imagens_tmp[1]);
-						}
-					} else if ($num_img == 2) {
-						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
-						
-						if (isset($imagens_tmp[3])) {
-							$imagens_tmp[2] = $imagens_tmp[3];
+						} else if ($num_img == 3) {
+							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
+							
 							unset($imagens_tmp[3]);
 						} else {
-							unset($imagens_tmp[2]);
+							$imagens->Deletar_Imagem_Temporaria($num_img);
+							
+							unset($imagens_tmp[$num_img]);
 						}
-					} else if ($num_img == 3) {
-						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
 						
-						unset($imagens_tmp[3]);
-					} else {
-						$imagens->Deletar_Imagem_Temporaria($num_img);
-						
-						unset($imagens_tmp[$num_img]);
-					}
-					
-					if (isset($imagens_tmp)) {
-						if (count($imagens_tmp) > 0) {
-							$_SESSION['imagens_tmp'] = $imagens_tmp;
+						if (isset($imagens_tmp)) {
+							if (count($imagens_tmp) > 0) {
+								$_SESSION['imagens_tmp'] = $imagens_tmp;
+							} else {
+								unset($_SESSION['imagens_tmp']);
+							}
 						} else {
 							unset($_SESSION['imagens_tmp']);
 						}
-					} else {
-						unset($_SESSION['imagens_tmp']);
 					}
 				}
+			} else {
+				return false;
 			}
 		}
 

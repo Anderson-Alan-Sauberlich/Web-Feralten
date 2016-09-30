@@ -12,8 +12,12 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
     @session_start();
 
     class Visualizar {
+    	
+    	private static $status_usuario;
 
-        function __construct() {
+        function __construct($status) {
+        	self::$status_usuario = $status;
+        	
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php');
         }
         
@@ -22,7 +26,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario();
+        	new View_Menu_Usuario(self::$status_usuario, array('auto-pecas', 'visualizar'));
         }
         
         public static function Mostrar_Card_Peca() {

@@ -9,6 +9,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once(RAIZ.'/application/model/dao/contato.php');
 	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
 	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php');
+	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
@@ -18,6 +19,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\util\Gerenciar_Imagens;
     use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
+    use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
     @session_start();
     
@@ -30,44 +32,64 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private static $form_atualizar;
         
         public static function Carregar_Pagina() {
-        	if (empty($_SESSION['form_atualizar'])) {
-        		self::Deletar_Imagem();
-        		unset($_SESSION['imagem_tmp']);
-        	}
-        	
-        	new View_Atualizar();
-        	
-            if (isset($_SESSION['dados_usuario'])) {
-        		unset($_SESSION['dados_usuario']);
-        	}
-        	
-        	if (isset($_SESSION['contato'])) {
-        		unset($_SESSION['contato']);
+        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        		
+        		if ($status == 1) {
+		        	if (empty($_SESSION['form_atualizar'])) {
+		        		self::Deletar_Imagem();
+		        		unset($_SESSION['imagem_tmp']);
+		        	}
+		        	
+		        	new View_Atualizar($status);
+		        	
+		            if (isset($_SESSION['dados_usuario'])) {
+		        		unset($_SESSION['dados_usuario']);
+		        	}
+		        	
+		        	if (isset($_SESSION['contato'])) {
+		        		unset($_SESSION['contato']);
+		        	}
+        		}
+        		
+        		return $status;
+        	} else {
+        		return false;
         	}
         }
         
         public static function Verificar_Evento() {
-        	self::$form_atualizar = array();
-        
-        	if (isset($_POST['restaurar_login'])) {
-        		self::Restaurar_Usuario();
-        	} else if (isset($_POST['salvar_login'])) {
-        		self::Atualizar_Usuario();
-        	} else if (isset($_POST['restaurar_dadosusuario'])) {
-        		self::Restaurar_DadosUsuario();
-        	} else if (isset($_POST['salvar_dadosusuario'])) {
-        		self::Atualizar_DadosUsuario();
-        	} else if (isset($_POST['restaurar_contato'])) {
-        		self::Restaurar_Contato();
-        	} else if (isset($_POST['salvar_contato'])) {
-        		self::Atualizar_Contato();
+        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        		
+        		if ($status == 1) {
+		        	self::$form_atualizar = array();
+		        
+		        	if (isset($_POST['restaurar_login'])) {
+		        		self::Restaurar_Usuario();
+		        	} else if (isset($_POST['salvar_login'])) {
+		        		self::Atualizar_Usuario();
+		        	} else if (isset($_POST['restaurar_dadosusuario'])) {
+		        		self::Restaurar_DadosUsuario();
+		        	} else if (isset($_POST['salvar_dadosusuario'])) {
+		        		self::Atualizar_DadosUsuario();
+		        	} else if (isset($_POST['restaurar_contato'])) {
+		        		self::Restaurar_Contato();
+		        	} else if (isset($_POST['salvar_contato'])) {
+		        		self::Atualizar_Contato();
+		        	} else {
+		        		self::Salvar_Contato();
+		        		self::Salvar_Dados_Usuario();
+		        		self::Salvar_Usuario();
+		        	}
+		        
+		        	$_SESSION['form_atualizar'] = self::$form_atualizar;
+        		}
+        		
+        		return $status;
         	} else {
-        		self::Salvar_Contato();
-        		self::Salvar_Dados_Usuario();
-        		self::Salvar_Usuario();
+        		return false;
         	}
-        
-        	$_SESSION['form_atualizar'] = self::$form_atualizar;
         }
         
         private static function Restaurar_Usuario() {
@@ -385,27 +407,35 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 		
 		public static function Salvar_Imagem_TMP() {
-			if (isset($_FILES['imagem'])) {
-				$imagens = new Gerenciar_Imagens();
-				
-				$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
-				
-				$_SESSION['imagem_tmp'] = $imagens->get_nome();
-				
-				echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+				if (isset($_FILES['imagem'])) {
+					$imagens = new Gerenciar_Imagens();
+					
+					$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
+					
+					$_SESSION['imagem_tmp'] = $imagens->get_nome();
+					
+					echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+				}
+			} else {
+				return false;
 			}
 		}
 		
 		public static function Deletar_Imagem() {
-			if (isset($_SESSION['imagem_tmp'])) {
-				if ($_SESSION['imagem_tmp'] != "del") {
-					$imagens = new Gerenciar_Imagens();
-					
-					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagem_tmp']);
+			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+				if (isset($_SESSION['imagem_tmp'])) {
+					if ($_SESSION['imagem_tmp'] != "del") {
+						$imagens = new Gerenciar_Imagens();
+						
+						$imagens->Deletar_Imagem_Temporaria($_SESSION['imagem_tmp']);
+					}
 				}
+	
+				$_SESSION['imagem_tmp'] = "del";
+			} else {
+				return false;
 			}
-
-			$_SESSION['imagem_tmp'] = "del";
 		}
 		
 		public static function Pegar_Imagem_URL($nome_imagem) {

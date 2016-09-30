@@ -10,13 +10,17 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     @session_start();
 
     class Concluir {
-            
-        function __construct() {
+        
+    	private static $status_usuario;
+    	
+        function __construct($status) {
+        	self::$status_usuario = $status;
+        	
             require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/concluir.php');
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_usuario();
+        	new View_Menu_usuario(self::$status_usuario, array('meus-dados', 'concluir'));
         }
         
         public static function Manter_Valor($campo) {
