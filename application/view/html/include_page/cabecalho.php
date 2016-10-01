@@ -1,4 +1,4 @@
-<?php require_once(RAIZ.'/application/view/src/include_page/cabecalho.php'); ?>
+<?php require_once RAIZ.'/application/view/src/include_page/cabecalho.php'; ?>
 <?php use application\view\src\include_page\Cabecalho; ?>
 <section class="margem-inferior-pouco">
 <script type="text/javascript" src="/application/view/js/include_page/cabecalho.js"></script>

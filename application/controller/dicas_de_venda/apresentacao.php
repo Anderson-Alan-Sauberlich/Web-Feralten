@@ -1,10 +1,20 @@
 <?php
 namespace application\controller\dicas_de_venda;
-
+	
+	require_once RAIZ.'/application/view/src/dicas_de_venda/apresentacao.php';
+	
+	use application\view\src\dicas_de_venda\Apresentacao as View_Apresentacao;
+	
+	@session_start();
+	
     class Apresentacao {
 
         function __construct() {
             
+        }
+        
+        public static function Carregar_Pagina() {
+        	new View_Apresentacao();
         }
     }
 ?>

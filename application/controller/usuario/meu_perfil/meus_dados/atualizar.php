@@ -1,15 +1,15 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/object/dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/object/contato.php');
-    require_once(RAIZ.'/application/model/dao/usuario.php');
-    require_once(RAIZ.'/application/model/dao/dados_usuario.php');
-    require_once(RAIZ.'/application/model/dao/contato.php');
-	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
-	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php');
-	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
+    require_once RAIZ.'/application/model/object/dados_usuario.php';
+    require_once RAIZ.'/application/model/object/usuario.php';
+    require_once RAIZ.'/application/model/object/contato.php';
+    require_once RAIZ.'/application/model/dao/usuario.php';
+    require_once RAIZ.'/application/model/dao/dados_usuario.php';
+    require_once RAIZ.'/application/model/dao/contato.php';
+	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
+	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
+	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;

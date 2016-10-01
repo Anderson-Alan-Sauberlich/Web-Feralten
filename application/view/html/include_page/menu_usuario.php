@@ -46,7 +46,6 @@
 				                	<li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'visualizar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/visualizar/">Visualizar Peças</a></li>
 				                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'cadastrar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/cadastrar/">Cadastrar Peças</a></li>
 				                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'atualizar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/atualizar/">Atualizar Peças</a></li>
-				                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'excluir'); ?>"><a href="/usuario/meu-perfil/auto-pecas/excluir/">Excluir Peças</a></li>
 				                </ul>
 							</div>
 						</div>
@@ -59,7 +58,6 @@
 				                	<li class="<?php self::Verificar_URL_Ativa('pacotes', 'informacoes'); ?>"><a href="/usuario/meu-perfil/pacotes/informacoes/">Informações Sobre os Pacotes</a></li>
 				                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'meus-pacotes'); ?>"><a href="/usuario/meu-perfil/pacotes/meus-pacotes/">Meus Pacotes</a></li>
 				                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'adicionar'); ?>"><a href="/usuario/meu-perfil/pacotes/adicionar/">Adicionar Pacote(s)</a></li>
-				                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'remover'); ?>"><a href="/usuario/meu-perfil/pacotes/remover/">Remover Pacote(s)</a></li>
 				                </ul>
 							</div>
 						</div>
@@ -101,7 +99,6 @@
 	                	<li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'visualizar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/visualizar/">Visualizar Peças</a></li>
 	                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'cadastrar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/cadastrar/">Cadastrar Peças</a></li>
 	                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'atualizar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/atualizar/">Atualizar Peças</a></li>
-	                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'excluir'); ?>"><a href="/usuario/meu-perfil/auto-pecas/excluir/">Excluir Peças</a></li>
 	                </ul>
 				</div>
 				<div role="tabpanel" class="ui attached tab segment <?php self::Verificar_URL_Ativa("pacotes"); ?>" data-tab="pacotes">
@@ -109,7 +106,6 @@
 	                	<li class="<?php self::Verificar_URL_Ativa('pacotes', 'informacoes'); ?>"><a href="/usuario/meu-perfil/pacotes/informacoes/">Informações Sobre os Pacotes</a></li>
 	                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'meus-pacotes'); ?>"><a href="/usuario/meu-perfil/pacotes/meus-pacotes/">Meus Pacotes</a></li>
 	                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'adicionar'); ?>"><a href="/usuario/meu-perfil/pacotes/adicionar/">Adicionar Pacote(s)</a></li>
-	                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'remover'); ?>"><a href="/usuario/meu-perfil/pacotes/remover/">Remover Pacote(s)</a></li>
 	                </ul>
 				</div>
 				<div role="tabpanel" class="ui attached tab segment <?php self::Verificar_URL_Ativa('financeiro'); ?>" data-tab="financeiro">

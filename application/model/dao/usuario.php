@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
     
-    require_once(RAIZ.'/application/model/object/usuario.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/usuario.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\util\Conexao;

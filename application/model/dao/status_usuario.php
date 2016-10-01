@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/status_usuario.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/status_usuario.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
 
     use application\model\object\Status_Usuario as Object_Status_Usuario;
     use application\model\util\Conexao;

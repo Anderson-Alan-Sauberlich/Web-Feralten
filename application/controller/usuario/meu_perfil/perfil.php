@@ -1,8 +1,8 @@
 <?php
 namespace application\controller\usuario\meu_perfil;
 
-	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/perfil.php');
-	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
+	require_once RAIZ.'/application/view/src/usuario/meu_perfil/perfil.php';
+	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
 
 	use application\view\src\usuario\meu_perfil\Perfil as View_Perfil;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;

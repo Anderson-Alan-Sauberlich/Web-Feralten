@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src\include_page;
 
-	require_once(RAIZ.'/application/controller/include_page/cabecalho.php');
+	require_once RAIZ.'/application/controller/include_page/cabecalho.php';
 
 	use application\controller\include_page\Cabecalho as Controller_Cabecalho;
 

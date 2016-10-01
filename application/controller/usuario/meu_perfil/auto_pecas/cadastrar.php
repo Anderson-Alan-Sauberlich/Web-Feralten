@@ -1,26 +1,26 @@
 <?php
 namespace application\controller\usuario\meu_perfil\auto_pecas;
 
-	require_once(RAIZ.'/application/model/object/peca.php');
-	require_once(RAIZ.'/application/model/object/lista_pativel.php');
-	require_once(RAIZ.'/application/model/object/foto_peca.php');
-    require_once(RAIZ.'/application/model/dao/categoria.php');
-    require_once(RAIZ.'/application/model/dao/marca.php');
-    require_once(RAIZ.'/application/model/dao/modelo.php');
-    require_once(RAIZ.'/application/model/dao/versao.php');
-    require_once(RAIZ.'/application/model/dao/categoria_compativel.php');
-    require_once(RAIZ.'/application/model/dao/marca_compativel.php');
-    require_once(RAIZ.'/application/model/dao/modelo_compativel.php');
-    require_once(RAIZ.'/application/model/dao/versao_compativel.php');
-	require_once(RAIZ.'/application/model/dao/status_peca.php');
-	require_once(RAIZ.'/application/model/dao/lista_pativel.php');
-	require_once(RAIZ.'/application/model/dao/peca.php');
-	require_once(RAIZ.'/application/model/dao/contato.php');
-	require_once(RAIZ.'/application/model/dao/endereco.php');
-	require_once(RAIZ.'/application/model/dao/foto_peca.php');
-	require_once(RAIZ.'/application/model/util/gerenciar_imagens.php');
-	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php');
-	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
+	require_once RAIZ.'/application/model/object/peca.php';
+	require_once RAIZ.'/application/model/object/lista_pativel.php';
+	require_once RAIZ.'/application/model/object/foto_peca.php';
+    require_once RAIZ.'/application/model/dao/categoria.php';
+    require_once RAIZ.'/application/model/dao/marca.php';
+    require_once RAIZ.'/application/model/dao/modelo.php';
+    require_once RAIZ.'/application/model/dao/versao.php';
+    require_once RAIZ.'/application/model/dao/categoria_compativel.php';
+    require_once RAIZ.'/application/model/dao/marca_compativel.php';
+    require_once RAIZ.'/application/model/dao/modelo_compativel.php';
+    require_once RAIZ.'/application/model/dao/versao_compativel.php';
+	require_once RAIZ.'/application/model/dao/status_peca.php';
+	require_once RAIZ.'/application/model/dao/lista_pativel.php';
+	require_once RAIZ.'/application/model/dao/peca.php';
+	require_once RAIZ.'/application/model/dao/contato.php';
+	require_once RAIZ.'/application/model/dao/endereco.php';
+	require_once RAIZ.'/application/model/dao/foto_peca.php';
+	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
+	require_once RAIZ.'/application/view/src/usuario/meu_perfil/auto_pecas/cadastrar.php';
+	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
 	
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Lista_Pativel as Object_Lista_Pativel;

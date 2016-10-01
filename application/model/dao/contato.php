@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/contato.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/contato.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Contato as Object_Contato;
     use application\model\util\Conexao;

@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src\usuario;
 
-	require_once(RAIZ.'/application/controller/usuario/login.php');
+	require_once RAIZ.'/application/controller/usuario/login.php';
 
 	use application\controller\usuario\Login as Controller_Login;
 	
@@ -10,7 +10,7 @@ namespace application\view\src\usuario;
     class Login {
 
         function __construct() {
-        	require_once(RAIZ.'/application/view/html/usuario/login.php');
+        	require_once RAIZ.'/application/view/html/usuario/login.php';
         }
         
         public static function Manter_Valor($campo) {

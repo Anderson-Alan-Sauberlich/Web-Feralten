@@ -1,7 +1,7 @@
 <?php
 namespace application\model\util;
 
-	require_once(RAIZ.'/application/model/object/usuario.php');
+	require_once RAIZ.'/application/model/object/usuario.php';
 	
 	use application\model\object\Usuario as Object_Usuario;
 	use DirectoryIterator;

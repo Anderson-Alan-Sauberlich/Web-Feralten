@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src\include_page;
 
-    require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
+    require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
     
     use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
     
@@ -16,7 +16,7 @@ namespace application\view\src\include_page;
         	self::$status_usuario = $status;
         	self::$url_menu = $url;
         	
-        	require_once(RAIZ.'/application/view/html/include_page/menu_usuario.php');
+        	require_once RAIZ.'/application/view/html/include_page/menu_usuario.php';
         }
         
         public static function Mostrar_Nome() {
@@ -26,13 +26,13 @@ namespace application\view\src\include_page;
         public static function Incluir_Status_Usuario() {
         	if (isset(self::$status_usuario)) {
 	        	if (self::$status_usuario === 0 AND self::$url_menu[1] !== 'concluir') {
-	        		include_once(RAIZ.'/application/view/html/include_page/mensagens/cadastro_incompleto.php');
+	        		include_once RAIZ.'/application/view/html/include_page/mensagens/cadastro_incompleto.php';
 	        	} else if (self::$status_usuario === 1) {
 	        
 	        	} else if (self::$status_usuario === 2) {
-	        		include_once(RAIZ.'/application/view/html/include_page/mensagens/pagamento_atrasado.php');
+	        		include_once RAIZ.'/application/view/html/include_page/mensagens/pagamento_atrasado.php';
 	        	} else if (self::$status_usuario === 3) {
-	        		include_once(RAIZ.'/application/view/html/include_page/mensagens/conta_desativada.php');
+	        		include_once RAIZ.'/application/view/html/include_page/mensagens/conta_desativada.php';
 	        	}
         	}
         }

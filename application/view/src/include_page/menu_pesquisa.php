@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src\include_page;
 
-    require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
+    require_once RAIZ.'/application/controller/include_page/menu_pesquisa.php';
     
     use application\controller\include_page\Menu_Pesquisa as Controller_Menu_Pesquisa;
     
@@ -10,7 +10,7 @@ namespace application\view\src\include_page;
     class Menu_Pesquisa {
 
         function __construct() {
-        	require_once(RAIZ.'/application/view/html/include_page/menu_pesquisa.php');
+        	require_once RAIZ.'/application/view/html/include_page/menu_pesquisa.php';
         }
         
         public static function Carregar_Anos() {

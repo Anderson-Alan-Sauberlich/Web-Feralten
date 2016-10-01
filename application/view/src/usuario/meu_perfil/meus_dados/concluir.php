@@ -1,8 +1,8 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
-    require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
+    require_once RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php';
+    require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
     
     use application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
@@ -16,7 +16,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         function __construct($status) {
         	self::$status_usuario = $status;
         	
-            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/concluir.php');
+            require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/concluir.php';
         }
         
         public static function Incluir_Menu_Usuario() {

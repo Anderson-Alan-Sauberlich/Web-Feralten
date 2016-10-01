@@ -1,4 +1,4 @@
-<?php require_once(RAIZ.'/application/view/src/include_page/mensagens/cadastro_incompleto.php'); ?>
+<?php require_once RAIZ.'/application/view/src/include_page/mensagens/cadastro_incompleto.php'; ?>
 <?php use application\view\src\include_page\mensagens\Cadastro_Inconpleto; ?>
 <div class="ui modal">
 	<i class="close icon"></i>

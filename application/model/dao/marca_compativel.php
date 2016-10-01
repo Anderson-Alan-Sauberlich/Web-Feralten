@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-	require_once(RAIZ.'/application/model/object/marca_compativel.php');
-	require_once(RAIZ.'/application/model/util/conexao.php');
+	require_once RAIZ.'/application/model/object/marca_compativel.php';
+	require_once RAIZ.'/application/model/util/conexao.php';
 	
 	use application\model\object\Marca_Compativel as Object_Marca_Compativel;
 	use application\model\util\Conexao;

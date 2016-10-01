@@ -1,10 +1,10 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
-    require_once(RAIZ.'/application/model/dao/usuario.php');
-	require_once(RAIZ.'/application/controller/usuario/login.php');
-	require_once(RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php');
-	require_once(RAIZ.'/application/controller/include_page/menu_usuario.php');
+    require_once RAIZ.'/application/model/dao/usuario.php';
+	require_once RAIZ.'/application/controller/usuario/login.php';
+	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php';
+	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
     
     use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;

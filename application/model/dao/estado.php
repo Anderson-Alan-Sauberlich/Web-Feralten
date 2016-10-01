@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/estado.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/estado.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Estado as Object_Estado;
     use application\model\util\Conexao;

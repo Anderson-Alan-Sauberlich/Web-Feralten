@@ -1,10 +1,10 @@
 <?php
 namespace application\controller\include_page;
 
-	require_once(RAIZ.'/application/model/dao/categoria.php');
-	require_once(RAIZ.'/application/model/dao/marca.php');
-	require_once(RAIZ.'/application/model/dao/modelo.php');
-	require_once(RAIZ.'/application/view/src/include_page/menu_pesquisa.php');
+	require_once RAIZ.'/application/model/dao/categoria.php';
+	require_once RAIZ.'/application/model/dao/marca.php';
+	require_once RAIZ.'/application/model/dao/modelo.php';
+	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
 
 	use application\model\dao\Categoria as DAO_Categoria;
 	use application\model\dao\Marca as DAO_Marca;

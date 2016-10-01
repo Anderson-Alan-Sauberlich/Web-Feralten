@@ -1,8 +1,8 @@
 <?php
 namespace application\view\src\usuario;
 
-    require_once(RAIZ.'/application/controller/usuario/cadastro.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once RAIZ.'/application/controller/usuario/cadastro.php';
+    require_once RAIZ.'/application/model/object/usuario.php';
 
     use application\controller\usuario\Cadastro as Controller_Cadastro;
     use application\model\object\Usuario as Object_Usuario;
@@ -12,7 +12,7 @@ namespace application\view\src\usuario;
     class Cadastro {
 
         function __construct() {
-        	require_once(RAIZ.'/application/view/html/usuario/cadastro.php');
+        	require_once RAIZ.'/application/view/html/usuario/cadastro.php';
         }
         
         public static function Mostrar_Erros() {

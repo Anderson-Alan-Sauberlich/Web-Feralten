@@ -1,7 +1,7 @@
 <?php
 namespace application\controller;
 
-	require_once(RAIZ.'/application/view/src/pagina_inicial.php');
+	require_once RAIZ.'/application/view/src/pagina_inicial.php';
 
 	use application\view\src\Pagina_Inicial as View_Pagina_Inicial;
 

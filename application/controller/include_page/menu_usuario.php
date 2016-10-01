@@ -1,8 +1,8 @@
 <?php
 namespace application\controller\include_page;
     
-    require_once(RAIZ.'/application/model/dao/dados_usuario.php');
-    require_once(RAIZ.'/application/model/object/usuario.php');
+    require_once RAIZ.'/application/model/dao/dados_usuario.php';
+    require_once RAIZ.'/application/model/object/usuario.php';
     
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
     use application\model\object\Usuario as Object_Usuario;

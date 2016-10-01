@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/foto_peca.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/foto_peca.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Foto_Peca as Object_Foto_Peca;
     use application\model\util\Conexao;

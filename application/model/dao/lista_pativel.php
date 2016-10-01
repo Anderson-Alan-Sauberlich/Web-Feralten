@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/lista_pativel.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/lista_pativel.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Lista_Pativel as Object_Lista_Pativel;
     use application\model\util\Conexao;

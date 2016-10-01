@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-    <?php include_once(RAIZ.'/application/view/html/include_page/head.php'); ?>
+    <?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
     <script type="text/javascript" src="/application/view/js/usuario/meu_perfil/auto_pecas/visualizar.js"></script>
 	<title>Visualizar | Feralten</title>
 </head>
 <body>
     <header>
-        <?php include_once(RAIZ.'/application/view/html/include_page/cabecalho.php'); ?>    
+        <?php include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
         <?php self::Incluir_Menu_Usuario(); ?>
@@ -15,7 +15,7 @@
 			<div class="row">
 				<?php self::Incluir_Menu_Pesquisa(); ?>
 				<div class="col-sm-4 col-md-3 col-lg-3">
-					<?php include_once(RAIZ.'/application/view/html/include_page/filtro.php'); ?>
+					<?php include_once RAIZ.'/application/view/html/include_page/filtro.php'; ?>
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
 					<div class="row">
@@ -32,7 +32,7 @@
 		</div>
     </section>
     <footer>
-        <?php include_once(RAIZ.'/application/view/html/include_page/rodape.php'); ?>
+        <?php include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>
     </footer>
 </body>
 </html>

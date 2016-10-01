@@ -1,9 +1,9 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
     
-	require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
-	require_once(RAIZ.'/application/view/src/include_page/menu_pesquisa.php');
-	require_once(RAIZ.'/application/view/src/include_page/menu_usuario.php');
+	require_once RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php';
+	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
+	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Visualizar as Controller_Visualizar;
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
@@ -18,7 +18,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         function __construct($status) {
         	self::$status_usuario = $status;
         	
-            require_once(RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php');
+            require_once RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php';
         }
         
         public static function Incluir_Menu_Pesquisa() {

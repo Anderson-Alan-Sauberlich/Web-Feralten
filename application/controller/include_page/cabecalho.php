@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\include_page;
 
-    require_once(RAIZ.'/application/controller/usuario/login.php');
+    require_once RAIZ.'/application/controller/usuario/login.php';
 
     use application\controller\usuario\Login;
 

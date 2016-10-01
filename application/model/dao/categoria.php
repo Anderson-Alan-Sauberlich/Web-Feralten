@@ -1,8 +1,8 @@
 <?php
 namespace application\model\dao;
 
-    require_once(RAIZ.'/application/model/object/categoria.php');
-    require_once(RAIZ.'/application/model/util/conexao.php');
+    require_once RAIZ.'/application/model/object/categoria.php';
+    require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Categoria as Object_Categoria;
     use application\model\util\Conexao;
