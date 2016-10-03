@@ -79,4 +79,3 @@
     </footer>
 </body>
 </html>
-<?php unset($_SESSION['endereco']); ?>

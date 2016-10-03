@@ -15,14 +15,10 @@
 			<div class="row">
 				<?php self::Incluir_Menu_Pesquisa(); ?>
 				<div class="col-sm-4 col-md-3 col-lg-3">
-					<?php include_once RAIZ.'/application/view/html/include_page/filtro.php'; ?>
+					<?php self::Incluir_Menu_Filtro(); ?>
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
 					<div class="row">
-						<div class="visible-xs">
-							<button onclick="abrirFiltro()" class="fluid ui secondary labeled icon open button"><i class="left arrow icon"></i>Abrir Filtro de Busca</button>
-							<div class="ui horizontal divider"></div>
-						</div>
 						<div class="ui three stackable doubling link cards" id="div_pecas">
 							<?php self::Mostrar_Card_Peca(); ?>
 						</div>

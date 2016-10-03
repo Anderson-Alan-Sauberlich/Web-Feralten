@@ -4,10 +4,12 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	require_once RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/view/src/include_page/menu_filtro.php';
 	
 	use application\controller\usuario\meu_perfil\auto_pecas\Visualizar as Controller_Visualizar;
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
+	use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro;
 	
     @session_start();
 
@@ -27,6 +29,10 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         
         public static function Incluir_Menu_Usuario() {
         	new View_Menu_Usuario(self::$status_usuario, array('auto-pecas', 'visualizar'));
+        }
+        
+        public static function Incluir_Menu_Filtro() {
+        	new View_Menu_Filtro();
         }
         
         public static function Mostrar_Card_Peca() {
