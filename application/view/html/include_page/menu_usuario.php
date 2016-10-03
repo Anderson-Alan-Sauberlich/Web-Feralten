@@ -50,25 +50,14 @@
 							</div>
 						</div>
 						<div class="panel panel-default">
-							<div class="title panel-heading <?php self::Verificar_URL_Ativa('pacotes'); ?>">
-								<h4 class="panel-title"><i class="pointing down icon lbPanel"></i>Pacotes</h4>
-							</div>
-							<div class="content <?php self::Verificar_URL_Ativa('pacotes'); ?>">
-				            	<ul class="nav nav-pills">
-				                	<li class="<?php self::Verificar_URL_Ativa('pacotes', 'informacoes'); ?>"><a href="/usuario/meu-perfil/pacotes/informacoes/">Informações Sobre os Pacotes</a></li>
-				                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'meus-pacotes'); ?>"><a href="/usuario/meu-perfil/pacotes/meus-pacotes/">Meus Pacotes</a></li>
-				                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'adicionar'); ?>"><a href="/usuario/meu-perfil/pacotes/adicionar/">Adicionar Pacote(s)</a></li>
-				                </ul>
-							</div>
-						</div>
-						<div class="panel panel-default">
 							<div class="title panel-heading <?php self::Verificar_URL_Ativa('financeiro'); ?>">
 								<h4 class="panel-title"><i class="pointing down icon lbPanel"></i>Financeiro</h4>
 							</div>
 							<div class="content <?php self::Verificar_URL_Ativa('financeiro'); ?>">
 				            	<ul class="nav nav-pills">
-				                	<li class="<?php self::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Visualizar Boleto Atual</a></li>
-				                    <li class="<?php self::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Visualizar Boletos Pagos</a></li>
+				            		<li class="<?php self::Verificar_URL_Ativa('financeiro', 'meu-lano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
+				                	<li class="<?php self::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Boleto Atual</a></li>
+				                    <li class="<?php self::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Boletos Pagos</a></li>
 				                </ul>
 							</div>
 						</div>
@@ -76,11 +65,10 @@
 				</div>
         	</div>
         	<div class="row-fluid sombra_painel hidden-xs">
-				<div class="ui top attached tabular five item menu" role="tablist">
+				<div class="ui top attached tabular four item menu" role="tablist">
 					<a id="perfil" onmouseover="MudarTabPerfil();" class="item <?php self::Verificar_URL_Ativa('meu-perfil'); ?>" role="tab" data-tab="perfil"><i class="pointing down icon lbPanel"></i>Meu Perfil</a>
 					<a id="dados" onmouseover="MudarTabDados();" class="item <?php self::Verificar_URL_Ativa('meus-dados'); ?>" role="tab" data-tab="dados"><i class="pointing down icon lbPanel"></i>Meus Dados</a>
 					<a id="pecas" onmouseover="MudarTabPecas();" class="item <?php self::Verificar_URL_Ativa('auto-pecas'); ?>" role="tab" data-tab="pecas"><i class="pointing down icon lbPanel"></i>Auto Peças</a>
-					<a id="pacotes" onmouseover="MudarTabPacotes();" class="item <?php self::Verificar_URL_Ativa('pacotes'); ?>" role="tab" data-tab="pacotes"><i class="pointing down icon lbPanel"></i>Pacotes</a>
 					<a id="financeiro" onmouseover="MudarTabFinanceiro();" class="item <?php self::Verificar_URL_Ativa('financeiro'); ?>" role="tab" data-tab="financeiro"><i class="pointing down icon lbPanel"></i>Financeiro</a>
 				</div>
 				<div role="tabpanel" class="ui attached tab segment <?php self::Verificar_URL_Ativa('meu-perfil'); ?>" data-tab="perfil">
@@ -101,17 +89,11 @@
 	                    <li class="<?php self::Verificar_URL_Ativa('auto-pecas', 'atualizar'); ?>"><a href="/usuario/meu-perfil/auto-pecas/atualizar/">Atualizar Peças</a></li>
 	                </ul>
 				</div>
-				<div role="tabpanel" class="ui attached tab segment <?php self::Verificar_URL_Ativa("pacotes"); ?>" data-tab="pacotes">
-	            	<ul class="nav nav-pills">
-	                	<li class="<?php self::Verificar_URL_Ativa('pacotes', 'informacoes'); ?>"><a href="/usuario/meu-perfil/pacotes/informacoes/">Informações Sobre os Pacotes</a></li>
-	                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'meus-pacotes'); ?>"><a href="/usuario/meu-perfil/pacotes/meus-pacotes/">Meus Pacotes</a></li>
-	                    <li class="<?php self::Verificar_URL_Ativa('pacotes', 'adicionar'); ?>"><a href="/usuario/meu-perfil/pacotes/adicionar/">Adicionar Pacote(s)</a></li>
-	                </ul>
-				</div>
 				<div role="tabpanel" class="ui attached tab segment <?php self::Verificar_URL_Ativa('financeiro'); ?>" data-tab="financeiro">
 	            	<ul class="nav nav-pills">
-	                	<li class="<?php self::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Visualizar Boleto Atual</a></li>
-	                    <li class="<?php self::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Visualizar Boletos Pagos</a></li>
+	            		<li class="<?php self::Verificar_URL_Ativa('financeiro', 'meu-plano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
+	                	<li class="<?php self::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Boleto Atual</a></li>
+	                    <li class="<?php self::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Boletos Pagos</a></li>
 	                </ul>
 				</div>
             </div>

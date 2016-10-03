@@ -2,7 +2,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
-	<title>Informações | Feralten</title>
+	<title>Meu Plano | Feralten</title>
 </head>
 <body>
     <header>

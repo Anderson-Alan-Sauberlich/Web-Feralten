@@ -16,11 +16,6 @@ function MudarTabPecas() {
     $('.menu .item').removeClass('active');
     $('#pecas').addClass('active');
 }
-function MudarTabPacotes() {
-	$(this).tab('change tab', 'pacotes');
-    $('.menu .item').removeClass('active');
-    $('#pacotes').addClass('active');
-}
 function MudarTabFinanceiro() {
 	$(this).tab('change tab', 'financeiro');
     $('.menu .item').removeClass('active');

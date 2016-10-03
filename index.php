@@ -197,7 +197,7 @@
 			}
 		});
 	});
-
+	
 	$app->group('/usuario/meu-perfil/financeiro/boleto-atual/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boleto_atual.php');
@@ -230,41 +230,11 @@
 		});
 	});
 	
-	$app->group('/usuario/meu-perfil/pacotes/informacoes/', function() use ($app) {
+	$app->group('/usuario/meu-perfil/financeiro/meu-plano/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/informacoes.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/meu_plano.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pacotes\Informacoes::Carregar_Pagina();
-			echo var_dump($_SESSION);
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
-		});
-	});
-
-	$app->group('/usuario/meu-perfil/pacotes/meus-pacotes/', function() use ($app) {
-		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/meus_pacotes.php');
-			
-			$resposta = application\controller\usuario\meu_perfil\pacotes\Meus_Pacotes::Carregar_Pagina();
-			echo var_dump($_SESSION);
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-	});
-	
-	$app->group('/usuario/meu-perfil/pacotes/adicionar/', function() use ($app) {
-		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/adicionar.php');
-			
-			$resposta = application\controller\usuario\meu_perfil\pacotes\Adicionar::Carregar_Pagina();
+			$resposta = application\controller\usuario\meu_perfil\financeiro\Meu_Plano::Carregar_Pagina();
 			echo var_dump($_SESSION);
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
