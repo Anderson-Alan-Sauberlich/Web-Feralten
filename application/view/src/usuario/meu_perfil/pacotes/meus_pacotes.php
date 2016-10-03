@@ -18,7 +18,7 @@ namespace application\view\src\usuario\meu_perfil\pacotes;
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario(self::$status_usuario, array('financeiro', 'boleto-atual'));
+        	new View_Menu_Usuario(self::$status_usuario, array('pacotes', 'meus-pacotes'));
         }
     }
 ?>

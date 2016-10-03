@@ -1,7 +1,7 @@
 <?php
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
-use application;
+	use application;
 	
 	require_once('config.php');
 	require_once('vendor/autoload.php');
@@ -187,6 +187,84 @@ use application;
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/atualizar.php');
 		
 			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Atualizar::Carregar_Pagina();
+			echo var_dump($_SESSION);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+	});
+
+	$app->group('/usuario/meu-perfil/financeiro/boleto-atual/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boleto_atual.php');
+			
+			$resposta = application\controller\usuario\meu_perfil\financeiro\Boleto_Atual::Carregar_Pagina();
+			echo var_dump($_SESSION);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+	});
+	
+	$app->group('/usuario/meu-perfil/financeiro/boletos-pagos/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boletos_pagos.php');
+			
+			$resposta = application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos::Carregar_Pagina();
+			echo var_dump($_SESSION);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+	});
+	
+	$app->group('/usuario/meu-perfil/pacotes/informacoes/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/informacoes.php');
+			
+			$resposta = application\controller\usuario\meu_perfil\pacotes\Informacoes::Carregar_Pagina();
+			echo var_dump($_SESSION);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else {
+				return $response;
+			}
+		});
+	});
+
+	$app->group('/usuario/meu-perfil/pacotes/meus-pacotes/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/meus_pacotes.php');
+			
+			$resposta = application\controller\usuario\meu_perfil\pacotes\Meus_Pacotes::Carregar_Pagina();
+			echo var_dump($_SESSION);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+	});
+	
+	$app->group('/usuario/meu-perfil/pacotes/adicionar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pacotes/adicionar.php');
+			
+			$resposta = application\controller\usuario\meu_perfil\pacotes\Adicionar::Carregar_Pagina();
 			echo var_dump($_SESSION);
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
