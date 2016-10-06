@@ -34,7 +34,7 @@
 	                        <label for="senha_nova" class="lbPanel_Senha">Digite Uma Nova Senha:</label>
 	                        <div class="input-group <?php self::Incluir_Classe_Erros("senha_nova"); ?>">
 	                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                            <input id="senha_nova" name="senha_nova" type="password" class="form-control" value="<?php self::Manter_Valor("senha_nova") ?>" placeholder="Nova Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 8 caracteres e no maximo 20. (Campo Obrigatório)" />
+	                            <input id="senha_nova" name="senha_nova" type="password" class="form-control" value="<?php self::Manter_Valor("senha_nova") ?>" placeholder="Nova Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no maximo 20. (Campo Obrigatório)" />
 								<span class="input-group-addon">
 			                        <div class="ui checkbox passCheck">
 										<input type="checkbox" id="mostrar_senha_nova" name="mostrar_senha_nova" onchange="Mostrar_Senha_Nova()">

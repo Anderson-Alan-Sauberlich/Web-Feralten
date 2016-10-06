@@ -271,21 +271,27 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 			if (isset($_POST['descricao'])) {
 				$peca->set_descricao($_POST['descricao']);
 			}
+			
 			if (isset($_POST['status'])) {
 				$peca->set_status_id($_POST['status']);
 			}
+			
 			if (isset($_POST['fabricante'])) {
 				$peca->set_fabricante($_POST['fabricante']);
 			}
+			
 			if (isset($_POST['peca'])) {
 				$peca->set_nome($_POST['peca']);
 			}
+			
 			if (isset($_POST['serie'])) {
 				$peca->set_serie($_POST['serie']);
 			}
+			
 			if (isset($_POST['preco'])) {
 				$peca->set_preco($_POST['preco']);
 			}
+			
 			if (isset($_POST['prioridade'])) {
 				$peca->set_prioridade($_POST['prioridade']);
 			}

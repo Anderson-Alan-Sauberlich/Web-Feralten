@@ -31,7 +31,7 @@ namespace application\controller\usuario;
 	        		}
 	        
 	        		unset($_SESSION['usuario']);
-	        		$_SESSION['login_success'][] = "LogOut efetuado com Sucesso!";
+	        		$_SESSION['login_success'][] = "LogOut efetuado com Sucesso";
 	        	}
         	}
         }
@@ -75,27 +75,34 @@ namespace application\controller\usuario;
             }
         }
 
-        public static function Autenticar_Usuario_Login($email, $senha, $manter_login) {
-            $login_campos = array();
+        public static function Autenticar_Usuario_Login() {
+            $login_campos = array('erro_email' => "certo");
             $login_erros = array();
+            $email = null;
+            $senha = null;
             
-            if (empty($email)) {
-                $login_erros[] = "Digite seu Email.";
-                $login_campos['erro_email'] = "erro";
-                
-                if (empty($senha)) {
-                    $login_erros[] = "Digite sua Senha.";
-                    $login_campos['erro_senha'] = "erro";
-                }
-                
-            } else if (DAO_Usuario::Verificar_Email($email) <= 0) {
-                $login_erros[] = "Email não Cadastrado.";
-                $login_campos['erro_email'] = "erro";
-                
-            } else if (empty($senha)) {
-                $login_campos['erro_email'] = "certo";
-                $login_erros[] = "Digite sua Senha.";
+            if (empty($_POST['email'])) {
+                $login_erros[] = "Digite seu Email";
+                $login_campos['erro_email'] = "erro";                
+            } else {
+            	$email = trim($_POST['email']);
+            	
+            	if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+	            	if (DAO_Usuario::Verificar_Email($email) <= 0) {
+		                $login_erros[] = "Email não Cadastrado";
+		                $login_campos['erro_email'] = "erro";
+	            	}
+            	} else {
+            		$login_erros[] = "Este E-Mail Não é Valido";
+		            $login_campos['erro_email'] = "erro";
+            	}
+            }
+            
+            if (empty($_POST['password'])) {
+                $login_erros[] = "Digite sua Senha";
                 $login_campos['erro_senha'] = "erro";
+            } else {
+            	$senha = $_POST['password'];
             }
 
             if (empty($login_erros)) {
@@ -122,25 +129,34 @@ namespace application\controller\usuario;
                     	DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
                     }
                 } else {
-                    $login_erros[] = "Senha Incorreta.";
+                    $login_erros[] = "Senha Incorreta";
                     $login_campos['erro_senha'] = "erro";
                     $login_campos['erro_email'] = "certo";
+                    
                     setcookie("f_m_l", null, time()-3600, "/");
+                    
                     $_SESSION['login_erros'] = $login_erros;
                     $_SESSION['login_campos'] = $login_campos;
+                    
+                    $form_login['email'] = trim(strip_tags($email));
+                    $form_login['senha'] = strip_tags($senha);
+                    $_SESSION['form_login'] = $form_login;
+                    
+                    return false;
                 }
+                
+                return true;
             } else {
                 setcookie("f_m_l", null, time()-3600, "/");
+                
                 $_SESSION['login_erros'] = $login_erros;
                 $_SESSION['login_campos'] = $login_campos;
-                $form_login['email'] = $email;
+                
+                $form_login['email'] = trim(strip_tags($email));
+                $form_login['senha'] = strip_tags($senha);
                 $_SESSION['form_login'] = $form_login;
-            }
-            
-            if (empty($login_erros)) {
-            	return true;
-            } else {
-            	return false;
+                
+                return false;
             }
         }
     }

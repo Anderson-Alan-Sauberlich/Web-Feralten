@@ -90,6 +90,8 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			
 			unset($_SESSION['form_concluir']['estado']);
 			
+			echo '<option value="0">Selecione sua Cidade</option>';
+			
             if (isset($id_estado)) {
                 $cidades = Controller_Concluir::Buscar_Cidades_Por_Estado($id_estado);
                 
@@ -118,9 +120,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	            switch ($campo) {
 	                case "fone1":
 	                	if (isset($cnclr_campos['erro_fone1'])) {
-		                    if ($cnclr_campos['erro_fone1'] == "erro") {
+		                    if ($cnclr_campos['erro_fone1'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_fone1'] == "certo") {
+		                    } else if ($cnclr_campos['erro_fone1'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_fone1']);
@@ -130,9 +132,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "fone2":
 	                	if (isset($cnclr_campos['erro_fone2'])) {
-		                    if ($cnclr_campos['erro_fone2'] == "erro") {
+		                    if ($cnclr_campos['erro_fone2'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_fone2'] == "certo") {
+		                    } else if ($cnclr_campos['erro_fone2'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_fone2']);
@@ -142,9 +144,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "estado":
 	                	if (isset($cnclr_campos['erro_estado'])) {
-		                    if ($cnclr_campos['erro_estado'] == "erro") {
+		                    if ($cnclr_campos['erro_estado'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_estado'] == "certo") {
+		                    } else if ($cnclr_campos['erro_estado'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_estado']);
@@ -154,9 +156,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "cidade":
 	                	if (isset($cnclr_campos['erro_cidade'])) {
-		                    if ($cnclr_campos['erro_cidade'] == "erro") {
+		                    if ($cnclr_campos['erro_cidade'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_cidade'] == "certo") {
+		                    } else if ($cnclr_campos['erro_cidade'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_cidade']);
@@ -166,9 +168,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "numero":
 	                	if (isset($cnclr_campos['erro_numero'])) {
-		                    if ($cnclr_campos['erro_numero'] == "erro") {
+		                    if ($cnclr_campos['erro_numero'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_numero'] == "certo") {
+		                    } else if ($cnclr_campos['erro_numero'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_numero']);
@@ -178,9 +180,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "cep":
 	                	if (isset($cnclr_campos['erro_cep'])) {
-		                    if ($cnclr_campos['erro_cep'] == "erro") {
+		                    if ($cnclr_campos['erro_cep'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_cep'] == "certo") {
+		                    } else if ($cnclr_campos['erro_cep'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_cep']);
@@ -190,9 +192,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "bairro":
 	                	if (isset($cnclr_campos['erro_bairro'])) {
-		                    if ($cnclr_campos['erro_bairro'] == "erro") {
+		                    if ($cnclr_campos['erro_bairro'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_bairro'] == "certo") {
+		                    } else if ($cnclr_campos['erro_bairro'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_bairro']);
@@ -202,9 +204,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "complemento":
 	                	if (isset($cnclr_campos['erro_complemento'])) {
-		                    if ($cnclr_campos['erro_complemento'] == "erro") {
+		                    if ($cnclr_campos['erro_complemento'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_complemento'] == "certo") {
+		                    } else if ($cnclr_campos['erro_complemento'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_complemento']);
@@ -214,9 +216,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "rua":
 	                	if (isset($cnclr_campos['erro_rua'])) {
-		                    if ($cnclr_campos['erro_rua'] == "erro") {
+		                    if ($cnclr_campos['erro_rua'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_rua'] == "certo") {
+		                    } else if ($cnclr_campos['erro_rua'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_rua']);
@@ -226,9 +228,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "imagem":
 	                	if (isset($cnclr_campos['erro_imagem'])) {
-		                    if ($cnclr_campos['erro_imagem'] == "erro") {
+		                    if ($cnclr_campos['erro_imagem'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_imagem'] == "certo") {
+		                    } else if ($cnclr_campos['erro_imagem'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_imagem']);
@@ -238,9 +240,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "cpf_cnpj":
 	                	if (isset($cnclr_campos['erro_cpf_cnpj'])) {
-		                    if ($cnclr_campos['erro_cpf_cnpj'] == "erro") {
+		                    if ($cnclr_campos['erro_cpf_cnpj'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_cpf_cnpj'] == "certo") {
+		                    } else if ($cnclr_campos['erro_cpf_cnpj'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_cpf_cnpj']);
@@ -250,9 +252,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "nomedadosusuario":
 	                	if (isset($cnclr_campos['erro_nomedadosusuario'])) {
-		                    if ($cnclr_campos['erro_nomedadosusuario'] == "erro") {
+		                    if ($cnclr_campos['erro_nomedadosusuario'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_nomedadosusuario'] == "certo") {
+		                    } else if ($cnclr_campos['erro_nomedadosusuario'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_nomedadosusuario']);
@@ -262,15 +264,27 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    
 	                case "emailcontato":
 	                	if (isset($cnclr_campos['erro_emailcontato'])) {
-		                    if ($cnclr_campos['erro_emailcontato'] == "erro") {
+		                    if ($cnclr_campos['erro_emailcontato'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($cnclr_campos['erro_emailcontato'] == "certo") {
+		                    } else if ($cnclr_campos['erro_emailcontato'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 		                    unset($cnclr_campos['erro_emailcontato']);
 	                	}
 	                	
 	                    break;
+	                    
+	                case "site":
+	                   	if (isset($cnclr_campos['erro_site'])) {
+	                   		if ($cnclr_campos['erro_site'] === "erro") {
+	                   			echo "has-error has-feedback";
+	                   		} else if ($cnclr_campos['erro_site'] === "certo") {
+	                   			echo "has-success has-feedback";
+	                   		}
+	                   		unset($cnclr_campos['erro_site']);
+	                   	}
+	                    
+	                   	break;
 	            }
 	            
 				if (count($cnclr_campos) > 0) {

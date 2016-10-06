@@ -21,14 +21,14 @@
 	                    </div>
 	                    <div class="panel-body loginPanel">
                             <label for="email" class="lbPanel">Digite seu E-mail:</label>
-                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros("email"); ?>">
+                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros('email'); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" type="email" class="form-control" name="email" value="<?php self::Manter_Valor("email"); ?>" placeholder="Endereço de Email" autofocus="" />
+                                <input id="email" type="email" class="form-control" name="email" value="<?php self::Manter_Valor('email'); ?>" placeholder="Endereço de Email" autofocus="" />
                             </div>
                             <label for="password" class="lbPanel">Digite sua Senha:</label>
-                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros("senha"); ?>">
+                            <div class="input-group menuRowMD <?php self::Incluir_Classe_Erros('senha'); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Senha" />
+                                <input id="password" type="password" class="form-control" name="password" value="<?php self::Manter_Valor('senha'); ?>" placeholder="Senha" />
 		          				<span class="input-group-addon">
 			                        <div class="ui checkbox passCheck">
 										<input type="checkbox" id="mostrar" name="mostrar" onchange="MostrarSenha()">

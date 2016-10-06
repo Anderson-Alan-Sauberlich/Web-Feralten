@@ -55,7 +55,6 @@
                                 <div class="input-group <?php self::Incluir_Classe_Erros("cidade"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
                                     <select id="cidade" name="cidade" class="form-control form_select">
-                                    	<option value="0">Selecione sua Cidade</option>
                                         <?php self::Mostrar_Cidades(); ?>
                                     </select>
                                     <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>

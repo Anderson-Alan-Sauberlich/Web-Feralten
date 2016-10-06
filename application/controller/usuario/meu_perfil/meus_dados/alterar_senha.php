@@ -73,8 +73,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            } else if ($senha_nova_usuario == "erro2") {
 	            	$erros_alterar_senha[] = "Preencha o Campo Comfirmar Nova Senha";
 	            	$alt_campos['erro_confsenha_nova'] = "erro";
-	            } else if (strlen($senha_nova_usuario) < 8 or strlen($senha_nova_usuario) > 20) {
-	                $erros_alterar_senha[] = "A Senha deve ter de 8 até 20 caracteres";
+	            } else if (strlen($senha_nova_usuario) < 6 or strlen($senha_nova_usuario) > 20) {
+	                $erros_alterar_senha[] = "A Senha deve ter de 6 até 20 caracteres";
 	                $alt_campos['erro_senha_nova'] = "erro";
 	                $alt_campos['erro_confsenha_nova'] = "erro";
 	            }

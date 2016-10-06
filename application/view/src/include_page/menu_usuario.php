@@ -25,7 +25,9 @@ namespace application\view\src\include_page;
         
         public static function Incluir_Status_Usuario() {
         	if (isset(self::$status_usuario)) {
-	        	if (self::$status_usuario === 0 AND self::$url_menu[1] !== 'concluir') {
+	        	if (self::$status_usuario === 0 
+	        		AND self::$url_menu[1] !== 'concluir'
+	        		AND self::$url_menu[1] !== 'alterar-senha') {
 	        		include_once RAIZ.'/application/view/html/include_page/mensagens/cadastro_incompleto.php';
 	        	} else if (self::$status_usuario === 1) {
 	        

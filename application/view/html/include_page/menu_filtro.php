@@ -3,11 +3,11 @@
 	<div id="menu_filtro" class="ui vertical inverted blue menu">
 		<div class="active item"><b>Filtro de Busca</b></div>
 		<div class="item">
-			<div class="header">Verção do Modelo</div>
+			<div class="header">Versão do Modelo</div>
 			<div class="menu">
 				<div class="container-fluid">
 					<select class="ui fluid search dropdown">
-						<option value="0">Selecione a Verção</option>
+						<option value="0">Selecione a Versão</option>
 						<?php  ?>
 					</select>
 				</div>

@@ -50,7 +50,7 @@
 		$app->post('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
-			if (application\controller\usuario\Login::Autenticar_Usuario_Login($_POST["email"], $_POST["password"], $_POST['manter_login'])) {
+			if (application\controller\usuario\Login::Autenticar_Usuario_Login()) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
 				return $response->withRedirect('/usuario/login/');
