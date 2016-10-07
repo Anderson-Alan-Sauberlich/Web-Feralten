@@ -265,35 +265,105 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 			$peca = new Object_Peca();
 			$pativeis = array();
 				
-			$peca->set_data_anuncio(date('Y-m-d H:i:s'));
-			$peca->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+			if (!empty($_POST['descricao'])) {
+				$descricao = strip_tags($_POST['descricao']);
+				 
+				if ($descricao === $_POST['descricao']) {
+					$descricao = trim($descricao);
+					$descricao = preg_replace('/\s+/', " ", $descricao);
+					 
+					if (strlen($descricao) <= 1000) {
+						$peca->set_descricao(ucfirst($descricao));
+					} else {
+						$erros_concluir[] = "Descricao, Não pode conter mais de 1000 Caracteres";
+						$cnclr_campos['erro_descricao'] = "erro";
+					}
+				} else {
+					$erros_cadastrar_peca[] = "Descricao, Não pode conter Tags de Programação";
+					$campos_cadastrar_peca['erro_descricao'] = "erro";
+				}
+			}
+			
+			if (!empty($_POST['status'])) {
+				if (filter_var($_POST['status'], FILTER_VALIDATE_INT)) {
+					$peca->set_status_id($_POST['status']);
+				} else {
+					$erros_cadastrar_peca[] = "Status, Selecione um Status Valido.";
+					$campos_cadastrar_peca['erro_status'] = "erro";
+				}
+			}
+			
+			if (!empty($_POST['fabricante'])) {
+				$fabricante = strip_tags($_POST['fabricante']);
 				
-			if (isset($_POST['descricao'])) {
-				$peca->set_descricao($_POST['descricao']);
+				if ($fabricante === $_POST['fabricante']) {
+					$fabricante = trim($fabricante);
+					$fabricante = preg_replace('/\s+/', " ", $fabricante);
+					 
+					if (strlen($fabricante) <= 50) {
+						$peca->set_fabricante(ucwords(strtolower($fabricante)));
+					} else {
+						$erros_cadastrar_peca[] = "Fabricante, Não pode conter mais de 50 Caracteres";
+						$campos_cadastrar_peca['erro_fabricante'] = "erro";
+					}
+				} else {
+					$erros_cadastrar_peca[] = "Fabricante, Não pode conter Tags de Programação";
+					$campos_cadastrar_peca['erro_fabricante'] = "erro";
+				}
 			}
 			
-			if (isset($_POST['status'])) {
-				$peca->set_status_id($_POST['status']);
+			if (!empty($_POST['peca'])) {
+				$peca_nome = strip_tags($_POST['peca']);
+				
+				if ($peca_nome === $_POST['peca']) {
+					$peca_nome = trim($$peca_nome);
+					$peca_nome = preg_replace('/\s+/', " ", $peca_nome);
+				
+					if (strlen($peca_nome) <= 50) {
+						$peca->set_nome(ucwords(strtolower($peca_nome)));
+					} else {
+						$erros_cadastrar_peca[] = "Peca Nome, Não pode conter mais de 50 Caracteres";
+						$campos_cadastrar_peca['erro_peca'] = "erro";
+					}
+				} else {
+					$erros_cadastrar_peca[] = "Peca Nome, Não pode conter Tags de Programação";
+					$campos_cadastrar_peca['erro_peca'] = "erro";
+				}
+			} else {
+				$campos_cadastrar_peca['erro_peca'] = "erro";
+				$erros_cadastrar_peca[] = "Digite o Nome da Peça";
 			}
 			
-			if (isset($_POST['fabricante'])) {
-				$peca->set_fabricante($_POST['fabricante']);
+			if (!empty($_POST['serie'])) {
+				$serie = strip_tags($_POST['serie']);
+				
+				if ($serie === $_POST['serie']) {
+					$serie = trim($serie);
+					$serie = preg_replace('/\s+/', " ", $serie);
+				
+					if (strlen($serie) <= 150) {
+						$peca->set_serie($serie);
+					} else {
+						$erros_cadastrar_peca[] = "Numero de Serie, Não pode conter mais de 150 Caracteres";
+						$campos_cadastrar_peca['erro_serie'] = "erro";
+					}
+				} else {
+					$erros_cadastrar_peca[] = "Numero de Serie, Não pode conter Tags de Programação";
+					$campos_cadastrar_peca['erro_serie'] = "erro";
+				}
 			}
 			
-			if (isset($_POST['peca'])) {
-				$peca->set_nome($_POST['peca']);
+			if (!empty($_POST['preco'])) {
+				if (filter_var($_POST['preco'], FILTER_VALIDATE_FLOAT)) {
+					$peca->set_preco($_POST['preco']);
+				} else {
+					$erros_cadastrar_peca[] = "Digite um Preço Valido para a peça";
+					$campos_cadastrar_peca['erro_preco'] = "erro";
+				}
 			}
 			
-			if (isset($_POST['serie'])) {
-				$peca->set_serie($_POST['serie']);
-			}
-			
-			if (isset($_POST['preco'])) {
-				$peca->set_preco($_POST['preco']);
-			}
-			
-			if (isset($_POST['prioridade'])) {
-				$peca->set_prioridade($_POST['prioridade']);
+			if (!empty($_POST['prioridade'])) {
+				$peca->set_prioridade(true);
 			}
 				
 			$categorias_compativeis = null;
@@ -301,29 +371,29 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 			$modelos_compativeis = null;
 			$versoes_compativeis = null;
 				
-			if (isset($_POST['categoria'])) {
+			if (!empty($_POST['categoria'])) {
 				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($_POST['categoria']));
 			
-				if (isset($_POST['marca'])) {
+				if (!empty($_POST['marca'])) {
 					$marcas_compativeis = self::Buscar_Marcas_Compativeis(current($_POST['marca']));
 						
-					if (isset($_POST['modelo'])) {
+					if (!empty($_POST['modelo'])) {
 						$modelos_compativeis = self::Buscar_Modelos_Compativeis(current($_POST['modelo']));
 			
-						if (isset($_POST['versao'])) {
+						if (!empty($_POST['versao'])) {
 							$versoes_compativeis = self::Buscar_Versoes_Compativeis(current($_POST['versao']));
 						}
 					}
 				}
 			}
 				
-			if (isset($_POST['categoria'])) {
+			if (!empty($_POST['categoria'])) {
 				foreach ($_POST['categoria'] as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {
 						$pativel = new Object_Lista_Pativel();
 						$pativel->set_categoria_id($categoria_selecionada);
 			
-						if (isset($_POST['marca'])) {
+						if (!empty($_POST['marca'])) {
 							foreach ($_POST['marca'] as $marca_selecionada) {
 								if (in_array($marca_selecionada, $marcas_compativeis)) {
 									if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
@@ -331,14 +401,14 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 										$pativel->set_categoria_id($categoria_selecionada);
 										$pativel->set_marca_id($marca_selecionada);
 			
-										if (isset($_POST['ano_ma_'.$marca_selecionada.'_de'])) {
+										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_de'])) {
 											$pativel->set_ano_de($_POST['ano_ma_'.$marca_selecionada.'_de']);
 										}
-										if (isset($_POST['ano_ma_'.$marca_selecionada.'_ate'])) {
+										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_ate'])) {
 											$pativel->set_ano_ate($_POST['ano_ma_'.$marca_selecionada.'_ate']);
 										}
 			
-										if (isset($_POST['modelo'])) {
+										if (!empty($_POST['modelo'])) {
 											foreach ($_POST['modelo'] as $modelo_selecionado) {
 												if (in_array($modelo_selecionado, $modelos_compativeis)) {
 													if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
@@ -347,14 +417,14 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 														$pativel->set_marca_id($marca_selecionada);
 														$pativel->set_modelo_id($modelo_selecionado);
 			
-														if (isset($_POST['ano_mo_'.$modelo_selecionado.'_de'])) {
+														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_de'])) {
 															$pativel->set_ano_de($_POST['ano_mo_'.$modelo_selecionado.'_de']);
 														}
-														if (isset($_POST['ano_mo_'.$modelo_selecionado.'_ate'])) {
+														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_ate'])) {
 															$pativel->set_ano_ate($_POST['ano_mo_'.$modelo_selecionado.'_ate']);
 														}
 			
-														if (isset($_POST['versao'])) {
+														if (!empty($_POST['versao'])) {
 															foreach ($_POST['versao'] as $versao_selecionada) {
 																if (in_array($versao_selecionada, $versoes_compativeis)) {
 																	if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
@@ -364,10 +434,10 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 																		$pativel->set_modelo_id($modelo_selecionado);
 																		$pativel->set_versao_id($versao_selecionada);
 			
-																		if (isset($_POST['ano_vs_'.$versao_selecionada.'_de'])) {
+																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_de'])) {
 																			$pativel->set_ano_de($_POST['ano_vs_'.$versao_selecionada.'_de']);
 																		}
-																		if (isset($_POST['ano_vs_'.$versao_selecionada.'_ate'])) {
+																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_ate'])) {
 																			$pativel->set_ano_ate($_POST['ano_vs_'.$versao_selecionada.'_ate']);
 																		}
 			
@@ -406,49 +476,22 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				}
 			}
 			
-			if (empty($peca->get_nome())) {
-				$campos_cadastrar_peca['erro_peca'] = "erro";
-				$erros_cadastrar_peca[] = "Digite o Nome da Peça";
-			}
-			
-			if (empty($peca->get_status_id())) {
-				$peca->set_status_id(null);
-			}
-			
-			if (empty($peca->get_preco())) {
-				$peca->set_preco(null);
-			}
-			
-			if (empty($peca->get_fabricante())) {
-				$peca->set_fabricante(null);
-			}
-			
-			if (empty($peca->get_descricao())) {
-				$peca->set_descricao(null);
-			}
-			
-			if (empty($peca->get_serie())) {
-				$peca->set_serie(null);
-			}
-			
-			if (!empty($peca->get_prioridade())) {
-				$peca->set_prioridade(true);
-			}
-			
 			if (empty($erros_cadastrar_peca)) {
+				$peca->set_data_anuncio(date('Y-m-d H:i:s'));
+				$peca->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 				$peca->set_contato_id(DAO_Contato::Buscar_Por_Id_Usuario($peca->get_usuario_id())->get_id());
 				$peca->set_endereco_id(DAO_Endereco::Buscar_Por_Id_Usuario($peca->get_usuario_id())->get_id());
 				
 				$id_peca = DAO_Peca::Inserir($peca);
 				
-				if (isset($id_peca) AND isset($pativeis)) {
+				if (!empty($id_peca) AND !empty($pativeis)) {
 					foreach ($pativeis as $pativel) {
 						$pativel->set_peca_id($id_peca);
 						DAO_Lista_Pativel::Inserir($pativel);
 					}
 				}
 				
-				if (isset($id_peca) AND isset($_SESSION['imagens_tmp'])) {
+				if (!empty($id_peca) AND !empty($_SESSION['imagens_tmp'])) {
 					$imagens = new Gerenciar_Imagens();
 					$diretorios_imagens = array();
 					
@@ -478,84 +521,62 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				
 				$form_cadastrar_peca = array();
 					
-				$form_cadastrar_peca['peca'] = null;
-				$form_cadastrar_peca['fabricante'] = null;
-				$form_cadastrar_peca['serie'] = null;
-				$form_cadastrar_peca['preco'] = null;
-				$form_cadastrar_peca['status'] = null;
-				$form_cadastrar_peca['prioridade'] = null;
-				$form_cadastrar_peca['descricao'] = null;
-					
-				if (isset($_POST['peca'])) {
-					$form_cadastrar_peca['peca'] = $_POST['peca'];
-				}
-				if (isset($_POST['fabricante'])) {
-					$form_cadastrar_peca['fabricante'] = $_POST['fabricante'];
-				}
-				if (isset($_POST['serie'])) {
-					$form_cadastrar_peca['serie'] = $_POST['serie'];
-				}
-				if (isset($_POST['preco'])) {
-					$form_cadastrar_peca['preco'] = $_POST['preco'];
-				}
-				if (isset($_POST['status'])) {
-					$form_cadastrar_peca['status'] = $_POST['status'];
-				}
-				if (isset($_POST['prioridade'])) {
-					$form_cadastrar_peca['prioridade'] = $_POST['prioridade'];
-				}
-				if (isset($_POST['descricao'])) {
-					$form_cadastrar_peca['descricao'] = $_POST['descricao'];
-				}
+				$form_cadastrar_peca['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['peca'])))));
+				$form_cadastrar_peca['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['fabricante'])))));
+				$form_cadastrar_peca['serie'] = trim(strip_tags($_POST['serie']));
+				$form_cadastrar_peca['preco'] = trim(strip_tags($_POST['preco']));
+				$form_cadastrar_peca['status'] = trim(strip_tags($_POST['status']));
+				$form_cadastrar_peca['prioridade'] = trim(strip_tags($_POST['prioridade']));
+				$form_cadastrar_peca['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($_POST['descricao']))));
 					
 				$_SESSION['form_cadastrar_peca'] = $form_cadastrar_peca;
 					
-				$marcas;
-				$modelos;
-				$versoes;
+				$marcas = null;
+				$modelos = null;
+				$versoes = null;
 				$anos = array();
 					
-				if (isset($_SESSION['compatibilidade']['marca'])) {
+				if (!empty($_SESSION['compatibilidade']['marca'])) {
 					$marcas = $_SESSION['compatibilidade']['marca'];
 				}
-				if (isset($_SESSION['compatibilidade']['modelo'])) {
+				if (!empty($_SESSION['compatibilidade']['modelo'])) {
 					$modelos = $_SESSION['compatibilidade']['modelo'];
 				}
-				if (isset($_SESSION['compatibilidade']['versao'])) {
+				if (!empty($_SESSION['compatibilidade']['versao'])) {
 					$versoes = $_SESSION['compatibilidade']['versao'];
 				}
 					
-				if (isset($marcas)) {
+				if (!empty($marcas)) {
 					foreach ($marcas as $marca) {
-						if (isset($_POST['ano_ma_'.$marca.'_de'])) {
+						if (!empty($_POST['ano_ma_'.$marca.'_de'])) {
 							$anos['ano_ma_'.$marca.'_de'] = $_POST['ano_ma_'.$marca.'_de'];
 						}
 				
-						if (isset($_POST['ano_ma_'.$marca.'_ate'])) {
+						if (!empty($_POST['ano_ma_'.$marca.'_ate'])) {
 							$anos['ano_ma_'.$marca.'_ate'] = $_POST['ano_ma_'.$marca.'_ate'];
 						}
 					}
 				}
 					
-				if (isset($modelos)) {
+				if (!empty($modelos)) {
 					foreach ($modelos as $modelo) {
-						if (isset($_POST['ano_mo_'.$modelo.'_de'])) {
+						if (!empty($_POST['ano_mo_'.$modelo.'_de'])) {
 							$anos['ano_mo_'.$modelo.'_de'] = $_POST['ano_mo_'.$modelo.'_de'];
 						}
 							
-						if (isset($_POST['ano_mo_'.$modelo.'_ate'])) {
+						if (!empty($_POST['ano_mo_'.$modelo.'_ate'])) {
 							$anos['ano_mo_'.$modelo.'_ate'] = $_POST['ano_mo_'.$modelo.'_ate'];
 						}
 					}
 				}
 					
-				if (isset($versoes)) {
+				if (!empty($versoes)) {
 					foreach ($versoes as $versao) {
-						if (isset($_POST['ano_vs_'.$versao.'_de'])) {
+						if (!empty($_POST['ano_vs_'.$versao.'_de'])) {
 							$anos['ano_vs_'.$versao.'_de'] = $_POST['ano_vs_'.$versao.'_de'];
 						}
 				
-						if (isset($_POST['ano_vs_'.$versao.'_ate'])) {
+						if (!empty($_POST['ano_vs_'.$versao.'_ate'])) {
 							$anos['ano_vs_'.$versao.'_ate'] = $_POST['ano_vs_'.$versao.'_ate'];
 						}
 					}

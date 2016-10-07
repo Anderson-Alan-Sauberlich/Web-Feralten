@@ -67,6 +67,66 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	                	}
 	                	
 	                    break;
+	                    
+	                case "descricao":
+	                   	if (isset($campos_cadastrar_peca['erro_descricao'])) {
+	                		if ($campos_cadastrar_peca['erro_descricao'] == "erro") {
+	                			echo "has-error has-feedback";
+	                		} else if ($campos_cadastrar_peca['erro_descricao'] == "certo") {
+	                			echo "has-success has-feedback";
+	                		}
+	                		unset($campos_cadastrar_peca['erro_descricao']);
+	                	}
+	                
+	                	break;
+	                	
+	                case "status":
+	                	if (isset($campos_cadastrar_peca['erro_status'])) {
+	                		if ($campos_cadastrar_peca['erro_status'] == "erro") {
+	                			echo "has-error has-feedback";
+	                		} else if ($campos_cadastrar_peca['erro_status'] == "certo") {
+	                			echo "has-success has-feedback";
+	                		}
+	                		unset($campos_cadastrar_peca['erro_status']);
+	                	}
+	                		 
+	                	break;
+	                	
+	                case "fabricante":
+	                	if (isset($campos_cadastrar_peca['erro_fabricante'])) {
+	                		if ($campos_cadastrar_peca['erro_fabricante'] == "erro") {
+	                			echo "has-error has-feedback";
+	                		} else if ($campos_cadastrar_peca['erro_fabricante'] == "certo") {
+	                			echo "has-success has-feedback";
+	                		}
+	                		unset($campos_cadastrar_peca['erro_fabricante']);
+	                	}
+	                	 
+	                	break;
+	                	
+	                case "serie":
+	                	if (isset($campos_cadastrar_peca['erro_serie'])) {
+	                		if ($campos_cadastrar_peca['erro_serie'] == "erro") {
+	                			echo "has-error has-feedback";
+	                		} else if ($campos_cadastrar_peca['erro_serie'] == "certo") {
+	                			echo "has-success has-feedback";
+	                		}
+	                		unset($campos_cadastrar_peca['erro_serie']);
+	                	}
+	                
+	                	break;
+	                	
+	                case "preco":
+	                	if (isset($campos_cadastrar_peca['erro_preco'])) {
+	                		if ($campos_cadastrar_peca['erro_preco'] == "erro") {
+	                			echo "has-error has-feedback";
+	                		} else if ($campos_cadastrar_peca['erro_preco'] == "certo") {
+	                			echo "has-success has-feedback";
+	                		}
+	                		unset($campos_cadastrar_peca['erro_preco']);
+	                	}
+	                	 
+	                	break;
 	            }
 	            
 				if (count($campos_cadastrar_peca) > 0) {

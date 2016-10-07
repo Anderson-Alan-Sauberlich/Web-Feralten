@@ -230,6 +230,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		                $erros_concluir[] = "Informe seu CPF ou CNPJ";
 		                $cnclr_campos['erro_cpf_cnpj'] = "erro";
 		            } else {
+		            	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
 		            	$cpf_cnpj = trim($cpf_cnpj);
 		            	$cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
 		            	

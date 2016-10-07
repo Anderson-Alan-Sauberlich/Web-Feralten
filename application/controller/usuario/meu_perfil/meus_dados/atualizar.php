@@ -134,17 +134,60 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $contato = new Object_Contato();
             
-            $contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $contato->set_telefone1($_POST['fone1']);
-            $contato->set_telefone2($_POST['fone2']);
-            $contato->set_email($_POST['emailcontato']);
-            
-            if (empty($contato->get_telefone1())) {
+            if (empty($_POST['fone1'])) {
                 $erros_contato[] = "Informe um Nº de Telefone para Telefone 1";
                 $alt_campos['erro_fone1'] = "erro";
+            } else {
+            	$telefone1 = trim($_POST['fone1']);
+            	 
+            	if (strlen($telefone1) == 10) {
+            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
+            			$contato->set_telefone1($telefone1);
+            		} else {
+            			$erros_contato[] = "Telefone-1, Digite Apenas Numeros";
+            			$alt_campos['erro_fone1'] = "erro";
+            		}
+            	} else {
+            		$erros_contato[] = "Telefone-1 deve conter 10 Numeros";
+            		$alt_campos['erro_fone1'] = "erro";
+            	}
+            }
+            
+            if (!empty($_POST['fone2'])) {
+            	$telefone2 = trim($_POST['fone2']);
+            	
+            	if (strlen($telefone2) == 10) {
+            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
+            			$contato->set_telefone2($telefone2);
+            		} else {
+            			$erros_contato[] = "Telefone-2, Digite Apenas Numeros";
+            			$alt_campos['erro_fone2'] = "erro";
+            		}
+            	} else {
+            		$erros_contato[] = "Telefone-2 deve conter 10 Numeros";
+            		$alt_campos['erro_fone2'] = "erro";
+            	}
+            }
+            
+            if (!empty($_POST['emailcontato'])) {
+            	$emailcontato = trim($_POST['emailcontato']);
+            	 
+            	if (strlen($emailcontato) <= 150) {
+            		if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
+            			$contato->set_email($emailcontato);
+            		} else {
+            			$erros_contato[] = "Digite um E-Mail Alternativo Valido";
+            			$alt_campos['erro_emailcontato'] = "erro";
+            		}
+            	} else {
+            		$erros_contato[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
+            		$alt_campos['erro_emailcontato'] = "erro";
+            	}
             }
             
             if (empty($erros_contato)) {
+            	$contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            	
                 DAO_Contato::Atualizar($contato);
 				
 				$_SESSION['success_contato'][] = "O Contato do seu Usuario foi Atualizado com Sucesso!";
@@ -164,14 +207,65 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $dados_usuario = new Object_Dados_Usuario();
             
-            $dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            $dados_usuario->set_cpf_cnpj($_POST['cpf_cnpj']);
-            $dados_usuario->set_nome_fantasia($_POST['nomedadosusuario']);
-            $dados_usuario->set_site($_POST['site']);
-            
-            if (empty($dados_usuario->get_cpf_cnpj())) {
+            if (empty($_POST['cpf_cnpj'])) {
                 $erros_dadosusuario[] = "Informe um CPF ou CNPJ";
                 $alt_campos['erro_cpf_cnpj'] = "erro";
+            } else {
+            	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
+		        $cpf_cnpj = trim($cpf_cnpj);
+		        $cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
+            	 
+            	if (filter_var($cpf_cnpj, FILTER_VALIDATE_INT)) {
+            		if (strlen($cpf_cnpj) === 14) {
+            			$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+            		} else if (strlen($cpf_cnpj) === 11) {
+            			$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+            		} else {
+            			$erros_dadosusuario[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
+            			$alt_campos['erro_cpf_cnpj'] = "erro";
+            		}
+            	} else {
+            		$erros_dadosusuario[] = "CPF/CNPJ, Digite Apenas Numeros";
+            		$alt_campos['erro_cpf_cnpj'] = "erro";
+            	}
+            }
+            
+            if (!empty($_POST['nomedadosusuario'])) {
+            	$nomedadosusuario = strip_tags($_POST['nomedadosusuario']);
+            	
+            	if ($nomedadosusuario === $_POST['nomedadosusuario']) {
+            		$nomedadosusuario = trim($nomedadosusuario);
+            		$nomedadosusuario = preg_replace('/\s+/', " ", $nomedadosusuario);
+            		 
+            		if (strlen($nomedadosusuario) <= 45) {
+            			$dados_usuario->set_nome_fantasia($nomedadosusuario);
+            		} else {
+            			$erros_dadosusuario[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
+            			$alt_campos['erro_nomedadosusuario'] = "erro";
+            		}
+            	} else {
+            		$erros_dadosusuario[] = "Nome Fantasia, Não pode conter Tags de Programação";
+            		$alt_campos['erro_nomedadosusuario'] = "erro";
+            	}
+            }
+            
+            if (!empty($_POST['site'])) {
+            	$site = strip_tags($_POST['site']);
+            	 
+            	if ($site === $_POST['site']) {
+            		$site = trim($_POST['site']);
+            		$site = preg_replace('/\s+/', "", $site);
+            	
+            		if (strlen($site) <= 150) {
+            			$dados_usuario->set_site($site);
+            		} else {
+            			$erros_dadosusuario[] = "Site, pode ter no Maximo 150 Caracteres";
+            			$alt_campos['erro_site'] = "erro";
+            		}
+            	} else {
+            		$erros_dadosusuario[] = "Site, Não pode conter Tags de Programação";
+            		$alt_campos['erro_site'] = "erro";
+            	}
             }
 
             if (empty($erros_dadosusuario)) {
@@ -179,6 +273,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
 
             if (empty($erros_dadosusuario)) {
+            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            	
             	if (empty($dados_usuario->get_imagem())) {
             		DAO_Dados_Usuario::Atualizar_Dados($dados_usuario);
             	} else if ($dados_usuario->get_imagem() == "del") {
@@ -205,42 +301,79 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $usuario = new Object_Usuario();
             
-            $usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
-            $usuario->set_nome($_POST["nome"]);
-            $usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
-            $usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
-            
-            if ($_POST['confemail'] == $_POST['email']) {
-            	$usuario->set_email($_POST['email']);
-            } else if (isset($_POST['confemail']) AND empty($_POST['email'])) {
-            	$usuario->set_email("erro1");
-            } else if (isset($_POST['email']) AND empty($_POST['confemail'])) {
-            	$usuario->set_email("erro2");
+            if (empty($_POST['nome'])) {
+            	$erros_cadastrar[] = "Digite Seu Nome Completo";
+            	$cad_campos['erro_nome'] = "erro";
             } else {
-            	$usuario->set_email("erro");
+            	$nome = strip_tags($_POST['nome']);
+            	 
+            	if ($nome === $_POST['nome']) {
+            		$nome = trim($nome);
+            		$nome = preg_replace('/\s+/', " ", $nome);
+            
+            		if (strlen($nome) <= 150) {
+            			if (preg_match("/^([a-zA-Z0-9çÇ ,'-]+)$/", $nome)) {
+            				$usuario->set_nome(ucwords(strtolower($nome)));
+            			} else {
+            				$erros_usuario[] = "O Nome Não Pode Conter Caracteres Especiais";
+            				$alt_campos['erro_nome'] = "erro";
+            			}
+            		} else {
+            			$erros_usuario[] = "O Nome pode ter no maximo 150 Caracteres";
+            			$alt_campos['erro_nome'] = "erro";
+            		}
+            	} else {
+            		$erros_usuario[] = "O Nome Não pode conter Tags de Programação";
+            		$alt_campos['erro_nome'] = "erro";
+            	}
             }
             
-            if (empty($usuario->get_nome())) {
-                $erros_usuario[] = "Digite seu Nome Completo";
-                $alt_campos['erro_nome'] = "erro";
-            }
-            if (empty($usuario->get_email())) {
-                $erros_usuario[] = "Digite seu Email";
-                $alt_campos['erro_email'] = "erro";
-				$alt_campos['erro_confemail'] = "erro";
-            } else if ($usuario->get_email() == "erro") {
-                $erros_usuario[] = "Digite o E-Mails Duas Vezes Igualmente";
-                $alt_campos['erro_email'] = "erro";
-                $alt_campos['erro_confemail'] = "erro";
-            } else if ($usuario->get_email() == "erro1") {
-                $erros_usuario[] = "Preencha o Campo E-Mail";
-                $alt_campos['erro_email'] = "erro";
-            } else if ($usuario->get_email() == "erro2") {
-            	$erros_usuario[] = "Preencha o Campo Comfirmar E-Mail";
-            	$alt_campos['erro_confemail'] = "erro";
+            if (empty($_POST['confemail']) OR empty($_POST['email'])) {
+            	if (empty($_POST['email'])) {
+            		$erros_usuario[] = "Preencha o Campo E-Mail";
+            		$alt_campos['erro_email'] = "erro";
+            	}
+            	 
+            	if (empty($_POST['confemail'])) {
+            		$erros_usuario[] = "Preencha o Campo Comfirmar E-Mail";
+            		$alt_campos['erro_confemail'] = "erro";
+            	}
+            } else {
+            	$confemail = trim($_POST['confemail']);
+            	$email = trim($_POST['email']);
+            
+            	if ($confemail === $email) {
+            		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+            			if (DAO_Usuario::Verificar_Email($email) === 0) {
+            				if (strlen($email) <= 150) {
+            					$usuario->set_email($email);
+            				} else {
+            					$erros_usuario[] = "O E-Mail pode ter no maximo 150 Caracteres";
+            					$alt_campos['erro_email'] = "erro";
+            					$alt_campos['erro_confemail'] = "erro";
+            				}
+            			} else {
+            				$erros_usuario[] = "Este E-Mail Já Esta Cadastrado";
+            				$alt_campos['erro_email'] = "erro";
+            				$alt_campos['erro_confemail'] = "erro";
+            			}
+            		} else {
+            			$erros_usuario[] = "Este E-Mail Não é Valido";
+            			$alt_campos['erro_email'] = "erro";
+            			$alt_campos['erro_confemail'] = "erro";
+            		}
+            	} else {
+            		$erros_usuario[] = "Digite o E-Mails Duas Vezes Igualmente";
+            		$alt_campos['erro_email'] = "erro";
+            		$alt_campos['erro_confemail'] = "erro";
+            	}
             }
             
             if (empty($erros_usuario)) {
+            	$usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
+            	$usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
+            	$usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
+            	
                 DAO_Usuario::Atualizar($usuario);
                 
                 $_SESSION['usuario'] = serialize($usuario);
