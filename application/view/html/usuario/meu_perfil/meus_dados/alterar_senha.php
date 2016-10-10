@@ -42,14 +42,14 @@
 									</div>
 								</span>
 	                        </div>
-	                        <label for="confsenha_nova" class="lbPanel">Digite a Nova Senha Novamente:</label>
-	                        <div class="input-group <?php self::Incluir_Classe_Erros("confsenha_nova"); ?>">
+	                        <label for="senha_confnova" class="lbPanel">Digite a Nova Senha Novamente:</label>
+	                        <div class="input-group <?php self::Incluir_Classe_Erros("senha_confnova"); ?>">
 	                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                            <input id="confsenha_nova" name="confsenha_nova" type="password" class="form-control" value="<?php self::Manter_Valor("confsenha_nova") ?>" placeholder="Confirmar Nova Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite a Senha novamente da mesma forma para Confirmila. (Campo Obrigatório)" />
+	                            <input id="senha_confnova" name="senha_confnova" type="password" class="form-control" value="<?php self::Manter_Valor("senha_confnova") ?>" placeholder="Confirmar Nova Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite a Senha novamente da mesma forma para Confirma-lá. (Campo Obrigatório)" />
 								<span class="input-group-addon">
 									<div class="ui checkbox passCheck">
-										<input type="checkbox" id="mostrar_confsenha_nova" name="mostrar_confsenha_nova" onchange="Mostrar_Confsenha_Nova()">
-										<label for="mostrar_confsenha_nova"><i class="hidden-xs">Mostrar Senha </i><i class="unlock alternate icon"></i></label>
+										<input type="checkbox" id="mostrar_senha_confnova" name="mostrar_senha_confnova" onchange="Mostrar_Senha_ConfNova()">
+										<label for="mostrar_senha_confnova"><i class="hidden-xs">Mostrar Senha </i><i class="unlock alternate icon"></i></label>
 									</div>
 								</span>
 	                        </div>

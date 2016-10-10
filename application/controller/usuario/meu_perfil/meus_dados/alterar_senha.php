@@ -32,59 +32,61 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         public static function Atualizar_Senha_Usuario() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 	            $erros_alterar_senha = array();
-	            $alt_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_confsenha_nova' => "certo");
+	            $alt_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
 	            
-	            $senha_antiga_usuario = $_POST["senha_antiga"];
-	            $senha_nova_usuario = $_POST["confsenha_nova"] == $_POST['senha_nova'] ? $_POST['senha_nova'] : "erro";
+			    $senha_antiga = null;
+			    $senha_nova = null;
+			    
+			    if (empty($_POST['senha_antiga'])) {
+			    	$erros_alterar_senha[] = "Digite a Senha Antiga";
+			    	$alt_campos['erro_senha_antiga'] = "erro";
+			    } else {
+			    	$senha_usuario = DAO_Usuario::Buscar_Senha_Usuario(unserialize($_SESSION['usuario'])->get_id());
+			    		
+			    	if (!password_verify($senha_antiga, $senha_usuario)) {
+			    		$erros_alterar_senha[] = "Senha Antiga Incorreta";
+			    		$alt_campos['erro_senha_antiga'] = "erro";
+			    	}
+			    }
 	            
-	            if ($_POST['confsenha_nova'] == $_POST['senha_nova']) {
-	            	$senha_nova_usuario = $_POST['senha_nova'];
-	            } else if (isset($_POST['confsenha_nova']) AND empty($_POST['senha_nova'])) {
-	            	$senha_nova_usuario = "erro1";
-	            } else if (isset($_POST['senha_nova']) AND empty($_POST['confsenha_nova'])) {
-	            	$senha_nova_usuario = "erro2";
+	            if (empty($_POST['senha_nova']) OR empty($_POST['senha_confnova'])) {
+	            	if (empty($_POST['senha_nova'])) {
+	            		$erros_alterar_senha[] = "Preencha o Campo Nova Senha";
+	            		$alt_campos['erro_senha_nova'] = "erro";
+	            	}
+	            	
+	            	if (empty($_POST['senha_confnova'])) {
+	            		$erros_alterar_senha[] = "Preencha o Campo Confirmar Nova Senha";
+	            		$alt_campos['erro_senha_confnova'] = "erro";
+	            	}
 	            } else {
-	            	$senha_nova_usuario = "erro";
-	            }
-	            
-				if (empty($senha_antiga_usuario)) {
-					$erros_alterar_senha[] = "Digite a Senha Antiga";
-					$alt_campos['erro_senha_antiga'] = "erro";
-				} else {
-					$senha = DAO_Usuario::Buscar_Senha_Usuario(unserialize($_SESSION['usuario'])->get_id());
-					
-					if (!password_verify($senha_antiga_usuario, $senha)) {
-						$erros_alterar_senha[] = "Senha Antiga Incorreta";
-						$alt_campos['erro_senha_antiga'] = "erro";
-					}
-				}
-				
-	            if (empty($senha_nova_usuario)) {
-	                $erros_alterar_senha[] = "Informe Uma Nova Senha";
-	                $alt_campos['erro_senha_nova'] = "erro";
-					$alt_campos['erro_confsenha_nova'] = "erro";
-	            } else if ($senha_nova_usuario == "erro") {
-	                $erros_alterar_senha[] = "Campos: \"Nova Senha\" e \"Confirmar Nova Senha\", Não estão Iguais.";
-	                $alt_campos['erro_senha_nova'] = "erro";
-	                $alt_campos['erro_confsenha_nova'] = "erro";
-	            } else if ($senha_nova_usuario == "erro1") {
-	                $erros_alterar_senha[] = "Preencha o Campo Nova Senha";
-	                $alt_campos['erro_senha_nova'] = "erro";
-	            } else if ($senha_nova_usuario == "erro2") {
-	            	$erros_alterar_senha[] = "Preencha o Campo Comfirmar Nova Senha";
-	            	$alt_campos['erro_confsenha_nova'] = "erro";
-	            } else if (strlen($senha_nova_usuario) < 6 or strlen($senha_nova_usuario) > 20) {
-	                $erros_alterar_senha[] = "A Senha deve ter de 6 até 20 caracteres";
-	                $alt_campos['erro_senha_nova'] = "erro";
-	                $alt_campos['erro_confsenha_nova'] = "erro";
+	            	if ($_POST['senha_nova'] === $_POST['senha_confnova']) {
+		            	if (strlen($_POST['senha_nova']) >= 6 AND strlen($_POST['senha_nova']) <= 20) {
+		            		$password = strip_tags($_POST['senha_nova']);
+		            		 
+		            		if ($password === $_POST['senha_nova']) {
+		            			$senha_nova = $password;
+		            		} else {
+		            			$erros_cadastrar[] = "A Senha Não pode conter Tags de Programação";
+		            			$cad_campos['erro_senha'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_cadastrar[] = "A Senha Deve conter de 6 a 20 caracteres";
+		            		$cad_campos['erro_senha'] = "erro";
+		            	}
+	            	} else {
+	            		$erros_alterar_senha[] = "Campos: \"Nova Senha\" e \"Confirmar Nova Senha\", Não estão Iguais.";
+	            		$alt_campos['erro_senha_nova'] = "erro";
+	            		$alt_campos['erro_senha_confnova'] = "erro";
+	            	}
 	            }
 	            
 	            if (empty($erros_alterar_senha)) {
-	            	$senha_nova_usuario = password_hash($senha_nova_usuario, PASSWORD_DEFAULT);
+	            	$senha_nova = password_hash($senha_nova, PASSWORD_DEFAULT);
 					
-	                DAO_Usuario::Atualizar_Senha($senha_nova_usuario, unserialize($_SESSION['usuario'])->get_id());
+	                DAO_Usuario::Atualizar_Senha($senha_nova, unserialize($_SESSION['usuario'])->get_id());
 	                
-					Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova_usuario);
+					Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova);
 					
 					return 'certo';
 	            } else {
@@ -93,9 +95,9 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 					
 					$form_alterar_senha = array();
 						
-					$form_alterar_senha['senha_antiga'] = $_POST['senha_antiga'];
-					$form_alterar_senha['senha_nova'] = $_POST['senha_nova'];
-					$form_alterar_senha['confsenha_nova'] = $_POST['confsenha_nova'];
+					$form_alterar_senha['senha_antiga'] = strip_tags($_POST['senha_antiga']);
+					$form_alterar_senha['senha_nova'] = strip_tags($_POST['senha_nova']);
+					$form_alterar_senha['senha_confnova'] = strip_tags($_POST['senha_confnova']);
 						
 					$_SESSION['form_alterar_senha'] = $form_alterar_senha;
 					

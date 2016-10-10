@@ -59,41 +59,124 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            
 		            $endereco = new Object_Endereco();
 		            
-		            $endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-		            $endereco->set_cidade_id($_POST['cidade']);
-		            $endereco->set_estado_id($_POST['estado']);
-		            $endereco->set_numero($_POST['numero']);
-		            $endereco->set_cep($_POST['cep']);
-		            $endereco->set_rua($_POST['rua']);
-		            $endereco->set_complemento($_POST['complemento']);
-		            $endereco->set_bairro($_POST['bairro']);
+		            if (!empty($_POST['complemento'])) {
+		            	$complemento = strip_tags($_POST['complemento']);
+		            	 
+		            	if ($complemento === $_POST['complemento']) {
+		            		$complemento = trim($complemento);
+		            		$complemento = preg_replace('/\s+/', " ", $complemento);
+		            		 
+		            		if (strlen($complemento) <= 150) {
+		            			$endereco->set_complemento(ucfirst(strtolower($complemento)));
+		            		} else {
+		            			$erros_enderecos[] = "Complemento, Não pode conter mais de 150 Caracteres";
+		            			$enderecos_campos['erro_complemento'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_enderecos[] = "Complemento, Não pode conter Tags de Programação";
+		            		$enderecos_campos['erro_complemento'] = "erro";
+		            	}
+		            }
 		            
-		            if ($endereco->get_cidade_id() <= 0) {
-		                $erros_enderecos[] = "Seleciona sua Cidade";
-		                $enderecos_campos['erro_cidade'] = "erro";
+		            if (empty($_POST['rua'])) {
+		            	$erros_enderecos[] = "Informe sua Rua";
+		            	$enderecos_campos['erro_rua'] = "erro";
+		            } else {
+		            	$rua = strip_tags($_POST['rua']);
+		            
+		            	if ($rua === $_POST['rua']) {
+		            		$rua = trim($rua);
+		            		$rua = preg_replace('/\s+/', " ", $rua);
+		            		 
+		            		if (strlen($rua) <= 150) {
+		            			$endereco->set_rua(ucwords(strtolower($rua)));
+		            		} else {
+		            			$erros_enderecos[] = "Rua, Não pode conter mais de 150 Caracteres";
+		            			$enderecos_campos['erro_rua'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_enderecos[] = "Rua, Não pode conter Tags de Programação";
+		            		$enderecos_campos['erro_rua'] = "erro";
+		            	}
 		            }
-		            if ($endereco->get_estado_id() <= 0) {
-		                $erros_enderecos[] = "Seleciona seu Estado";
-		                $enderecos_campos['erro_estado'] = "erro";
+		            
+		            if (empty($_POST['bairro'])) {
+		            	$erros_enderecos[] = "Informe seu Bairro";
+		            	$enderecos_campos['erro_bairro'] = "erro";
+		            } else {
+		            	$bairro = strip_tags($_POST['bairro']);
+		            	 
+		            	if ($bairro === $_POST['bairro']) {
+		            		$bairro = trim($bairro);
+		            		$bairro = preg_replace('/\s+/', " ", $bairro);
+		            
+		            		if (strlen($bairro) <= 45) {
+		            			$endereco->set_bairro(ucwords(strtolower($bairro)));
+		            		} else {
+		            			$erros_enderecos[] = "Bairro, Não pode conter mais de 45 Caracteres";
+		            			$enderecos_campos['erro_bairro'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_enderecos[] = "Bairro, Não pode conter Tags de Programação";
+		            		$enderecos_campos['erro_bairro'] = "erro";
+		            	}
 		            }
-		            if (empty($endereco->get_numero())) {
-		                $erros_enderecos[] = "Informe o Numero do seu Endereço";
-		                $enderecos_campos['erro_numero'] = "erro";
+		            
+		            if (empty($_POST['cep'])) {
+		            	$erros_enderecos[] = "Informe seu CEP";
+		            	$enderecos_campos['erro_cep'] = "erro";
+		            } else {
+		            	if (strlen($_POST['cep']) === 8) {
+		            		if (filter_var($_POST['cep'], FILTER_VALIDATE_INT)) {
+		            			$endereco->set_cep($_POST['cep']);
+		            		} else {
+		            			$erros_enderecos[] = "CEP, Digite Apenas os Numeros";
+		            			$enderecos_campos['erro_cep'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_enderecos[] = "CEP Deve conter 8 Numeros";
+		            		$enderecos_campos['erro_cep'] = "erro";
+		            	}
 		            }
-		            if (empty($endereco->get_cep())) {
-		                $erros_enderecos[] = "Informe seu CEP";
-		                $enderecos_campos['erro_cep'] = "erro";
+		            
+		            if (empty($_POST['numero'])) {
+		            	$erros_enderecos[] = "Informe o Numero do seu Endereço";
+		            	$enderecos_campos['erro_numero'] = "erro";
+		            } else {
+		            	$numero = strip_tags($_POST['numero']);
+		            	 
+		            	if ($numero === $_POST['numero']) {
+		            		$numero = trim($numero);
+		            
+		            		if (strlen($numero) <= 10) {
+		            			$endereco->set_numero($numero);
+		            		} else {
+		            			$erros_enderecos[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
+		            			$enderecos_campos['erro_numero'] = "erro";
+		            		}
+		            	} else {
+		            		$erros_enderecos[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
+		            		$enderecos_campos['erro_numero'] = "erro";
+		            	}
 		            }
-		            if (empty($endereco->get_bairro())) {
-		                $erros_enderecos[] = "Informe seu Bairro";
-		                $enderecos_campos['erro_bairro'] = "erro";
+		            
+		            if (empty($_POST['cidade']) OR $_POST['cidade'] <= 0) {
+		            	$erros_enderecos[] = "Seleciona sua Cidade";
+		            	$enderecos_campos['erro_cidade'] = "erro";
+		            } else {
+		            	$endereco->set_cidade_id($_POST['cidade']);
 		            }
-		            if (empty($endereco->get_rua())) {
-		                $erros_enderecos[] = "Informe sua Rua";
-		                $enderecos_campos['erro_rua'] = "erro";
+		            
+		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
+		            	$erros_enderecos[] = "Seleciona seu Estado";
+		            	$enderecos_campos['erro_estado'] = "erro";
+		            } else {
+		            	$endereco->set_estado_id($_POST['estado']);
 		            }
 		            
 		            if (empty($erros_enderecos)) {
+		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+		            	
 		                DAO_Endereco::Atualizar($endereco);
 						
 						$_SESSION['success_enderecos'][] = "O Endereço do seu Usuario foi Atualizado com Sucesso!";

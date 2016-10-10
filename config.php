@@ -1,3 +1,3 @@
 <?php
-	define(RAIZ, __DIR__);
+	define('RAIZ', __DIR__);
 ?>

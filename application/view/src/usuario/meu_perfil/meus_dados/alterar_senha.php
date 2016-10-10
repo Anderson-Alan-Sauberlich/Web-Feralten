@@ -82,14 +82,14 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                	
 	                    break;
 						
-	                case "confsenha_nova":
-	                	if (isset($alt_campos['erro_confsenha_nova'])) {
-		                    if ($alt_campos['erro_confsenha_nova'] == "erro") {
+	                case "senha_confnova":
+	                	if (isset($alt_campos['erro_senha_confnova'])) {
+		                    if ($alt_campos['erro_senha_confnova'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($alt_campos['erro_confsenha_nova'] == "certo") {
+		                    } else if ($alt_campos['erro_senha_confnova'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($alt_campos['erro_confsenha_nova']);
+		                    unset($alt_campos['erro_senha_confnova']);
 	                	}
 	                	
 	                    break;

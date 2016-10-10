@@ -134,7 +134,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	if ($numero === $_POST['numero']) {
 			            	$numero = trim($numero);
 			            	
-			            	if (strlen($emailcontato) <= 10) {
+			            	if (strlen($numero) <= 10) {
 			            		$endereco->set_numero($numero);
 			            	} else {
 			            		$erros_concluir[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";

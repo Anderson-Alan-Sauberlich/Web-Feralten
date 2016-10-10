@@ -16,8 +16,8 @@ function Mostrar_Senha_Nova() {
        	passwordField.attr('type', 'password');
    	}
 }
-function Mostrar_Confsenha_Nova() {
-   	var passwordField = $('#confsenha_nova');
+function Mostrar_Senha_ConfNova() {
+   	var passwordField = $('#senha_confnova');
    	var passwordFieldType = passwordField.attr('type');
    	if(passwordFieldType == 'password'){
        	passwordField.attr('type', 'text');
