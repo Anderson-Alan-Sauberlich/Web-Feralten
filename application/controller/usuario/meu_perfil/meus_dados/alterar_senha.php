@@ -34,7 +34,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            $erros_alterar_senha = array();
 	            $alt_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
 	            
-			    $senha_antiga = null;
 			    $senha_nova = null;
 			    
 			    if (empty($_POST['senha_antiga'])) {
@@ -43,7 +42,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			    } else {
 			    	$senha_usuario = DAO_Usuario::Buscar_Senha_Usuario(unserialize($_SESSION['usuario'])->get_id());
 			    		
-			    	if (!password_verify($senha_antiga, $senha_usuario)) {
+			    	if (!password_verify($_POST['senha_antiga'], $senha_usuario)) {
 			    		$erros_alterar_senha[] = "Senha Antiga Incorreta";
 			    		$alt_campos['erro_senha_antiga'] = "erro";
 			    	}

@@ -40,7 +40,7 @@ namespace application\controller\usuario;
 			$usuario_login = DAO_Usuario::Buscar_Usuario($id_usuario);
 			
 			if (hash_equals($token, hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token())))) {
-            	$usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', serialize($usuario_login))));
+            	$usuario_login->set_senha(hash_hmac('sha512', $usuario_login->get_senha(), hash('sha512', $usuario_login->get_senha())));
 				$usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
 				$usuario_login->set_token(null);
 				
@@ -68,7 +68,7 @@ namespace application\controller\usuario;
             
             if (!empty($usuario_login)) {
             	if (hash_equals($senha, $usuario_login->get_senha())) {
-            		$usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', serialize($usuario_login))));
+            		$usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', $usuario_login->get_senha())));
 					
 					$_SESSION['usuario'] = serialize($usuario_login);
             	}
@@ -80,6 +80,7 @@ namespace application\controller\usuario;
             $login_erros = array();
             $email = null;
             $senha = null;
+            $manter_login = null;
             
             if (empty($_POST['email'])) {
                 $login_erros[] = "Digite seu Email";
@@ -102,61 +103,60 @@ namespace application\controller\usuario;
                 $login_erros[] = "Digite sua Senha";
                 $login_campos['erro_senha'] = "erro";
             } else {
-            	$senha = $_POST['password'];
+            	$senha = strip_tags($_POST['password']);
+            	 
+            	if ($senha !== $_POST['password']) {
+            		$login_erros[] = "A Senha Não pode conter Tags de Programação";
+            		$login_campos['erro_senha'] = "erro";
+            	}
+            }
+            
+            if (!empty($_POST['manter_login'])) {
+            	$manter_login = true;
             }
 
             if (empty($login_erros)) {
                 $usuario_login = DAO_Usuario::Autenticar($email);
                 
-                if (!empty($usuario_login) AND password_verify($senha, $usuario_login->get_senha())) {
-                    $usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', $senha)));
+	            if (password_verify($senha, $usuario_login->get_senha())) {
+	                $usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', $senha)));
 					$usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
 					
-                    $_SESSION['usuario'] = serialize($usuario_login);
-                    
-                    if (isset($manter_login)) {
-                    	$login = array();
+	                $_SESSION['usuario'] = serialize($usuario_login);
+	                
+	                if (isset($manter_login)) {
+	                    $login = array();
 						
 						$usuario_login->set_token(random_bytes(40));
 						
 						$login['usuario'] = $usuario_login->get_id();
 						$login['token'] = hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token()));
 						
-                        setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
-                        
+	                    setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
+	                    
 						DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login->get_token(), $usuario_login->get_ultimo_login(), $usuario_login->get_id());
-                    } else {
-                    	DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
-                    }
-                } else {
-                    $login_erros[] = "Senha Incorreta";
-                    $login_campos['erro_senha'] = "erro";
-                    $login_campos['erro_email'] = "certo";
-                    
-                    setcookie("f_m_l", null, time()-3600, "/");
-                    
-                    $_SESSION['login_erros'] = $login_erros;
-                    $_SESSION['login_campos'] = $login_campos;
-                    
-                    $form_login['email'] = trim(strip_tags($email));
-                    $form_login['senha'] = strip_tags($senha);
-                    $_SESSION['form_login'] = $form_login;
-                    
-                    return false;
-                }
-                
-                return true;
+	                } else {
+	                    DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
+	                }
+	            } else {
+	                $login_erros[] = "Senha Incorreta";
+	                $login_campos['erro_senha'] = "erro";
+	            }
+            }
+            
+            if (empty($login_erros)) {
+            	return true;
             } else {
-                setcookie("f_m_l", null, time()-3600, "/");
-                
-                $_SESSION['login_erros'] = $login_erros;
-                $_SESSION['login_campos'] = $login_campos;
-                
-                $form_login['email'] = trim(strip_tags($email));
-                $form_login['senha'] = strip_tags($senha);
-                $_SESSION['form_login'] = $form_login;
-                
-                return false;
+            	setcookie("f_m_l", null, time()-3600, "/");
+            	
+            	$_SESSION['login_erros'] = $login_erros;
+            	$_SESSION['login_campos'] = $login_campos;
+            	
+            	$form_login['email'] = trim(strip_tags($email));
+            	$form_login['senha'] = strip_tags($senha);
+            	$_SESSION['form_login'] = $form_login;
+            	
+            	return false;
             }
         }
     }
