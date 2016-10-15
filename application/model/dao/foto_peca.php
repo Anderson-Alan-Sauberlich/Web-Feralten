@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Foto_Peca {
 
         function __construct() {
@@ -27,8 +27,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -43,8 +43,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -56,8 +56,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":pc_id", $id_peca, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -70,8 +70,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":num", $num_peca, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 		
@@ -84,8 +84,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaFotosPecas($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -99,8 +99,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaFotoPeca($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 		

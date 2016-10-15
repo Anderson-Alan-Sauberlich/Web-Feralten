@@ -3,6 +3,8 @@ namespace application\model\util;
 
     use \PDO;
     use \PDOException;
+    
+    @session_start();
 
     class Conexao {
 
@@ -29,18 +31,11 @@ namespace application\model\util;
 
         public static function Conectar() {
             if (!isset(self::$conection)) {
-                try
-                {
-                    self::$conection = new PDO(
-                    self::$DB_TYPE.":host=".self::$DB_HOST.";port=".self::$DB_PORT.";dbname=".self::$DB_NAME.";charset=".self::$DB_CHRS, self::$DB_USER, self::$DB_PASS,
-                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-                    self::$conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    //self::$conection->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
-                } 
-                catch (PDOException $e)
-                {
-                    die("Erro: <code>" . $e->getMessage() . "</code>");
-                }
+                self::$conection = new PDO(
+                		
+                self::$DB_TYPE.":host=".self::$DB_HOST.";port=".self::$DB_PORT.";dbname=".self::$DB_NAME.";charset=".self::$DB_CHRS, self::$DB_USER, self::$DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                
+                self::$conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             
             return self::$conection;

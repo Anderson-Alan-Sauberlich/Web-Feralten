@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Status_Usuario {
         
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Status_Usuario $object_status_usuario) {
             try {
-                                 
                 $sql = "INSERT INTO tb_status_usuario (status_usuario_id, status_usuario_nome, status_usuario_descricao) 
                         VALUES (:id, :nome, :descricao);";
                 
@@ -28,13 +27,12 @@ namespace application\model\dao;
                 $p_sql->bindValue(":descricao", $object_status_usuario->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
-        public static function Editar(Object_Status_Usuario $status) {
+        public static function Atualizar(Object_Status_Usuario $status) {
             try {
                 $sql = "UPDATE tb_status_usuario SET
                 status_usuario_id = :id,
@@ -49,8 +47,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":descricao", $object_status_usuario->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
  
@@ -62,8 +60,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 
@@ -76,8 +74,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaStatus($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Status_Peca {
         
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Status_Peca $object_status_peca) {
             try {
-                                 
                 $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_descricao) 
                         VALUES (:id, :nome);";
                 
@@ -27,13 +26,12 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
-        public static function Editar(Object_Status_Peca $object_status_peca) {
+        public static function Atualizar(Object_Status_Peca $object_status_peca) {
             try {
                 $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome WHERE status_peca_id = :id";
 
@@ -43,8 +41,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
  
@@ -56,8 +54,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 
@@ -70,8 +68,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::Popular_Status_Peca($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -83,8 +81,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::Popular_Status_Pecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

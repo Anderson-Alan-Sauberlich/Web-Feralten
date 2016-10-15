@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Lista_Pativel {
         
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Lista_Pativel $object_lista_pativel) {
             try {
-                                 
                 $sql = "INSERT INTO tb_lista_pativel (lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate) 
                         VALUES (:pc_id, :ca_id, :ma_id, :mo_id, :vs_id, :ano_de, :ano_ate);";
                 
@@ -32,9 +31,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":ano_ate", $object_lista_pativel->get_ano_ate(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -61,8 +59,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":ano_ate", $object_lista_pativel->get_ano_ate(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -75,7 +73,7 @@ namespace application\model\dao;
 
                 return $p_sql->execute();
             } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+				return false;
             }
         }
         
@@ -88,8 +86,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::Popula_Lista_Pativeis($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

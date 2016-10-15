@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Peca {
         
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Peca $object_peca) {
             try {
-                                 
                 $sql = "INSERT INTO tb_peca (peca_id, peca_du_us_id, peca_en_id, peca_co_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade) 
                         VALUES (:id, :du_us_id, :en_id, :co_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade);";
                 
@@ -39,9 +38,8 @@ namespace application\model\dao;
                 $p_sql->execute();
 				
 				return Conexao::Conectar()->lastInsertId();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -67,8 +65,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);
 				
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -80,8 +78,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -94,8 +92,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaPeca($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

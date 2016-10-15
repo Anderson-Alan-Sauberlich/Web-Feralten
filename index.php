@@ -9,12 +9,18 @@
 	
 	$app = new \Slim\App(["settings" => $config]);
 	
+	$app->group('/teste', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			phpinfo();
+		});
+	});
+	
 	$app->group('/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/pagina_inicial.php');
 			
 			application\controller\Pagina_Inicial::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			return $response;
 		});
 	});
@@ -42,17 +48,19 @@
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
 			application\controller\usuario\Login::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			return $response;
 		});
 		
 		$app->post('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
-			if (application\controller\usuario\Login::Autenticar_Usuario_Login()) {
+			$resposta = application\controller\usuario\Login::Autenticar_Usuario_Login();
+			
+			if ($resposta) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
-				return $response->withRedirect('/usuario/login/');
+				return $response;
 			}
 		});
 		
@@ -70,17 +78,19 @@
 			require_once(RAIZ.'/application/controller/usuario/cadastro.php');
 			
 			application\controller\usuario\Cadastro::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			return $response;
 		});
 		
 		$app->post('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/cadastro.php');
 			
-			if (application\controller\usuario\Cadastro::Cadastrar_Usuario()) {
+			$resposta = application\controller\usuario\Cadastro::Cadastrar_Usuario();
+			
+			if ($resposta) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
-				return $response->withRedirect('/usuario/cadastro/');
+				return $response;
 			}
 		});
 	});
@@ -90,7 +100,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/perfil.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\Perfil::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else {
@@ -104,7 +114,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -136,7 +146,7 @@
 			} else if ($resposta != 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
-				return $response->withRedirect('/usuario/meu-perfil/auto-pecas/cadastrar/');
+				return $response;
 			}
 		});
 		
@@ -170,7 +180,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Visualizar::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -186,7 +196,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/atualizar.php');
 		
 			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Atualizar::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -202,7 +212,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boleto_atual.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\financeiro\Boleto_Atual::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -218,7 +228,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boletos_pagos.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -234,7 +244,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/meu_plano.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\financeiro\Meu_Plano::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -250,7 +260,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\meus_dados\Atualizar::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -304,7 +314,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else {
@@ -332,7 +342,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\meus_dados\Enderecos::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -364,7 +374,7 @@
 			} else if ($resposta != 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
-				return $response->withRedirect('/usuario/meu-perfil/meus-dados/enderecos/');
+				return $response;
 			}
 		});
 	});
@@ -374,7 +384,7 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Carregar_Pagina();
-			echo var_dump($_SESSION);
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 0) {
@@ -425,14 +435,12 @@
 			
 			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Concluir_Cadastro();
 			
-			if ($resposta === 'certo') {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else if ($resposta === 'erro') {
-				return $response->withRedirect('/usuario/meu-perfil/meus-dados/concluir/');
-			} else if ($resposta === false) {
+			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 0) {
+			} else if ($resposta === 'certo') {
 				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
 			}
 		});
 	});

@@ -23,14 +23,24 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina() {
+        public static function Carregar_Pagina($enderecos_erros= null, $enderecos_campos = null, $enderecos_sucesso= null, $enderecos_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			new View_Enderecos($status);
+        			$view = new View_Enderecos($status);
         			
-        			unset($_SESSION['endereco']);
+        			$view->set_enderecos_campos($enderecos_campos);
+        			$view->set_enderecos_erros($enderecos_erros);
+        			$view->set_enderecos_sucesso($enderecos_sucesso);
+        			
+        			if (!empty($enderecos_form)) {
+        				$view->set_enderecos_form($enderecos_form);
+        			} else {
+        				$view->set_enderecos_form(DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id()));
+        			}
+        			 
+        			$view->Executar();
         		}
         		
         		return $status;
@@ -54,7 +64,9 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-		            $erros_enderecos = array();
+		            $enderecos_erros = array();
+		            $enderecos_sucesso = array();
+		            $enderecos_form = null;
 		            $enderecos_campos = array('erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo", 'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo");
 		            
 		            $endereco = new Object_Endereco();
@@ -69,17 +81,17 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($complemento) <= 150) {
 		            			$endereco->set_complemento(ucfirst(strtolower($complemento)));
 		            		} else {
-		            			$erros_enderecos[] = "Complemento, Não pode conter mais de 150 Caracteres";
+		            			$enderecos_erros[] = "Complemento, Não pode conter mais de 150 Caracteres";
 		            			$enderecos_campos['erro_complemento'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_enderecos[] = "Complemento, Não pode conter Tags de Programação";
+		            		$enderecos_erros[] = "Complemento, Não pode conter Tags de Programação";
 		            		$enderecos_campos['erro_complemento'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['rua'])) {
-		            	$erros_enderecos[] = "Informe sua Rua";
+		            	$enderecos_erros[] = "Informe sua Rua";
 		            	$enderecos_campos['erro_rua'] = "erro";
 		            } else {
 		            	$rua = strip_tags($_POST['rua']);
@@ -91,17 +103,17 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($rua) <= 150) {
 		            			$endereco->set_rua(ucwords(strtolower($rua)));
 		            		} else {
-		            			$erros_enderecos[] = "Rua, Não pode conter mais de 150 Caracteres";
+		            			$enderecos_erros[] = "Rua, Não pode conter mais de 150 Caracteres";
 		            			$enderecos_campos['erro_rua'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_enderecos[] = "Rua, Não pode conter Tags de Programação";
+		            		$enderecos_erros[] = "Rua, Não pode conter Tags de Programação";
 		            		$enderecos_campos['erro_rua'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['bairro'])) {
-		            	$erros_enderecos[] = "Informe seu Bairro";
+		            	$enderecos_erros[] = "Informe seu Bairro";
 		            	$enderecos_campos['erro_bairro'] = "erro";
 		            } else {
 		            	$bairro = strip_tags($_POST['bairro']);
@@ -113,34 +125,34 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($bairro) <= 45) {
 		            			$endereco->set_bairro(ucwords(strtolower($bairro)));
 		            		} else {
-		            			$erros_enderecos[] = "Bairro, Não pode conter mais de 45 Caracteres";
+		            			$enderecos_erros[] = "Bairro, Não pode conter mais de 45 Caracteres";
 		            			$enderecos_campos['erro_bairro'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_enderecos[] = "Bairro, Não pode conter Tags de Programação";
+		            		$enderecos_erros[] = "Bairro, Não pode conter Tags de Programação";
 		            		$enderecos_campos['erro_bairro'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['cep'])) {
-		            	$erros_enderecos[] = "Informe seu CEP";
+		            	$enderecos_erros[] = "Informe seu CEP";
 		            	$enderecos_campos['erro_cep'] = "erro";
 		            } else {
 		            	if (strlen($_POST['cep']) === 8) {
 		            		if (filter_var($_POST['cep'], FILTER_VALIDATE_INT)) {
 		            			$endereco->set_cep($_POST['cep']);
 		            		} else {
-		            			$erros_enderecos[] = "CEP, Digite Apenas os Numeros";
+		            			$enderecos_erros[] = "CEP, Digite Apenas os Numeros";
 		            			$enderecos_campos['erro_cep'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_enderecos[] = "CEP Deve conter 8 Numeros";
+		            		$enderecos_erros[] = "CEP Deve conter 8 Numeros";
 		            		$enderecos_campos['erro_cep'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['numero'])) {
-		            	$erros_enderecos[] = "Informe o Numero do seu Endereço";
+		            	$enderecos_erros[] = "Informe o Numero do seu Endereço";
 		            	$enderecos_campos['erro_numero'] = "erro";
 		            } else {
 		            	$numero = strip_tags($_POST['numero']);
@@ -151,40 +163,41 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($numero) <= 10) {
 		            			$endereco->set_numero($numero);
 		            		} else {
-		            			$erros_enderecos[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
+		            			$enderecos_erros[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
 		            			$enderecos_campos['erro_numero'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_enderecos[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
+		            		$enderecos_erros[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
 		            		$enderecos_campos['erro_numero'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['cidade']) OR $_POST['cidade'] <= 0) {
-		            	$erros_enderecos[] = "Seleciona sua Cidade";
+		            	$enderecos_erros[] = "Seleciona sua Cidade";
 		            	$enderecos_campos['erro_cidade'] = "erro";
 		            } else {
 		            	$endereco->set_cidade_id($_POST['cidade']);
 		            }
 		            
 		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
-		            	$erros_enderecos[] = "Seleciona seu Estado";
+		            	$enderecos_erros[] = "Seleciona seu Estado";
 		            	$enderecos_campos['erro_estado'] = "erro";
 		            } else {
 		            	$endereco->set_estado_id($_POST['estado']);
 		            }
 		            
-		            if (empty($erros_enderecos)) {
+		            if (empty($enderecos_erros)) {
 		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	
-		                DAO_Endereco::Atualizar($endereco);
-						
-						$_SESSION['success_enderecos'][] = "O Endereço do seu Usuario foi Atualizado com Sucesso!";
-		            } else {
-		                $_SESSION['erros_enderecos'] = $erros_enderecos;
+		                if (DAO_Endereco::Atualizar($endereco) === false) {
+		                	$enderecos_erros[] = "Erro ao tentar Atualizar Endereço";
+		                } else {
+		                	$enderecos_sucesso[] = "O Endereço do seu Usuario foi Atualizado com Sucesso!";
+		                	$enderecos_form = $endereco;
+		                }
 		            }
 		            
-		            $_SESSION['enderecos_campos'] = $enderecos_campos;
+					self::Carregar_Pagina($enderecos_erros, $enderecos_campos, $enderecos_sucesso, $enderecos_form);
         		}
         		
         		return $status;
@@ -192,151 +205,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		return false;
         	}
         }
-
-        public static function Pegar_Endereco_Cidade() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_cidade_id() != null) {
-                    return $endereco->get_cidade_id();
-                }
-            } else {                
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_cidade_id() != null){
-                    return $endereco->get_cidade_id();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_Numero() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_numero() != null) {
-                    return $endereco->get_numero();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_numero() != null){
-                    return $endereco->get_numero();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_Estado() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_estado_id() != null) {
-                    return $endereco->get_estado_id();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_estado_id() != null) {
-                     return $endereco->get_estado_id();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_CEP() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_cep() != null) {
-                    return $endereco->get_cep();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_cep() != null){
-                    return $endereco->get_cep();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_Bairro() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_bairro() != null) {
-                    return $endereco->get_bairro();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_bairro() != null){
-                    return $endereco->get_bairro();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_Complemento() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_complemento() != null) {
-                    return $endereco->get_complemento();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_complemento() != null){
-                    return $endereco->get_complemento();
-                }
-            }
-        }
-
-        public static function Pegar_Endereco_Rua() {
-            $endereco = new Object_Endereco();
-            
-            if (isset($_SESSION['endereco'])) {
-                $endereco = $_SESSION['endereco'];
-                
-                if ($endereco->get_rua() != null) {
-                    return $endereco->get_rua();
-                }
-            } else {
-                $endereco = self::Pegar_Endereco($endereco);
-                
-                if ($endereco->get_rua() != null){
-                    return $endereco->get_rua();
-                }
-            }
-        }
-
-        private function Pegar_Endereco(Object_Endereco $endereco) {
-            $endereco = DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
-            
-            $_SESSION['endereco'] = $endereco;
-            
-            return $endereco;
-        }
 		
 		public static function Buscar_Estados() {
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidade_Por_Estado($id_estado) {
+		public static function Buscar_Cidades_Por_Estado($id_estado) {
 			return DAO_Cidade::BuscarPorCOD($id_estado);
-		}
-		
-		public static function Buscar_Cidade_Por_Estado_Usuario() {
-			return DAO_Cidade::BuscarPorCOD(self::Pegar_Endereco_Estado());
 		}
 	}
 ?>

@@ -9,8 +9,6 @@ namespace application\model\dao;
     use \PDO;
     use \PDOException;
 	
-	@session_start();
-    
     class Usuario {
 
         function __construct() {
@@ -31,8 +29,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":login", $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                $_SESSION['erros_cadastrar'][] = "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -50,8 +48,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":email", $object_usuario->get_email(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -65,8 +63,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":ps", $senha, PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 		
@@ -81,8 +79,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":ul", $login, PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -97,7 +95,7 @@ namespace application\model\dao;
 
                 return $p_sql->execute();
             } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+				return false;
             }
         }
 
@@ -111,8 +109,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":ul", $login, PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -124,8 +122,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -139,8 +137,8 @@ namespace application\model\dao;
                 $select = $p_sql->fetchAll();
                 
                 return count($select);
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -153,8 +151,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
 		
@@ -169,8 +167,8 @@ namespace application\model\dao;
 				$row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 return $row['usuario_senha'];
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -183,8 +181,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

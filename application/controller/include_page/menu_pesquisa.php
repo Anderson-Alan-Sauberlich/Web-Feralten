@@ -32,11 +32,19 @@ namespace application\controller\include_page;
         }
         
         public static function Buscar_Marca_Por_Id_Categoria($categoria) {
-        	return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
+        	if (!empty($categoria)) {
+        		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
+        	} else {
+        		return null;
+        	}
         }
         
         public static function Buscar_Modelo_Por_Id_Marca($marca) {
-        	return DAO_Modelo::Buscar_Por_ID_Marca($marca);
+        	if (!empty($marca)) {
+        		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
+        	} else {
+        		return null;
+        	}
         }
     }
 ?>

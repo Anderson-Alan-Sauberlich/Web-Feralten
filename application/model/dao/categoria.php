@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Categoria {
 
         function __construct() {
@@ -26,9 +26,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -45,8 +44,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -58,8 +57,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -71,8 +70,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaCategorias($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -85,8 +84,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Modelo {
         
         function __construct() {
@@ -27,8 +27,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -47,8 +47,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -60,8 +60,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -74,8 +74,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -90,12 +90,12 @@ namespace application\model\dao;
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
                 return $row['modelo_ma_id'];
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
-        public static function Buscar_Por_ID_Marca($id) {
+        public static function Buscar_Por_Id_Marca($id) {
             try {
                 $sql = "SELECT modelo_id, modelo_ma_id, modelo_nome FROM tb_modelo WHERE modelo_ma_id = :id";
                 
@@ -104,9 +104,29 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Marca($id) {
+        	try {
+        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_ma_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
+        		$id_modelos = array();
+        		
+        		foreach ($rows as $row) {
+        			$id_modelos[] = $row['modelo_id'];
+        		}
+        		
+        		return $id_modelos;
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         private function PopulaModelo($row) {

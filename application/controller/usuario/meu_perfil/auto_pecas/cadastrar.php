@@ -51,21 +51,27 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
             
         }
         
-        public static function Carregar_Pagina() {
+        public static function Carregar_Pagina($cadastrar_erros = null, $cadastrar_campos = null, $cadastrar_form = null, $cadastrar_sucesso = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			if (empty($_SESSION['form_cadastrar_peca'])) {
+        			if (empty($cadastrar_form)) {
         				unset($_SESSION['compatibilidade']);
         				self::Deletar_Imagem(123);
         			}
         			
-        			new View_Cadastrar($status);
+        			$view = new View_Cadastrar($status);
+        			
+        			$view->set_cadastrar_campos($cadastrar_campos);
+        			$view->set_cadastrar_erros($cadastrar_erros);
+        			$view->set_cadastrar_form($cadastrar_form);
+        			$view->set_cadastrar_sucesso($cadastrar_sucesso);
+        			 
+        			$view->Executar();
         		}
         		
         		return $status;
-
         	} else {
         		return false;
         	}
@@ -79,7 +85,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 		        	if (isset($_POST['salvar'])) {
 		        		self::Cadastrar_Peca();
 		        	} else if (isset($_POST['restaurar'])) {
-		        		unset($_SESSION['form_cadastrar_peca']);
+		        		unset($_SESSION['cadastrar_form']);
 		        		unset($_SESSION['compatibilidade']);
 		        		self::Deletar_Imagem(123);
 		        	}
@@ -152,25 +158,25 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         				unset($compatibilidade['categoria'][$_GET['categoria']]);
         
         				if (isset($compatibilidade['marca'])) {
-        					$marcas = self::Buscar_Marcas_Por_Categoria($_GET['categoria']);
+        					$id_marcas = self::Buscar_Id_Marcas_Por_Id_Categoria($_GET['categoria']);
         						
-        					foreach ($marcas as $marca) {
-        						if (isset($compatibilidade['marca'][$marca->get_id()])) {
-        							unset($compatibilidade['marca'][$marca->get_id()]);
+        					foreach ($id_marcas as $id_marca) {
+        						if (isset($compatibilidade['marca'][$id_marca])) {
+        							unset($compatibilidade['marca'][$id_marca]);
         								
         							if (isset($compatibilidade['modelo'])) {
-        								$modelos = self::Buscar_Modelos_Por_Marca($marca->get_id());
+        								$id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($id_marca);
         
-        								foreach ($modelos as $modelo) {
-        									if (isset($compatibilidade['modelo'][$modelo->get_id()])) {
-        										unset($compatibilidade['modelo'][$modelo->get_id()]);
+        								foreach ($id_modelos as $id_modelo) {
+        									if (isset($compatibilidade['modelo'][$id_modelo])) {
+        										unset($compatibilidade['modelo'][$id_modelo]);
         
         										if (isset($compatibilidade['versao'])) {
-        											$versoes = self::Buscar_Versoes_Por_Modelo($modelo->get_id());
+        											$id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($id_modelo);
         												
-        											foreach ($versoes as $versao) {
-        												if (isset($compatibilidade['versao'][$versao->get_id()])) {
-        													unset($compatibilidade['versao'][$versao->get_id()]);
+        											foreach ($id_versoes as $id_versao) {
+        												if (isset($compatibilidade['versao'][$id_versao])) {
+        													unset($compatibilidade['versao'][$id_versao]);
         												}
         											}
         										}
@@ -194,18 +200,18 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         				unset($compatibilidade['marca'][$_GET['marca']]);
         
         				if (isset($compatibilidade['modelo'])) {
-        					$modelos = self::Buscar_Modelos_Por_Marca($_GET['marca']);
+        					$id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($_GET['marca']);
         						
-        					foreach ($modelos as $modelo) {
-        						if (isset($compatibilidade['modelo'][$modelo->get_id()])) {
-        							unset($compatibilidade['modelo'][$modelo->get_id()]);
+        					foreach ($id_modelos as $id_modelo) {
+        						if (isset($compatibilidade['modelo'][$id_modelo])) {
+        							unset($compatibilidade['modelo'][$id_modelo]);
         								
         							if (isset($compatibilidade['versao'])) {
-        								$versoes = self::Buscar_Versoes_Por_Modelo($modelo->get_id());
+        								$id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($id_modelo);
         
-        								foreach ($versoes as $versao) {
-        									if (isset($compatibilidade['versao'][$versao->get_id()])) {
-        										unset($compatibilidade['versao'][$versao->get_id()]);
+        								foreach ($id_versoes as $id_versao) {
+        									if (isset($compatibilidade['versao'][$id_versao])) {
+        										unset($compatibilidade['versao'][$id_versao]);
         									}
         								}
         							}
@@ -226,11 +232,11 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         				unset($compatibilidade['modelo'][$_GET['modelo']]);
         
         				if (isset($compatibilidade['versao'])) {
-        					$versoes = self::Buscar_Versoes_Por_Modelo($_GET['modelo']);
+        					$id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($_GET['modelo']);
         						
-        					foreach ($versoes as $versao) {
-        						if (isset($compatibilidade['versao'][$versao->get_id()])) {
-        							unset($compatibilidade['versao'][$versao->get_id()]);
+        					foreach ($id_versoes as $id_versao) {
+        						if (isset($compatibilidade['versao'][$id_versao])) {
+        							unset($compatibilidade['versao'][$id_versao]);
         						}
         					}
         				}
@@ -258,9 +264,9 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         }
 		
 		private static function Cadastrar_Peca() {
-			$erros_cadastrar_peca = array();
-			$sucesso_cadastrar_peca = array();
-			$campos_cadastrar_peca = array('erro_peca' => "certo");
+			$cadastrar_erros = array();
+			$cadastrar_sucesso = array();
+			$cadastrar_campos = array('erro_peca' => "certo");
 			
 			$peca = new Object_Peca();
 			$pativeis = array();
@@ -279,8 +285,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 						$cnclr_campos['erro_descricao'] = "erro";
 					}
 				} else {
-					$erros_cadastrar_peca[] = "Descricao, Não pode conter Tags de Programação";
-					$campos_cadastrar_peca['erro_descricao'] = "erro";
+					$cadastrar_erros[] = "Descricao, Não pode conter Tags de Programação";
+					$cadastrar_campos['erro_descricao'] = "erro";
 				}
 			}
 			
@@ -288,8 +294,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				if (filter_var($_POST['status'], FILTER_VALIDATE_INT)) {
 					$peca->set_status_id($_POST['status']);
 				} else {
-					$erros_cadastrar_peca[] = "Status, Selecione um Status Valido.";
-					$campos_cadastrar_peca['erro_status'] = "erro";
+					$cadastrar_erros[] = "Status, Selecione um Status Valido.";
+					$cadastrar_campos['erro_status'] = "erro";
 				}
 			}
 			
@@ -303,12 +309,12 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 					if (strlen($fabricante) <= 50) {
 						$peca->set_fabricante(ucwords(strtolower($fabricante)));
 					} else {
-						$erros_cadastrar_peca[] = "Fabricante, Não pode conter mais de 50 Caracteres";
-						$campos_cadastrar_peca['erro_fabricante'] = "erro";
+						$cadastrar_erros[] = "Fabricante, Não pode conter mais de 50 Caracteres";
+						$cadastrar_campos['erro_fabricante'] = "erro";
 					}
 				} else {
-					$erros_cadastrar_peca[] = "Fabricante, Não pode conter Tags de Programação";
-					$campos_cadastrar_peca['erro_fabricante'] = "erro";
+					$cadastrar_erros[] = "Fabricante, Não pode conter Tags de Programação";
+					$cadastrar_campos['erro_fabricante'] = "erro";
 				}
 			}
 			
@@ -316,22 +322,22 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				$peca_nome = strip_tags($_POST['peca']);
 				
 				if ($peca_nome === $_POST['peca']) {
-					$peca_nome = trim($$peca_nome);
+					$peca_nome = trim($peca_nome);
 					$peca_nome = preg_replace('/\s+/', " ", $peca_nome);
 				
 					if (strlen($peca_nome) <= 50) {
 						$peca->set_nome(ucwords(strtolower($peca_nome)));
 					} else {
-						$erros_cadastrar_peca[] = "Peca Nome, Não pode conter mais de 50 Caracteres";
-						$campos_cadastrar_peca['erro_peca'] = "erro";
+						$cadastrar_erros[] = "Peca Nome, Não pode conter mais de 50 Caracteres";
+						$cadastrar_campos['erro_peca'] = "erro";
 					}
 				} else {
-					$erros_cadastrar_peca[] = "Peca Nome, Não pode conter Tags de Programação";
-					$campos_cadastrar_peca['erro_peca'] = "erro";
+					$cadastrar_erros[] = "Peca Nome, Não pode conter Tags de Programação";
+					$cadastrar_campos['erro_peca'] = "erro";
 				}
 			} else {
-				$campos_cadastrar_peca['erro_peca'] = "erro";
-				$erros_cadastrar_peca[] = "Digite o Nome da Peça";
+				$cadastrar_campos['erro_peca'] = "erro";
+				$cadastrar_erros[] = "Digite o Nome da Peça";
 			}
 			
 			if (!empty($_POST['serie'])) {
@@ -344,12 +350,12 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 					if (strlen($serie) <= 150) {
 						$peca->set_serie($serie);
 					} else {
-						$erros_cadastrar_peca[] = "Numero de Serie, Não pode conter mais de 150 Caracteres";
-						$campos_cadastrar_peca['erro_serie'] = "erro";
+						$cadastrar_erros[] = "Numero de Serie, Não pode conter mais de 150 Caracteres";
+						$cadastrar_campos['erro_serie'] = "erro";
 					}
 				} else {
-					$erros_cadastrar_peca[] = "Numero de Serie, Não pode conter Tags de Programação";
-					$campos_cadastrar_peca['erro_serie'] = "erro";
+					$cadastrar_erros[] = "Numero de Serie, Não pode conter Tags de Programação";
+					$cadastrar_campos['erro_serie'] = "erro";
 				}
 			}
 			
@@ -357,8 +363,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				if (filter_var($_POST['preco'], FILTER_VALIDATE_FLOAT)) {
 					$peca->set_preco($_POST['preco']);
 				} else {
-					$erros_cadastrar_peca[] = "Digite um Preço Valido para a peça";
-					$campos_cadastrar_peca['erro_preco'] = "erro";
+					$cadastrar_erros[] = "Digite um Preço Valido para a peça";
+					$cadastrar_campos['erro_preco'] = "erro";
 				}
 			}
 			
@@ -476,60 +482,92 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				}
 			}
 			
-			if (empty($erros_cadastrar_peca)) {
+			if (empty($cadastrar_erros)) {
 				$peca->set_data_anuncio(date('Y-m-d H:i:s'));
 				$peca->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-				$peca->set_contato_id(DAO_Contato::Buscar_Por_Id_Usuario($peca->get_usuario_id())->get_id());
-				$peca->set_endereco_id(DAO_Endereco::Buscar_Por_Id_Usuario($peca->get_usuario_id())->get_id());
+				
+				$id_contato = DAO_Contato::Buscar_Id_Por_Id_Usuario($peca->get_usuario_id());
+				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Usuario($peca->get_usuario_id());
+				
+				if ($id_contato === false) {
+					$cadastrar_erros[] = "Erro ao tentar adicionar o Contato do Usuario para a Peça";
+					$cadastrar_campos['erro_peca'] = "";
+				} else {
+					$peca->set_contato_id($id_contato);
+				}
+				
+				if ($id_endereco === false) {
+					$cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
+					$cadastrar_campos['erro_peca'] = "";
+				} else {
+					$peca->set_endereco_id($id_endereco);
+				}
 				
 				$id_peca = DAO_Peca::Inserir($peca);
 				
-				if (!empty($id_peca) AND !empty($pativeis)) {
-					foreach ($pativeis as $pativel) {
-						$pativel->set_peca_id($id_peca);
-						DAO_Lista_Pativel::Inserir($pativel);
-					}
-				}
-				
-				if (!empty($id_peca) AND !empty($_SESSION['imagens_tmp'])) {
-					$imagens = new Gerenciar_Imagens();
-					$diretorios_imagens = array();
-					
-					$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca);
-					
-					if (isset($diretorios_imagens)) {
-						$indice = 0;
+				if (!empty($id_peca) AND $id_peca !== false) {
+					if (!empty($pativeis)) {
+						$retorno = null;
 						
-						foreach ($diretorios_imagens as $diretorio) {
-							$foto_peca = new Object_Foto_Peca();
-							$indice++;
+						foreach ($pativeis as $pativel) {
+							$pativel->set_peca_id($id_peca);
 							
-							$foto_peca->set_peca_id($id_peca);
-							$foto_peca->set_endereco($diretorio);
-							$foto_peca->set_numero($indice);
-							
-							DAO_Foto_Peca::Inserir($foto_peca);
+							if (DAO_Lista_Pativel::Inserir($pativel) === false) {
+								$retorno = false;
+							}
+						}
+						
+						if ($retorno === false) {
+							$cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+							$cadastrar_campos['erro_peca'] = "";
 						}
 					}
+					
+					if (!empty($_SESSION['imagens_tmp'])) {
+						$imagens = new Gerenciar_Imagens();
+						$diretorios_imagens = array();
+						
+						$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca);
+						
+						if (isset($diretorios_imagens)) {
+							$indice = 0;
+							
+							foreach ($diretorios_imagens as $diretorio) {
+								$foto_peca = new Object_Foto_Peca();
+								$indice++;
+								
+								$foto_peca->set_peca_id($id_peca);
+								$foto_peca->set_endereco($diretorio);
+								$foto_peca->set_numero($indice);
+								
+								if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
+									$cadastrar_erros[] = "Erro ao tentar adicionar Foto $indice para a Peça";
+									$cadastrar_campos['erro_peca'] = "";
+								}
+							}
+						}
+					}
+				} else {
+					$cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
+					$cadastrar_campos['erro_peca'] = "";
 				}
+			}
+			
+			if (empty($cadastrar_erros)) {
+				$cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
+				$cadastrar_campos['erro_peca'] = "";
 				
-				$sucesso_cadastrar_peca[] = "Peça Cadastrada Com Sucesso";
-				$_SESSION['sucesso_cadastrar_peca'] = $sucesso_cadastrar_peca;
+				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
 			} else {
-				$_SESSION['erros_cadastrar_peca'] = $erros_cadastrar_peca;
-				$_SESSION['campos_cadastrar_peca'] = $campos_cadastrar_peca;
-				
-				$form_cadastrar_peca = array();
+				$cadastrar_form = array();
 					
-				$form_cadastrar_peca['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['peca'])))));
-				$form_cadastrar_peca['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['fabricante'])))));
-				$form_cadastrar_peca['serie'] = trim(strip_tags($_POST['serie']));
-				$form_cadastrar_peca['preco'] = trim(strip_tags($_POST['preco']));
-				$form_cadastrar_peca['status'] = trim(strip_tags($_POST['status']));
-				$form_cadastrar_peca['prioridade'] = trim(strip_tags($_POST['prioridade']));
-				$form_cadastrar_peca['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($_POST['descricao']))));
-					
-				$_SESSION['form_cadastrar_peca'] = $form_cadastrar_peca;
+				$cadastrar_form['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['peca'])))));
+				$cadastrar_form['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['fabricante'])))));
+				$cadastrar_form['serie'] = trim(strip_tags($_POST['serie']));
+				$cadastrar_form['preco'] = trim(strip_tags($_POST['preco']));
+				$cadastrar_form['status'] = trim(strip_tags($_POST['status']));
+				$cadastrar_form['prioridade'] = trim(strip_tags($_POST['prioridade']));
+				$cadastrar_form['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($_POST['descricao']))));
 					
 				$marcas = null;
 				$modelos = null;
@@ -583,6 +621,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				}
 					
 				$_SESSION['compatibilidade']['ano'] = $anos;
+				
+				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
 			}
 		}
 		
@@ -703,16 +743,28 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 			return DAO_Categoria::BuscarTodos();
 		}
 		
+		public static function Buscar_Id_Marcas_Por_Id_Categoria($id_categoria) {
+			return DAO_Marca::Buscar_Id_Por_Id_Categorai($id_categoria);
+		}
+		
+		public static function Buscar_Id_Modelos_Por_Id_Marca($id_marca) {
+			return DAO_Modelo::Buscar_Id_Por_Id_Marca($id_marca);
+		}
+		
+		public static function Buscar_Id_Versoes_Por_Id_Modelo($id_modelo) {
+			return DAO_Versao::Buscar_Id_Por_Id_Modelo($id_modelo);
+		}
+		
 		public static function Buscar_Marcas_Por_Categoria($id_categoria) {
-			return DAO_Marca::Buscar_Por_ID_Categorai($id_categoria);
+			return DAO_Marca::Buscar_Por_Id_Categorai($id_categoria);
 		}
 		
 		public static function Buscar_Modelos_Por_Marca($id_marca) {
-			return DAO_Modelo::Buscar_Por_ID_Marca($id_marca);
+			return DAO_Modelo::Buscar_Por_Id_Marca($id_marca);
 		}
 		
 		public static function Buscar_Versoes_Por_Modelo($id_modelo) {
-			return DAO_Versao::Buscar_Por_ID_Modelo($id_modelo);
+			return DAO_Versao::Buscar_Por_Id_Modelo($id_modelo);
 		}
 		
 		public static function Buscar_Categoria_Por_Id($id_categoria) {

@@ -11,12 +11,34 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	
     class Cadastrar {
     	
-    	private static $status_usuario;
-		
         function __construct($status) {
         	self::$status_usuario = $status;
-        	
-            require_once RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/cadastrar.php';
+        }
+        
+        private static $status_usuario;
+        private static $cadastrar_erros;
+        private static $cadastrar_campos;
+        private static $cadastrar_form;
+        private static $cadastrar_sucesso;
+        
+        public function set_cadastrar_erros($cadastrar_erros) {
+        	self::$cadastrar_erros = $cadastrar_erros;
+        }
+        
+        public function set_cadastrar_campos($cadastrar_campos) {
+        	self::$cadastrar_campos = $cadastrar_campos;
+        }
+        
+        public function set_cadastrar_form($cadastrar_form) {
+        	self::$cadastrar_form = $cadastrar_form;
+        }
+        
+        public function set_cadastrar_sucesso($cadastrar_sucesso) {
+        	self::$cadastrar_sucesso = $cadastrar_sucesso;
+        }
+        
+        public function Executar() {
+        	require_once RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/cadastrar.php';
         }
 
         public static function Incluir_Menu_Usuario() {
@@ -24,133 +46,95 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         }
         
 		public static function Mostrar_Sucesso() {
-            if (isset($_SESSION['sucesso_cadastrar_peca'])) {
-                $sucesso_cadastrar_peca = $_SESSION['sucesso_cadastrar_peca'];
-                
+            if (!empty(self::$cadastrar_sucesso)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach ($sucesso_cadastrar_peca as $value) {
+                foreach (self::$cadastrar_sucesso as $value) {
                     echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
-                
-                unset($_SESSION['sucesso_cadastrar_peca']);
             }
 		}
 
 		public static function Mostrar_Erros() {
-            if (isset($_SESSION['erros_cadastrar_peca'])) {
-                $erros_cadastrar_peca = $_SESSION['erros_cadastrar_peca'];
-                
+            if (!empty(self::$cadastrar_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach ($erros_cadastrar_peca as $value) {
+                foreach (self::$cadastrar_erros as $value) {
                     echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
-                
-                unset($_SESSION['erros_cadastrar_peca']);
             }
 		}
 		
 		public static function Incluir_Classe_Erros($campo) {
-        	if (isset($_SESSION['campos_cadastrar_peca'])) {
-	            $campos_cadastrar_peca = $_SESSION['campos_cadastrar_peca'];
-	            
+        	if (!empty(self::$cadastrar_campos)) {
 	            switch ($campo) {
 	                case "peca":
-	                	if (isset($campos_cadastrar_peca['erro_peca'])) {
-		                    if ($campos_cadastrar_peca['erro_peca'] == "erro") {
+	                	if (isset(self::$cadastrar_campos['erro_peca'])) {
+		                    if (self::$cadastrar_campos['erro_peca'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($campos_cadastrar_peca['erro_peca'] == "certo") {
+		                    } else if (self::$cadastrar_campos['erro_peca'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($campos_cadastrar_peca['erro_peca']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "descricao":
-	                   	if (isset($campos_cadastrar_peca['erro_descricao'])) {
-	                		if ($campos_cadastrar_peca['erro_descricao'] == "erro") {
+	                   	if (isset(self::$cadastrar_campos['erro_descricao'])) {
+	                		if (self::$cadastrar_campos['erro_descricao'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if ($campos_cadastrar_peca['erro_descricao'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_descricao'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
-	                		unset($campos_cadastrar_peca['erro_descricao']);
 	                	}
-	                
 	                	break;
 	                	
 	                case "status":
-	                	if (isset($campos_cadastrar_peca['erro_status'])) {
-	                		if ($campos_cadastrar_peca['erro_status'] == "erro") {
+	                	if (isset(self::$cadastrar_campos['erro_status'])) {
+	                		if (self::$cadastrar_campos['erro_status'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if ($campos_cadastrar_peca['erro_status'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_status'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
-	                		unset($campos_cadastrar_peca['erro_status']);
 	                	}
-	                		 
 	                	break;
 	                	
 	                case "fabricante":
-	                	if (isset($campos_cadastrar_peca['erro_fabricante'])) {
-	                		if ($campos_cadastrar_peca['erro_fabricante'] == "erro") {
+	                	if (isset(self::$cadastrar_campos['erro_fabricante'])) {
+	                		if (self::$cadastrar_campos['erro_fabricante'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if ($campos_cadastrar_peca['erro_fabricante'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_fabricante'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
-	                		unset($campos_cadastrar_peca['erro_fabricante']);
 	                	}
-	                	 
 	                	break;
 	                	
 	                case "serie":
-	                	if (isset($campos_cadastrar_peca['erro_serie'])) {
-	                		if ($campos_cadastrar_peca['erro_serie'] == "erro") {
+	                	if (isset(self::$cadastrar_campos['erro_serie'])) {
+	                		if (self::$cadastrar_campos['erro_serie'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if ($campos_cadastrar_peca['erro_serie'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_serie'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
-	                		unset($campos_cadastrar_peca['erro_serie']);
 	                	}
-	                
 	                	break;
 	                	
 	                case "preco":
-	                	if (isset($campos_cadastrar_peca['erro_preco'])) {
-	                		if ($campos_cadastrar_peca['erro_preco'] == "erro") {
+	                	if (isset(self::$cadastrar_campos['erro_preco'])) {
+	                		if (self::$cadastrar_campos['erro_preco'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if ($campos_cadastrar_peca['erro_preco'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_preco'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
-	                		unset($campos_cadastrar_peca['erro_preco']);
 	                	}
-	                	 
 	                	break;
 	            }
-	            
-				if (count($campos_cadastrar_peca) > 0) {
-	            	$_SESSION['campos_cadastrar_peca'] = $campos_cadastrar_peca;
-				} else {
-					unset($_SESSION['campos_cadastrar_peca']);
-				}
         	}
 		}
 		
 		public static function Manter_Valor($campo) {
-            if (isset($_SESSION['form_cadastrar_peca'])) {
-                $form_cadastrar_peca = $_SESSION['form_cadastrar_peca'];
-                
-                if (isset($form_cadastrar_peca[$campo])) {
-                    echo $form_cadastrar_peca[$campo];
-                    unset($form_cadastrar_peca[$campo]);
-					if (count($form_cadastrar_peca) > 0) {
-                    	$_SESSION['form_cadastrar_peca'] = $form_cadastrar_peca;
-					} else {
-						unset($_SESSION['form_cadastrar_peca']);
-					}
-                } else if (count($form_cadastrar_peca) > 0) {
-                	unset($_SESSION['form_cadastrar_peca']);
+            if (!empty(self::$cadastrar_form)) {
+                if (isset(self::$cadastrar_form[$campo])) {
+                    echo self::$cadastrar_form[$campo];
                 }
             }
 		}
@@ -189,12 +173,9 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 			$categorias_selecionadas = array();
 			$categorias_compativeis = null;
 			
-			if (isset($_SESSION['compatibilidade']['categoria'])) {
+			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
-				
-				if (count($categorias_selecionadas) > 0) {
-					$categorias_compativeis = Controller_Cadastrar::Buscar_Categorias_Compativeis(current($categorias_selecionadas));
-				}
+				$categorias_compativeis = Controller_Cadastrar::Buscar_Categorias_Compativeis(current($categorias_selecionadas));
 			}
 			
 			foreach ($categorias as $categoria) {
@@ -208,7 +189,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 						break;
 					}
 				} else {
-					if (isset($categorias_compativeis)) {
+					if (!empty($categorias_compativeis)) {
 						if (in_array($categoria->get_id(), $categorias_compativeis)) {
 							echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria[]\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
 						} else {
@@ -224,140 +205,122 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 		}
 		
 		public static function Carregar_Marcas() {
-			if (isset($_SESSION['compatibilidade']['categoria'])) {
+			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
-			
-				if (count($categorias_selecionadas) > 0) {
-					ob_start();
-					$categorias_selecionadas = array_reverse($categorias_selecionadas);
-					$marcas_selecionadas = array();
-					$marcas_compativeis = null;
+				
+				ob_start();
+				$categorias_selecionadas = array_reverse($categorias_selecionadas);
+				$marcas_selecionadas = array();
+				$marcas_compativeis = null;
+				
+				if (!empty($_SESSION['compatibilidade']['marca'])) {
+					$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
+					$marcas_compativeis = Controller_Cadastrar::Buscar_Marcas_Compativeis(current($marcas_selecionadas));
+				}
+				
+				foreach ($categorias_selecionadas as $categoria) {
+					$marcas = Controller_Cadastrar::Buscar_Marcas_Por_Categoria($categoria);
+					$nome_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($categoria)->get_nome();
 					
-					if (isset($_SESSION['compatibilidade']['marca'])) {
-						$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
-						
-						if (count($marcas_selecionadas) > 0) {
-							$marcas_compativeis = Controller_Cadastrar::Buscar_Marcas_Compativeis(current($marcas_selecionadas));
-						}
-					}
-						
-					foreach ($categorias_selecionadas as $categoria) {
-						$marcas = Controller_Cadastrar::Buscar_Marcas_Por_Categoria($categoria);
-						$nome_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($categoria)->get_nome();
-				
-						echo "<div class=\"container-fluid borda_PanelPeca\">";
-						echo "<label class=\"titulo\">".$nome_categoria."</label>";
-				
-						if (count($marcas) > 0) {
-							foreach ($marcas as $marca) {
-								if (isset($marcas_selecionadas[$marca->get_id()])) {
+					echo "<div class=\"container-fluid borda_PanelPeca\">";
+					echo "<label class=\"titulo\">$nome_categoria</label>";
+					
+					if (!empty($marcas) AND $marcas !== false) {
+						foreach ($marcas as $marca) {
+							if (isset($marcas_selecionadas[$marca->get_id()])) {
+								if (in_array($marca->get_id(), $marcas_compativeis)) {
+									echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" checked=\"checked\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
+								} else {
+									unset($_SESSION['compatibilidade']['marca'][$marca->get_id()]);
+									ob_end_clean();
+									self::Carregar_Marcas();
+									break 2;
+								}
+							} else {
+								if (!empty($marcas_compativeis)) {
 									if (in_array($marca->get_id(), $marcas_compativeis)) {
-										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" checked=\"checked\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
+										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
 									} else {
-										unset($_SESSION['compatibilidade']['marca'][$marca->get_id()]);
-										ob_end_clean();
-										self::Carregar_Marcas();
-										break 2;
+										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
 									}
 								} else {
-									if (isset($marcas_compativeis)) {
-										if (in_array($marca->get_id(), $marcas_compativeis)) {
-											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
-										} else {
-											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
-										}
-									} else {
-										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
-									}
+									echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Marca(this)\" id=\"".$marca->get_id()."\" name=\"marca[]\" value=\"".$marca->get_id()."\"><label>".$marca->get_nome()."</label></div></div>";
 								}
 							}
-						} else {
-							echo "<label class=\"linha_inteira\">Nenhuma Marca Cadastrado Para a Categoria: ".$nome_categoria."</label>";
 						}
-				
-						echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
-						echo "</div>";
+					} else {
+						echo "<label class=\"linha_inteira\">Nenhuma Marca Cadastrado Para a Categoria: $nome_categoria</label>";
 					}
 					
-					ob_end_flush();
-				} else {
-					echo "Selecione a Categoria do Veiculo...";
+					echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
+					echo "</div>";
 				}
+				
+				ob_end_flush();
 			} else {
 				echo "Selecione a Categoria do Veiculo...";
 			}
 		}
 		
 		public static function Carregar_Modelos() {
-			if (isset($_SESSION['compatibilidade']['categoria'])) {
+			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
-				if (count($categorias_selecionadas) > 0) {
-					if (isset($_SESSION['compatibilidade']['marca'])) {
-						$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
+				if (!empty($_SESSION['compatibilidade']['marca'])) {
+					$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
+					
+					ob_start();
+					$marcas_selecionadas = array_reverse($marcas_selecionadas);
+					$modelos_selecionados = array();
+					$modelos_compativeis = null;
+					
+					if (!empty($_SESSION['compatibilidade']['modelo'])) {
+						$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
+						$modelos_compativeis = Controller_Cadastrar::Buscar_Modelos_Compativeis(current($modelos_selecionados));
+					}
+					
+					foreach ($marcas_selecionadas as $marca) {
+						$modelos = Controller_Cadastrar::Buscar_Modelos_Por_Marca($marca);
+						$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($marca);
+						$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
 						
-						if (count($marcas_selecionadas) > 0) {
-							ob_start();
-							$marcas_selecionadas = array_reverse($marcas_selecionadas);
-							$modelos_selecionados = array();
-							$modelos_compativeis = null;
-							
-							if (isset($_SESSION['compatibilidade']['modelo'])) {
-								$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
-								
-								if (count($modelos_selecionados) > 0) {
-									$modelos_compativeis = Controller_Cadastrar::Buscar_Modelos_Compativeis(current($modelos_selecionados));
-								}
-							}
-								
-							foreach ($marcas_selecionadas as $marca) {
-								$modelos = Controller_Cadastrar::Buscar_Modelos_Por_Marca($marca);
-								$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($marca);
-								$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
-					
-								echo "<div class=\"container-fluid borda_PanelPeca\">";
-								echo "<label class=\"titulo\">".$titulo_marca->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_categoria->get_nome()."</label>";
-					
-								if (count($modelos) > 0) {
-									foreach ($modelos as $modelo) {
-										if (isset($modelos_selecionados[$modelo->get_id()])) {
-											if (in_array($modelo->get_id(), $modelos_compativeis)) {
-												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" checked=\"checked\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
-											} else {
-												unset($_SESSION['compatibilidade']['modelo'][$modelo->get_id()]);
-												ob_end_clean();
-												self::Carregar_Modelos();
-												break 2;
-											}
-										} else {
-											if (isset($modelos_compativeis)) {
-												if (in_array($modelo->get_id(), $modelos_compativeis)) {
-													echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
-												} else {
-													echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
-												}
-											} else {
-												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
-											}
-										}
+						echo "<div class=\"container-fluid borda_PanelPeca\">";
+						echo "<label class=\"titulo\">".$titulo_marca->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_categoria->get_nome()."</label>";
+						
+						if (!empty($modelos) AND $modelos !== false) {
+							foreach ($modelos as $modelo) {
+								if (isset($modelos_selecionados[$modelo->get_id()])) {
+									if (in_array($modelo->get_id(), $modelos_compativeis)) {
+										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" checked=\"checked\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
+									} else {
+										unset($_SESSION['compatibilidade']['modelo'][$modelo->get_id()]);
+										ob_end_clean();
+										self::Carregar_Modelos();
+										break 2;
 									}
 								} else {
-									echo "<label class=\"linha_inteira\">Nenhum Modelo Cadastrado Para a Marca: ".$titulo_marca->get_nome()." da Categoria: ".$titulo_categoria->get_nome()."</label>";
+									if (!empty($modelos_compativeis)) {
+										if (in_array($modelo->get_id(), $modelos_compativeis)) {
+											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
+										} else {
+											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
+										}
+									} else {
+										echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Modelo(this)\" id=\"".$modelo->get_id()."\" name=\"modelo[]\" value=\"".$modelo->get_id()."\"><label>".$modelo->get_nome()."</label></div></div>";
+									}
 								}
-					
-								echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
-								echo "</div>";
 							}
-							
-							ob_end_flush();
 						} else {
-							echo "Selecione a Marca do Veiculo...";
+							echo "<label class=\"linha_inteira\">Nenhum Modelo Cadastrado Para a Marca: ".$titulo_marca->get_nome()." da Categoria: ".$titulo_categoria->get_nome()."</label>";
 						}
-					} else {
-						echo "Selecione a Marca do Veiculo...";
+						
+						echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
+						echo "</div>";
 					}
+					
+					ob_end_flush();
 				} else {
-					echo "Selecione a Categoria e a Marca do Veiculo...";
+					echo "Selecione a Marca do Veiculo...";
 				}
 			} else {
 				echo "Selecione a Categoria e a Marca do Veiculo...";
@@ -365,86 +328,71 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 		}
 
 		public static function Carregar_Versoes() {
-			if (isset($_SESSION['compatibilidade']['categoria'])) {
+			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
-				if (count($categorias_selecionadas) > 0) {
-					if (isset($_SESSION['compatibilidade']['marca'])) {
-						$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
+				if (!empty($_SESSION['compatibilidade']['marca'])) {
+					$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
+					
+					if (!empty($_SESSION['compatibilidade']['modelo'])) {
+						$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
 						
-						if (count($marcas_selecionadas) > 0) {
-							if (isset($_SESSION['compatibilidade']['modelo'])) {
-								$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
-								
-								if (count($modelos_selecionados) > 0) {
-									ob_start();
-									$modelos_selecionados = array_reverse($modelos_selecionados);
-									$versoes_selecionadas = array();
-									$versoes_compativeis = null;
-									
-									if (isset($_SESSION['compatibilidade']['versao'])) {
-										$versoes_selecionadas = $_SESSION['compatibilidade']['versao'];
-										
-										if (count($versoes_selecionadas) > 0) {
-											$versoes_compativeis = Controller_Cadastrar::Buscar_Versoes_Compativeis(current($versoes_selecionadas));
+						ob_start();
+						$modelos_selecionados = array_reverse($modelos_selecionados);
+						$versoes_selecionadas = array();
+						$versoes_compativeis = null;
+						
+						if (!empty($_SESSION['compatibilidade']['versao'])) {
+							$versoes_selecionadas = $_SESSION['compatibilidade']['versao'];
+							$versoes_compativeis = Controller_Cadastrar::Buscar_Versoes_Compativeis(current($versoes_selecionadas));
+						}
+						
+						foreach ($modelos_selecionados as $modelo) {
+							$versoes = Controller_Cadastrar::Buscar_Versoes_Por_Modelo($modelo);
+							$titulo_modelo = Controller_Cadastrar::Buscar_Modelo_Por_Id($modelo);
+							$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
+							$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
+							
+							echo "<div class=\"container-fluid borda_PanelPeca\">";
+							echo "<label class=\"titulo\">".$titulo_modelo->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_categoria->get_nome()."</label>";
+							
+							if (!empty($versoes) AND $versoes !== false) {
+								foreach ($versoes as $versao) {
+									if (isset($versoes_selecionadas[$versao->get_id()])) {
+										if (in_array($versao->get_id(), $versoes_compativeis)) {
+											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" checked=\"checked\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
+										} else {
+											unset($_SESSION['compatibilidade']['versao'][$versao->get_id()]);
+											ob_end_clean();
+											self::Carregar_Versoes();
+											break 2;
 										}
-									}
-										
-									foreach ($modelos_selecionados as $modelo) {
-										$versoes = Controller_Cadastrar::Buscar_Versoes_Por_Modelo($modelo);
-										$titulo_modelo = Controller_Cadastrar::Buscar_Modelo_Por_Id($modelo);
-										$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
-										$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
-						
-										echo "<div class=\"container-fluid borda_PanelPeca\">";
-										echo "<label class=\"titulo\">".$titulo_modelo->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"glyphicon glyphicon-hand-right\"></i> ".$titulo_categoria->get_nome()."</label>";
-						
-										if (count($versoes) > 0) {
-											foreach ($versoes as $versao) {
-												if (isset($versoes_selecionadas[$versao->get_id()])) {
-													if (in_array($versao->get_id(), $versoes_compativeis)) {
-														echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" checked=\"checked\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
-													} else {
-														unset($_SESSION['compatibilidade']['versao'][$versao->get_id()]);
-														ob_end_clean();
-														self::Carregar_Versoes();
-														break 2;
-													}
-												} else {
-													if (isset($versoes_compativeis)) {
-														if (in_array($versao->get_id(), $versoes_compativeis)) {
-															echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
-														} else {
-															echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
-														}
-													} else {
-														echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
-													}
-												}
+									} else {
+										if (isset($versoes_compativeis)) {
+											if (in_array($versao->get_id(), $versoes_compativeis)) {
+												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
+											} else {
+												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
 											}
 										} else {
-											echo "<label class=\"linha_inteira\">Nenhuma Versão Cadastrada Para o Modelo: ".$titulo_modelo->get_nome()." da Marca: ".$titulo_marca->get_nome()." da Categoria: ".$titulo_categoria->get_nome()."</label>";
+											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
 										}
-						
-										echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
-										echo "</div>";
 									}
-									
-									ob_end_flush();
-								} else {
-									echo "Selecione o Modelo do Veiculo...";
 								}
 							} else {
-								echo "Selecione o Modelo do Veiculo...";
+								echo "<label class=\"linha_inteira\">Nenhuma Versão Cadastrada Para o Modelo: ".$titulo_modelo->get_nome()." da Marca: ".$titulo_marca->get_nome()." da Categoria: ".$titulo_categoria->get_nome()."</label>";
 							}
-						} else {
-							echo "Selecione a Marca e o Modelo do Veiculo...";
+							
+							echo "<div class=\"esp_tit_cad_pec col-lg-12 col-md-12 col-sm-12 col-xs-12\"></div>";
+							echo "</div>";
 						}
+						
+						ob_end_flush();
 					} else {
-						echo "Selecione a Marca e o Modelo do Veiculo...";
+						echo "Selecione o Modelo do Veiculo...";
 					}
 				} else {
-					echo "Selecione a Categoria a Marca e o Modelo do Veiculo...";
+					echo "Selecione a Marca e o Modelo do Veiculo...";
 				}
 			} else {
 				echo "Selecione a Categoria a Marca e o Modelo do Veiculo...";
@@ -452,56 +400,43 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 		}
 
 		public static function Carregar_Anos() {
-			if (isset($_SESSION['compatibilidade']['categoria'])) {
+			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
-				if (count($categorias_selecionadas) > 0) {
-					if (isset($_SESSION['compatibilidade']['marca'])) {
-						$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
-						
-						if (count($marcas_selecionadas) > 0) {
-							$modelos_selecionados = array();
-							$versoes_selecionadas = array();
-							$anos_selecionados = array();
-							
-							if (isset($_SESSION['compatibilidade']['modelo'])) {
-								$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
-							}
-							if (isset($_SESSION['compatibilidade']['versao'])) {
-								$versoes_selecionadas = $_SESSION['compatibilidade']['versao'];
-							}
-							if (isset($_SESSION['compatibilidade']['ano'])) {
-								$anos_selecionados = $_SESSION['compatibilidade']['ano'];
-							}
+				if (!empty($_SESSION['compatibilidade']['marca'])) {
+					$marcas_selecionadas = $_SESSION['compatibilidade']['marca'];
 					
-							foreach ($marcas_selecionadas as $marca_selecionada) {
-								if (count($modelos_selecionados) > 0) {
-									foreach ($modelos_selecionados as $modelo_selecionado) {
-										if (Controller_Cadastrar::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
-						
-											if (count($versoes_selecionadas) > 0) {
-												foreach ($versoes_selecionadas as $versao_selecionada) {
-													if (Controller_Cadastrar::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
-														self::Carregar_Anos_Versao($versao_selecionada, $anos_selecionados);
-													}
-												}
-											} else {
-												self::Carregar_Anos_Modelo($modelo_selecionado, $anos_selecionados);
+					$anos_selecionados = array();
+					
+					if (!empty($_SESSION['compatibilidade']['ano'])) {
+						$anos_selecionados = $_SESSION['compatibilidade']['ano'];
+					}
+					
+					foreach ($marcas_selecionadas as $marca_selecionada) {
+						if (!empty($_SESSION['compatibilidade']['modelo'])) {
+							$modelos_selecionados = $_SESSION['compatibilidade']['modelo'];
+							
+							foreach ($modelos_selecionados as $modelo_selecionado) {
+								if (Controller_Cadastrar::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
+									if (!empty($_SESSION['compatibilidade']['versao'])) {
+										$versoes_selecionadas = $_SESSION['compatibilidade']['versao'];
+										
+										foreach ($versoes_selecionadas as $versao_selecionada) {
+											if (Controller_Cadastrar::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
+												self::Carregar_Anos_Versao($versao_selecionada, $anos_selecionados);
 											}
 										}
+									} else {
+										self::Carregar_Anos_Modelo($modelo_selecionado, $anos_selecionados);
 									}
-								} else {
-									self::Carregar_Anos_Marca($marca_selecionada, $anos_selecionados);
 								}
 							}
 						} else {
-							echo "Selecione a Marca e o Modelo ou Versão do Veiculo...";
+							self::Carregar_Anos_Marca($marca_selecionada, $anos_selecionados);
 						}
-					} else {
-						echo "Selecione a Marca e o Modelo ou Versão do Veiculo...";
 					}
 				} else {
-					echo "Selecione a Categoria a Marca e o Modelo ou Versão do Veiculo...";
+					echo "Selecione a Marca e o Modelo ou Versão do Veiculo...";
 				}
 			} else {
 				echo "Selecione a Categoria a Marca e o Modelo ou Versão do Veiculo...";
@@ -648,7 +583,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 			unset($_SESSION['form_cadastrar_peca']['status']);
 		}
 		
-        private function Mostrar_Anos($ano = null) {
+        private static function Mostrar_Anos($ano = null) {
             if (isset($ano)) {
 	            for ($i=2017; $i >= 1900; $i--) {
 	            	if ($ano == $i) {

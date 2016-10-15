@@ -19,19 +19,25 @@ namespace application\controller\usuario;
             
         }
         
-        public static function Carregar_Pagina() {
-        	new View_Cadastro();
+        public static function Carregar_Pagina($cadastro_erros = null, $cadastro_campos = null, $cadastro_form = null) {
+        	$view = new View_Cadastro();
+        	
+        	$view->set_cadastro_campos($cadastro_campos);
+        	$view->set_cadastro_erros($cadastro_erros);
+        	$view->set_cadastro_form($cadastro_form);
+        	 
+        	$view->Executar();
         }
 
         public function Cadastrar_Usuario() {
-            $erros_cadastrar = array();
-            $cad_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
+            $cadastro_erros = array();
+            $cadastro_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
 
             $usuario = new Object_Usuario();
             
             if (empty($_POST['nome'])) {
-            	$erros_cadastrar[] = "Digite Seu Nome Completo";
-            	$cad_campos['erro_nome'] = "erro";
+            	$cadastro_erros[] = "Digite Seu Nome Completo";
+            	$cadastro_campos['erro_nome'] = "erro";
             } else {
             	$nome = strip_tags($_POST['nome']);
             	
@@ -43,22 +49,22 @@ namespace application\controller\usuario;
 	            		if (preg_match("/^([a-zA-Z0-9çÇ ,'-]+)$/", $nome)) {
 	            			$usuario->set_nome(ucwords(strtolower($nome)));
 	            		} else {
-	            			$erros_cadastrar[] = "O Nome Não Pode Conter Caracteres Especiais";
-	            			$cad_campos['erro_nome'] = "erro";
+	            			$cadastro_erros[] = "O Nome Não Pode Conter Caracteres Especiais";
+	            			$cadastro_campos['erro_nome'] = "erro";
 	            		}
 	            	} else {
-	            		$erros_cadastrar[] = "O Nome pode ter no maximo 150 Caracteres";
-	            		$cad_campos['erro_nome'] = "erro";
+	            		$cadastro_erros[] = "O Nome pode ter no maximo 150 Caracteres";
+	            		$cadastro_campos['erro_nome'] = "erro";
 	            	}
             	} else {
-            		$erros_cadastrar[] = "O Nome Não pode conter Tags de Programação";
-            		$cad_campos['erro_nome'] = "erro";
+            		$cadastro_erros[] = "O Nome Não pode conter Tags de Programação";
+            		$cadastro_campos['erro_nome'] = "erro";
             	}
             }
             
             if (empty($_POST['password'])) {
-            	$erros_cadastrar[] = "Preencha o Campo Senha";
-            	$cad_campos['erro_senha'] = "erro";
+            	$cadastro_erros[] = "Preencha o Campo Senha";
+            	$cadastro_campos['erro_senha'] = "erro";
             } else {
 	            if (strlen($_POST['password']) >= 6 AND strlen($_POST['password']) <= 20) {
 	            	$password = strip_tags($_POST['password']);
@@ -66,24 +72,24 @@ namespace application\controller\usuario;
 	            	if ($password === $_POST['password']) {
 	            		$usuario->set_senha($password);
 	            	} else {
-	            		$erros_cadastrar[] = "A Senha Não pode conter Tags de Programação";
-	            		$cad_campos['erro_senha'] = "erro";
+	            		$cadastro_erros[] = "A Senha Não pode conter Tags de Programação";
+	            		$cadastro_campos['erro_senha'] = "erro";
 	            	}
 	            } else {
-	            	$erros_cadastrar[] = "A Senha Deve conter de 6 a 20 caracteres";
-	            	$cad_campos['erro_senha'] = "erro";
+	            	$cadastro_erros[] = "A Senha Deve conter de 6 a 20 caracteres";
+	            	$cadastro_campos['erro_senha'] = "erro";
 	            }
             }
 	        
 	        if (empty($_POST['confemail']) OR empty($_POST['email'])) {
 	        	if (empty($_POST['email'])) {
-	        		$erros_cadastrar[] = "Preencha o Campo E-Mail";
-	        		$cad_campos['erro_email'] = "erro";
+	        		$cadastro_erros[] = "Preencha o Campo E-Mail";
+	        		$cadastro_campos['erro_email'] = "erro";
 	        	}
 	        	 
 	        	if (empty($_POST['confemail'])) {
-	        		$erros_cadastrar[] = "Preencha o Campo Comfirmar E-Mail";
-	        		$cad_campos['erro_confemail'] = "erro";
+	        		$cadastro_erros[] = "Preencha o Campo Comfirmar E-Mail";
+	        		$cadastro_campos['erro_confemail'] = "erro";
 	        	}
 	        } else {
 	        	$confemail = trim($_POST['confemail']);
@@ -91,56 +97,69 @@ namespace application\controller\usuario;
 	        	
 	        	if ($confemail === $email) {
 	        		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-		        		if (DAO_Usuario::Verificar_Email($email) === 0) {
-		        			if (strlen($email) <= 150) {
-		        				$usuario->set_email($email);
-		        			} else {
-		        				$erros_cadastrar[] = "O E-Mail pode ter no maximo 150 Caracteres";
-		        				$cad_campos['erro_email'] = "erro";
-		        				$cad_campos['erro_confemail'] = "erro";
-		        			}
+	        			if (strlen($email) <= 150) {
+		        			$retorno = DAO_Usuario::Verificar_Email($email);
+		        			
+			        		if ($retorno !== false) {
+			        			if ($retorno === 0) {
+				        			$usuario->set_email($email);
+				        		} else {
+				        			$cadastro_erros[] = "Este E-Mail Já Esta Cadastrado";
+				        			$cadastro_campos['erro_email'] = "erro";
+				        			$cadastro_campos['erro_confemail'] = "erro";
+				        		}
+			        		} else {
+			        			$cadastro_erros[] = "Erro ao tentar Encontrar E-Mail";
+			        			$cadastro_campos['erro_email'] = "";
+			        			$cadastro_campos['erro_confemail'] = "";
+			        		}
 		        		} else {
-		        			$erros_cadastrar[] = "Este E-Mail Já Esta Cadastrado";
-		        			$cad_campos['erro_email'] = "erro";
-		        			$cad_campos['erro_confemail'] = "erro";
+		        			$cadastro_erros[] = "O E-Mail pode ter no maximo 150 Caracteres";
+		        			$cadastro_campos['erro_email'] = "erro";
+		        			$cadastro_campos['erro_confemail'] = "erro";
 		        		}
 	        		} else {
-	        			$erros_cadastrar[] = "Este E-Mail Não é Valido";
-	        			$cad_campos['erro_email'] = "erro";
-	        			$cad_campos['erro_confemail'] = "erro";
+	        			$cadastro_erros[] = "Este E-Mail Não é Valido";
+	        			$cadastro_campos['erro_email'] = "erro";
+	        			$cadastro_campos['erro_confemail'] = "erro";
 	        		}
 	        	} else {
-	        		$erros_cadastrar[] = "Digite o E-Mails Duas Vezes Igualmente";
-	        		$cad_campos['erro_email'] = "erro";
-	        		$cad_campos['erro_confemail'] = "erro";
+	        		$cadastro_erros[] = "Digite o E-Mails Duas Vezes Igualmente";
+	        		$cadastro_campos['erro_email'] = "erro";
+	        		$cadastro_campos['erro_confemail'] = "erro";
 	        	}
 	        }
             
-            if (empty($erros_cadastrar)) {
+            if (empty($cadastro_erros)) {
             	$usuario->set_id(0);
             	$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
             	
             	$usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
             	
-                DAO_Usuario::Inserir($usuario);
+                $retorno = DAO_Usuario::Inserir($usuario);
 				
-                Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
-                
-                return true;
+                if ($retorno !== false) {
+                	$retorno = Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
+                	
+                	if ($retorno === false) {
+                		$cadastro_erros[] = "Usuario Cadastrado com Sucesso, porem Autenticação Falhou";
+                	}
+                } else {
+                	$cadastro_erros[] = "Erro ao tentar Cadastrar Usuario";
+                }
+            }
+            
+            if (empty($cadastro_erros)) {
+            	return true;
             } else {
-                $_SESSION['erros_cadastrar'] = $erros_cadastrar;
-                $_SESSION['cad_campos'] = $cad_campos;
+                $cadastro_form = array();
                 
-                $form_cadastro = array();
+                $cadastro_form['nome'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['nome'])))));
+                $cadastro_form['email'] = trim(strip_tags($_POST['email']));
+                $cadastro_form['confemail'] = trim(strip_tags($_POST['confemail']));
+                $cadastro_form['senha'] = strip_tags($_POST['password']);
                 
-                $form_cadastro['nome'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['nome'])))));
-                $form_cadastro['email'] = trim(strip_tags($_POST['email']));
-                $form_cadastro['confemail'] = trim(strip_tags($_POST['confemail']));
-                $form_cadastro['senha'] = strip_tags($_POST['password']);
-                
-                $_SESSION['form_cadastro'] = $form_cadastro;
-                
-                return false;
+                self::Carregar_Pagina($cadastro_erros, $cadastro_campos, $cadastro_form);
             }
         }
     }

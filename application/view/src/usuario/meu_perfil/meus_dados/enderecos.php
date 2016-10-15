@@ -11,12 +11,34 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 
     class Enderecos {
 
-    	private static $status_usuario;
-    	
         function __construct($status) {
         	self::$status_usuario = $status;
-        	
-            require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/enderecos.php';
+        }
+        
+        private static $status_usuario;
+        private static $enderecos_erros;
+        private static $enderecos_campos;
+        private static $enderecos_form;
+        private static $enderecos_sucesso;
+        
+        public function set_enderecos_erros($enderecos_erros) {
+        	self::$enderecos_erros = $enderecos_erros;
+        }
+        
+        public function set_enderecos_campos($enderecos_campos) {
+        	self::$enderecos_campos = $enderecos_campos;
+        }
+        
+        public function set_enderecos_form($enderecos_form) {
+        	self::$enderecos_form = $enderecos_form;
+        }
+        
+        public function set_enderecos_sucesso($enderecos_sucesso) {
+        	self::$enderecos_sucesso = $enderecos_sucesso;
+        }
+        
+        public function Executar() {
+        	require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/enderecos.php';
         }
         
         public static function Incluir_Menu_Usuario() {
@@ -24,174 +46,169 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
 		
         public static function Incluir_Classe_Erros($campo) {
-        	if (isset($_SESSION['enderecos_campos'])) {
-	            $enderecos_campos = $_SESSION['enderecos_campos'];
-	            
+        	if (!empty(self::$enderecos_campos)) {
 	            switch ($campo) {
 	                case "cidade":
-	                	if (isset($enderecos_campos['erro_cidade'])) {
-		                    if ($enderecos_campos['erro_cidade'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_cidade'])) {
+		                    if (self::$enderecos_campos['erro_cidade'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_cidade'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_cidade'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_cidade']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "numero":
-	                	if (isset($enderecos_campos['erro_numero'])) {
-		                    if ($enderecos_campos['erro_numero'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_numero'])) {
+		                    if (self::$enderecos_campos['erro_numero'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_numero'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_numero'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_numero']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "estado":
-	                	if (isset($enderecos_campos['erro_estado'])) {
-		                    if ($enderecos_campos['erro_estado'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_estado'])) {
+		                    if (self::$enderecos_campos['erro_estado'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_estado'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_estado'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_estado']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "cep":
-	                	if (isset($enderecos_campos['erro_cep'])) {
-		                    if ($enderecos_campos['erro_cep'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_cep'])) {
+		                    if (self::$enderecos_campos['erro_cep'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_cep'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_cep'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_cep']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "bairro":
-	                	if (isset($enderecos_campos['erro_bairro'])) {
-		                    if ($enderecos_campos['erro_bairro'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_bairro'])) {
+		                    if (self::$enderecos_campos['erro_bairro'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_bairro'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_bairro'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_bairro']);
 	                	}
 	                	
 	                    break;
 	                    
 	                case "complemento":
-	                	if (isset($enderecos_campos['erro_complemento'])) {
-		                    if ($enderecos_campos['erro_complemento'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_complemento'])) {
+		                    if (self::$enderecos_campos['erro_complemento'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_complemento'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_complemento'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_complemento']);
 	                	}
-	                	
 	                    break;
 	                    
 	                case "rua":
-	                	if (isset($enderecos_campos['erro_rua'])) {
-		                    if ($enderecos_campos['erro_rua'] == "erro") {
+	                	if (isset(self::$enderecos_campos['erro_rua'])) {
+		                    if (self::$enderecos_campos['erro_rua'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if ($enderecos_campos['erro_rua'] == "certo") {
+		                    } else if (self::$enderecos_campos['erro_rua'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
-		                    unset($enderecos_campos['erro_rua']);
 	                	}
-	                	
 	                    break;
 	            }
-	            
-				if (count($enderecos_campos) > 0) {
-	            	$_SESSION['enderecos_campos'] = $enderecos_campos;
-        		} else {
-        			unset($_SESSION['enderecos_campos']);
-        		}
 			}
 		}
 
-        public static function Pegar_Valor($campo) {                    
+        public static function Pegar_Valor($campo) {
         	if ($campo == "numero") {
-                echo Controller_Enderecos::Pegar_Endereco_Numero();
+                echo self::$enderecos_form->get_numero();
             } else if ($campo == "cep") {
-                echo Controller_Enderecos::Pegar_Endereco_CEP();
+                echo self::$enderecos_form->get_cep();
             } else if ($campo == "bairro") {
-                echo Controller_Enderecos::Pegar_Endereco_Bairro();
+                echo self::$enderecos_form->get_bairro();
             } else if ($campo == "complemento") {
-                echo Controller_Enderecos::Pegar_Endereco_Complemento();
+                echo self::$enderecos_form->get_complemento();
             } else if ($campo == "rua") {
-                echo Controller_Enderecos::Pegar_Endereco_Rua();
+                echo self::$enderecos_form->get_rua();
             }
         }
 		
         public static function Mostrar_Estados() {
-            $estados = Controller_Enderecos::Buscar_Estados();
-            
-            foreach ($estados as $estado) {
-                if (Controller_Enderecos::Pegar_Endereco_Estado() == $estado->get_id()) {
-                    echo "<option selected value=\"". $estado->get_id() . "\">" . $estado->get_uf() . " - " . $estado->get_nome() . "</option>";
-                } else {
-                    echo "<option value=\"". $estado->get_id() . "\">" . $estado->get_uf() . " - " . $estado->get_nome() . "</option>";
-                }
-            }
+        	$estados = Controller_Enderecos::Buscar_Estados();
+        
+        	if (!empty($estados) AND $estados !== false) {
+        		if (!empty(self::$enderecos_form->get_estado_id())) {
+        			foreach ($estados as $estado) {
+        				if (self::$enderecos_form->get_estado_id() == $estado->get_id()) {
+        					echo "<option selected value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+        				} else {
+        					echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+        				}
+        			}
+        		} else {
+        			foreach ($estados as $estado) {
+        				echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+        			}
+        		}
+        	} else {
+        		echo '<option value="">Erro</option>';
+        	}
         }
         
         public static function Mostrar_Cidades($estado = null) {
-        	$cidades = array();
-        	
-            if (isset($estado)) {
-                $cidades = Controller_Enderecos::Buscar_Cidade_Por_Estado($estado);
-            } else {
-                $cidades = Controller_Enderecos::Buscar_Cidade_Por_Estado_Usuario();
-            }
-            
-			echo "<option value=\"0\">Selecione sua Cidade</option>";
-			
-            foreach ($cidades as $cidade) {
-                if (Controller_Enderecos::Pegar_Endereco_Cidade() == $cidade->get_id()) {
-                    echo "<option selected value=\"". $cidade->get_id() . "\">" . $cidade->get_nome() . "</option>";
-                } else {
-                    echo "<option value=\"". $cidade->get_id() . "\">" . $cidade->get_nome() . "</option>";
-                }
-            }
+        	$id_estado;
+        
+        	if (isset($estado)) {
+        		$id_estado = $estado;
+        	} else if (!empty(self::$enderecos_form->get_estado_id())) {
+        		$id_estado = self::$enderecos_form->get_estado_id();
+        	}
+        		
+        	echo '<option value="0">Selecione sua Cidade</option>';
+        		
+        	if (isset($id_estado)) {
+        		$cidades = Controller_Enderecos::Buscar_Cidades_Por_Estado($id_estado);
+        
+        		if (!empty($cidades) AND $cidades !== false) {
+        			if (!empty(self::$enderecos_form->get_cidade_id())) {
+        				foreach ($cidades as $cidade) {
+        					if (self::$enderecos_form->get_cidade_id() == $cidade->get_id()) {
+        						echo "<option selected value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+        					} else {
+        						echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+        					}
+        				}
+        			} else {
+        				foreach ($cidades as $cidade) {
+        					echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+        				}
+        			}
+        		} else {
+        			echo '<option value="">Erro</option>';
+        		}
+        	}
         }
 		
         public static function Mostrar_Erros() {
-			if (isset($_SESSION['erros_enderecos'])) {
-                $erros_enderecos = $_SESSION['erros_enderecos'];
-                if (isset($erros_enderecos)) {
-                    echo "<div class=\"container-fluid\"><div class=\"row\">";
-                    foreach ($erros_enderecos as $value) {
-                        echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" . $value . "</div>";
-                    }
-                    echo "</div></div>";
+			if (!empty(self::$enderecos_erros)) {
+                echo "<div class=\"container-fluid\"><div class=\"row\">";
+                foreach (self::$enderecos_erros as $value) {
+                    echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" . $value . "</div>";
                 }
-                unset($_SESSION['erros_enderecos']);
+                echo "</div></div>";
             }
         }
 		
         public static function Mostrar_Sucesso() {
-			if (isset($_SESSION['success_enderecos'])) {
-                $success_enderecos = $_SESSION['success_enderecos'];
-				if (isset($success_enderecos)) {
-					echo "<div class=\"container-fluid\"><div class=\"row\">";
-                	foreach ($success_enderecos as $value) {
-                		echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong><span class=\"glyphicon glyphicon-ok\"></span></strong> " . $value . "</div>";
-					}
-					echo "</div></div>";
+			if (!empty(self::$enderecos_sucesso)) {
+				echo "<div class=\"container-fluid\"><div class=\"row\">";
+                foreach (self::$enderecos_sucesso as $value) {
+                	echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong><span class=\"glyphicon glyphicon-ok\"></span></strong> " . $value . "</div>";
 				}
-                unset($_SESSION['success_enderecos']);
+				echo "</div></div>";
             }
         }
 	}

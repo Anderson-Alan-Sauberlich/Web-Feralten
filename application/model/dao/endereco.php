@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Endereco {
 
         function __construct() {
@@ -33,9 +33,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -64,8 +63,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -77,8 +76,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -91,9 +90,24 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaEndereco($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Usuario($id) {
+        	try {
+        		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_du_us_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		return $row['endereco_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         private function PopulaEndereco($row) {

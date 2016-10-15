@@ -33,12 +33,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina() {
+        public static function Carregar_Pagina($concluir_erros = null, $concluir_campos = null, $concluir_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
-        			new View_Concluir($status);
+        			$view = new View_Concluir($status);
+        			
+        			$view->set_concluir_campos($concluir_campos);
+        			$view->set_concluir_erros($concluir_erros);
+        			$view->set_concluir_form($concluir_form);
+        			 
+        			$view->Executar();
         		}
         		
         		return $status;
@@ -52,8 +58,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
-		           	$erros_concluir = array();
-		            $cnclr_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo",
+		           	$concluir_erros = array();
+		            $concluir_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo",
 		            					  'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
 		            
 		            $contato = new Object_Contato();
@@ -61,8 +67,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            $dados_usuario = new Object_Dados_Usuario();
 		            
 		            if (empty($_POST['fone1'])) {
-		                $erros_concluir[] = "Informe um Nº de Telefone para Telefone-1";
-		                $cnclr_campos['erro_fone1'] = "erro";
+		                $concluir_erros[] = "Informe um Nº de Telefone para Telefone-1";
+		                $concluir_campos['erro_fone1'] = "erro";
 		            } else {
 		            	$telefone1 = trim($_POST['fone1']);
 		            	
@@ -70,12 +76,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
 		            			$contato->set_telefone1($telefone1);
 		            		} else {
-		            			$erros_concluir[] = "Telefone-1, Digite Apenas Numeros";
-		            			$cnclr_campos['erro_fone1'] = "erro";
+		            			$concluir_erros[] = "Telefone-1, Digite Apenas Numeros";
+		            			$concluir_campos['erro_fone1'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Telefone-1 deve conter 10 Numeros";
-		            		$cnclr_campos['erro_fone1'] = "erro";
+		            		$concluir_erros[] = "Telefone-1 deve conter 10 Numeros";
+		            		$concluir_campos['erro_fone1'] = "erro";
 		            	}
 		            }
 		            
@@ -86,12 +92,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
 		            			$contato->set_telefone2($telefone2);
 		            		} else {
-		            			$erros_concluir[] = "Telefone-2, Digite Apenas Numeros";
-		            			$cnclr_campos['erro_fone2'] = "erro";
+		            			$concluir_erros[] = "Telefone-2, Digite Apenas Numeros";
+		            			$concluir_campos['erro_fone2'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Telefone-2 deve conter 10 Numeros";
-		            		$cnclr_campos['erro_fone2'] = "erro";
+		            		$concluir_erros[] = "Telefone-2 deve conter 10 Numeros";
+		            		$concluir_campos['erro_fone2'] = "erro";
 		            	}
 		            }
 		            
@@ -102,32 +108,32 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			            	if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
 			            		$contato->set_email($emailcontato);
 			            	} else {
-			            		$erros_concluir[] = "Digite um E-Mail Alternativo Valido";
-			            		$cnclr_campos['erro_emailcontato'] = "erro";
+			            		$concluir_erros[] = "Digite um E-Mail Alternativo Valido";
+			            		$concluir_campos['erro_emailcontato'] = "erro";
 			            	}
 		            	} else {
-		            		$erros_concluir[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
-		            		$cnclr_campos['erro_emailcontato'] = "erro";
+		            		$concluir_erros[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
+		            		$concluir_campos['erro_emailcontato'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['cidade']) OR $_POST['cidade'] <= 0) {
-		                $erros_concluir[] = "Seleciona sua Cidade";
-		                $cnclr_campos['erro_cidade'] = "erro";
+		                $concluir_erros[] = "Seleciona sua Cidade";
+		                $concluir_campos['erro_cidade'] = "erro";
 		            } else {
 		            	$endereco->set_cidade_id($_POST['cidade']);
 		            }
 		            
 		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
-		                $erros_concluir[] = "Seleciona seu Estado";
-		                $cnclr_campos['erro_estado'] = "erro";
+		                $concluir_erros[] = "Seleciona seu Estado";
+		                $concluir_campos['erro_estado'] = "erro";
 		            } else {
 		            	$endereco->set_estado_id($_POST['estado']);
 		            }
 		            
 		            if (empty($_POST['numero'])) {
-		                $erros_concluir[] = "Informe o Numero do seu Endereço";
-		                $cnclr_campos['erro_numero'] = "erro";
+		                $concluir_erros[] = "Informe o Numero do seu Endereço";
+		                $concluir_campos['erro_numero'] = "erro";
 		            } else {
 		            	$numero = strip_tags($_POST['numero']);
 		            	
@@ -137,35 +143,35 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			            	if (strlen($numero) <= 10) {
 			            		$endereco->set_numero($numero);
 			            	} else {
-			            		$erros_concluir[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
-			            		$cnclr_campos['erro_numero'] = "erro";
+			            		$concluir_erros[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
+			            		$concluir_campos['erro_numero'] = "erro";
 			            	}
 		            	} else {
-		            		$erros_concluir[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_numero'] = "erro";
+		            		$concluir_erros[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_numero'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['cep'])) {
-		                $erros_concluir[] = "Informe seu CEP";
-		                $cnclr_campos['erro_cep'] = "erro";
+		                $concluir_erros[] = "Informe seu CEP";
+		                $concluir_campos['erro_cep'] = "erro";
 		            } else {
 		            	if (strlen($_POST['cep']) === 8) {
 			            	if (filter_var($_POST['cep'], FILTER_VALIDATE_INT)) {
 			            		$endereco->set_cep($_POST['cep']);
 			            	} else {
-			            		$erros_concluir[] = "CEP, Digite Apenas os Numeros";
-			            		$cnclr_campos['erro_cep'] = "erro";
+			            		$concluir_erros[] = "CEP, Digite Apenas os Numeros";
+			            		$concluir_campos['erro_cep'] = "erro";
 			            	}
 		            	} else {
-		            		$erros_concluir[] = "CEP Deve conter 8 Numeros";
-		            		$cnclr_campos['erro_cep'] = "erro";
+		            		$concluir_erros[] = "CEP Deve conter 8 Numeros";
+		            		$concluir_campos['erro_cep'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['bairro'])) {
-		                $erros_concluir[] = "Informe seu Bairro";
-		                $cnclr_campos['erro_bairro'] = "erro";
+		                $concluir_erros[] = "Informe seu Bairro";
+		                $concluir_campos['erro_bairro'] = "erro";
 		            } else {
 		            	$bairro = strip_tags($_POST['bairro']);
 		            	
@@ -176,18 +182,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			            	if (strlen($bairro) <= 45) {
 			            		$endereco->set_bairro(ucwords(strtolower($bairro)));
 			            	} else {
-			            		$erros_concluir[] = "Bairro, Não pode conter mais de 45 Caracteres";
-			            		$cnclr_campos['erro_bairro'] = "erro";
+			            		$concluir_erros[] = "Bairro, Não pode conter mais de 45 Caracteres";
+			            		$concluir_campos['erro_bairro'] = "erro";
 			            	}
 		            	} else {
-		            		$erros_concluir[] = "Bairro, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_bairro'] = "erro";
+		            		$concluir_erros[] = "Bairro, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_bairro'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['rua'])) {
-		                $erros_concluir[] = "Informe sua Rua";
-		                $cnclr_campos['erro_rua'] = "erro";
+		                $concluir_erros[] = "Informe sua Rua";
+		                $concluir_campos['erro_rua'] = "erro";
 		            } else {
 		            	$rua = strip_tags($_POST['rua']);
 		            	 
@@ -198,12 +204,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($rua) <= 150) {
 		            			$endereco->set_rua(ucwords(strtolower($rua)));
 		            		} else {
-		            			$erros_concluir[] = "Rua, Não pode conter mais de 150 Caracteres";
-		            			$cnclr_campos['erro_rua'] = "erro";
+		            			$concluir_erros[] = "Rua, Não pode conter mais de 150 Caracteres";
+		            			$concluir_campos['erro_rua'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Rua, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_rua'] = "erro";
+		            		$concluir_erros[] = "Rua, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_rua'] = "erro";
 		            	}
 		            }
 		            
@@ -217,18 +223,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($complemento) <= 150) {
 		            			$endereco->set_complemento(ucfirst(strtolower($complemento)));
 		            		} else {
-		            			$erros_concluir[] = "Complemento, Não pode conter mais de 150 Caracteres";
-		            			$cnclr_campos['erro_complemento'] = "erro";
+		            			$concluir_erros[] = "Complemento, Não pode conter mais de 150 Caracteres";
+		            			$concluir_campos['erro_complemento'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Complemento, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_complemento'] = "erro";
+		            		$concluir_erros[] = "Complemento, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_complemento'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($_POST['cpf_cnpj'])) {
-		                $erros_concluir[] = "Informe seu CPF ou CNPJ";
-		                $cnclr_campos['erro_cpf_cnpj'] = "erro";
+		                $concluir_erros[] = "Informe seu CPF ou CNPJ";
+		                $concluir_campos['erro_cpf_cnpj'] = "erro";
 		            } else {
 		            	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
 		            	$cpf_cnpj = trim($cpf_cnpj);
@@ -238,14 +244,26 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($cpf_cnpj) === 14) {
 		            			$dados_usuario->set_cpf_cnpj($cpf_cnpj);
 		            		} else if (strlen($cpf_cnpj) === 11) {
-		            			$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+		            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
+		            			
+		            			if ($retorno !== false) {
+		            				if ($retorno === 0) {
+		            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+		            				} else {
+		            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
+		            					$concluir_campos['erro_cpf_cnpj'] = "erro";
+		            				}
+		            			} else {
+		            				$concluir_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
+		            				$concluir_campos['erro_cpf_cnpj'] = "";
+		            			}
 		            		} else {
-		            			$erros_concluir[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
-		            			$cnclr_campos['erro_cpf_cnpj'] = "erro";
+		            			$concluir_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
+		            			$concluir_campos['erro_cpf_cnpj'] = "erro";
 		            		}
 	            		} else {
-	            			$erros_concluir[] = "CPF/CNPJ, Digite Apenas Numeros";
-	            			$cnclr_campos['erro_cpf_cnpj'] = "erro";
+	            			$concluir_erros[] = "CPF/CNPJ, Digite Apenas Numeros";
+	            			$concluir_campos['erro_cpf_cnpj'] = "erro";
 	            		}
 		            }
 		            
@@ -259,12 +277,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($site) <= 150) {
 		            			$dados_usuario->set_site($site);
 		            		} else {
-		            			$erros_concluir[] = "Site, pode ter no Maximo 150 Caracteres";
-		            			$cnclr_campos['erro_site'] = "erro";
+		            			$concluir_erros[] = "Site, pode ter no Maximo 150 Caracteres";
+		            			$concluir_campos['erro_site'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Site, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_site'] = "erro";
+		            		$concluir_erros[] = "Site, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_site'] = "erro";
 		            	}
 		            }
 		            
@@ -278,58 +296,60 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($nomedadosusuario) <= 45) {
 		            			$dados_usuario->set_nome_fantasia($nomedadosusuario);
 		            		} else {
-		            			$erros_concluir[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
-		            			$cnclr_campos['erro_nomedadosusuario'] = "erro";
+		            			$concluir_erros[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
+		            			$concluir_campos['erro_nomedadosusuario'] = "erro";
 		            		}
 		            	} else {
-		            		$erros_concluir[] = "Nome Fantasia, Não pode conter Tags de Programação";
-		            		$cnclr_campos['erro_nomedadosusuario'] = "erro";
+		            		$concluir_erros[] = "Nome Fantasia, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_nomedadosusuario'] = "erro";
 		            	}
 		            }
 		            
-		            if (empty($erros_concluir)) {
-		                $dados_usuario->set_imagem(self::Salvar_Imagem());
-		            }
-		            
-		            if (empty($erros_concluir)) {
+		            if (empty($concluir_erros)) {
 		            	$contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_status_id(1);
 		            	$dados_usuario->set_data(date('Y-m-d H:i:s'));
+		            	$dados_usuario->set_imagem(self::Salvar_Imagem());
 		            	
-		                DAO_Dados_Usuario::Inserir($dados_usuario);
-		                DAO_Endereco::Inserir($endereco);
-		                DAO_Contato::Inserir($contato);
-		                
-		                return 'certo';
-		            } else {
-		                $_SESSION['erros_concluir'] = $erros_concluir;
-		                $_SESSION['cnclr_campos'] = $cnclr_campos;
-		                
-		                $form_concluir = array();
-		                
-		                $form_concluir['fone1'] = trim(strip_tags($_POST['fone1']));
-		                $form_concluir['fone2'] = trim(strip_tags($_POST['fone2']));
-		                $form_concluir['cidade'] = strip_tags($_POST['cidade']);
-		                $form_concluir['estado'] = strip_tags($_POST['estado']);
-		                $form_concluir['numero'] = trim(strip_tags($_POST['numero']));
-		                $form_concluir['cep'] = strip_tags($_POST['cep']);
-		                $form_concluir['rua'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['rua'])))));
-		                $form_concluir['complemento'] = ucfirst(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['complemento'])))));
-		                $form_concluir['bairro'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['bairro'])))));
-		                $form_concluir['cpf_cnpj'] = strip_tags($_POST['cpf_cnpj']);
-		                $form_concluir['nomedadosusuario'] = trim(strip_tags($_POST['nomedadosusuario']));
-		                $form_concluir['emailcontato'] = trim(strip_tags($_POST['emailcontato']));
-		                $form_concluir['site'] = trim(strip_tags($_POST['site']));
-		                
-		                $_SESSION['form_concluir'] = $form_concluir;
-		                
-		                return 'erro';
+		                if (DAO_Dados_Usuario::Inserir($dados_usuario) !== false) {
+		                	if (DAO_Endereco::Inserir($endereco) !== false) {
+		                		if (DAO_Contato::Inserir($contato) === false) {
+		                			$concluir_erros[] = "Erro ao tentar Inserir Contato do Usuario";
+		                		}
+		                	} else {
+		                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
+		                	}
+		            	} else {
+		            		$concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
+		            	}
 		            }
+		            
+		            if (empty($concluir_erros)) {
+		            	return 'certo';
+		            } else {
+		            	$concluir_form = array();
+		            	
+		            	$concluir_form['fone1'] = trim(strip_tags($_POST['fone1']));
+		            	$concluir_form['fone2'] = trim(strip_tags($_POST['fone2']));
+		            	$concluir_form['cidade'] = strip_tags($_POST['cidade']);
+		            	$concluir_form['estado'] = strip_tags($_POST['estado']);
+		            	$concluir_form['numero'] = trim(strip_tags($_POST['numero']));
+		            	$concluir_form['cep'] = strip_tags($_POST['cep']);
+		            	$concluir_form['rua'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['rua'])))));
+		            	$concluir_form['complemento'] = ucfirst(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['complemento'])))));
+		            	$concluir_form['bairro'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['bairro'])))));
+		            	$concluir_form['cpf_cnpj'] = strip_tags($_POST['cpf_cnpj']);
+		            	$concluir_form['nomedadosusuario'] = trim(strip_tags($_POST['nomedadosusuario']));
+		            	$concluir_form['emailcontato'] = trim(strip_tags($_POST['emailcontato']));
+		            	$concluir_form['site'] = trim(strip_tags($_POST['site']));
+		            	
+		            	self::Carregar_Pagina($concluir_erros, $concluir_campos, $concluir_form);
+		            }
+        		} else {
+        			return $status;
         		}
-        		
-        		return $status;
         	} else {
         		return false;
         	}

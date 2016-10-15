@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
 	class Dados_Usuario {
 
         function __construct() {
@@ -31,8 +31,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":data", $object_dados_usuario->get_data(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -54,8 +54,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":site", $object_dados_usuario->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -75,8 +75,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":site", $object_dados_usuario->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -90,8 +90,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":imagem", $imagem, PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -103,9 +103,24 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
+        }
+        
+        public static function Verificar_CPF_CNPJ($cpf_cnpj) {
+        	try {
+        		$sql = "SELECT dados_usuario_us_id FROM tb_dados_usuario WHERE dados_usuario_cpf_cnpj = :cpf_cnpj";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":cpf_cnpj", $cpf_cnpj, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$select = $p_sql->fetchAll();
+        
+        		return count($select);
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         public static function Pegar_Status_Usuario($id) {
@@ -118,8 +133,8 @@ namespace application\model\dao;
                 
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 return $row['dados_usuario_su_id'];
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -133,8 +148,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

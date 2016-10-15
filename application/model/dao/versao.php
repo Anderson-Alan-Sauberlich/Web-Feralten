@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Versao {
         
         function __construct() {
@@ -27,8 +27,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -47,8 +47,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -60,8 +60,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -74,8 +74,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaVersao($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -90,12 +90,12 @@ namespace application\model\dao;
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
                 return $row['versao_mo_id'];
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
-        public static function Buscar_Por_ID_Modelo($id) {
+        public static function Buscar_Por_Id_Modelo($id) {
             try {
                 $sql = "SELECT versao_id, versao_mo_id, versao_nome FROM tb_versao WHERE versao_mo_id = :id";
                 
@@ -104,9 +104,29 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaVersoes($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Modelo($id) {
+        	try {
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
+        		$id_versao = array();
+        		
+        		foreach ($rows as $row) {
+        			$id_versao[] = $row['versao_id'];
+        		}
+        		
+        		return $id_versao;
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         private function PopulaVersao($row) {

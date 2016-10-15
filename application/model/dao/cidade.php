@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Cidade {
 
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Cidade $object_cidade) {
             try {
-                                 
                 $sql = "INSERT INTO tb_cidade (cidade_id, cidade_es_id, cidade_nome) 
                         VALUES (:id, :es_id, :nome);";
                 
@@ -28,13 +27,12 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
-        public static function Editar(Object_Cidade $object_cidade) {
+        public static function Atualizar(Object_Cidade $object_cidade) {
             try {
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
@@ -49,8 +47,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -62,8 +60,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -76,8 +74,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaCidades($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -90,8 +88,8 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaCidade($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         

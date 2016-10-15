@@ -8,7 +8,7 @@ namespace application\model\dao;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
-
+	
     class Contato {
 
         function __construct() {
@@ -17,7 +17,6 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Contato $object_contato) {
             try {
-                
                 $sql = "INSERT INTO tb_contato (contato_id, contato_du_us_id, contato_telefone1, contato_telefone2, contato_email) 
                         VALUES (:id, :du_ud_id, :fone1, :fone2, :email);";
                 
@@ -30,9 +29,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":email", $object_contato->get_email(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-                
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -52,8 +50,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":email", $object_contato->get_email(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -65,8 +63,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 
                 return $p_sql->execute();
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
         }
         
@@ -79,9 +77,24 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (Exception $e) {
-                print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+            } catch (PDOException $e) {
+				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Usuario($id) {
+        	try {
+        		$sql = "SELECT contato_id FROM tb_contato WHERE contato_du_us_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		return $row['contato_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         private function PopulaCategoria($row) {

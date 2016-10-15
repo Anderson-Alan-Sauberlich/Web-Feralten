@@ -27,8 +27,8 @@ namespace application\model\dao;
 	
 				return $p_sql->execute();
 	
-			} catch (Exception $e) {
-				print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+			} catch (PDOException $e) {
+				return false;
 			}
 		}
 	
@@ -42,8 +42,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":com_id", $object_modelo_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
-			} catch (Exception $e) {
-				print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+			} catch (PDOException $e) {
+				return false;
 			}
 		}
 	
@@ -55,8 +55,8 @@ namespace application\model\dao;
 				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
-			} catch (Exception $e) {
-				print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+			} catch (PDOException $e) {
+				return false;
 			}
 		}
 	
@@ -68,8 +68,8 @@ namespace application\model\dao;
 				$p_sql->execute();
 	
 				return self::PopulaModelosCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
-			} catch (Exception $e) {
-				print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+			} catch (PDOException $e) {
+				return false;
 			}
 		}
 	
@@ -82,8 +82,8 @@ namespace application\model\dao;
 				$p_sql->execute();
 	
 				return self::PopulaModelosCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
-			} catch (Exception $e) {
-				print "Ocorreu um erro ao tentar executar esta ação, tente novamente mais tarde.";
+			} catch (PDOException $e) {
+				return false;
 			}
 		}
 	
