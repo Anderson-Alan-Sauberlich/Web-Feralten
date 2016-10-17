@@ -9,12 +9,14 @@ namespace application\view\src\usuario\meu_perfil\financeiro;
 
     class Boleto_Atual {
     	
-    	private static $status_usuario;
-
         function __construct($status) {
         	self::$status_usuario = $status;
-        	
-            require_once RAIZ.'/application/view/html/usuario/meu_perfil/financeiro/boleto_atual.php';
+        }
+        
+        private static $status_usuario;
+        
+        public function Executar() {
+        	require_once RAIZ.'/application/view/html/usuario/meu_perfil/financeiro/boleto_atual.php';
         }
         
         public static function Incluir_Menu_Usuario() {

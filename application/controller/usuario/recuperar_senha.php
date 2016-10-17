@@ -14,7 +14,9 @@ namespace application\controller\usuario;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Recuperar_Senha();
+        	$view = new View_Recuperar_Senha();
+        	
+        	$view->Executar();
         }
     }
 ?>

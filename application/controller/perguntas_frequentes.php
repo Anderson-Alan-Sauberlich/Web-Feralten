@@ -14,7 +14,9 @@ namespace application\controller;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Perguntas_Frequentes();
+        	$view = new View_Perguntas_Frequentes();
+        	
+        	$view->Executar();
         }
     }
 ?>

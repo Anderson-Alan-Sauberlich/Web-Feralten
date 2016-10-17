@@ -14,7 +14,9 @@ namespace application\controller;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Mapa_Do_Site();
+        	$view = new View_Mapa_Do_Site();
+        	
+        	$view->Executar();
         }
     }
 ?>

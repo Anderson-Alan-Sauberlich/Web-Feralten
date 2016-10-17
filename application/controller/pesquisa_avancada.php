@@ -14,7 +14,9 @@ namespace application\controller;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Pesquisa_Avancada();
+        	$view = new View_Pesquisa_Avancada();
+        	
+        	$view->Executar();
         }
     }
 ?>

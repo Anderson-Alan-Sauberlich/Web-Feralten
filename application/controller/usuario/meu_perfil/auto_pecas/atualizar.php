@@ -20,7 +20,9 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			new View_Atualizar($status);
+        			$view = new View_Atualizar($status);
+        			
+        			$view->Executar();
         		}
         		
         		return $status;

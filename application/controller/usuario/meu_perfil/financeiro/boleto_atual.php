@@ -20,7 +20,9 @@ namespace application\controller\usuario\meu_perfil\financeiro;
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status != 0) {
-        			new View_Boleto_Atual($status);
+        			$view = new View_Boleto_Atual($status);
+        			
+        			$view->Executar();
         		}
         		
         		return $status;

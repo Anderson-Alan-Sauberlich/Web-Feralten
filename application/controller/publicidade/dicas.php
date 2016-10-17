@@ -14,7 +14,9 @@ namespace application\controller\publicidade;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Dicas();
+        	$view = new View_Dicas();
+        	
+        	$view->Executar();
         }
     }
 ?>

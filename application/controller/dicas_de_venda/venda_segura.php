@@ -14,7 +14,9 @@ namespace application\controller\dicas_de_venda;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Venda_Segura();
+        	$view = new View_Venda_Segura();
+        	
+        	$view->Executar();
         }
     }
 ?>

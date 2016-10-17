@@ -14,7 +14,9 @@ namespace application\controller\publicidade;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Experimentar_Formatos();
+        	$view = new View_Experimentar_Formatos();
+        	
+        	$view->Executar();
         }
     }
 ?>

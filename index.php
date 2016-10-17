@@ -9,12 +9,6 @@
 	
 	$app = new \Slim\App(["settings" => $config]);
 	
-	$app->group('/teste', function() use ($app) {
-		$app->get('', function(Request $request, Response $response) use ($app) {
-			phpinfo();
-		});
-	});
-	
 	$app->group('/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
 			require_once(RAIZ.'/application/controller/pagina_inicial.php');

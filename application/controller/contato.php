@@ -14,7 +14,9 @@ namespace application\controller;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Contato();
+        	$view = new View_Contato();
+        	
+        	$view->Executar();
         }
     }
 ?>

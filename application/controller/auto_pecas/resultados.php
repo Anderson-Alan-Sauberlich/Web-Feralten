@@ -14,7 +14,9 @@ namespace application\controller\auto_pecas;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Resultados();
+        	$view = new View_Resultados();
+        	
+        	$view->Executar();
         }
     }
 ?>

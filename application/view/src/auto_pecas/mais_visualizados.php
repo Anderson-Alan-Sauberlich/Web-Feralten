@@ -10,6 +10,10 @@ namespace application\view\src\auto_pecas;
     class Mais_Visualizados {
 
         function __construct() {
+        	
+        }
+        
+        public function Executar() {
         	require_once RAIZ.'/application/view/html/auto_pecas/mais_visualizados.php';
         }
         

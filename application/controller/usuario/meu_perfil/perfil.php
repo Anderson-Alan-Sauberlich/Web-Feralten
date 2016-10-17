@@ -19,7 +19,9 @@ namespace application\controller\usuario\meu_perfil;
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
-        		new View_Perfil($status);
+        		$view = new View_Perfil($status);
+        		
+        		$view->Executar();
         	} else {
         		return false;
         	}

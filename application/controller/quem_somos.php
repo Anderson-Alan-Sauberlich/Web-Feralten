@@ -14,7 +14,9 @@ namespace application\controller;
         }
         
         public static function Carregar_Pagina() {
-        	new View_Quem_Somos();
+        	$view = new View_Quem_Somos();
+        	
+        	$view->Executar();
         }
     }
 ?>

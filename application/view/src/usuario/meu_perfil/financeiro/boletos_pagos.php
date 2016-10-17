@@ -9,11 +9,13 @@ namespace application\view\src\usuario\meu_perfil\financeiro;
 
     class Boletos_Pagos {
     	
-    	private static $status_usuario;
-
         function __construct($status) {
         	self::$status_usuario = $status;
-        	 
+        }
+        
+        private static $status_usuario;
+        
+        public function Executar() {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/financeiro/boletos_pagos.php';
         }
         

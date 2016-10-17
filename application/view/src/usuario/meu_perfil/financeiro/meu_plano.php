@@ -9,11 +9,13 @@ namespace application\view\src\usuario\meu_perfil\financeiro;
 
     class Meu_Plano {
     	
-    	private static $status_usuario;
-
         function __construct($status) {
         	self::$status_usuario = $status;
-        	 
+        }
+        
+        private static $status_usuario;
+        
+        public function Executar() {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/financeiro/meu_plano.php';
         }
         

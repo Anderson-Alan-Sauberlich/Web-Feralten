@@ -1,12 +1,10 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\auto_pecas;
     
-	require_once RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_filtro.php';
 	
-	use application\controller\usuario\meu_perfil\auto_pecas\Visualizar as Controller_Visualizar;
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro;
@@ -15,12 +13,14 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 
     class Visualizar {
     	
-    	private static $status_usuario;
-
         function __construct($status) {
         	self::$status_usuario = $status;
-        	
-            require_once RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php';
+        }
+        
+        private static $status_usuario;
+        
+        public function Executar() {
+        	require_once RAIZ.'/application/view/html/usuario/meu_perfil/auto_pecas/visualizar.php';
         }
         
         public static function Incluir_Menu_Pesquisa() {
@@ -36,7 +36,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         }
         
         public static function Mostrar_Card_Peca() {
-        	for ($i = 0; $i <= 5; $i++) {
+        	for ($i = 0; $i <= 4; $i++) {
         		echo "<div class=\"ui raised card\">";
         		echo "<div class=\"content\">";
         		echo "<div class=\"meta\">Nome da Peça</div>";

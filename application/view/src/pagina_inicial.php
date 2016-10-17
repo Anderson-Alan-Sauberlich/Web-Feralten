@@ -8,6 +8,10 @@ namespace application\view\src;
     class Pagina_Inicial {
 
         function __construct() {
+        	
+        }
+        
+        public function Executar() {
         	require_once RAIZ.'/application/view/html/pagina_inicial.php';
         }
         
