@@ -92,15 +92,23 @@ namespace application\model\dao;
             }
         }
         
-        private function Popular_Estados($rows) {
+        private static function Popular_Estados($rows) {
             $estados = array();
             
             foreach ($rows as $row) {
                 $object_estado = new Object_Estado();
                 
-                $object_estado->set_id($row['estado_id']);
-                $object_estado->set_uf($row['estado_uf']);
-                $object_estado->set_nome($row['estado_nome']);
+                if (isset($row['estado_id'])) {
+                	$object_estado->set_id($row['estado_id']);
+                }
+                
+                if (isset($row['estado_uf'])) {
+                	$object_estado->set_uf($row['estado_uf']);
+                }
+                
+                if (isset($row['estado_nome'])) {
+                	$object_estado->set_nome($row['estado_nome']);
+                }
                 
                 $estados[] = $object_estado;
             }

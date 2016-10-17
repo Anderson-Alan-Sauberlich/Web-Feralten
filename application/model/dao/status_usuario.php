@@ -79,12 +79,20 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaStatus($row) {
+        private static function PopulaStatus($row) {
             $object_status_usuario = new Object_Status_Usuario();
             
-            $object_status_usuario->set_id($row['status_usuario_id']);
-            $object_status_usuario->set_nome($row['status_usuario_nome']);
-            $object_status_usuario->set_descricao($row['status_usuario_descricao']);
+            if (isset($row['status_usuario_id'])) {
+            	$object_status_usuario->set_id($row['status_usuario_id']);
+            }
+            
+            if (isset($row['status_usuario_nome'])) {
+            	$object_status_usuario->set_nome($row['status_usuario_nome']);
+            }
+            
+            if (isset($row['status_usuario_descricao'])) {
+            	$object_status_usuario->set_descricao($row['status_usuario_descricao']);
+            }
             
             return $object_status_usuario;
         }                

@@ -129,12 +129,20 @@ namespace application\model\dao;
         	}
         }
         
-        private function PopulaModelo($row) {
+        private static function PopulaModelo($row) {
             $object_modelo = new Object_Modelo();
             
-            $object_modelo->set_id($row['modelo_id']);
-            $object_modelo->set_marca_id($row['modelo_ma_id']);
-            $object_modelo->set_nome($row['modelo_nome']);
+            if (isset($row['modelo_id'])) {
+            	$object_modelo->set_id($row['modelo_id']);
+            }
+            
+            if (isset($row['modelo_ma_id'])) {
+            	$object_modelo->set_marca_id($row['modelo_ma_id']);
+            }
+            
+            if (isset($row['modelo_nome'])) {
+            	$object_modelo->set_nome($row['modelo_nome']);
+            }
             
             return $object_modelo;
         }
@@ -145,9 +153,17 @@ namespace application\model\dao;
             foreach ($rows as $row) {
                 $object_modelo = new Object_Modelo();
                 
-                $object_modelo->set_id($row['modelo_id']);
-                $object_modelo->set_marca_id($row['modelo_ma_id']);
-                $object_modelo->set_nome($row['modelo_nome']);
+                if (isset($row['modelo_id'])) {
+                	$object_modelo->set_id($row['modelo_id']);
+                }
+                
+                if (isset($row['modelo_ma_id'])) {
+                	$object_modelo->set_marca_id($row['modelo_ma_id']);
+                }
+                
+                if (isset($row['modelo_nome'])) {
+                	$object_modelo->set_nome($row['modelo_nome']);
+                }
                 
                 $modelos[] = $object_modelo;
             }

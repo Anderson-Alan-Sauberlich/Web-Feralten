@@ -186,16 +186,33 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaUsuario($row) {
+        private static function PopulaUsuario($row) {
             $object_usuario = new Object_Usuario();
 			
-            $object_usuario->set_id($row['usuario_id']);
-            $object_usuario->set_nome($row['usuario_nome']);
-            $object_usuario->set_email($row['usuario_email']);
-            $object_usuario->set_senha($row['usuario_senha']);
-			$object_usuario->set_ultimo_login($row['usuario_ultimo_login']);
-			$object_usuario->set_token($row['usuario_token_login']);
-			
+            if (isset($row['usuario_id'])) {
+            	$object_usuario->set_id($row['usuario_id']);
+            }
+            
+            if (isset($row['usuario_nome'])) {
+            	$object_usuario->set_nome($row['usuario_nome']);
+            }
+            
+            if (isset($row['usuario_email'])) {
+            	$object_usuario->set_email($row['usuario_email']);
+            }
+            
+            if (isset($row['usuario_senha'])) {
+            	$object_usuario->set_senha($row['usuario_senha']);
+            }
+            
+            if (isset($row['usuario_ultimo_login'])) {
+            	$object_usuario->set_ultimo_login($row['usuario_ultimo_login']);
+            }
+            
+            if (isset($row['usuario_token_login'])) {
+            	$object_usuario->set_token($row['usuario_token_login']);
+            }
+            
             return $object_usuario;
         }
     }

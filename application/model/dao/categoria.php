@@ -89,16 +89,21 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaCategoria($row) {
+        private static function PopulaCategoria($row) {
             $object_categoria = new Object_Categoria();
             
-            $object_categoria->set_id($row['categoria_id']);
-            $object_categoria->set_nome($row['categoria_nome']);
+            if (isset($row['categoria_id'])) {
+            	$object_categoria->set_id($row['categoria_id']);
+            }
+            
+            if (isset($row['categoria_nome'])) {
+            	$object_categoria->set_nome($row['categoria_nome']);
+            }
             
             return $object_categoria;
         }
         
-        private function PopulaCategorias($rows) {
+        private static function PopulaCategorias($rows) {
             $categorias = array();
             
             foreach ($rows as $row) {

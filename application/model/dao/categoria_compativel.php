@@ -86,20 +86,27 @@ namespace application\model\dao;
 			}
 		}
 	
-		private function PopulaCategoriaCompativel($row) {
+		private static function PopulaCategoriaCompativel($row) {
 			$object_categoria_compativel = new Object_Categoria_Compativel();
-	
-			$object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ca']);
-			$object_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ca']);
-	
+			
+			if (isset($row['categoria_compativel_da_id_ca'])) {
+				$object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ca']);
+			}
+			
+			if (isset($row['categoria_compativel_com_id_ca'])) {
+				$object_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ca']);
+			}
+			
 			return $object_categoria_compativel;
 		}
 	
-		private function PopulaCategoriasCompativeis($rows) {
+		private static function PopulaCategoriasCompativeis($rows) {
 			$categorias_compativeis = array();
 	
 			foreach ($rows as $row) {
-				$categorias_compativeis[] = $row['categoria_compativel_com_id_ca'];
+				if (isset($row['categoria_compativel_com_id_ca'])) {
+					$categorias_compativeis[] = $row['categoria_compativel_com_id_ca'];
+				}
 			}
 	
 			return $categorias_compativeis;

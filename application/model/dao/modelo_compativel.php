@@ -87,20 +87,27 @@ namespace application\model\dao;
 			}
 		}
 	
-		private function PopulaModeloCompativel($row) {
+		private static function PopulaModeloCompativel($row) {
 			$object_modelo_compativel = new Object_Modelo_Compativel();
-	
-			$object_modelo_compativel->set_da_id($row['modelo_compativel_da_id_mo']);
-			$object_modelo_compativel->set_com_id($row['modelo_compativel_com_id_mo']);
-	
+			
+			if (isset($row['modelo_compativel_da_id_mo'])) {
+				$object_modelo_compativel->set_da_id($row['modelo_compativel_da_id_mo']);
+			}
+			
+			if (isset($row['modelo_compativel_com_id_mo'])) {
+				$object_modelo_compativel->set_com_id($row['modelo_compativel_com_id_mo']);
+			}
+			
 			return $object_modelo_compativel;
 		}
 	
-		private function PopulaModelosCompativeis($rows) {
+		private static function PopulaModelosCompativeis($rows) {
 			$modelos_compativeis = array();
 	
 			foreach ($rows as $row) {
-				$modelos_compativeis[] = $row['modelo_compativel_com_id_mo'];
+				if (isset($row['modelo_compativel_com_id_mo'])) {
+					$modelos_compativeis[] = $row['modelo_compativel_com_id_mo'];
+				}
 			}
 	
 			return $modelos_compativeis;

@@ -110,18 +110,44 @@ namespace application\model\dao;
         	}
         }
         
-        private function PopulaEndereco($row) {
+        private static function PopulaEndereco($row) {
             $object_endereco = new Object_Endereco();
             
-            $object_endereco->set_id($row['endereco_id']);
-            $object_endereco->set_cidade_id($row['endereco_ci_id']);
-            $object_endereco->set_dados_usuario_id($row['endereco_du_us_id']);
-            $object_endereco->set_estado_id($row['endereco_es_id']);
-            $object_endereco->set_numero($row['endereco_numero']);
-            $object_endereco->set_cep($row['endereco_cep']);
-            $object_endereco->set_rua($row['endereco_rua']);
-            $object_endereco->set_complemento($row['endereco_complemento']);
-            $object_endereco->set_bairro($row['endereco_bairro']);
+            if (isset($row['endereco_id'])) {
+            	$object_endereco->set_id($row['endereco_id']);
+            }
+            
+            if (isset($row['endereco_ci_id'])) {
+            	$object_endereco->set_cidade_id($row['endereco_ci_id']);
+            }
+            
+            if (isset($row['endereco_du_us_id'])) {
+            	$object_endereco->set_dados_usuario_id($row['endereco_du_us_id']);
+            }
+            
+            if (isset($row['endereco_es_id'])) {
+            	$object_endereco->set_estado_id($row['endereco_es_id']);
+            }
+            
+            if (isset($row['endereco_numero'])) {
+            	$object_endereco->set_numero($row['endereco_numero']);
+            }
+            
+            if (isset($row['endereco_cep'])) {
+            	$object_endereco->set_cep($row['endereco_cep']);
+            }
+            
+            if (isset($row['endereco_rua'])) {
+            	$object_endereco->set_rua($row['endereco_rua']);
+            }
+            
+            if (isset($row['endereco_complemento'])) {
+            	$object_endereco->set_complemento($row['endereco_complemento']);
+            }
+            
+            if (isset($row['endereco_bairro'])) {
+            	$object_endereco->set_bairro($row['endereco_bairro']);
+            }
             
             return $object_endereco;
         }

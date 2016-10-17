@@ -86,23 +86,33 @@ namespace application\model\dao;
             }
         }
         
-        private function Popular_Status_Peca($row) {
+        private static function Popular_Status_Peca($row) {
             $object_status_peca = new Object_Status_Peca();
             
-            $object_status_peca->set_id($row['status_peca_id']);
-            $object_status_peca->set_nome($row['status_peca_nome']);
+            if (isset($row['status_peca_id'])) {
+            	$object_status_peca->set_id($row['status_peca_id']);
+            }
+            
+            if (isset($row['status_peca_nome'])) {
+            	$object_status_peca->set_nome($row['status_peca_nome']);
+            }
             
             return $object_status_peca;
         }
 		
-		private function Popular_Status_Pecas($rows) {
+		private static function Popular_Status_Pecas($rows) {
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
 	            $object_status_peca = new Object_Status_Peca();
 	            
-	            $object_status_peca->set_id($row['status_peca_id']);
-	            $object_status_peca->set_nome($row['status_peca_nome']);
+	            if (isset($row['status_peca_id'])) {
+	            	$object_status_peca->set_id($row['status_peca_id']);
+	            }
+	            
+	            if (isset($row['status_peca_nome'])) {
+	            	$object_status_peca->set_nome($row['status_peca_nome']);
+	            }
 	            
 	            $status_pecas[] = $object_status_peca;
 			}

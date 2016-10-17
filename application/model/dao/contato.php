@@ -97,14 +97,28 @@ namespace application\model\dao;
         	}
         }
         
-        private function PopulaCategoria($row) {
+        private static function PopulaCategoria($row) {
             $object_contato = new Object_Contato();
             
-            $object_contato->set_id($row['contato_id']);
-            $object_contato->set_dados_usuario_id($row['contato_du_us_id']);
-            $object_contato->set_telefone1($row['contato_telefone1']);
-            $object_contato->set_telefone2($row['contato_telefone2']);
-            $object_contato->set_email($row['contato_email']);
+            if (isset($row['contato_id'])) {
+            	$object_contato->set_id($row['contato_id']);
+            }
+            
+            if (isset($row['contato_du_us_id'])) {
+            	$object_contato->set_dados_usuario_id($row['contato_du_us_id']);
+            }
+            
+            if (isset($row['contato_telefone1'])) {
+            	$object_contato->set_telefone1($row['contato_telefone1']);
+            }
+            
+            if (isset($row['contato_telefone2'])) {
+            	$object_contato->set_telefone2($row['contato_telefone2']);
+            }
+            
+            if (isset($row['contato_email'])) {
+            	$object_contato->set_email($row['contato_email']);
+            }
             
             return $object_contato;
         }

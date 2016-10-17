@@ -129,25 +129,41 @@ namespace application\model\dao;
         	}
         }
         
-        private function PopulaMarca($row) {
+        private static function PopulaMarca($row) {
             $object_marca = new Object_Marca();
             
-            $object_marca->set_id($row['marca_id']);
-            $object_marca->set_categoria_id($row['marca_ca_id']);
-            $object_marca->set_nome($row['marca_nome']);
-
+            if (isset($row['marca_id'])) {
+            	$object_marca->set_id($row['marca_id']);
+            }
+            
+            if (isset($row['marca_ca_id'])) {
+            	$object_marca->set_categoria_id($row['marca_ca_id']);
+            }
+            
+            if (isset($row['marca_nome'])) {
+            	$object_marca->set_nome($row['marca_nome']);
+            }
+            
             return $object_marca;
         }
         
-        private function PopulaMarcas($rows) {
+        private static function PopulaMarcas($rows) {
             $marcas = array();
             
             foreach ($rows as $row) {
                 $object_marca = new Object_Marca();
                 
-                $object_marca->set_id($row['marca_id']);
-                $object_marca->set_categoria_id($row['marca_ca_id']);
-                $object_marca->set_nome($row['marca_nome']);
+                if (isset($row['marca_id'])) {
+                	$object_marca->set_id($row['marca_id']);
+                }
+                
+                if (isset($row['marca_ca_id'])) {
+                	$object_marca->set_categoria_id($row['marca_ca_id']);
+                }
+                
+                if (isset($row['marca_nome'])) {
+                	$object_marca->set_nome($row['marca_nome']);
+                }
                 
                 $marcas[] = $object_marca;
             }

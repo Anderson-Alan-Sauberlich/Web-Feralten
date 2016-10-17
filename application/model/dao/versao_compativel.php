@@ -86,20 +86,27 @@ namespace application\model\dao;
 			}
 		}
 	
-		private function PopulaVersaoCompativel($row) {
+		private static function PopulaVersaoCompativel($row) {
 			$object_versao_compativel = new Object_Versao_Compativel();
-	
-			$object_versao_compativel->set_da_id($row['versao_compativel_da_id_vs']);
-			$object_versao_compativel->set_com_id($row['versao_compativel_com_id_vs']);
-	
+			
+			if (isset($row['versao_compativel_da_id_vs'])) {
+				$object_versao_compativel->set_da_id($row['versao_compativel_da_id_vs']);
+			}
+			
+			if (isset($row['versao_compativel_com_id_vs'])) {
+				$object_versao_compativel->set_com_id($row['versao_compativel_com_id_vs']);
+			}
+			
 			return $object_versao_compativel;
 		}
 	
-		private function PopulaVersoesCompativeis($rows) {
+		private static function PopulaVersoesCompativeis($rows) {
 			$versoes_compativeis = array();
 	
 			foreach ($rows as $row) {
-				$versoes_compativeis[] = $row['versao_compativel_com_id_vs'];
+				if (isset($row['versao_compativel_com_id_vs'])) {
+					$versoes_compativeis[] = $row['versao_compativel_com_id_vs'];
+				}
 			}
 	
 			return $versoes_compativeis;

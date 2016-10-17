@@ -86,20 +86,27 @@ namespace application\model\dao;
 			}
 		}
 	
-		private function PopulaMarcaCompativel($row) {
+		private static function PopulaMarcaCompativel($row) {
 			$object_marca_compativel = new Object_Marca_Compativel();
-	
-			$object_marca_compativel->set_da_id($row['marca_compativel_da_id_ma']);
-			$object_marca_compativel->set_com_id($row['marca_compativel_com_id_ma']);
-	
+			
+			if (isset($row['marca_compativel_da_id_ma'])) {
+				$object_marca_compativel->set_da_id($row['marca_compativel_da_id_ma']);
+			}
+			
+			if (isset($row['marca_compativel_com_id_ma'])) {
+				$object_marca_compativel->set_com_id($row['marca_compativel_com_id_ma']);
+			}
+			
 			return $object_marca_compativel;
 		}
 	
-		private function PopulaMarcasCompativeis($rows) {
+		private static function PopulaMarcasCompativeis($rows) {
 			$marcas_compativeis = array();
 	
 			foreach ($rows as $row) {
-				$marcas_compativeis[] = $row['marca_compativel_com_id_ma'];
+				if (isset($row['marca_compativel_com_id_ma'])) {
+					$marcas_compativeis[] = $row['marca_compativel_com_id_ma'];
+				}
 			}
 	
 			return $marcas_compativeis;

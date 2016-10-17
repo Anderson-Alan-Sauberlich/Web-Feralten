@@ -91,20 +91,40 @@ namespace application\model\dao;
             }
         }
         
-        private function Popula_Lista_Pativeis($rows) {
+        private static function Popula_Lista_Pativeis($rows) {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {
 	            $object_lista_pativel = new Object_Lista_Pativel();
 	            
-	            $object_lista_pativel->set_peca_id($row['lista_pativel_pc_id']);
-	            $object_lista_pativel->set_categoria_id($row['lista_pativel_ca_id']);
-	            $object_lista_pativel->set_marca_id($row['lista_pativel_ma_id']);
-				$object_lista_pativel->set_modelo_id($row['lista_pativel_mo_id']);
-				$object_lista_pativel->set_versao_id($row['lista_pativel_vs_id']);
-	            $object_lista_pativel->set_ano_de($row['lista_pativel_ano_de']);
-	            $object_lista_pativel->set_ano_ate($row['lista_pativel_ano_ate']);
-				
+	            if (isset($row['lista_pativel_pc_id'])) {
+	            	$object_lista_pativel->set_peca_id($row['lista_pativel_pc_id']);
+	            }
+	            
+	            if (isset($row['lista_pativel_ca_id'])) {
+	            	$object_lista_pativel->set_categoria_id($row['lista_pativel_ca_id']);
+	            }
+	            
+	            if (isset($row['lista_pativel_ma_id'])) {
+	            	$object_lista_pativel->set_marca_id($row['lista_pativel_ma_id']);
+	            }
+	            
+	            if (isset($row['lista_pativel_mo_id'])) {
+	            	$object_lista_pativel->set_modelo_id($row['lista_pativel_mo_id']);
+	            }
+	            
+	            if (isset($row['lista_pativel_vs_id'])) {
+	            	$object_lista_pativel->set_versao_id($row['lista_pativel_vs_id']);
+	            }
+	            
+	            if (isset($row['lista_pativel_ano_de'])) {
+	            	$object_lista_pativel->set_ano_de($row['lista_pativel_ano_de']);
+	            }
+	            
+	            if (isset($row['lista_pativel_ano_ate'])) {
+	            	$object_lista_pativel->set_ano_ate($row['lista_pativel_ano_ate']);
+	            }
+	            
 				$pativeis[] = $object_lista_pativel;
 			}
             

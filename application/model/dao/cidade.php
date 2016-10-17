@@ -93,15 +93,23 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaCidades($rows) {
+        private static function PopulaCidades($rows) {
             $cidades = array();
             
             foreach ($rows as $row) {
                 $object_cidade = new Object_Cidade();
-            
-                $object_cidade->set_id($row['cidade_id']);
-                $object_cidade->set_estado_id($row['cidade_es_id']);
-                $object_cidade->set_nome($row['cidade_nome']);
+            	
+                if (isset($row['cidade_id'])) {
+                	$object_cidade->set_id($row['cidade_id']);
+                }
+                
+                if (isset($row['cidade_es_id'])) {
+                	$object_cidade->set_estado_id($row['cidade_es_id']);
+                }
+                
+                if (isset($row['cidade_nome'])) {
+                	$object_cidade->set_nome($row['cidade_nome']);
+                }
                 
                 $cidades[] = $object_cidade;
             }
@@ -109,12 +117,20 @@ namespace application\model\dao;
             return $cidades;
         }
         
-        private function PopulaCidade($row) {
+        private static function PopulaCidade($row) {
             $object_cidade = new Object_Cidade();
             
-            $object_cidade->set_id($row['cidade_id']);
-            $object_cidade->set_estado_id($row['cidade_es_id']);
-            $object_cidade->set_nome($row['cidade_nome']);
+            if (isset($row['cidade_id'])) {
+            	$object_cidade->set_id($row['cidade_id']);
+            }
+            
+            if (isset($row['cidade_es_id'])) {
+            	$object_cidade->set_estado_id($row['cidade_es_id']);
+            }
+            
+            if (isset($row['cidade_nome'])) {
+            	$object_cidade->set_nome($row['cidade_nome']);
+            }
             
             return $object_cidade;
         }

@@ -97,23 +97,132 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaPeca($row) {
+        public static function Buscar_Por_Id_Usuario($id) {
+        	try {
+        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_co_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade FROM tb_peca WHERE peca_du_us_id = :id";
+        	
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        	
+        		return self::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        private static function PopulaPeca($row) {
             $object_peca = new Object_Peca();
             
-            $object_peca->set_id($row['peca_id']);
-            $object_peca->set_usuario_id($row['peca_du_us_id']);
-			$object_peca->set_endereco_id($row['peca_en_id']);
-			$object_peca->set_contato_id($row['peca_co_id']);
-			$object_peca->set_status_id($row['peca_sp_id']);
-            $object_peca->set_nome($row['peca_nome']);
-            $object_peca->set_fabricante($row['peca_fabricante']);
-            $object_peca->set_preco($row['peca_preco']);
-            $object_peca->set_descricao($row['peca_descricao']);
-            $object_peca->set_data_anuncio($row['peca_data_anuncio']);
-			$object_peca->set_serie($row['peca_numero_serie']);
-			$object_peca->set_prioridade($row['peca_prioridade']);
+            if (isset($row['peca_id'])) {
+            	$object_peca->set_id($row['peca_id']);
+            }
+            
+            if (isset($row['peca_du_us_id'])) {
+            	$object_peca->set_usuario_id($row['peca_du_us_id']);
+            }
+            
+            if (isset($row['peca_en_id'])) {
+            	$object_peca->set_endereco_id($row['peca_en_id']);
+            }
+            
+            if (isset($row['peca_co_id'])) {
+            	$object_peca->set_contato_id($row['peca_co_id']);
+            }
+            
+            if (isset($row['peca_sp_id'])) {
+            	$object_peca->set_status_id($row['peca_sp_id']);
+            }
+            
+            if (isset($row['peca_nome'])) {
+            	$object_peca->set_nome($row['peca_nome']);
+            }
+            
+            if (isset($row['peca_fabricante'])) {
+            	$object_peca->set_fabricante($row['peca_fabricante']);
+            }
+            
+            if (isset($row['peca_preco'])) {
+            	$object_peca->set_preco($row['peca_preco']);
+            }
+            
+            if (isset($row['peca_descricao'])) {
+            	$object_peca->set_descricao($row['peca_descricao']);
+            }
+            
+            if (isset($row['peca_data_anuncio'])) {
+            	$object_peca->set_data_anuncio($row['peca_data_anuncio']);
+            }
+            
+            if (isset($row['peca_numero_serie'])) {
+            	$object_peca->set_serie($row['peca_numero_serie']);
+            }
+            
+            if (isset($row['peca_prioridade'])) {
+            	$object_peca->set_prioridade($row['peca_prioridade']);
+            }
             
             return $object_peca;
+        }
+        
+        private static function PopulaPecas($rows) {
+        	$object_pecas = array();
+        	
+        	foreach ($rows as $row) {
+	        	$object_peca = new Object_Peca();
+	        	
+	        	if (isset($row['peca_id'])) {
+	        		$object_peca->set_id($row['peca_id']);
+	        	}
+	        	
+	        	if (isset($row['peca_du_us_id'])) {
+	        		$object_peca->set_usuario_id($row['peca_du_us_id']);
+	        	}
+	        	
+	        	if (isset($row['peca_en_id'])) {
+	        		$object_peca->set_endereco_id($row['peca_en_id']);
+	        	}
+	        	
+	        	if (isset($row['peca_co_id'])) {
+	        		$object_peca->set_contato_id($row['peca_co_id']);
+	        	}
+	        	
+	        	if (isset($row['peca_sp_id'])) {
+	        		$object_peca->set_status_id($row['peca_sp_id']);
+	        	}
+	        	
+	        	if (isset($row['peca_nome'])) {
+	        		$object_peca->set_nome($row['peca_nome']);
+	        	}
+	        	
+	        	if (isset($row['peca_fabricante'])) {
+	        		$object_peca->set_fabricante($row['peca_fabricante']);
+	        	}
+	        	
+	        	if (isset($row['peca_preco'])) {
+	        		$object_peca->set_preco($row['peca_preco']);
+	        	}
+	        	
+	        	if (isset($row['peca_descricao'])) {
+	        		$object_peca->set_descricao($row['peca_descricao']);
+	        	}
+	        	
+	        	if (isset($row['peca_data_anuncio'])) {
+	        		$object_peca->set_data_anuncio($row['peca_data_anuncio']);
+	        	}
+	        	
+	        	if (isset($row['peca_numero_serie'])) {
+	        		$object_peca->set_serie($row['peca_numero_serie']);
+	        	}
+	        	
+	        	if (isset($row['peca_prioridade'])) {
+	        		$object_peca->set_prioridade($row['peca_prioridade']);
+	        	}
+	        
+	        	$object_pecas[] = $object_peca;
+        	}
+        	
+        	return $object_pecas;
         }
     }
 ?>

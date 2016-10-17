@@ -104,25 +104,41 @@ namespace application\model\dao;
             }
         }
 		
-        private function PopulaFotoPeca($row) {
+        private static function PopulaFotoPeca($row) {
             $object_foto_peca = new Object_Foto_Peca();
             
-            $object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
-            $object_foto_peca->set_endereco($row['foto_peca_endereco']);
-            $object_foto_peca->set_numero($row['foto_peca_numero']);
-
+            if (isset($row['foto_peca_pc_id'])) {
+            	$object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
+            }
+            
+            if (isset($row['foto_peca_endereco'])) {
+            	$object_foto_peca->set_endereco($row['foto_peca_endereco']);
+            }
+            
+            if (isset($row['foto_peca_numero'])) {
+            	$object_foto_peca->set_numero($row['foto_peca_numero']);
+            }
+            
             return $object_foto_peca;
         }
         
-        private function PopulaFotosPecas($rows) {
+        private static function PopulaFotosPecas($rows) {
             $fotos_pecas = array();
             
             foreach ($rows as $row) {
                 $object_foto_peca = new Object_Foto_Peca();
                 
-                $object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
-                $object_foto_peca->set_endereco($row['foto_peca_endereco']);
-                $object_foto_peca->set_numero($row['foto_peca_numero']);
+                if (isset($row['foto_peca_pc_id'])) {
+                	$object_foto_peca->set_peca_id($row['foto_peca_pc_id']);
+                }
+                
+                if (isset($row['foto_peca_endereco'])) {
+                	$object_foto_peca->set_endereco($row['foto_peca_endereco']);
+                }
+                
+                if (isset($row['foto_peca_numero'])) {
+                	$object_foto_peca->set_numero($row['foto_peca_numero']);
+                }
                 
                 $fotos_pecas[] = $object_foto_peca;
             }

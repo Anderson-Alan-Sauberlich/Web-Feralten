@@ -129,25 +129,41 @@ namespace application\model\dao;
         	}
         }
         
-        private function PopulaVersao($row) {
+        private static function PopulaVersao($row) {
             $object_versao = new Object_Versao();
             
-            $object_versao->set_id($row['versao_id']);
-            $object_versao->set_modelo_id($row['versao_mo_id']);
-            $object_versao->set_nome($row['versao_nome']);
+            if (isset($row['versao_id'])) {
+            	$object_versao->set_id($row['versao_id']);
+            }
+            
+            if (isset($row['versao_mo_id'])) {
+            	$object_versao->set_modelo_id($row['versao_mo_id']);
+            }
+            
+            if (isset($row['versao_nome'])) {
+            	$object_versao->set_nome($row['versao_nome']);
+            }
             
             return $object_versao;
         }
         
-        private function PopulaVersoes($rows) {
+        private static function PopulaVersoes($rows) {
             $versoes = array();
             
             foreach ($rows as $row) {
                 $object_versao = new Object_Versao();
                 
-                $object_versao->set_id($row['versao_id']);
-                $object_versao->set_modelo_id($row['versao_mo_id']);
-                $object_versao->set_nome($row['versao_nome']);
+                if (isset($row['versao_id'])) {
+                	$object_versao->set_id($row['versao_id']);
+                }
+                
+                if (isset($row['versao_mo_id'])) {
+                	$object_versao->set_modelo_id($row['versao_mo_id']);
+                }
+                
+                if (isset($row['versao_nome'])) {
+                	$object_versao->set_nome($row['versao_nome']);
+                }
                 
                 $versoes[] = $object_versao;
             }

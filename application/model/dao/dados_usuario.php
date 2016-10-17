@@ -153,16 +153,36 @@ namespace application\model\dao;
             }
         }
         
-        private function PopulaUsuario($row) {
+        private static function PopulaUsuario($row) {
             $object_dados_usuario = new Object_Dados_Usuario();
             
-            $object_dados_usuario->set_usuario_id($row['dados_usuario_us_id']);
-            $object_dados_usuario->set_status_id($row['dados_usuario_su_id']);
-            $object_dados_usuario->set_cpf_cnpj($row['dados_usuario_cpf_cnpj']);
-            $object_dados_usuario->set_nome_fantasia($row['dados_usuario_nome_fantasia']);
-            $object_dados_usuario->set_imagem($row['dados_usuario_imagem']);
-            $object_dados_usuario->set_site($row['dados_usuario_site']);
-            $object_dados_usuario->set_data($row['dados_usuario_data_cadastro']);
+            if (isset($row['dados_usuario_us_id'])) {
+            	$object_dados_usuario->set_usuario_id($row['dados_usuario_us_id']);
+            }
+            
+            if (isset($row['dados_usuario_su_id'])) {
+            	$object_dados_usuario->set_status_id($row['dados_usuario_su_id']);
+            }
+            
+            if (isset($row['dados_usuario_cpf_cnpj'])) {
+            	$object_dados_usuario->set_cpf_cnpj($row['dados_usuario_cpf_cnpj']);
+            }
+            
+            if (isset($row['dados_usuario_nome_fantasia'])) {
+            	$object_dados_usuario->set_nome_fantasia($row['dados_usuario_nome_fantasia']);
+            }
+            
+            if (isset($row['dados_usuario_imagem'])) {
+            	$object_dados_usuario->set_imagem($row['dados_usuario_imagem']);
+            }
+            
+            if (isset($row['dados_usuario_site'])) {
+            	$object_dados_usuario->set_site($row['dados_usuario_site']);
+            }
+            
+            if (isset($row['dados_usuario_data_cadastro'])) {
+            	$object_dados_usuario->set_data($row['dados_usuario_data_cadastro']);
+            }
             
             return $object_dados_usuario;
         }
