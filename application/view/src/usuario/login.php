@@ -10,6 +10,7 @@ namespace application\view\src\usuario;
         }
         
         private static $login_erros;
+        private static $login_sucesso;
         private static $login_campos;
         private static $login_form;
         
@@ -25,6 +26,10 @@ namespace application\view\src\usuario;
         	self::$login_form = $login_form;
         }
         
+        public function set_login_sucesso($login_sucesso) {
+        	self::$login_sucesso = $login_sucesso;
+        }
+        
         public function Executar() {
         	require_once RAIZ.'/application/view/html/usuario/login.php';
         }
@@ -38,24 +43,36 @@ namespace application\view\src\usuario;
         }
         
         public static function Mostrar_Erros() {
-            if (!empty(self::$login_erros)) {
-                foreach (self::$login_erros as $value) {
+        	$login_erros = null;
+        	
+        	if (!empty(self::$login_erros)) {
+        		$login_erros = self::$login_erros;
+        	} else if (!empty($_SESSION['login_erros'])) {
+        		$login_erros = $_SESSION['login_erros'];
+        		unset($_SESSION['login_erros']);
+        	}
+        	
+            if (!empty($login_erros)) {
+                foreach ($login_erros as $value) {
                     echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>$value</div>";
                 }
             }
         }
         
         public static function Mostrar_Sucesso() {
-            if (isset($_SESSION['login_success'])) {
-                $login_success = $_SESSION['login_success'];
-                
-				if (isset($login_success)) {
-                	foreach ($login_success as $value) {
-                		echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong><span class=\"glyphicon glyphicon-ok\"></span></strong> " . $value . "</div>";
-					}
+        	$login_sucesso = null;
+        	 
+        	if (!empty(self::$login_sucesso)) {
+        		$login_sucesso = self::$login_sucesso;
+        	} else if (!empty($_SESSION['login_sucesso'])) {
+        		$login_sucesso = $_SESSION['login_sucesso'];
+        		unset($_SESSION['login_sucesso']);
+        	}
+        	
+            if (!empty($login_sucesso)) {
+                foreach ($login_sucesso as $value) {
+                	echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong><span class=\"glyphicon glyphicon-ok\"></span></strong> " . $value . "</div>";
 				}
-				
-                unset($_SESSION['login_success']);
             }
         }
 

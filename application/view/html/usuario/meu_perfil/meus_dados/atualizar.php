@@ -13,13 +13,13 @@
         <?php self::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
             <form id="form_atualizar" name="form_atualizar" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/" method="post" role="form">
+                <?php  self::Mostrar_Erros(); ?>
+                <?php  self::Mostrar_Sucesso(); ?>
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
                         <label class="lbPanel">Atualizar Dados do Login</label>
                     </div>
                     <div class="panel-body dadosPanel">
-                        <?php  self::Mostrar_Erros("atualizar_login"); ?>
-                        <?php  self::Mostrar_Sucesso("atualizar_login"); ?>
                         <div class="col-sm-6">
                             <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
                             <div class="input-group <?php self::Incluir_Classe_Erros("login", "email"); ?>">
@@ -27,7 +27,7 @@
                                 <input id="email" name="email" type="email" class="form-control" value="<?php self::Manter_Valor("login", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este email sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
 	                        <label for="confemail" class="lbPanel">Digite Novamente Seu E-Mail:</label>
-	                        <div class="input-group <?php self::Incluir_Classe_Erros("login", "confemail");  ?>">
+	                        <div class="input-group <?php self::Incluir_Classe_Erros("login", "confemail"); ?>">
 	                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 	                            <input id="confemail" name="confemail" type="email" class="form-control" value="<?php self::Manter_Valor("login", "confemail") ?>" placeholder="Repetir E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu e-mail novamente da mesma forma para Confirmilo. (Campo Obrigatório)" />
 	                        </div>
@@ -51,8 +51,6 @@
                         <label class="lbPanel">Atualizar Dados Do Usuario</label>
                     </div>
                     <div class="panel-body dadosPanel">
-                        <?php  self::Mostrar_Erros("atualizar_dadosusuario"); ?>
-                        <?php  self::Mostrar_Sucesso("atualizar_dadosusuario"); ?>
                         <div class="col-sm-6">
                             <label for="imagem" class="lbPanel">Selecione uma Foto, Logo Marca ou Imagem de Capa:</label>
 							<div class="thumbnail">
@@ -103,8 +101,6 @@
                         <label class="lbPanel">Atualizar Dados do Contato</label>
                     </div>
                     <div class="panel-body dadosPanel">
-                        <?php  self::Mostrar_Erros("atualizar_contato"); ?>
-                        <?php  self::Mostrar_Sucesso("atualizar_contato"); ?>
                         <div class="col-sm-6">
                             <label for="fone1" class="lbPanel">Digite Seu Numero de Telefone-1:</label>
                             <div class="input-group <?php self::Incluir_Classe_Erros("contato", "fone1"); ?>">

@@ -19,11 +19,17 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina() {
+        public static function Carregar_Pagina($alterar_senha_erros = null, $alterar_senha_campos = null, $alterar_senha_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
-        		new View_Alterar_Senha($status);
+        		$view = new View_Alterar_Senha($status);
+        		
+        		$view->set_alterar_senha_campos($alterar_senha_campos);
+        		$view->set_alterar_senha_erros($alterar_senha_erros);
+        		$view->set_alterar_senha_form($alterar_senha_form);
+        		 
+        		$view->Executar();
         	} else {
         		return false;
         	}
@@ -31,32 +37,32 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public static function Atualizar_Senha_Usuario() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-	            $erros_alterar_senha = array();
-	            $alt_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
+	            $alterar_senha_erros = array();
+	            $alterar_senha_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
 	            
 			    $senha_nova = null;
 			    
 			    if (empty($_POST['senha_antiga'])) {
-			    	$erros_alterar_senha[] = "Digite a Senha Antiga";
-			    	$alt_campos['erro_senha_antiga'] = "erro";
+			    	$alterar_senha_erros[] = "Digite a Senha Antiga";
+			    	$alterar_senha_campos['erro_senha_antiga'] = "erro";
 			    } else {
 			    	$senha_usuario = DAO_Usuario::Buscar_Senha_Usuario(unserialize($_SESSION['usuario'])->get_id());
 			    		
 			    	if (!password_verify($_POST['senha_antiga'], $senha_usuario)) {
-			    		$erros_alterar_senha[] = "Senha Antiga Incorreta";
-			    		$alt_campos['erro_senha_antiga'] = "erro";
+			    		$alterar_senha_erros[] = "Senha Antiga Incorreta";
+			    		$alterar_senha_campos['erro_senha_antiga'] = "erro";
 			    	}
 			    }
 	            
 	            if (empty($_POST['senha_nova']) OR empty($_POST['senha_confnova'])) {
 	            	if (empty($_POST['senha_nova'])) {
-	            		$erros_alterar_senha[] = "Preencha o Campo Nova Senha";
-	            		$alt_campos['erro_senha_nova'] = "erro";
+	            		$alterar_senha_erros[] = "Preencha o Campo Nova Senha";
+	            		$alterar_senha_campos['erro_senha_nova'] = "erro";
 	            	}
 	            	
 	            	if (empty($_POST['senha_confnova'])) {
-	            		$erros_alterar_senha[] = "Preencha o Campo Confirmar Nova Senha";
-	            		$alt_campos['erro_senha_confnova'] = "erro";
+	            		$alterar_senha_erros[] = "Preencha o Campo Confirmar Nova Senha";
+	            		$alterar_senha_campos['erro_senha_confnova'] = "erro";
 	            	}
 	            } else {
 	            	if ($_POST['senha_nova'] === $_POST['senha_confnova']) {
@@ -74,33 +80,37 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		$cad_campos['erro_senha'] = "erro";
 		            	}
 	            	} else {
-	            		$erros_alterar_senha[] = "Campos: \"Nova Senha\" e \"Confirmar Nova Senha\", Não estão Iguais.";
-	            		$alt_campos['erro_senha_nova'] = "erro";
-	            		$alt_campos['erro_senha_confnova'] = "erro";
+	            		$alterar_senha_erros[] = "Campos: \"Nova Senha\" e \"Confirmar Nova Senha\", Não estão Iguais.";
+	            		$alterar_senha_campos['erro_senha_nova'] = "erro";
+	            		$alterar_senha_campos['erro_senha_confnova'] = "erro";
 	            	}
 	            }
 	            
-	            if (empty($erros_alterar_senha)) {
+	            if (empty($alterar_senha_erros)) {
 	            	$senha_nova = password_hash($senha_nova, PASSWORD_DEFAULT);
 					
-	                DAO_Usuario::Atualizar_Senha($senha_nova, unserialize($_SESSION['usuario'])->get_id());
-	                
-					Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova);
-					
-					return 'certo';
+	                if (DAO_Usuario::Atualizar_Senha($senha_nova, unserialize($_SESSION['usuario'])->get_id()) !== false) {
+	                	if (Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova) === false) {
+	                		$alterar_senha_erros[] = "Senha Alterada, porém ocorreu um Erro ao tentar Autenticar o Usuario";
+	                	}
+	                } else {
+	                	$alterar_senha_erros[] = "Erro ao tentar Alterar a Senha do Usuario";
+	                	$alterar_senha_campos['erro_senha_antiga'] = "";
+	                	$alterar_senha_campos['erro_senha_nova'] = "";
+	                	$alterar_senha_campos['erro_senha_confnova'] = "";
+	                }
+	            }
+	            
+	            if (empty($alterar_senha_erros)) {
+	            	return 'certo';
 	            } else {
-	                $_SESSION['erros_alterar_senha'] = $erros_alterar_senha;
-					$_SESSION['alt_campos'] = $alt_campos;
-					
-					$form_alterar_senha = array();
-						
-					$form_alterar_senha['senha_antiga'] = strip_tags($_POST['senha_antiga']);
-					$form_alterar_senha['senha_nova'] = strip_tags($_POST['senha_nova']);
-					$form_alterar_senha['senha_confnova'] = strip_tags($_POST['senha_confnova']);
-						
-					$_SESSION['form_alterar_senha'] = $form_alterar_senha;
-					
-					return 'erro';
+	            	$alterar_senha_form = array();
+	            	
+	            	$alterar_senha_form['senha_antiga'] = strip_tags($_POST['senha_antiga']);
+	            	$alterar_senha_form['senha_nova'] = strip_tags($_POST['senha_nova']);
+	            	$alterar_senha_form['senha_confnova'] = strip_tags($_POST['senha_confnova']);
+	            	
+	            	self::Carregar_Pagina($alterar_senha_erros, $alterar_senha_campos, $alterar_senha_form);
 	            }
         	} else {
         		return false;

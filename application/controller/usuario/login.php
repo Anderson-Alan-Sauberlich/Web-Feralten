@@ -37,7 +37,7 @@ namespace application\controller\usuario;
 	        		}
 	        
 	        		unset($_SESSION['usuario']);
-	        		$_SESSION['login_success'][] = "LogOut efetuado com Sucesso";
+	        		$_SESSION['login_sucesso'][] = "LogOut efetuado com Sucesso";
 	        	}
         	}
         }

@@ -241,9 +241,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
 		            	
 	            		if (filter_var($cpf_cnpj, FILTER_VALIDATE_INT)) {
-		            		if (strlen($cpf_cnpj) === 14) {
-		            			$dados_usuario->set_cpf_cnpj($cpf_cnpj);
-		            		} else if (strlen($cpf_cnpj) === 11) {
+		            		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
 		            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
 		            			
 		            			if ($retorno !== false) {

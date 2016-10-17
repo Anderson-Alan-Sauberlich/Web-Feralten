@@ -280,7 +280,7 @@
 			} else if ($resposta != 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
-				return $response->withRedirect('/usuario/meu-perfil/meus-dados/atualizar/');
+				return $response;
 			}
 		});
 		
@@ -329,10 +329,10 @@
 			
 			if ($resposta === 'certo') {
 				return $response->withRedirect('/usuario/meu-perfil/');
-			} else if ($resposta === 'erro') {
-				return $response->withRedirect('/usuario/meu-perfil/meus-dados/alterar-senha/');
 			} else if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
+			} else {
+				return $response;
 			}
 		});
 	});

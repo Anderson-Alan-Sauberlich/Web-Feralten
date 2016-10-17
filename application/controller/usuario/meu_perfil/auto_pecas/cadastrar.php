@@ -85,9 +85,9 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 		        	if (isset($_POST['salvar'])) {
 		        		self::Cadastrar_Peca();
 		        	} else if (isset($_POST['restaurar'])) {
-		        		unset($_SESSION['cadastrar_form']);
 		        		unset($_SESSION['compatibilidade']);
 		        		self::Deletar_Imagem(123);
+		        		self::Carregar_Pagina();
 		        	}
         		}
         		
