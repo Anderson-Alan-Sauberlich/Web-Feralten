@@ -20,7 +20,7 @@
 				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
 					<div class="row">
 						<div class="ui three stackable doubling link cards" id="div_pecas">
-							<?php self::Mostrar_Card_Peca(); ?>
+							<?php self::Mostrar_Cards_Pecas(); ?>
 						</div>
 					</div>
 				</div>

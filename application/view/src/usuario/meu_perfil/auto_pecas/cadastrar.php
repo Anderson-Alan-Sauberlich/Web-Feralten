@@ -562,15 +562,10 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 
 		public static function Mostrar_Status() {
 			$satus_pecas = Controller_Cadastrar::Buscar_Status_Pecas();
-			$status;
-			
-			if (isset($_SESSION['form_cadastrar_peca']['status'])) {
-				$status = $_SESSION['form_cadastrar_peca']['status'];
-			}
 			
 			foreach ($satus_pecas as $status_peca) {
-				if (isset($status)) {
-					if ($status == $status_peca->get_id()) {
+				if (isset(self::$cadastrar_form['status'])) {
+					if (self::$cadastrar_form['status'] == $status_peca->get_id()) {
 						echo "<option selected value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
 					} else {
 						echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
@@ -579,8 +574,6 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 					echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
 				}
 			}
-			
-			unset($_SESSION['form_cadastrar_peca']['status']);
 		}
 		
         private static function Mostrar_Anos($ano = null) {

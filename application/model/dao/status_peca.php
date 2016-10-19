@@ -86,6 +86,19 @@ namespace application\model\dao;
             }
         }
         
+        public static function Buscar_Lista_Todos() {
+        	try {
+        		$sql = "SELECT status_peca_id, status_peca_nome FROM tb_status_peca";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->execute();
+        
+        		return self::Popular_Lista_Status_Pecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         private static function Popular_Status_Peca($row) {
             $object_status_peca = new Object_Status_Peca();
             
@@ -117,6 +130,18 @@ namespace application\model\dao;
 	            $status_pecas[] = $object_status_peca;
 			}
 			
+			return $status_pecas;
+		}
+		
+		private static function Popular_Lista_Status_Pecas($rows) {
+			$status_pecas = array();
+				
+			foreach ($rows as $row) {
+				if (isset($row['status_peca_id']) AND isset($row['status_peca_nome'])) {
+					$status_pecas[$row['status_peca_id']] = $row['status_peca_nome'];
+				}
+			}
+				
 			return $status_pecas;
 		}
     }

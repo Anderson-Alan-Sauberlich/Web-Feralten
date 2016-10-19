@@ -19,9 +19,19 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         
         private static $status_usuario;
         private static $pecas;
+        private static $status_pecas;
+        private static $fotos_pecas;
         
         public function set_pecas($pecas) {
         	self::$pecas = $pecas;
+        }
+        
+        public function set_fotos_pecas($fotos_pecas) {
+        	self::$fotos_pecas = $fotos_pecas;
+        }
+        
+        public function set_status_pecas($status_pecas) {
+        	self::$status_pecas = $status_pecas;
         }
         
         public function Executar() {
@@ -40,7 +50,7 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         	new View_Menu_Filtro();
         }
         
-        public static function Mostrar_Card_Peca() {
+        public static function Mostrar_Cards_Pecas() {
         	if (!empty(self::$pecas)) {
 	        	foreach (self::$pecas as $peca) {
 	        		echo "<div class=\"ui raised card\">";
@@ -48,29 +58,49 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	        		echo "<div class=\"meta\">".$peca->get_nome()."</div>";
 	        		echo "</div>";
 	        		echo "<div class=\"ui medium bordered image\">";
-	        		echo "<img src=\"/application/view/resources/img/imagem_Indisponivel.png\">";
+	        		if (!empty(self::$fotos_pecas)) {
+	        			if (!empty(self::$fotos_pecas[$peca->get_id()])) {
+	        				echo "<img src=\"".str_replace("@", "200x150", self::$fotos_pecas[$peca->get_id()])."\">";
+	        			} else {
+	        				echo "<img src=\"/application/view/resources/img/imagem_Indisponivel.png\">";
+	        			}
+	        		}
 	        		echo "</div>";
 	        		echo "<div class=\"content\">";
-	        		echo "<div class=\"header\">Molly</div>";
-	        		echo "<div class=\"meta\">";
-	        		echo "<span class=\"date\">Coworker</span>";
-	        		echo "</div>";
-	        		echo "<div class=\"description\">";
-	        		echo "Molly is a personal assistant living in Paris.";
-	        		echo "</div>";
-	        		echo "</div>";
+	        		if (!empty($peca->get_preco()) AND !empty($peca->get_status_id())) {
+	        			echo "<div class=\"right floated header\">R$: ".$peca->get_preco()."</div>";
+	        			echo "<div class=\"meta\">";
+	        			echo "<span class=\"date\">".self::$status_pecas[$peca->get_status_id()]."</span>";
+	        			echo "</div>";//meta
+	        		} else if (!empty($peca->get_preco()) AND empty($peca->get_status_id())) {
+	        			echo "<div class=\"header\">R$: ".$peca->get_preco()."</div>";
+	        		} else if (empty($peca->get_preco()) AND !empty($peca->get_status_id())) {
+	        			echo "<div class=\"header\">R$: A Negociar</div>";
+	        			echo "<div class=\"meta\">";
+	        			echo "<span class=\"date\">".self::$status_pecas[$peca->get_status_id()]."</span>";
+	        			echo "</div>";//meta
+	        		} else if (empty($peca->get_preco())) {
+	        			echo "<div class=\"header\">R$: A Negociar</div>";
+	        		}
+	        		if (!empty($peca->get_fabricante())) {
+	        			echo "<div class=\"description\">".$peca->get_fabricante()."</div>";
+	        		}
+	        		echo "</div>";//content
 	        		echo "<div class=\"extra content\">";
-	        		echo "<span class=\"right floated\">Joined in 2011</span>";
-	        		echo "<span><i class=\"user icon\"></i>35 Friends</span>";
-	        		echo "</div>";
+	        		echo "<span class=\"right floated\">".$peca->get_data_anuncio()."</span>";
+	        		echo "<span><i class=\"user icon\"></i>livre</span>";
+	        		echo "</div>";//extra content
 	        		echo "<div class=\"extra content\">";
 	        		echo "<div class=\"ui two buttons\">";
-	        		echo "<div class=\"ui basic green button\">Atualizar</div>";
-	        		echo "<div class=\"ui basic red button\">Excluir</div>";
-	        		echo "</div>";
-	        		echo "</div>";
+	        		echo "<button class=\"ui inverted green button\">Atualizar</button>";
+	        		echo "<button class=\"ui inverted red button\">Excluir</button>";
+	        		echo "</div>";//ui two buttons
+	        		echo "</div>";//extra content
 	        		echo "</div>";
 	        	}
+        	} else {
+        		echo "<h2><label class=\"lbPanel\">".unserialize($_SESSION['usuario'])->get_nome().", você não tem nanhuma Peça Cadastrada.</label><h2>";
+        		echo "<h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/auto-pecas/cadastrar/\"> clicando aqui!</a></h3>";
         	}
         }
     }

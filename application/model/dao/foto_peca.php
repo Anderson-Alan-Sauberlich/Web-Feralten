@@ -91,7 +91,7 @@ namespace application\model\dao;
         
         public static function Buscar_Foto($id_peca, $num_peca) {
             try {
-                $sql = "SELECT foto_peca_pc_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pc_id = :id AND foto_peca_numero = :num";
+                $sql = "SELECT foto_peca_pc_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pc_id = :pc_id AND foto_peca_numero = :num";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":pc_id", $id_peca, PDO::PARAM_INT);
