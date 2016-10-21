@@ -26,6 +26,7 @@
 				</div>
 			</div>
 		</div>
+		<?php self::Incluir_Menu_Paginacao(); ?>
     </section>
     <footer>
         <?php include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>

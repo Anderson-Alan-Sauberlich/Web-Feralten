@@ -22,6 +22,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         }
         
         private static $pecas;
+        private static $pagina;
+        private static $paginas;
         
         public static function Carregar_Pagina() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
@@ -35,6 +37,8 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         			$view->set_pecas(self::$pecas);
         			$view->set_status_pecas(DAO_Status_Peca::Buscar_Lista_Todos());
         			$view->set_fotos_pecas(self::Buscar_Lista_Fotos());
+        			$view->set_pagina(self::$pagina);
+        			$view->set_paginas(self::$paginas);
         			
         			$view->Executar();
         		}
@@ -46,7 +50,16 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
         }
         
         private static function Buscar_Pecas_Usuario() {
-        	return DAO_Peca::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
+        	self::$pagina = 1;
+        	self::$paginas = DAO_Peca::Buscar_Numero_Paginas_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
+        	
+        	if (!empty($_GET['p']) AND filter_var($_GET['p'], FILTER_VALIDATE_INT)) {
+        		if ($_GET['p'] > 0 AND $_GET['p'] <= self::$paginas) {
+        			self::$pagina = $_GET['p'];
+        		}
+        	}
+        	
+        	return DAO_Peca::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id(), self::$pagina);
         }
         
         private static function Buscar_Lista_Fotos() {

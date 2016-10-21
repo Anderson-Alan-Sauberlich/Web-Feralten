@@ -4,10 +4,12 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_filtro.php';
+	require_once RAIZ.'/application/view/src/include_page/menu_paginacao.php';
 	
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro;
+	use application\view\src\include_page\Menu_Paginacao as View_Menu_Paginacao;
 	
     @session_start();
 
@@ -21,6 +23,8 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         private static $pecas;
         private static $status_pecas;
         private static $fotos_pecas;
+        private static $pagina;
+        private static $paginas;
         
         public function set_pecas($pecas) {
         	self::$pecas = $pecas;
@@ -32,6 +36,14 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         
         public function set_status_pecas($status_pecas) {
         	self::$status_pecas = $status_pecas;
+        }
+        
+        public function set_pagina($pagina) {
+        	self::$pagina = $pagina;
+        }
+        
+        public function set_paginas($paginas) {
+        	self::$paginas = $paginas;
         }
         
         public function Executar() {
@@ -48,6 +60,10 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
         
         public static function Incluir_Menu_Filtro() {
         	new View_Menu_Filtro();
+        }
+        
+        public static function Incluir_Menu_Paginacao() {
+        	new View_Menu_Paginacao(self::$pagina, self::$paginas);
         }
         
         public static function Mostrar_Cards_Pecas() {
@@ -99,8 +115,8 @@ namespace application\view\src\usuario\meu_perfil\auto_pecas;
 	        		echo "</div>";
 	        	}
         	} else {
-        		echo "<h2><label class=\"lbPanel\">".unserialize($_SESSION['usuario'])->get_nome().", você não tem nanhuma Peça Cadastrada.</label><h2>";
-        		echo "<h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/auto-pecas/cadastrar/\"> clicando aqui!</a></h3>";
+        		echo "<div class=\"container\"><h2><label class=\"lbPanel\">".unserialize($_SESSION['usuario'])->get_nome().", nenhuma peça foi encontrada.</label></h2></div>";
+        		echo "<div class=\"container\"><h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/auto-pecas/cadastrar/\"> Clicando Aqui!</a></h3></div>";
         	}
         }
     }

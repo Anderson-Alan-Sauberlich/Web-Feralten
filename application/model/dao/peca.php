@@ -97,15 +97,37 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario($id) {
+        public static function Buscar_Por_Id_Usuario($id, $pg) {
+        	$limite = 9;
+        	$inicio = ($pg * $limite) - $limite;
+        	
         	try {
-        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_co_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade FROM tb_peca WHERE peca_du_us_id = :id";
+        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_co_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade 
+        				FROM tb_peca WHERE peca_du_us_id = :id LIMIT :inicio, :limite";
         	
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
+        		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
         		$p_sql->execute();
         	
         		return self::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Numero_Paginas_Por_Id_Usuario($id) {
+        	try {
+        		$sql = "SELECT peca_id FROM tb_peca WHERE peca_du_us_id = :id";
+        		 
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$select = $p_sql->fetchAll();
+        		$cont = count($select);
+        		 
+        		return  ceil($cont / 9);
         	} catch (PDOException $e) {
         		return false;
         	}
