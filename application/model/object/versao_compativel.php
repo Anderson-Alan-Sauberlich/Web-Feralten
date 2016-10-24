@@ -2,11 +2,20 @@
 namespace application\model\object;
 
 	class Versao_Compativel {
+		private $id;
 		private $da_id;
 		private $com_id;
 	
 		function __constructor() {
-				
+			
+		}
+		
+		public function set_id($id) {
+			$this->id = $id;
+		}
+		
+		public function get_id() {
+			return $this->id;
 		}
 	
 		public function set_da_id($da_id) {

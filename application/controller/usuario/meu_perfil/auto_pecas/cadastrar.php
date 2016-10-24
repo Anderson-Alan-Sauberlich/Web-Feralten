@@ -557,7 +557,7 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				$cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
 				$cadastrar_campos['erro_peca'] = "";
 				
-				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
+				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, null, $cadastrar_sucesso);
 			} else {
 				$cadastrar_form = array();
 					
@@ -566,9 +566,12 @@ namespace application\controller\usuario\meu_perfil\auto_pecas;
 				$cadastrar_form['serie'] = trim(strip_tags($_POST['serie']));
 				$cadastrar_form['preco'] = trim(strip_tags($_POST['preco']));
 				$cadastrar_form['status'] = trim(strip_tags($_POST['status']));
-				$cadastrar_form['prioridade'] = trim(strip_tags($_POST['prioridade']));
 				$cadastrar_form['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($_POST['descricao']))));
-					
+				
+				if (isset($_POST['prioridade'])) { 
+					$cadastrar_form['prioridade'] = true;
+				}
+				
 				$marcas = null;
 				$modelos = null;
 				$versoes = null;

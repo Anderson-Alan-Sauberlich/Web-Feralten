@@ -17,11 +17,12 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Lista_Pativel $object_lista_pativel) {
             try {
-                $sql = "INSERT INTO tb_lista_pativel (lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate) 
-                        VALUES (:pc_id, :ca_id, :ma_id, :mo_id, :vs_id, :ano_de, :ano_ate);";
+                $sql = "INSERT INTO tb_lista_pativel (lista_pativel_id, lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate) 
+                        VALUES (:id, :pc_id, :ca_id, :ma_id, :mo_id, :vs_id, :ano_de, :ano_ate);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-
+				
+                $p_sql->bindValue(":id", $object_lista_pativel->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":pc_id", $object_lista_pativel->get_peca_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":ca_id", $object_lista_pativel->get_categoria_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":ma_id", $object_lista_pativel->get_marca_id(), PDO::PARAM_INT);
@@ -39,6 +40,7 @@ namespace application\model\dao;
         public static function Atualizar(Object_Lista_Pativel $object_lista_pativel) {
             try {
                 $sql = "UPDATE tb_lista_pativel SET
+                lista_pativel_id = :id,
                 lista_pativel_pc_id = :pc_id,
                 lista_pativel_ca_id = :ca_id,
                 lista_pativel_ma_id = :ma_id,
@@ -49,7 +51,8 @@ namespace application\model\dao;
                 WHERE lista_pativel_pc_id = :pc_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-
+				
+                $p_sql->bindValue(":id", $object_lista_pativel->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":pc_id", $object_lista_pativel->get_peca_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":ca_id", $object_lista_pativel->get_categoria_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":ma_id", $object_lista_pativel->get_marca_id(), PDO::PARAM_INT);
@@ -79,7 +82,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD($id) {
             try {
-                $sql = "SELECT lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate FROM tb_lista_pativel WHERE lista_pativel_pc_id = :id";
+                $sql = "SELECT lista_pativel_id, lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate FROM tb_lista_pativel WHERE lista_pativel_pc_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -96,6 +99,10 @@ namespace application\model\dao;
 			
 			foreach ($rows as $row) {
 	            $object_lista_pativel = new Object_Lista_Pativel();
+	            
+	            if (isset($row['lista_pativel_id'])) {
+	            	$object_lista_pativel->set_id($row['lista_pativel_id']);
+	            }
 	            
 	            if (isset($row['lista_pativel_pc_id'])) {
 	            	$object_lista_pativel->set_peca_id($row['lista_pativel_pc_id']);

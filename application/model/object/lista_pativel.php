@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Lista_Pativel {
+    	private $id;
     	private $peca_id;
 		private $categoria_id;
 		private $marca_id;
@@ -12,6 +13,14 @@ namespace application\model\object;
 		
 		function __constructor() {
 			
+		}
+		
+		public function set_id($id) {
+			$this->id = $id;
+		}
+		
+		public function get_id() {
+			return $this->id;
 		}
 		
 		public function set_categoria_id($categoria_id) {

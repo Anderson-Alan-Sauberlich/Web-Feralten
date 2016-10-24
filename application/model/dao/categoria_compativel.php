@@ -17,11 +17,12 @@ namespace application\model\dao;
 	
 		public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) {
 			try {
-				$sql = "INSERT INTO tb_categoria_compativel (categoria_compativel_da_id_ca, categoria_compativel_com_id_ca)
-	                    VALUES (:da_id, :com_id);";
+				$sql = "INSERT INTO tb_categoria_compativel (categoria_compativel_id, categoria_compativel_da_id_ca, categoria_compativel_com_id_ca)
+	                    VALUES (:id, :da_id, :com_id);";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-	
+				
+				$p_sql->bindValue(":id", $object_categoria_compativel->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":da_id", $object_categoria_compativel->get_da_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":com_id", $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
 	
@@ -33,10 +34,11 @@ namespace application\model\dao;
 	
 		public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) {
 			try {
-				$sql = "UPDATE tb_categoria_compativel SET categoria_compativel_da_id_ca = :da_id, categoria_compativel_com_id_ca = :com_id WHERE categoria_compativel_da_id_ca = :da_id";
+				$sql = "UPDATE tb_categoria_compativel SET categoria_compativel_id = :id, categoria_compativel_da_id_ca = :da_id, categoria_compativel_com_id_ca = :com_id WHERE categoria_compativel_da_id_ca = :da_id";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-	
+				
+				$p_sql->bindValue(":id", $object_categoria_compativel->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":da_id", $object_categoria_compativel->get_da_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":com_id", $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
 	
@@ -48,10 +50,10 @@ namespace application\model\dao;
 	
 		public static function Deletar($id) {
 			try {
-				$sql = "DELETE FROM tb_categoria_compativel WHERE categoria_compativel_da_id_ca = :da_id";
+				$sql = "DELETE FROM tb_categoria_compativel WHERE categoria_compativel_id = :id";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException $e) {
@@ -88,6 +90,10 @@ namespace application\model\dao;
 	
 		private static function PopulaCategoriaCompativel($row) {
 			$object_categoria_compativel = new Object_Categoria_Compativel();
+			
+			if (isset($row['categoria_compativel_id'])) {
+				$object_categoria_compativel->set_id($row['categoria_compativel_id']);
+			}
 			
 			if (isset($row['categoria_compativel_da_id_ca'])) {
 				$object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ca']);

@@ -159,21 +159,21 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         public static function Mostrar_Cidades($estado = null) {
-        	$id_estado;
+        	$id_estado = null;
         
-        	if (isset($estado)) {
+        	if (!empty($estado)) {
         		$id_estado = $estado;
-        	} else if (!empty(self::$enderecos_form->get_estado_id())) {
+        	} else if (!empty(self::$enderecos_form)) {
         		$id_estado = self::$enderecos_form->get_estado_id();
         	}
         		
         	echo '<option value="0">Selecione sua Cidade</option>';
         		
-        	if (isset($id_estado)) {
+        	if (!empty($id_estado)) {
         		$cidades = Controller_Enderecos::Buscar_Cidades_Por_Estado($id_estado);
         
         		if (!empty($cidades) AND $cidades !== false) {
-        			if (!empty(self::$enderecos_form->get_cidade_id())) {
+        			if (!empty(self::$enderecos_form)) {
         				foreach ($cidades as $cidade) {
         					if (self::$enderecos_form->get_cidade_id() == $cidade->get_id()) {
         						echo "<option selected value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";

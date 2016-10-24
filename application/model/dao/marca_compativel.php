@@ -17,11 +17,12 @@ namespace application\model\dao;
 	
 		public static function Inserir(Object_Marca_Compativel $object_marca_compativel) {
 			try {
-				$sql = "INSERT INTO tb_marca_compativel (marca_compativel_da_id_ma, marca_compativel_com_id_ma)
-	                    VALUES (:da_id, :com_id);";
-	
+				$sql = "INSERT INTO tb_marca_compativel (marca_compativel_id, marca_compativel_da_id_ma, marca_compativel_com_id_ma)
+	                    VALUES (:id, :da_id, :com_id);";
+				
 				$p_sql = Conexao::Conectar()->prepare($sql);
-	
+				
+				$p_sql->bindValue(":id", $object_marca_compativel->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":da_id", $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":com_id", $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
 	
@@ -33,10 +34,11 @@ namespace application\model\dao;
 	
 		public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) {
 			try {
-				$sql = "UPDATE tb_marca_compativel SET marca_compativel_da_id_ma = :da_id, marca_compativel_com_id_ma = :com_id WHERE marca_compativel_da_id_ma = :da_id";
-	
+				$sql = "UPDATE tb_marca_compativel SET marca_compativel_id = :id, marca_compativel_da_id_ma = :da_id, marca_compativel_com_id_ma = :com_id WHERE marca_compativel_da_id_ma = :da_id";
+				
 				$p_sql = Conexao::Conectar()->prepare($sql);
-	
+				
+				$p_sql->bindValue(":id", $object_marca_compativel->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":da_id", $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":com_id", $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
 	
@@ -48,10 +50,10 @@ namespace application\model\dao;
 	
 		public static function Deletar($id) {
 			try {
-				$sql = "DELETE FROM tb_marca_compativel WHERE marca_compativel_da_id_ma = :da_id";
+				$sql = "DELETE FROM tb_marca_compativel WHERE marca_compativel_id = :id";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException $e) {
@@ -88,6 +90,10 @@ namespace application\model\dao;
 	
 		private static function PopulaMarcaCompativel($row) {
 			$object_marca_compativel = new Object_Marca_Compativel();
+			
+			if (isset($row['marca_compativel_id'])) {
+				$object_marca_compativel->set_id($row['marca_compativel_id']);
+			}
 			
 			if (isset($row['marca_compativel_da_id_ma'])) {
 				$object_marca_compativel->set_da_id($row['marca_compativel_da_id_ma']);
