@@ -1,10 +1,15 @@
 <?php
 namespace application\model\object;
-
+	
+	require_once RAIZ.'/application/model/object/foto_peca.php';
+	require_once RAIZ.'/application/model/object/status_peca.php';
+	
+	use application\model\object\Foto_Peca as Object_Foto_Peca;
+	use application\model\object\Status_Peca as Object_Status_Peca;
+	
     class Peca {
     	private $id;
 		private $usuario_id;
-		private $status_id;
 		private $nome;
 		private $fabricante;
 		private $endereco_id;
@@ -14,6 +19,8 @@ namespace application\model\object;
 		private $data_anuncio;
 		private $serie;
 		private $prioridade;
+		private $status;
+		private $fotos = array();
 		
 		function __constructor() {
 			
@@ -33,14 +40,6 @@ namespace application\model\object;
 		
 		public function get_usuario_id() {
 			return $this->usuario_id;
-		}
-		
-		public function set_status_id($status_id) {
-			$this->status_id = $status_id;
-		}
-		
-		public function get_status_id() {
-			return $this->status_id;
 		}
 		
 		public function set_nome($nome) {
@@ -113,6 +112,22 @@ namespace application\model\object;
 		
 		public function get_prioridade() {
 			return $this->prioridade;
+		}
+		
+		public function set_status(Object_Status_Peca $status) {
+			$this->status = $status;
+		}
+		
+		public function get_status() {
+			return $this->status;
+		}
+		
+		public function set_fotos(Object_Foto_Peca $foto) {
+			$this->fotos[] = $foto;
+		}
+		
+		public function get_fotos() {
+			return $this->fotos;
 		}
     }
 ?>

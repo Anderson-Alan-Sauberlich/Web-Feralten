@@ -1,5 +1,11 @@
 <?php
 namespace application\model\object;
+	
+	require_once RAIZ.'/application/model/object/endereco.php';
+	require_once RAIZ.'/application/model/object/contato.php';
+	
+	use application\model\object\Endereco as Object_Endereco;
+	use application\model\object\Contato as Object_Contato;
 
 	class Dados_Usuario {
 		private $usuario_id;
@@ -9,6 +15,8 @@ namespace application\model\object;
         private $imagem;
 		private $site;
         private $data;
+        private $enderecos;
+        private $contatos;
 		
 		function __constructor() {
 			
@@ -68,6 +76,18 @@ namespace application\model\object;
         
         public function get_data() {
             return $this->data;
+        }
+        
+        public function set_enderecos(Object_Endereco $endereco) {
+        	$this->enderecos[] = $endereco;
+        }
+        
+        public function get_enderecos() {
+        	return $this->enderecos;
+        }
+        
+        public function set_contatos(Object_Contato $contato) {
+        	$this->contatos[] = $contato;
         }
 	}
 ?>

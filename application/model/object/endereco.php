@@ -1,11 +1,17 @@
 <?php
 namespace application\model\object;
-
+	
+	require_once RAIZ.'/application/model/object/cidade.php';
+	require_once RAIZ.'/application/model/object/estado.php';
+	
+	use application\model\object\Cidade as Object_Cidade;
+	use application\model\object\Estado as Object_Estado;
+	
     class Endereco {
     	private $id;
-		private $cidade_id;
         private $dados_usuario_id;
-        private $estado_id;
+        private $cidade;
+        private $estado;
 		private $numero;
 		private $cep;
 		private $rua;
@@ -24,20 +30,20 @@ namespace application\model\object;
 			return $this->id;
 		}
 		
-		public function set_cidade_id($cidade_id) {
-			$this->cidade_id = $cidade_id;
+		public function set_cidade(Object_Cidade $cidade) {
+			$this->cidade = $cidade;
 		}
 		
-		public function get_cidade_id() {
-			return $this->cidade_id;
+		public function get_cidade() {
+			return $this->cidade;
 		}
         
-        public function set_estado_id($estado_id) {
-            $this->estado_id = $estado_id;
+        public function set_estado(Object_Estado $estado) {
+            $this->estado = $estado;
         }
         
-        public function get_estado_id() {
-            return $this->estado_id;
+        public function get_estado() {
+            return $this->estado;
         }
 		
         public function set_dados_usuario_id($dados_usuario_id) {
