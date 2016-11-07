@@ -140,9 +140,9 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         	$estados = Controller_Enderecos::Buscar_Estados();
         
         	if (!empty($estados) AND $estados !== false) {
-        		if (!empty(self::$enderecos_form->get_estado_id())) {
+        		if (!empty(self::$enderecos_form)) {
         			foreach ($estados as $estado) {
-        				if (self::$enderecos_form->get_estado_id() == $estado->get_id()) {
+        				if (self::$enderecos_form->get_estado()->get_id() == $estado->get_id()) {
         					echo "<option selected value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
         				} else {
         					echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
@@ -164,7 +164,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         	if (!empty($estado)) {
         		$id_estado = $estado;
         	} else if (!empty(self::$enderecos_form)) {
-        		$id_estado = self::$enderecos_form->get_estado_id();
+        		$id_estado = self::$enderecos_form->get_estado()->get_id();
         	}
         		
         	echo '<option value="0">Selecione sua Cidade</option>';
@@ -175,7 +175,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         		if (!empty($cidades) AND $cidades !== false) {
         			if (!empty(self::$enderecos_form)) {
         				foreach ($cidades as $cidade) {
-        					if (self::$enderecos_form->get_cidade_id() == $cidade->get_id()) {
+        					if (self::$enderecos_form->get_cidade()->get_id() == $cidade->get_id()) {
         						echo "<option selected value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
         					} else {
         						echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";

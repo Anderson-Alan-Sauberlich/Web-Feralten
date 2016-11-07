@@ -20,7 +20,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         private static $atualizar_sucesso;
         private static $atualizar_campos;
         private static $atualizar_form;
-        private static $contato_form;
         private static $dados_usuario_form;
         private static $usuario_form;
         
@@ -34,10 +33,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         
         public function set_atualizar_form($atualizar_form) {
         	self::$atualizar_form = $atualizar_form;
-        }
-        
-        public function set_contato_form($contato_form) {
-        	self::$contato_form = $contato_form;
         }
         
         public function set_dados_usuario_form($dados_usuario_form) {
@@ -75,7 +70,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 		public static function Manter_Imagem() {
 			if (isset($_SESSION['imagem_tmp'])) {
 				if ($_SESSION['imagem_tmp'] == "del") {
-					echo "/application/view/resources/img/imagem_Indisponivel.png";
+					echo "/application/view/resources/img/imagem_indisponivel.png";
 				} else {
 					echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 				}
@@ -83,7 +78,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 				if (!empty(self::$dados_usuario_form->get_imagem())) {
 					echo str_replace("@", "200x150", self::$dados_usuario_form->get_imagem());
 				} else {
-					echo "/application/view/resources/img/imagem_Indisponivel.png";
+					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
 			}
 		}
@@ -245,16 +240,12 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         				echo self::$dados_usuario_form->get_cpf_cnpj();
         			} else if ($campo == "site") {
         				echo self::$dados_usuario_form->get_site();
-        			}
-        			break;
-        
-        		case "contato":
-        			if ($campo == "fone1") {
-        				echo self::$contato_form->get_telefone1();
+        			} else if ($campo == "fone1") {
+        				echo self::$dados_usuario_form->get_telefone1();
         			} else if ($campo == "fone2") {
-        				echo self::$contato_form->get_telefone2();
+        				echo self::$dados_usuario_form->get_telefone2();
         			} else if ($campo == "emailcontato") {
-        				echo self::$contato_form->get_email();
+        				echo self::$dados_usuario_form->get_email();
         			}
         			break;
         	}

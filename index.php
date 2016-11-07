@@ -103,11 +103,11 @@
 		});
 	});
 	
-	$app->group('/usuario/meu-perfil/auto-pecas/cadastrar/', function() use ($app) {
+	$app->group('/usuario/meu-perfil/pecas/cadastrar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Carregar_Pagina();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -119,9 +119,9 @@
 		});
 		
 		$app->get('compatibilidade/', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Carregar_Compatibilidade();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Carregar_Compatibilidade();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -131,9 +131,9 @@
 		});
 		
 		$app->post('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Verificar_Evento();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Verificar_Evento();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -145,9 +145,9 @@
 		});
 		
 		$app->post('imagem/', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Salvar_Imagem_TMP();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Salvar_Imagem_TMP();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -157,9 +157,9 @@
 		});
 		
 		$app->delete('imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/cadastrar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Cadastrar::Deletar_Imagem($args['img']);
+			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Deletar_Imagem($args['img']);
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -169,11 +169,11 @@
 		});
 	});
 	
-	$app->group('/usuario/meu-perfil/auto-pecas/visualizar/', function() use ($app) {
+	$app->group('/usuario/meu-perfil/pecas/visualizar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/visualizar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Visualizar::Carregar_Pagina();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -185,11 +185,11 @@
 		});
 	});
 	
-	$app->group('/usuario/meu-perfil/auto-pecas/atualizar/', function() use ($app) {
+	$app->group('/usuario/meu-perfil/pecas/atualizar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/auto_pecas/atualizar.php');
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
 		
-			$resposta = application\controller\usuario\meu_perfil\auto_pecas\Atualizar::Carregar_Pagina();
+			$resposta = application\controller\usuario\meu_perfil\pecas\Atualizar::Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -436,6 +436,136 @@
 			} else {
 				return $response;
 			}
+		});
+	});
+	
+	$app->group('/quem-somos/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/quem_somos.php');
+			
+			application\controller\Quem_Somos::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/usuario/recuperar-senha/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/recuperar_senha.php');
+			
+			application\controller\usuario\Recuperar_Senha::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/documentacao/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/documentacao.php');
+			
+			application\controller\Documentacao::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/perguntas-frequentes/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/perguntas_frequentes.php');
+			
+			application\controller\Perguntas_Frequentes::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/dicas-de-venda/apresentacao/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/dicas_de_venda/apresentacao.php');
+				
+			application\controller\dicas_de_venda\Apresentacao::Carregar_Pagina();
+					
+			return $response;
+		});
+	});
+	
+	$app->group('/dicas-de-venda/principais/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/dicas_de_venda/principais.php');
+			
+			application\controller\dicas_de_venda\Principais::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/contato/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/contato.php');
+			
+			application\controller\Contato::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/pesquisa-avancada/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/pesquisa_avancada.php');
+			
+			application\controller\Pesquisa_Avancada::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/pecas/busca-programada/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/pecas/busca_programada.php');
+			
+			application\controller\pecas\Busca_Programada::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/pecas/mais-visualizados/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/pecas/mais_visualizados.php');
+			
+			application\controller\pecas\Mais_Visualizados::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/dicas-de-venda/venda-segura/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/dicas_de_venda/venda_segura.php');
+			
+			application\controller\dicas_de_venda\Venda_Segura::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/pecas/resultados/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/pecas/resultados.php');
+			
+			application\controller\pecas\Resultados::Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/publicidade/experimentar-formatos/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response) use ($app) {
+			require_once(RAIZ.'/application/controller/publicidade/experimentar_formatos.php');
+			
+			application\controller\publicidade\Experimentar_Formatos::Carregar_Pagina();
+			
+			return $response;
 		});
 	});
 	

@@ -73,7 +73,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::Popular_Estados($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::Popular_Estado($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException $e) {
 				return false;
             }
@@ -90,6 +90,24 @@ namespace application\model\dao;
             } catch (PDOException $e) {
 				return false;
             }
+        }
+        
+        private static function Popular_Estado($row) {
+        	$object_estado = new Object_Estado();
+        	
+        	if (isset($row['estado_id'])) {
+        		$object_estado->set_id($row['estado_id']);
+        	}
+        	
+        	if (isset($row['estado_uf'])) {
+        		$object_estado->set_uf($row['estado_uf']);
+        	}
+			
+       		if (isset($row['estado_nome'])) {
+        		$object_estado->set_nome($row['estado_nome']);
+        	}
+        
+        	return $object_estado;
         }
         
         private static function Popular_Estados($rows) {

@@ -2,6 +2,8 @@
 namespace application\controller\usuario\meu_perfil\meus_dados;
 
 	require_once RAIZ.'/application/model/object/endereco.php';
+	require_once RAIZ.'/application/model/object/cidade.php';
+	require_once RAIZ.'/application/model/object/estado.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
     require_once RAIZ.'/application/model/dao/cidade.php';
     require_once RAIZ.'/application/model/dao/estado.php';
@@ -9,6 +11,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
 	
 	use application\model\object\Endereco as Object_Endereco;
+	use application\model\object\Cidade as Object_Cidade;
+	use application\model\object\Estado as Object_Estado;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;
@@ -176,14 +180,22 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$enderecos_erros[] = "Seleciona sua Cidade";
 		            	$enderecos_campos['erro_cidade'] = "erro";
 		            } else {
-		            	$endereco->set_cidade_id($_POST['cidade']);
+		            	$cidade = new Object_Cidade();
+		            	
+		            	$cidade->set_id($_POST['cidade']);
+		            	
+		            	$endereco->set_cidade($cidade);
 		            }
 		            
 		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
 		            	$enderecos_erros[] = "Seleciona seu Estado";
 		            	$enderecos_campos['erro_estado'] = "erro";
 		            } else {
-		            	$endereco->set_estado_id($_POST['estado']);
+		            	$estado = new Object_Estado();
+		            	
+		            	$estado->set_id($_POST['estado']);
+		            	
+		            	$endereco->set_estado($estado);
 		            }
 		            
 		            if (empty($enderecos_erros)) {

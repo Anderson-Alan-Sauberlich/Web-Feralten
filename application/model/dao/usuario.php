@@ -134,9 +134,14 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":email", $email, PDO::PARAM_STR);
                 $p_sql->execute();
-                $select = $p_sql->fetchAll();
+                $select = $p_sql->fetch(PDO::FETCH_ASSOC);
+                $select = 0;
                 
-                return count($select);
+                if (isset($row['usuario_id'])) {
+                	$select = $row['usuario_id'];
+                }
+                
+                return $select;
             } catch (PDOException $e) {
 				return false;
             }

@@ -3,19 +3,15 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 
     require_once RAIZ.'/application/model/object/dados_usuario.php';
     require_once RAIZ.'/application/model/object/usuario.php';
-    require_once RAIZ.'/application/model/object/contato.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/dao/dados_usuario.php';
-    require_once RAIZ.'/application/model/dao/contato.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
-    use application\model\object\Contato as Object_Contato;
     use application\model\dao\Usuario as DAO_Usuario;
-    use application\model\dao\Contato as DAO_Contato;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\util\Gerenciar_Imagens;
     use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
@@ -33,7 +29,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private static $atualizar_erros;
         private static $atualizar_sucesso;
         private static $atualizar_campos;
-        private static $contato_form;
         private static $dados_usuario_form;
         private static $usuario_form;
         
@@ -47,7 +42,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        		unset($_SESSION['imagem_tmp']);
 		        	}
 		        	
-		        	self::$contato_form = DAO_Contato::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
 		        	self::$dados_usuario_form = DAO_Dados_Usuario::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
 		        	self::$usuario_form = DAO_Usuario::Buscar_Usuario(unserialize($_SESSION['usuario'])->get_id());
 		        	
@@ -57,7 +51,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        	$view->set_atualizar_erros(self::$atualizar_erros);
 		        	$view->set_atualizar_form(self::$atualizar_form);
 		        	$view->set_atualizar_sucesso(self::$atualizar_sucesso);
-		        	$view->set_contato_form(self::$contato_form);
 		        	$view->set_dados_usuario_form(self::$dados_usuario_form);
 		        	$view->set_usuario_form(self::$usuario_form);
 		        	 
@@ -85,12 +78,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        		self::Restaurar_DadosUsuario();
 		        	} else if (isset($_POST['salvar_dadosusuario'])) {
 		        		self::Atualizar_DadosUsuario();
-		        	} else if (isset($_POST['restaurar_contato'])) {
-		        		self::Restaurar_Contato();
-		        	} else if (isset($_POST['salvar_contato'])) {
-		        		self::Atualizar_Contato();
 		        	} else {
-		        		self::Salvar_Contato();
 		        		self::Salvar_Dados_Usuario();
 		        		self::Salvar_Usuario();
 		        	}
@@ -105,21 +93,14 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         private static function Restaurar_Usuario() {
-        	self::Salvar_Contato();
         	self::Salvar_Dados_Usuario();
         }
         
         private static function Restaurar_DadosUsuario() {
         	self::Salvar_Usuario();
-        	self::Salvar_Contato();
         	self::Deletar_Imagem();
         	
         	unset($_SESSION['imagem_tmp']);
-        }
-        
-        private static function Restaurar_Contato() {
-        	self::Salvar_Usuario();
-        	self::Salvar_Dados_Usuario();
         }
         
         private static function Salvar_Usuario() {
@@ -132,30 +113,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	self::$atualizar_form['nomedadosusuario'] = $_POST['nomedadosusuario'];
         	self::$atualizar_form['cpf_cnpj'] = $_POST['cpf_cnpj'];
         	self::$atualizar_form['site'] = $_POST['site'];
-        }
-        
-        private static function Salvar_Contato() {
         	self::$atualizar_form['fone1'] = $_POST['fone1'];
         	self::$atualizar_form['fone2'] = $_POST['fone2'];
         	self::$atualizar_form['emailcontato'] = $_POST['emailcontato'];
         }
         
-        private static function Atualizar_Contato() {
+        private static function Atualizar_DadosUsuario() {
             self::$atualizar_erros = array();
             self::$atualizar_sucesso = array();
-            self::$atualizar_campos = array('erro_fone1' => "certo");
+            self::$atualizar_campos = array('erro_cpf_cnpj' => "certo");
             
-            $contato = new Object_Contato();
+            $dados_usuario = new Object_Dados_Usuario();
             
             if (empty($_POST['fone1'])) {
-                self::$atualizar_erros[] = "Informe um Nº de Telefone para Telefone 1";
-                self::$atualizar_campos['erro_fone1'] = "erro";
+            	self::$atualizar_erros[] = "Informe um Nº de Telefone para Telefone 1";
+            	self::$atualizar_campos['erro_fone1'] = "erro";
             } else {
             	$telefone1 = trim($_POST['fone1']);
-            	 
+            
             	if (strlen($telefone1) == 10) {
             		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
-            			$contato->set_telefone1($telefone1);
+            			$dados_usuario->set_telefone1($telefone1);
             		} else {
             			self::$atualizar_erros[] = "Telefone-1, Digite Apenas Numeros";
             			self::$atualizar_campos['erro_fone1'] = "erro";
@@ -168,10 +146,10 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             if (!empty($_POST['fone2'])) {
             	$telefone2 = trim($_POST['fone2']);
-            	
+            	 
             	if (strlen($telefone2) == 10) {
             		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
-            			$contato->set_telefone2($telefone2);
+            			$dados_usuario->set_telefone2($telefone2);
             		} else {
             			self::$atualizar_erros[] = "Telefone-2, Digite Apenas Numeros";
             			self::$atualizar_campos['erro_fone2'] = "erro";
@@ -184,10 +162,10 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             if (!empty($_POST['emailcontato'])) {
             	$emailcontato = trim($_POST['emailcontato']);
-            	 
+            
             	if (strlen($emailcontato) <= 150) {
             		if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
-            			$contato->set_email($emailcontato);
+            			$dados_usuario->set_email($emailcontato);
             		} else {
             			self::$atualizar_erros[] = "Digite um E-Mail Alternativo Valido";
             			self::$atualizar_campos['erro_emailcontato'] = "erro";
@@ -197,28 +175,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		self::$atualizar_campos['erro_emailcontato'] = "erro";
             	}
             }
-            
-            if (empty(self::$atualizar_erros)) {
-            	$contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            	
-                if (DAO_Contato::Atualizar($contato) === false) {
-                	self::$atualizar_erros[] = "Erro ao tentar Atualizar Contado do Usuario";
-                	$atualizar_campos['erro_fone1'] = "";
-                } else {
-                	self::$atualizar_sucesso[] = "Contato do Usuario Atualizado com Sucesso";
-                }
-            }
-            
-            self::Salvar_Usuario();
-            self::Salvar_Dados_Usuario();
-        }
-        
-        private static function Atualizar_DadosUsuario() {
-            self::$atualizar_erros = array();
-            self::$atualizar_sucesso = array();
-            self::$atualizar_campos = array('erro_cpf_cnpj' => "certo");
-            
-            $dados_usuario = new Object_Dados_Usuario();
             
             if (empty($_POST['cpf_cnpj'])) {
                 self::$atualizar_erros[] = "Informe um CPF ou CNPJ";
@@ -233,7 +189,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
             			 
             			if ($retorno !== false) {
-            				if ($retorno === 0) {
+            				if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
             					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
             				} else {
             					self::$atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -321,7 +277,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 }
             }
             
-            self::Salvar_Contato();
             self::Salvar_Usuario();
         }
         
@@ -375,7 +330,9 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             	if ($confemail === $email) {
             		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-            			if (DAO_Usuario::Verificar_Email($email) === 0) {
+            			$retorno = DAO_Usuario::Verificar_Email($email);
+            			
+            			if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
             				if (strlen($email) <= 150) {
             					$usuario->set_email($email);
             				} else {
@@ -417,13 +374,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 }
             }
             
-            self::Salvar_Contato();
             self::Salvar_Dados_Usuario();
         }
 		
 		public static function Salvar_Imagem_TMP() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-				if (isset($_FILES['imagem'])) {
+				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
 					
 					$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
@@ -431,6 +387,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 					$_SESSION['imagem_tmp'] = $imagens->get_nome();
 					
 					echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+				} else {
+					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
 			} else {
 				return false;
@@ -461,7 +419,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			if (isset($caminho_imagem)) {
 				return $imagens::Gerar_Data_URL($caminho_imagem);
 			} else {
-				return "/resources/img/imagem_Indisponivel.png";
+				return "/resources/img/imagem_indisponivel.png";
 			}
 		}
         

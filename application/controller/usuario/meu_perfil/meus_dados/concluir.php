@@ -3,8 +3,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 
     require_once RAIZ.'/application/model/object/dados_usuario.php';
     require_once RAIZ.'/application/model/object/endereco.php';
-    require_once RAIZ.'/application/model/object/contato.php';
-    require_once RAIZ.'/application/model/dao/contato.php';
+    require_once RAIZ.'/application/model/object/cidade.php';
+    require_once RAIZ.'/application/model/object/estado.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
 	require_once RAIZ.'/application/model/dao/dados_usuario.php';
     require_once RAIZ.'/application/model/dao/estado.php';
@@ -15,8 +15,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
     use application\model\object\Endereco as Object_Endereco;
-    use application\model\object\Contato as Object_Contato;
-    use application\model\dao\Contato as DAO_Contato;
+    use application\model\object\Cidade as Object_Cidade;
+    use application\model\object\Estado as Object_Estado;
 	use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Estado as DAO_Estado;
@@ -62,7 +62,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            $concluir_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo",
 		            					  'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
 		            
-		            $contato = new Object_Contato();
 		            $endereco = new Object_Endereco();
 		            $dados_usuario = new Object_Dados_Usuario();
 		            
@@ -74,7 +73,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	
 		            	if (strlen($telefone1) == 10) {
 		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
-		            			$contato->set_telefone1($telefone1);
+		            			$dados_usuario->set_telefone1($telefone1);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-1, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone1'] = "erro";
@@ -90,7 +89,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	 
 		            	if (strlen($telefone2) == 10) {
 		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
-		            			$contato->set_telefone2($telefone2);
+		            			$dados_usuario->set_telefone2($telefone2);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-2, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone2'] = "erro";
@@ -106,7 +105,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	
 		            	if (strlen($emailcontato) <= 150) {
 			            	if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
-			            		$contato->set_email($emailcontato);
+			            		$dados_usuario->set_email($emailcontato);
 			            	} else {
 			            		$concluir_erros[] = "Digite um E-Mail Alternativo Valido";
 			            		$concluir_campos['erro_emailcontato'] = "erro";
@@ -121,14 +120,22 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		                $concluir_erros[] = "Seleciona sua Cidade";
 		                $concluir_campos['erro_cidade'] = "erro";
 		            } else {
-		            	$endereco->set_cidade_id($_POST['cidade']);
+		            	$cidade = new Object_Cidade();
+		            	
+		            	$cidade->set_id($_POST['cidade']);
+		            	
+		            	$endereco->set_cidade($cidade);
 		            }
 		            
 		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
 		                $concluir_erros[] = "Seleciona seu Estado";
 		                $concluir_campos['erro_estado'] = "erro";
 		            } else {
-		            	$endereco->set_estado_id($_POST['estado']);
+		            	$estado = new Object_Estado();
+		            	
+		            	$estado->set_id($_POST['estado']);
+		            	
+		            	$endereco->set_estado($estado);
 		            }
 		            
 		            if (empty($_POST['numero'])) {
@@ -245,7 +252,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
 		            			
 		            			if ($retorno !== false) {
-		            				if ($retorno === 0) {
+		            				if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
 		            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
 		            				} else {
 		            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -304,7 +311,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (empty($concluir_erros)) {
-		            	$contato->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_status_id(1);
@@ -312,11 +318,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$dados_usuario->set_imagem(self::Salvar_Imagem());
 		            	
 		                if (DAO_Dados_Usuario::Inserir($dados_usuario) !== false) {
-		                	if (DAO_Endereco::Inserir($endereco) !== false) {
-		                		if (DAO_Contato::Inserir($contato) === false) {
-		                			$concluir_erros[] = "Erro ao tentar Inserir Contato do Usuario";
-		                		}
-		                	} else {
+		                	if (DAO_Endereco::Inserir($endereco) === false) {
 		                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
 		                	}
 		            	} else {
@@ -365,7 +367,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
 		public static function Salvar_Imagem_TMP() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-				if (isset($_FILES['imagem'])) {
+				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
 						
 					$imagens->Armazenar_Imagem_Temporaria($_FILES['imagem']);
@@ -373,6 +375,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 					$_SESSION['imagem_tmp'] = $imagens->get_nome();
 						
 					echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-200x150.".$imagens->get_extensao());
+				} else {
+					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
 			} else {
 				return false;
@@ -401,7 +405,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			if (isset($caminho_imagem)) {
 				return $imagens::Gerar_Data_URL($caminho_imagem);
 			} else {
-				return "/application/view/resources/img/imagem_Indisponivel.png";
+				return "/application/view/resources/img/imagem_indisponivel.png";
 			}
 		}
 

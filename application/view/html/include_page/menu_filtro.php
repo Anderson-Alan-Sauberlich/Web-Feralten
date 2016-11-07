@@ -1,6 +1,8 @@
+<?php require_once RAIZ.'/application/view/src/include_page/menu_filtro.php'; ?>
+<?php use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro; ?>
 <script type="text/javascript" src="/application/view/js/include_page/menu_filtro.js"></script>
-<div class="row redutorMenuLateral">
-	<div id="menu_filtro" class="ui vertical inverted blue menu">
+<aside class="row redutorMenuLateral">
+	<nav id="menu_filtro" class="ui vertical inverted blue menu">
 		<div class="active item"><b>Filtro de Busca</b></div>
 		<div class="item">
 			<div class="header">Versão do Modelo</div>
@@ -19,14 +21,14 @@
 				<div class="container-fluid">
 					<select id="estado" name="estado" class="ui fluid search dropdown">
 						<option value="0">Selecione o Estado</option>
-						<?php self::Mostrar_Estados(); ?>
+						<?php View_Menu_Filtro::Mostrar_Estados(); ?>
 					</select>
 				</div>
 			</div>
 			<div class="menu">
 				<div class="container-fluid">
 					<select id="cidade" name="cidade" class="ui fluid search dropdown">
-						<?php self::Mostrar_Cidades(); ?>
+						<?php View_Menu_Filtro::Mostrar_Cidades(); ?>
 					</select>
 				</div>
 			</div>
@@ -81,7 +83,7 @@
 				<div class="container-fluid">
 					<select class="ui fluid search dropdown">
 						<option value="0">Selecione o Status</option>
-						<?php self::Mostrar_Status(); ?>
+						<?php View_Menu_Filtro::Mostrar_Status(); ?>
 					</select>
 				</div>
 			</div>
@@ -96,8 +98,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	</nav>
+</aside>
 <div class="visible-xs">
 	<button onclick="abrirFiltro()" class="fluid ui secondary labeled icon open button"><i class="left arrow icon"></i>Abrir Filtro de Busca</button>
 	<div class="ui horizontal divider"></div>

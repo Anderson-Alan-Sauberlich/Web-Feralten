@@ -16,7 +16,7 @@
 			<div class="collapse navbar-collapse" id="collapseNav">
 				<ul class="nav navbar-nav navbar-left pull-left">
                     <li><a href="/"><i class="home icon"></i>INÍCIO</a></li>
-                    <li id="auto_pecas_item"><a href="#"><i class="puzzle icon"></i>AUTO PEÇAS</a></li>
+                    <li id="pecas_item"><a href="#"><i class="puzzle icon"></i>PEÇAS</a></li>
 					<div class="ui fluid popup">
 						<div class="ui four column relaxed divided grid">
 					    	<div class="column">

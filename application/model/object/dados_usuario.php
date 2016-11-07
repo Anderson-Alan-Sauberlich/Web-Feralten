@@ -2,10 +2,8 @@
 namespace application\model\object;
 	
 	require_once RAIZ.'/application/model/object/endereco.php';
-	require_once RAIZ.'/application/model/object/contato.php';
 	
 	use application\model\object\Endereco as Object_Endereco;
-	use application\model\object\Contato as Object_Contato;
 
 	class Dados_Usuario {
 		private $usuario_id;
@@ -15,8 +13,10 @@ namespace application\model\object;
         private $imagem;
 		private $site;
         private $data;
-        private $enderecos;
-        private $contatos;
+        private $telefone1;
+        private $telefone2;
+        private $email;
+        private $enderecos = array();
 		
 		function __constructor() {
 			
@@ -78,16 +78,42 @@ namespace application\model\object;
             return $this->data;
         }
         
-        public function set_enderecos(Object_Endereco $endereco) {
+        public function set_telefone1($telefone1) {
+        	$this->telefone1 = $telefone1;
+        }
+        
+        public function get_telefone1() {
+        	return $this->telefone1;
+        }
+        
+        public function set_telefone2($telefone2) {
+        	$this->telefone2 = $telefone2;
+        }
+        
+        public function get_telefone2() {
+        	return $this->telefone2;
+        }
+        
+        public function set_email($email) {
+        	$this->email = $email;
+        }
+        
+        public function get_email() {
+        	return $this->email;
+        }
+        
+        public function set_enderecos(array $enderecos) {
+        	foreach ($enderecos as $endereco) {
+        		$this->set_endereco($endereco);
+        	}
+        }
+        
+        public function set_endereco(Object_Endereco $endereco) {
         	$this->enderecos[] = $endereco;
         }
         
         public function get_enderecos() {
         	return $this->enderecos;
-        }
-        
-        public function set_contatos(Object_Contato $contato) {
-        	$this->contatos[] = $contato;
         }
 	}
 ?>

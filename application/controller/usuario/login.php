@@ -112,7 +112,7 @@ namespace application\controller\usuario;
             		$retorno = DAO_Usuario::Verificar_Email($email);
             		
             		if ($retorno !== false) {
-		            	if ($retorno <= 0) {
+		            	if ($retorno !== 0) {
 			                $login_erros[] = "Email não Cadastrado";
 			                $login_campos['erro_email'] = "erro";
 		            	}

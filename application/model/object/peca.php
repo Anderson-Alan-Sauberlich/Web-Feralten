@@ -3,17 +3,20 @@ namespace application\model\object;
 	
 	require_once RAIZ.'/application/model/object/foto_peca.php';
 	require_once RAIZ.'/application/model/object/status_peca.php';
+	require_once RAIZ.'/application/model/object/endereco.php';
+	require_once RAIZ.'/application/model/object/dados_usuario.php';
 	
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Status_Peca as Object_Status_Peca;
+	use application\model\object\Endereco as Object_Endereco;
+	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
 	
     class Peca {
     	private $id;
-		private $usuario_id;
+		private $dados_usuario;
 		private $nome;
 		private $fabricante;
-		private $endereco_id;
-		private $contato_id;
+		private $endereco;
 		private $preco;
 		private $descricao;
 		private $data_anuncio;
@@ -34,12 +37,12 @@ namespace application\model\object;
 			return $this->id;
 		}
 		
-		public function set_usuario_id($usuario_id) {
-			$this->usuario_id = $usuario_id;
+		public function set_dados_usuario(Object_Dados_Usuario $dados_usuario) {
+			$this->dados_usuario = $dados_usuario;
 		}
 		
-		public function get_usuario_id() {
-			return $this->usuario_id;
+		public function get_dados_usuario() {
+			return $this->dados_usuario;
 		}
 		
 		public function set_nome($nome) {
@@ -66,20 +69,12 @@ namespace application\model\object;
 			return $this->serie;
 		}
 		
-		public function set_endereco_id($endereco_id) {
-			$this->endereco_id = $endereco_id;
+		public function set_endereco(Object_Endereco $endereco) {
+			$this->endereco = $endereco;
 		}
 		
-		public function get_endereco_id() {
-			return $this->endereco_id;
-		}
-		
-		public function set_contato_id($contato_id) {
-			$this->contato_id = $contato_id;
-		}
-		
-		public function get_contato_id() {
-			return $this->contato_id;
+		public function get_endereco() {
+			return $this->endereco;
 		}
 		
 		public function set_preco($preco) {
@@ -122,12 +117,22 @@ namespace application\model\object;
 			return $this->status;
 		}
 		
-		public function set_fotos(Object_Foto_Peca $foto) {
-			$this->fotos[] = $foto;
+		public function set_fotos(array $fotos) {
+			foreach ($fotos as $foto) {
+				$this->set_foto($foto);
+			}
+		}
+		
+		public function set_foto(Object_Foto_Peca $foto) {
+			$this->fotos[$foto->get_numero()] = $foto;
 		}
 		
 		public function get_fotos() {
 			return $this->fotos;
+		}
+		
+		public function get_foto($numero) {
+			return $this->fotos[$numero];
 		}
     }
 ?>

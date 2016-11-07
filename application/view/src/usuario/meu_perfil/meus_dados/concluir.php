@@ -52,7 +52,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			if (isset($_SESSION['imagem_tmp'])) {
 				echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 			} else {
-				echo "/application/view/resources/img/imagem_Indisponivel.png";
+				echo "/application/view/resources/img/imagem_indisponivel.png";
 			}
 		}
         

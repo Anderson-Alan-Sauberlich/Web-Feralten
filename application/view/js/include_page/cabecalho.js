@@ -11,7 +11,7 @@ $('#ferro_velho_item')
   });
 });
 $(document).ready(function() {
-$('#auto_pecas_item')
+$('#pecas_item')
   .popup({
     inline   : true,
     hoverable: true,

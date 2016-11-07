@@ -1,3 +1,5 @@
+<?php require_once RAIZ.'/application/view/src/usuario/meu_perfil/perfil.php'; ?>
+<?php use application\view\src\usuario\meu_perfil\Perfil as View_Perfil; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -9,7 +11,7 @@
         <?php include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
-        <?php self::Incluir_Menu_Usuario(); ?>
+        <?php View_Perfil::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">

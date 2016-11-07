@@ -42,10 +42,13 @@ function limparCampoFile() {
 		url: "/usuario/meu-perfil/meus-dados/concluir/imagem/",
 	}).done(function() {
 		document.getElementById("imagem").value = "";
-		document.getElementById("foto").src = "/application/view/resources/img/imagem_Indisponivel.png";
+		document.getElementById("foto").src = "/application/view/resources/img/imagem_indisponivel.png";
 		$("#div_img").removeClass("active");
 	});
 }
 $(document).ready(function() {
 	$('[data-toggle="popover"]').popover();
 });
+function MostImgErr($ths) {
+	$ths.src='/application/view/resources/img/imagem_indisponivel.png';
+}

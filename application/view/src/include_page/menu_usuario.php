@@ -1,9 +1,5 @@
 <?php
 namespace application\view\src\include_page;
-
-    require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
-    
-    use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
     
     @session_start();
 
@@ -23,7 +19,7 @@ namespace application\view\src\include_page;
             echo unserialize($_SESSION['usuario'])->get_nome();
         }
         
-        public static function Incluir_Status_Usuario() {
+        public static function Incluir_Mensagem_Status_Usuario() {
         	if (isset(self::$status_usuario)) {
 	        	if (self::$status_usuario === 0 
 	        		AND self::$url_menu[1] !== 'concluir'

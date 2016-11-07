@@ -2,9 +2,13 @@
 namespace application\model\dao;
 
     require_once RAIZ.'/application/model/object/endereco.php';
+    require_once RAIZ.'/application/model/dao/cidade.php';
+    require_once RAIZ.'/application/model/dao/estado.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Endereco as Object_Endereco;
+    use application\model\dao\Cidade as DAO_Cidade;
+    use application\model\dao\Estado as DAO_Estado;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -23,8 +27,8 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_endereco->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_endereco->get_estado_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":du_us_id", $object_endereco->get_dados_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
                 $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
@@ -53,9 +57,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":du_us_id", $object_endereco->get_dados_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_endereco->get_estado_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
                 $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
                 $p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
@@ -118,7 +122,7 @@ namespace application\model\dao;
             }
             
             if (isset($row['endereco_ci_id'])) {
-            	$object_endereco->set_cidade_id($row['endereco_ci_id']);
+            	$object_endereco->set_cidade(DAO_Cidade::Buscar_Por_ID_Cidade($row['endereco_ci_id']));
             }
             
             if (isset($row['endereco_du_us_id'])) {
@@ -126,7 +130,7 @@ namespace application\model\dao;
             }
             
             if (isset($row['endereco_es_id'])) {
-            	$object_endereco->set_estado_id($row['endereco_es_id']);
+            	$object_endereco->set_estado(DAO_Estado::BuscarPorCOD($row['endereco_es_id']));
             }
             
             if (isset($row['endereco_numero'])) {
