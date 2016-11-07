@@ -25,8 +25,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	use application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
     
-    @session_start();
-
     class Concluir {
 		
         function __construct() {

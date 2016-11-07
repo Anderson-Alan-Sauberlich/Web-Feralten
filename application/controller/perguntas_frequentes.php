@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Perguntas_Frequentes as View_Perguntas_Frequentes;
 	
-	@session_start();
-	
     class Perguntas_Frequentes {
 
         function __construct() {

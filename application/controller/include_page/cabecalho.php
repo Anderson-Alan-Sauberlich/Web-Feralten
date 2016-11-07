@@ -5,8 +5,6 @@ namespace application\controller\include_page;
 
     use application\controller\usuario\Login;
 
-    @session_start();
-
     class Cabecalho {
 
         function __construct() {

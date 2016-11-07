@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Quem_Somos as View_Quem_Somos;
 		
-	@session_start();
-	
     class Quem_Somos {
 
         function __construct() {

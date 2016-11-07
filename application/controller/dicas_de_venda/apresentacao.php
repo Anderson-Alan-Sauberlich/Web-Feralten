@@ -5,8 +5,6 @@ namespace application\controller\dicas_de_venda;
 	
 	use application\view\src\dicas_de_venda\Apresentacao as View_Apresentacao;
 	
-	@session_start();
-	
     class Apresentacao {
 
         function __construct() {

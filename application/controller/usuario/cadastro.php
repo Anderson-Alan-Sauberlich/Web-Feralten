@@ -11,8 +11,6 @@ namespace application\controller\usuario;
     use application\controller\usuario\Login;
     use application\view\src\usuario\Cadastro as View_Cadastro;
     
-    @session_start();
-
     class Cadastro {
 
         function __construct() {

@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Pesquisa_Avancada as View_Pesquisa_Avancada;
 	
-	@session_start();
-	
     class Pesquisa_Avancada {
 
         function __construct() {

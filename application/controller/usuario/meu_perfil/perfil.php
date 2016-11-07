@@ -7,8 +7,6 @@ namespace application\controller\usuario\meu_perfil;
 	use application\view\src\usuario\meu_perfil\Perfil as View_Perfil;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-	@session_start();
-	
     class Perfil {
 
         function __construct() {

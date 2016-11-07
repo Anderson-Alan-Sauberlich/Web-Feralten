@@ -5,8 +5,6 @@ namespace application\controller\publicidade;
 	
 	use application\view\src\publicidade\Condicoes_Gerais as View_Condicoes_Gerais;
 	
-	@session_start();
-	
     class Condicoes_Gerais {
 
         function __construct() {

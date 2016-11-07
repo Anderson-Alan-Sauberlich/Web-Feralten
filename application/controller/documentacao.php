@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Documentacao as View_Documentacao;
 	
-	@session_start();
-	
     class Documentacao {
 
         function __construct() {

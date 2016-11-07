@@ -5,8 +5,6 @@ namespace application\controller;
 
 	use application\view\src\Pagina_Inicial as View_Pagina_Inicial;
 
-	@session_start();
-	
     class Pagina_Inicial {
 
         function __construct() {

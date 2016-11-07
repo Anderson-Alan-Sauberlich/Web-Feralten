@@ -5,8 +5,6 @@ namespace application\controller\pecas;
 	
 	use application\view\src\pecas\Resultados as View_Resultados;
 	
-	@session_start();
-	
     class Resultados {
 
         function __construct() {

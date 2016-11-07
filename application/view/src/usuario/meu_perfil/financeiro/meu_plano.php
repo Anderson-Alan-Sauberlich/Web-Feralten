@@ -5,8 +5,6 @@ namespace application\view\src\usuario\meu_perfil\financeiro;
 	
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 
-    @session_start();
-
     class Meu_Plano {
     	
         function __construct($status) {

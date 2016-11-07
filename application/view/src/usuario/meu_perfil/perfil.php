@@ -5,8 +5,6 @@ namespace application\view\src\usuario\meu_perfil;
 	
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
-    @session_start();
-
     class Perfil {
 
         function __construct($status) {

@@ -5,8 +5,6 @@ namespace application\controller\pecas;
 	
 	use application\view\src\pecas\Busca_Programada as View_Busca_Programada;
 	
-	@session_start();
-	
     class Busca_Programada {
 
         function __construct() {

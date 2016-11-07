@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src\publicidade;
 	
-	@session_start();
-	
     class Condicoes_Gerais {
 
         function __construct() {

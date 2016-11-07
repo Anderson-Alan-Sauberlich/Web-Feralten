@@ -5,8 +5,6 @@ namespace application\controller\pecas;
 	
 	use application\view\src\pecas\Mais_Visualizados as View_Mais_Visualizados;
 	
-	@session_start();
-	
     class Mais_Visualizados {
 
         function __construct() {

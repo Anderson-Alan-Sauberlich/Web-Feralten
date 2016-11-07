@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src;
 	
-	@session_start();
-	
     class Quem_Somos {
 
         function __construct() {

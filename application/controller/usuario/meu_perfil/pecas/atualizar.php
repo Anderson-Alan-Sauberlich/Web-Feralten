@@ -7,8 +7,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\view\src\usuario\meu_perfil\pecas\Atualizar as View_Atualizar;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-	@session_start();
-	
     class Atualizar {
 
         function __construct() {

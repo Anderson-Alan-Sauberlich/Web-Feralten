@@ -45,8 +45,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\view\src\usuario\meu_perfil\pecas\Cadastrar as View_Cadastrar;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 		
-	@session_start();
-	
     class Cadastrar {
 
         function __construct() {

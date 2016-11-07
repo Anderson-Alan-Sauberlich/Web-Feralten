@@ -7,8 +7,6 @@ namespace application\controller\usuario\meu_perfil\financeiro;
 	use application\view\src\usuario\meu_perfil\financeiro\Meu_Plano as View_Meu_Plano;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-	@session_start();
-	
     class Meu_Plano {
 
         function __construct() {

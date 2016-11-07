@@ -5,8 +5,6 @@ namespace application\controller\publicidade;
 	
 	use application\view\src\publicidade\Porque_Anunciar as View_Porque_Anunciar;
 	
-	@session_start();
-	
     class Porque_Anunciar {
 
         function __construct() {

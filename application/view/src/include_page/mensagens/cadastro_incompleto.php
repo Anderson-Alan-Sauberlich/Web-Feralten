@@ -7,8 +7,6 @@ namespace application\view\src\include_page\mensagens;
     use application\controller\include_page\mensagens\Cadastro_Inconpleto as Controller_Cadastro_Inconpleto;
     use application\model\object\Usuario as Object_Usuario;
 
-    @session_start();
-
     class Cadastro_Inconpleto {
 		
         function __construct() {

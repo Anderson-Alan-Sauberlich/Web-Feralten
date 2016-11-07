@@ -5,8 +5,6 @@ namespace application\controller\usuario;
 	
 	use application\view\src\usuario\Recuperar_Senha as View_Recuperar_Senha;
 	
-	@session_start();
-	
     class Recuperar_Senha {
 
         function __construct() {

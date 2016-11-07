@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src\pecas;
 
-	@session_start();
-
     class Resultados {
 
         function __construct() {

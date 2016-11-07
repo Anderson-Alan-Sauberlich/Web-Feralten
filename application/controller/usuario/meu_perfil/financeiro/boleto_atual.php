@@ -7,8 +7,6 @@ namespace application\controller\usuario\meu_perfil\financeiro;
 	use application\view\src\usuario\meu_perfil\financeiro\Boleto_Atual as View_Boleto_Atual;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-	@session_start();
-		
     class Boleto_Atual {
 
         function __construct() {

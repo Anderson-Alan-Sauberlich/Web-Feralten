@@ -5,8 +5,6 @@ namespace application\controller\dicas_de_venda;
 	
 	use application\view\src\dicas_de_venda\Principais as View_Principais;
 	
-	@session_start();
-	
     class Principais {
 
         function __construct() {

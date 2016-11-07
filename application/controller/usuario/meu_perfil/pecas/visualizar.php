@@ -9,8 +9,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	use application\model\dao\Peca as DAO_Peca;
 
-	@session_start();
-
     class Visualizar {
 
         function __construct() {

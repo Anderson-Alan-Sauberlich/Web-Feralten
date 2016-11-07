@@ -7,8 +7,6 @@ namespace application\controller\include_page;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
     use application\model\object\Usuario as Object_Usuario;
     
-    @session_start();
-    
     class Menu_Usuario {
 
         function __construct() {

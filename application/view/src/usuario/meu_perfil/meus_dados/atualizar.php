@@ -7,8 +7,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     use application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
     use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
     
-    @session_start();
-    
     class Atualizar {
     	
         function __construct($status) {

@@ -5,8 +5,6 @@ namespace application\view\src\include_page;
 
 	use application\controller\include_page\Menu_Filtro as Controller_Menu_Filtro;
 
-	@session_start();
-	
 	class Menu_Filtro {
 		
 	    function __construct() {

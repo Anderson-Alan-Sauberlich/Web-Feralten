@@ -11,8 +11,6 @@ namespace application\controller\include_page;
 	use application\model\dao\Estado as DAO_Estado;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
 
-	@session_start();
-	
 	class Menu_Filtro {
 		
 	    function __construct() {

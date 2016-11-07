@@ -5,8 +5,6 @@ namespace application\controller\publicidade;
 	
 	use application\view\src\publicidade\Dicas as View_Dicas;
 	
-	@session_start();
-	
     class Dicas {
 
         function __construct() {

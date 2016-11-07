@@ -7,8 +7,6 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 	use application\controller\usuario\meu_perfil\pecas\Cadastrar as Controller_Cadastrar;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
-    @session_start();
-	
     class Cadastrar {
     	
         function __construct($status) {

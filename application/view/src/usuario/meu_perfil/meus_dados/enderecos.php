@@ -7,8 +7,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	use application\controller\usuario\meu_perfil\meus_dados\Enderecos as Controller_Enderecos;
     use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
-    @session_start();
-
     class Enderecos {
 
         function __construct($status) {

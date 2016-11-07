@@ -7,8 +7,6 @@ namespace application\controller\usuario\meu_perfil\financeiro;
 	use application\view\src\usuario\meu_perfil\financeiro\Boletos_Pagos as View_Boletos_Pagos;
 	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-	@session_start();
-	
     class Boletos_Pagos {
 
         function __construct() {

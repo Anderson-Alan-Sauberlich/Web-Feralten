@@ -7,8 +7,6 @@ namespace application\controller\usuario;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\view\src\usuario\Login as View_Login;
 
-    @session_start();
-
     class Login {
 
         function __construct() {

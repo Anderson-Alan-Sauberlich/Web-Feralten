@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src\pecas;
 
-	@session_start();
-
     class Descricao {
 
         function __construct() {

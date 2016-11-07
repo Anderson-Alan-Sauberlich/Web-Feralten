@@ -11,8 +11,6 @@ namespace application\controller\include_page;
 	use application\model\dao\Modelo as DAO_Modelo;
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
 	
-	@session_start();
-	
     class Menu_Pesquisa {
 
         function __construct() {

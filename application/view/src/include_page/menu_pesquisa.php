@@ -5,8 +5,6 @@ namespace application\view\src\include_page;
     
     use application\controller\include_page\Menu_Pesquisa as Controller_Menu_Pesquisa;
     
-    @session_start();
-
     class Menu_Pesquisa {
 
         function __construct() {

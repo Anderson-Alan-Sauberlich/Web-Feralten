@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src\dicas_de_venda;
 	
-	@session_start();
-	
     class Principais {
 
         function __construct() {

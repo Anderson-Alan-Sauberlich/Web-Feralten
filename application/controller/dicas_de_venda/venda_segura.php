@@ -5,8 +5,6 @@ namespace application\controller\dicas_de_venda;
 	
 	use application\view\src\dicas_de_venda\Venda_Segura as View_Venda_Segura;
 	
-	@session_start();
-	
     class Venda_Segura {
 
         function __construct() {

@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src\include_page;
     
-    @session_start();
-
     class Menu_Usuario {
     	
     	private static $status_usuario;

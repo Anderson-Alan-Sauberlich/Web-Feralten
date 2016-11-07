@@ -5,8 +5,6 @@ namespace application\controller\publicidade;
 	
 	use application\view\src\publicidade\Experimentar_Formatos as View_Experimentar_Formatos;
 	
-	@session_start();
-	
     class Experimentar_Formatos {
 
         function __construct() {

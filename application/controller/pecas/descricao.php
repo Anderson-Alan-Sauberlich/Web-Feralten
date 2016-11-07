@@ -5,8 +5,6 @@ namespace application\controller\pecas;
 	
 	use application\view\src\pecas\Descricao as View_Descricao;
 	
-	@session_start();
-	
     class Descricao {
 
         function __construct() {

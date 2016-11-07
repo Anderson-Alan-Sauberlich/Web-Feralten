@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Contato as View_Contato;
 	
-	@session_start();
-	
     class Contato {
 
         function __construct() {

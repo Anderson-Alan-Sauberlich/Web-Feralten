@@ -7,8 +7,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     use application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
     
-    @session_start();
-
     class Concluir {
     	
         function __construct($status) {

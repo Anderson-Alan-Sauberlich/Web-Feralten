@@ -5,8 +5,6 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 
 	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
 	
-    @session_start();
-
     class Atualizar {
     	
         function __construct($status) {

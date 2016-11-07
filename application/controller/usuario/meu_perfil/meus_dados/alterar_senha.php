@@ -11,8 +11,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
     use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
 	
-    @session_start();
-    
     class Alterar_Senha {
 
         function __construct() {

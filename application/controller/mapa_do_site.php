@@ -5,8 +5,6 @@ namespace application\controller;
 	
 	use application\view\src\Mapa_Do_Site as View_Mapa_Do_Site;
 	
-	@session_start();
-	
     class Mapa_Do_Site {
 
         function __construct() {
