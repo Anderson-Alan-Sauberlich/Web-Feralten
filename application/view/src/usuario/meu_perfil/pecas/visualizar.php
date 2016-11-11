@@ -41,7 +41,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Menu_Pesquisa();
+        	new View_Menu_Pesquisa('/usuario/meu-perfil/pecas/visualizar/');
         }
         
         public static function Incluir_Menu_Usuario() {

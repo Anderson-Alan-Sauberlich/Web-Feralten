@@ -40,5 +40,31 @@ namespace application\view\src\include_page;
 				echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
 			}
 		}
+		
+		public static function Mostrar_Preco_Menor() {
+			
+		}
+		
+		public static function Mostrar_Preco_Maior() {
+			
+		}
+		
+		public static function Mostrar_Data_Dia() {
+			for ($i = 1; $i <= 31; $i++) {
+				echo "<option value=\"$i\">$i</option>";
+			}
+		}
+		
+		public static function Mostrar_Data_Mes() {
+			for ($i = 1; $i <= 12; $i++) {
+				echo "<option value=\"$i\">$i</option>";
+			}
+		}
+		
+		public static function Mostrar_Data_Ano() {
+			for ($i = 2016; $i <= 2017; $i++) {
+				echo "<option value=\"$i\">$i</option>";
+			}
+		}
 	}
 ?>

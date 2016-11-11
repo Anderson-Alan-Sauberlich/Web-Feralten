@@ -7,9 +7,13 @@ namespace application\view\src\include_page;
     
     class Menu_Pesquisa {
 
-        function __construct() {
+        function __construct($base_url) {
+        	self::$base_url = $base_url;
+        	
         	require_once RAIZ.'/application/view/html/include_page/menu_pesquisa.php';
         }
+        
+        private static $base_url;
         
         public static function Carregar_Anos() {
             for ($i=2017; $i >= 1900; $i--) {
@@ -18,6 +22,18 @@ namespace application\view\src\include_page;
         }
         
         public static function Carregar_Categorias() {
+        	$categorias = Controller_Menu_Pesquisa::Buscar_Todas_Categorias();
+        	
+        	if (!empty($categorias) AND $categorias !== false) {
+	        	foreach ($categorias as $categoria) {
+	        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria[]\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
+	        	}
+        	} else {
+        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\">Erro</div>";
+        	}
+        }
+        
+        public static function Carregar_Categoriasx() {
             $categorias = Controller_Menu_Pesquisa::Buscar_Todas_Categorias();
             
             echo "<option value=\"0\">Categoria</option>";
@@ -57,6 +73,10 @@ namespace application\view\src\include_page;
             } else {
             	echo "<option value=\"\">Erro</option>";
             }
+        }
+        
+        public static function Mostrar_Base_URL() {
+        	echo self::$base_url;
         }
     }
 ?>
