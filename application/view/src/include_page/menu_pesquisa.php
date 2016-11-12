@@ -33,20 +33,6 @@ namespace application\view\src\include_page;
         	}
         }
         
-        public static function Carregar_Categoriasx() {
-            $categorias = Controller_Menu_Pesquisa::Buscar_Todas_Categorias();
-            
-            echo "<option value=\"0\">Categoria</option>";
-            
-            if (!empty($categorias) AND $categorias !== false) {
-	            foreach ($categorias as $categoria) {
-	                echo "<option value=\"".$categoria->get_id()."\">".$categoria->get_nome()."</option>";
-	            }
-            } else {
-            	echo "<option value=\"\">Erro</option>";
-            }
-        }
-        
         public static function Carregar_Marcas($categoria = null) {
             $marcas = Controller_Menu_Pesquisa::Buscar_Marca_Por_Id_Categoria($categoria);
             
