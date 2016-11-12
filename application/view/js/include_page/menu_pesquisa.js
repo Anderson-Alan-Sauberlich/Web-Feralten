@@ -1,13 +1,13 @@
-$(document).ready(function() {
-	$("#categoria").change(function() {
-    	$("#marca").html('<option>Carregando...</option>');
-        $.get('/menu-pesquisa/marca/', 
-        {categoria:$(this).val()},
-        function(valor) {
-        	$("#marca").html(valor);
-        });
-   });
-});
+function Carregar_Categoria(ca) {
+    $("#marca").html('<option>Carregando...</option>');
+    $.get('/menu-pesquisa/marca/', 
+    {categoria:$(ca).val()},
+    function(valor) {
+        $("#marca").html(valor);
+        $("#modelo").html('<option value="0">Modelo</option>');
+        $("#versao").html('<option value="0">Versão</option>');
+    });
+}
 $(document).ready(function( ) {
 	$("#marca").change(function() {
     	$("#modelo").html('<option>Carregando...</option>');
@@ -15,6 +15,17 @@ $(document).ready(function( ) {
         {marca:$(this).val()},
         function(valor) {
         	$("#modelo").html(valor);
+        	$("#versao").html('<option value="0">Versão</option>');
+        });
+   });
+});
+$(document).ready(function() {
+	$("#modelo").change(function() {
+    	$("#versao").html('<option>Carregando...</option>');
+        $.get('/menu-pesquisa/versao/', 
+        {modelo:$(this).val()},
+        function(valor) {
+        	$("#versao").html(valor);
         });
    });
 });
@@ -24,29 +35,49 @@ $(document).ready(function() {
 	$('.ui.dropdown').dropdown();
 });
 function Pesquisar() {
-	if ($("#categoria").val() != 0 && $("#categoria").val() != "") {
-		$("#searschform").attr("action", $("#searschform").attr("action") + $("#categoria").val() + "/");
+	var base_url = $("#searschform").attr("action");
+	var categoria = $("input[name='categoria']:checked").val();
+	var ano_de = $("#ano_de").val();
+	var ano_ate = $("#ano_ate").val();
+	var peca = $("#peca").val();
+	
+	if (categoria != 0 && categoria != "" && categoria != undefined) {
+		$("input[name='categoria']:checked").prop('disabled', true);
 		
-		if ($("#marca").val() != 0 && $("#marca").val() != "") {
-			$("#searschform").attr("action", $("#searschform").attr("action") + $("#marca").val() + "/");
+		base_url = base_url + categoria + "/";
+		
+		var marca = $("#marca").val();
+		
+		if (marca != 0 && marca != "" && marca != undefined) {
+			base_url = base_url + marca + "/"
 			
-			if ($("#modelo").val() != 0 && $("#modelo").val() != "") {
-				$("#searschform").attr("action", $("#searschform").attr("action") + $("#modelo").val() + "/");
+			var modelo = $("#modelo").val();
+			
+			if (modelo != 0 && modelo != "" && modelo != undefined) {
+				base_url = base_url + modelo + "/"
+				
+				var versao = $("#versao").val();
+				
+				if (versao != 0 && versao != "" && versao != undefined) {
+					base_url = base_url + versao + "/"
+				}
 			}
 		}
 	}
 	
-	if ($("#ano_de").val() != 0 && $("#ano_de").val() != "") {
-		$("#searschform").attr("action", $("#searschform").attr("action") + "de-" + $("#ano_de").val() + "/");
+	if (ano_de != 0 && ano_de != "") {
+		base_url = base_url + ano_de + "/"
 	}
 	
-	if ($("#ano_ate").val() != 0 && $("#ano_ate").val() != "") {
-		$("#searschform").attr("action", $("#searschform").attr("action") + "ate-" + $("#ano_ate").val() + "/");
+	if (ano_ate != 0 && ano_ate != "") {
+		base_url = base_url + ano_ate + "/"
 	}
 	
-	if ($("#peca").val() != 0 && $("#peca").val() != "") {
-		$("#searschform").attr("action", $("#searschform").attr("action") + $("#peca").val() + "/");
+	if (peca != 0 && peca != "") {
+		base_url = base_url + peca + "/"
 	}
+	
+	$("#searschform").attr("action", base_url);
 	
 	$("#searschform").submit();
 }

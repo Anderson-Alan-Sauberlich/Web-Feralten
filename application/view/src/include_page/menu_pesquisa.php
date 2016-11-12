@@ -26,7 +26,7 @@ namespace application\view\src\include_page;
         	
         	if (!empty($categorias) AND $categorias !== false) {
 	        	foreach ($categorias as $categoria) {
-	        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria[]\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
+	        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
 	        	}
         	} else {
         		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\">Erro</div>";
@@ -59,6 +59,20 @@ namespace application\view\src\include_page;
             } else {
             	echo "<option value=\"\">Erro</option>";
             }
+        }
+        
+        public static function Carregar_Versoes($modelo = null) {
+        	$versoes = Controller_Menu_Pesquisa::Buscar_Versoes_Por_Id_Modelo($modelo);
+        
+        	echo "<option value=\"0\">Versão</option>";
+        
+        	if (!empty($versoes) AND $versoes !== false) {
+        		foreach ($versoes as $versao) {
+        			echo "<option value=\"".$versao->get_id()."\">".$versao->get_nome()."</option>";
+        		}
+        	} else {
+        		echo "<option value=\"\">Erro</option>";
+        	}
         }
         
         public static function Mostrar_Base_URL() {

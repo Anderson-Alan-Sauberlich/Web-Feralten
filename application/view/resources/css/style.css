@@ -153,11 +153,6 @@
 	height: 20px;
 }
 
-.menuPesquisaPanel {
-	padding-left: 0px;
-	padding-right: 0px;
-}
-
 .sombra_painel:before,
 .sombra_painel:after {
 	position: absolute;

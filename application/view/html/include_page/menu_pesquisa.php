@@ -15,51 +15,60 @@
 				        </div>
 					</div>
 				</div>
-				<div class="ui form">
-	                <div class="four fields">
-	                    <div class="field">
-							<select id="categoria" class="ui fluid search selection dropdown">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    	<div class="row-fluid buscaDropEspaco">
+							<select id="marca" class="ui fluid search selection dropdown">
 								<?php View_Menu_Pesquisa::Carregar_Marcas(); ?>
 							</select>
-	                    </div>
-	                    <div class="field">
-			                <select id="marca" class="ui fluid search selection dropdown">
-								<?php View_Menu_Pesquisa::Carregar_Marcas(); ?>
-							</select>
-	                    </div>
-	                    <div class="field">
-			                <select id="modelo" class="ui fluid search selection dropdown">
+						</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    	<div class="row-fluid buscaDropEspaco">
+		                   	<select id="modelo" class="ui fluid search selection dropdown">
 								<?php View_Menu_Pesquisa::Carregar_Modelos(); ?>
 							</select>
-	                    </div>
-	                    <div class="field">
-	                        <div class="two fields">
-	                            <div class="field">
-				                    <select id="ano_de" class="ui fluid search selection dropdown">
+						</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    	<div class="row-fluid buscaDropEspaco">
+		                   	<select id="versao" class="ui fluid search selection dropdown">
+								<?php View_Menu_Pesquisa::Carregar_Versoes(); ?>
+							</select>
+						</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            	<div class="row-fluid buscaDropEspaco">
+			                    	<select id="ano_de" class="ui fluid search selection dropdown">
 										<option value="0">De</option>
 										<?php View_Menu_Pesquisa::Carregar_Anos(); ?>
 									</select>
-	                            </div>
-	                            <div class="field">
-			                        <select id="ano_ate" class="ui fluid search selection dropdown">
+								</div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            	<div class="row-fluid buscaDropEspaco">
+		                           	<select id="ano_ate" class="ui fluid search selection dropdown">
 										<option value="0">Até</option>
 										<?php View_Menu_Pesquisa::Carregar_Anos(); ?>
 									</select>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="two fields">
-	                	<div class="twelve wide field">
-		          			<div class="ui fluid big left icon input">
-								<i class="search icon"></i>
-								<input id="peca" placeholder="Digite o que deseja Procurar..." type="text">
-							</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-md-9 col-sm-8 col-xs-12">
+	          			<div class="ui fluid big left icon input">
+							<i class="search icon"></i>
+							<input id="peca" placeholder="Digite o que deseja Procurar..." type="text">
 						</div>
-						<div class="four wide field">
-							<button id="pesquisa" onClick="Pesquisar()" class="ui fluid big red labeled icon button"><i class="search icon"></i>Pesquisar</button>
-	    				</div>
-	    			</div>
+					</div>
+					<div class="col-md-3 col-sm-4 col-xs-12">
+						<div class="visible-xs ui horizontal divider"></div>
+						<button id="pesquisa" onClick="Pesquisar()" class="ui fluid big red labeled icon button"><i class="search icon"></i>Pesquisar</button>
+    				</div>
     			</div>
     		</form>
 		</div>

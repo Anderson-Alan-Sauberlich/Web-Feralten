@@ -35,6 +35,14 @@
 			
 			return $response;
 		});
+		
+		$app->get('versao/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
+			
+			application\controller\include_page\Menu_Pesquisa::Retornar_Versoes_Por_Modelo();
+			
+			return $response;
+		});
 	});
 	
 	$app->group('/usuario/login/', function() use ($app) {
@@ -172,9 +180,9 @@
 	$app->group('/usuario/meu-perfil/pecas/visualizar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
+		
 			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
+		
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
 			} else if ($resposta != 1) {
@@ -226,7 +234,7 @@
 			}
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 				
 			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
@@ -240,7 +248,7 @@
 			}
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 				
 			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
@@ -254,7 +262,21 @@
 			}
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
+				
+			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
+				
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+		
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 			
 			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
@@ -644,11 +666,9 @@
 		
 		$app->get('{categoria}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
+		
 			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			echo $args['categoria'].'/';
-				
+		
 			return $response;
 		});
 		
@@ -656,8 +676,6 @@
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 				
 			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			echo $args['categoria'].'/'.$args['marca'].'/';
 				
 			return $response;
 		});
@@ -667,37 +685,37 @@
 				
 			application\controller\pecas\Resultados::Carregar_Pagina();
 				
-			echo $args['categoria'].'/'.$args['marca'].'/'.$args['modelo'].'/';
-				
 			return $response;
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 				
 			application\controller\pecas\Resultados::Carregar_Pagina();
 				
-			echo $args['categoria'].'/'.$args['marca'].'/'.$args['modelo'].'/'.$args['ano_de'].'/';
-				
 			return $response;
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 				
 			application\controller\pecas\Resultados::Carregar_Pagina();
 				
-			echo $args['categoria'].'/'.$args['marca'].'/'.$args['modelo'].'/'.$args['ano_de'].'/'.$args['ano_ate'].'/';
+			return $response;
+		});
+		
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/pecas/resultados.php');
+				
+			application\controller\pecas\Resultados::Carregar_Pagina();
 				
 			return $response;
 		});
 		
-		$app->get('{categoria}/{marca}/{modelo}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 			
 			application\controller\pecas\Resultados::Carregar_Pagina();
-			
-			echo $args['categoria'].'/'.$args['marca'].'/'.$args['modelo'].'/'.$args['ano_de'].'/'.$args['ano_ate'].'/'.$args['peca'].'/';
 			
 			return $response;
 		});

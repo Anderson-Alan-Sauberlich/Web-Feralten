@@ -4,11 +4,13 @@ namespace application\controller\include_page;
 	require_once RAIZ.'/application/model/dao/categoria.php';
 	require_once RAIZ.'/application/model/dao/marca.php';
 	require_once RAIZ.'/application/model/dao/modelo.php';
+	require_once RAIZ.'/application/model/dao/versao.php';
 	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
 
 	use application\model\dao\Categoria as DAO_Categoria;
 	use application\model\dao\Marca as DAO_Marca;
 	use application\model\dao\Modelo as DAO_Modelo;
+	use application\model\dao\Versao as DAO_Versao;
 	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
 	
     class Menu_Pesquisa {
@@ -23,6 +25,10 @@ namespace application\controller\include_page;
         
         public static function Retornar_Modelos_Por_Marca() {
         	View_Menu_Pesquisa::Carregar_Modelos($_GET['marca']);
+        }
+        
+        public static function Retornar_Versoes_Por_Modelo() {
+        	View_Menu_Pesquisa::Carregar_Versoes($_GET['modelo']);
         }
         
         public static function Buscar_Todas_Categorias() {
@@ -40,6 +46,14 @@ namespace application\controller\include_page;
         public static function Buscar_Modelo_Por_Id_Marca($marca) {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
+        	} else {
+        		return null;
+        	}
+        }
+        
+        public static function Buscar_Versoes_Por_Id_Modelo($modelo) {
+        	if (!empty($modelo)) {
+        		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {
         		return null;
         	}
