@@ -31,7 +31,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina($concluir_erros = null, $concluir_campos = null, $concluir_form = null) {
+        public function Carregar_Pagina($concluir_erros = null, $concluir_campos = null, $concluir_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
@@ -51,7 +51,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Concluir_Cadastro() {
+        public function Concluir_Cadastro() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
@@ -313,7 +313,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_status_id(1);
 		            	$dados_usuario->set_data(date('Y-m-d H:i:s'));
-		            	$dados_usuario->set_imagem(self::Salvar_Imagem());
+		            	$dados_usuario->set_imagem($this->Salvar_Imagem());
 		            	
 		                if (DAO_Dados_Usuario::Inserir($dados_usuario) !== false) {
 		                	if (DAO_Endereco::Inserir($endereco) === false) {
@@ -343,7 +343,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$concluir_form['emailcontato'] = trim(strip_tags($_POST['emailcontato']));
 		            	$concluir_form['site'] = trim(strip_tags($_POST['site']));
 		            	
-		            	self::Carregar_Pagina($concluir_erros, $concluir_campos, $concluir_form);
+		            	$this->Carregar_Pagina($concluir_erros, $concluir_campos, $concluir_form);
 		            }
         		} else {
         			return $status;
@@ -353,7 +353,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Retornar_Cidades_Por_Estado() {
+        public function Retornar_Cidades_Por_Estado() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Concluir::Mostrar_Cidades($_GET['estado']);
@@ -363,7 +363,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-		public static function Salvar_Imagem_TMP() {
+		public function Salvar_Imagem_TMP() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
@@ -381,7 +381,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public static function Deletar_Imagem() {
+		public function Deletar_Imagem() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					$imagens = new Gerenciar_Imagens();

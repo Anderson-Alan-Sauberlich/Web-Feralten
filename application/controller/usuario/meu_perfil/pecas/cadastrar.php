@@ -51,14 +51,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
             
         }
         
-        public static function Carregar_Pagina($cadastrar_erros = null, $cadastrar_campos = null, $cadastrar_form = null, $cadastrar_sucesso = null) {
+        public function Carregar_Pagina($cadastrar_erros = null, $cadastrar_campos = null, $cadastrar_form = null, $cadastrar_sucesso = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
         			if (empty($cadastrar_form)) {
         				unset($_SESSION['compatibilidade']);
-        				self::Deletar_Imagem(123);
+        				$this->Deletar_Imagem(123);
         			}
         			
         			$view = new View_Cadastrar($status);
@@ -77,17 +77,17 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Verificar_Evento() {
+        public function Verificar_Evento() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
 		        	if (isset($_POST['salvar'])) {
-		        		self::Cadastrar_Peca();
+		        		$this->Cadastrar_Peca();
 		        	} else if (isset($_POST['restaurar'])) {
 		        		unset($_SESSION['compatibilidade']);
-		        		self::Deletar_Imagem(123);
-		        		self::Carregar_Pagina();
+		        		$this->Deletar_Imagem(123);
+		        		$this->Carregar_Pagina();
 		        	}
         		}
         		
@@ -97,7 +97,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Carregar_Compatibilidade() {
+        public function Carregar_Compatibilidade() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['categoria'])) {
 	        		if ($_GET['categoria'] == "verificar") {
@@ -263,7 +263,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$_SESSION['compatibilidade'] = $compatibilidade;
         }
 		
-		private static function Cadastrar_Peca() {
+		private function Cadastrar_Peca() {
 			$cadastrar_erros = array();
 			$cadastrar_sucesso = array();
 			$cadastrar_campos = array('erro_peca' => "certo");
@@ -562,7 +562,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
 				$cadastrar_campos['erro_peca'] = "";
 				
-				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, null, $cadastrar_sucesso);
+				$this->Carregar_Pagina($cadastrar_erros, $cadastrar_campos, null, $cadastrar_sucesso);
 			} else {
 				$cadastrar_form = array();
 					
@@ -630,11 +630,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 				$_SESSION['compatibilidade']['ano'] = $anos;
 				
-				self::Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
+				$this->Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
 			}
 		}
 		
-		public static function Salvar_Imagem_TMP() {
+		public function Salvar_Imagem_TMP() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				$arquivo = null;
 				
@@ -668,7 +668,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public static function Deletar_Imagem($num_img) {
+		public function Deletar_Imagem($num_img) {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagens_tmp'])) {
 					if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {

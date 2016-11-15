@@ -13,7 +13,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pagina_inicial.php');
 			
-			application\controller\Pagina_Inicial::Carregar_Pagina();
+			$pagina_inicial = new application\controller\Pagina_Inicial();
+			
+			$pagina_inicial->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -23,7 +25,9 @@
 		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
 			
-			application\controller\include_page\Menu_Pesquisa::Retornar_Marcas_Por_Categoria();
+			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+			
+			$menu_pesquisa->Retornar_Marcas_Por_Categoria();
 			
 			return $response;
 		});
@@ -31,7 +35,9 @@
 		$app->get('modelo/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
 			
-			application\controller\include_page\Menu_Pesquisa::Retornar_Modelos_Por_Marca();
+			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+				
+			$menu_pesquisa->Retornar_Modelos_Por_Marca();
 			
 			return $response;
 		});
@@ -39,7 +45,9 @@
 		$app->get('versao/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
 			
-			application\controller\include_page\Menu_Pesquisa::Retornar_Versoes_Por_Modelo();
+			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+				
+			$menu_pesquisa->Retornar_Versoes_Por_Modelo();
 			
 			return $response;
 		});
@@ -49,7 +57,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
-			application\controller\usuario\Login::Carregar_Pagina();
+			$login = new application\controller\usuario\Login();
+			
+			$login->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -57,7 +67,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
-			$resposta = application\controller\usuario\Login::Autenticar_Usuario_Login();
+			$login = new application\controller\usuario\Login();
+				
+			$resposta = $login->Autenticar_Usuario_Login();
 			
 			if ($resposta) {
 				return $response->withRedirect('/usuario/meu-perfil/');
@@ -69,7 +81,9 @@
 		$app->get('sair/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
-			application\controller\usuario\Login::LogOut();
+			$login = new application\controller\usuario\Login();
+				
+			$login->LogOut();
 			
 			return $response->withRedirect('/usuario/login/');
 		});
@@ -79,7 +93,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/cadastro.php');
 			
-			application\controller\usuario\Cadastro::Carregar_Pagina();
+			$cadastro = new application\controller\usuario\Cadastro();
+			
+			$cadastro->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -87,7 +103,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/cadastro.php');
 			
-			$resposta = application\controller\usuario\Cadastro::Cadastrar_Usuario();
+			$cadastro = new application\controller\usuario\Cadastro();
+				
+			$resposta = $cadastro->Cadastrar_Usuario();
 			
 			if ($resposta) {
 				return $response->withRedirect('/usuario/meu-perfil/');
@@ -101,7 +119,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/perfil.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\Perfil::Carregar_Pagina();
+			$perfil = new application\controller\usuario\meu_perfil\Perfil();
+			
+			$resposta = $perfil->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -115,7 +135,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Carregar_Pagina();
+			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+			
+			$resposta = $cadastrar->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -129,7 +151,9 @@
 		$app->get('compatibilidade/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Carregar_Compatibilidade();
+			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+			
+			$resposta = $cadastrar->Carregar_Compatibilidade();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -141,7 +165,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Verificar_Evento();
+			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+			
+			$resposta = $cadastrar->Verificar_Evento();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -155,7 +181,9 @@
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Salvar_Imagem_TMP();
+			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+				
+			$resposta = $cadastrar->Salvar_Imagem_TMP();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -167,7 +195,9 @@
 		$app->delete('imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Cadastrar::Deletar_Imagem($args['img']);
+			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+			
+			$resposta = $cadastrar->Deletar_Imagem($args['img']);
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -178,108 +208,12 @@
 	});
 	
 	$app->group('/usuario/meu-perfil/pecas/visualizar/', function() use ($app) {
-		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-		
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-		
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-				
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
-				
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/[{ano_de}/[{ano_ate}/[{peca}/[{params:.*}/]]]]]]]]', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\pecas\Visualizar::Carregar_Pagina();
+			$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar($args);
+			
+			$resposta = $visualizar->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -295,7 +229,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
 		
-			$resposta = application\controller\usuario\meu_perfil\pecas\Atualizar::Carregar_Pagina();
+			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			$resposta = $atualizar->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -311,7 +247,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boleto_atual.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\financeiro\Boleto_Atual::Carregar_Pagina();
+			$boleto_atual = new application\controller\usuario\meu_perfil\financeiro\Boleto_Atual();
+			
+			$resposta = $boleto_atual->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -327,7 +265,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/boletos_pagos.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos::Carregar_Pagina();
+			$boletos_pagos = new application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos();
+			
+			$resposta = $boletos_pagos->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -343,7 +283,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/financeiro/meu_plano.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\financeiro\Meu_Plano::Carregar_Pagina();
+			$meu_plano = new application\controller\usuario\meu_perfil\financeiro\Meu_Plano();
+			
+			$resposta = $meu_plano->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -359,7 +301,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Atualizar::Carregar_Pagina();
+			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+			
+			$resposta = $atualizar->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -373,7 +317,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Atualizar::Verificar_Evento();
+			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+				
+			$resposta = $atualizar->Verificar_Evento();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -387,7 +333,9 @@
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Atualizar::Salvar_Imagem_TMP();
+			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+				
+			$resposta = $atualizar->Salvar_Imagem_TMP();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -399,7 +347,9 @@
 		$app->delete('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Atualizar::Deletar_Imagem();
+			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+				
+			$resposta = $atualizar->Deletar_Imagem();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -413,7 +363,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha::Carregar_Pagina();
+			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
+			
+			$resposta = $alterar_senha->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -425,7 +377,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha::Atualizar_Senha_Usuario();
+			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
+				
+			$resposta = $alterar_senha->Atualizar_Senha_Usuario();
 			
 			if ($resposta === 'certo') {
 				return $response->withRedirect('/usuario/meu-perfil/');
@@ -441,7 +395,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Enderecos::Carregar_Pagina();
+			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+			
+			$resposta = $enderecos->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -455,7 +411,9 @@
 		$app->get('cidades/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Enderecos::Retornar_Cidades_Por_Estado();
+			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+				
+			$resposta = $enderecos->Retornar_Cidades_Por_Estado();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -467,7 +425,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Enderecos::Atualizar_Endereco();
+			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+				
+			$resposta = $enderecos->Atualizar_Endereco();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -483,7 +443,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Carregar_Pagina();
+			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+			
+			$resposta = $concluir->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -497,7 +459,9 @@
 		$app->get('cidades/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Retornar_Cidades_Por_Estado();
+			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+				
+			$resposta = $concluir->Retornar_Cidades_Por_Estado();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -509,7 +473,9 @@
 		$app->delete('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Deletar_Imagem();
+			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+				
+			$resposta = $concluir->Deletar_Imagem();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -521,7 +487,9 @@
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Salvar_Imagem_TMP();
+			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+				
+			$resposta = $concluir->Salvar_Imagem_TMP();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -533,7 +501,9 @@
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
-			$resposta = application\controller\usuario\meu_perfil\meus_dados\Concluir::Concluir_Cadastro();
+			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+				
+			$resposta = $concluir->Concluir_Cadastro();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
@@ -549,7 +519,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/quem_somos.php');
 			
-			application\controller\Quem_Somos::Carregar_Pagina();
+			$quem_somos = new application\controller\Quem_Somos();
+			
+			$quem_somos->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -559,7 +531,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/recuperar_senha.php');
 			
-			application\controller\usuario\Recuperar_Senha::Carregar_Pagina();
+			$recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+			
+			$recuperar_senha->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -569,7 +543,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/documentacao.php');
 			
-			application\controller\Documentacao::Carregar_Pagina();
+			$documentacao = new application\controller\Documentacao();
+			
+			$documentacao->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -579,7 +555,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/perguntas_frequentes.php');
 			
-			application\controller\Perguntas_Frequentes::Carregar_Pagina();
+			$perguntas_frequentes = new application\controller\Perguntas_Frequentes();
+			
+			$perguntas_frequentes->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -589,8 +567,10 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/dicas_de_venda/apresentacao.php');
 				
-			application\controller\dicas_de_venda\Apresentacao::Carregar_Pagina();
-					
+			$apresentacao = new application\controller\dicas_de_venda\Apresentacao();
+			
+			$apresentacao->Carregar_Pagina();
+			
 			return $response;
 		});
 	});
@@ -599,7 +579,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/dicas_de_venda/principais.php');
 			
-			application\controller\dicas_de_venda\Principais::Carregar_Pagina();
+			$principais = new application\controller\dicas_de_venda\Principais();
+			
+			$principais->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -609,7 +591,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/contato.php');
 			
-			application\controller\Contato::Carregar_Pagina();
+			$contato = new application\controller\Contato();
+			
+			$contato->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -619,7 +603,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pesquisa_avancada.php');
 			
-			application\controller\Pesquisa_Avancada::Carregar_Pagina();
+			$pesquisa_avancada = new application\controller\Pesquisa_Avancada();
+			
+			$pesquisa_avancada->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -629,7 +615,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/busca_programada.php');
 			
-			application\controller\pecas\Busca_Programada::Carregar_Pagina();
+			$busca_programada = new application\controller\pecas\Busca_Programada();
+			
+			$busca_programada->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -639,7 +627,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/mais_visualizados.php');
 			
-			application\controller\pecas\Mais_Visualizados::Carregar_Pagina();
+			$mais_visualizados = new application\controller\pecas\Mais_Visualizados();
+			
+			$mais_visualizados->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -649,73 +639,21 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/dicas_de_venda/venda_segura.php');
 			
-			application\controller\dicas_de_venda\Venda_Segura::Carregar_Pagina();
+			$venda_segura = new application\controller\dicas_de_venda\Venda_Segura();
+			
+			$venda_segura->Carregar_Pagina();
 			
 			return $response;
 		});
 	});
 	
 	$app->group('/pecas/resultados/', function() use ($app) {
-		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-		
-			application\controller\pecas\Resultados::Carregar_Pagina();
-		
-			return $response;
-		});
-		
-		$app->get('{categoria}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-		
-			application\controller\pecas\Resultados::Carregar_Pagina();
-		
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
-			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
-			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
-			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
-			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-				
-			application\controller\pecas\Resultados::Carregar_Pagina();
-				
-			return $response;
-		});
-		
-		$app->get('{categoria}/{marca}/{modelo}/{versao}/{ano_de}/{ano_ate}/{peca}/', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/[{ano_de}/[{ano_ate}/[{peca}/[{params:.*}/]]]]]]]]', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 			
-			application\controller\pecas\Resultados::Carregar_Pagina();
+			$resultados = new application\controller\pecas\Resultados();
+			
+			$resultados->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -725,7 +663,9 @@
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/publicidade/experimentar_formatos.php');
 			
-			application\controller\publicidade\Experimentar_Formatos::Carregar_Pagina();
+			$experimentar_formatos = new application\controller\publicidade\Experimentar_Formatos();
+			
+			$experimentar_formatos->Carregar_Pagina();
 			
 			return $response;
 		});

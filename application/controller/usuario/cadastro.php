@@ -17,7 +17,7 @@ namespace application\controller\usuario;
             
         }
         
-        public static function Carregar_Pagina($cadastro_erros = null, $cadastro_campos = null, $cadastro_form = null) {
+        public function Carregar_Pagina($cadastro_erros = null, $cadastro_campos = null, $cadastro_form = null) {
         	$view = new View_Cadastro();
         	
         	$view->set_cadastro_campos($cadastro_campos);
@@ -157,7 +157,7 @@ namespace application\controller\usuario;
                 $cadastro_form['confemail'] = trim(strip_tags($_POST['confemail']));
                 $cadastro_form['senha'] = strip_tags($_POST['password']);
                 
-                self::Carregar_Pagina($cadastro_erros, $cadastro_campos, $cadastro_form);
+                $this->Carregar_Pagina($cadastro_erros, $cadastro_campos, $cadastro_form);
             }
         }
     }

@@ -43,6 +43,7 @@ function Pesquisar() {
 	
 	if (categoria != 0 && categoria != "" && categoria != undefined) {
 		$("input[name='categoria']:checked").prop('disabled', true);
+		$("input[name='categoria']:checked").prop('readonly', true);
 		
 		base_url = base_url + categoria + "/";
 		
@@ -66,11 +67,11 @@ function Pesquisar() {
 	}
 	
 	if (ano_de != 0 && ano_de != "") {
-		base_url = base_url + ano_de + "/"
+		base_url = base_url + "de-" + ano_de + "/"
 	}
 	
 	if (ano_ate != 0 && ano_ate != "") {
-		base_url = base_url + ano_ate + "/"
+		base_url = base_url + "ate-" + ano_ate + "/"
 	}
 	
 	if (peca != 0 && peca != "") {

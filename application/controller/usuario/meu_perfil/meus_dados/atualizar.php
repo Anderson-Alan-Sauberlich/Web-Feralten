@@ -23,34 +23,34 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			
         }
         
-        private static $atualizar_form;
-        private static $atualizar_erros;
-        private static $atualizar_sucesso;
-        private static $atualizar_campos;
-        private static $dados_usuario_form;
-        private static $usuario_form;
+        private $atualizar_form;
+        private $atualizar_erros;
+        private $atualizar_sucesso;
+        private $atualizar_campos;
+        private $dados_usuario_form;
+        private $usuario_form;
         
-        public static function Carregar_Pagina() {
+        public function Carregar_Pagina() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
 		        	if (empty($atualizar_form)) {
-		        		self::Deletar_Imagem();
+		        		$this->Deletar_Imagem();
 		        		unset($_SESSION['imagem_tmp']);
 		        	}
 		        	
-		        	self::$dados_usuario_form = DAO_Dados_Usuario::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
-		        	self::$usuario_form = DAO_Usuario::Buscar_Usuario(unserialize($_SESSION['usuario'])->get_id());
+		        	$this->dados_usuario_form = DAO_Dados_Usuario::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
+		        	$this->usuario_form = DAO_Usuario::Buscar_Usuario(unserialize($_SESSION['usuario'])->get_id());
 		        	
 		        	$view = new View_Atualizar($status);
 		        	
-		        	$view->set_atualizar_campos(self::$atualizar_campos);
-		        	$view->set_atualizar_erros(self::$atualizar_erros);
-		        	$view->set_atualizar_form(self::$atualizar_form);
-		        	$view->set_atualizar_sucesso(self::$atualizar_sucesso);
-		        	$view->set_dados_usuario_form(self::$dados_usuario_form);
-		        	$view->set_usuario_form(self::$usuario_form);
+		        	$view->set_atualizar_campos($this->atualizar_campos);
+		        	$view->set_atualizar_erros($this->atualizar_erros);
+		        	$view->set_atualizar_form($this->atualizar_form);
+		        	$view->set_atualizar_sucesso($this->atualizar_sucesso);
+		        	$view->set_dados_usuario_form($this->dados_usuario_form);
+		        	$view->set_usuario_form($this->usuario_form);
 		        	 
 		        	$view->Executar();
         		}
@@ -61,27 +61,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Verificar_Evento() {
+        public function Verificar_Evento() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-		        	self::$atualizar_form = array();
+        			$this->atualizar_form = array();
 		        
 		        	if (isset($_POST['restaurar_login'])) {
-		        		self::Restaurar_Usuario();
+		        		$this->Restaurar_Usuario();
 		        	} else if (isset($_POST['salvar_login'])) {
-		        		self::Atualizar_Usuario();
+		        		$this->Atualizar_Usuario();
 		        	} else if (isset($_POST['restaurar_dadosusuario'])) {
-		        		self::Restaurar_DadosUsuario();
+		        		$this->Restaurar_DadosUsuario();
 		        	} else if (isset($_POST['salvar_dadosusuario'])) {
-		        		self::Atualizar_DadosUsuario();
+		        		$this->Atualizar_DadosUsuario();
 		        	} else {
-		        		self::Salvar_Dados_Usuario();
-		        		self::Salvar_Usuario();
+		        		$this->Salvar_Dados_Usuario();
+		        		$this->Salvar_Usuario();
 		        	}
 		        
-		        	self::Carregar_Pagina();
+		        	$this->Carregar_Pagina();
         		}
         		
         		return $status;
@@ -90,42 +90,42 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        private static function Restaurar_Usuario() {
-        	self::Salvar_Dados_Usuario();
+        private function Restaurar_Usuario() {
+        	$this->Salvar_Dados_Usuario();
         }
         
-        private static function Restaurar_DadosUsuario() {
-        	self::Salvar_Usuario();
-        	self::Deletar_Imagem();
+        private function Restaurar_DadosUsuario() {
+        	$this->Salvar_Usuario();
+        	$this->Deletar_Imagem();
         	
         	unset($_SESSION['imagem_tmp']);
         }
         
-        private static function Salvar_Usuario() {
-        	self::$atualizar_form['nome'] = $_POST['nome'];
-        	self::$atualizar_form['email'] = $_POST['email'];
-        	self::$atualizar_form['confemail'] = $_POST['confemail'];
+        private function Salvar_Usuario() {
+        	$this->atualizar_form['nome'] = $_POST['nome'];
+        	$this->atualizar_form['email'] = $_POST['email'];
+        	$this->atualizar_form['confemail'] = $_POST['confemail'];
         }
         
-        private static function Salvar_Dados_Usuario() {
-        	self::$atualizar_form['nomedadosusuario'] = $_POST['nomedadosusuario'];
-        	self::$atualizar_form['cpf_cnpj'] = $_POST['cpf_cnpj'];
-        	self::$atualizar_form['site'] = $_POST['site'];
-        	self::$atualizar_form['fone1'] = $_POST['fone1'];
-        	self::$atualizar_form['fone2'] = $_POST['fone2'];
-        	self::$atualizar_form['emailcontato'] = $_POST['emailcontato'];
+        private function Salvar_Dados_Usuario() {
+        	$this->atualizar_form['nomedadosusuario'] = $_POST['nomedadosusuario'];
+        	$this->atualizar_form['cpf_cnpj'] = $_POST['cpf_cnpj'];
+        	$this->atualizar_form['site'] = $_POST['site'];
+        	$this->atualizar_form['fone1'] = $_POST['fone1'];
+        	$this->atualizar_form['fone2'] = $_POST['fone2'];
+        	$this->atualizar_form['emailcontato'] = $_POST['emailcontato'];
         }
         
-        private static function Atualizar_DadosUsuario() {
-            self::$atualizar_erros = array();
-            self::$atualizar_sucesso = array();
-            self::$atualizar_campos = array('erro_cpf_cnpj' => "certo");
+        private function Atualizar_DadosUsuario() {
+            $this->atualizar_erros = array();
+            $this->atualizar_sucesso = array();
+            $this->atualizar_campos = array('erro_cpf_cnpj' => "certo");
             
             $dados_usuario = new Object_Dados_Usuario();
             
             if (empty($_POST['fone1'])) {
-            	self::$atualizar_erros[] = "Informe um Nº de Telefone para Telefone 1";
-            	self::$atualizar_campos['erro_fone1'] = "erro";
+            	$this->atualizar_erros[] = "Informe um Nº de Telefone para Telefone 1";
+            	$this->atualizar_campos['erro_fone1'] = "erro";
             } else {
             	$telefone1 = trim($_POST['fone1']);
             
@@ -133,12 +133,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
             			$dados_usuario->set_telefone1($telefone1);
             		} else {
-            			self::$atualizar_erros[] = "Telefone-1, Digite Apenas Numeros";
-            			self::$atualizar_campos['erro_fone1'] = "erro";
+            			$this->atualizar_erros[] = "Telefone-1, Digite Apenas Numeros";
+            			$this->atualizar_campos['erro_fone1'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "Telefone-1 deve conter 10 Numeros";
-            		self::$atualizar_campos['erro_fone1'] = "erro";
+            		$this->atualizar_erros[] = "Telefone-1 deve conter 10 Numeros";
+            		$this->atualizar_campos['erro_fone1'] = "erro";
             	}
             }
             
@@ -149,12 +149,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
             			$dados_usuario->set_telefone2($telefone2);
             		} else {
-            			self::$atualizar_erros[] = "Telefone-2, Digite Apenas Numeros";
-            			self::$atualizar_campos['erro_fone2'] = "erro";
+            			$this->atualizar_erros[] = "Telefone-2, Digite Apenas Numeros";
+            			$this->atualizar_campos['erro_fone2'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "Telefone-2 deve conter 10 Numeros";
-            		self::$atualizar_campos['erro_fone2'] = "erro";
+            		$this->atualizar_erros[] = "Telefone-2 deve conter 10 Numeros";
+            		$this->atualizar_campos['erro_fone2'] = "erro";
             	}
             }
             
@@ -165,18 +165,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
             			$dados_usuario->set_email($emailcontato);
             		} else {
-            			self::$atualizar_erros[] = "Digite um E-Mail Alternativo Valido";
-            			self::$atualizar_campos['erro_emailcontato'] = "erro";
+            			$this->atualizar_erros[] = "Digite um E-Mail Alternativo Valido";
+            			$this->atualizar_campos['erro_emailcontato'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
-            		self::$atualizar_campos['erro_emailcontato'] = "erro";
+            		$this->atualizar_erros[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
+            		$this->atualizar_campos['erro_emailcontato'] = "erro";
             	}
             }
             
             if (empty($_POST['cpf_cnpj'])) {
-                self::$atualizar_erros[] = "Informe um CPF ou CNPJ";
-                self::$atualizar_campos['erro_cpf_cnpj'] = "erro";
+                $this->atualizar_erros[] = "Informe um CPF ou CNPJ";
+                $this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             } else {
             	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
 		        $cpf_cnpj = trim($cpf_cnpj);
@@ -190,20 +190,20 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             				if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
             					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
             				} else {
-            					self::$atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
-            					self::$atualizar_campos['erro_cpf_cnpj'] = "erro";
+            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
+            					$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             				}
             			} else {
-            				self::$atualizar_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
-            				self::$atualizar_campos['erro_cpf_cnpj'] = "";
+            				$this->atualizar_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
+            				$this->atualizar_campos['erro_cpf_cnpj'] = "";
             			}
             		} else {
-            			self::$atualizar_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
-            			self::$atualizar_campos['erro_cpf_cnpj'] = "erro";
+            			$this->atualizar_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
+            			$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "CPF/CNPJ, Digite Apenas Numeros";
-            		self::$atualizar_campos['erro_cpf_cnpj'] = "erro";
+            		$this->atualizar_erros[] = "CPF/CNPJ, Digite Apenas Numeros";
+            		$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             	}
             }
             
@@ -217,12 +217,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (strlen($nomedadosusuario) <= 45) {
             			$dados_usuario->set_nome_fantasia($nomedadosusuario);
             		} else {
-            			self::$atualizar_erros[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
-            			self::$atualizar_campos['erro_nomedadosusuario'] = "erro";
+            			$this->atualizar_erros[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
+            			$this->atualizar_campos['erro_nomedadosusuario'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "Nome Fantasia, Não pode conter Tags de Programação";
-            		self::$atualizar_campos['erro_nomedadosusuario'] = "erro";
+            		$this->atualizar_erros[] = "Nome Fantasia, Não pode conter Tags de Programação";
+            		$this->atualizar_campos['erro_nomedadosusuario'] = "erro";
             	}
             }
             
@@ -236,58 +236,58 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (strlen($site) <= 150) {
             			$dados_usuario->set_site($site);
             		} else {
-            			self::$atualizar_erros[] = "Site, pode ter no Maximo 150 Caracteres";
-            			self::$atualizar_campos['erro_site'] = "erro";
+            			$this->atualizar_erros[] = "Site, pode ter no Maximo 150 Caracteres";
+            			$this->atualizar_campos['erro_site'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "Site, Não pode conter Tags de Programação";
-            		self::$atualizar_campos['erro_site'] = "erro";
+            		$this->atualizar_erros[] = "Site, Não pode conter Tags de Programação";
+            		$this->atualizar_campos['erro_site'] = "erro";
             	}
             }
 
-            if (empty(self::$atualizar_erros)) {
+            if (empty($this->atualizar_erros)) {
             	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-            	$dados_usuario->set_imagem(self::Salvar_Imagem());
+            	$dados_usuario->set_imagem($this->Salvar_Imagem());
             	
             	if (empty($dados_usuario->get_imagem())) {
             		if (DAO_Dados_Usuario::Atualizar_Dados($dados_usuario) === false) {
-            			self::$atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
-            			self::$atualizar_campos['erro_cpf_cnpj'] = "";
+            			$this->atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
+            			$this->atualizar_campos['erro_cpf_cnpj'] = "";
             		} else {
-                		self::$atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
+                		$this->atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
                 	}
             	} else if ($dados_usuario->get_imagem() == "del") {
             		$dados_usuario->set_imagem(null);
             		
                 	if (DAO_Dados_Usuario::Atualizar($dados_usuario) === false) {
-                		self::$atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
-                		self::$atualizar_campos['erro_cpf_cnpj'] = "";
+                		$this->atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
+                		$this->atualizar_campos['erro_cpf_cnpj'] = "";
                 	} else {
-                		self::$atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
+                		$this->atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
                 	}
                 } else {
                 	if (DAO_Dados_Usuario::Atualizar($dados_usuario) === false) {
-                		self::$atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
-                		self::$atualizar_campos['erro_cpf_cnpj'] = "";
+                		$this->atualizar_erros[] = "Erro ao tentar Atualizar Dados de Usuario";
+                		$this->atualizar_campos['erro_cpf_cnpj'] = "";
                 	} else {
-                		self::$atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
+                		$this->atualizar_sucesso[] = "Dados de Usuario Atualizados com Sucesso";
                 	}
                 }
             }
             
-            self::Salvar_Usuario();
+            $this->Salvar_Usuario();
         }
         
-        private static function Atualizar_Usuario() {
-            self::$atualizar_erros = array();
-            self::$atualizar_sucesso = array();
-            self::$atualizar_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' =>  "certo");
+        private function Atualizar_Usuario() {
+            $this->atualizar_erros = array();
+            $this->atualizar_sucesso = array();
+            $this->atualizar_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' =>  "certo");
             
             $usuario = new Object_Usuario();
             
             if (empty($_POST['nome'])) {
-            	self::$atualizar_erros[] = "Digite Seu Nome Completo";
-            	self::$atualizar_campos['erro_nome'] = "erro";
+            	$this->atualizar_erros[] = "Digite Seu Nome Completo";
+            	$this->atualizar_campos['erro_nome'] = "erro";
             } else {
             	$nome = strip_tags($_POST['nome']);
             	 
@@ -299,28 +299,28 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			if (preg_match("/^([a-zA-Z0-9çÇ ,'-]+)$/", $nome)) {
             				$usuario->set_nome(ucwords(strtolower($nome)));
             			} else {
-            				self::$atualizar_erros[] = "O Nome Não Pode Conter Caracteres Especiais";
-            				self::$atualizar_campos['erro_nome'] = "erro";
+            				$this->atualizar_erros[] = "O Nome Não Pode Conter Caracteres Especiais";
+            				$this->atualizar_campos['erro_nome'] = "erro";
             			}
             		} else {
-            			self::$atualizar_erros[] = "O Nome pode ter no maximo 150 Caracteres";
-            			self::$atualizar_campos['erro_nome'] = "erro";
+            			$this->atualizar_erros[] = "O Nome pode ter no maximo 150 Caracteres";
+            			$this->atualizar_campos['erro_nome'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "O Nome Não pode conter Tags de Programação";
-            		self::$atualizar_campos['erro_nome'] = "erro";
+            		$this->atualizar_erros[] = "O Nome Não pode conter Tags de Programação";
+            		$this->atualizar_campos['erro_nome'] = "erro";
             	}
             }
             
             if (empty($_POST['confemail']) OR empty($_POST['email'])) {
             	if (empty($_POST['email'])) {
-            		self::$atualizar_erros[] = "Preencha o Campo E-Mail";
-            		self::$atualizar_campos['erro_email'] = "erro";
+            		$this->atualizar_erros[] = "Preencha o Campo E-Mail";
+            		$this->atualizar_campos['erro_email'] = "erro";
             	}
             	 
             	if (empty($_POST['confemail'])) {
-            		self::$atualizar_erros[] = "Preencha o Campo Comfirmar E-Mail";
-            		self::$atualizar_campos['erro_confemail'] = "erro";
+            		$this->atualizar_erros[] = "Preencha o Campo Comfirmar E-Mail";
+            		$this->atualizar_campos['erro_confemail'] = "erro";
             	}
             } else {
             	$confemail = trim($_POST['confemail']);
@@ -334,48 +334,48 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             				if (strlen($email) <= 150) {
             					$usuario->set_email($email);
             				} else {
-            					self::$atualizar_erros[] = "O E-Mail pode ter no maximo 150 Caracteres";
-            					self::$atualizar_campos['erro_email'] = "erro";
-            					self::$atualizar_campos['erro_confemail'] = "erro";
+            					$this->atualizar_erros[] = "O E-Mail pode ter no maximo 150 Caracteres";
+            					$this->atualizar_campos['erro_email'] = "erro";
+            					$this->atualizar_campos['erro_confemail'] = "erro";
             				}
             			} else {
-            				self::$atualizar_erros[] = "Este E-Mail Já Esta Cadastrado";
-            				self::$atualizar_campos['erro_email'] = "erro";
-            				self::$atualizar_campos['erro_confemail'] = "erro";
+            				$this->atualizar_erros[] = "Este E-Mail Já Esta Cadastrado";
+            				$this->atualizar_campos['erro_email'] = "erro";
+            				$this->atualizar_campos['erro_confemail'] = "erro";
             			}
             		} else {
-            			self::$atualizar_erros[] = "Este E-Mail Não é Valido";
-            			self::$atualizar_campos['erro_email'] = "erro";
-            			self::$atualizar_campos['erro_confemail'] = "erro";
+            			$this->atualizar_erros[] = "Este E-Mail Não é Valido";
+            			$this->atualizar_campos['erro_email'] = "erro";
+            			$this->atualizar_campos['erro_confemail'] = "erro";
             		}
             	} else {
-            		self::$atualizar_erros[] = "Digite o E-Mails Duas Vezes Igualmente";
-            		self::$atualizar_campos['erro_email'] = "erro";
-            		self::$atualizar_campos['erro_confemail'] = "erro";
+            		$this->atualizar_erros[] = "Digite o E-Mails Duas Vezes Igualmente";
+            		$this->atualizar_campos['erro_email'] = "erro";
+            		$this->atualizar_campos['erro_confemail'] = "erro";
             	}
             }
             
-            if (empty(self::$atualizar_erros)) {
+            if (empty($this->atualizar_erros)) {
             	$usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
             	$usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
             	$usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
             	
                 if (DAO_Usuario::Atualizar($usuario) === false) {
-                	self::$atualizar_erros[] = "Erro ao tentar Atualizar Usuario";
-                	self::$atualizar_campos['erro_nome'] = "";
-                	self::$atualizar_campos['erro_email'] = "";
-                	self::$atualizar_campos['erro_confemail'] = "";
+                	$this->atualizar_erros[] = "Erro ao tentar Atualizar Usuario";
+                	$this->atualizar_campos['erro_nome'] = "";
+                	$this->atualizar_campos['erro_email'] = "";
+                	$this->atualizar_campos['erro_confemail'] = "";
                 } else {
                 	$_SESSION['usuario'] = serialize($usuario);
                 	
-                	self::$atualizar_sucesso[] = "Usuario Atualizado com Sucesso";
+                	$this->atualizar_sucesso[] = "Usuario Atualizado com Sucesso";
                 }
             }
             
-            self::Salvar_Dados_Usuario();
+            $this->Salvar_Dados_Usuario();
         }
 		
-		public static function Salvar_Imagem_TMP() {
+		public function Salvar_Imagem_TMP() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
@@ -393,7 +393,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public static function Deletar_Imagem() {
+		public function Deletar_Imagem() {
 			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					if ($_SESSION['imagem_tmp'] != "del") {
@@ -421,7 +421,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        private static function Salvar_Imagem() {
+        private function Salvar_Imagem() {
         	if (isset($_SESSION['imagem_tmp'])) {
         		$imagens = new Gerenciar_Imagens();
 				

@@ -25,7 +25,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina($enderecos_erros= null, $enderecos_campos = null, $enderecos_sucesso= null, $enderecos_form = null) {
+        public function Carregar_Pagina($enderecos_erros= null, $enderecos_campos = null, $enderecos_sucesso= null, $enderecos_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
@@ -51,7 +51,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Retornar_Cidades_Por_Estado() {
+        public function Retornar_Cidades_Por_Estado() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
@@ -61,7 +61,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
 		
-        public static function Atualizar_Endereco() {
+        public function Atualizar_Endereco() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
@@ -207,7 +207,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		                }
 		            }
 		            
-					self::Carregar_Pagina($enderecos_erros, $enderecos_campos, $enderecos_sucesso, $enderecos_form);
+					$this->Carregar_Pagina($enderecos_erros, $enderecos_campos, $enderecos_sucesso, $enderecos_form);
         		}
         		
         		return $status;

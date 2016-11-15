@@ -17,7 +17,7 @@ namespace application\controller\include_page;
 	        
 		}
 		
-		public static function Retornar_Cidades_Por_Estado() {
+		public function Retornar_Cidades_Por_Estado() {
 			if (isset($_GET['estado'])) {
 				View_Menu_Filtro::Mostrar_Cidades($_GET['estado']);
 			}

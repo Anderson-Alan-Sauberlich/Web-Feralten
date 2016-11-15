@@ -11,7 +11,7 @@ namespace application\controller;
             
         }
         
-        public static function Carregar_Pagina() {
+        public function Carregar_Pagina() {
         	$view = new View_Pesquisa_Avancada();
         	
         	$view->Executar();

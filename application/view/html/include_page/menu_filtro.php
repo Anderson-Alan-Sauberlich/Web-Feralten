@@ -5,17 +5,6 @@
 	<nav id="menu_filtro" class="ui vertical inverted blue menu">
 		<div class="active item"><h3>Filtro de Busca</h3></div>
 		<div class="item">
-			<div class="header"><h4>Versão do Modelo</h4></div>
-			<div class="menu">
-				<div class="ui container fluid">
-					<select class="ui fluid search dropdown">
-						<option value="0">Selecione a Versão</option>
-						<?php  ?>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="item">
 			<div class="header"><h4>Localização</h4></div>
 			<div class="menu">
 				<div class="ui container fluid">
@@ -127,28 +116,6 @@
 			        		<label for="ordenar_maior_preco">Menos Recente</label>
 			      		</div>
 			      	</div>
-				</div>
-				<div class="ui form">
-					<div class="three fields">
-						<div class="field">
-							<select id="data_dia" name="data_dia" class="ui fluid search dropdown">
-								<option value="0">Dia</option>
-								<?php View_Menu_Filtro::Mostrar_Data_Dia(); ?>
-							</select>
-						</div>
-						<div class="field">
-							<select id="data_mes" name="data_mes" class="ui fluid search dropdown">
-								<option value="0">Mes</option>
-								<?php View_Menu_Filtro::Mostrar_Data_Mes(); ?>
-							</select>
-						</div>
-						<div class="field">
-							<select id="data_ano" name="data_ano" class="ui fluid search dropdown">
-								<option value="0">Ano</option>
-								<?php View_Menu_Filtro::Mostrar_Data_Ano(); ?>
-							</select>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

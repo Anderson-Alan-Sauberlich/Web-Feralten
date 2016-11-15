@@ -13,7 +13,7 @@ namespace application\controller\usuario\meu_perfil;
             
         }
         
-        public static function Carregar_Pagina() {
+        public function Carregar_Pagina() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		

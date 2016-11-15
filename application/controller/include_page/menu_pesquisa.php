@@ -19,15 +19,15 @@ namespace application\controller\include_page;
             
         }
         
-        public static function Retornar_Marcas_Por_Categoria() {
+        public function Retornar_Marcas_Por_Categoria() {
         	View_Menu_Pesquisa::Carregar_Marcas($_GET['categoria']);
         }
         
-        public static function Retornar_Modelos_Por_Marca() {
+        public function Retornar_Modelos_Por_Marca() {
         	View_Menu_Pesquisa::Carregar_Modelos($_GET['marca']);
         }
         
-        public static function Retornar_Versoes_Por_Modelo() {
+        public function Retornar_Versoes_Por_Modelo() {
         	View_Menu_Pesquisa::Carregar_Versoes($_GET['modelo']);
         }
         

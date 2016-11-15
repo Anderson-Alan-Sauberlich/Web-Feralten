@@ -17,7 +17,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public static function Carregar_Pagina($alterar_senha_erros = null, $alterar_senha_campos = null, $alterar_senha_form = null) {
+        public function Carregar_Pagina($alterar_senha_erros = null, $alterar_senha_campos = null, $alterar_senha_form = null) {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
         		
@@ -33,7 +33,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Atualizar_Senha_Usuario() {
+        public function Atualizar_Senha_Usuario() {
         	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
 	            $alterar_senha_erros = array();
 	            $alterar_senha_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
@@ -108,7 +108,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            	$alterar_senha_form['senha_nova'] = strip_tags($_POST['senha_nova']);
 	            	$alterar_senha_form['senha_confnova'] = strip_tags($_POST['senha_confnova']);
 	            	
-	            	self::Carregar_Pagina($alterar_senha_erros, $alterar_senha_campos, $alterar_senha_form);
+	            	$this->Carregar_Pagina($alterar_senha_erros, $alterar_senha_campos, $alterar_senha_form);
 	            }
         	} else {
         		return false;

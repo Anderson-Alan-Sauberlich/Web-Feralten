@@ -11,7 +11,7 @@ namespace application\controller\publicidade;
             
         }
         
-        public static function Carregar_Pagina() {
+        public function Carregar_Pagina() {
         	$view = new View_Experimentar_Formatos();
         	
         	$view->Executar();

@@ -13,7 +13,7 @@ namespace application\controller\usuario;
             
         }
         
-        public static function Carregar_Pagina($login_erros = null, $login_campos = null, $login_form = null) {
+        public function Carregar_Pagina($login_erros = null, $login_campos = null, $login_form = null) {
         	$view = new View_Login();
         	
         	$view->set_login_campos($login_campos);
@@ -23,7 +23,7 @@ namespace application\controller\usuario;
         	$view->Executar();
         }
         
-        public static function LogOut() {
+        public function LogOut() {
         	if (isset($_GET['logout'])) {
 	        	if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
 	        		if (isset($_COOKIE['f_m_l'])) {
@@ -93,7 +93,7 @@ namespace application\controller\usuario;
             }
         }
 
-        public static function Autenticar_Usuario_Login() {
+        public function Autenticar_Usuario_Login() {
             $login_campos = array('erro_email' => "certo");
             $login_erros = array();
             $email = null;
