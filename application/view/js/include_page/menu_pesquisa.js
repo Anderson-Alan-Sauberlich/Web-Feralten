@@ -66,16 +66,19 @@ function Pesquisar() {
 		}
 	}
 	
-	if (ano_de != 0 && ano_de != "") {
-		base_url = base_url + "de-" + ano_de + "/"
+	if (ano_de == 0 || ano_de == "" || ano_de == undefined) {
+		$("#ano_de").prop('disabled', true);
+		$("#ano_de").prop('readonly', true);
 	}
 	
-	if (ano_ate != 0 && ano_ate != "") {
-		base_url = base_url + "ate-" + ano_ate + "/"
+	if (ano_ate == 0 || ano_ate == "" || ano_ate == undefined) {
+		$("#ano_ate").prop('disabled', true);
+		$("#ano_ate").prop('readonly', true);
 	}
 	
-	if (peca != 0 && peca != "") {
-		base_url = base_url + peca + "/"
+	if (peca == 0 || peca == "" || peca == undefined) {
+		$("#peca").prop('disabled', true);
+		$("#peca").prop('readonly', true);
 	}
 	
 	$("#searschform").attr("action", base_url);

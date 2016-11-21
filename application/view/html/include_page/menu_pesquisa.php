@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-6">
                             	<div class="row-fluid buscaDropEspaco">
-			                    	<select id="ano_de" class="ui fluid search selection dropdown">
+			                    	<select id="ano_de" name="ano_de" class="ui fluid search selection dropdown">
 										<option value="0">De</option>
 										<?php View_Menu_Pesquisa::Carregar_Anos(); ?>
 									</select>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                             	<div class="row-fluid buscaDropEspaco">
-		                           	<select id="ano_ate" class="ui fluid search selection dropdown">
+		                           	<select id="ano_ate" name="ano_ate" class="ui fluid search selection dropdown">
 										<option value="0">Até</option>
 										<?php View_Menu_Pesquisa::Carregar_Anos(); ?>
 									</select>
@@ -62,7 +62,7 @@
                 	<div class="col-md-9 col-sm-8 col-xs-12">
 	          			<div class="ui fluid big left icon input">
 							<i class="search icon"></i>
-							<input id="peca" placeholder="Digite o que deseja Procurar..." type="text">
+							<input id="peca" name="peca" placeholder="Digite o que deseja Procurar..." type="text">
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-12">

@@ -208,15 +208,45 @@
 	});
 	
 	$app->group('/usuario/meu-perfil/pecas/visualizar/', function() use ($app) {
-		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/[{ano_de}/[{ano_ate}/[{peca}/[{params:.*}/]]]]]]]]', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
 			
-			$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar($args);
+			$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
+			
+			if (isset($args['categoria'])) {
+				$visualizar->set_categoria($args['categoria']);
+			}
+			
+			if (isset($args['marca'])) {
+				$visualizar->set_marca($args['marca']);
+			}
+			
+			if (isset($args['modelo'])) {
+				$visualizar->set_modelo($args['modelo']);
+			}
+			
+			if (isset($args['versao'])) {
+				$visualizar->set_versao($args['versao']);
+			}
+			
+			if (isset($_GET['ano_de'])) {
+				$visualizar->set_ano_de($args['ano_de']);
+			}
+			
+			if (isset($_GET['ano_ate'])) {
+				$visualizar->set_ano_ate($args['ano_ate']);
+			}
+			
+			if (isset($_GET['peca'])) {
+				$visualizar->set_peca($args['peca']);
+			}
 			
 			$resposta = $visualizar->Carregar_Pagina();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta === 'erro') {
+				return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
 			} else if ($resposta != 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
 			} else {
@@ -648,7 +678,7 @@
 	});
 	
 	$app->group('/pecas/resultados/', function() use ($app) {
-		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/[{ano_de}/[{ano_ate}/[{peca}/[{params:.*}/]]]]]]]]', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/pecas/resultados.php');
 			
 			$resultados = new application\controller\pecas\Resultados();

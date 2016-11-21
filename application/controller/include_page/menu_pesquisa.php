@@ -58,5 +58,27 @@ namespace application\controller\include_page;
         		return null;
         	}
         }
+        
+        public static function Validar_Variaveis_De_Parametro($categoria, $marca, $modelo, $versao, $ano_de, $ano_ate, $peca) {
+        	$categoria = strip_tags($categoria);
+        	$marca = strip_tags($marca);
+        	$modelo = strip_tags($modelo);
+        	$versao = strip_tags($versao);
+        	$ano_de = strip_tags($ano_de);
+        	$ano_ate = strip_tags($ano_ate);
+        	$peca = strip_tags($peca);
+        	 
+        	$categoria = trim($categoria);
+        	$marca = trim($marca);
+        	$modelo = trim($modelo);
+        	$versao = trim($versao);
+        	$ano_de = trim($ano_de);
+        	$ano_ate = trim($ano_ate);
+        	$peca = trim($peca);
+        	
+        	
+        	
+        	return true;
+        }
     }
 ?>
