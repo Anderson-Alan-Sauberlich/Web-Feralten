@@ -27,31 +27,31 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $ano_ate;
         private $peca;
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void {
         	$this->categoria = $categoria;
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void {
         	$this->marca = $marca;
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void {
         	$this->modelo = $modelo;
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void {
         	$this->versao = $versao;
         }
         
-        public function set_ano_de($ano_de) {
+        public function set_ano_de($ano_de) : void {
         	$this->ano_de = $ano_de;
         }
         
-        public function set_ano_ate($ano_ate) {
+        public function set_ano_ate($ano_ate) : void {
         	$this->ano_ate = $ano_ate;
         }
         
-        public function set_peca($peca) {
+        public function set_peca($peca) : void {
         	$this->peca = $peca;
         }
         

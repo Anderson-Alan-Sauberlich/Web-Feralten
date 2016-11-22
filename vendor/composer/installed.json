@@ -175,17 +175,17 @@
     },
     {
         "name": "slim/slim",
-        "version": "3.5.0",
-        "version_normalized": "3.5.0.0",
+        "version": "3.6.0",
+        "version_normalized": "3.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/slimphp/Slim.git",
-            "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893"
+            "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/slimphp/Slim/zipball/184352bc1913d7ba552ab4131d62f4730ddb0893",
-            "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893",
+            "url": "https://api.github.com/repos/slimphp/Slim/zipball/a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
+            "reference": "a685fe91a9435e1432e8eeb7cf516e2f5cee7f64",
             "shasum": ""
         },
         "require": {
@@ -202,7 +202,7 @@
             "phpunit/phpunit": "^4.0",
             "squizlabs/php_codesniffer": "^2.5"
         },
-        "time": "2016-07-26 15:12:13",
+        "time": "2016-11-20 20:48:49",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

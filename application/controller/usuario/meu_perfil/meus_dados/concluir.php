@@ -309,6 +309,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (empty($concluir_erros)) {
+		            	$endereco->set_id(0);
 		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 		            	$dados_usuario->set_status_id(1);

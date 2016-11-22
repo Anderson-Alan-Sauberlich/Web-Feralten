@@ -22,75 +22,75 @@ namespace application\model\object;
 			
 		}
 		
-		public function set_id($id) {
+		public function set_id(int $id) : void {
 			$this->id = $id;
 		}
 		
-		public function get_id() {
+		public function get_id() : int {
 			return $this->id;
 		}
 		
-		public function set_cidade(Object_Cidade $cidade) {
+		public function set_cidade(Object_Cidade $cidade) : void {
 			$this->cidade = $cidade;
 		}
 		
-		public function get_cidade() {
+		public function get_cidade() : Object_Cidade {
 			return $this->cidade;
 		}
         
-        public function set_estado(Object_Estado $estado) {
+        public function set_estado(Object_Estado $estado) : void {
             $this->estado = $estado;
         }
         
-        public function get_estado() {
+        public function get_estado() : Object_Estado {
             return $this->estado;
         }
 		
-        public function set_dados_usuario_id($dados_usuario_id) {
+        public function set_dados_usuario_id(int $dados_usuario_id) : void {
             $this->dados_usuario_id = $dados_usuario_id;
         }
         
-        public function get_dados_usuario_id() {
+        public function get_dados_usuario_id() : int {
             return $this->dados_usuario_id;
         }
         
-		public function set_numero($numero) {
+		public function set_numero(string $numero) : void {
 			$this->numero = $numero;
 		}
 		
-		public function get_numero() {
+		public function get_numero() : string {
 			return $this->numero;
 		}
 		
-		public function set_cep($cep) {
+		public function set_cep(string $cep) : void {
 			$this->cep = $cep;
 		}
 		
-		public function get_cep() {
+		public function get_cep() : string {
 			return $this->cep;
 		}
 		
-		public function set_rua($rua) {
+		public function set_rua(string $rua) : void {
 			$this->rua = $rua;
 		}
 		
-		public function get_rua() {
+		public function get_rua() : string {
 			return $this->rua;
 		}
 		
-		public function set_complemento($complemento) {
+		public function set_complemento(?string $complemento = null) : void {
 			$this->complemento = $complemento;
 		}
 		
-		public function get_complemento() {
+		public function get_complemento() : ?string {
 			return $this->complemento;
 		}
 		
-		public function set_bairro($bairro) {
+		public function set_bairro(string $bairro) : void {
 			$this->bairro = $bairro;
 		}
 		
-		public function get_bairro() {
+		public function get_bairro() : string {
 			return $this->bairro;
 		}
     }

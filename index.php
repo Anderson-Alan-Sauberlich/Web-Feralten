@@ -5,9 +5,7 @@
 	require_once('config.php');
 	require_once('vendor/autoload.php');
 	
-	$config['displayErrorDetails'] = true;
-	
-	$app = new \Slim\App(["settings" => $config]);
+	$app = new \Slim\App();
 	
 	$app->group('/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {

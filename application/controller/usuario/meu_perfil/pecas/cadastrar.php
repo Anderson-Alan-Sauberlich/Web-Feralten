@@ -505,6 +505,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 					$endereco->set_id($id_endereco);
 					
+					$peca->set_id(0);
 					$peca->set_endereco($endereco);
 				}
 				
@@ -515,6 +516,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 						$retorno = null;
 						
 						foreach ($pativeis as $pativel) {
+							$pativel->set_id(0);
 							$pativel->set_peca_id($id_peca);
 							
 							if (DAO_Lista_Pativel::Inserir($pativel) === false) {
@@ -541,6 +543,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 								$foto_peca = new Object_Foto_Peca();
 								$indice++;
 								
+								$foto_peca->set_id(0);
 								$foto_peca->set_peca_id($id_peca);
 								$foto_peca->set_endereco($diretorio);
 								$foto_peca->set_numero($indice);
