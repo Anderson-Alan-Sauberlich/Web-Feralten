@@ -15,7 +15,7 @@ namespace application\model\dao;
 	
 		}
 	
-		public static function Inserir(Object_Marca_Compativel $object_marca_compativel) {
+		public static function Inserir(Object_Marca_Compativel $object_marca_compativel) : bool {
 			try {
 				$sql = "INSERT INTO tb_marca_compativel (marca_compativel_id, marca_compativel_da_id_ma, marca_compativel_com_id_ma)
 	                    VALUES (:id, :da_id, :com_id);";
@@ -32,7 +32,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) {
+		public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) : bool {
 			try {
 				$sql = "UPDATE tb_marca_compativel SET marca_compativel_id = :id, marca_compativel_da_id_ma = :da_id, marca_compativel_com_id_ma = :com_id WHERE marca_compativel_da_id_ma = :da_id";
 				
@@ -48,7 +48,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Deletar($id) {
+		public static function Deletar(int $id) : bool {
 			try {
 				$sql = "DELETE FROM tb_marca_compativel WHERE marca_compativel_id = :id";
 	
@@ -74,7 +74,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD($id) {
+		public static function BuscarPorCOD(int $id) {
 			try {
 				$sql = "SELECT marca_compativel_com_id_ma FROM tb_marca_compativel WHERE marca_compativel_da_id_ma = :da_id";
 	
@@ -88,7 +88,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaMarcaCompativel($row) {
+		private static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel {
 			$object_marca_compativel = new Object_Marca_Compativel();
 			
 			if (isset($row['marca_compativel_id'])) {
@@ -106,7 +106,7 @@ namespace application\model\dao;
 			return $object_marca_compativel;
 		}
 	
-		private static function PopulaMarcasCompativeis($rows) {
+		private static function PopulaMarcasCompativeis(array $rows) : array {
 			$marcas_compativeis = array();
 	
 			foreach ($rows as $row) {

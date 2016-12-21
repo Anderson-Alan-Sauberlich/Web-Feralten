@@ -15,16 +15,17 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Versao $object_versao) {
+        public static function Inserir(Object_Versao $object_versao) : bool {
             try {
-                $sql = "INSERT INTO tb_versao (versao_id, versao_mo_id, versao_nome) 
-                        VALUES (:id, :mo_id, :nome);";
+                $sql = "INSERT INTO tb_versao (versao_id, versao_mo_id, versao_nome, versao_url) 
+                        VALUES (:id, :mo_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_versao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_versao->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException $e) {
@@ -32,19 +33,17 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Versao $object_versao) {
+        public static function Atualizar(Object_Versao $object_versao) : bool {
             try {
-                $sql = "UPDATE tb_versao SET
-                versao_id = :id,
-                versao_mo_id = :mo_id,
-                versao_nome = :nome 
-                WHERE versao_id = :id";
+                $sql = "UPDATE tb_versao SET versao_id = :id, versao_mo_id = :mo_id, versao_nome = :nome, versao_url = :url 
+                		WHERE versao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_versao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":mo_id", $object_versao->get_marca_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_versao->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException $e) {
@@ -52,7 +51,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_versao WHERE versao_id = :id";
                 
@@ -65,9 +64,9 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT versao_id, versao_mo_id, versao_nome FROM tb_versao WHERE versao_id = :id";
+                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -79,7 +78,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Modelo_Id($id) {
+        public static function Buscar_Modelo_Id(int $id) {
             try {
                 $sql = "SELECT versao_mo_id FROM tb_versao WHERE versao_id = :id";
                 
@@ -95,9 +94,9 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Modelo($id) {
+        public static function Buscar_Por_Id_Modelo(int $id) {
             try {
-                $sql = "SELECT versao_id, versao_mo_id, versao_nome FROM tb_versao WHERE versao_mo_id = :id";
+                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_mo_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -109,7 +108,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Modelo($id) {
+        public static function Buscar_Id_Por_Id_Modelo(int $id) {
         	try {
         		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :id";
         
@@ -129,7 +128,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaVersao($row) {
+        private static function PopulaVersao(array $row) : Object_Versao {
             $object_versao = new Object_Versao();
             
             if (isset($row['versao_id'])) {
@@ -144,10 +143,14 @@ namespace application\model\dao;
             	$object_versao->set_nome($row['versao_nome']);
             }
             
+            if (isset($row['versao_url'])) {
+            	$object_versao->set_url($row['versao_url']);
+            }
+            
             return $object_versao;
         }
         
-        private static function PopulaVersoes($rows) {
+        private static function PopulaVersoes(array $rows) : array {
             $versoes = array();
             
             foreach ($rows as $row) {
@@ -163,6 +166,10 @@ namespace application\model\dao;
                 
                 if (isset($row['versao_nome'])) {
                 	$object_versao->set_nome($row['versao_nome']);
+                }
+                
+                if (isset($row['versao_url'])) {
+                	$object_versao->set_url($row['versao_url']);
                 }
                 
                 $versoes[] = $object_versao;

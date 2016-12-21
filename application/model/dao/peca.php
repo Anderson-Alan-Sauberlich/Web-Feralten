@@ -23,7 +23,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Peca $object_peca) {
+        public static function Inserir(Object_Peca $object_peca) : bool {
             try {
                 $sql = "INSERT INTO tb_peca (peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade) 
                         VALUES (:id, :du_us_id, :en_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade);";
@@ -50,7 +50,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Peca $object_peca) {
+        public static function Atualizar(Object_Peca $object_peca) : bool {
             try {
                 $sql = "UPDATE tb_peca SET peca_id = :id, peca_du_us_id = :du_us_id, peca_en_id = :en_id, peca_sp_id = :st_id, 
                 peca_nome = :nome, peca_fabricante = :fabricante, peca_preco = :preco, peca_descricao = :descricao, 
@@ -76,7 +76,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_peca WHERE peca_id = :id";
                 
@@ -89,7 +89,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade FROM tb_peca WHERE peca_id = :id";
                 
@@ -103,7 +103,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario($id, $pg) {
+        public static function Buscar_Por_Id_Usuario(int $id, int $pg) {
         	$limite = 9;
         	$inicio = ($pg * $limite) - $limite;
         	
@@ -123,7 +123,7 @@ namespace application\model\dao;
         	}
         }
         
-        public static function Buscar_Numero_Paginas_Por_Id_Usuario($id) {
+        public static function Buscar_Numero_Paginas_Por_Id_Usuario(int $id) {
         	try {
         		$sql = "SELECT peca_id FROM tb_peca WHERE peca_du_us_id = :id";
         		 
@@ -139,7 +139,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaPeca($row) {
+        private static function PopulaPeca(array $row) : Object_Peca {
             $object_peca = new Object_Peca();
             
             if (isset($row['peca_id'])) {
@@ -190,7 +190,7 @@ namespace application\model\dao;
             return $object_peca;
         }
         
-        private static function PopulaPecas($rows) {
+        private static function PopulaPecas(array $rows) : array {
         	$object_pecas = array();
         	
         	foreach ($rows as $row) {
@@ -198,7 +198,12 @@ namespace application\model\dao;
 	        	
 	        	if (isset($row['peca_id'])) {
 	        		$object_peca->set_id($row['peca_id']);
-	        		$object_peca->set_fotos(DAO_Foto_Peca::Buscar_Fotos($row['peca_id']));
+	        		
+	        		$fotos = DAO_Foto_Peca::Buscar_Fotos($row['peca_id']);
+	        		
+	        		if (!empty($fotos) AND $fotos !== false) {
+	        			$object_peca->set_fotos($fotos);
+	        		}
 	        	}
 	        	
 	        	if (isset($row['peca_du_us_id'])) {

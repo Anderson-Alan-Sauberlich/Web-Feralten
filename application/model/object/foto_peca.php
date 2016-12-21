@@ -15,7 +15,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -23,7 +23,7 @@ namespace application\model\object;
 			$this->peca_id = $peca_id;
 		}
 		
-		public function get_peca_id() : int {
+		public function get_peca_id() : ?int {
 			return $this->peca_id;
 		}
 		
@@ -31,7 +31,7 @@ namespace application\model\object;
 			$this->endereco = $endereco;
 		}
 		
-		public function get_endereco() : string {
+		public function get_endereco() : ?string {
 			return $this->endereco;
 		}
 		
@@ -39,7 +39,7 @@ namespace application\model\object;
 			$this->numero = $numero;
 		}
 		
-		public function get_numero() : int {
+		public function get_numero() : ?int {
 			return $this->numero;
 		}
     }

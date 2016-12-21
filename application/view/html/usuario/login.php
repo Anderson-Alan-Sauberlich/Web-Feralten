@@ -25,7 +25,7 @@
                             <label for="email" class="lbPanel">Digite seu E-mail:</label>
                             <div class="input-group menuRowMD <?php View_Login::Incluir_Classe_Erros('email'); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" type="email" class="form-control" name="email" value="<?php View_Login::Manter_Valor('email'); ?>" placeholder="Endereço de Email" autofocus="" />
+                                <input id="email" type="email" class="form-control" name="email" value="<?php View_Login::Manter_Valor('email'); ?>" placeholder="Endereço de Email" autofocus="autofocus" />
                             </div>
                             <label for="password" class="lbPanel">Digite sua Senha:</label>
                             <div class="input-group menuRowMD <?php View_Login::Incluir_Classe_Erros('senha'); ?>">

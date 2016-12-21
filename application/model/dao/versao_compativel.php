@@ -15,7 +15,7 @@ namespace application\model\dao;
 	
 		}
 	
-		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) {
+		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) : bool {
 			try {
 				$sql = "INSERT INTO tb_versao_compativel (versao_compativel_id, versao_compativel_da_id_vs, versao_compativel_com_id_vs)
 	                    VALUES (:id, :da_id, :com_id);";
@@ -32,7 +32,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) {
+		public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) : bool {
 			try {
 				$sql = "UPDATE tb_versao_compativel SET versao_compativel_id = :id, versao_compativel_da_id_vs = :da_id, versao_compativel_com_id_vs = :com_id WHERE versao_compativel_da_id_vs = :da_id";
 				
@@ -48,7 +48,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Deletar($id) {
+		public static function Deletar(int $id) : bool {
 			try {
 				$sql = "DELETE FROM tb_versao_compativel WHERE versao_compativel_id = :id";
 	
@@ -74,7 +74,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD($id) {
+		public static function BuscarPorCOD(int $id) {
 			try {
 				$sql = "SELECT versao_compativel_com_id_vs FROM tb_versao_compativel WHERE versao_compativel_da_id_vs = :da_id";
 	
@@ -88,7 +88,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaVersaoCompativel($row) {
+		private static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel {
 			$object_versao_compativel = new Object_Versao_Compativel();
 			
 			if (isset($row['versao_compativel_id'])) {
@@ -106,7 +106,7 @@ namespace application\model\dao;
 			return $object_versao_compativel;
 		}
 	
-		private static function PopulaVersoesCompativeis($rows) {
+		private static function PopulaVersoesCompativeis(array $rows) : array {
 			$versoes_compativeis = array();
 	
 			foreach ($rows as $row) {

@@ -14,7 +14,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -22,7 +22,7 @@ namespace application\model\object;
 			$this->uf = $uf;
 		}
 		
-		public function get_uf() : string {
+		public function get_uf() : ?string {
 			return $this->uf;
 		}
 		
@@ -30,7 +30,7 @@ namespace application\model\object;
 			$this->nome = $nome;
 		}
 		
-		public function get_nome() : string {
+		public function get_nome() : ?string {
 			return $this->nome;
 		}
     }

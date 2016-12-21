@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Cidade $object_cidade) {
+        public static function Inserir(Object_Cidade $object_cidade) : bool {
             try {
                 $sql = "INSERT INTO tb_cidade (cidade_id, cidade_es_id, cidade_nome) 
                         VALUES (:id, :es_id, :nome);";
@@ -32,7 +32,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Cidade $object_cidade) {
+        public static function Atualizar(Object_Cidade $object_cidade) : bool {
             try {
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
@@ -52,7 +52,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_cidade WHERE cidade_id = :id";
                 
@@ -65,7 +65,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT cidade_id, cidade_es_id, cidade_nome FROM tb_cidade WHERE cidade_es_id = :id";
                 
@@ -79,7 +79,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_ID_Cidade($id) {
+        public static function Buscar_Por_ID_Cidade(int $id) {
             try {
                 $sql = "SELECT cidade_id, cidade_es_id, cidade_nome FROM tb_cidade WHERE cidade_id = :id";
                 
@@ -93,7 +93,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaCidades($rows) {
+        private static function PopulaCidades(array $rows) : array {
             $cidades = array();
             
             foreach ($rows as $row) {
@@ -117,7 +117,7 @@ namespace application\model\dao;
             return $cidades;
         }
         
-        private static function PopulaCidade($row) {
+        private static function PopulaCidade(array $row) : Object_Cidade {
             $object_cidade = new Object_Cidade();
             
             if (isset($row['cidade_id'])) {

@@ -17,7 +17,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Dados_Usuario $object_dados_usuario) {
+        public static function Inserir(Object_Dados_Usuario $object_dados_usuario) : bool {
             try {
                 $sql = "INSERT INTO tb_dados_usuario (dados_usuario_us_id, dados_usuario_su_id, dados_usuario_cpf_cnpj, dados_usuario_nome_fantasia,
                         dados_usuario_imagem, dados_usuario_site, dados_usuario_data_cadastro, dados_usuario_telefone1, dados_usuario_telefone2, dados_usuario_email) 
@@ -42,7 +42,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Dados_Usuario $object_dados_usuario) {
+        public static function Atualizar(Object_Dados_Usuario $object_dados_usuario) : bool {
             try {
                 $sql = "UPDATE tb_dados_usuario SET
                 dados_usuario_cpf_cnpj = :cpf_cnpj,
@@ -71,7 +71,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Dados(Object_Dados_Usuario $object_dados_usuario) {
+        public static function Atualizar_Dados(Object_Dados_Usuario $object_dados_usuario) : bool {
             try {
                 $sql = "UPDATE tb_dados_usuario SET
                 dados_usuario_cpf_cnpj = :cpf_cnpj,
@@ -98,7 +98,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Imagem($imagem, $usuario) {
+        public static function Atualizar_Imagem(string $imagem, int $usuario) : bool {
             try {
                 $sql = "UPDATE tb_dados_usuario SET dados_usuario_imagem = :imagem WHERE dados_usuario_us_id = :us_id";
 
@@ -113,7 +113,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_dados_usuario WHERE dados_usuario_us_id = :id";
                 
@@ -126,14 +126,16 @@ namespace application\model\dao;
             }
         }
         
-        public static function Verificar_CPF_CNPJ($cpf_cnpj) {
+        public static function Verificar_CPF_CNPJ(string $cpf_cnpj) {
         	try {
         		$sql = "SELECT dados_usuario_us_id FROM tb_dados_usuario WHERE dados_usuario_cpf_cnpj = :cpf_cnpj";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":cpf_cnpj", $cpf_cnpj, PDO::PARAM_STR);
         		$p_sql->execute();
+        		
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
         		$select = 0;
         		
         		if (isset($row['dados_usuario_us_id'])) {
@@ -146,7 +148,7 @@ namespace application\model\dao;
         	}
         }
         
-        public static function Pegar_Status_Usuario($id) {
+        public static function Pegar_Status_Usuario(int $id) {
             try {
                 $sql = "SELECT dados_usuario_su_id FROM tb_dados_usuario WHERE dados_usuario_us_id = :id";
                 
@@ -161,7 +163,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT dados_usuario_us_id, dados_usuario_su_id, dados_usuario_cpf_cnpj, dados_usuario_nome_fantasia, 
                 		dados_usuario_imagem, dados_usuario_site, dados_usuario_data_cadastro, dados_usuario_telefone1, 
@@ -177,7 +179,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaUsuario($row) {
+        private static function PopulaUsuario(array $row) : Object_Dados_Usuario {
             $object_dados_usuario = new Object_Dados_Usuario();
             
             if (isset($row['dados_usuario_us_id'])) {

@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Usuario $object_usuario) {
+        public static function Inserir(Object_Usuario $object_usuario) : bool {
             try {
                 $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_senha, usuario_ultimo_login) 
                         VALUES (:id, :email, :nome, :senha, :login);";
@@ -34,7 +34,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Usuario $object_usuario) {
+        public static function Atualizar(Object_Usuario $object_usuario) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET
                 usuario_nome = :nome,
@@ -53,7 +53,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Senha($senha, $id) {
+        public static function Atualizar_Senha(string $senha, int $id) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_senha = :ps WHERE usuario_id = :id";
 
@@ -68,7 +68,7 @@ namespace application\model\dao;
             }
         }
 		
-        public static function Atualizar_Token_Ultimo_Login($token, $login, $id) {
+        public static function Atualizar_Token_Ultimo_Login(string $token, string $login, int $id) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_token_login = :tk, usuario_ultimo_login = :ul WHERE usuario_id = :id";
 
@@ -84,7 +84,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Token($token, $id) {
+        public static function Atualizar_Token(string $token, int $id) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_token_login = :tk WHERE usuario_id = :id";
 
@@ -99,7 +99,7 @@ namespace application\model\dao;
             }
         }
 
-        public static function Atualizar_Ultimo_Login($login, $id) {
+        public static function Atualizar_Ultimo_Login(string $login, int $id) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_ultimo_login = :ul WHERE usuario_id = :id";
 
@@ -114,7 +114,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_usuario WHERE usuario_id = :id";
                 
@@ -127,14 +127,16 @@ namespace application\model\dao;
             }
         }
         
-        public static function Verificar_Email($email) {
+        public static function Verificar_Email(string $email) {
             try {
                 $sql = "SELECT usuario_id FROM tb_usuario WHERE usuario_email = :email";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":email", $email, PDO::PARAM_STR);
                 $p_sql->execute();
-                $select = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
                 $select = 0;
                 
                 if (isset($row['usuario_id'])) {
@@ -147,7 +149,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Usuario($id) {
+        public static function Buscar_Usuario(int $id) {
             try {
                 $sql = "SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_token_login FROM tb_usuario WHERE usuario_id = :id";
                 
@@ -161,7 +163,7 @@ namespace application\model\dao;
             }
         }
 		
-        public static function Buscar_Senha_Usuario($id) {
+        public static function Buscar_Senha_Usuario(int $id) {
             try {
                 $sql = "SELECT usuario_senha FROM tb_usuario WHERE usuario_id = :id";
                 
@@ -177,7 +179,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Autenticar($email) {
+        public static function Autenticar(string $email) {
             try {
                 $sql = "SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login FROM tb_usuario WHERE usuario_email = :email";
                 
@@ -191,7 +193,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaUsuario($row) {
+        private static function PopulaUsuario(array $row) : Object_Usuario {
             $object_usuario = new Object_Usuario();
 			
             if (isset($row['usuario_id'])) {

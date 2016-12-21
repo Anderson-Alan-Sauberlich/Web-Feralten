@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Foto_Peca $object_foto_peca) {
+        public static function Inserir(Object_Foto_Peca $object_foto_peca) : bool {
             try {
                 $sql = "INSERT INTO tb_foto_peca (foto_peca_id, foto_peca_pc_id, foto_peca_endereco, foto_peca_numero) 
                         VALUES (:id, :pc_id, :endereco, :num);";
@@ -33,7 +33,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Foto_Peca $object_foto_peca) {
+        public static function Atualizar(Object_Foto_Peca $object_foto_peca) : bool {
             try {
                 $sql = "UPDATE tb_foto_peca SET foto_peca_id = :id, foto_peca_pc_id = :pc_id, foto_peca_endereco = :endereco, foto_peca_numero = :num WHERE foto_peca_pc_id = :pc_id AND foto_peca_numero = :num";
 
@@ -50,7 +50,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar_Fotos($id_peca) {
+        public static function Deletar_Fotos(int $id_peca) : bool {
             try {
                 $sql = "DELETE FROM tb_foto_peca WHERE foto_peca_pc_id = :pc_id";
                 
@@ -63,7 +63,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar_Foto($id_peca, $num_peca) {
+        public static function Deletar_Foto(int $id_peca, int $num_peca) : bool {
             try {
                 $sql = "DELETE FROM tb_foto_peca WHERE foto_peca_pc_id = :pc_id AND foto_peca_numero = :num";
                 
@@ -77,7 +77,7 @@ namespace application\model\dao;
             }
         }
 		
-        public static function Buscar_Fotos($id_peca) {
+        public static function Buscar_Fotos(int $id_peca) {
             try {
                 $sql = "SELECT foto_peca_id, foto_peca_pc_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pc_id = :pc_id";
                 
@@ -91,7 +91,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Foto($id_peca, $num_peca) {
+        public static function Buscar_Foto(int $id_peca, int $num_peca) {
             try {
                 $sql = "SELECT foto_peca_id, foto_peca_pc_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pc_id = :pc_id AND foto_peca_numero = :num";
                 
@@ -106,7 +106,7 @@ namespace application\model\dao;
             }
         }
 		
-        private static function PopulaFotoPeca($row) {
+        private static function PopulaFotoPeca(array $row) : Object_Foto_Peca {
             $object_foto_peca = new Object_Foto_Peca();
             
             if (isset($row['foto_peca_id'])) {
@@ -128,7 +128,7 @@ namespace application\model\dao;
             return $object_foto_peca;
         }
         
-        private static function PopulaFotosPecas($rows) {
+        private static function PopulaFotosPecas(array $rows) : array {
             $fotos_pecas = array();
             
             if (!empty($rows)) {

@@ -53,7 +53,7 @@ namespace application\controller\usuario;
 					
 	                $login = array();
 					
-					$usuario_login->set_token(random_bytes(40));
+					$usuario_login->set_token(bin2hex(random_bytes(40)));
 					
 					$login['usuario'] = $usuario_login->get_id();
 					$login['token'] = hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token()));
@@ -110,7 +110,7 @@ namespace application\controller\usuario;
             		$retorno = DAO_Usuario::Verificar_Email($email);
             		
             		if ($retorno !== false) {
-		            	if ($retorno !== 0) {
+		            	if ($retorno === 0) {
 			                $login_erros[] = "Email não Cadastrado";
 			                $login_campos['erro_email'] = "erro";
 		            	}
@@ -153,7 +153,7 @@ namespace application\controller\usuario;
 		                if (isset($manter_login)) {
 		                    $login = array();
 							
-							$usuario_login->set_token(random_bytes(40));
+							$usuario_login->set_token(bin2hex(random_bytes(40)));
 							
 							$login['usuario'] = $usuario_login->get_id();
 							$login['token'] = hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token()));

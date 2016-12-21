@@ -19,7 +19,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Endereco $object_endereco) {
+        public static function Inserir(Object_Endereco $object_endereco) : bool {
             try {
                 $sql = "INSERT INTO tb_endereco (endereco_id, endereco_ci_id, endereco_du_us_id, endereco_es_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, 
                                                  endereco_bairro) VALUES (:id, :ci_id, :du_us_id, :es_id, :numero, :cep, :rua, :complemento, :bairro);";
@@ -42,7 +42,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Endereco $object_endereco) {
+        public static function Atualizar(Object_Endereco $object_endereco) : bool {
             try {
                 $sql = "UPDATE tb_endereco SET
                 endereco_ci_id = :ci_id,
@@ -72,7 +72,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_endereco WHERE endereco_id = :id";
                 
@@ -85,7 +85,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario($id) {
+        public static function Buscar_Por_Id_Usuario(int $id) {
             try {
                 $sql = "SELECT endereco_id, endereco_du_us_id, endereco_ci_id, endereco_es_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_du_us_id = :id";
                 
@@ -93,13 +93,13 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaEndereco($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopulaEndereco($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Usuario($id) {
+        public static function Buscar_Id_Por_Id_Usuario(int $id) {
         	try {
         		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_du_us_id = :id";
         
@@ -114,7 +114,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaEndereco($row) {
+        private static function PopulaEndereco(array $row) : Object_Endereco {
             $object_endereco = new Object_Endereco();
             
             if (isset($row['endereco_id'])) {

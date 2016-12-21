@@ -17,7 +17,7 @@ namespace application\model\object;
             $this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -25,7 +25,7 @@ namespace application\model\object;
             $this->nome = $nome;
 		}
 		
-		public function get_nome() : string {
+		public function get_nome() : ?string {
 			return $this->nome;
 		}
 		
@@ -33,7 +33,7 @@ namespace application\model\object;
             $this->email = $email;
 		}
 		
-		public function get_email() : string {
+		public function get_email() : ?string {
 			return $this->email;
 		}
 		
@@ -41,7 +41,7 @@ namespace application\model\object;
             $this->senha = $senha;
 		}
 		
-		public function get_senha() : string {
+		public function get_senha() : ?string {
 			return $this->senha;
 		}
 		
@@ -49,7 +49,7 @@ namespace application\model\object;
             $this->ultimo_login = $ultimo_login;
 		}
 		
-		public function get_ultimo_login() : string {
+		public function get_ultimo_login() : ?string {
 			return $this->ultimo_login;
 		}
 		

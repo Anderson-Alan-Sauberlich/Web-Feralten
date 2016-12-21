@@ -15,16 +15,17 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Marca $object_marca) {
+        public static function Inserir(Object_Marca $object_marca) : bool {
             try {
-                $sql = "INSERT INTO tb_marca (marca_id, marca_ca_id, marca_nome) 
-                        VALUES (:id, :ca_id, :nome);";
+                $sql = "INSERT INTO tb_marca (marca_id, marca_ca_id, marca_nome, marca_url) 
+                        VALUES (:id, :ca_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_marca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException $e) {
@@ -32,19 +33,17 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Marca $object_marca) {
+        public static function Atualizar(Object_Marca $object_marca) : bool {
             try {
-                $sql = "UPDATE tb_marca SET
-                marca_id = :id,
-                marca_ca_id = :ca_id,
-                marca_nome = :nome 
-                WHERE marca_id = :id";
+                $sql = "UPDATE tb_marca SET marca_id = :id, marca_ca_id = :ca_id, marca_nome = :nome, marca_url = :url 
+                		WHERE marca_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_marca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException $e) {
@@ -52,7 +51,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_marca WHERE marca_id = :id";
                 
@@ -65,9 +64,9 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome FROM tb_marca WHERE marca_id = :id";
+                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -79,7 +78,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Categoria_Id($id) {
+        public static function Buscar_Categoria_Id(int $id) {
             try {
                 $sql = "SELECT marca_ca_id FROM tb_marca WHERE marca_id = :id";
                 
@@ -95,9 +94,9 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Categorai($id) {
+        public static function Buscar_Por_Id_Categorai(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome FROM tb_marca WHERE marca_ca_id = :id";
+                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_ca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -109,7 +108,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Categorai($id) {
+        public static function Buscar_Id_Por_Id_Categorai(int $id) {
         	try {
         		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :id";
         
@@ -129,7 +128,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaMarca($row) {
+        private static function PopulaMarca(array $row) : Object_Marca {
             $object_marca = new Object_Marca();
             
             if (isset($row['marca_id'])) {
@@ -144,10 +143,14 @@ namespace application\model\dao;
             	$object_marca->set_nome($row['marca_nome']);
             }
             
+            if (isset($row['marca_url'])) {
+            	$object_marca->set_url($row['marca_url']);
+            }
+            
             return $object_marca;
         }
         
-        private static function PopulaMarcas($rows) {
+        private static function PopulaMarcas(array $rows) : array {
             $marcas = array();
             
             foreach ($rows as $row) {
@@ -163,6 +166,10 @@ namespace application\model\dao;
                 
                 if (isset($row['marca_nome'])) {
                 	$object_marca->set_nome($row['marca_nome']);
+                }
+                
+                if (isset($row['marca_url'])) {
+                	$object_marca->set_url($row['marca_url']);
                 }
                 
                 $marcas[] = $object_marca;

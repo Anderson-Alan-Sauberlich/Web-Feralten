@@ -26,7 +26,7 @@ namespace application\model\object;
 			$this->usuario_id = $usuario_id;
 		}
 		
-		public function get_usuario_id() : int {
+		public function get_usuario_id() : ?int {
 			return $this->usuario_id;
 		}
         
@@ -34,7 +34,7 @@ namespace application\model\object;
             $this->status_id = $status_id;
         }
         
-        public function get_status_id() : int {
+        public function get_status_id() : ?int {
             return $this->status_id;
         }
         
@@ -42,7 +42,7 @@ namespace application\model\object;
             $this->cpf_cnpj = $cpf_cnpj;
         }
         
-        public function get_cpf_cnpj() : string {
+        public function get_cpf_cnpj() : ?string {
             return $this->cpf_cnpj;
         }
         
@@ -74,7 +74,7 @@ namespace application\model\object;
             $this->data = $data;
         }
         
-        public function get_data() : string {
+        public function get_data() : ?string {
             return $this->data;
         }
         
@@ -82,7 +82,7 @@ namespace application\model\object;
         	$this->telefone1 = $telefone1;
         }
         
-        public function get_telefone1() : string {
+        public function get_telefone1() : ?string {
         	return $this->telefone1;
         }
         
@@ -112,7 +112,7 @@ namespace application\model\object;
         	$this->enderecos[] = $endereco;
         }
         
-        public function get_enderecos() : array {
+        public function get_enderecos() : ?array {
         	return $this->enderecos;
         }
 	}

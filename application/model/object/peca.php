@@ -33,7 +33,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -41,7 +41,7 @@ namespace application\model\object;
 			$this->dados_usuario = $dados_usuario;
 		}
 		
-		public function get_dados_usuario() : Object_Dados_Usuario {
+		public function get_dados_usuario() : ?Object_Dados_Usuario {
 			return $this->dados_usuario;
 		}
 		
@@ -49,7 +49,7 @@ namespace application\model\object;
 			$this->nome = $nome;
 		}
 		
-		public function get_nome() : string {
+		public function get_nome() : ?string {
 			return $this->nome;
 		}
 		
@@ -73,7 +73,7 @@ namespace application\model\object;
 			$this->endereco = $endereco;
 		}
 		
-		public function get_endereco() : Object_Endereco {
+		public function get_endereco() : ?Object_Endereco {
 			return $this->endereco;
 		}
 		
@@ -89,7 +89,7 @@ namespace application\model\object;
 			$this->data_anuncio = $data_anuncio;
 		}
 		
-		public function get_data_anuncio() : string {
+		public function get_data_anuncio() : ?string {
 			return $this->data_anuncio;
 		}
 		

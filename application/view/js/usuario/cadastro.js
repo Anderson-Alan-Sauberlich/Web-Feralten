@@ -1,8 +1,10 @@
 $(document).ready(function() {
+	$('#senha').attr('type', 'password');
 	$('.ui.checkbox').checkbox();
+	$(document).ready(function(){ $('[data-toggle="popover"]').popover(); });
 });
 function MostrarSenha() {
-	var passwordField = $('#password');
+	var passwordField = $('#senha');
 	var passwordFieldType = passwordField.attr('type');
 	if(passwordFieldType == 'password'){
     	passwordField.attr('type', 'text');
@@ -10,6 +12,3 @@ function MostrarSenha() {
     	passwordField.attr('type', 'password');
 	}
 }
-$(document).ready(function() {
-	$(document).ready(function(){ $('[data-toggle="popover"]').popover(); });
-});

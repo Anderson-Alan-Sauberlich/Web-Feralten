@@ -12,10 +12,10 @@ namespace application\model\dao;
 	class Categoria_Compativel {
 	
 		function __construct() {
-	
+			
 		}
 	
-		public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) {
+		public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) : bool {
 			try {
 				$sql = "INSERT INTO tb_categoria_compativel (categoria_compativel_id, categoria_compativel_da_id_ca, categoria_compativel_com_id_ca)
 	                    VALUES (:id, :da_id, :com_id);";
@@ -32,9 +32,10 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) {
+		public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) : bool {
 			try {
-				$sql = "UPDATE tb_categoria_compativel SET categoria_compativel_id = :id, categoria_compativel_da_id_ca = :da_id, categoria_compativel_com_id_ca = :com_id WHERE categoria_compativel_da_id_ca = :da_id";
+				$sql = "UPDATE tb_categoria_compativel SET categoria_compativel_id = :id, categoria_compativel_da_id_ca = :da_id, categoria_compativel_com_id_ca = :com_id 
+						WHERE categoria_compativel_da_id_ca = :da_id";
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -48,7 +49,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function Deletar($id) {
+		public static function Deletar(int $id) : bool {
 			try {
 				$sql = "DELETE FROM tb_categoria_compativel WHERE categoria_compativel_id = :id";
 	
@@ -74,7 +75,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD($id) {
+		public static function BuscarPorCOD(int $id) {
 			try {
 				$sql = "SELECT categoria_compativel_com_id_ca FROM tb_categoria_compativel WHERE categoria_compativel_da_id_ca = :da_id";
 	
@@ -88,7 +89,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaCategoriaCompativel($row) {
+		private static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel {
 			$object_categoria_compativel = new Object_Categoria_Compativel();
 			
 			if (isset($row['categoria_compativel_id'])) {
@@ -106,7 +107,7 @@ namespace application\model\dao;
 			return $object_categoria_compativel;
 		}
 	
-		private static function PopulaCategoriasCompativeis($rows) {
+		private static function PopulaCategoriasCompativeis(array $rows) : array {
 			$categorias_compativeis = array();
 	
 			foreach ($rows as $row) {

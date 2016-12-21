@@ -60,15 +60,15 @@ namespace application\controller\usuario;
             	}
             }
             
-            if (empty($_POST['password'])) {
+            if (empty($_POST['senha'])) {
             	$cadastro_erros[] = "Preencha o Campo Senha";
             	$cadastro_campos['erro_senha'] = "erro";
             } else {
-	            if (strlen($_POST['password']) >= 6 AND strlen($_POST['password']) <= 20) {
-	            	$password = strip_tags($_POST['password']);
+	            if (strlen($_POST['senha']) >= 6 AND strlen($_POST['senha']) <= 20) {
+	            	$senha = strip_tags($_POST['senha']);
 	            	 
-	            	if ($password === $_POST['password']) {
-	            		$usuario->set_senha($password);
+	            	if ($senha === $_POST['senha']) {
+	            		$usuario->set_senha($senha);
 	            	} else {
 	            		$cadastro_erros[] = "A Senha Não pode conter Tags de Programação";
 	            		$cadastro_campos['erro_senha'] = "erro";
@@ -155,7 +155,7 @@ namespace application\controller\usuario;
                 $cadastro_form['nome'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['nome'])))));
                 $cadastro_form['email'] = trim(strip_tags($_POST['email']));
                 $cadastro_form['confemail'] = trim(strip_tags($_POST['confemail']));
-                $cadastro_form['senha'] = strip_tags($_POST['password']);
+                $cadastro_form['senha'] = strip_tags($_POST['senha']);
                 
                 $this->Carregar_Pagina($cadastro_erros, $cadastro_campos, $cadastro_form);
             }

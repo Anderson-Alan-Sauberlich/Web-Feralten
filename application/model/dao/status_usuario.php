@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Status_Usuario $object_status_usuario) {
+        public static function Inserir(Object_Status_Usuario $object_status_usuario) : bool {
             try {
                 $sql = "INSERT INTO tb_status_usuario (status_usuario_id, status_usuario_nome, status_usuario_descricao) 
                         VALUES (:id, :nome, :descricao);";
@@ -32,7 +32,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Status_Usuario $status) {
+        public static function Atualizar(Object_Status_Usuario $status) : bool {
             try {
                 $sql = "UPDATE tb_status_usuario SET
                 status_usuario_id = :id,
@@ -52,7 +52,7 @@ namespace application\model\dao;
             }
         }
  
-         public static function Deletar($id) {
+         public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_status_usuario WHERE status_usuario_id = :id";
                 
@@ -65,7 +65,7 @@ namespace application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT * FROM tb_status_usuario WHERE status_usuario_id = :id";
                 
@@ -79,7 +79,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaStatus($row) {
+        private static function PopulaStatus(array $row) : Object_Status_Usuario {
             $object_status_usuario = new Object_Status_Usuario();
             
             if (isset($row['status_usuario_id'])) {

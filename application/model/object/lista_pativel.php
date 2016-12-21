@@ -19,7 +19,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -27,7 +27,7 @@ namespace application\model\object;
 			$this->peca_id = $peca_id;
 		}
 		
-		public function get_peca_id() : int {
+		public function get_peca_id() : ?int {
 			return $this->peca_id;
 		}
 		

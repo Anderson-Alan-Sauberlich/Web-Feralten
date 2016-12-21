@@ -26,7 +26,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -34,7 +34,7 @@ namespace application\model\object;
 			$this->cidade = $cidade;
 		}
 		
-		public function get_cidade() : Object_Cidade {
+		public function get_cidade() : ?Object_Cidade {
 			return $this->cidade;
 		}
         
@@ -42,7 +42,7 @@ namespace application\model\object;
             $this->estado = $estado;
         }
         
-        public function get_estado() : Object_Estado {
+        public function get_estado() : ?Object_Estado {
             return $this->estado;
         }
 		
@@ -50,7 +50,7 @@ namespace application\model\object;
             $this->dados_usuario_id = $dados_usuario_id;
         }
         
-        public function get_dados_usuario_id() : int {
+        public function get_dados_usuario_id() : ?int {
             return $this->dados_usuario_id;
         }
         
@@ -58,7 +58,7 @@ namespace application\model\object;
 			$this->numero = $numero;
 		}
 		
-		public function get_numero() : string {
+		public function get_numero() : ?string {
 			return $this->numero;
 		}
 		
@@ -66,7 +66,7 @@ namespace application\model\object;
 			$this->cep = $cep;
 		}
 		
-		public function get_cep() : string {
+		public function get_cep() : ?string {
 			return $this->cep;
 		}
 		
@@ -74,7 +74,7 @@ namespace application\model\object;
 			$this->rua = $rua;
 		}
 		
-		public function get_rua() : string {
+		public function get_rua() : ?string {
 			return $this->rua;
 		}
 		
@@ -90,7 +90,7 @@ namespace application\model\object;
 			$this->bairro = $bairro;
 		}
 		
-		public function get_bairro() : string {
+		public function get_bairro() : ?string {
 			return $this->bairro;
 		}
     }

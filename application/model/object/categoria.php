@@ -4,6 +4,7 @@ namespace application\model\object;
     class Categoria {
     	private $id;
 		private $nome;
+		private $url;
 		
 		function __constructor() {
 			
@@ -13,7 +14,7 @@ namespace application\model\object;
 			$this->id = $id;
 		}
 		
-		public function get_id() : int {
+		public function get_id() : ?int {
 			return $this->id;
 		}
 		
@@ -21,8 +22,16 @@ namespace application\model\object;
 			$this->nome = $nome;
 		}
 		
-		public function get_nome() : string {
+		public function get_nome() : ?string {
 			return $this->nome;
+		}
+		
+		public function set_url(string $url) : void {
+			$this->url = $url;
+		}
+		
+		public function get_url() : ?string {
+			return $this->url;
 		}
     }
 ?>

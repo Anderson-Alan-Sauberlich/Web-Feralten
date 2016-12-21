@@ -39,7 +39,7 @@
                             <label for="senha" class="lbPanel">Digite Uma Senha:</label>
                             <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("senha");  ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" name="password" type="password" autocomplete="off" class="form-control" value="<?php View_Cadastro::Manter_Valor("senha") ?>" placeholder="Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no maximo 20. (Campo Obrigatório)" />
+                                <input id="senha" name="senha" autocomplete="off" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("senha") ?>" placeholder="Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no maximo 20. (Campo Obrigatório)" />
 			          			<span class="input-group-addon">
 			          				<div class="ui checkbox passCheck">
 										<input type="checkbox" id="mostrar" name="mostrar" onchange="MostrarSenha()">

@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Status_Peca $object_status_peca) {
+        public static function Inserir(Object_Status_Peca $object_status_peca) : bool {
             try {
                 $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_descricao) 
                         VALUES (:id, :nome);";
@@ -31,7 +31,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Status_Peca $object_status_peca) {
+        public static function Atualizar(Object_Status_Peca $object_status_peca) : bool {
             try {
                 $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome WHERE status_peca_id = :id";
 
@@ -46,7 +46,7 @@ namespace application\model\dao;
             }
         }
  
-         public static function Deletar($id) {
+         public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_status_peca WHERE status_peca_id = :id";
                 
@@ -59,7 +59,7 @@ namespace application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT status_peca_id, status_peca_nome FROM tb_status_peca WHERE status_peca_id = :id";
                 
@@ -99,7 +99,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function Popular_Status_Peca($row) {
+        private static function Popular_Status_Peca(array $row) : Object_Status_Peca {
             $object_status_peca = new Object_Status_Peca();
             
             if (isset($row['status_peca_id'])) {
@@ -113,7 +113,7 @@ namespace application\model\dao;
             return $object_status_peca;
         }
 		
-		private static function Popular_Status_Pecas($rows) {
+		private static function Popular_Status_Pecas(array $rows) : array {
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -133,7 +133,7 @@ namespace application\model\dao;
 			return $status_pecas;
 		}
 		
-		private static function Popular_Lista_Status_Pecas($rows) {
+		private static function Popular_Lista_Status_Pecas(array $rows) : array {
 			$status_pecas = array();
 				
 			foreach ($rows as $row) {

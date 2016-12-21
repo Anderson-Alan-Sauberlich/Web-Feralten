@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Lista_Pativel $object_lista_pativel) {
+        public static function Inserir(Object_Lista_Pativel $object_lista_pativel) : bool {
             try {
                 $sql = "INSERT INTO tb_lista_pativel (lista_pativel_id, lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate) 
                         VALUES (:id, :pc_id, :ca_id, :ma_id, :mo_id, :vs_id, :ano_de, :ano_ate);";
@@ -37,7 +37,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Lista_Pativel $object_lista_pativel) {
+        public static function Atualizar(Object_Lista_Pativel $object_lista_pativel) : bool {
             try {
                 $sql = "UPDATE tb_lista_pativel SET
                 lista_pativel_id = :id,
@@ -67,7 +67,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar($id) {
+        public static function Deletar(int $id) : bool {
             try {
                 $sql = "DELETE FROM tb_lista_pativel WHERE lista_pativel_pc_id = :id";
                 
@@ -80,7 +80,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD($id) {
+        public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT lista_pativel_id, lista_pativel_pc_id, lista_pativel_ca_id, lista_pativel_ma_id, lista_pativel_mo_id, lista_pativel_vs_id, lista_pativel_ano_de, lista_pativel_ano_ate FROM tb_lista_pativel WHERE lista_pativel_pc_id = :id";
                 
@@ -94,7 +94,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function Popula_Lista_Pativeis($rows) {
+        private static function Popula_Lista_Pativeis(array $rows) : array {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {

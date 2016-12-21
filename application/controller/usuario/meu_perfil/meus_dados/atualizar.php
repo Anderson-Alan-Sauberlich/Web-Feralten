@@ -187,7 +187,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
             			 
             			if ($retorno !== false) {
-            				if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
+            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
             					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
             				} else {
             					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -330,7 +330,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
             			$retorno = DAO_Usuario::Verificar_Email($email);
             			
-            			if ($retorno === 0 OR $retorno === unserialize($_SESSION['usuario'])->get_id()) {
+            			if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
             				if (strlen($email) <= 150) {
             					$usuario->set_email($email);
             				} else {

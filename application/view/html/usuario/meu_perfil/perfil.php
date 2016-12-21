@@ -12,24 +12,13 @@
     </header>
     <section class="ui container" role="main">
         <?php View_Perfil::Incluir_Menu_Usuario(); ?>
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <label class="lbPanel">Peças Cadastradas</label>
-                </div>
-                <div class="panel-body">
-                    
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <label class="lbPanel">Mensagens Recebidas</label>
-                </div>
-                <div class="panel-body">
-                    
-                </div>
+        
+		<div class="container-fluid">
+            <div class="row-fluid">
+                <img src="/application/view/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
             </div>
         </div>
+        
     </section>
     <footer>
         <?php include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>
