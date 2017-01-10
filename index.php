@@ -699,5 +699,17 @@
 		});
 	});
 	
+	$app->group('/admin/login/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/login.php');
+			
+			$login = new application\controller\admin\Login();
+			
+			$login->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
 	$app->run();
 ?>

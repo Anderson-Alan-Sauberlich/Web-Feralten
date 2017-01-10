@@ -1,5 +1,5 @@
 <?php
-namespace application\controller\dicas_de_venda;
+namespace application\controller\admin;
 	
 	require_once RAIZ.'/application/view/src/dicas_de_venda/apresentacao.php';
 	
