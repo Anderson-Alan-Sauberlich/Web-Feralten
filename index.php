@@ -711,5 +711,77 @@
 		});
 	});
 	
+	$app->group('/admin/controle/base-de-conhecimento/cmmv/cadastrar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+			
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+			
+			$cadastrar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/admin/controle/base-de-conhecimento/cmmv/atualizar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/atualizar.php');
+			
+			$atualizar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Atualizar();
+			
+			$atualizar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/admin/controle/base-de-conhecimento/cmmv/deletar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/cadastrar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/compatibilidade/cadastrar.php');
+			
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Cadastrar();
+			
+			$cadastrar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/atualizar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/compatibilidade/atualizar.php');
+			
+			$atualizar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Atualizar();
+			
+			$atualizar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
+	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/deletar/', function() use ($app) {
+		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/compatibilidade/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Deletar();
+			
+			$deletar->Carregar_Pagina();
+			
+			return $response;
+		});
+	});
+	
 	$app->run();
 ?>
