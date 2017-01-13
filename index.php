@@ -714,13 +714,44 @@
 	$app->group('/admin/controle/base-de-conhecimento/cmmv/cadastrar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+				
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+				
+			$cadastrar->Carregar_Pagina();
+				
+			return $response;
+		});
+		
+		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+				
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+				
+			$cadastrar->Retornar_Marcas_Por_Categoria();
+				
+			return $response;
+		});
+		
+		$app->get('modelos/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+				
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+				
+			$cadastrar->Retornar_Modelos_Por_Marca();
+				
+			return $response;
+		});
+		
+		$app->get('versoes/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
 			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
 			
-			$cadastrar->Carregar_Pagina();
+			$cadastrar->Retornar_Versoes_Por_Modelo();
 			
 			return $response;
 		});
+		
 	});
 	
 	$app->group('/admin/controle/base-de-conhecimento/cmmv/atualizar/', function() use ($app) {

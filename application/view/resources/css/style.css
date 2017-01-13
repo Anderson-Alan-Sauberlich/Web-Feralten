@@ -137,6 +137,11 @@
 	color: yellow;
 }
 
+.cmmv_salvar {
+	margin-top: 30px;
+	margin-bottom: 25px;
+}
+
 .sombra_painel {
 	position: relative;
 	border-radius: 5px;

@@ -76,8 +76,6 @@ namespace application\controller\include_page;
         	$ano_ate = trim($ano_ate);
         	$peca = trim($peca);
         	
-        	
-        	
         	return true;
         }
     }
