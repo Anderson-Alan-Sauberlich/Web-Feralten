@@ -27,19 +27,65 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	$view->Executar();
         }
         
+        public function Cadastrar_CMMV() {
+        	if (!empty($_POST['modelo'])) {
+        		$this->Cadastrar_Versao();
+        	} else if (!empty($_POST['marca'])) {
+        		$this->Cadastrar_Modelo();
+        	} else if (!empty($_POST['categoria'])) {
+        		$this->Cadastrar_Marca();
+        	} else {
+        		$this->Cadastrar_Categoria();
+        	}
+        }
+        
+        private function Cadastrar_Versao() {
+        	if ($this->Validar_Nome_URL()) {
+        		
+        	}
+        }
+        
+        private function Cadastrar_Modelo() {
+        	if ($this->Validar_Nome_URL()) {
+        	
+        	}
+        }
+        
+        private function Cadastrar_Marca() {
+        	if ($this->Validar_Nome_URL()) {
+        	
+        	}
+        }
+        
+        private function Cadastrar_Categoria() {
+        	if ($this->Validar_Nome_URL()) {
+        	
+        	}
+        }
+        
+        private function Validar_Nome_URL() {
+        	if (!empty($_POST['nome']) AND !empty($_POST['url'])) {
+        		return true;
+        	} else {
+        		echo 'Erro: Nome/URL Não Informado.';
+        		
+        		return false;
+        	}
+        }
+        
         public function Retornar_Marcas_Por_Categoria() {
-        	View_Cadastrar::Carregar_Marcas(self::Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
+        	View_Cadastrar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
         }
         
         public function Retornar_Modelos_Por_Marca() {
-        	View_Cadastrar::Carregar_Modelos(self::Buscar_Modelo_Por_Id_Marca($_GET['marca']));
+        	View_Cadastrar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($_GET['marca']));
         }
         
         public function Retornar_Versoes_Por_Modelo() {
-        	View_Cadastrar::Carregar_Versoes(self::Buscar_Versoes_Por_Id_Modelo($_GET['modelo']));
+        	View_Cadastrar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($_GET['modelo']));
         }
         
-        public static function Buscar_Marca_Por_Id_Categoria($categoria) {
+        public function Buscar_Marca_Por_Id_Categoria($categoria) {
         	if (!empty($categoria)) {
         		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
         	} else {
@@ -47,7 +93,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public static function Buscar_Modelo_Por_Id_Marca($marca) {
+        public function Buscar_Modelo_Por_Id_Marca($marca) {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
         	} else {
@@ -55,7 +101,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public static function Buscar_Versoes_Por_Id_Modelo($modelo) {
+        public function Buscar_Versoes_Por_Id_Modelo($modelo) {
         	if (!empty($modelo)) {
         		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {

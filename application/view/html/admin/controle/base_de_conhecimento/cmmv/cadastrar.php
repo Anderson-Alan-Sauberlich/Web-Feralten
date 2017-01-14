@@ -42,16 +42,16 @@
 		<h4 class="ui dividing header">Digite o Nome e a URL do novo elemento:</h4>
 		<div class="two fields">
 			<div class="field">
-				<input type="text" id="nome" name="nome" placeholder="Nome" class="ui fluid"/>
+				<input type="text" id="nome" name="nome" placeholder="Nome (1° Letra Maiuscula)" class="ui fluid"/>
 			</div>
 			<div class="field">
-				<input type="text" id="url" name="url" placeholder="URL" class="ui fluid"/>
+				<input type="text" id="url" name="url" placeholder="URL (Não pode conter Caracteres Especiais" class="ui fluid"/>
 			</div>
 		</div>
     </form>
     	<div class="cmmv_salvar">
     		<h4 class="ui dividing header">A Cadastrar uma nova: <label id="lb_item">Categoria</label></h4>
-        	<button id="salvar" name="salvar" class="ui fluid inverted green button ">Salvar e Cadastrar</button>
+        	<button id="salvar" name="salvar" onclick="SalvarCadastrar()" class="ui fluid inverted green button ">Salvar e Cadastrar</button>
     	</div>
     </section>
     <footer>

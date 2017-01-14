@@ -752,6 +752,15 @@
 			return $response;
 		});
 		
+		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+			
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+			
+			$cadastrar->Cadastrar_CMMV();
+			
+			return $response;
+		});
 	});
 	
 	$app->group('/admin/controle/base-de-conhecimento/cmmv/atualizar/', function() use ($app) {
