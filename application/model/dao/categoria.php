@@ -18,11 +18,10 @@ namespace application\model\dao;
         public static function Inserir(Object_Categoria $object_categoria) : bool {
             try {
                 $sql = "INSERT INTO tb_categoria (categoria_id, categoria_nome, categoria_url) 
-                        VALUES (:id, :nome, :url);";
+                        VALUES (fc_achar_id_livre_categoria(), :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_categoria->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(":url", $object_categoria->get_url(), PDO::PARAM_STR);
 
@@ -87,6 +86,26 @@ namespace application\model\dao;
             } catch (PDOException $e) {
 				return false;
             }
+        }
+        
+        public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool {
+        	try {
+        		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":url", $object_categoria->get_url(), PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		if (!empty($row['categoria_id'])) {
+        			return false;
+        		} else {
+        			return true;
+        		}
+        	} catch (PDOException $e) {
+        		return false;
+        	}
         }
         
         private static function PopulaCategoria(array $row) : Object_Categoria {

@@ -18,11 +18,10 @@ namespace application\model\dao;
         public static function Inserir(Object_Modelo $object_modelo) : bool {
             try {
                 $sql = "INSERT INTO tb_modelo (modelo_id, modelo_ma_id, modelo_nome, modelo_url) 
-                        VALUES (:id, :ma_id, :nome, :url);";
+                        VALUES (fc_achar_id_livre_modelo(:ma_id), :ma_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_modelo->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
@@ -123,6 +122,27 @@ namespace application\model\dao;
         		}
         		
         		return $id_modelos;
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool {
+        	try {
+        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_ma_id = :ma_id AND modelo_nome = :nome OR modelo_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		if (!empty($row['modelo_id'])) {
+        			return false;
+        		} else {
+        			return true;
+        		}
         	} catch (PDOException $e) {
         		return false;
         	}

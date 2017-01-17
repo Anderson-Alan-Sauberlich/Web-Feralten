@@ -18,11 +18,10 @@ namespace application\model\dao;
         public static function Inserir(Object_Marca $object_marca) : bool {
             try {
                 $sql = "INSERT INTO tb_marca (marca_id, marca_ca_id, marca_nome, marca_url) 
-                        VALUES (:id, :ca_id, :nome, :url);";
+                        VALUES (fc_achar_id_livre_marca(:ca_id), :ca_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_marca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
@@ -123,6 +122,27 @@ namespace application\model\dao;
         		}
         		
         		return $id_marcas;
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
+        	try {
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND marca_nome = :nome OR marca_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		if (!empty($row['marca_id'])) {
+        			return false;
+        		} else {
+        			return true;
+        		}
         	} catch (PDOException $e) {
         		return false;
         	}

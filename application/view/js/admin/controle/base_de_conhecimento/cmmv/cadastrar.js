@@ -76,7 +76,6 @@ function VerificarStatusItem() {
 }
 function SalvarCadastrar() {
 	$("#salvar").addClass("disabled loading");
-	
 	$.ajax({
 		type: "POST",
 		url: "/admin/controle/base-de-conhecimento/cmmv/cadastrar/",
@@ -89,7 +88,8 @@ function SalvarCadastrar() {
 		    nome:$("#nome").val(),
 		    url:$("#url").val()
 		}
+	}).done(function(valor) {
+		$("#div_msg").html(valor);
 	});
-	
 	$( "#salvar" ).removeClass("disabled loading");
 }

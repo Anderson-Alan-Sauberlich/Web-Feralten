@@ -18,11 +18,10 @@ namespace application\model\dao;
         public static function Inserir(Object_Versao $object_versao) : bool {
             try {
                 $sql = "INSERT INTO tb_versao (versao_id, versao_mo_id, versao_nome, versao_url) 
-                        VALUES (:id, :mo_id, :nome, :url);";
+                        VALUES (fc_achar_id_livre_versao(:mo_id), :mo_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_versao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(":url", $object_versao->get_url(), PDO::PARAM_STR);
@@ -123,6 +122,27 @@ namespace application\model\dao;
         		}
         		
         		return $id_versao;
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool {
+        	try {
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND versao_nome = :nome OR versao_url = :url";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":url", $object_versao->get_url(), PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		if (!empty($row['versao_id'])) {
+        			return false;
+        		} else {
+        			return true;
+        		}
         	} catch (PDOException $e) {
         		return false;
         	}

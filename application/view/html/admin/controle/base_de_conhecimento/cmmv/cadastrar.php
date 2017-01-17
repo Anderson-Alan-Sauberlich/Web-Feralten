@@ -12,7 +12,7 @@
         <?php include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-	
+    <div id="div_msg"></div>
 	<form class="ui form">
 		<h4 class="ui dividing header">Selecione a CMMV ao qual pertense a nova informação:</h4>
 		<div class="two fields">
