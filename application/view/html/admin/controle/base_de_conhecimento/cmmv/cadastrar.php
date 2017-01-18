@@ -50,7 +50,7 @@
 		</div>
     </form>
     	<div class="cmmv_salvar">
-    		<h4 class="ui dividing header">A Cadastrar uma nova: <label id="lb_item">Categoria</label></h4>
+    		<h4 class="ui dividing header">A Cadastrar uma nova: <label id="lb_item"><h3>Categoria</h3></label></h4>
         	<button id="salvar" name="salvar" onclick="SalvarCadastrar()" class="ui fluid inverted green button ">Salvar e Cadastrar</button>
     	</div>
     </section>

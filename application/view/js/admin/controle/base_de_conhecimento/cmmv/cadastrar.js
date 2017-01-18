@@ -23,8 +23,6 @@ $(document).ready(function( ) {
 	       	$('#modelo').dropdown('restore defaults');
 	       	$('#versao').dropdown('restore defaults');
 		}
-	        
-	    VerificarStatusItem();
 	});
 	$("#marca").change(function() {
 		if ($("#marca").val() != 0 && $("#marca").val() != null) {
@@ -43,8 +41,6 @@ $(document).ready(function( ) {
         	$('#modelo').dropdown('restore defaults');
         	$('#versao').dropdown('restore defaults');
 		}
-		
-		VerificarStatusItem();
 	});
 	$("#modelo").change(function() {
 		if ($("#modelo").val() != 0 && $("#modelo").val() != null) {
@@ -63,15 +59,34 @@ $(document).ready(function( ) {
 		VerificarStatusItem();
 	});
 });
+$(document).ready(function( ) {
+	$("#nome").keyup(function() {
+		$("#url").val(retira_acentos($("#nome").val()));
+	});
+});
+function retira_acentos(palavra) {
+	com_acento = '/.áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ ';
+	sem_acento = '--aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC-';
+	nova = '';
+	for(i=0;i<palavra.length;i++) {
+		if (com_acento.search(palavra.substr(i,1))>=0) {
+			nova+=sem_acento.substr(com_acento.search(palavra.substr(i,1)),1);
+		}
+		else {
+			nova+=palavra.substr(i,1);
+		}
+	}
+	return nova.toLowerCase();
+}
 function VerificarStatusItem() {
 	if ($("#categoria").val() == 0) {
-    	$("#lb_item").html('Categoria');
+    	$("#lb_item").html('<h3>Categoria</h3>');
     } else if ($("#marca").val() == 0) {
-    	$("#lb_item").html('Marca');
+    	$("#lb_item").html('<h3>Marca</h3>');
     } else if ($("#modelo").val() == 0) {
-    	$("#lb_item").html('Modelo');
+    	$("#lb_item").html('<h3>Modelo</h3>');
     } else {
-    	$("#lb_item").html('Versão');
+    	$("#lb_item").html('<h3>Versão</h3>');
     }
 }
 function SalvarCadastrar() {
