@@ -1,6 +1,6 @@
-<?php require_once RAIZ.'/application/view/src/include_page/menu_filtro.php'; ?>
-<?php use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro; ?>
-<script type="text/javascript" src="/application/view/js/include_page/menu_filtro.js"></script>
+<?php require_once RAIZ.'/application/view/src/include_page/menu/filtro.php'; ?>
+<?php use application\view\src\include_page\menu\Filtro as View_Filtro; ?>
+<script type="text/javascript" src="/application/view/js/include_page/menu/filtro.js"></script>
 <aside class="row redutorMenuLateral">
 	<nav id="menu_filtro" class="ui vertical inverted blue menu">
 		<div class="active item"><h3>Filtro de Busca</h3></div>
@@ -10,14 +10,14 @@
 				<div class="ui container fluid">
 					<select id="estado" name="estado" class="ui fluid search dropdown">
 						<option value="0">Selecione o Estado</option>
-						<?php View_Menu_Filtro::Mostrar_Estados(); ?>
+						<?php View_Filtro::Mostrar_Estados(); ?>
 					</select>
 				</div>
 			</div>
 			<div class="menu">
 				<div class="ui container fluid">
 					<select id="cidade" name="cidade" class="ui fluid search dropdown">
-						<?php View_Menu_Filtro::Mostrar_Cidades(); ?>
+						<?php View_Filtro::Mostrar_Cidades(); ?>
 					</select>
 				</div>
 			</div>
@@ -75,13 +75,13 @@
 							<div class="field">
 								<select id="preco_menor" name="preco_menor" class="ui fluid search dropdown">
 									<option value="0">Menor</option>
-									<?php View_Menu_Filtro::Mostrar_Preco_Menor(); ?>
+									<?php View_Filtro::Mostrar_Preco_Menor(); ?>
 								</select>
 							</div>
 							<div class="field">
 								<select id="preco_maior" name="preco_maior" class="ui fluid search dropdown">
 									<option value="0">Maior</option>
-									<?php View_Menu_Filtro::Mostrar_Preco_Maior(); ?>
+									<?php View_Filtro::Mostrar_Preco_Maior(); ?>
 								</select>
 							</div>
 						</div>
@@ -95,7 +95,7 @@
 				<div class="ui container fluid">
 					<select class="ui fluid search dropdown">
 						<option value="0">Selecione o Status</option>
-						<?php View_Menu_Filtro::Mostrar_Status(); ?>
+						<?php View_Filtro::Mostrar_Status(); ?>
 					</select>
 				</div>
 			</div>

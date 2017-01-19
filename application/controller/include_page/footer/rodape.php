@@ -1,5 +1,5 @@
 <?php
-namespace application\controller\include_page;
+namespace application\controller\include_page\footer;
 
     class Rodape {
 

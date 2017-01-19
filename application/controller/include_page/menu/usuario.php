@@ -1,5 +1,5 @@
 <?php
-namespace application\controller\include_page;
+namespace application\controller\include_page\menu;
     
     require_once RAIZ.'/application/model/dao/dados_usuario.php';
     require_once RAIZ.'/application/model/object/usuario.php';
@@ -7,7 +7,7 @@ namespace application\controller\include_page;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
     use application\model\object\Usuario as Object_Usuario;
     
-    class Menu_Usuario {
+    class Usuario {
 
         function __construct() {
             

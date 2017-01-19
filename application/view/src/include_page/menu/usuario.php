@@ -1,7 +1,7 @@
 <?php
-namespace application\view\src\include_page;
+namespace application\view\src\include_page\menu;
     
-    class Menu_Usuario {
+    class Usuario {
     	
     	private static $status_usuario;
     	private static $url_menu;
@@ -10,7 +10,7 @@ namespace application\view\src\include_page;
         	self::$status_usuario = $status;
         	self::$url_menu = $url;
         	
-        	require_once RAIZ.'/application/view/html/include_page/menu_usuario.php';
+        	require_once RAIZ.'/application/view/html/include_page/menu/usuario.php';
         }
         
         public static function Mostrar_Nome() {

@@ -1,17 +1,17 @@
 <?php
-namespace application\controller\include_page;
+namespace application\controller\include_page\menu;
 
-	require_once RAIZ.'/application/view/src/include_page/menu_filtro.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/filtro.php';
 	require_once RAIZ.'/application/model/dao/cidade.php';
 	require_once RAIZ.'/application/model/dao/estado.php';
 	require_once RAIZ.'/application/model/dao/status_peca.php';
 	
-	use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro;
+	use application\view\src\include_page\menu\Filtro as View_Filtro;
 	use application\model\dao\Cidade as DAO_Cidade;
 	use application\model\dao\Estado as DAO_Estado;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
 
-	class Menu_Filtro {
+	class Filtro {
 		
 	    function __construct() {
 	        
@@ -19,7 +19,7 @@ namespace application\controller\include_page;
 		
 		public function Retornar_Cidades_Por_Estado() {
 			if (isset($_GET['estado'])) {
-				View_Menu_Filtro::Mostrar_Cidades($_GET['estado']);
+				View_Filtro::Mostrar_Cidades($_GET['estado']);
 			}
 		}
 		

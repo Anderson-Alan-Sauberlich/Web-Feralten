@@ -1,34 +1,34 @@
 <?php
-namespace application\controller\include_page;
+namespace application\controller\include_page\menu;
 
 	require_once RAIZ.'/application/model/dao/categoria.php';
 	require_once RAIZ.'/application/model/dao/marca.php';
 	require_once RAIZ.'/application/model/dao/modelo.php';
 	require_once RAIZ.'/application/model/dao/versao.php';
-	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
 
 	use application\model\dao\Categoria as DAO_Categoria;
 	use application\model\dao\Marca as DAO_Marca;
 	use application\model\dao\Modelo as DAO_Modelo;
 	use application\model\dao\Versao as DAO_Versao;
-	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
+	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 	
-    class Menu_Pesquisa {
+    class Pesquisa {
 
         function __construct() {
             
         }
         
         public function Retornar_Marcas_Por_Categoria() {
-        	View_Menu_Pesquisa::Carregar_Marcas($_GET['categoria']);
+        	View_Pesquisa::Carregar_Marcas($_GET['categoria']);
         }
         
         public function Retornar_Modelos_Por_Marca() {
-        	View_Menu_Pesquisa::Carregar_Modelos($_GET['marca']);
+        	View_Pesquisa::Carregar_Modelos($_GET['marca']);
         }
         
         public function Retornar_Versoes_Por_Modelo() {
-        	View_Menu_Pesquisa::Carregar_Versoes($_GET['modelo']);
+        	View_Pesquisa::Carregar_Versoes($_GET['modelo']);
         }
         
         public static function Buscar_Todas_Categorias() {

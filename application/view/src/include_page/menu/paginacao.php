@@ -1,14 +1,14 @@
 <?php
-namespace application\view\src\include_page;
+namespace application\view\src\include_page\menu;
 
-	class Menu_Paginacao {
+	class Paginacao {
 		
 		function __construct($pagina, $paginas) {
 			self::$pagina = $pagina;
 			self::$paginas = $paginas;
 			
 			if (self::$paginas > 1) {
-				require_once RAIZ.'/application/view/html/include_page/menu_paginacao.php';
+				require_once RAIZ.'/application/view/html/include_page/menu/paginacao.php';
 			}
 		}
 		
