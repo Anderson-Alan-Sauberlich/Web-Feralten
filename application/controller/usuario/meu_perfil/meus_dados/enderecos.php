@@ -8,7 +8,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/model/dao/cidade.php';
     require_once RAIZ.'/application/model/dao/estado.php';
     require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php';
-    require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
+    require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Cidade as Object_Cidade;
@@ -17,7 +17,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;
     use application\view\src\usuario\meu_perfil\meus_dados\Enderecos as View_Enderecos;
-    use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
+    use application\controller\include_page\menu\Usuario as Controller_Usuario;
 
     class Enderecos {
 
@@ -26,8 +26,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Carregar_Pagina($enderecos_erros= null, $enderecos_campos = null, $enderecos_sucesso= null, $enderecos_form = null) {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
         			$view = new View_Enderecos($status);
@@ -52,7 +52,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Retornar_Cidades_Por_Estado() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
 	        	}
@@ -62,8 +62,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 		
         public function Atualizar_Endereco() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
 		            $enderecos_erros = array();

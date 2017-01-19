@@ -2,10 +2,10 @@
 namespace application\view\src\usuario\meu_perfil\pecas;
 	
 	require_once RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php';
-	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
 	
 	use application\controller\usuario\meu_perfil\pecas\Cadastrar as Controller_Cadastrar;
-	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
+	use application\view\src\include_page\menu\Usuario as View_Usuario;
 	
     class Cadastrar {
     	
@@ -40,7 +40,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
 
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario(self::$status_usuario, array('pecas', 'cadastrar'));
+        	new View_Usuario(self::$status_usuario, array('pecas', 'cadastrar'));
         }
         
 		public static function Mostrar_Sucesso() {

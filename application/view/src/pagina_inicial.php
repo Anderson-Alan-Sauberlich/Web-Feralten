@@ -1,9 +1,9 @@
 <?php
 namespace application\view\src;
 
-	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
 
-	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
+	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 			
     class Pagina_Inicial {
 
@@ -16,7 +16,7 @@ namespace application\view\src;
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Menu_Pesquisa('/pecas/resultados/');
+        	new View_Pesquisa('/pecas/resultados/');
         }
     }
 ?>

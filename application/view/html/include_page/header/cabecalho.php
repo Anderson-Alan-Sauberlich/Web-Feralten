@@ -1,7 +1,7 @@
-<?php require_once RAIZ.'/application/view/src/include_page/menu/cabecalho.php'; ?>
-<?php use application\view\src\include_page\menu\Cabecalho; ?>
+<?php require_once RAIZ.'/application/view/src/include_page/header/cabecalho.php'; ?>
+<?php use application\view\src\include_page\header\Cabecalho; ?>
 <section class="margem-inferior-pouco">
-<script type="text/javascript" src="/application/view/js/include_page/cabecalho.js"></script>
+<script type="text/javascript" src="/application/view/js/include_page/header/cabecalho.js"></script>
 	<nav class="navbar navbar-default navbar-fixed-top navbar-titulo" role="navigation">
 		<div class="ui container">
  			<div class="navbar-header">

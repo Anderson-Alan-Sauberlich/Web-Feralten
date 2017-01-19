@@ -20,7 +20,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/model/dao/foto_peca.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/cadastrar.php';
-	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
@@ -43,7 +43,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
 	use application\view\src\usuario\meu_perfil\pecas\Cadastrar as View_Cadastrar;
-	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
+	use application\controller\include_page\menu\Usuario as Controller_Usuario;
 		
     class Cadastrar {
 
@@ -52,8 +52,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
         
         public function Carregar_Pagina($cadastrar_erros = null, $cadastrar_campos = null, $cadastrar_form = null, $cadastrar_sucesso = null) {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
         			if (empty($cadastrar_form)) {
@@ -78,8 +78,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
         
         public function Verificar_Evento() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
 		        	if (isset($_POST['salvar'])) {
@@ -98,7 +98,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
         
         public function Carregar_Compatibilidade() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['categoria'])) {
 	        		if ($_GET['categoria'] == "verificar") {
 	        			View_Cadastrar::Carregar_Marcas();
@@ -638,7 +638,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		}
 		
 		public function Salvar_Imagem_TMP() {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				$arquivo = null;
 				
 				if (isset($_FILES['imagem1']) AND $_FILES['imagem1']['error'] === 0) {
@@ -672,7 +672,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		}
 		
 		public function Deletar_Imagem($num_img) {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagens_tmp'])) {
 					if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
 						$imagens_tmp = $_SESSION['imagens_tmp'];

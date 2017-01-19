@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
+        <?php include_once RAIZ.'/application/view/html/include_page/header/cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
 		
@@ -20,7 +20,7 @@
         
     </section>
     <footer>
-        <?php include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>
+        <?php include_once RAIZ.'/application/view/html/include_page/footer/rodape.php'; ?>
     </footer>
 </body>
 </html>

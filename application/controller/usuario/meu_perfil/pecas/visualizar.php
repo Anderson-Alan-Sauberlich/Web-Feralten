@@ -2,13 +2,13 @@
 namespace application\controller\usuario\meu_perfil\pecas;
 
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/visualizar.php';
-	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
-	require_once RAIZ.'/application/controller/include_page/menu_pesquisa.php';
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
+	require_once RAIZ.'/application/controller/include_page/menu/pesquisa.php';
 	require_once RAIZ.'/application/model/dao/peca.php';
 	
 	use application\view\src\usuario\meu_perfil\pecas\Visualizar as View_Visualizar;
-	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
-	use application\controller\include_page\Menu_Pesquisa as Controller_Menu_Pesquisa;
+	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\include_page\menu\Pesquisa as Controller_Pesquisa;
 	use application\model\dao\Peca as DAO_Peca;
 
     class Visualizar {
@@ -56,11 +56,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
         
         public function Carregar_Pagina() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			if (Controller_Menu_Pesquisa::Validar_Variaveis_De_Parametro($this->categoria, $this->marca, $this->modelo, $this->versao, $this->ano_de, $this->ano_ate, $this->peca)) {
+        			if (Controller_Pesquisa::Validar_Variaveis_De_Parametro($this->categoria, $this->marca, $this->modelo, $this->versao, $this->ano_de, $this->ano_ate, $this->peca)) {
 	        			$view = new View_Visualizar($status);
 	        			
 	        			$view->set_pecas($this->Buscar_Pecas_Usuario());

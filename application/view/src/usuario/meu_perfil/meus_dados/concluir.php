@@ -2,10 +2,10 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 
     require_once RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php';
-    require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
+    require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
     
     use application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
-	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
+	use application\view\src\include_page\menu\Usuario as View_Usuario;
     
     class Concluir {
     	
@@ -35,7 +35,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_usuario(self::$status_usuario, array('meus-dados', 'concluir'));
+        	new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
         }
         
         public static function Manter_Valor($campo) {

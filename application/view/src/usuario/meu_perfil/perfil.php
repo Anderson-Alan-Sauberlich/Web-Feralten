@@ -1,9 +1,9 @@
 <?php
 namespace application\view\src\usuario\meu_perfil;
     
-	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
 	
-	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
+	use application\view\src\include_page\menu\Usuario as View_Usuario;
 	
     class Perfil {
 
@@ -18,7 +18,7 @@ namespace application\view\src\usuario\meu_perfil;
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario(self::$status_usuario, array('meu-perfil', null));
+        	new View_Usuario(self::$status_usuario, array('meu-perfil', null));
         }
     }
 ?>

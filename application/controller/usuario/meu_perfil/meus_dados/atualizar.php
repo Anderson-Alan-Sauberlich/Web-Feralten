@@ -7,7 +7,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/model/dao/dados_usuario.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
-	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
@@ -15,7 +15,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
 	use application\model\util\Gerenciar_Imagens;
     use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
-    use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
+    use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	
     class Atualizar {
 
@@ -31,8 +31,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private $usuario_form;
         
         public function Carregar_Pagina() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
 		        	if (empty($atualizar_form)) {
@@ -62,8 +62,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Verificar_Evento() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
         			$this->atualizar_form = array();
@@ -376,7 +376,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
 		
 		public function Salvar_Imagem_TMP() {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
 					
@@ -394,7 +394,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		}
 		
 		public function Deletar_Imagem() {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					if ($_SESSION['imagem_tmp'] != "del") {
 						$imagens = new Gerenciar_Imagens();

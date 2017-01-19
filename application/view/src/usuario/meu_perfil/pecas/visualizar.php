@@ -1,16 +1,16 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\pecas;
     
-	require_once RAIZ.'/application/view/src/include_page/menu_pesquisa.php';
-	require_once RAIZ.'/application/view/src/include_page/menu_usuario.php';
-	require_once RAIZ.'/application/view/src/include_page/menu_filtro.php';
-	require_once RAIZ.'/application/view/src/include_page/menu_paginacao.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/filtro.php';
+	require_once RAIZ.'/application/view/src/include_page/menu/paginacao.php';
 	require_once RAIZ.'/application/view/src/include_page/card_peca.php';
 	
-	use application\view\src\include_page\Menu_Pesquisa as View_Menu_Pesquisa;
-	use application\view\src\include_page\Menu_Usuario as View_Menu_Usuario;
-	use application\view\src\include_page\Menu_Filtro as View_Menu_Filtro;
-	use application\view\src\include_page\Menu_Paginacao as View_Menu_Paginacao;
+	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
+	use application\view\src\include_page\menu\Usuario as View_Usuario;
+	use application\view\src\include_page\menu\Filtro as View_Filtro;
+	use application\view\src\include_page\menu\Paginacao as View_Paginacao;
 	use application\view\src\include_page\Card_Peca as View_Card_Peca;
 	
     class Visualizar {
@@ -41,19 +41,19 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Menu_Pesquisa('/usuario/meu-perfil/pecas/visualizar/');
+        	new View_Pesquisa('/usuario/meu-perfil/pecas/visualizar/');
         }
         
         public static function Incluir_Menu_Usuario() {
-        	new View_Menu_Usuario(self::$status_usuario, array('pecas', 'visualizar'));
+        	new View_Usuario(self::$status_usuario, array('pecas', 'visualizar'));
         }
         
         public static function Incluir_Menu_Filtro() {
-        	new View_Menu_Filtro();
+        	new View_Filtro();
         }
         
         public static function Incluir_Menu_Paginacao() {
-        	new View_Menu_Paginacao(self::$pagina, self::$paginas);
+        	new View_Paginacao(self::$pagina, self::$paginas);
         }
         
         public static function Mostrar_Cards_Pecas() {

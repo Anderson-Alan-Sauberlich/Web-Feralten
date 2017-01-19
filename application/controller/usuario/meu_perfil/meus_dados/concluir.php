@@ -11,7 +11,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/model/dao/cidade.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/concluir.php';
-	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
     use application\model\object\Endereco as Object_Endereco;
@@ -23,7 +23,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\util\Gerenciar_Imagens;
 	use application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
-	use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
+	use application\controller\include_page\menu\Usuario as Controller_Usuario;
     
     class Concluir {
 		
@@ -32,8 +32,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Carregar_Pagina($concluir_erros = null, $concluir_campos = null, $concluir_form = null) {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
         			$view = new View_Concluir($status);
@@ -52,8 +52,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Concluir_Cadastro() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
 		           	$concluir_erros = array();
@@ -355,7 +355,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Retornar_Cidades_Por_Estado() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Concluir::Mostrar_Cidades($_GET['estado']);
 	        	}
@@ -365,7 +365,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
 		public function Salvar_Imagem_TMP() {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
 						
@@ -383,7 +383,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		}
 		
 		public function Deletar_Imagem() {
-			if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					$imagens = new Gerenciar_Imagens();
 					

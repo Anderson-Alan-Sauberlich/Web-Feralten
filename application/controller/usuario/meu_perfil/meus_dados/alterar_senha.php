@@ -4,12 +4,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/model/dao/usuario.php';
 	require_once RAIZ.'/application/controller/usuario/login.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php';
-	require_once RAIZ.'/application/controller/include_page/menu_usuario.php';
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
     use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
-    use application\controller\include_page\Menu_Usuario as Controller_Menu_Usuario;
+    use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	
     class Alterar_Senha {
 
@@ -18,8 +18,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Carregar_Pagina($alterar_senha_erros = null, $alterar_senha_campos = null, $alterar_senha_form = null) {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
+        		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		$view = new View_Alterar_Senha($status);
         		
@@ -34,7 +34,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         public function Atualizar_Senha_Usuario() {
-        	if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
+        	if (Controller_Usuario::Verificar_Autenticacao()) {
 	            $alterar_senha_erros = array();
 	            $alterar_senha_campos = array('erro_senha_antiga' =>  "certo", 'erro_senha_nova' => "certo", 'erro_senha_confnova' => "certo");
 	            
