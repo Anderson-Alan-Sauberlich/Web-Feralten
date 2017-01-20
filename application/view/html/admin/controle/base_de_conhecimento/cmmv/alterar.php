@@ -16,7 +16,7 @@
     	<div class="margem-superior-pouco"></div>
 	    <div id="div_msg"></div>
 		<form class="ui form">
-			<h4 class="ui dividing header">Selecione a sequência a ser alterada:</h4>
+			<h4 class="ui dividing header">Selecione a sequência a ser Alterada:</h4>
 			<div class="two fields">
 				<div class="field">
 					<select id="categoria" name="categoria" class="ui fluid search selection dropdown">
@@ -53,7 +53,7 @@
 	    </form>
 	    <div class="cmmv_salvar">
 	    	<h4 class="ui dividing header">A Alterar: <label class="ui big label" id="lb_item">Nada</label></h4>
-	       	<button id="salvar" name="salvar" onclick="SalvarAlterar()" class="ui fluid inverted green button ">Salvar e Alterar</button>
+	       	<button id="salvar" name="salvar" onclick="SalvarAlterar()" class="ui fluid inverted yellow button ">Salvar e Alterar</button>
 	    </div>
     </section>
     <footer>

@@ -34,8 +34,7 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Marca $object_marca) : bool {
             try {
-                $sql = "UPDATE tb_marca SET marca_id = :id, marca_ca_id = :ca_id, marca_nome = :nome, marca_url = :url 
-                		WHERE marca_id = :id";
+                $sql = "UPDATE tb_marca SET marca_ca_id = :ca_id, marca_nome = :nome, marca_url = :url WHERE marca_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -143,7 +142,7 @@ namespace application\model\dao;
         
         public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND marca_nome = :nome OR marca_url = :url";
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
@@ -152,7 +151,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
-        		if (!empty($row['marca_id'])) {
+        		if (!empty($row['marca_id']) AND $row['marca_id'] != $object_marca->get_id()) {
         			return false;
         		} else {
         			return true;

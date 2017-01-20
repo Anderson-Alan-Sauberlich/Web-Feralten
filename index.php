@@ -865,6 +865,86 @@
 			
 			return $response;
 		});
+		
+		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Marcas_Por_Categoria();
+			
+			return $response;
+		});
+			
+		$app->get('modelos/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Modelos_Por_Marca();
+			
+			return $response;
+		});
+			
+		$app->get('versoes/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Versoes_Por_Modelo();
+			
+			return $response;
+		});
+			
+		$app->get('categoria/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Categoria();
+			
+			return $response;
+		});
+			
+		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Marca();
+			
+			return $response;
+		});
+			
+		$app->get('modelo/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Modelo();
+			
+			return $response;
+		});
+			
+		$app->get('versao/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Versao();
+			
+			return $response;
+		});
+			
+		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Deletar_CMMV();
+			
+			return $response;
+		});
 	});
 	
 	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/cadastrar/', function() use ($app) {

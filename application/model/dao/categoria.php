@@ -112,7 +112,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
-        		if (!empty($row['categoria_id'])) {
+        		if (!empty($row['categoria_id']) AND $row['categoria_id'] != $object_categoria->get_id()) {
         			return false;
         		} else {
         			return true;

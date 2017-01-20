@@ -14,6 +14,9 @@ $(document).ready(function( ) {
 		       	$('#marca').dropdown('restore default value');
 		       	$('#modelo').dropdown('restore default value');
 		       	$('#versao').dropdown('restore default value');
+		       	$('#marca').dropdown('restore default text');
+		       	$('#modelo').dropdown('restore default text');
+		       	$('#versao').dropdown('restore default text');
 		       	$("#lb_item").html('Marca');
 		    });
 		} else if (true) {
@@ -23,6 +26,9 @@ $(document).ready(function( ) {
 	       	$('#marca').dropdown('restore default value');
 	       	$('#modelo').dropdown('restore default value');
 	       	$('#versao').dropdown('restore default value');
+	       	$('#marca').dropdown('restore default text');
+	       	$('#modelo').dropdown('restore default text');
+	       	$('#versao').dropdown('restore default text');
 	       	$("#lb_item").html('Categoria');
 		}
 	});
@@ -36,6 +42,8 @@ $(document).ready(function( ) {
 	        	$("#versao").html('<option value="0">Versão</option>');
 	        	$('#modelo').dropdown('restore default value');
 	        	$('#versao').dropdown('restore default value');
+	        	$('#modelo').dropdown('restore default text');
+	        	$('#versao').dropdown('restore default text');
 	        	$("#lb_item").html('Modelo');
 	        });
 		} else if ($("#categoria").val() != 0 && $("#categoria").val() != null) {
@@ -43,6 +51,8 @@ $(document).ready(function( ) {
 			$("#versao").html('<option value="0">Versão</option>');
         	$('#modelo').dropdown('restore default value');
         	$('#versao').dropdown('restore default value');
+        	$('#modelo').dropdown('restore default text');
+        	$('#versao').dropdown('restore default text');
         	$("#lb_item").html('Marca');
 		}
 	});
@@ -54,11 +64,13 @@ $(document).ready(function( ) {
 	        function(valor) {
 	        	$("#versao").html(valor);
 	        	$('#versao').dropdown('restore default value');
+	        	$('#versao').dropdown('restore default text');
 	        	$("#lb_item").html('Versão');
 	        });
 		} else if ($("#marca").val() != 0 && $("#marca").val() != null) {
 			$("#versao").html('<option value="0">Versão</option>');
         	$('#versao').dropdown('restore default value');
+        	$('#versao').dropdown('restore default text');
         	$("#lb_item").html('Modelo');
 		}
 	});

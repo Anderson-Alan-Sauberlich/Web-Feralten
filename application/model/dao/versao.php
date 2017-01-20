@@ -34,13 +34,12 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Versao $object_versao) : bool {
             try {
-                $sql = "UPDATE tb_versao SET versao_id = :id, versao_mo_id = :mo_id, versao_nome = :nome, versao_url = :url 
-                		WHERE versao_id = :id";
+                $sql = "UPDATE tb_versao SET versao_mo_id = :mo_id, versao_nome = :nome, versao_url = :url WHERE versao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_versao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":mo_id", $object_versao->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_versao->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(":url", $object_versao->get_url(), PDO::PARAM_STR);
 
@@ -143,7 +142,7 @@ namespace application\model\dao;
         
         public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool {
         	try {
-        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND versao_nome = :nome OR versao_url = :url";
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
@@ -152,7 +151,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         		
-        		if (!empty($row['versao_id'])) {
+        		if (!empty($row['versao_id']) AND $row['versao_id'] != $object_versao->get_id()) {
         			return false;
         		} else {
         			return true;
