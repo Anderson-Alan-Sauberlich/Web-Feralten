@@ -702,12 +702,36 @@
 	$app->group('/admin/login/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/login.php');
+		
+			$login = new application\controller\admin\Login();
+		
+			$login->Carregar_Pagina();
+		
+			return $response;
+		});
+		
+		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/login.php');
+				
+			$login = new application\controller\admin\Login();
+				
+			$resposta = $login->Autenticar_Usuario_Login();
+				
+			if ($resposta) {
+				return $response->withRedirect('/admin/controle/base-de-conhecimento/cmmv/cadastrar/');
+			} else {
+				return $response;
+			}
+		});
+		
+		$app->get('sair/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/login.php');
 			
 			$login = new application\controller\admin\Login();
 			
-			$login->Carregar_Pagina();
+			$login->LogOut();
 			
-			return $response;
+			return $response->withRedirect('/admin/login/');
 		});
 	});
 	
