@@ -88,6 +88,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        	try {
+        		$sql = "SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        
+        		return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool {
         	try {
         		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url";

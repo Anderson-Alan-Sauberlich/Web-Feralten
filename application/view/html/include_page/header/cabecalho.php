@@ -1,5 +1,5 @@
 <?php require_once RAIZ.'/application/view/src/include_page/header/cabecalho.php'; ?>
-<?php use application\view\src\include_page\header\Cabecalho; ?>
+<?php use application\view\src\include_page\header\Cabecalho as View_Cabecalho; ?>
 <section class="margem-inferior-pouco">
 <script type="text/javascript" src="/application/view/js/include_page/header/cabecalho.js"></script>
 	<nav class="navbar navbar-default navbar-fixed-top navbar-titulo" role="navigation">
@@ -98,7 +98,7 @@
 					</div>
                 </ul>
                 <ul class="nav navbar-nav navbar-right pull-right">
-                    <?php Cabecalho::Verificar_Usuario_Autenticado(); ?>
+                    <?php View_Cabecalho::Verificar_Usuario_Autenticado(); ?>
                 </ul>
             </div>
 		</div>

@@ -1,5 +1,5 @@
-<?php require_once RAIZ.'/application/view/src/admin/controle/base_de_conhecimento/compatibilidade/atualizar.php'; ?>
-<?php use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\Atualizar as View_Atualizar; ?>
+<?php require_once RAIZ.'/application/view/src/admin/controle/base_de_conhecimento/compatibilidade/alterar.php'; ?>
+<?php use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\Alterar as View_Alterar; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>

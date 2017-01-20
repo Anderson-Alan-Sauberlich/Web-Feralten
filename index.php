@@ -763,13 +763,93 @@
 		});
 	});
 	
-	$app->group('/admin/controle/base-de-conhecimento/cmmv/atualizar/', function() use ($app) {
+	$app->group('/admin/controle/base-de-conhecimento/cmmv/alterar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/atualizar.php');
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
-			$atualizar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Atualizar();
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
-			$atualizar->Carregar_Pagina();
+			$alterar->Carregar_Pagina();
+			
+			return $response;
+		});
+		
+		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Marcas_Por_Categoria();
+			
+			return $response;
+		});
+		
+		$app->get('modelos/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Modelos_Por_Marca();
+			
+			return $response;
+		});
+		
+		$app->get('versoes/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Versoes_Por_Modelo();
+			
+			return $response;
+		});
+		
+		$app->get('categoria/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Categoria();
+			
+			return $response;
+		});
+		
+		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Marca();
+			
+			return $response;
+		});
+		
+		$app->get('modelo/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Modelo();
+			
+			return $response;
+		});
+		
+		$app->get('versao/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Versao();
+			
+			return $response;
+		});
+		
+		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Alterar_CMMV();
 			
 			return $response;
 		});
@@ -799,13 +879,13 @@
 		});
 	});
 	
-	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/atualizar/', function() use ($app) {
+	$app->group('/admin/controle/base-de-conhecimento/compatibilidade/alterar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/compatibilidade/atualizar.php');
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/compatibilidade/alterar.php');
 			
-			$atualizar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Atualizar();
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Alterar();
 			
-			$atualizar->Carregar_Pagina();
+			$alterar->Carregar_Pagina();
 			
 			return $response;
 		});

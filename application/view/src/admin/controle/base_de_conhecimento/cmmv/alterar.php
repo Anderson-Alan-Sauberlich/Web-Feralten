@@ -5,7 +5,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 
 	use application\view\src\include_page\menu\Admin as View_Admin;
 
-	class Cadastrar {
+	class Alterar {
 	
 		function __construct() {
 			
@@ -18,7 +18,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 		}
 		
 		public function Executar() {
-			require_once RAIZ.'/application/view/html/admin/controle/base_de_conhecimento/cmmv/cadastrar.php';
+			require_once RAIZ.'/application/view/html/admin/controle/base_de_conhecimento/cmmv/alterar.php';
 		}
 		
 		public static function Incluir_Menu_Admin() {
@@ -27,7 +27,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 		
 		public static function Carregar_Categorias() {
 			echo "<option value=\"0\">Categoria</option>";
-			
+				
 			if (!empty(self::$categorias) AND self::$categorias !== false) {
 				foreach (self::$categorias as $categoria) {
 					echo "<option value=\"".$categoria->get_id()."\">".$categoria->get_nome()."</option>";

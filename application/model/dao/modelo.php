@@ -77,6 +77,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        	try {
+        		$sql = "SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        
+        		return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Buscar_Marca_Id(int $id) {
             try {
                 $sql = "SELECT modelo_ma_id FROM tb_modelo WHERE modelo_id = :id";

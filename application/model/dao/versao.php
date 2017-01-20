@@ -77,6 +77,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        	try {
+        		$sql = "SELECT versao_nome, versao_url FROM tb_versao WHERE versao_id = :id";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        
+        		return self::PopulaVersao($p_sql->fetch(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Buscar_Modelo_Id(int $id) {
             try {
                 $sql = "SELECT versao_mo_id FROM tb_versao WHERE versao_id = :id";
