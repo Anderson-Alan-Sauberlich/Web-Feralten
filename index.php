@@ -715,7 +715,7 @@
 				
 			$login = new application\controller\admin\Login();
 				
-			$resposta = $login->Autenticar_Usuario_Login();
+			$resposta = $login->Login();
 				
 			if ($resposta) {
 				return $response->withRedirect('/admin/controle/base-de-conhecimento/cmmv/cadastrar/');
@@ -741,8 +741,22 @@
 				
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
 				
-			$cadastrar->Carregar_Pagina();
+			$resposta = $cadastrar->Carregar_Pagina();
 				
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
+		});
+		
+		$app->get('categorias/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
+			
+			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+			
+			$cadastrar->Retornar_Categorias();
+			
 			return $response;
 		});
 		
@@ -793,9 +807,13 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
-			$alterar->Carregar_Pagina();
+			$resposta = $alterar->Carregar_Pagina();
 			
-			return $response;
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
 		});
 		
 		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
@@ -885,9 +903,13 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
 			
-			$deletar->Carregar_Pagina();
+			$resposta = $deletar->Carregar_Pagina();
 			
-			return $response;
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
 		});
 		
 		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
@@ -977,9 +999,13 @@
 			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Cadastrar();
 			
-			$cadastrar->Carregar_Pagina();
+			$resposta = $cadastrar->Carregar_Pagina();
 			
-			return $response;
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
 		});
 	});
 	
@@ -989,9 +1015,13 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Alterar();
 			
-			$alterar->Carregar_Pagina();
+			$resposta = $alterar->Carregar_Pagina();
 			
-			return $response;
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
 		});
 	});
 	
@@ -1001,9 +1031,13 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Deletar();
 			
-			$deletar->Carregar_Pagina();
+			$resposta = $deletar->Carregar_Pagina();
 			
-			return $response;
+			if ($resposta === false) {
+				return $response->withRedirect('/admin/login/');
+			} else {
+				return $response;
+			}
 		});
 	});
 	

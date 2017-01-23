@@ -163,5 +163,15 @@ function SalvarDeletar() {
 	}).done(function(valor) {
 		$("#div_msg").html(valor);
 	});
+	var item = $("label[for='salvar']").html();
+	if (item == 'Categoria') {
+		Recarregar_Categoria();
+	} else if (item == 'Marca') {
+		Recarregar_Marcas();
+	} else if (item == 'Modelo') {
+		Recarregar_Modelos();
+	} else if (item == 'Versão') {
+		Recarregar_Versoes();
+	}
 	$( "#salvar" ).removeClass("disabled loading");
 }

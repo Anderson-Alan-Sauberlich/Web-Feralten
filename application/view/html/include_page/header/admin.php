@@ -6,7 +6,7 @@
 		<div class="ui container stackable inverted blue menu">
 			<a onclick="abrir_menu()" class="item"><i class="sidebar icon"></i>Menu</a>
 			<div class="right menu">
-				<a class="item"><i class="power icon"></i>Sair</a>
+				<a href="/admin/login/sair/?logout=<?php View_Admin::Carregar_Id_Session(); ?>" class="item"><i class="power icon"></i>Sair</a>
 			</div>
 		</div>
 	</div>

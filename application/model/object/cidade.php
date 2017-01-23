@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Cidade {
+    	
     	private $id;
 		private $estado_id;
 		private $nome;

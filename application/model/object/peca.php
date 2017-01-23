@@ -12,6 +12,7 @@ namespace application\model\object;
 	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
 	
     class Peca {
+    	
     	private $id;
 		private $dados_usuario;
 		private $nome;

@@ -191,7 +191,7 @@ namespace application\controller\usuario;
             	$login_form['email'] = trim(strip_tags($email));
             	$login_form['senha'] = strip_tags($senha);
             	
-            	self::Carregar_Pagina($login_erros, $login_campos, $login_form);
+            	$this->Carregar_Pagina($login_erros, $login_campos, $login_form);
             }
         }
     }

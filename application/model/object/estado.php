@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Estado {
+    	
     	private $id;
 		private $uf;
 		private $nome;

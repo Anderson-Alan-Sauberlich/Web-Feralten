@@ -12,7 +12,7 @@
         <?php //include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-		<div class="margem-superior-medio"></div>
+    	<div class="margem-superior-medio"></div>
 		<div class="ui middle aligned center aligned grid">
 		    <form class="ui large form" method="post" action="/admin/login/" role="form">
 				<div class="ui stacked segment">
@@ -32,6 +32,8 @@
 				</div>
 		    </form>
 		</div>
+		<div class="margem-superior-medio"></div>
+		<?php View_Login::Mostrar_Erros(); ?>
     </section>
     <footer>
         <?php //include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>        

@@ -8,6 +8,7 @@ namespace application\model\object;
 	use application\model\object\Estado as Object_Estado;
 	
     class Endereco {
+    	
     	private $id;
         private $dados_usuario_id;
         private $cidade;

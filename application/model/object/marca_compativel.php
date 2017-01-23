@@ -2,6 +2,7 @@
 namespace application\model\object;
 
 	class Marca_Compativel {
+		
 		private $id;
 		private $da_id;
 		private $com_id;

@@ -6,6 +6,7 @@ namespace application\model\object;
 	use application\model\object\Endereco as Object_Endereco;
 
 	class Dados_Usuario {
+		
 		private $usuario_id;
         private $status_id;
         private $cpf_cnpj;

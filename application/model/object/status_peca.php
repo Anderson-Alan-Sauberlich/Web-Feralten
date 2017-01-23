@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Status_Peca {
+    	
     	private $id;
 		private $nome;
 		

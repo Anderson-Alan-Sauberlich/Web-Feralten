@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Marca {
+    	
     	private $id;
 		private $categoria_id;
 		private $nome;

@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Lista_Pativel {
+    	
     	private $id;
     	private $peca_id;
 		private $categoria_id;

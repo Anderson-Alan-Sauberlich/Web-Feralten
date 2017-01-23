@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Categoria {
+    	
     	private $id;
 		private $nome;
 		private $url;

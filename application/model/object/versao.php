@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Versao {
+    	
     	private $id;
 		private $modelo_id;
 		private $nome;

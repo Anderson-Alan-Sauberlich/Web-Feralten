@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Modelo {
+    	
     	private $id;
 		private $marca_id;
 		private $nome;

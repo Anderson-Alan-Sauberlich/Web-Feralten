@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Foto_Peca {
+    	
     	private $id;
 		private $peca_id;
 		private $endereco;

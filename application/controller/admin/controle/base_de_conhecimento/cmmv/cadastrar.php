@@ -9,6 +9,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
 	require_once RAIZ.'/application/model/object/marca.php';
 	require_once RAIZ.'/application/model/object/modelo.php';
 	require_once RAIZ.'/application/model/object/versao.php';
+	require_once RAIZ.'/application/controller/include_page/menu/admin.php';
 	require_once RAIZ.'/application/view/src/admin/controle/base_de_conhecimento/cmmv/cadastrar.php';
 	
 	use application\model\dao\Categoria as DAO_Categoria;
@@ -19,6 +20,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
 	use application\model\object\Modelo as Object_Modelo;
 	use application\model\object\Marca as Object_Marca;
 	use application\model\object\Categoria as Object_Categoria;
+	use application\controller\include_page\menu\Admin as Controller_Admin;
 	use application\view\src\admin\controle\base_de_conhecimento\cmmv\Cadastrar as View_Cadastrar;
 					
     class Cadastrar {
@@ -28,11 +30,15 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         }
         
         public function Carregar_Pagina() {
-        	$view = new View_Cadastrar();
-        	
-        	$view->set_categorias(DAO_Categoria::BuscarTodos());
-        	
-        	$view->Executar();
+        	if (Controller_Admin::Verificar_Autenticacao()) {
+	        	$view = new View_Cadastrar();
+	        	
+	        	$view->set_categorias(DAO_Categoria::BuscarTodos());
+	        	
+	        	$view->Executar();
+	        } else {
+	        	return false;
+	        }
         }
         
         public function Cadastrar_CMMV() {
@@ -118,6 +124,10 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         		
         		return false;
         	}
+        }
+        
+        public function Retornar_Categorias() {
+        	View_Cadastrar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
         public function Retornar_Marcas_Por_Categoria() {

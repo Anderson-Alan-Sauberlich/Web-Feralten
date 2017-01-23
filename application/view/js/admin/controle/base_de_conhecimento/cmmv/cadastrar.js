@@ -4,21 +4,16 @@ $(document).ready(function() {
 $(document).ready(function( ) {
 	$("#categoria").change(function() {
 		if ($("#categoria").val() != 0 && $("#categoria").val() != null) {
-			$("#marca").html('<option>Carregando...</option>');
-		    $.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/marcas/', 
-		    {categoria:$("#categoria").val()},
-		    function(valor) {        	
-		       	$("#marca").html(valor);
-		       	$("#modelo").html('<option value="0">Modelo</option>');
-		       	$("#versao").html('<option value="0">Versão</option>');
-		       	$('#marca').dropdown('restore default value');
-		       	$('#modelo').dropdown('restore default value');
-		       	$('#versao').dropdown('restore default value');
-		       	$('#marca').dropdown('restore default text');
-		       	$('#modelo').dropdown('restore default text');
-		       	$('#versao').dropdown('restore default text');
-		       	$("#lb_item").html('Marca');
-		    });
+			Recarregar_Marcas();
+		    $("#modelo").html('<option value="0">Modelo</option>');
+	       	$("#versao").html('<option value="0">Versão</option>');
+	       	$('#marca').dropdown('restore default value');
+	       	$('#modelo').dropdown('restore default value');
+	       	$('#versao').dropdown('restore default value');
+	       	$('#marca').dropdown('restore default text');
+	       	$('#modelo').dropdown('restore default text');
+	       	$('#versao').dropdown('restore default text');
+	       	$("#lb_item").html('Marca');
 		} else if (true) {
 			$("#marca").html('<option value="0">Marca</option>');
 			$("#modelo").html('<option value="0">Modelo</option>');
@@ -34,18 +29,13 @@ $(document).ready(function( ) {
 	});
 	$("#marca").change(function() {
 		if ($("#marca").val() != 0 && $("#marca").val() != null) {
-			$("#modelo").html('<option>Carregando...</option>');
-	        $.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/modelos/', 
-	        {marca:$("#marca").val()},
-	        function(valor) {
-	        	$("#modelo").html(valor);
-	        	$("#versao").html('<option value="0">Versão</option>');
-	        	$('#modelo').dropdown('restore default value');
-	        	$('#versao').dropdown('restore default value');
-	        	$('#modelo').dropdown('restore default text');
-	        	$('#versao').dropdown('restore default text');
-	        	$("#lb_item").html('Modelo');
-	        });
+			Recarregar_Modelos();
+	        $("#versao").html('<option value="0">Versão</option>');
+        	$('#modelo').dropdown('restore default value');
+        	$('#versao').dropdown('restore default value');
+        	$('#modelo').dropdown('restore default text');
+        	$('#versao').dropdown('restore default text');
+        	$("#lb_item").html('Modelo');
 		} else if ($("#categoria").val() != 0 && $("#categoria").val() != null) {
 			$("#modelo").html('<option value="0">Modelo</option>');
 			$("#versao").html('<option value="0">Versão</option>');
@@ -58,15 +48,10 @@ $(document).ready(function( ) {
 	});
 	$("#modelo").change(function() {
 		if ($("#modelo").val() != 0 && $("#modelo").val() != null) {
-	    	$("#versao").html('<option>Carregando...</option>');
-	        $.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/versoes/', 
-	        {modelo:$("#modelo").val()},
-	        function(valor) {
-	        	$("#versao").html(valor);
-	        	$('#versao').dropdown('restore default value');
-	        	$('#versao').dropdown('restore default text');
-	        	$("#lb_item").html('Versão');
-	        });
+			Recarregar_Versoes();
+	        $('#versao').dropdown('restore default value');
+        	$('#versao').dropdown('restore default text');
+        	$("#lb_item").html('Versão');
 		} else if ($("#marca").val() != 0 && $("#marca").val() != null) {
 			$("#versao").html('<option value="0">Versão</option>');
         	$('#versao').dropdown('restore default value');
@@ -74,14 +59,38 @@ $(document).ready(function( ) {
         	$("#lb_item").html('Modelo');
 		}
 	});
-	$("#versao").change(function() {
-		if ($("#versao").val() != 0 && $("#versao").val() != null) {
-	        
-		} else if ($("#modelo").val() != 0 && $("#modelo").val() != null) {
-        	
-		}
-	});
 });
+function Recarregar_Categoria() {
+	$("#categoria").html('<option>Carregando...</option>');
+	$.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/categorias/', 
+	function(valor) {        	
+		$("#categoria").html(valor);
+	});
+}
+function Recarregar_Marcas() {
+	$("#marca").html('<option>Carregando...</option>');
+	$.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/marcas/', 
+	{categoria:$("#categoria").val()},
+	function(valor) {
+		$("#marca").html(valor);
+	});
+}
+function Recarregar_Modelos() {
+	$("#modelo").html('<option>Carregando...</option>');
+	$.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/modelos/', 
+	{marca:$("#marca").val()},
+	function(valor) {
+		$("#modelo").html(valor);
+	});
+}
+function Recarregar_Versoes() {
+	$("#versao").html('<option>Carregando...</option>');
+	$.get('/admin/controle/base-de-conhecimento/cmmv/cadastrar/versoes/', 
+	{modelo:$("#modelo").val()},
+	function(valor) {
+		$("#versao").html(valor);
+	});
+}
 $(document).ready(function( ) {
 	$("#nome").keyup(function() {
 		$("#url").val(retira_acentos($("#nome").val()));
@@ -118,5 +127,15 @@ function SalvarCadastrar() {
 	}).done(function(valor) {
 		$("#div_msg").html(valor);
 	});
+	var item = $("#lb_item").html();
+	if (item == 'Categoria') {
+		Recarregar_Categoria();
+	} else if (item == 'Marca') {
+		Recarregar_Marcas();
+	} else if (item == 'Modelo') {
+		Recarregar_Modelos();
+	} else if (item == 'Versão') {
+		Recarregar_Versoes();
+	}
 	$( "#salvar" ).removeClass("disabled loading");
 }

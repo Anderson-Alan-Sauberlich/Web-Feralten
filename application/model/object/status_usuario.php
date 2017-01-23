@@ -2,6 +2,7 @@
 namespace application\model\object;
 
     class Status_Usuario {
+    	
     	private $id;
 		private $nome;
 		private $descricao;
