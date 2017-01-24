@@ -78,32 +78,50 @@ $(document).ready(function( ) {
 });
 function Recarregar_Categoria() {
 	$("#categoria").html('<option>Carregando...</option>');
-	$.get('/admin/controle/base-de-conhecimento/cmmv/alterar/categorias/', 
-	function(valor) {        	
+	$.ajax({
+		type: "GET",
+		url: "/admin/controle/base-de-conhecimento/cmmv/alterar/categorias/",
+		async: false,
+	}).done(function(valor) {
 		$("#categoria").html(valor);
 	});
 }
 function Recarregar_Marcas() {
 	$("#marca").html('<option>Carregando...</option>');
-	$.get('/admin/controle/base-de-conhecimento/cmmv/alterar/marcas/', 
-	{categoria:$("#categoria").val()},
-	function(valor) {
+	$.ajax({
+		type: "GET",
+		url: "/admin/controle/base-de-conhecimento/cmmv/alterar/marcas/",
+		async: false,
+		data: {
+		    categoria:$("#categoria").val(),
+		}
+	}).done(function(valor) {
 		$("#marca").html(valor);
 	});
 }
 function Recarregar_Modelos() {
 	$("#modelo").html('<option>Carregando...</option>');
-	$.get('/admin/controle/base-de-conhecimento/cmmv/alterar/modelos/', 
-	{marca:$("#marca").val()},
-	function(valor) {
+	$.ajax({
+		type: "GET",
+		url: "/admin/controle/base-de-conhecimento/cmmv/alterar/modelos/",
+		async: false,
+		data: {
+			marca:$("#marca").val()
+		}
+	}).done(function(valor) {
 		$("#modelo").html(valor);
 	});
 }
 function Recarregar_Versoes() {
 	$("#versao").html('<option>Carregando...</option>');
-	$.get('/admin/controle/base-de-conhecimento/cmmv/alterar/versoes/', 
-	{modelo:$("#modelo").val()},
-	function(valor) {
+	$.ajax({
+		type: "GET",
+		url: "/admin/controle/base-de-conhecimento/cmmv/alterar/versoes/",
+		async: false,
+		data: {
+			modelo:$("#modelo").val()
+		}
+	}).done(function(valor) {
 		$("#versao").html(valor);
 	});
 }

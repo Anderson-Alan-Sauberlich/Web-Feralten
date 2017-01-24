@@ -25,9 +25,13 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 			new View_Admin();
 		}
 		
-		public static function Carregar_Categorias() {
+		public static function Carregar_Categorias($categorias = null) {
 			echo "<option value=\"0\">Categoria</option>";
-				
+			
+			if (!empty($categorias) AND $categorias !== null) {
+				self::$categorias = $categorias;
+			}
+			
 			if (!empty(self::$categorias) AND self::$categorias !== false) {
 				foreach (self::$categorias as $categoria) {
 					echo "<option value=\"".$categoria->get_id()."\">".$categoria->get_nome()."</option>";

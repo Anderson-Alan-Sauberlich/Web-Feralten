@@ -129,6 +129,10 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
+        public function Retornar_Categorias() {
+        	View_Deletar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
+        }
+        
         public function Retornar_Marcas_Por_Categoria() {
         	View_Deletar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
         }

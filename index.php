@@ -816,6 +816,16 @@
 			}
 		});
 		
+		$app->get('categorias/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
+			
+			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			$alterar->Retornar_Categorias();
+			
+			return $response;
+		});
+		
 		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
@@ -910,6 +920,16 @@
 			} else {
 				return $response;
 			}
+		});
+		
+		$app->get('categorias/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
+			
+			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			$deletar->Retornar_Categorias();
+			
+			return $response;
 		});
 		
 		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
