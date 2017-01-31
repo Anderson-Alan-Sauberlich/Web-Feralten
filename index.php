@@ -21,9 +21,9 @@
 	
 	$app->group('/menu-pesquisa/', function() use ($app) {
 		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
+			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
 			
-			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
 			
 			$menu_pesquisa->Retornar_Marcas_Por_Categoria();
 			
@@ -31,9 +31,9 @@
 		});
 		
 		$app->get('modelo/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
+			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
 			
-			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
 				
 			$menu_pesquisa->Retornar_Modelos_Por_Marca();
 			
@@ -41,9 +41,9 @@
 		});
 		
 		$app->get('versao/', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/include_page/menu_pesquisa.php');
+			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
 			
-			$menu_pesquisa = new application\controller\include_page\Menu_Pesquisa();
+			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
 				
 			$menu_pesquisa->Retornar_Versoes_Por_Modelo();
 			

@@ -21,13 +21,13 @@ namespace application\model\util;
         
         public static $conection;
 
-        private static $DB_TYPE = "mysql";
-        private static $DB_HOST = "localhost";
-        private static $DB_PORT = "3306";
-        private static $DB_USER = "root";
-        private static $DB_PASS = "1234";
-        private static $DB_NAME = "FERALTEN_BD";
-        private static $DB_CHRS = "utf8";
+        private static $DB_TYPE = 'mysql';
+        private static $DB_HOST = 'localhost';
+        private static $DB_PORT = '3306';
+        private static $DB_USER = 'web-feralten';
+        private static $DB_PASS = '$My?Fer!Vel@Bank#1024';
+        private static $DB_NAME = 'FERALTEN_BD';
+        private static $DB_CHRS = 'utf8';
 
         public static function Conectar() {
             if (!isset(self::$conection)) {
