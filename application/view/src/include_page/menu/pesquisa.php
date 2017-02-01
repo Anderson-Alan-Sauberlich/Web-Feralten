@@ -26,7 +26,7 @@ namespace application\view\src\include_page\menu;
         	
         	if (!empty($categorias) AND $categorias !== false) {
 	        	foreach ($categorias as $categoria) {
-	        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
+	        		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\"><label>".$categoria->get_nome()."</label></div></div>";
 	        	}
         	} else {
         		echo "<div class=\"col-md-3 col-sm-4 col-xs-12\">Erro</div>";
@@ -40,7 +40,7 @@ namespace application\view\src\include_page\menu;
             
             if (!empty($marcas) AND $marcas !== false) {
 	            foreach ($marcas as $marca) {
-	                echo "<option value=\"".$marca->get_id()."\">".$marca->get_nome()."</option>";
+	                echo "<option value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
 	            }
             } else {
             	echo "<option value=\"\">Erro</option>";
@@ -54,7 +54,7 @@ namespace application\view\src\include_page\menu;
             
             if (!empty($modelos) AND $modelos !== false) {
 	            foreach ($modelos as $modelo) {
-	                echo "<option value=\"".$modelo->get_id()."\">".$modelo->get_nome()."</option>";
+	                echo "<option value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
 	            }
             } else {
             	echo "<option value=\"\">Erro</option>";
@@ -68,7 +68,7 @@ namespace application\view\src\include_page\menu;
         
         	if (!empty($versoes) AND $versoes !== false) {
         		foreach ($versoes as $versao) {
-        			echo "<option value=\"".$versao->get_id()."\">".$versao->get_nome()."</option>";
+        			echo "<option value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
         		}
         	} else {
         		echo "<option value=\"\">Erro</option>";

@@ -1,3 +1,13 @@
+$(document).ready(function() {
+	$('.ui.accordion').accordion();
+	$('.ui.checkbox').checkbox();
+	$('.ui.dropdown').dropdown('save defaults');
+	Accordion_Categoria();
+});
+function Accordion_Categoria() {
+	$('#title_categoria').addClass('active');
+	$('#content_categoria').addClass('active');
+}
 function Carregar_Categoria(ca) {
     $("#marca").html('<option>Carregando...</option>');
     $.get('/menu-pesquisa/marca/', 
@@ -6,6 +16,12 @@ function Carregar_Categoria(ca) {
         $("#marca").html(valor);
         $("#modelo").html('<option value="0">Modelo</option>');
         $("#versao").html('<option value="0">Versão</option>');
+        $('#marca').dropdown('restore default value');
+        $('#modelo').dropdown('restore default value');
+       	$('#versao').dropdown('restore default value');
+        $('#marca').dropdown('restore default text');
+        $('#modelo').dropdown('restore default text');
+       	$('#versao').dropdown('restore default text');
     });
 }
 $(document).ready(function( ) {
@@ -16,6 +32,10 @@ $(document).ready(function( ) {
         function(valor) {
         	$("#modelo").html(valor);
         	$("#versao").html('<option value="0">Versão</option>');
+        	$('#modelo').dropdown('restore default value');
+           	$('#versao').dropdown('restore default value');
+           	$('#modelo').dropdown('restore default text');
+           	$('#versao').dropdown('restore default text');
         });
    });
 });
@@ -26,17 +46,14 @@ $(document).ready(function() {
         {modelo:$(this).val()},
         function(valor) {
         	$("#versao").html(valor);
+        	$('#versao').dropdown('restore default value');
+        	$('#versao').dropdown('restore default text');
         });
    });
 });
-$(document).ready(function() {
-	$('.ui.accordion').accordion();
-	$('.ui.checkbox').checkbox();
-	$('.ui.dropdown').dropdown();
-});
 function Pesquisar() {
 	var base_url = $("#searschform").attr("action");
-	var categoria = $("input[name='categoria']:checked").val();
+	var categoria = $("input[name='categoria']:checked").data('url');
 	var ano_de = $("#ano_de").val();
 	var ano_ate = $("#ano_ate").val();
 	var peca = $("#peca").val();
@@ -47,17 +64,17 @@ function Pesquisar() {
 		
 		base_url = base_url + categoria + "/";
 		
-		var marca = $("#marca").val();
+		var marca = $("#marca").find("option:selected").data('url');
 		
 		if (marca != 0 && marca != "" && marca != undefined) {
 			base_url = base_url + marca + "/"
 			
-			var modelo = $("#modelo").val();
+			var modelo = $("#modelo").find("option:selected").data('url');
 			
 			if (modelo != 0 && modelo != "" && modelo != undefined) {
 				base_url = base_url + modelo + "/"
 				
-				var versao = $("#versao").val();
+				var versao = $("#versao").find("option:selected").data('url');
 				
 				if (versao != 0 && versao != "" && versao != undefined) {
 					base_url = base_url + versao + "/"

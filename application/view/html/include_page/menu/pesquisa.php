@@ -6,8 +6,8 @@
 		<div class="well borderPainel sombra_painel">
     		<form id="searschform" class="form-horizontal" name="searschform" action="<?php View_Pesquisa::Mostrar_Base_URL(); ?>" method="get" role="form">
 				<div class="ui accordion field">
-					<div class="title ui horizontal divider header"><i class="icon dropdown"></i>Categorias</div>
-					<div class="content field">
+					<div id="title_categoria" class="title ui horizontal divider header"><i class="icon dropdown"></i>Categorias</div>
+					<div id="content_categoria" class="content field">
 						<div class="well well-sm">
 					    	<div class="row">
 					        	<?php View_Pesquisa::Carregar_Categorias(); ?>
