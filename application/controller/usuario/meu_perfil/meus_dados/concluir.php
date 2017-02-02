@@ -359,8 +359,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	        	if (isset($_GET['estado'])) {
 	        		View_Concluir::Mostrar_Cidades($_GET['estado']);
 	        	}
-        	} else {
-        		return false;
         	}
         }
         
@@ -377,8 +375,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 				} else {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
-			} else {
-				return false;
 			}
 		}
 		
@@ -391,8 +387,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 					
 					unset($_SESSION['imagem_tmp']);
 				}
-			} else {
-				return false;
 			}
 		}
 		

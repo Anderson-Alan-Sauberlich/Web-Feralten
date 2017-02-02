@@ -151,13 +151,9 @@
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
 			
-			$resposta = $cadastrar->Carregar_Compatibilidade();
+			$cadastrar->Carregar_Compatibilidade();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
@@ -181,13 +177,9 @@
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
 				
-			$resposta = $cadastrar->Salvar_Imagem_TMP();
+			$cadastrar->Salvar_Imagem_TMP();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->delete('imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
@@ -195,13 +187,9 @@
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
 			
-			$resposta = $cadastrar->Deletar_Imagem($args['img']);
+			$cadastrar->Deletar_Imagem($args['img']);
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 	});
 	
@@ -363,13 +351,9 @@
 			
 			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
 				
-			$resposta = $atualizar->Salvar_Imagem_TMP();
+			$atualizar->Salvar_Imagem_TMP();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->delete('imagem/', function(Request $request, Response $response, $args) use ($app) {
@@ -377,13 +361,9 @@
 			
 			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
 				
-			$resposta = $atualizar->Deletar_Imagem();
+			$atualizar->Deletar_Imagem();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 	});
 	
@@ -441,13 +421,9 @@
 			
 			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
 				
-			$resposta = $enderecos->Retornar_Cidades_Por_Estado();
+			$enderecos->Retornar_Cidades_Por_Estado();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
@@ -489,13 +465,9 @@
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
 				
-			$resposta = $concluir->Retornar_Cidades_Por_Estado();
+			$concluir->Retornar_Cidades_Por_Estado();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->delete('imagem/', function(Request $request, Response $response, $args) use ($app) {
@@ -503,13 +475,9 @@
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
 				
-			$resposta = $concluir->Deletar_Imagem();
+			$concluir->Deletar_Imagem();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
@@ -517,13 +485,9 @@
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
 				
-			$resposta = $concluir->Salvar_Imagem_TMP();
+			$concluir->Salvar_Imagem_TMP();
 			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else {
-				return $response;
-			}
+			return $response;
 		});
 		
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {

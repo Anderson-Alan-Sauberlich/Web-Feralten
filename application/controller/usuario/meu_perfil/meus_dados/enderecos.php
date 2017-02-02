@@ -56,8 +56,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	        	if (isset($_GET['estado'])) {
 	        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
 	        	}
-        	} else {
-        		return false;
         	}
         }
 		

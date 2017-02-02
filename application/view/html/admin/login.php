@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <?php //include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
+        <?php //include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
     	<div class="margem-superior-medio"></div>

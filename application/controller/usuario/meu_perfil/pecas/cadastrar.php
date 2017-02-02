@@ -134,8 +134,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	        			View_Cadastrar::Carregar_Versoes();
 	        		}
 	        	}
-        	} else {
-        		return false;
         	}
         }
         
@@ -666,8 +664,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				} else {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
-			} else {
-				return false;
 			}
 		}
 		
@@ -735,8 +731,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 						}
 					}
 				}
-			} else {
-				return false;
 			}
 		}
 

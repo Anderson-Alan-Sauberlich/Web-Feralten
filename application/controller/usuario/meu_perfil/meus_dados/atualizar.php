@@ -388,8 +388,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 				} else {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
-			} else {
-				return false;
 			}
 		}
 		
@@ -404,8 +402,6 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 				}
 	
 				$_SESSION['imagem_tmp'] = "del";
-			} else {
-				return false;
 			}
 		}
 		

@@ -84,7 +84,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Token(string $token, int $id) : bool {
+        public static function Atualizar_Token(string $token = null, int $id) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_token_login = :tk WHERE usuario_id = :id";
 
