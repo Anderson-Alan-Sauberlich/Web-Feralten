@@ -3,12 +3,12 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/include_page/head/admin.php'; ?>
 	<title>Administração | Feralten</title>
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/application/view/html/include_page/cabecalho.php'; ?>    
+        <?php include_once RAIZ.'/application/view/html/include_page/header/admin.php'; ?>    
     </header>
     <section class="ui container" role="main">
 		    
@@ -20,7 +20,7 @@
         
     </section>
     <footer>
-        <?php include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>        
+        <?php //include_once RAIZ.'/application/view/html/include_page/rodape.php'; ?>        
     </footer>
 </body>
 </html>

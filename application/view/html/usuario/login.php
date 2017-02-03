@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/include_page/head/default.php'; ?>
 	<script type="text/javascript" src="/application/view/js/usuario/login.js"></script>
 	<title>Login | Feralten</title>
 </head>

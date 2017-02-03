@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/include_page/head/admin.php'; ?>
 	<script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\deletar.js"></script>
 	<title>Del CMMV | Feralten</title>
 </head>

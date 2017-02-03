@@ -32,14 +32,14 @@ namespace application\view\src\include_page\menu;
 				if (self::$pagina == $i) {
 					echo "<a class=\"active red item\">$i</a>";
 				} else {
-					echo "<a class=\"item\" href=\"/usuario/meu-perfil/pecas/visualizar/?p=$i\">$i</a>";
+					echo "<a class=\"item\" href=\"?pagina=$i\">$i</a>";
 				}
 			}
 		}
 		
 		public static function Mostrar_Item_Anterior() {
 			if (self::$pagina != 1) {
-				echo "<a class=\"item\" href=\"/usuario/meu-perfil/pecas/visualizar/?p=".(self::$pagina - 1)."\"><i class=\"chevron left icon\"></i></a>";
+				echo "<a class=\"item\" href=\"?pagina=".(self::$pagina - 1)."\"><i class=\"chevron left icon\"></i></a>";
 			} else {
 				echo "<a class=\"disabled item\"><i class=\"chevron left icon\"></i></a>";
 			}
@@ -47,7 +47,7 @@ namespace application\view\src\include_page\menu;
 		
 		public static function Mostrar_Item_Proximo() {
 			if (self::$pagina != self::$paginas) {
-				echo "<a class=\"item\" href=\"/usuario/meu-perfil/pecas/visualizar/?p=".(self::$pagina + 1)."\"><i class=\"chevron right icon\"></i></a>";
+				echo "<a class=\"item\" href=\"?pagina=".(self::$pagina + 1)."\"><i class=\"chevron right icon\"></i></a>";
 			} else {
 				echo "<a class=\"disabled item\"><i class=\"chevron right icon\"></i></a>";
 			}

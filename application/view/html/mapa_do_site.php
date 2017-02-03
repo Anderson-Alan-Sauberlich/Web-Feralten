@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/include_page/head/default.php'; ?>
 	<title>Mapa do Site | Feralten</title>
 </head>
 <body>

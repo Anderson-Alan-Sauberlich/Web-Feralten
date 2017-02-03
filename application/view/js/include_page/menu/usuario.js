@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('.menu .item').tab();
+	$('.ui.accordion').accordion();
 });
 function MudarTabPerfil() {
 	$(this).tab('change tab', 'perfil');
@@ -21,6 +22,3 @@ function MudarTabFinanceiro() {
     $('.menu .item').removeClass('active');
     $('#financeiro').addClass('active');
 }
-$(document).ready(function() {
-	$('.ui.accordion').accordion();
-});

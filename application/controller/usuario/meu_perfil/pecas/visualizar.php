@@ -79,13 +79,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        private function Buscar_Pecas_Usuario() {
+        private function Buscar_Pecas_Usuario() : array {
         	$this->pagina = 1;
         	$this->paginas = DAO_Peca::Buscar_Numero_Paginas_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
         	
-        	if (!empty($_GET['p']) AND filter_var($_GET['p'], FILTER_VALIDATE_INT)) {
-        		if ($_GET['p'] > 0 AND $_GET['p'] <= $this->paginas) {
-        			$this->pagina = $_GET['p'];
+        	if (!empty($_GET['pagina']) AND filter_var($_GET['pagina'], FILTER_VALIDATE_INT)) {
+        		if ($_GET['pagina'] > 0 AND $_GET['pagina'] <= $this->paginas) {
+        			$this->pagina = $_GET['pagina'];
         		}
         	}
         	

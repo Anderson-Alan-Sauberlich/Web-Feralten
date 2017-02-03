@@ -68,10 +68,10 @@
         	</div>
         	<div class="row-fluid sombra_painel hidden-xs">
 				<div class="ui top attached tabular four item menu" role="tablist">
-					<a id="perfil" onmouseover="MudarTabPerfil();" class="item <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>" role="tab" data-tab="perfil"><i class="pointing down icon lbPanel"></i>Meu Perfil</a>
-					<a id="dados" onmouseover="MudarTabDados();" class="item <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>" role="tab" data-tab="dados"><i class="pointing down icon lbPanel"></i>Meus Dados</a>
-					<a id="pecas" onmouseover="MudarTabPecas();" class="item <?php View_Usuario::Verificar_URL_Ativa('pecas'); ?>" role="tab" data-tab="pecas"><i class="pointing down icon lbPanel"></i>Peças</a>
-					<a id="financeiro" onmouseover="MudarTabFinanceiro();" class="item <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>" role="tab" data-tab="financeiro"><i class="pointing down icon lbPanel"></i>Financeiro</a>
+					<a id="perfil" class="item <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>" role="tab" data-tab="perfil"><i class="pointing down icon lbPanel"></i>Meu Perfil</a>
+					<a id="dados" class="item <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>" role="tab" data-tab="dados"><i class="pointing down icon lbPanel"></i>Meus Dados</a>
+					<a id="pecas" class="item <?php View_Usuario::Verificar_URL_Ativa('pecas'); ?>" role="tab" data-tab="pecas"><i class="pointing down icon lbPanel"></i>Peças</a>
+					<a id="financeiro" class="item <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>" role="tab" data-tab="financeiro"><i class="pointing down icon lbPanel"></i>Financeiro</a>
 				</div>
 				<div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>" data-tab="perfil">
 					Perfil
