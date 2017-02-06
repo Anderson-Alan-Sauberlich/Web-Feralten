@@ -23,7 +23,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Peca $object_peca) : bool {
+        public static function Inserir(Object_Peca $object_peca) {
             try {
                 $sql = "INSERT INTO tb_peca (peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade) 
                         VALUES (:id, :du_us_id, :en_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade);";

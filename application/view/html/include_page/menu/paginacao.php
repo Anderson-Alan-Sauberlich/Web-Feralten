@@ -1,5 +1,6 @@
 <?php require_once RAIZ.'/application/view/src/include_page/menu/paginacao.php'; ?>
 <?php use application\view\src\include_page\menu\Paginacao as View_Paginacao; ?>
+<script type="text/javascript" src="/application/view/js/include_page/menu/paginacao.js"></script>
 <nav class="ui center aligned container margem-inferior-pouco">
 	<ul class="ui stackable pagination menu">
 	 	<?php View_Paginacao::Mostrar_Item_Anterior(); ?>

@@ -541,7 +541,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 								$foto_peca = new Object_Foto_Peca();
 								$indice++;
 								
-								$foto_peca->set_id(0);
 								$foto_peca->set_peca_id($id_peca);
 								$foto_peca->set_endereco($diretorio);
 								$foto_peca->set_numero($indice);
