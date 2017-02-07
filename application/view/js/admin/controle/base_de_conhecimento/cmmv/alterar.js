@@ -77,6 +77,7 @@ $(document).ready(function( ) {
 	});
 });
 function Recarregar_Categoria() {
+	var id = $('#categoria').dropdown('get value');
 	$("#categoria").html('<option>Carregando...</option>');
 	$.ajax({
 		type: "GET",
@@ -84,14 +85,12 @@ function Recarregar_Categoria() {
 		async: false,
 	}).done(function(valor) {
 		$("#categoria").html(valor);
-		$('#categoria').dropdown('restore default value');
-		$('#categoria').dropdown('restore default text');
-		$("#lb_item").html('Nada');
-		$("#nome").val("");
-	   	$("#url").val("");
+		$('#categoria').dropdown('set value', id);
+		$('#categoria').dropdown('set text', $("#nome").val());
 	});
 }
 function Recarregar_Marcas() {
+	var id = $('#marca').dropdown('get value');
 	$("#marca").html('<option>Carregando...</option>');
 	$.ajax({
 		type: "GET",
@@ -102,13 +101,12 @@ function Recarregar_Marcas() {
 		}
 	}).done(function(valor) {
 		$("#marca").html(valor);
-		$('#marca').dropdown('restore default value');
-		$('#marca').dropdown('restore default text');
-		$("#lb_item").html('Categoria');
-		Sincronizar_Categoria();
+		$('#marca').dropdown('set value', id);
+		$('#marca').dropdown('set text', $("#nome").val());
 	});
 }
 function Recarregar_Modelos() {
+	var id = $('#modelo').dropdown('get value');
 	$("#modelo").html('<option>Carregando...</option>');
 	$.ajax({
 		type: "GET",
@@ -119,13 +117,12 @@ function Recarregar_Modelos() {
 		}
 	}).done(function(valor) {
 		$("#modelo").html(valor);
-		$('#modelo').dropdown('restore default value');
-		$('#modelo').dropdown('restore default text');
-		$("#lb_item").html('Marca');
-		Sincronizar_Marca()
+		$('#modelo').dropdown('set value', id);
+		$('#modelo').dropdown('set text', $("#nome").val());
 	});
 }
 function Recarregar_Versoes() {
+	var id = $('#versao').dropdown('get value');
 	$("#versao").html('<option>Carregando...</option>');
 	$.ajax({
 		type: "GET",
@@ -136,10 +133,8 @@ function Recarregar_Versoes() {
 		}
 	}).done(function(valor) {
 		$("#versao").html(valor);
-		$('#versao').dropdown('restore default value');
-		$('#versao').dropdown('restore default text');
-		$("#lb_item").html('Modelo');
-		Sincronizar_Modelo();
+		$('#versao').dropdown('set value', id);
+		$('#versao').dropdown('set text', $("#nome").val());
 	});
 }
 $(document).ready(function( ) {
