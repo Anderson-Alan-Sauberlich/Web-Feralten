@@ -84,6 +84,11 @@ function Recarregar_Categoria() {
 		async: false,
 	}).done(function(valor) {
 		$("#categoria").html(valor);
+		$('#categoria').dropdown('restore default value');
+		$('#categoria').dropdown('restore default text');
+		$("#lb_item").html('Nada');
+		$("#nome").val("");
+	   	$("#url").val("");
 	});
 }
 function Recarregar_Marcas() {
@@ -97,6 +102,10 @@ function Recarregar_Marcas() {
 		}
 	}).done(function(valor) {
 		$("#marca").html(valor);
+		$('#marca').dropdown('restore default value');
+		$('#marca').dropdown('restore default text');
+		$("#lb_item").html('Categoria');
+		Sincronizar_Categoria();
 	});
 }
 function Recarregar_Modelos() {
@@ -110,6 +119,10 @@ function Recarregar_Modelos() {
 		}
 	}).done(function(valor) {
 		$("#modelo").html(valor);
+		$('#modelo').dropdown('restore default value');
+		$('#modelo').dropdown('restore default text');
+		$("#lb_item").html('Marca');
+		Sincronizar_Marca()
 	});
 }
 function Recarregar_Versoes() {
@@ -123,6 +136,10 @@ function Recarregar_Versoes() {
 		}
 	}).done(function(valor) {
 		$("#versao").html(valor);
+		$('#versao').dropdown('restore default value');
+		$('#versao').dropdown('restore default text');
+		$("#lb_item").html('Modelo');
+		Sincronizar_Modelo();
 	});
 }
 $(document).ready(function( ) {

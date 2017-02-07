@@ -59,14 +59,14 @@
                     </div>
                 </div>
                 <div class="row">
-                	<div class="col-md-9 col-sm-8 col-xs-12">
+                	<div class="col-md-9 col-sm-12 col-xs-12">
 	          			<div class="ui fluid big left icon input">
 							<i class="search icon"></i>
 							<input id="peca" name="peca" placeholder="Digite o que deseja Procurar..." type="text">
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-4 col-xs-12">
-						<div class="visible-xs ui horizontal divider"></div>
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="visible-xs visible-sm ui horizontal divider"></div>
 						<button id="pesquisa" onClick="Pesquisar()" class="ui fluid big red labeled icon button"><i class="search icon"></i>Pesquisar</button>
     				</div>
     			</div>
