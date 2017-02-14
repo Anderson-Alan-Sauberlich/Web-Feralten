@@ -3,7 +3,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 
 	require_once RAIZ.'/application/model/object/peca.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
-	require_once RAIZ.'/application/model/object/lista_pativel.php';
+	require_once RAIZ.'/application/model/object/categoria_pativel.php';
+	require_once RAIZ.'/application/model/object/marca_pativel.php';
+	require_once RAIZ.'/application/model/object/modelo_pativel.php';
+	require_once RAIZ.'/application/model/object/versao_pativel.php';
 	require_once RAIZ.'/application/model/object/foto_peca.php';
     require_once RAIZ.'/application/model/dao/categoria.php';
     require_once RAIZ.'/application/model/dao/marca.php';
@@ -14,7 +17,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
     require_once RAIZ.'/application/model/dao/modelo_compativel.php';
     require_once RAIZ.'/application/model/dao/versao_compativel.php';
 	require_once RAIZ.'/application/model/dao/status_peca.php';
-	require_once RAIZ.'/application/model/dao/lista_pativel.php';
+	require_once RAIZ.'/application/model/dao/categoria_pativel.php';
+	require_once RAIZ.'/application/model/dao/marca_pativel.php';
+	require_once RAIZ.'/application/model/dao/modelo_pativel.php';
+	require_once RAIZ.'/application/model/dao/versao_pativel.php';
 	require_once RAIZ.'/application/model/dao/peca.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
 	require_once RAIZ.'/application/model/dao/foto_peca.php';
@@ -25,7 +31,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
-	use application\model\object\Lista_Pativel as Object_Lista_Pativel;
+	use application\model\object\Categoria_Pativel as Object_Categoria_Pativel;
+	use application\model\object\Marca_Pativel as Object_Marca_Pativel;
+	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
+	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
     use application\model\dao\Categoria as DAO_Categoria;
@@ -38,7 +47,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
     use application\model\dao\Versao_Compativel as DAO_Versao_Compativel;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
 	use application\model\dao\Peca as DAO_Peca;
-	use application\model\dao\Lista_Pativel as DAO_Lista_Pativel;
+	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
+	use application\model\dao\Marca_Pativel as DAO_Marca_Pativel;
+	use application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
+	use application\model\dao\Versao_Pativel as DAO_Versao_Pativel;
 	use application\model\dao\Endereco as DAO_Endereco;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
@@ -270,7 +282,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$status = new Object_Status_Peca();
 			
 			$peca->set_status($status);
-			$pativeis = array();
 				
 			if (!empty($_POST['descricao'])) {
 				$descricao = strip_tags($_POST['descricao']);
@@ -379,6 +390,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$marcas_compativeis = null;
 			$modelos_compativeis = null;
 			$versoes_compativeis = null;
+			
+			$categorias_pativeis = array();
+			$marcas_pativeis = array();
+			$modelos_pativeis = array();
+			$versoes_pativeis = array();
 				
 			if (!empty($_POST['categoria'])) {
 				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($_POST['categoria']));
@@ -399,87 +415,69 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			if (!empty($_POST['categoria'])) {
 				foreach ($_POST['categoria'] as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {
-						$pativel = new Object_Lista_Pativel();
-						$pativel->set_categoria_id($categoria_selecionada);
-			
+						$categoria_pativel = new Object_Categoria_Pativel();
+						$categoria_pativel->set_categoria_id($categoria_selecionada);
+						
+						$categorias_pativeis[] = $categoria_pativel;
+						
 						if (!empty($_POST['marca'])) {
 							foreach ($_POST['marca'] as $marca_selecionada) {
 								if (in_array($marca_selecionada, $marcas_compativeis)) {
 									if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
-										$pativel = new Object_Lista_Pativel();
-										$pativel->set_categoria_id($categoria_selecionada);
-										$pativel->set_marca_id($marca_selecionada);
-			
+										$marca_pativel = new Object_Marca_Pativel();
+										$marca_pativel->set_marca_id($marca_selecionada);
+										
 										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_de'])) {
-											$pativel->set_ano_de($_POST['ano_ma_'.$marca_selecionada.'_de']);
+											$marca_pativel->set_ano_de($_POST['ano_ma_'.$marca_selecionada.'_de']);
 										}
 										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_ate'])) {
-											$pativel->set_ano_ate($_POST['ano_ma_'.$marca_selecionada.'_ate']);
+											$marca_pativel->set_ano_ate($_POST['ano_ma_'.$marca_selecionada.'_ate']);
 										}
-			
+										
+										$marcas_pativeis[] = $marca_pativel;
+										
 										if (!empty($_POST['modelo'])) {
 											foreach ($_POST['modelo'] as $modelo_selecionado) {
 												if (in_array($modelo_selecionado, $modelos_compativeis)) {
 													if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
-														$pativel = new Object_Lista_Pativel();
-														$pativel->set_categoria_id($categoria_selecionada);
-														$pativel->set_marca_id($marca_selecionada);
-														$pativel->set_modelo_id($modelo_selecionado);
-			
+														$modelo_pativel = new Object_Modelo_Pativel();
+														$modelo_pativel->set_modelo_id($modelo_selecionado);
+														
 														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_de'])) {
-															$pativel->set_ano_de($_POST['ano_mo_'.$modelo_selecionado.'_de']);
+															$modelo_pativel->set_ano_de($_POST['ano_mo_'.$modelo_selecionado.'_de']);
 														}
 														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_ate'])) {
-															$pativel->set_ano_ate($_POST['ano_mo_'.$modelo_selecionado.'_ate']);
+															$modelo_pativel->set_ano_ate($_POST['ano_mo_'.$modelo_selecionado.'_ate']);
 														}
-			
+														
+														$modelos_pativeis[] = $modelo_pativel;
+														
 														if (!empty($_POST['versao'])) {
 															foreach ($_POST['versao'] as $versao_selecionada) {
 																if (in_array($versao_selecionada, $versoes_compativeis)) {
 																	if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
-																		$pativel = new Object_Lista_Pativel();
-																		$pativel->set_categoria_id($categoria_selecionada);
-																		$pativel->set_marca_id($marca_selecionada);
-																		$pativel->set_modelo_id($modelo_selecionado);
-																		$pativel->set_versao_id($versao_selecionada);
+																		$versao_pativel = new Object_Versao_Pativel();
+																		$versao_pativel->set_versao_id($versao_selecionada);
 			
 																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_de'])) {
-																			$pativel->set_ano_de($_POST['ano_vs_'.$versao_selecionada.'_de']);
+																			$versao_pativel->set_ano_de($_POST['ano_vs_'.$versao_selecionada.'_de']);
 																		}
 																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_ate'])) {
-																			$pativel->set_ano_ate($_POST['ano_vs_'.$versao_selecionada.'_ate']);
+																			$versao_pativel->set_ano_ate($_POST['ano_vs_'.$versao_selecionada.'_ate']);
 																		}
 			
-																		$pativeis[] = $pativel;
+																		$versoes_pativeis[] = $versao_pativel;
 																	}
 																}
 															}
-																
-															if (empty($pativel->get_versao_id())) {
-																$pativeis[] = $pativel;
-															}
-														} else {
-															$pativeis[] = $pativel;
 														}
 													}
 												}
 											}
-												
-											if (empty($pativel->get_modelo_id())) {
-												$pativeis[] = $pativel;
-											}
-										} else {
-											$pativeis[] = $pativel;
 										}
 									}
 								}
 							}
-			
-							if (empty($pativel->get_marca_id())) {
-								$pativeis[] = $pativel;
-							}
-						} else {
-							$pativeis[] = $pativel;
 						}
 					}
 				}
@@ -510,22 +508,43 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$id_peca = DAO_Peca::Inserir($peca);
 				
 				if (!empty($id_peca) AND $id_peca !== false) {
-					if (!empty($pativeis)) {
-						$retorno = null;
+					$retorno = null;
 						
-						foreach ($pativeis as $pativel) {
-							$pativel->set_id(0);
-							$pativel->set_peca_id($id_peca);
-							
-							if (DAO_Lista_Pativel::Inserir($pativel) === false) {
-								$retorno = false;
-							}
-						}
+					foreach ($categorias_pativeis as $pativel) {
+						$pativel->set_peca_id($id_peca);
 						
-						if ($retorno === false) {
-							$cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
-							$cadastrar_campos['erro_peca'] = "";
+						if (DAO_Categoria_Pativel::Inserir($pativel) === false) {
+							$retorno = false;
 						}
+					}
+					
+					foreach ($marcas_pativeis as $pativel) {
+						$pativel->set_peca_id($id_peca);
+						
+						if (DAO_Marca_Pativel::Inserir($pativel) === false) {
+							$retorno = false;
+						}
+					}
+					
+					foreach ($modelos_pativeis as $pativel) {
+						$pativel->set_peca_id($id_peca);
+						
+						if (DAO_Modelo_Pativel::Inserir($pativel) === false) {
+							$retorno = false;
+						}
+					}
+					
+					foreach ($versoes_pativeis as $pativel) {
+						$pativel->set_peca_id($id_peca);
+						
+						if (DAO_Versao_Pativel::Inserir($pativel) === false) {
+							$retorno = false;
+						}
+					}
+					
+					if ($retorno === false) {
+						$cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+						$cadastrar_campos['erro_peca'] = "";
 					}
 					
 					if (!empty($_SESSION['imagens_tmp'])) {

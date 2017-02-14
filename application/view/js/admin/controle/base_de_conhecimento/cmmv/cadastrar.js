@@ -115,8 +115,8 @@ $(document).ready(function( ) {
 	});
 });
 function retira_acentos(palavra) {
-	com_acento = '/.áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ ';
-	sem_acento = '--aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC-';
+	com_acento = '&/.,áàãâäéèêëíìîïóòõôöúùûüẃẁŵẅýỳŷỹÿǵĝĉçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜẂẀŴẄÝỲŶỸŸǴĜĈÇ ';
+	sem_acento = 'e---aaaaaeeeeiiiiooooouuuuwwwwyyyyyggccaaaaaeeeeiiiiooooouuuuwwwwyyyyyggcc-';
 	nova = '';
 	for(i=0;i<palavra.length;i++) {
 		if (com_acento.search(palavra.substr(i,1))>=0) {
