@@ -19,12 +19,16 @@ namespace application\view\src\include_page\menu;
 			$inicio = 1;
 			$fim = self::$paginas;
 			
-			if (self::$paginas > 9) {
-				if (self::$pagina > 5) {
-					$inicio = self::$pagina - 4;
-					$fim = self::$pagina + 4;
-				} else {
-					$fim = 9;
+			if (self::$paginas > 6) {
+				if ((self::$paginas - self::$pagina) <= 3) {
+					$inicio = (self::$paginas - 6);
+					$fim = self::$paginas;
+				} else if (self::$pagina > 3 AND 3 < (self::$paginas - self::$pagina)) {
+					$inicio = (self::$pagina - 3);
+					$fim = (self::$pagina + 3);
+				} else if (self::$pagina <= 3) {
+					$inicio = 1;
+					$fim = 7;
 				}
 			}
 			

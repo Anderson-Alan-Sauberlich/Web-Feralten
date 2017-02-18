@@ -11,5 +11,5 @@ $(document).ready(function() {
 		url = url + '?pagina=';
 	}
 	
-	alert(url);
+	//alert(url); //.data('url');
 });
