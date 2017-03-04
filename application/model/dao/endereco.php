@@ -114,7 +114,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaEndereco(array $row) : Object_Endereco {
+        public static function PopulaEndereco(array $row) : Object_Endereco {
             $object_endereco = new Object_Endereco();
             
             if (isset($row['endereco_id'])) {

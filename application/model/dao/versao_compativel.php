@@ -88,7 +88,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel {
+		public static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel {
 			$object_versao_compativel = new Object_Versao_Compativel();
 			
 			if (isset($row['versao_compativel_id'])) {
@@ -106,7 +106,7 @@ namespace application\model\dao;
 			return $object_versao_compativel;
 		}
 	
-		private static function PopulaVersoesCompativeis(array $rows) : array {
+		public static function PopulaVersoesCompativeis(array $rows) : array {
 			$versoes_compativeis = array();
 	
 			foreach ($rows as $row) {

@@ -18,21 +18,21 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     	<div class="row-fluid buscaDropEspaco">
-							<select id="marca" class="ui fluid search selection dropdown">
+							<select id="marca" class="ui fluid scrolling search selection dropdown">
 								<?php View_Pesquisa::Carregar_Marcas(); ?>
 							</select>
 						</div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     	<div class="row-fluid buscaDropEspaco">
-		                   	<select id="modelo" class="ui fluid search selection dropdown">
+		                   	<select id="modelo" class="ui fluid scrolling search selection dropdown">
 								<?php View_Pesquisa::Carregar_Modelos(); ?>
 							</select>
 						</div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     	<div class="row-fluid buscaDropEspaco">
-		                   	<select id="versao" class="ui fluid search selection dropdown">
+		                   	<select id="versao" class="ui fluid scrolling search selection dropdown">
 								<?php View_Pesquisa::Carregar_Versoes(); ?>
 							</select>
 						</div>
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-6">
                             	<div class="row-fluid buscaDropEspaco">
-			                    	<select id="ano_de" name="ano_de" class="ui fluid search selection dropdown">
+			                    	<select id="ano_de" name="ano_de" class="ui fluid scrolling search selection dropdown">
 										<option value="0">Ano De</option>
 										<?php View_Pesquisa::Carregar_Anos(); ?>
 									</select>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                             	<div class="row-fluid buscaDropEspaco">
-		                           	<select id="ano_ate" name="ano_ate" class="ui fluid search selection dropdown">
+		                           	<select id="ano_ate" name="ano_ate" class="ui fluid scrolling search selection dropdown">
 										<option value="0">Ano Até</option>
 										<?php View_Pesquisa::Carregar_Anos(); ?>
 									</select>

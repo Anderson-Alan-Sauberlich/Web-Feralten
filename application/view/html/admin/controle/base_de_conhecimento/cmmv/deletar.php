@@ -19,24 +19,24 @@
 			<h4 class="ui dividing header">Selecione a sequência a ser Deletada:</h4>
 			<div class="two fields">
 				<div class="field">
-					<select id="categoria" name="categoria" class="ui fluid search selection dropdown">
+					<select id="categoria" name="categoria" class="ui fluid scrolling search selection dropdown">
 						<?php View_Deletar::Carregar_Categorias(); ?>
 					</select>
 				</div>
 				<div class="field">
-					<select id="marca" name="marca" class="ui fluid search selection dropdown">
+					<select id="marca" name="marca" class="ui fluid scrolling search selection dropdown">
 						<option value="0">Marca</option>
 					</select>
 				</div>
 			</div>
 			<div class="two fields">
 				<div class="field">
-					<select id="modelo" name="modelo" class="ui fluid search selection dropdown">
+					<select id="modelo" name="modelo" class="ui fluid scrolling search selection dropdown">
 						<option value="0">Modelo</option>
 					</select>
 				</div>
 				<div class="field">
-					<select id="versao" name="versao" class="ui fluid search selection dropdown">
+					<select id="versao" name="versao" class="ui fluid scrolling search selection dropdown">
 						<option value="0">Versão</option>
 					</select>
 				</div>

@@ -1,6 +1,6 @@
 <?php
 namespace application\controller\include_page\menu;
-
+	
 	require_once RAIZ.'/application/view/src/include_page/menu/paginacao.php';
 	
 	use application\view\src\include_page\menu\Paginacao as View_Paginacao;
@@ -9,6 +9,12 @@ namespace application\controller\include_page\menu;
 		
         function __construct() {
             
+        }
+        
+        public static function get_pagina() {
+        	if (isset($_GET['pagina'])) {
+        		return $_GET['pagina'];
+        	}
         }
     }
 ?>

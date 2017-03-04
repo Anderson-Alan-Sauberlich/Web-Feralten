@@ -104,7 +104,7 @@ namespace application\model\dao;
             }
         }
 		
-        private static function PopulaFotoPeca(array $row) : Object_Foto_Peca {
+        public static function PopulaFotoPeca(array $row) : Object_Foto_Peca {
             $object_foto_peca = new Object_Foto_Peca();
             
             if (isset($row['foto_peca_pc_id'])) {
@@ -122,7 +122,7 @@ namespace application\model\dao;
             return $object_foto_peca;
         }
         
-        private static function PopulaFotosPecas(array $rows) : array {
+        public static function PopulaFotosPecas(array $rows) : array {
             $fotos_pecas = array();
             
             if (!empty($rows)) {

@@ -79,7 +79,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaStatus(array $row) : Object_Status_Usuario {
+        public static function PopulaStatus(array $row) : Object_Status_Usuario {
             $object_status_usuario = new Object_Status_Usuario();
             
             if (isset($row['status_usuario_id'])) {

@@ -88,7 +88,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel {
+		public static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel {
 			$object_marca_compativel = new Object_Marca_Compativel();
 			
 			if (isset($row['marca_compativel_id'])) {
@@ -106,7 +106,7 @@ namespace application\model\dao;
 			return $object_marca_compativel;
 		}
 	
-		private static function PopulaMarcasCompativeis(array $rows) : array {
+		public static function PopulaMarcasCompativeis(array $rows) : array {
 			$marcas_compativeis = array();
 	
 			foreach ($rows as $row) {

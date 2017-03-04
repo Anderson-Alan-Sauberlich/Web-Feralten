@@ -102,6 +102,21 @@ namespace application\model\dao;
         	}
         }
         
+        public static function Buscar_ID_Por_URL(string $url) {
+        	try {
+        		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		return $row['categoria_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool {
         	try {
         		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url";
@@ -122,7 +137,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaCategoria(array $row) : Object_Categoria {
+        public static function PopulaCategoria(array $row) : Object_Categoria {
             $object_categoria = new Object_Categoria();
             
             if (isset($row['categoria_id'])) {
@@ -140,7 +155,7 @@ namespace application\model\dao;
             return $object_categoria;
         }
         
-        private static function PopulaCategorias(array $rows) : array {
+        public static function PopulaCategorias(array $rows) : array {
             $categorias = array();
             
             foreach ($rows as $row) {

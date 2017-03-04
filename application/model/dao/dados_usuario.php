@@ -179,7 +179,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaUsuario(array $row) : Object_Dados_Usuario {
+        public static function PopulaUsuario(array $row) : Object_Dados_Usuario {
             $object_dados_usuario = new Object_Dados_Usuario();
             
             if (isset($row['dados_usuario_us_id'])) {

@@ -1,19 +1,24 @@
 <?php
 namespace application\view\src\include_page\menu;
-
+	
+	require_once RAIZ.'/application/controller/include_page/menu/paginacao.php';
+	
+	use application\controller\include_page\menu\Paginacao as Controller_Paginacao;
+	
 	class Paginacao {
 		
 		function __construct($pagina, $paginas) {
-			self::$pagina = $pagina;
-			self::$paginas = $paginas;
-			
-			if (self::$paginas > 1) {
+			if ($paginas > 1) {
+				self::$pagina = $pagina;
+				self::$paginas = $paginas;
+				self::$get_pagina = Controller_Paginacao::get_pagina();
 				require_once RAIZ.'/application/view/html/include_page/menu/paginacao.php';
 			}
 		}
 		
 		private static $pagina;
 		private static $paginas;
+		private static $get_pagina;
 		
 		public static function Mostrar_Indices_Paginas() {
 			$inicio = 1;
@@ -38,13 +43,13 @@ namespace application\view\src\include_page\menu;
 				} else {
 					if (empty($_GET) AND strripos($_SERVER['REQUEST_URI'], '/?') === false) {
 						echo "<a class=\"item\" href=\"".$_SERVER['REQUEST_URI']."?pagina=$i"."\">$i</a>";
-					} else if (!empty($_GET['pagina'])) {
-						$get_pagina = $_GET['pagina'];
+					} else if (!empty(self::$get_pagina)) {
+						$get_pagina = self::$get_pagina;
 						$uri = str_replace("pagina=$get_pagina", "pagina=$i", $_SERVER['REQUEST_URI']);
 						echo "<a class=\"item\" href=\"$uri\">$i</a>";
-					} else if (isset($_GET['pagina'])) {
-						if ($_GET['pagina'] > -1 AND $_GET['pagina'] < 1) {
-							$get_pagina = $_GET['pagina'];
+					} else if (isset(self::$get_pagina)) {
+						if (self::$get_pagina > -1 AND self::$get_pagina < 1) {
+							$get_pagina = self::$get_pagina;
 							$uri = str_replace("pagina=$get_pagina", "pagina=$i", $_SERVER['REQUEST_URI']);
 							echo "<a class=\"item\" href=\"$uri\">$i</a>";
 						} else if (strripos($_SERVER['REQUEST_URI'], 'pagina=') !== false) {
@@ -66,13 +71,13 @@ namespace application\view\src\include_page\menu;
 				$pagina_anterior = self::$pagina - 1;
 				if (empty($_GET) AND strripos($_SERVER['REQUEST_URI'], '/?') === false) {
 					echo "<a class=\"item\" href=\"".$_SERVER['REQUEST_URI']."?pagina=$pagina_anterior"."\"><i class=\"chevron left icon\"></i></a>";
-				} else if (!empty($_GET['pagina'])) {
-					$get_pagina = $_GET['pagina'];
+				} else if (!empty(self::$get_pagina)) {
+					$get_pagina = self::$get_pagina;
 					$uri = str_replace("pagina=$get_pagina", "pagina=$pagina_anterior", $_SERVER['REQUEST_URI']);
 					echo "<a class=\"item\" href=\"$uri\"><i class=\"chevron left icon\"></i></a>";
-				} else if (isset($_GET['pagina'])) {
-					if ($_GET['pagina'] > -1 AND $_GET['pagina'] < 1) {
-						$get_pagina = $_GET['pagina'];
+				} else if (isset(self::$get_pagina)) {
+					if (self::$get_pagina > -1 AND self::$get_pagina < 1) {
+						$get_pagina = self::$get_pagina;
 						$uri = str_replace("pagina=$get_pagina", "pagina=$pagina_anterior", $_SERVER['REQUEST_URI']);
 						echo "<a class=\"item\" href=\"$uri\"><i class=\"chevron left icon\"></i></a>";
 					} else if (strripos($_SERVER['REQUEST_URI'], 'pagina=') !== false) {
@@ -95,13 +100,13 @@ namespace application\view\src\include_page\menu;
 				$pagina_seguinte = self::$pagina + 1;
 				if (empty($_GET) AND strripos($_SERVER['REQUEST_URI'], '/?') === false) {
 					echo "<a class=\"item\" href=\"".$_SERVER['REQUEST_URI']."?pagina=$pagina_seguinte"."\"><i class=\"chevron right icon\"></i></a>";
-				} else if (!empty($_GET['pagina'])) {
-					$get_pagina = $_GET['pagina'];
+				} else if (!empty(self::$get_pagina)) {
+					$get_pagina = self::$get_pagina;
 					$uri = str_replace("pagina=$get_pagina", "pagina=$pagina_seguinte", $_SERVER['REQUEST_URI']);
 					echo "<a class=\"item\" href=\"$uri\"><i class=\"chevron right icon\"></i></a>";
-				} else if (isset($_GET['pagina'])) {
-					if ($_GET['pagina'] > -1 AND $_GET['pagina'] < 1) {
-						$get_pagina = $_GET['pagina'];
+				} else if (isset(self::$get_pagina)) {
+					if (self::$get_pagina > -1 AND self::$get_pagina < 1) {
+						$get_pagina = self::$get_pagina;
 						$uri = str_replace("pagina=$get_pagina", "pagina=$pagina_seguinte", $_SERVER['REQUEST_URI']);
 						echo "<a class=\"item\" href=\"$uri\"><i class=\"chevron right icon\"></i></a>";
 					} else if (strripos($_SERVER['REQUEST_URI'], 'pagina=') !== false) {

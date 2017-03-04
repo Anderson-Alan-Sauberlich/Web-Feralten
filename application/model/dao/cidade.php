@@ -93,7 +93,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaCidades(array $rows) : array {
+        public static function PopulaCidades(array $rows) : array {
             $cidades = array();
             
             foreach ($rows as $row) {
@@ -117,7 +117,7 @@ namespace application\model\dao;
             return $cidades;
         }
         
-        private static function PopulaCidade(array $row) : Object_Cidade {
+        public static function PopulaCidade(array $row) : Object_Cidade {
             $object_cidade = new Object_Cidade();
             
             if (isset($row['cidade_id'])) {

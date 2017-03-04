@@ -89,7 +89,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel {
+		public static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel {
 			$object_categoria_compativel = new Object_Categoria_Compativel();
 			
 			if (isset($row['categoria_compativel_id'])) {
@@ -107,7 +107,7 @@ namespace application\model\dao;
 			return $object_categoria_compativel;
 		}
 	
-		private static function PopulaCategoriasCompativeis(array $rows) : array {
+		public static function PopulaCategoriasCompativeis(array $rows) : array {
 			$categorias_compativeis = array();
 	
 			foreach ($rows as $row) {

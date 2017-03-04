@@ -99,7 +99,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function Popular_Status_Peca(array $row) : Object_Status_Peca {
+        public static function Popular_Status_Peca(array $row) : Object_Status_Peca {
             $object_status_peca = new Object_Status_Peca();
             
             if (isset($row['status_peca_id'])) {
@@ -113,7 +113,7 @@ namespace application\model\dao;
             return $object_status_peca;
         }
 		
-		private static function Popular_Status_Pecas(array $rows) : array {
+        public static function Popular_Status_Pecas(array $rows) : array {
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -133,7 +133,7 @@ namespace application\model\dao;
 			return $status_pecas;
 		}
 		
-		private static function Popular_Lista_Status_Pecas(array $rows) : array {
+		public static function Popular_Lista_Status_Pecas(array $rows) : array {
 			$status_pecas = array();
 				
 			foreach ($rows as $row) {

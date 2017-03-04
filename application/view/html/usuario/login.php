@@ -40,8 +40,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-7">
-			                        <div class="ui checkbox">
-										<input type="checkbox" id="manter_login" name="manter_login" value="1"/>
+			                        <div class="ui checked checkbox">
+										<input type="checkbox" checked="checked" id="manter_login" name="manter_login" value="1"/>
 										<label for="manter_login" class="lbPanel">Mantenha-me Conectado</label>
 									</div>
                                 </div>

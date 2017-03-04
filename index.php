@@ -216,15 +216,19 @@
 			}
 			
 			if (isset($_GET['ano_de'])) {
-				$visualizar->set_ano_de($args['ano_de']);
+				$visualizar->set_ano_de($_GET['ano_de']);
 			}
 			
 			if (isset($_GET['ano_ate'])) {
-				$visualizar->set_ano_ate($args['ano_ate']);
+				$visualizar->set_ano_ate($_GET['ano_ate']);
 			}
 			
 			if (isset($_GET['peca'])) {
-				$visualizar->set_peca($args['peca']);
+				$visualizar->set_peca($_GET['peca']);
+			}
+			
+			if (isset($_GET['pagina'])) {
+				$visualizar->set_pagina($_GET['pagina']);
 			}
 			
 			$resposta = $visualizar->Carregar_Pagina();

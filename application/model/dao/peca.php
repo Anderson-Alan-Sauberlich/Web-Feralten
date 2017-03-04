@@ -1,6 +1,6 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/peca.php';
     require_once RAIZ.'/application/model/dao/foto_peca.php';
     require_once RAIZ.'/application/model/dao/status_peca.php';
@@ -103,43 +103,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario(int $id, int $pg) {
-        	$limite = 9;
-        	$inicio = ($pg * $limite) - $limite;
-        	
-        	try {
-        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade 
-        				FROM tb_peca WHERE peca_du_us_id = :id LIMIT :inicio, :limite";
-        	
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-        		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
-        		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
-        		$p_sql->execute();
-        	
-        		return self::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
-        	} catch (PDOException $e) {
-        		return false;
-        	}
-        }
-        
-        public static function Buscar_Numero_Paginas_Por_Id_Usuario(int $id) {
-        	try {
-        		$sql = "SELECT peca_id FROM tb_peca WHERE peca_du_us_id = :id";
-        		 
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-        		$p_sql->execute();
-        		$select = $p_sql->fetchAll();
-        		$cont = count($select);
-        		 
-        		return  ceil($cont / 9);
-        	} catch (PDOException $e) {
-        		return false;
-        	}
-        }
-        
-        private static function PopulaPeca(array $row) : Object_Peca {
+        public static function PopulaPeca(array $row) : Object_Peca {
             $object_peca = new Object_Peca();
             
             if (isset($row['peca_id'])) {
@@ -190,7 +154,7 @@ namespace application\model\dao;
             return $object_peca;
         }
         
-        private static function PopulaPecas(array $rows) : array {
+        public static function PopulaPecas(array $rows) : array {
         	$object_pecas = array();
         	
         	foreach ($rows as $row) {

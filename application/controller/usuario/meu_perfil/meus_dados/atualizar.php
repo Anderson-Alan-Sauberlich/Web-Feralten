@@ -1,6 +1,6 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
-
+	
     require_once RAIZ.'/application/model/object/dados_usuario.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/dao/usuario.php';

@@ -108,7 +108,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Modelo(int $id) {
             try {
-                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_mo_id = :id";
+                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_mo_id = :id ORDER BY versao_nome";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -140,6 +140,22 @@ namespace application\model\dao;
         	}
         }
         
+        public static function Buscar_ID_Por_URL(int $modelo_id, string $url) {
+        	try {
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND versao_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":mo_id", $marca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		return $row['versao_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool {
         	try {
         		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)";
@@ -161,7 +177,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaVersao(array $row) : Object_Versao {
+        public static function PopulaVersao(array $row) : Object_Versao {
             $object_versao = new Object_Versao();
             
             if (isset($row['versao_id'])) {
@@ -183,7 +199,7 @@ namespace application\model\dao;
             return $object_versao;
         }
         
-        private static function PopulaVersoes(array $rows) : array {
+        public static function PopulaVersoes(array $rows) : array {
             $versoes = array();
             
             foreach ($rows as $row) {

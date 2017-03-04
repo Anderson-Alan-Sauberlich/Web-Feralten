@@ -108,7 +108,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Marca(int $id) {
             try {
-                $sql = "SELECT modelo_id, modelo_ma_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_ma_id = :id";
+                $sql = "SELECT modelo_id, modelo_ma_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_ma_id = :id ORDER BY modelo_nome";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -140,6 +140,22 @@ namespace application\model\dao;
         	}
         }
         
+        public static function Buscar_ID_Por_URL(int $marca_id, string $url) {
+        	try {
+        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_ma_id = :ma_id AND modelo_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":ma_id", $marca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		return $row['modelo_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool {
         	try {
         		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_ma_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)";
@@ -161,7 +177,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaModelo(array $row) : Object_Modelo {
+        public static function PopulaModelo(array $row) : Object_Modelo {
             $object_modelo = new Object_Modelo();
             
             if (isset($row['modelo_id'])) {
@@ -183,7 +199,7 @@ namespace application\model\dao;
             return $object_modelo;
         }
         
-        private function PopulaModelos(array $rows) : array {
+        public function PopulaModelos(array $rows) : array {
             $modelos = array();
             
             foreach ($rows as $row) {

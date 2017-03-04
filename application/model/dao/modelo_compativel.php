@@ -89,7 +89,7 @@ namespace application\model\dao;
 			}
 		}
 	
-		private static function PopulaModeloCompativel(array $row) : Object_Modelo_Compativel {
+		public static function PopulaModeloCompativel(array $row) : Object_Modelo_Compativel {
 			$object_modelo_compativel = new Object_Modelo_Compativel();
 			
 			if (isset($row['modelo_compativel_id'])) {
@@ -107,7 +107,7 @@ namespace application\model\dao;
 			return $object_modelo_compativel;
 		}
 	
-		private static function PopulaModelosCompativeis(array $rows) : array {
+		public static function PopulaModelosCompativeis(array $rows) : array {
 			$modelos_compativeis = array();
 	
 			foreach ($rows as $row) {

@@ -82,7 +82,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function Popula_Modelo_Pativeis(array $rows) : array {
+        public static function Popula_Modelo_Pativeis(array $rows) : array {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {

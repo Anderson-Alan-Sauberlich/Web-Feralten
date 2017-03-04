@@ -108,7 +108,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Categorai(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_ca_id = :id";
+                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_ca_id = :id ORDER BY marca_nome";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -140,6 +140,22 @@ namespace application\model\dao;
         	}
         }
         
+        public static function Buscar_ID_Por_URL(int $categoria_id, string $url) {
+        	try {
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND marca_url = :url";
+        
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":ca_id", $categoria_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        
+        		return $row['marca_id'];
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
         	try {
         		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)";
@@ -161,7 +177,7 @@ namespace application\model\dao;
         	}
         }
         
-        private static function PopulaMarca(array $row) : Object_Marca {
+        public static function PopulaMarca(array $row) : Object_Marca {
             $object_marca = new Object_Marca();
             
             if (isset($row['marca_id'])) {
@@ -183,7 +199,7 @@ namespace application\model\dao;
             return $object_marca;
         }
         
-        private static function PopulaMarcas(array $rows) : array {
+        public static function PopulaMarcas(array $rows) : array {
             $marcas = array();
             
             foreach ($rows as $row) {

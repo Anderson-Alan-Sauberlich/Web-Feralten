@@ -143,7 +143,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function PopulaUsuario(array $row) : Object_Usuario_Admin {
+        public static function PopulaUsuario(array $row) : Object_Usuario_Admin {
             $object_usuario_admin = new Object_Usuario_Admin();
 			
             if (isset($row['usuario_admin_id'])) {

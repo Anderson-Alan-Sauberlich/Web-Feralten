@@ -1,10 +1,14 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/categoria_pativel.php';
+    require_once RAIZ.'/application/model/object/peca.php';
+    require_once RAIZ.'/application/model/dao/peca.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Categoria_Pativel as Object_Categoria_Pativel;
+    use application\model\object\Peca as Object_Peca;
+    use application\model\dao\Peca as DAO_Peca;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -82,7 +86,50 @@ namespace application\model\dao;
             }
         }
         
-        private static function Popula_Categoria_Pativeis(array $rows) : array {
+        public static function Buscar_Pecas(Object_Categoria_Pativel $object_categoria_pativel, Object_Peca $object_peca, int $pg) {
+        	$limite = 9;
+        	$inicio = ($pg * $limite) - $limite;
+        	
+        	try {
+        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
+        				FROM vw_categoria_peca WHERE categoria_pativel_pc_id = :pc_id OR categoria_pativel_ca_id = :ca_id OR categoria_pativel_ano_de = :ano_de OR categoria_pativel_ano_ate = :ano_ate LIMIT :inicio, :limite";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
+        		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return DAO_Peca::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Numero_Paginas(Object_Categoria_Pativel $object_categoria_pativel, Object_Peca $object_peca) {
+        	try {
+        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
+        				FROM vw_categoria_peca WHERE categoria_pativel_pc_id = :pc_id OR categoria_pativel_ca_id = :ca_id OR categoria_pativel_ano_de = :ano_de OR categoria_pativel_ano_ate = :ano_ate";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
+        		$p_sql->execute();
+        		$select = $p_sql->fetchAll();
+        		$cont = count($select);
+        		
+        		return ceil($cont / 9);
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Popula_Categoria_Pativeis(array $rows) : array {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {

@@ -89,7 +89,7 @@ namespace application\model\dao;
             }
         }
         
-        private static function Popular_Estado(array $row) : Object_Estado {
+        public static function Popular_Estado(array $row) : Object_Estado {
         	$object_estado = new Object_Estado();
         	
         	if (isset($row['estado_id'])) {
@@ -107,7 +107,7 @@ namespace application\model\dao;
         	return $object_estado;
         }
         
-        private static function Popular_Estados(array $rows) : array {
+        public static function Popular_Estados(array $rows) : array {
             $estados = array();
             
             foreach ($rows as $row) {
