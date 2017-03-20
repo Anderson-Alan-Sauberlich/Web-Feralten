@@ -31,14 +31,14 @@
                                 <label for="fone2" class="lbPanel">Digite Seu Numero de Telefone-2:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("fone2"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                    <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("fone2"); ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2.  (Campo Obcional)" />
+                                    <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("fone2"); ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2. (Campo Opcional)" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emailcontato" class="lbPanel">Digite Um E-Mail Alternativo:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("emailcontato"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="emailcontato" name="emailcontato" type="email" class="form-control" value="<?php View_Concluir::Manter_Valor("emailcontato"); ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario.  (Campo Obcional)" />
+                                    <input id="emailcontato" name="emailcontato" type="email" class="form-control" value="<?php View_Concluir::Manter_Valor("emailcontato"); ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                 <label for="complemento" class="lbPanel">Digite um Complemento do Endereço:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("complemento"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                    <input id="complemento" name="complemento" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("complemento"); ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complememento de Referencia para o Endereço.  (Campo Obcional)" />
+                                    <input id="complemento" name="complemento" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("complemento"); ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complemento de Referencia para o Endereço. (Campo Opcional)" />
                                 </div>
                             </div>
                         </div>
@@ -121,12 +121,12 @@
                                 <label for="nomedadosusuario" class="lbPanel">Digite um Nome Fantasia:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("nomedadosusuario"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                                    <input id="nomedadosusuario" name="nomedadosusuario" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("nomedadosusuario"); ?>" placeholder="Nome Fantasia" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario.  (Campo Obcional)" />
+                                    <input id="nomedadosusuario" name="nomedadosusuario" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("nomedadosusuario"); ?>" placeholder="Nome Fantasia" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Campo Opcional)" />
                                 </div>
                                 <label for="site" class="lbPanel">Digite o Endereço do seu Site:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("site"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
-                                    <input id="site" name="site" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("site"); ?>" placeholder="Digite o Endereço do seu site" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Obcional)" />
+                                    <input id="site" name="site" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("site"); ?>" placeholder="Digite o Endereço do seu site" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
     class Visualizar extends Controller_Pesquisa {
 
         function __construct() {
-        	
+        	parent::__construct();
         }
         
         public function Carregar_Pagina() {
@@ -21,7 +21,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		
         		if ($status == 1) {
         			if ($this->Validar_Variaveis()) {
-        				$this->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+        				$this->set_peca_usuario(unserialize($_SESSION['usuario'])->get_id());
         				
 	        			$view = new View_Visualizar($status);
 	        			

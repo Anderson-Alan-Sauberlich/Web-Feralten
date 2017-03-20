@@ -65,7 +65,7 @@
                             <label for="complemento" class="lbPanel">Digite um Complemento do Endereço:</label>
                             <div class="input-group <?php View_Enderecos::Incluir_Classe_Erros("complemento"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                <input id="complemento" name="complemento" type="text" class="form-control" value="<?php View_Enderecos::Pegar_Valor("complemento") ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complememento de Referencia para o Endereço.  (Campo Obcional)" />
+                                <input id="complemento" name="complemento" type="text" class="form-control" value="<?php View_Enderecos::Pegar_Valor("complemento") ?>" placeholder="Complemento" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite um Complemento de Referencia para o Endereço. (Campo Opcional)" />
                             </div>
                         </div>
                    </div>
