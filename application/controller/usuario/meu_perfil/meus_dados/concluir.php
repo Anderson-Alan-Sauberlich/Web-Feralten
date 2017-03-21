@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
-
+	
+	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
     require_once RAIZ.'/application/model/object/dados_usuario.php';
     require_once RAIZ.'/application/model/object/endereco.php';
     require_once RAIZ.'/application/model/object/cidade.php';
@@ -13,6 +14,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/concluir.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
+	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
     use application\model\object\Endereco as Object_Endereco;
     use application\model\object\Cidade as Object_Cidade;
@@ -69,7 +71,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            } else {
 		            	$telefone1 = trim($_POST['fone1']);
 		            	
-		            	if (strlen($telefone1) == 10) {
+		            	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
 		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
 		            			$dados_usuario->set_telefone1($telefone1);
 		            		} else {
@@ -77,7 +79,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            			$concluir_campos['erro_fone1'] = "erro";
 		            		}
 		            	} else {
-		            		$concluir_erros[] = "Telefone-1 deve conter 10 Numeros";
+		            		$concluir_erros[] = "Telefone-1 deve conter 10 ou 11 Dígitos";
 		            		$concluir_campos['erro_fone1'] = "erro";
 		            	}
 		            }
@@ -85,7 +87,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            if (!empty($_POST['fone2'])) {
 		            	$telefone2 = trim($_POST['fone2']);
 		            	 
-		            	if (strlen($telefone2) == 10) {
+		            	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
 		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
 		            			$dados_usuario->set_telefone2($telefone2);
 		            		} else {
@@ -93,7 +95,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            			$concluir_campos['erro_fone2'] = "erro";
 		            		}
 		            	} else {
-		            		$concluir_erros[] = "Telefone-2 deve conter 10 Numeros";
+		            		$concluir_erros[] = "Telefone-2 deve conter 10 ou 11 Dígitos";
 		            		$concluir_campos['erro_fone2'] = "erro";
 		            	}
 		            }
@@ -245,20 +247,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$cpf_cnpj = trim($cpf_cnpj);
 		            	$cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
 		            	
-	            		if (filter_var($cpf_cnpj, FILTER_VALIDATE_INT)) {
+	            		if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
 		            		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
-		            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
-		            			
-		            			if ($retorno !== false) {
-		            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
-		            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
-		            				} else {
-		            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
-		            					$concluir_campos['erro_cpf_cnpj'] = "erro";
-		            				}
+		            			$class_cpf_cnpj = new Class_CPF_CNPJ($cpf_cnpj);
+		            			 
+		            			if ($class_cpf_cnpj->valida()) {
+			            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
+			            			
+			            			if ($retorno !== false) {
+			            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
+			            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+			            				} else {
+			            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
+			            					$concluir_campos['erro_cpf_cnpj'] = "erro";
+			            				}
+			            			} else {
+			            				$concluir_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
+			            				$concluir_campos['erro_cpf_cnpj'] = "erro";
+			            			}
 		            			} else {
-		            				$concluir_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
-		            				$concluir_campos['erro_cpf_cnpj'] = "";
+		            				$concluir_erros[] = "CPF/CNPJ Inválido";
+		            				$concluir_campos['erro_cpf_cnpj'] = "erro";
 		            			}
 		            		} else {
 		            			$concluir_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";

@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
+	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
     require_once RAIZ.'/application/model/object/dados_usuario.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
@@ -9,6 +10,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
+	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Dados_Usuario as Object_Dados_Usuario;
     use application\model\dao\Usuario as DAO_Usuario;
@@ -129,7 +131,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             } else {
             	$telefone1 = trim($_POST['fone1']);
             
-            	if (strlen($telefone1) == 10) {
+            	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
             		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
             			$dados_usuario->set_telefone1($telefone1);
             		} else {
@@ -137,7 +139,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			$this->atualizar_campos['erro_fone1'] = "erro";
             		}
             	} else {
-            		$this->atualizar_erros[] = "Telefone-1 deve conter 10 Numeros";
+            		$this->atualizar_erros[] = "Telefone-1 deve conter 10 ou 11 Dígitos";
             		$this->atualizar_campos['erro_fone1'] = "erro";
             	}
             }
@@ -145,7 +147,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             if (!empty($_POST['fone2'])) {
             	$telefone2 = trim($_POST['fone2']);
             	 
-            	if (strlen($telefone2) == 10) {
+            	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
             		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
             			$dados_usuario->set_telefone2($telefone2);
             		} else {
@@ -153,7 +155,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			$this->atualizar_campos['erro_fone2'] = "erro";
             		}
             	} else {
-            		$this->atualizar_erros[] = "Telefone-2 deve conter 10 Numeros";
+            		$this->atualizar_erros[] = "Telefone-2 deve conter 10 ou 11 Dígitos";
             		$this->atualizar_campos['erro_fone2'] = "erro";
             	}
             }
@@ -182,20 +184,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        $cpf_cnpj = trim($cpf_cnpj);
 		        $cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
             	 
-            	if (filter_var($cpf_cnpj, FILTER_VALIDATE_INT)) {
+            	if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
             		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
-            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
-            			 
-            			if ($retorno !== false) {
-            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
-            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
-            				} else {
-            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
-            					$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
-            				}
+            			$class_cpf_cnpj = new Class_CPF_CNPJ($cpf_cnpj);
+            			
+            			if ($class_cpf_cnpj->valida()) {
+	            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
+	            			 
+	            			if ($retorno !== false) {
+	            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
+	            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+	            				} else {
+	            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
+	            					$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
+	            				}
+	            			} else {
+	            				$this->atualizar_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
+	            				$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
+	            			}
             			} else {
-            				$this->atualizar_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
-            				$this->atualizar_campos['erro_cpf_cnpj'] = "";
+            				$this->atualizar_erros[] = "CPF/CNPJ Inválido";
+            				$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             			}
             		} else {
             			$this->atualizar_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
