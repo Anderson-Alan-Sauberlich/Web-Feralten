@@ -112,9 +112,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
                     self::Incluir_Classe_Erros_DadosUsuario($campo);
                     break;
                     
-                case "contato":
-                    self::Incluir_Classe_Erros_Contato($campo);
-                    break;
             }            
         }
         
@@ -159,6 +156,36 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
 	                
+	            	case "fone1":
+	            		if (isset(self::$atualizar_campos['erro_fone1'])) {
+	            			if (self::$atualizar_campos['erro_fone1'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_fone1'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            		 
+	            	case "fone2":
+	            		if (isset(self::$atualizar_campos['erro_fone2'])) {
+	            			if (self::$atualizar_campos['erro_fone2'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_fone2'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            		 
+	            	case "emailcontato":
+	            		if (isset(self::$atualizar_campos['erro_emailcontato'])) {
+	            			if (self::$atualizar_campos['erro_emailcontato'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_emailcontato'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            	
 	                case "nomedadosusuario":
 	                	if (isset(self::$atualizar_campos['erro_nomedadosusuario'])) {
 		                    if (self::$atualizar_campos['erro_nomedadosusuario'] == "erro") {
@@ -180,43 +207,6 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                    break;
 	            }
             }
-        }
-        
-        private function Incluir_Classe_Erros_Contato($campo) {
-        	if (!empty(self::$atualizar_campos)) {
-	            switch ($campo) {
-	                
-	                case "fone1":
-	                	if (isset(self::$atualizar_campos['erro_fone1'])) {
-		                    if (self::$atualizar_campos['erro_fone1'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$atualizar_campos['erro_fone1'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "fone2":
-	                	if (isset(self::$atualizar_campos['erro_fone2'])) {
-		                    if (self::$atualizar_campos['erro_fone2'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$atualizar_campos['erro_fone2'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "emailcontato":
-	                	if (isset(self::$atualizar_campos['erro_emailcontato'])) {
-		                    if (self::$atualizar_campos['erro_emailcontato'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$atualizar_campos['erro_emailcontato'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	            }
-			}
         }
         
         private static function Pegar_Valor($quadro, $campo) {

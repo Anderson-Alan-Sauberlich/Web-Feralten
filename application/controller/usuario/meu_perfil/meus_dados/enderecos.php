@@ -138,9 +138,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$enderecos_erros[] = "Informe seu CEP";
 		            	$enderecos_campos['erro_cep'] = "erro";
 		            } else {
-		            	if (strlen($_POST['cep']) === 8) {
-		            		if (filter_var($_POST['cep'], FILTER_VALIDATE_INT)) {
-		            			$endereco->set_cep($_POST['cep']);
+		            	$cep = trim($_POST['cep']);
+		            	$cep = preg_replace('/[^a-zA-Z0-9]/', "", $cep);
+		            	
+		            	if (strlen($cep) === 8) {
+		            		if (filter_var($cep, FILTER_VALIDATE_INT)) {
+		            			$endereco->set_cep($cep);
 		            		} else {
 		            			$enderecos_erros[] = "CEP, Digite Apenas os Numeros";
 		            			$enderecos_campos['erro_cep'] = "erro";

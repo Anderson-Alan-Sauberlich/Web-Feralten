@@ -47,8 +47,30 @@ function limparCampoFile() {
 	});
 }
 $(document).ready(function() {
+	var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length === 11 ? '(00) 000-000-000' : '(00) 0000-00009';
+		},
+		options = {onKeyPress: function(val, e, field, options) {
+		        field.mask(maskBehavior.apply({}, arguments), options);
+		    }
+		};
+
+	$('#fone1').mask(maskBehavior, options);
+	$('#fone2').mask(maskBehavior, options);
+	$('#cep').mask('00.000-000');
 	$('[data-toggle="popover"]').popover();
 });
-function MostImgErr($ths) {
-	$ths.src='/application/view/resources/img/imagem_indisponivel.png';
+$(document).ready(function() {
+	var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-00###';
+		},
+		options = {onKeyPress: function(val, e, field, options) {
+		        field.mask(maskBehavior.apply({}, arguments), options);
+		    }
+		};
+
+		$('#cpf_cnpj').mask(maskBehavior, options);
+});
+function MostImgErr($this) {
+	$this.src='/application/view/resources/img/imagem_indisponivel.png';
 }

@@ -121,7 +121,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private function Atualizar_DadosUsuario() {
             $this->atualizar_erros = array();
             $this->atualizar_sucesso = array();
-            $this->atualizar_campos = array('erro_cpf_cnpj' => "certo");
+            $this->atualizar_campos = array('erro_cpf_cnpj' => "certo", 'erro_fone1' => 'certo');
             
             $dados_usuario = new Object_Dados_Usuario();
             
@@ -130,6 +130,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	$this->atualizar_campos['erro_fone1'] = "erro";
             } else {
             	$telefone1 = trim($_POST['fone1']);
+            	$telefone1 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone1);
             
             	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
             		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
@@ -146,6 +147,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             if (!empty($_POST['fone2'])) {
             	$telefone2 = trim($_POST['fone2']);
+            	$telefone2 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone2);
             	 
             	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
             		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
@@ -182,7 +184,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             } else {
             	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
 		        $cpf_cnpj = trim($cpf_cnpj);
-		        $cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
+		        $cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
             	 
             	if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
             		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {

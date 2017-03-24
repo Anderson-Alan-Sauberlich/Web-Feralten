@@ -4,6 +4,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/application/view/html/include_page/head/default.php'; ?>
+	<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.10.min.js"></script>
 	<script type="text/javascript" src="/application/view/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
 	<title>Atualizar | Feralten</title>
 </head>
@@ -68,7 +69,7 @@
 										<div class="ui small bordered image imagemPeca">
 											<div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
 											<a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
-											<img id="foto" name="foto" onError="MostImgErr(this)" src="<?php View_Atualizar::Manter_Imagem() ?>">
+											<img id="foto" name="foto" onError="MostImgErr($this)" src="<?php View_Atualizar::Manter_Imagem() ?>">
 										</div>
 									</div>
                                 </div>
@@ -79,7 +80,7 @@
                                 <input id="fone1" name="fone1" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "fone1") ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-1. (Campo Obrigatório)" />
                             </div>
                             <label for="fone2" class="lbPanel">Digite Seu Numero de Telefone-2:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("contato", "fone2"); ?>">
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "fone2"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                                 <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "fone2") ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2. (Campo Opcional)" />
                             </div>

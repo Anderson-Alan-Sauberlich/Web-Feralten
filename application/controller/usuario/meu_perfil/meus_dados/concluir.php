@@ -70,6 +70,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		                $concluir_campos['erro_fone1'] = "erro";
 		            } else {
 		            	$telefone1 = trim($_POST['fone1']);
+		            	$telefone1 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone1);
 		            	
 		            	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
 		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
@@ -86,6 +87,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            
 		            if (!empty($_POST['fone2'])) {
 		            	$telefone2 = trim($_POST['fone2']);
+		            	$telefone2 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone2);
 		            	 
 		            	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
 		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
@@ -163,9 +165,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		                $concluir_erros[] = "Informe seu CEP";
 		                $concluir_campos['erro_cep'] = "erro";
 		            } else {
-		            	if (strlen($_POST['cep']) === 8) {
-			            	if (filter_var($_POST['cep'], FILTER_VALIDATE_INT)) {
-			            		$endereco->set_cep($_POST['cep']);
+		            	$cep = trim($_POST['cep']);
+		            	$cep = preg_replace('/[^a-zA-Z0-9]/', "", $cep);
+		            	
+		            	if (strlen($cep) === 8) {
+			            	if (filter_var($cep, FILTER_VALIDATE_INT)) {
+			            		$endereco->set_cep($cep);
 			            	} else {
 			            		$concluir_erros[] = "CEP, Digite Apenas os Numeros";
 			            		$concluir_campos['erro_cep'] = "erro";
@@ -245,7 +250,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            } else {
 		            	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
 		            	$cpf_cnpj = trim($cpf_cnpj);
-		            	$cpf_cnpj = preg_replace('/\s+/', "", $cpf_cnpj);
+		            	$cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
 		            	
 	            		if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
 		            		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {

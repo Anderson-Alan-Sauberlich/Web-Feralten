@@ -4,6 +4,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/application/view/html/include_page/head/default.php'; ?>
+	<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.10.min.js"></script>
 	<script type="text/javascript" src="/application/view/js/usuario/meu_perfil/meus_dados/concluir.js"></script>
 	<title>Concluir Cadastro | Feralten</title>
 </head>
@@ -106,7 +107,7 @@
 											<div class="ui small bordered image imagemPeca">
 												<div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
 												<a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
-												<img id="foto" name="foto" onError="MostImgErr(this)" src="<?php View_Concluir::Manter_Imagem(); ?>">
+												<img id="foto" name="foto" onError="MostImgErr($this);" src="<?php View_Concluir::Manter_Imagem(); ?>">
 											</div>
 										</div>
                                     </div>
