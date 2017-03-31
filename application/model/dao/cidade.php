@@ -17,7 +17,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Cidade $object_cidade) : bool {
             try {
-                $sql = "INSERT INTO tb_cidade (cidade_id, cidade_es_id, cidade_nome) 
+                $sql = "INSERT INTO tb_cidade (cidade_id, cidade_est_id, cidade_nome) 
                         VALUES (:id, :es_id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -36,7 +36,7 @@ namespace application\model\dao;
             try {
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
-                cidade_es_id = :es_id,
+                cidade_est_id = :es_id,
                 cidade_nome = :nome 
                 WHERE cidade_id = :id";
 
@@ -67,7 +67,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_es_id, cidade_nome FROM tb_cidade WHERE cidade_es_id = :id";
+                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome FROM tb_cidade WHERE cidade_est_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -81,7 +81,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_ID_Cidade(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_es_id, cidade_nome FROM tb_cidade WHERE cidade_id = :id";
+                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome FROM tb_cidade WHERE cidade_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -103,8 +103,8 @@ namespace application\model\dao;
                 	$object_cidade->set_id($row['cidade_id']);
                 }
                 
-                if (isset($row['cidade_es_id'])) {
-                	$object_cidade->set_estado_id($row['cidade_es_id']);
+                if (isset($row['cidade_est_id'])) {
+                	$object_cidade->set_estado_id($row['cidade_est_id']);
                 }
                 
                 if (isset($row['cidade_nome'])) {
@@ -124,8 +124,8 @@ namespace application\model\dao;
             	$object_cidade->set_id($row['cidade_id']);
             }
             
-            if (isset($row['cidade_es_id'])) {
-            	$object_cidade->set_estado_id($row['cidade_es_id']);
+            if (isset($row['cidade_est_id'])) {
+            	$object_cidade->set_estado_id($row['cidade_est_id']);
             }
             
             if (isset($row['cidade_nome'])) {

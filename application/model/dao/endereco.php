@@ -21,15 +21,15 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Endereco $object_endereco) : bool {
             try {
-                $sql = "INSERT INTO tb_endereco (endereco_id, endereco_ci_id, endereco_du_us_id, endereco_es_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, 
-                                                 endereco_bairro) VALUES (:id, :ci_id, :du_us_id, :es_id, :numero, :cep, :rua, :complemento, :bairro);";
+                $sql = "INSERT INTO tb_endereco (endereco_id, endereco_cid_id, endereco_ent_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, 
+                                                 endereco_bairro) VALUES (:id, :ci_id, :ent_id, :es_id, :numero, :cep, :rua, :complemento, :bairro);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":id", $object_endereco->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":du_us_id", $object_endereco->get_dados_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
                 $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
                 $p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
@@ -45,20 +45,20 @@ namespace application\model\dao;
         public static function Atualizar(Object_Endereco $object_endereco) : bool {
             try {
                 $sql = "UPDATE tb_endereco SET
-                endereco_ci_id = :ci_id,
-                endereco_du_us_id = :du_us_id,
-                endereco_es_id = :es_id,
+                endereco_cid_id = :ci_id,
+                endereco_ent_id = :ent_id,
+                endereco_est_id = :es_id,
                 endereco_numero = :numero,
                 endereco_cep = :cep,
                 endereco_rua = :rua,
                 endereco_complemento = :complemento,
                 endereco_bairro = :bairro 
-                WHERE endereco_du_us_id = :du_us_id";
+                WHERE endereco_ent_id = :ent_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
                 $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":du_us_id", $object_endereco->get_dados_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
                 $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
@@ -87,7 +87,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Usuario(int $id) {
             try {
-                $sql = "SELECT endereco_id, endereco_du_us_id, endereco_ci_id, endereco_es_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_du_us_id = :id";
+                $sql = "SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_ent_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -101,7 +101,7 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Usuario(int $id) {
         	try {
-        		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_du_us_id = :id";
+        		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_ent_id = :id";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -121,16 +121,16 @@ namespace application\model\dao;
             	$object_endereco->set_id($row['endereco_id']);
             }
             
-            if (isset($row['endereco_ci_id'])) {
-            	$object_endereco->set_cidade(DAO_Cidade::Buscar_Por_ID_Cidade($row['endereco_ci_id']));
+            if (isset($row['endereco_cid_id'])) {
+            	$object_endereco->set_cidade(DAO_Cidade::Buscar_Por_ID_Cidade($row['endereco_cid_id']));
             }
             
-            if (isset($row['endereco_du_us_id'])) {
-            	$object_endereco->set_dados_usuario_id($row['endereco_du_us_id']);
+            if (isset($row['endereco_ent_id'])) {
+            	$object_endereco->set_entidade_id($row['endereco_ent_id']);
             }
             
-            if (isset($row['endereco_es_id'])) {
-            	$object_endereco->set_estado(DAO_Estado::BuscarPorCOD($row['endereco_es_id']));
+            if (isset($row['endereco_est_id'])) {
+            	$object_endereco->set_estado(DAO_Estado::BuscarPorCOD($row['endereco_est_id']));
             }
             
             if (isset($row['endereco_numero'])) {

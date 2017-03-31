@@ -4,17 +4,20 @@ namespace application\model\object;
 	require_once RAIZ.'/application/model/object/foto_peca.php';
 	require_once RAIZ.'/application/model/object/status_peca.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
-	require_once RAIZ.'/application/model/object/dados_usuario.php';
+	require_once RAIZ.'/application/model/object/entidade.php';
+	require_once RAIZ.'/application/model/object/usuario.php';
 	
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Status_Peca as Object_Status_Peca;
 	use application\model\object\Endereco as Object_Endereco;
-	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+	use application\model\object\Entidade as Object_Entidade;
+	use application\model\object\Usuario as Object_Usuario;
 	
     class Peca {
     	
     	private $id;
-		private $dados_usuario;
+		private $entidade;
+		private $usuario_responsavel;
 		private $nome;
 		private $fabricante;
 		private $endereco;
@@ -25,6 +28,7 @@ namespace application\model\object;
 		private $prioridade;
 		private $status;
 		private $fotos = array();
+		private $divulgar_endereco;
 		
 		function __constructor() {
 			
@@ -38,12 +42,20 @@ namespace application\model\object;
 			return $this->id;
 		}
 		
-		public function set_dados_usuario(Object_Dados_Usuario $dados_usuario) : void {
-			$this->dados_usuario = $dados_usuario;
+		public function set_entidade(Object_Entidade $entidade) : void {
+			$this->entidade = $entidade;
 		}
 		
-		public function get_dados_usuario() : ?Object_Dados_Usuario {
-			return $this->dados_usuario;
+		public function get_entidade() : ?Object_Entidade {
+			return $this->entidade;
+		}
+		
+		public function set_responsavel(Object_Usuario $usuario_responsavel) : void {
+			$this->usuario_responsavel = $usuario_responsavel;
+		}
+		
+		public function get_responsavel() : ?Object_Usuario {
+			return $this->usuario_responsavel;
 		}
 		
 		public function set_nome(string $nome) : void {
@@ -134,6 +146,14 @@ namespace application\model\object;
 		
 		public function get_foto($numero) : ?Object_Foto_Peca {
 			return $this->fotos[$numero];
+		}
+		
+		public function set_divulgar_endereco(?bool $divulgar_endereco = null) : void {
+			$this->divulgar_endereco = $divulgar_endereco;
+		}
+		
+		public function get_divulgar_endereco() : ?bool {
+			return $this->divulgar_endereco;
 		}
     }
 ?>

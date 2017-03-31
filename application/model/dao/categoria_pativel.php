@@ -21,7 +21,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Categoria_Pativel $object_categoria_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_categoria_pativel (categoria_pativel_pc_id, categoria_pativel_ca_id, categoria_pativel_ano_de, categoria_pativel_ano_ate) 
+                $sql = "INSERT INTO tb_categoria_pativel (categoria_pativel_pec_id, categoria_pativel_ctg_id, categoria_pativel_ano_de, categoria_pativel_ano_ate) 
                         VALUES (:pc_id, :ca_id, :ano_de, :ano_ate);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -40,11 +40,11 @@ namespace application\model\dao;
         public static function Atualizar(Object_Categoria_Pativel $object_categoria_pativel) : bool {
             try {
                 $sql = "UPDATE tb_categoria_pativel SET
-                categoria_pativel_pc_id = :pc_id,
-                categoria_pativel_ca_id = :ca_id,
+                categoria_pativel_pec_id = :pc_id,
+                categoria_pativel_ctg_id = :ca_id,
                 categoria_pativel_ano_de = :ano_de,
                 categoria_pativel_ano_ate = :ano_ate 
-                WHERE categoria_pativel_pc_id = :pc_id AND categoria_pativel_ca_id = :ca_id";
+                WHERE categoria_pativel_pec_id = :pc_id AND categoria_pativel_ctg_id = :ca_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -61,7 +61,7 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_categoria_pativel WHERE categoria_pativel_pc_id = :id";
+                $sql = "DELETE FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -74,7 +74,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT categoria_pativel_pc_id, categoria_pativel_ca_id, categoria_pativel_ano_de, categoria_pativel_ano_ate FROM tb_categoria_pativel WHERE categoria_pativel_pc_id = :id";
+                $sql = "SELECT categoria_pativel_pec_id, categoria_pativel_ctg_id, categoria_pativel_ano_de, categoria_pativel_ano_ate FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -88,7 +88,7 @@ namespace application\model\dao;
         
         public static function Buscar_Numero_Paginas(Object_Categoria_Pativel $object_categoria_pativel, Object_Peca $object_peca) {
         	try {
-        		$sql = "SELECT peca_id FROM vw_categoria_peca WHERE categoria_pativel_pc_id = :pc_id OR categoria_pativel_ca_id = :ca_id OR categoria_pativel_ano_de = :ano_de OR categoria_pativel_ano_ate = :ano_ate";
+        		$sql = "SELECT peca_id FROM vw_categoria_peca WHERE categoria_pativel_pec_id = :pc_id OR categoria_pativel_ctg_id = :ca_id OR categoria_pativel_ano_de = :ano_de OR categoria_pativel_ano_ate = :ano_ate";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
@@ -114,13 +114,13 @@ namespace application\model\dao;
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
-        		$pesquisa .= "categoria_pativel_pc_id = :pc_id";
+        		$pesquisa .= "categoria_pativel_pec_id = :pc_id";
         	}
         	if (!empty($object_categoria_pativel->get_categoria_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
-        		$pesquisa .= "categoria_pativel_ca_id = :ca_id";
+        		$pesquisa .= "categoria_pativel_ctg_id = :ca_id";
         	}
         	if (!empty($object_categoria_pativel->get_ano_de())) {
         		if (!empty($pesquisa)) {
@@ -138,13 +138,13 @@ namespace application\model\dao;
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
-        		$pesquisa .= "peca_du_us_id = :du_id";
+        		$pesquisa .= "peca_entidade_id = :ent_id";
         	}
         	if (!empty($object_peca->get_status())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
-        		$pesquisa .= "peca_sp_id = :sp_id";
+        		$pesquisa .= "peca_sts_pec_id = :sp_id";
         	}
         	if (!empty($object_peca->get_nome())) {
         		if (!empty($pesquisa)) {
@@ -190,7 +190,7 @@ namespace application\model\dao;
         	}
         	
         	try {
-        		$sql = "SELECT peca_id, peca_du_us_id, peca_en_id, peca_sp_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
+        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
         				FROM vw_categoria_peca WHERE $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
@@ -198,7 +198,7 @@ namespace application\model\dao;
         		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
         		//$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
         		//$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":du_id", $object_peca->get_dados_usuario()->get_usuario_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_usuario_id(), PDO::PARAM_INT);
         		/*$p_sql->bindValue(":sp_id", $object_peca->get_status(), PDO::PARAM_INT);
         		$p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
         		$p_sql->bindValue(":fabricante", $object_peca->get_fabricante(), PDO::PARAM_STR);
@@ -223,12 +223,12 @@ namespace application\model\dao;
 			foreach ($rows as $row) {
 	            $object_categoria_pativel = new Object_Categoria_Pativel();
 	            
-	            if (isset($row['categoria_pativel_pc_id'])) {
-	            	$object_categoria_pativel->set_peca_id($row['categoria_pativel_pc_id']);
+	            if (isset($row['categoria_pativel_pec_id'])) {
+	            	$object_categoria_pativel->set_peca_id($row['categoria_pativel_pec_id']);
 	            }
 	            
-	            if (isset($row['categoria_pativel_ca_id'])) {
-	            	$object_categoria_pativel->set_categoria_id($row['categoria_pativel_ca_id']);
+	            if (isset($row['categoria_pativel_ctg_id'])) {
+	            	$object_categoria_pativel->set_categoria_id($row['categoria_pativel_ctg_id']);
 	            }
 	            
 	            if (isset($row['categoria_pativel_ano_de'])) {

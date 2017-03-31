@@ -5,8 +5,9 @@ namespace application\model\object;
 	
 	use application\model\object\Endereco as Object_Endereco;
 
-	class Dados_Usuario {
+	class Entidade {
 		
+		private $id;
 		private $usuario_id;
         private $status_id;
         private $cpf_cnpj;
@@ -14,13 +15,18 @@ namespace application\model\object;
         private $imagem;
 		private $site;
         private $data;
-        private $telefone1;
-        private $telefone2;
-        private $email;
         private $enderecos = array();
 		
 		function __constructor() {
 			
+		}
+		
+		public function set_id(int $id) : void {
+			$this->id = $id;
+		}
+		
+		public function get_id() : ?int {
+			return $this->id;
 		}
 		
 		public function set_usuario_id(int $usuario_id) : void {
@@ -77,30 +83,6 @@ namespace application\model\object;
         
         public function get_data() : ?string {
             return $this->data;
-        }
-        
-        public function set_telefone1(string $telefone1) : void {
-        	$this->telefone1 = $telefone1;
-        }
-        
-        public function get_telefone1() : ?string {
-        	return $this->telefone1;
-        }
-        
-        public function set_telefone2(?string $telefone2 = null) : void {
-        	$this->telefone2 = $telefone2;
-        }
-        
-        public function get_telefone2() : ?string {
-        	return $this->telefone2;
-        }
-        
-        public function set_email(?string $email = null) : void {
-        	$this->email = $email;
-        }
-        
-        public function get_email() : ?string {
-        	return $this->email;
         }
         
         public function set_enderecos(array $enderecos) : void {

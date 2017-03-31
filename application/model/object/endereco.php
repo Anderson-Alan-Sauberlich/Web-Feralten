@@ -10,7 +10,7 @@ namespace application\model\object;
     class Endereco {
     	
     	private $id;
-        private $dados_usuario_id;
+        private $entidade_id;
         private $cidade;
         private $estado;
 		private $numero;
@@ -47,12 +47,12 @@ namespace application\model\object;
             return $this->estado;
         }
 		
-        public function set_dados_usuario_id(int $dados_usuario_id) : void {
-            $this->dados_usuario_id = $dados_usuario_id;
+        public function set_entidade_id(int $entidade_id) : void {
+            $this->entidade_id = $entidade_id;
         }
         
-        public function get_dados_usuario_id() : ?int {
-            return $this->dados_usuario_id;
+        public function get_entidade_id() : ?int {
+            return $this->entidade_id;
         }
         
 		public function set_numero(string $numero) : void {

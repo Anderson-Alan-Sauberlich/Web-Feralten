@@ -1,7 +1,7 @@
 <?php
 namespace application\model\object;
 
-    class Status_Usuario {
+    class Status_Entidade {
     	
     	private $id;
 		private $nome;

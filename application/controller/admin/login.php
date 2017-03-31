@@ -53,7 +53,7 @@ namespace application\controller\admin;
         			if (password_verify($senha, $usuario_login->get_senha())) {
         				$_SESSION['usuario_admin'] = $usuario_login->get_id();
         			} else {
-        				$login_admin_erros[] = "Senha Incorreta";
+        				$login_admin_erros[] = "Erro ao tentar Autenticar";
         			}
         		} else {
         			$login_admin_erros[] = "Erro ao tentar Autenticar";

@@ -9,6 +9,10 @@ namespace application\model\object;
         private $senha;
 		private $ultimo_login;
 		private $token;
+		private $status_id;
+		private $fone1;
+		private $fone2;
+		private $email_alternativo;
 		
 		function __constructor() {
 			
@@ -60,6 +64,38 @@ namespace application\model\object;
 		
 		public function get_token() : ?string {
 			return $this->token;
+		}
+		
+		public function set_status_id(int $status_id) : void {
+			$this->status_id = $status_id;
+		}
+		
+		public function get_status_id() : ?int {
+			return $this->status_id;
+		}
+		
+		public function set_fone1(string $fone1) : void {
+			$this->fone1 = $fone1;
+		}
+		
+		public function get_fone1() : ?string {
+			return $this->fone1;
+		}
+		
+		public function set_fone2(string $fone2) : void {
+			$this->fone2 = $fone2;
+		}
+		
+		public function get_fone2() : ?string {
+			return $this->fone2;
+		}
+		
+		public function set_email_alternativo(string $email_alternativo) : void {
+			$this->email_alternativo = $email_alternativo;
+		}
+		
+		public function get_email_alternativo() : ?string {
+			return $this->email_alternativo;
 		}
     }
 ?>

@@ -17,7 +17,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Marca $object_marca) : bool {
             try {
-                $sql = "INSERT INTO tb_marca (marca_id, marca_ca_id, marca_nome, marca_url) 
+                $sql = "INSERT INTO tb_marca (marca_id, marca_ctg_id, marca_nome, marca_url) 
                         VALUES (fc_achar_id_livre_marca(:ca_id), :ca_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -34,7 +34,7 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Marca $object_marca) : bool {
             try {
-                $sql = "UPDATE tb_marca SET marca_ca_id = :ca_id, marca_nome = :nome, marca_url = :url WHERE marca_id = :id";
+                $sql = "UPDATE tb_marca SET marca_ctg_id = :ca_id, marca_nome = :nome, marca_url = :url WHERE marca_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -64,7 +64,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id";
+                $sql = "SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -92,7 +92,7 @@ namespace application\model\dao;
         
         public static function Buscar_Categoria_Id(int $id) {
             try {
-                $sql = "SELECT marca_ca_id FROM tb_marca WHERE marca_id = :id";
+                $sql = "SELECT marca_ctg_id FROM tb_marca WHERE marca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -100,7 +100,7 @@ namespace application\model\dao;
                 
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
-                return $row['marca_ca_id'];
+                return $row['marca_ctg_id'];
             } catch (PDOException $e) {
 				return false;
             }
@@ -108,7 +108,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Categorai(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ca_id, marca_nome, marca_url FROM tb_marca WHERE marca_ca_id = :id ORDER BY marca_nome";
+                $sql = "SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_ctg_id = :id ORDER BY marca_nome";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -122,7 +122,7 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Categorai(int $id) {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :id";
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :id";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -142,7 +142,7 @@ namespace application\model\dao;
         
         public static function Buscar_ID_Por_URL(int $categoria_id, string $url) {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND marca_url = :url";
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND marca_url = :url";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":ca_id", $categoria_id, PDO::PARAM_INT);
@@ -158,7 +158,7 @@ namespace application\model\dao;
         
         public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ca_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)";
+        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
@@ -184,8 +184,8 @@ namespace application\model\dao;
             	$object_marca->set_id($row['marca_id']);
             }
             
-            if (isset($row['marca_ca_id'])) {
-            	$object_marca->set_categoria_id($row['marca_ca_id']);
+            if (isset($row['marca_ctg_id'])) {
+            	$object_marca->set_categoria_id($row['marca_ctg_id']);
             }
             
             if (isset($row['marca_nome'])) {
@@ -209,8 +209,8 @@ namespace application\model\dao;
                 	$object_marca->set_id($row['marca_id']);
                 }
                 
-                if (isset($row['marca_ca_id'])) {
-                	$object_marca->set_categoria_id($row['marca_ca_id']);
+                if (isset($row['marca_ctg_id'])) {
+                	$object_marca->set_categoria_id($row['marca_ctg_id']);
                 }
                 
                 if (isset($row['marca_nome'])) {

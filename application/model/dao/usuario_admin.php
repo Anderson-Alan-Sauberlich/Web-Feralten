@@ -137,7 +137,13 @@ namespace application\model\dao;
                 $p_sql->bindValue(":usuario", $usuario, PDO::PARAM_STR);
                 $p_sql->execute();
                 
-                return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
+                $usuario = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($usuario) AND $usuario !== false) {
+                	return self::PopulaUsuario($usuario);
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }

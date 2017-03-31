@@ -16,7 +16,7 @@ namespace application\controller\include_page\menu;
 	require_once RAIZ.'/application/model/object/marca_pativel.php';
 	require_once RAIZ.'/application/model/object/modelo_pativel.php';
 	require_once RAIZ.'/application/model/object/versao_pativel.php';
-	require_once RAIZ.'/application/model/object/dados_usuario.php';
+	require_once RAIZ.'/application/model/object/entidade.php';
 	
 	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 	use application\model\dao\Peca as DAO_Peca;
@@ -33,7 +33,7 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Marca_Pativel as Object_Marca_Pativel;
 	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
-	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+	use application\model\object\Entidade as Object_Entidade;
 	
     class Pesquisa {
 
@@ -176,9 +176,9 @@ namespace application\controller\include_page\menu;
         public function set_peca_usuario(int $id_usuario) : void {
         	if (!empty($id_usuario)) {
         		if (filter_var($id_usuario, FILTER_VALIDATE_INT) !== false) {
-        			$dados_usuario = new Object_Dados_Usuario();
-        			$dados_usuario->set_usuario_id($id_usuario);
-        			$this->object_peca->set_dados_usuario($dados_usuario);
+        			$entidade = new Object_Entidade();
+        			$entidade->set_usuario_id($id_usuario);
+        			$this->object_peca->set_entidade($entidade);
         		}
         	}
         }

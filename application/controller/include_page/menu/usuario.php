@@ -1,10 +1,10 @@
 <?php
 namespace application\controller\include_page\menu;
     
-    require_once RAIZ.'/application/model/dao/dados_usuario.php';
+    require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     
-    use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
+    use application\model\dao\Entidade as DAO_Entidade;
     use application\model\object\Usuario as Object_Usuario;
     
     class Usuario {
@@ -26,7 +26,7 @@ namespace application\controller\include_page\menu;
         }
         
         public static function Verificar_Status_Usuario() {
-        	$status = DAO_Dados_Usuario::Pegar_Status_Usuario(unserialize($_SESSION['usuario'])->get_id());
+        	$status = DAO_Entidade::Pegar_Status_Usuario(unserialize($_SESSION['usuario'])->get_id());
         
         	if ($status == null) {
         		return 0;

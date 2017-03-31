@@ -2,12 +2,12 @@
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
 	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
-    require_once RAIZ.'/application/model/object/dados_usuario.php';
+    require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/endereco.php';
     require_once RAIZ.'/application/model/object/cidade.php';
     require_once RAIZ.'/application/model/object/estado.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
-	require_once RAIZ.'/application/model/dao/dados_usuario.php';
+	require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/model/dao/estado.php';
     require_once RAIZ.'/application/model/dao/cidade.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
@@ -15,11 +15,11 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
 	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
-    use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+    use application\model\object\Entidade as Object_Entidade;
     use application\model\object\Endereco as Object_Endereco;
     use application\model\object\Cidade as Object_Cidade;
     use application\model\object\Estado as Object_Estado;
-	use application\model\dao\Dados_Usuario as DAO_Dados_Usuario;
+	use application\model\dao\Entidade as DAO_Entidade;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Estado as DAO_Estado;
     use application\model\dao\Cidade as DAO_Cidade;
@@ -63,7 +63,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            					  'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
 		            
 		            $endereco = new Object_Endereco();
-		            $dados_usuario = new Object_Dados_Usuario();
+		            $entidade = new Object_Entidade();
 		            
 		            if (empty($_POST['fone1'])) {
 		                $concluir_erros[] = "Informe um Nº de Telefone para Telefone-1";
@@ -74,7 +74,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	
 		            	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
 		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
-		            			$dados_usuario->set_telefone1($telefone1);
+		            			$entidade->set_telefone1($telefone1);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-1, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone1'] = "erro";
@@ -91,7 +91,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	 
 		            	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
 		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
-		            			$dados_usuario->set_telefone2($telefone2);
+		            			$entidade->set_telefone2($telefone2);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-2, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone2'] = "erro";
@@ -107,7 +107,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	
 		            	if (strlen($emailcontato) <= 150) {
 			            	if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
-			            		$dados_usuario->set_email($emailcontato);
+			            		$entidade->set_email($emailcontato);
 			            	} else {
 			            		$concluir_erros[] = "Digite um E-Mail Alternativo Valido";
 			            		$concluir_campos['erro_emailcontato'] = "erro";
@@ -257,11 +257,11 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            			$class_cpf_cnpj = new Class_CPF_CNPJ($cpf_cnpj);
 		            			 
 		            			if ($class_cpf_cnpj->valida()) {
-			            			$retorno = DAO_Dados_Usuario::Verificar_CPF_CNPJ($cpf_cnpj);
+			            			$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
 			            			
 			            			if ($retorno !== false) {
 			            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
-			            					$dados_usuario->set_cpf_cnpj($cpf_cnpj);
+			            					$entidade->set_cpf_cnpj($cpf_cnpj);
 			            				} else {
 			            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
 			            					$concluir_campos['erro_cpf_cnpj'] = "erro";
@@ -292,7 +292,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		$site = preg_replace('/\s+/', "", $site);
 		            		
 		            		if (strlen($site) <= 150) {
-		            			$dados_usuario->set_site($site);
+		            			$entidade->set_site($site);
 		            		} else {
 		            			$concluir_erros[] = "Site, pode ter no Maximo 150 Caracteres";
 		            			$concluir_campos['erro_site'] = "erro";
@@ -311,7 +311,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		$nomedadosusuario = preg_replace('/\s+/', " ", $nomedadosusuario);
 		            	
 		            		if (strlen($nomedadosusuario) <= 45) {
-		            			$dados_usuario->set_nome_fantasia($nomedadosusuario);
+		            			$entidade->set_nome_fantasia($nomedadosusuario);
 		            		} else {
 		            			$concluir_erros[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
 		            			$concluir_campos['erro_nomedadosusuario'] = "erro";
@@ -324,13 +324,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            
 		            if (empty($concluir_erros)) {
 		            	$endereco->set_id(0);
-		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-		            	$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-		            	$dados_usuario->set_status_id(1);
-		            	$dados_usuario->set_data(date('Y-m-d H:i:s'));
-		            	$dados_usuario->set_imagem($this->Salvar_Imagem());
+		            	$endereco->set_entidade_id(unserialize($_SESSION['usuario'])->get_id());
+		            	$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+		            	$entidade->set_status_id(1);
+		            	$entidade->set_data(date('Y-m-d H:i:s'));
+		            	$entidade->set_imagem($this->Salvar_Imagem());
 		            	
-		                if (DAO_Dados_Usuario::Inserir($dados_usuario) !== false) {
+		                if (DAO_Entidade::Inserir($entidade) !== false) {
 		                	if (DAO_Endereco::Inserir($endereco) === false) {
 		                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
 		                	}

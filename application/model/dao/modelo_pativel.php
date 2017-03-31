@@ -17,7 +17,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Modelo_Pativel $object_modelo_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pc_id, modelo_pativel_mo_id, modelo_pativel_ano_de, modelo_pativel_ano_ate) 
+                $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_de, modelo_pativel_ano_ate) 
                         VALUES (:pc_id, :mo_id, :ano_de, :ano_ate);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -36,11 +36,11 @@ namespace application\model\dao;
         public static function Atualizar(Object_Modelo_Pativel $object_modelo_pativel) : bool {
             try {
                 $sql = "UPDATE tb_modelo_pativel SET
-                modelo_pativel_pc_id = :pc_id,
-                modelo_pativel_mo_id = :mo_id,
+                modelo_pativel_pec_id = :pc_id,
+                modelo_pativel_mdl_id = :mo_id,
                 modelo_pativel_ano_de = :ano_de,
                 modelo_pativel_ano_ate = :ano_ate 
-                WHERE modelo_pativel_pc_id = :pc_id AND modelo_pativel_mo_id = :mo_id";
+                WHERE modelo_pativel_pec_id = :pc_id AND modelo_pativel_mdl_id = :mo_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -57,7 +57,7 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_modelo_pativel WHERE modelo_pativel_pc_id = :id";
+                $sql = "DELETE FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -70,7 +70,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT modelo_pativel_pc_id, modelo_pativel_mo_id, modelo_pativel_ano_de, modelo_pativel_ano_ate FROM tb_modelo_pativel WHERE modelo_pativel_pc_id = :id";
+                $sql = "SELECT modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_de, modelo_pativel_ano_ate FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -88,12 +88,12 @@ namespace application\model\dao;
 			foreach ($rows as $row) {
 	            $object_modelo_pativel = new Object_Modelo_Pativel();
 	            
-	            if (isset($row['modelo_pativel_pc_id'])) {
-	            	$object_modelo_pativel->set_peca_id($row['modelo_pativel_pc_id']);
+	            if (isset($row['modelo_pativel_pec_id'])) {
+	            	$object_modelo_pativel->set_peca_id($row['modelo_pativel_pec_id']);
 	            }
 	            
-	            if (isset($row['modelo_pativel_mo_id'])) {
-	            	$object_modelo_pativel->set_modelo_id($row['modelo_pativel_mo_id']);
+	            if (isset($row['modelo_pativel_mdl_id'])) {
+	            	$object_modelo_pativel->set_modelo_id($row['modelo_pativel_mdl_id']);
 	            }
 	            
 	            if (isset($row['modelo_pativel_ano_de'])) {

@@ -17,7 +17,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Marca_Pativel $object_marca_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pc_id, marca_pativel_ma_id, marca_pativel_ano_de, marca_pativel_ano_ate) 
+                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_de, marca_pativel_ano_ate) 
                         VALUES (:pc_id, :ma_id, :ano_de, :ano_ate);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -36,11 +36,11 @@ namespace application\model\dao;
         public static function Atualizar(Object_Marca_Pativel $object_marca_pativel) : bool {
             try {
                 $sql = "UPDATE tb_marca_pativel SET
-                marca_pativel_pc_id = :pc_id,
-                marca_pativel_ma_id = :ma_id,
+                marca_pativel_pec_id = :pc_id,
+                marca_pativel_mrc_id = :ma_id,
                 marca_pativel_ano_de = :ano_de,
                 marca_pativel_ano_ate = :ano_ate 
-                WHERE marca_pativel_pc_id = :pc_id AND marca_pativel_ma_id = :ma_id";
+                WHERE marca_pativel_pec_id = :pc_id AND marca_pativel_mrc_id = :ma_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -57,7 +57,7 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_marca_pativel WHERE marca_pativel_pc_id = :id";
+                $sql = "DELETE FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -70,7 +70,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT marca_pativel_pc_id, marca_pativel_ma_id, marca_pativel_ano_de, marca_pativel_ano_ate FROM tb_marca_pativel WHERE marca_pativel_pc_id = :id";
+                $sql = "SELECT marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_de, marca_pativel_ano_ate FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -88,12 +88,12 @@ namespace application\model\dao;
 			foreach ($rows as $row) {
 	            $object_marca_pativel = new Object_Marca_Pativel();
 				
-	            if (isset($row['marca_pativel_pc_id'])) {
-	            	$object_marca_pativel->set_peca_id($row['marca_pativel_pc_id']);
+	            if (isset($row['marca_pativel_pec_id'])) {
+	            	$object_marca_pativel->set_peca_id($row['marca_pativel_pec_id']);
 	            }
 	            
-	            if (isset($row['marca_pativel_ma_id'])) {
-	            	$object_marca_pativel->set_marca_id($row['marca_pativel_ma_id']);
+	            if (isset($row['marca_pativel_mrc_id'])) {
+	            	$object_marca_pativel->set_marca_id($row['marca_pativel_mrc_id']);
 	            }
 	            
 	            if (isset($row['marca_pativel_ano_de'])) {

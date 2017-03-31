@@ -17,7 +17,7 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Versao $object_versao) : bool {
             try {
-                $sql = "INSERT INTO tb_versao (versao_id, versao_mo_id, versao_nome, versao_url) 
+                $sql = "INSERT INTO tb_versao (versao_id, versao_mdl_id, versao_nome, versao_url) 
                         VALUES (fc_achar_id_livre_versao(:mo_id), :mo_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -34,7 +34,7 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Versao $object_versao) : bool {
             try {
-                $sql = "UPDATE tb_versao SET versao_mo_id = :mo_id, versao_nome = :nome, versao_url = :url WHERE versao_id = :id";
+                $sql = "UPDATE tb_versao SET versao_mdl_id = :mo_id, versao_nome = :nome, versao_url = :url WHERE versao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -64,7 +64,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_id = :id";
+                $sql = "SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao WHERE versao_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -92,7 +92,7 @@ namespace application\model\dao;
         
         public static function Buscar_Modelo_Id(int $id) {
             try {
-                $sql = "SELECT versao_mo_id FROM tb_versao WHERE versao_id = :id";
+                $sql = "SELECT versao_mdl_id FROM tb_versao WHERE versao_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -100,7 +100,7 @@ namespace application\model\dao;
                 
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
-                return $row['versao_mo_id'];
+                return $row['versao_mdl_id'];
             } catch (PDOException $e) {
 				return false;
             }
@@ -108,7 +108,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Modelo(int $id) {
             try {
-                $sql = "SELECT versao_id, versao_mo_id, versao_nome, versao_url FROM tb_versao WHERE versao_mo_id = :id ORDER BY versao_nome";
+                $sql = "SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao WHERE versao_mdl_id = :id ORDER BY versao_nome";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -122,7 +122,7 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Modelo(int $id) {
         	try {
-        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :id";
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :id";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -142,7 +142,7 @@ namespace application\model\dao;
         
         public static function Buscar_ID_Por_URL(int $modelo_id, string $url) {
         	try {
-        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND versao_url = :url";
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND versao_url = :url";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":mo_id", $marca_id, PDO::PARAM_INT);
@@ -158,7 +158,7 @@ namespace application\model\dao;
         
         public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool {
         	try {
-        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mo_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)";
+        		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":mo_id", $object_versao->get_modelo_id(), PDO::PARAM_INT);
@@ -184,8 +184,8 @@ namespace application\model\dao;
             	$object_versao->set_id($row['versao_id']);
             }
             
-            if (isset($row['versao_mo_id'])) {
-            	$object_versao->set_modelo_id($row['versao_mo_id']);
+            if (isset($row['versao_mdl_id'])) {
+            	$object_versao->set_modelo_id($row['versao_mdl_id']);
             }
             
             if (isset($row['versao_nome'])) {
@@ -209,8 +209,8 @@ namespace application\model\dao;
                 	$object_versao->set_id($row['versao_id']);
                 }
                 
-                if (isset($row['versao_mo_id'])) {
-                	$object_versao->set_modelo_id($row['versao_mo_id']);
+                if (isset($row['versao_mdl_id'])) {
+                	$object_versao->set_modelo_id($row['versao_mdl_id']);
                 }
                 
                 if (isset($row['versao_nome'])) {
