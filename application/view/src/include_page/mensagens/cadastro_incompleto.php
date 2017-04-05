@@ -13,7 +13,7 @@ namespace application\view\src\include_page\mensagens;
             
         }
 		
-        public static function Mostrar_Nome() {
+        public static function Mostrar_Nome() : void {
             echo unserialize($_SESSION['usuario'])->get_nome();
         }
     }

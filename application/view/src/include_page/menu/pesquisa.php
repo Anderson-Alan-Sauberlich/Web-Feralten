@@ -7,7 +7,7 @@ namespace application\view\src\include_page\menu;
     
     class Pesquisa {
 
-        function __construct($base_url) {
+        function __construct(string $base_url) {
         	self::$base_url = $base_url;
         	
         	require_once RAIZ.'/application/view/html/include_page/menu/pesquisa.php';
@@ -15,13 +15,13 @@ namespace application\view\src\include_page\menu;
         
         private static $base_url;
         
-        public static function Carregar_Anos() {
+        public static function Carregar_Anos() : void {
             for ($i=2017; $i >= 1900; $i--) {
                 echo "<option value=\"".$i."\">".$i."</option>";
             }
         }
         
-        public static function Carregar_Categorias() {
+        public static function Carregar_Categorias() : void {
         	$categorias = Controller_Pesquisa::Buscar_Todas_Categorias();
         	
         	if (!empty($categorias) AND $categorias !== false) {
@@ -33,7 +33,7 @@ namespace application\view\src\include_page\menu;
         	}
         }
         
-        public static function Carregar_Marcas($categoria = null) {
+        public static function Carregar_Marcas(?int $categoria = null) : void {
             $marcas = Controller_Pesquisa::Buscar_Marca_Por_Id_Categoria($categoria);
             
             echo "<option value=\"0\">Marca</option>";
@@ -47,7 +47,7 @@ namespace application\view\src\include_page\menu;
             }
         }
         
-        public static function Carregar_Modelos($marca = null) {
+        public static function Carregar_Modelos(?int $marca = null) : void {
             $modelos = Controller_Pesquisa::Buscar_Modelo_Por_Id_Marca($marca);
             
             echo "<option value=\"0\">Modelo</option>";
@@ -61,7 +61,7 @@ namespace application\view\src\include_page\menu;
             }
         }
         
-        public static function Carregar_Versoes($modelo = null) {
+        public static function Carregar_Versoes(?int $modelo = null) : void {
         	$versoes = Controller_Pesquisa::Buscar_Versoes_Por_Id_Modelo($modelo);
         
         	echo "<option value=\"0\">Versão</option>";
@@ -75,7 +75,7 @@ namespace application\view\src\include_page\menu;
         	}
         }
         
-        public static function Mostrar_Base_URL() {
+        public static function Mostrar_Base_URL() : void {
         	echo self::$base_url;
         }
     }

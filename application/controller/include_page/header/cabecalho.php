@@ -11,7 +11,7 @@ namespace application\controller\include_page\header;
             
         }
 		
-		public static function Verificar_Cookie($login) {
+		public static function Verificar_Cookie(array $login) : bool {
 			return Login::Autenticar_Usuario_Cookie($login['usuario'], $login['token']);
 		}
     }

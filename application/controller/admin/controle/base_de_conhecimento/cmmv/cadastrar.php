@@ -41,7 +41,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
 	        }
         }
         
-        public function Cadastrar_CMMV() {
+        public function Cadastrar_CMMV() : void {
         	if (!empty($_POST['modelo'])) {
         		$this->Cadastrar_Versao();
         	} else if (!empty($_POST['marca'])) {
@@ -53,7 +53,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Cadastrar_Versao() {
+        private function Cadastrar_Versao() : void {
         	if ($this->Validar_Nome_URL()) {
         		$object_versao = new Object_Versao();
         		
@@ -69,7 +69,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Cadastrar_Modelo() {
+        private function Cadastrar_Modelo() : void {
         	if ($this->Validar_Nome_URL()) {
         		$object_modelo = new Object_Modelo();
         		
@@ -85,7 +85,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Cadastrar_Marca() {
+        private function Cadastrar_Marca() : void {
         	if ($this->Validar_Nome_URL()) {
         		$object_marca = new Object_Marca();
         		
@@ -101,7 +101,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Cadastrar_Categoria() {
+        private function Cadastrar_Categoria() : void {
         	if ($this->Validar_Nome_URL()) {
         		$object_categoria = new Object_Categoria();
         		
@@ -116,7 +116,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Validar_Nome_URL() {
+        private function Validar_Nome_URL() : bool {
         	if (!empty($_POST['nome']) AND !empty($_POST['url'])) {
         		return true;
         	} else {
@@ -126,23 +126,23 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Retornar_Categorias() {
+        public function Retornar_Categorias() : void {
         	View_Cadastrar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
-        public function Retornar_Marcas_Por_Categoria() {
+        public function Retornar_Marcas_Por_Categoria() : void {
         	View_Cadastrar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
         }
         
-        public function Retornar_Modelos_Por_Marca() {
+        public function Retornar_Modelos_Por_Marca() : void {
         	View_Cadastrar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($_GET['marca']));
         }
         
-        public function Retornar_Versoes_Por_Modelo() {
+        public function Retornar_Versoes_Por_Modelo() : void {
         	View_Cadastrar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($_GET['modelo']));
         }
         
-        private function Buscar_Marca_Por_Id_Categoria($categoria) {
+        private function Buscar_Marca_Por_Id_Categoria(?int $categoria) {
         	if (!empty($categoria)) {
         		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
         	} else {
@@ -150,7 +150,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Modelo_Por_Id_Marca($marca) {
+        private function Buscar_Modelo_Por_Id_Marca(?int $marca) {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
         	} else {
@@ -158,7 +158,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Versoes_Por_Id_Modelo($modelo) {
+        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo) {
         	if (!empty($modelo)) {
         		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {

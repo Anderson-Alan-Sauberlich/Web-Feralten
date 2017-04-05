@@ -17,7 +17,7 @@ namespace application\controller\include_page\menu;
 	        
 		}
 		
-		public function Retornar_Cidades_Por_Estado() {
+		public function Retornar_Cidades_Por_Estado() : void {
 			if (isset($_GET['estado'])) {
 				View_Filtro::Mostrar_Cidades($_GET['estado']);
 			}
@@ -27,7 +27,7 @@ namespace application\controller\include_page\menu;
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidade_Por_Estado($id_estado) {
+		public static function Buscar_Cidade_Por_Estado(int $id_estado) {
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
 		

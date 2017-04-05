@@ -93,7 +93,13 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaEndereco($p_sql->fetch(PDO::FETCH_ASSOC));
+                $endereco = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($endereco) AND $endereco != false) {
+                	return self::PopulaEndereco($endereco);
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }

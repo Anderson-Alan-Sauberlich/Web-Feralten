@@ -1,15 +1,19 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\meus_dados;
     
+	require_once RAIZ.'/application/model/object/entidade.php';
+	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php';
     require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
     
+    use application\model\object\Entidade as Object_Entidade;
+    use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
     use application\view\src\include_page\menu\Usuario as View_Usuario;
     
     class Atualizar {
     	
-        function __construct($status) {
+        function __construct(?int $status = null) {
         	self::$status_usuario = $status;
         }
         
@@ -18,42 +22,42 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         private static $atualizar_sucesso;
         private static $atualizar_campos;
         private static $atualizar_form;
-        private static $dados_usuario_form;
+        private static $entidade_form;
         private static $usuario_form;
         
-        public function set_atualizar_erros($atualizar_erros) {
+        public function set_atualizar_erros(?array $atualizar_erros = null) : void {
         	self::$atualizar_erros = $atualizar_erros;
         }
         
-        public function set_atualizar_campos($atualizar_campos) {
+        public function set_atualizar_campos(?array $atualizar_campos = null) : void {
         	self::$atualizar_campos = $atualizar_campos;
         }
         
-        public function set_atualizar_form($atualizar_form) {
+        public function set_atualizar_form(?array $atualizar_form = null) : void {
         	self::$atualizar_form = $atualizar_form;
         }
         
-        public function set_dados_usuario_form($dados_usuario_form) {
-        	self::$dados_usuario_form = $dados_usuario_form;
+        public function set_entidade_form(?Object_Entidade $entidade_form = null) : void {
+        	self::$entidade_form = $entidade_form;
         }
         
-        public function set_usuario_form($usuario_form) {
+        public function set_usuario_form(?Object_Usuario $usuario_form = null) : void {
         	self::$usuario_form = $usuario_form;
         }
         
-        public function set_atualizar_sucesso($atualizar_sucesso) {
+        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void {
         	self::$atualizar_sucesso = $atualizar_sucesso;
         }
         
-        public function Executar() {
+        public function Executar() : void {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/atualizar.php';
         }
         
-        public static function Incluir_Menu_Usuario() {
+        public static function Incluir_Menu_Usuario() : void {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'atualizar'));
         }
         
-        public static function Manter_Valor($quadro, $campo) {
+        public static function Manter_Valor(?string $quadro = null, ?string $campo = null) : void {
             if (!empty(self::$atualizar_form)) {
                 if (isset(self::$atualizar_form[$campo])) {
                     echo self::$atualizar_form[$campo];
@@ -65,7 +69,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 		
-		public static function Manter_Imagem() {
+		public static function Manter_Imagem() : void {
 			if (isset($_SESSION['imagem_tmp'])) {
 				if ($_SESSION['imagem_tmp'] == "del") {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
@@ -73,15 +77,15 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 					echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 				}
 			} else {
-				if (!empty(self::$dados_usuario_form->get_imagem())) {
-					echo str_replace("@", "200x150", self::$dados_usuario_form->get_imagem());
+				if (!empty(self::$entidade_form->get_imagem())) {
+					echo str_replace("@", "200x150", self::$entidade_form->get_imagem());
 				} else {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
 			}
 		}
         
-        public static function Mostrar_Erros() {
+        public static function Mostrar_Erros() : void {
             if (!empty(self::$atualizar_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$atualizar_erros as $value) {
@@ -91,7 +95,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Sucesso() {
+        public static function Mostrar_Sucesso() : void {
             if (!empty(self::$atualizar_sucesso)) {
 				echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$atualizar_sucesso as $value) {
@@ -101,24 +105,53 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Incluir_Classe_Erros($quadro, $campo) {
+        public static function Incluir_Classe_Erros(?string $quadro = null, ?string $campo = null) : void {
             switch ($quadro) {
                 
-                case "login":
+                case "usuario":
                     self::Incluir_Classe_Erros_Usuario($campo);
                     break;
                     
-                case "dadosusuario":
-                    self::Incluir_Classe_Erros_DadosUsuario($campo);
+                case "entidade":
+                    self::Incluir_Classe_Erros_Entidade($campo);
                     break;
                     
             }            
         }
         
-        private function Incluir_Classe_Erros_Usuario($campo) {
+        private function Incluir_Classe_Erros_Usuario(?string $campo = null) : void {
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
-	                
+	            	case "fone1":
+	            		if (isset(self::$atualizar_campos['erro_fone1'])) {
+	            			if (self::$atualizar_campos['erro_fone1'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_fone1'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            	
+	            	case "fone2":
+	            		if (isset(self::$atualizar_campos['erro_fone2'])) {
+	            			if (self::$atualizar_campos['erro_fone2'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_fone2'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            	
+	            	case "email_alternativo":
+	            		if (isset(self::$atualizar_campos['erro_email_alternativo'])) {
+	            			if (self::$atualizar_campos['erro_email_alternativo'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_email_alternativo'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            	
 	                case "nome":
 	                	if (isset(self::$atualizar_campos['erro_nome'])) {
 		                    if (self::$atualizar_campos['erro_nome'] == "erro") {
@@ -128,7 +161,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 		                    }
 	                	}
 	                    break;
-	                    
+	                
 	                case "email":
 	                	if (isset(self::$atualizar_campos['erro_email'])) {
 		                    if (self::$atualizar_campos['erro_email'] == "erro") {
@@ -138,7 +171,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 		                    }
 	                	}
 	                    break;
-						
+					
 	                case "confemail":
 	                	if (isset(self::$atualizar_campos['erro_confemail'])) {
 		                    if (self::$atualizar_campos['erro_confemail'] == "erro") {
@@ -152,50 +185,30 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        private function Incluir_Classe_Erros_DadosUsuario($campo) {
+        private function Incluir_Classe_Erros_Entidade(?string $campo = null) : void {
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
-	                
-	            	case "fone1":
-	            		if (isset(self::$atualizar_campos['erro_fone1'])) {
-	            			if (self::$atualizar_campos['erro_fone1'] == "erro") {
-	            				echo "has-error has-feedback";
-	            			} else if (self::$atualizar_campos['erro_fone1'] == "certo") {
-	            				echo "has-success has-feedback";
-	            			}
-	            		}
-	            		break;
-	            		 
-	            	case "fone2":
-	            		if (isset(self::$atualizar_campos['erro_fone2'])) {
-	            			if (self::$atualizar_campos['erro_fone2'] == "erro") {
-	            				echo "has-error has-feedback";
-	            			} else if (self::$atualizar_campos['erro_fone2'] == "certo") {
-	            				echo "has-success has-feedback";
-	            			}
-	            		}
-	            		break;
-	            		 
-	            	case "emailcontato":
-	            		if (isset(self::$atualizar_campos['erro_emailcontato'])) {
-	            			if (self::$atualizar_campos['erro_emailcontato'] == "erro") {
-	            				echo "has-error has-feedback";
-	            			} else if (self::$atualizar_campos['erro_emailcontato'] == "certo") {
-	            				echo "has-success has-feedback";
-	            			}
-	            		}
-	            		break;
 	            	
-	                case "nomedadosusuario":
-	                	if (isset(self::$atualizar_campos['erro_nomedadosusuario'])) {
-		                    if (self::$atualizar_campos['erro_nomedadosusuario'] == "erro") {
+	            	case "site":
+	            		if (isset(self::$atualizar_campos['erro_site'])) {
+	            			if (self::$atualizar_campos['erro_site'] == "erro") {
+	            				echo "has-error has-feedback";
+	            			} else if (self::$atualizar_campos['erro_site'] == "certo") {
+	            				echo "has-success has-feedback";
+	            			}
+	            		}
+	            		break;
+	            		
+	                case "nome_comercial":
+	                	if (isset(self::$atualizar_campos['erro_nome_comercial'])) {
+		                    if (self::$atualizar_campos['erro_nome_comercial'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$atualizar_campos['erro_nomedadosusuario'] == "certo") {
+		                    } else if (self::$atualizar_campos['erro_nome_comercial'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}
 	                    break;
-	                    
+	                
 	                case "cpf_cnpj":
 	                	if (isset(self::$atualizar_campos['erro_cpf_cnpj'])) {
 		                    if (self::$atualizar_campos['erro_cpf_cnpj'] == "erro") {
@@ -209,31 +222,31 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        private static function Pegar_Valor($quadro, $campo) {
+        private static function Pegar_Valor(?string $quadro = null, ?string $campo = null) : void {
         	switch ($quadro) {
-        		case "login":
+        		case "usuario":
         			if ($campo == "nome") {
         				echo self::$usuario_form->get_nome();
         			} else if ($campo == "email") {
         				echo self::$usuario_form->get_email();
         			} else if ($campo == "confemail") {
         				echo self::$usuario_form->get_email();
+        			} else if ($campo == "fone1") {
+        				echo self::$usuario_form->get_fone1();
+        			} else if ($campo == "fone2") {
+        				echo self::$usuario_form->get_fone2();
+        			} else if ($campo == "email_alternativo") {
+        				echo self::$usuario_form->get_email_alternativo();
         			}
         			break;
         
-        		case "dadosusuario":
-        			if ($campo == "nomedadosusuario") {
-        				echo self::$dados_usuario_form->get_nome_fantasia();
+        		case "entidade":
+        			if ($campo == "nome_comercial") {
+        				echo self::$entidade_form->get_nome_comercial();
         			} else if ($campo == "cpf_cnpj") {
-        				echo self::$dados_usuario_form->get_cpf_cnpj();
+        				echo self::$entidade_form->get_cpf_cnpj();
         			} else if ($campo == "site") {
-        				echo self::$dados_usuario_form->get_site();
-        			} else if ($campo == "fone1") {
-        				echo self::$dados_usuario_form->get_telefone1();
-        			} else if ($campo == "fone2") {
-        				echo self::$dados_usuario_form->get_telefone2();
-        			} else if ($campo == "emailcontato") {
-        				echo self::$dados_usuario_form->get_email();
+        				echo self::$entidade_form->get_site();
         			}
         			break;
         	}

@@ -25,7 +25,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public function Carregar_Pagina($enderecos_erros= null, $enderecos_campos = null, $enderecos_sucesso= null, $enderecos_form = null) {
+        public function Carregar_Pagina(?array $enderecos_erros = null, ?array $enderecos_campos = null, ?array $enderecos_sucesso = null, ?Object_Endereco $enderecos_form = null) {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -39,7 +39,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         			if (!empty($enderecos_form)) {
         				$view->set_enderecos_form($enderecos_form);
         			} else {
-        				$view->set_enderecos_form(DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id()));
+        				$endereco_retorno = DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
+        				
+        				if (!empty($endereco_retorno) AND $endereco_retorno != false) {
+        					$view->set_enderecos_form($endereco_retorno);
+        				} else {
+        					$view->set_enderecos_form(new Object_Endereco());
+        				}
         			}
         			 
         			$view->Executar();
@@ -51,7 +57,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Retornar_Cidades_Por_Estado() {
+        public function Retornar_Cidades_Por_Estado() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
@@ -217,11 +223,11 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
 		
-		public static function Buscar_Estados() {
+		public static function Buscar_Estados() : array {
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidades_Por_Estado($id_estado) {
+		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array {
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
 	}

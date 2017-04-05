@@ -12,27 +12,27 @@ namespace application\view\src\usuario;
         private static $login_campos;
         private static $login_form;
         
-        public function set_login_erros($login_erros) {
+        public function set_login_erros(?array $login_erros = null) : void {
         	self::$login_erros = $login_erros;
         }
         
-        public function set_login_campos($login_campos) {
+        public function set_login_campos(?array $login_campos = null) : void {
         	self::$login_campos = $login_campos;
         }
         
-        public function set_login_form($login_form) {
+        public function set_login_form(?array $login_form = null) : void {
         	self::$login_form = $login_form;
         }
         
-        public function set_login_sucesso($login_sucesso) {
+        public function set_login_sucesso(?array $login_sucesso = null) : void {
         	self::$login_sucesso = $login_sucesso;
         }
         
-        public function Executar() {
+        public function Executar() : void {
         	require_once RAIZ.'/application/view/html/usuario/login.php';
         }
         
-        public static function Manter_Valor($campo) {
+        public static function Manter_Valor(string $campo) : void {
             if (!empty(self::$login_form)) {
                 if (isset(self::$login_form[$campo])) {
                     echo self::$login_form[$campo];
@@ -40,7 +40,7 @@ namespace application\view\src\usuario;
             }
         }
         
-        public static function Mostrar_Erros() {
+        public static function Mostrar_Erros() : void {
         	$login_erros = null;
         	
         	if (!empty(self::$login_erros)) {
@@ -57,7 +57,7 @@ namespace application\view\src\usuario;
             }
         }
         
-        public static function Mostrar_Sucesso() {
+        public static function Mostrar_Sucesso() : void {
         	$login_sucesso = null;
         	 
         	if (!empty(self::$login_sucesso)) {
@@ -74,7 +74,7 @@ namespace application\view\src\usuario;
             }
         }
 
-        public static function Incluir_Classe_Erros($campo) {
+        public static function Incluir_Classe_Erros(string $campo) : void {
         	if (!empty(self::$login_campos)) {
 	            switch ($campo) {
 	                case "email":

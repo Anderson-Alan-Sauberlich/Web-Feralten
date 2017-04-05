@@ -36,10 +36,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="emailcontato" class="lbPanel">Digite Um E-Mail Alternativo:</label>
-                                <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("emailcontato"); ?>">
+                                <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
+                                <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("email_alternativo"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="emailcontato" name="emailcontato" type="email" class="form-control" value="<?php View_Concluir::Manter_Valor("emailcontato"); ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
+                                    <input id="email_alternativo" name="email_alternativo" type="email" class="form-control" value="<?php View_Concluir::Manter_Valor("email_alternativo"); ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
                                 </div>
                             </div>
                         </div>
@@ -119,15 +119,15 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
                                     <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
                                 </div>
-                                <label for="nomedadosusuario" class="lbPanel">Digite um Nome Fantasia:</label>
-                                <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("nomedadosusuario"); ?>">
+                                <label for="nome_comercial" class="lbPanel">Digite o Nome Comercial:</label>
+                                <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("nome_comercial"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                                    <input id="nomedadosusuario" name="nomedadosusuario" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("nomedadosusuario"); ?>" placeholder="Nome Fantasia" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Campo Opcional)" />
+                                    <input id="nome_comercial" name="nome_comercial" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("nome_comercial"); ?>" placeholder="Nome Comercial" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Campo Opcional)" />
                                 </div>
                                 <label for="site" class="lbPanel">Digite o Endereço do seu Site:</label>
                                 <div class="input-group <?php View_Concluir::Incluir_Classe_Erros("site"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
-                                    <input id="site" name="site" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("site"); ?>" placeholder="Digite o Endereço do seu site" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
+                                    <input id="site" name="site" type="text" class="form-control" value="<?php View_Concluir::Manter_Valor("site"); ?>" placeholder="Ex: www.meusite.com.br" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
                                 </div>
                             </div>
                         </div>

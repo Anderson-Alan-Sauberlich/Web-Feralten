@@ -11,7 +11,7 @@ namespace application\model\object;
 		private $usuario_id;
         private $status_id;
         private $cpf_cnpj;
-        private $nome_fantasia;
+        private $nome_comercial;
         private $imagem;
 		private $site;
         private $data;
@@ -53,12 +53,12 @@ namespace application\model\object;
             return $this->cpf_cnpj;
         }
         
-        public function set_nome_fantasia(?string $nome_fantasia = null) : void {
-            $this->nome_fantasia = $nome_fantasia;
+        public function set_nome_comercial(?string $nome_comercial = null) : void {
+            $this->nome_comercial = $nome_comercial;
         }
         
-        public function get_nome_fantasia() : ?string {
-            return $this->nome_fantasia;
+        public function get_nome_comercial() : ?string {
+            return $this->nome_comercial;
         }
         
         public function set_imagem(?string $imagem = null) : void {

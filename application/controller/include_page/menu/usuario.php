@@ -13,7 +13,7 @@ namespace application\controller\include_page\menu;
             
         }
         
-        public static function Verificar_Autenticacao() {
+        public static function Verificar_Autenticacao() : bool {
             if (empty($_SESSION['usuario'])) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
@@ -26,8 +26,8 @@ namespace application\controller\include_page\menu;
         }
         
         public static function Verificar_Status_Usuario() {
-        	$status = DAO_Entidade::Pegar_Status_Usuario(unserialize($_SESSION['usuario'])->get_id());
-        
+        	$status = DAO_Entidade::Pegar_Status_Entidade(unserialize($_SESSION['usuario'])->get_id());
+        	// mudar a verificassão do status com urgencia para pegar por entidade e por usuario separadamente
         	if ($status == null) {
         		return 0;
         	} else if ($status == 1) {

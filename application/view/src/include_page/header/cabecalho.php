@@ -11,7 +11,7 @@ namespace application\view\src\include_page\header;
 			
         }
         
-        public static function Verificar_Usuario_Autenticado() {
+        public static function Verificar_Usuario_Autenticado() : void {
         	if (isset($_SESSION['usuario'])) {
         		echo "<li><a href=\"/usuario/meu-perfil/\"><i class=\"menu-yellow\"><i class=\"user icon\"></i>MEU PERFIL</i></a></li>";
 				echo "<li><a href=\"/usuario/login/sair/?logout=".hash_hmac('sha1', session_id(), sha1(session_id()))."\"><i class=\"sign out icon\"></i>SAIR</a></li>";

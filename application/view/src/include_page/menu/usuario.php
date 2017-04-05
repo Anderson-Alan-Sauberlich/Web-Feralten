@@ -6,18 +6,18 @@ namespace application\view\src\include_page\menu;
     	private static $status_usuario;
     	private static $url_menu;
 
-        function __construct($status, $url) {
+        function __construct(int $status, array $url) {
         	self::$status_usuario = $status;
         	self::$url_menu = $url;
         	
         	require_once RAIZ.'/application/view/html/include_page/menu/usuario.php';
         }
         
-        public static function Mostrar_Nome() {
+        public static function Mostrar_Nome() : void {
             echo unserialize($_SESSION['usuario'])->get_nome();
         }
         
-        public static function Incluir_Mensagem_Status_Usuario() {
+        public static function Incluir_Mensagem_Status_Usuario() : void {
         	if (isset(self::$status_usuario)) {
 	        	if (self::$status_usuario === 0 
 	        		AND self::$url_menu[1] !== 'concluir'
@@ -33,7 +33,7 @@ namespace application\view\src\include_page\menu;
         	}
         }
         
-        public static function Verificar_URL_Ativa($id_tab, $id_pill = null) {
+        public static function Verificar_URL_Ativa(string $id_tab, ?string $id_pill = null) : void {
         	$class = '';
         	
         	if (self::$url_menu[0] === $id_tab) {

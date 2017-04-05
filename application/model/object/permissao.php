@@ -1,10 +1,10 @@
 <?php
 namespace application\model\object;
-
-    class Permissao_Usuario {
+	
+    class Permissao {
     	
     	private $id;
-		private $funcionalidade;
+		private $nome;
 		
 		function __constructor() {
 			
@@ -18,12 +18,12 @@ namespace application\model\object;
 			return $this->id;
 		}
 		
-		public function set_funcionalidade(string $funcionalidade) : void {
-			$this->funcionalidade = $funcionalidade;
+		public function set_nome(string $nome) : void {
+			$this->nome = $nome;
 		}
 		
-		public function get_funcionalidade() : ?string {
-			return $this->funcionalidade;
+		public function get_nome() : ?string {
+			return $this->nome;
 		}
     }
 ?>

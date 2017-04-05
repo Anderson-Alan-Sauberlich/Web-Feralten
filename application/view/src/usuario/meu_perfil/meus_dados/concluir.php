@@ -9,7 +9,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     
     class Concluir {
     	
-        function __construct($status) {
+        function __construct(?int $status = null) {
         	self::$status_usuario = $status;
         }
         
@@ -18,27 +18,27 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         private static $concluir_campos;
         private static $concluir_form;
         
-        public function set_concluir_erros($concluir_erros) {
+        public function set_concluir_erros(?array $concluir_erros = null) : void {
         	self::$concluir_erros = $concluir_erros;
         }
         
-        public function set_concluir_campos($concluir_campos) {
+        public function set_concluir_campos(?array $concluir_campos = null) : void {
         	self::$concluir_campos = $concluir_campos;
         }
         
-        public function set_concluir_form($concluir_form) {
+        public function set_concluir_form(?array $concluir_form = null) : void {
         	self::$concluir_form = $concluir_form;
         }
         
-        public function Executar() {
+        public function Executar() : void {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/concluir.php';
         }
         
-        public static function Incluir_Menu_Usuario() {
+        public static function Incluir_Menu_Usuario() : void {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
         }
         
-        public static function Manter_Valor($campo) {
+        public static function Manter_Valor(string $campo) : void {
             if (!empty(self::$concluir_form)) {
                 if (isset(self::$concluir_form[$campo])) {
                     echo self::$concluir_form[$campo];
@@ -46,7 +46,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 
-		public static function Manter_Imagem() {
+		public static function Manter_Imagem() : void {
 			if (isset($_SESSION['imagem_tmp'])) {
 				echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 			} else {
@@ -54,7 +54,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        public static function Mostrar_Erros() {
+        public static function Mostrar_Erros() : void {
             if (!empty(self::$concluir_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$concluir_erros as $value) {
@@ -64,7 +64,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Estados() {
+        public static function Mostrar_Estados() : void {
             $estados = Controller_Concluir::Buscar_Todos_Estados();
             
             if (!empty($estados) AND $estados !== false) {
@@ -86,7 +86,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Cidades($estado = null) {
+        public static function Mostrar_Cidades(?int $estado = null) : void {
 			$id_estado;
 				
 			if (isset($estado)) {
@@ -120,7 +120,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Incluir_Classe_Erros($campo) {
+        public static function Incluir_Classe_Erros(string $campo) : void {
         	if (!empty(self::$concluir_campos)) {
 	            switch ($campo) {
 	                case "fone1":
@@ -233,21 +233,21 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	                	}
 	                    break;
 	                    
-	                case "nomedadosusuario":
-	                	if (isset(self::$concluir_campos['erro_nomedadosusuario'])) {
-		                    if (self::$concluir_campos['erro_nomedadosusuario'] === "erro") {
+	                case "nome_comercial":
+	                	if (isset(self::$concluir_campos['erro_nome_comercial'])) {
+		                    if (self::$concluir_campos['erro_nome_comercial'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_nomedadosusuario'] === "certo") {
+		                    } else if (self::$concluir_campos['erro_nome_comercial'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}
 	                    break;
 	                    
-	                case "emailcontato":
-	                	if (isset(self::$concluir_campos['erro_emailcontato'])) {
-		                    if (self::$concluir_campos['erro_emailcontato'] === "erro") {
+	                case "email_alternativo":
+	                	if (isset(self::$concluir_campos['erro_email_alternativo'])) {
+		                    if (self::$concluir_campos['erro_email_alternativo'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_emailcontato'] === "certo") {
+		                    } else if (self::$concluir_campos['erro_email_alternativo'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}

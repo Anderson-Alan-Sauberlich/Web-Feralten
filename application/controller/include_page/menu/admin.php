@@ -13,7 +13,7 @@ namespace application\controller\include_page\menu;
             
         }
         
-        public static function Verificar_Autenticacao() {
+        public static function Verificar_Autenticacao() : bool {
             if (empty($_SESSION['usuario_admin'])) {
                 $login_admin_erros = array();
                 $login_admin_erros[] = "Você deve estar Autenticado.";

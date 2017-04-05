@@ -5,6 +5,7 @@ namespace application\model\object;
     	
     	private $usuario_id;
 		private $entidade_id;
+		private $funcionalidade_id;
 		private $permissao_id;
 		
 		function __constructor() {
@@ -25,6 +26,14 @@ namespace application\model\object;
 		
 		public function get_entidade_id() : ?int {
 			return $this->entidade_id;
+		}
+		
+		public function set_funcionalidade_id(int $funcionalidade_id) : void {
+			$this->funcionalidade_id = $funcionalidade_id;
+		}
+		
+		public function get_funcionalidade_id() : ?int {
+			return $this->funcionalidade_id;
 		}
 		
 		public function set_permissao_id(int $permissao_id) : void {

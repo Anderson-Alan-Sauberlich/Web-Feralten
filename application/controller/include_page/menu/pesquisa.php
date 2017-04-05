@@ -65,7 +65,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_paginas($paginas) {
+        public function set_paginas($paginas) : void {
         	if ($paginas !== false) {
 	        	if (!empty($paginas)) {
 	        		if (filter_var($paginas, FILTER_VALIDATE_INT) !== false) {

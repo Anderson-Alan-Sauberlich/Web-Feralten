@@ -2,12 +2,14 @@
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
 	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
+	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/endereco.php';
     require_once RAIZ.'/application/model/object/cidade.php';
     require_once RAIZ.'/application/model/object/estado.php';
+    require_once RAIZ.'/application/model/dao/usuario.php';
+    require_once RAIZ.'/application/model/dao/entidade.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
-	require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/model/dao/estado.php';
     require_once RAIZ.'/application/model/dao/cidade.php';
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
@@ -15,10 +17,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
 	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
+	use application\model\object\usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
     use application\model\object\Endereco as Object_Endereco;
     use application\model\object\Cidade as Object_Cidade;
     use application\model\object\Estado as Object_Estado;
+    use application\model\dao\Usuario as DAO_Usuario;
 	use application\model\dao\Entidade as DAO_Entidade;
 	use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Estado as DAO_Estado;
@@ -33,7 +37,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public function Carregar_Pagina($concluir_erros = null, $concluir_campos = null, $concluir_form = null) {
+        public function Carregar_Pagina(?array $concluir_erros = null, ?array $concluir_campos = null, ?array $concluir_form = null) {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -62,19 +66,20 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            $concluir_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo",
 		            					  'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
 		            
-		            $endereco = new Object_Endereco();
+		            $usuario = new Object_Usuario();
 		            $entidade = new Object_Entidade();
+		            $endereco = new Object_Endereco();
 		            
 		            if (empty($_POST['fone1'])) {
 		                $concluir_erros[] = "Informe um Nº de Telefone para Telefone-1";
 		                $concluir_campos['erro_fone1'] = "erro";
 		            } else {
-		            	$telefone1 = trim($_POST['fone1']);
-		            	$telefone1 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone1);
+		            	$fone1 = trim($_POST['fone1']);
+		            	$fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $fone1);
 		            	
-		            	if (strlen($telefone1) === 11 OR strlen($telefone1) === 10) {
-		            		if (filter_var($telefone1, FILTER_VALIDATE_INT)) {
-		            			$entidade->set_telefone1($telefone1);
+		            	if (strlen($fone1) === 11 OR strlen($fone1) === 10) {
+		            		if (filter_var($fone1, FILTER_VALIDATE_INT)) {
+		            			$usuario->set_fone1($fone1);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-1, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone1'] = "erro";
@@ -86,12 +91,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (!empty($_POST['fone2'])) {
-		            	$telefone2 = trim($_POST['fone2']);
-		            	$telefone2 = preg_replace('/[^a-zA-Z0-9]/', "", $telefone2);
+		            	$fone2 = trim($_POST['fone2']);
+		            	$fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $fone2);
 		            	 
-		            	if (strlen($telefone2) === 11 OR strlen($telefone2) === 10) {
-		            		if (filter_var($telefone2, FILTER_VALIDATE_INT)) {
-		            			$entidade->set_telefone2($telefone2);
+		            	if (strlen($fone2) === 11 OR strlen($fone2) === 10) {
+		            		if (filter_var($fone2, FILTER_VALIDATE_INT)) {
+		            			$usuario->set_fone2($fone2);
 		            		} else {
 		            			$concluir_erros[] = "Telefone-2, Digite Apenas Numeros";
 		            			$concluir_campos['erro_fone2'] = "erro";
@@ -102,12 +107,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (!empty($_POST['emailcontato'])) {
-		            	$emailcontato = trim($_POST['emailcontato']);
+		            if (!empty($_POST['email_alternativo'])) {
+		            	$email_alternativo = trim($_POST['email_alternativo']);
 		            	
-		            	if (strlen($emailcontato) <= 150) {
-			            	if (filter_var($emailcontato, FILTER_VALIDATE_EMAIL)) {
-			            		$entidade->set_email($emailcontato);
+		            	if (strlen($email_alternativo) <= 150) {
+			            	if (filter_var($email_alternativo, FILTER_VALIDATE_EMAIL)) {
+			            		$usuario->set_email_alternativo($email_alternativo);
 			            	} else {
 			            		$concluir_erros[] = "Digite um E-Mail Alternativo Valido";
 			            		$concluir_campos['erro_emailcontato'] = "erro";
@@ -303,37 +308,46 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (!empty($_POST['nomedadosusuario'])) {
-		            	$nomedadosusuario = strip_tags($_POST['nomedadosusuario']);
+		            if (!empty($_POST['nome_comercial'])) {
+		            	$nome_comercial = strip_tags($_POST['nome_comercial']);
 		            	 
-		            	if ($nomedadosusuario === $_POST['nomedadosusuario']) {
-		            		$nomedadosusuario = trim($nomedadosusuario);
-		            		$nomedadosusuario = preg_replace('/\s+/', " ", $nomedadosusuario);
+		            	if ($nome_comercial === $_POST['nome_comercial']) {
+		            		$nome_comercial = trim($nome_comercial);
+		            		$nome_comercial = preg_replace('/\s+/', " ", $nome_comercial);
 		            	
-		            		if (strlen($nomedadosusuario) <= 45) {
-		            			$entidade->set_nome_fantasia($nomedadosusuario);
+		            		if (strlen($nome_comercial) <= 150) {
+		            			$entidade->set_nome_comercial($nome_comercial);
 		            		} else {
-		            			$concluir_erros[] = "Nome Fantasia, Não pode conter mais de 45 Caracteres";
-		            			$concluir_campos['erro_nomedadosusuario'] = "erro";
+		            			$concluir_erros[] = "Nome Comercial, Não pode conter mais de 45 Caracteres";
+		            			$concluir_campos['erro_nome_comercial'] = "erro";
 		            		}
 		            	} else {
-		            		$concluir_erros[] = "Nome Fantasia, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_nomedadosusuario'] = "erro";
+		            		$concluir_erros[] = "Nome Comercial, Não pode conter Tags de Programação";
+		            		$concluir_campos['erro_nome_comercial'] = "erro";
 		            	}
 		            }
 		            
 		            if (empty($concluir_erros)) {
-		            	$endereco->set_id(0);
-		            	$endereco->set_entidade_id(unserialize($_SESSION['usuario'])->get_id());
-		            	$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
-		            	$entidade->set_status_id(1);
-		            	$entidade->set_data(date('Y-m-d H:i:s'));
-		            	$entidade->set_imagem($this->Salvar_Imagem());
+		            	$usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
 		            	
-		                if (DAO_Entidade::Inserir($entidade) !== false) {
-		                	if (DAO_Endereco::Inserir($endereco) === false) {
-		                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
-		                	}
+		            	if (DAO_Usuario::Atualizar_Contato($usuario) !== false) {
+		            		$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+		            		$entidade->set_status_id(1);
+		            		$entidade->set_data(date('Y-m-d H:i:s'));
+		            		$entidade->set_imagem($this->Salvar_Imagem());
+		            		
+		            		$retorno = DAO_Entidade::Inserir($entidade);
+		            		
+			                if ($retorno != false) {
+			                	$endereco->set_id(0);
+			                	$endereco->set_entidade_id($retorno);
+			                	
+			                	if (DAO_Endereco::Inserir($endereco) === false) {
+			                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
+			                	}
+			            	} else {
+			            		$concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
+			            	}
 		            	} else {
 		            		$concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
 		            	}
@@ -354,8 +368,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$concluir_form['complemento'] = ucfirst(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['complemento'])))));
 		            	$concluir_form['bairro'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['bairro'])))));
 		            	$concluir_form['cpf_cnpj'] = strip_tags($_POST['cpf_cnpj']);
-		            	$concluir_form['nomedadosusuario'] = trim(strip_tags($_POST['nomedadosusuario']));
-		            	$concluir_form['emailcontato'] = trim(strip_tags($_POST['emailcontato']));
+		            	$concluir_form['nome_comercial'] = trim(strip_tags($_POST['nome_comercial']));
+		            	$concluir_form['email_alternativo'] = trim(strip_tags($_POST['email_alternativo']));
 		            	$concluir_form['site'] = trim(strip_tags($_POST['site']));
 		            	
 		            	$this->Carregar_Pagina($concluir_erros, $concluir_campos, $concluir_form);
@@ -368,7 +382,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Retornar_Cidades_Por_Estado() {
+        public function Retornar_Cidades_Por_Estado() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['estado'])) {
 	        		View_Concluir::Mostrar_Cidades($_GET['estado']);
@@ -376,7 +390,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-		public function Salvar_Imagem_TMP() {
+		public function Salvar_Imagem_TMP() : void {
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
@@ -392,7 +406,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public function Deletar_Imagem() {
+		public function Deletar_Imagem() : void {
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					$imagens = new Gerenciar_Imagens();
@@ -404,7 +418,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public static function Pegar_Imagem_URL($nome_imagem) {
+		public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string {
 			$imagens = new Gerenciar_Imagens();
 			
 			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-200x150");
@@ -416,7 +430,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 
-        private function Salvar_Imagem() {
+        private function Salvar_Imagem() : ?string {
         	if (isset($_SESSION['imagem_tmp'])) {
         		$imagens = new Gerenciar_Imagens();
 			
@@ -424,15 +438,23 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		
         		unset($_SESSION['imagem_tmp']);
         		
-				return $imagens->Arquivar_Imagem_Usuario($imagem_tmp);
+        		$img_nome = $imagens->Arquivar_Imagem_Usuario($imagem_tmp);
+        		
+        		if (!empty($img_nome) AND $img_nome != false) {
+        			return $img_nome;
+        		} else {
+        			return null;
+        		}
+			} else {
+				return null;
 			}
         }
 
-		public static function Buscar_Todos_Estados() {
+		public static function Buscar_Todos_Estados() : array {
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidades_Por_Estado($id_estado) {
+		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array {
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
     }

@@ -9,15 +9,15 @@ namespace application\view\src\admin;
 		
 		private static $login_admin_erros;
 		
-		public function set_login_admin_erros($login_admin_erros) {
+		public function set_login_admin_erros(?array $login_admin_erros = null) : void {
 			self::$login_admin_erros = $login_admin_erros;
 		}
 		
-		public function Executar() {
+		public function Executar() : void {
 			require_once RAIZ.'/application/view/html/admin/login.php';
 		}
 		
-		public static function Mostrar_Erros() {
+		public static function Mostrar_Erros() : void {
 			$login_admin_erros = null;
 			 
 			if (!empty(self::$login_admin_erros)) {

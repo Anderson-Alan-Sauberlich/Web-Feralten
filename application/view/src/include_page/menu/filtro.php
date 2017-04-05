@@ -11,7 +11,7 @@ namespace application\view\src\include_page\menu;
 	        require_once RAIZ.'/application/view/html/include_page/menu/filtro.php';
 		}
 		
-		public static function Mostrar_Estados() {
+		public static function Mostrar_Estados() : void {
 			$estados = Controller_Filtro::Buscar_Estados();
 		
 			foreach ($estados as $estado) {
@@ -19,10 +19,10 @@ namespace application\view\src\include_page\menu;
 			}
 		}
 		
-		public static function Mostrar_Cidades($estado = null) {
+		public static function Mostrar_Cidades(?int $estado = null) : void {
 			$cidades = array();
 			 
-			if (isset($estado)) {
+			if (!empty($estado)) {
 				$cidades = Controller_Filtro::Buscar_Cidade_Por_Estado($estado);
 			}
 		
@@ -33,7 +33,7 @@ namespace application\view\src\include_page\menu;
 			}
 		}
 		
-		public static function Mostrar_Status() {
+		public static function Mostrar_Status() : void {
 			$satus_pecas = Controller_Filtro::Buscar_Status_Pecas();
 				
 			foreach ($satus_pecas as $status_peca) {
@@ -41,27 +41,27 @@ namespace application\view\src\include_page\menu;
 			}
 		}
 		
-		public static function Mostrar_Preco_Menor() {
+		public static function Mostrar_Preco_Menor() : void {
 			
 		}
 		
-		public static function Mostrar_Preco_Maior() {
+		public static function Mostrar_Preco_Maior() : void {
 			
 		}
 		
-		public static function Mostrar_Data_Dia() {
+		public static function Mostrar_Data_Dia() : void {
 			for ($i = 1; $i <= 31; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 		
-		public static function Mostrar_Data_Mes() {
+		public static function Mostrar_Data_Mes() : void {
 			for ($i = 1; $i <= 12; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 		
-		public static function Mostrar_Data_Ano() {
+		public static function Mostrar_Data_Ano() : void {
 			for ($i = 2016; $i <= 2017; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}

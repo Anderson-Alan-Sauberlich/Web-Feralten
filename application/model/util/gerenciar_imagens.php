@@ -130,6 +130,8 @@ namespace application\model\util;
 				
 				if (isset($this->tipo)) {
 					return "/imagens/".$this->usuario."/".$nome_tmp."-@.".$this->tipo;
+				} else {
+					return false;
 				}
 			}
 		}

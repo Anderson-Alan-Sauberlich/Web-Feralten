@@ -41,7 +41,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Deletar_CMMV() {
+        public function Deletar_CMMV() : void {
         	if (!empty($_POST['versao'])) {
         		$this->Deletar_Versao();
         	} else if (!empty($_POST['modelo'])) {
@@ -53,31 +53,31 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Deletar_Versao() {
+        private function Deletar_Versao() : void {
         	if (!DAO_Versao::Deletar($_POST['versao'])) {
         		echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Deletar Versão Falhou</b></div>";
         	}
         }
         
-        private function Deletar_Modelo() {
+        private function Deletar_Modelo() : void {
         	if (!DAO_Modelo::Deletar($_POST['modelo'])) {
         		echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Deletar Modelo Falhou</b></div>";
         	}
         }
         
-        private function Deletar_Marca() {
+        private function Deletar_Marca() : void {
         	if (!DAO_Marca::Deletar($_POST['marca'])) {
         		echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Deletar Marca Falhou</b></div>";
         	}
         }
         
-        private function Deletar_Categoria() {
+        private function Deletar_Categoria() : void {
         	if (!DAO_Categoria::Deletar($_POST['categoria'])) {
         		echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Deletar Categoria Falhou</b></div>";
         	}
         }
         
-        public function Retornar_Categoria() {
+        public function Retornar_Categoria() : void {
         	$object_categoria = $this->Buscar_Categoria_Por_Id($_GET['categoria']);
         	 
         	if (!empty($object_categoria)) {
@@ -90,7 +90,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Retornar_Marca() {
+        public function Retornar_Marca() : void {
         	$object_marca = $this->Buscar_Marca_Por_Id($_GET['marca']);
         
         	if (!empty($object_marca)) {
@@ -103,7 +103,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Retornar_Modelo() {
+        public function Retornar_Modelo() : void {
         	$object_modelo = $this->Buscar_Modelo_Por_Id($_GET['modelo']);
         
         	if (!empty($object_modelo)) {
@@ -116,7 +116,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Retornar_Versao() {
+        public function Retornar_Versao() : void {
         	$object_versao = $this->Buscar_Versao_Por_Id($_GET['versao']);
         
         	if (!empty($object_versao)) {
@@ -129,23 +129,23 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        public function Retornar_Categorias() {
+        public function Retornar_Categorias() : void {
         	View_Deletar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
-        public function Retornar_Marcas_Por_Categoria() {
+        public function Retornar_Marcas_Por_Categoria() : void {
         	View_Deletar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
         }
         
-        public function Retornar_Modelos_Por_Marca() {
+        public function Retornar_Modelos_Por_Marca() : void {
         	View_Deletar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($_GET['marca']));
         }
         
-        public function Retornar_Versoes_Por_Modelo() {
+        public function Retornar_Versoes_Por_Modelo() : void {
         	View_Deletar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($_GET['modelo']));
         }
         
-        private function Buscar_Marca_Por_Id_Categoria($categoria) {
+        private function Buscar_Marca_Por_Id_Categoria(?int $categoria) {
         	if (!empty($categoria)) {
         		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
         	} else {
@@ -153,7 +153,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Modelo_Por_Id_Marca($marca) {
+        private function Buscar_Modelo_Por_Id_Marca(?int $marca) {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
         	} else {
@@ -161,7 +161,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Versoes_Por_Id_Modelo($modelo) {
+        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo) {
         	if (!empty($modelo)) {
         		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {
@@ -169,7 +169,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Categoria_Por_Id($categoria) {
+        private function Buscar_Categoria_Por_Id(?int $categoria) {
         	if (!empty($categoria)) {
         		return DAO_Categoria::Buscar_Nome_URL_Por_ID($categoria);
         	} else {
@@ -177,7 +177,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Marca_Por_Id($marca) {
+        private function Buscar_Marca_Por_Id(?int $marca) {
         	if (!empty($marca)) {
         		return DAO_Marca::Buscar_Nome_URL_Por_ID($marca);
         	} else {
@@ -185,7 +185,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Modelo_Por_Id($modelo) {
+        private function Buscar_Modelo_Por_Id(?int $modelo) {
         	if (!empty($modelo)) {
         		return DAO_Modelo::Buscar_Nome_URL_Por_ID($modelo);
         	} else {
@@ -193,7 +193,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	}
         }
         
-        private function Buscar_Versao_Por_Id($versao) {
+        private function Buscar_Versao_Por_Id(?int $versao) {
         	if (!empty($versao)) {
         		return DAO_Versao::Buscar_Nome_URL_Por_ID($versao);
         	} else {

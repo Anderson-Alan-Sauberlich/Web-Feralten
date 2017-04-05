@@ -17,9 +17,9 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Entidade $object_entidade) : bool {
+        public static function Inserir(Object_Entidade $object_entidade) {
             try {
-                $sql = "INSERT INTO tb_entidade (entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_fantasia,
+                $sql = "INSERT INTO tb_entidade (entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                         entidade_imagem, entidade_site, entidade_data_cadastro) 
                 		VALUES (:us_id, :su_id, :cpf_cnpj, :nome, :imagem, :site, :data);";
                 
@@ -28,12 +28,14 @@ namespace application\model\dao;
                 $p_sql->bindValue(":us_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":su_id", $object_entidade->get_status_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":cpf_cnpj", $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_entidade->get_nome_fantasia(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
                 $p_sql->bindValue(":imagem", $object_entidade->get_imagem(), PDO::PARAM_STR);
 				$p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 $p_sql->bindValue(":data", $object_entidade->get_data(), PDO::PARAM_STR);
                 
-                return $p_sql->execute();
+                $p_sql->execute();
+                
+                return Conexao::Conectar()->lastInsertId();
             } catch (PDOException $e) {
 				return false;
             }
@@ -43,16 +45,16 @@ namespace application\model\dao;
             try {
                 $sql = "UPDATE tb_entidade SET
                 entidade_cpf_cnpj = :cpf_cnpj,
-                entidade_nome_fantasia = :nome,
+                entidade_nome_comercial = :nome,
                 entidade_imagem = :imagem,
                 entidade_site = :site 
-                WHERE entidade_us_id = :us_id";
+                WHERE entidade_usr_id = :us_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":us_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":cpf_cnpj", $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_entidade->get_nome_fantasia(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
                 $p_sql->bindValue(":imagem", $object_entidade->get_imagem(), PDO::PARAM_STR);
                 $p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 
@@ -66,15 +68,15 @@ namespace application\model\dao;
             try {
                 $sql = "UPDATE tb_entidade SET
                 entidade_cpf_cnpj = :cpf_cnpj,
-                entidade_nome_fantasia = :nome,
+                entidade_nome_comercial = :nome,
                 entidade_site = :site 
-                WHERE entidade_us_id = :us_id";
+                WHERE entidade_usr_id = :us_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(":us_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":cpf_cnpj", $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_entidade->get_nome_fantasia(), PDO::PARAM_STR);
+                $p_sql->bindValue(":nome", $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
 				$p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
@@ -85,7 +87,7 @@ namespace application\model\dao;
         
         public static function Atualizar_Imagem(string $imagem, int $usuario) : bool {
             try {
-                $sql = "UPDATE tb_entidade SET entidade_imagem = :imagem WHERE entidade_us_id = :us_id";
+                $sql = "UPDATE tb_entidade SET entidade_imagem = :imagem WHERE entidade_usr_id = :us_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -133,16 +135,16 @@ namespace application\model\dao;
         	}
         }
         
-        public static function Pegar_Status_Usuario(int $id) {
+        public static function Pegar_Status_Entidade(int $id) {
             try {
-                $sql = "SELECT entidade_sts_usr_id FROM tb_entidade WHERE entidade_usr_id = :id";
+                $sql = "SELECT entidade_sts_ent_id FROM tb_entidade WHERE entidade_usr_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
-                return $row['entidade_sts_usr_id'];
+                return $row['entidade_sts_ent_id'];
             } catch (PDOException $e) {
 				return false;
             }
@@ -150,7 +152,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT entidade_usr_id, entidade_sts_usr_id, entidade_cpf_cnpj, entidade_nome_fantasia, 
+                $sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial, 
                 		entidade_imagem, entidade_site, entidade_data_cadastro 
                 		FROM tb_entidade WHERE entidade_usr_id = :id";
                 
@@ -167,21 +169,25 @@ namespace application\model\dao;
         public static function PopulaUsuario(array $row) : Object_Entidade {
             $object_entidade = new Object_Entidade();
             
-            if (isset($row['entidade_usr_id'])) {
-            	$object_entidade->set_usuario_id($row['entidade_usr_id']);
-            	$object_entidade->set_endereco(DAO_Endereco::Buscar_Por_Id_Usuario($row['entidade_usr_id']));
+            if (isset($row['entidade_id'])) {
+            	$object_entidade->set_id($row['entidade_id']);
+            	$object_entidade->set_endereco(DAO_Endereco::Buscar_Por_Id_Usuario($row['entidade_id']));
             }
             
-            if (isset($row['entidade_sts_usr_id'])) {
-            	$object_entidade->set_status_id($row['entidade_sts_usr_id']);
+            if (isset($row['entidade_usr_id'])) {
+            	$object_entidade->set_usuario_id($row['entidade_usr_id']);
+            }
+            
+            if (isset($row['entidade_sts_ent_id'])) {
+            	$object_entidade->set_status_id($row['entidade_sts_ent_id']);
             }
             
             if (isset($row['entidade_cpf_cnpj'])) {
             	$object_entidade->set_cpf_cnpj($row['entidade_cpf_cnpj']);
             }
             
-            if (isset($row['entidade_nome_fantasia'])) {
-            	$object_entidade->set_nome_fantasia($row['entidade_nome_fantasia']);
+            if (isset($row['entidade_nome_comercial'])) {
+            	$object_entidade->set_nome_comercial($row['entidade_nome_comercial']);
             }
             
             if (isset($row['entidade_imagem'])) {

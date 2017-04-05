@@ -63,6 +63,27 @@ namespace application\model\dao;
             }
         }
         
+        public static function Atualizar_Contato(Object_Usuario $object_usuario) : bool {
+        	try {
+        		$sql = "UPDATE tb_usuario SET
+                usuario_fone1 = :fone1,
+                usuario_fone2 = :fone2,
+                usuario_email_alternativo = :email_alt
+                WHERE usuario_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":id", $object_usuario->get_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":fone1", $object_usuario->get_fone1(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":fone2", $object_usuario->get_fone2(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":email_alt", $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
+        		
+        		return $p_sql->execute();
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
         public static function Atualizar_Status(int $status, int $id) : bool {
         	try {
         		$sql = "UPDATE tb_usuario SET usuario_sts_usr = :sts WHERE usuario_id = :id";
@@ -182,7 +203,13 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
+                $usuario = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($usuario) AND $usuario !== false) {
+                	return self::PopulaUsuario($usuario);
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
@@ -258,7 +285,7 @@ namespace application\model\dao;
             }
             
             if (isset($row['usuario_email_alternativo'])) {
-            	$object_usuario->set_token($row['usuario_email_alternativo']);
+            	$object_usuario->set_email_alternativo($row['usuario_email_alternativo']);
             }
             
             return $object_usuario;

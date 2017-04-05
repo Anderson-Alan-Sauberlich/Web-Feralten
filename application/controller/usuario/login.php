@@ -13,7 +13,7 @@ namespace application\controller\usuario;
             
         }
         
-        public function Carregar_Pagina($login_erros = null, $login_campos = null, $login_form = null) {
+        public function Carregar_Pagina(?array $login_erros = null, ?array $login_campos = null, ?array $login_form = null) : void {
         	$view = new View_Login();
         	
         	$view->set_login_campos($login_campos);
@@ -23,7 +23,7 @@ namespace application\controller\usuario;
         	$view->Executar();
         }
         
-        public function LogOut() {
+        public function LogOut() : void {
         	if (isset($_GET['logout'])) {
 	        	if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
 	        		if (isset($_COOKIE['f_m_l'])) {
@@ -40,7 +40,7 @@ namespace application\controller\usuario;
         	}
         }
 		
-		public static function Autenticar_Usuario_Cookie($id_usuario, $token) {
+		public static function Autenticar_Usuario_Cookie(?int $id_usuario = null, ?string $token = null) : bool {
 			$usuario_login = DAO_Usuario::Buscar_Usuario($id_usuario);
 			
 			if ($usuario_login !== false) {
@@ -75,7 +75,7 @@ namespace application\controller\usuario;
 			}
 		}
 		
-        public static function Autenticar_Usuario_Logado($email, $senha) {
+        public static function Autenticar_Usuario_Logado(?string $email = null, ?string $senha = null) : bool {
         	$usuario_login = DAO_Usuario::Autenticar($email);
             
             if (!empty($usuario_login) AND $usuario_login !== false) {
@@ -93,7 +93,7 @@ namespace application\controller\usuario;
             }
         }
 
-        public function Autenticar_Usuario_Login() {
+        public function Autenticar_Usuario_Login() : ?bool {
             $login_campos = array('erro_email' => "certo");
             $login_erros = array();
             $email = null;

@@ -1,15 +1,17 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\meus_dados;
-
+	
+	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php';
 	require_once RAIZ.'/application/view/src/include_page/menu/usuario.php';
 	
+	use application\model\object\Endereco as Object_Endereco;
 	use application\controller\usuario\meu_perfil\meus_dados\Enderecos as Controller_Enderecos;
     use application\view\src\include_page\menu\Usuario as View_Usuario;
 	
     class Enderecos {
 
-        function __construct($status) {
+        function __construct(?int $status = null) {
         	self::$status_usuario = $status;
         }
         
@@ -19,31 +21,31 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         private static $enderecos_form;
         private static $enderecos_sucesso;
         
-        public function set_enderecos_erros($enderecos_erros) {
+        public function set_enderecos_erros(?array $enderecos_erros = null) : void {
         	self::$enderecos_erros = $enderecos_erros;
         }
         
-        public function set_enderecos_campos($enderecos_campos) {
+        public function set_enderecos_campos(?array $enderecos_campos = null) : void {
         	self::$enderecos_campos = $enderecos_campos;
         }
         
-        public function set_enderecos_form($enderecos_form) {
+        public function set_enderecos_form(?Object_Endereco $enderecos_form = null) : void {
         	self::$enderecos_form = $enderecos_form;
         }
         
-        public function set_enderecos_sucesso($enderecos_sucesso) {
+        public function set_enderecos_sucesso(?array $enderecos_sucesso = null) : void {
         	self::$enderecos_sucesso = $enderecos_sucesso;
         }
         
-        public function Executar() {
+        public function Executar() : void {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/meus_dados/enderecos.php';
         }
         
-        public static function Incluir_Menu_Usuario() {
+        public static function Incluir_Menu_Usuario() : void {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'enderecos'));
         }
 		
-        public static function Incluir_Classe_Erros($campo) {
+        public static function Incluir_Classe_Erros(string $campo) : void {
         	if (!empty(self::$enderecos_campos)) {
 	            switch ($campo) {
 	                case "cidade":
@@ -120,7 +122,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			}
 		}
 
-        public static function Pegar_Valor($campo) {
+        public static function Pegar_Valor(string $campo) : void {
         	if ($campo == "numero") {
                 echo self::$enderecos_form->get_numero();
             } else if ($campo == "cep") {
@@ -134,7 +136,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 		
-        public static function Mostrar_Estados() {
+        public static function Mostrar_Estados() : void {
         	$estados = Controller_Enderecos::Buscar_Estados();
         
         	if (!empty($estados) AND $estados !== false) {
@@ -156,7 +158,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public static function Mostrar_Cidades($estado = null) {
+        public static function Mostrar_Cidades(?int $estado = null) : void {
         	$id_estado = null;
         
         	if (!empty($estado)) {
@@ -190,7 +192,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         	}
         }
 		
-        public static function Mostrar_Erros() {
+        public static function Mostrar_Erros() : void {
 			if (!empty(self::$enderecos_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$enderecos_erros as $value) {
@@ -200,7 +202,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 		
-        public static function Mostrar_Sucesso() {
+        public static function Mostrar_Sucesso() : void {
 			if (!empty(self::$enderecos_sucesso)) {
 				echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$enderecos_sucesso as $value) {

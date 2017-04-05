@@ -13,7 +13,7 @@ namespace application\view\src\include_page;
 			
 		}
 		
-		public function Executar(Object_Peca $peca) {
+		public function Executar(Object_Peca $peca) : void {
 			include RAIZ.'/application/view/html/include_page/card_peca.php';
 		}
 	}

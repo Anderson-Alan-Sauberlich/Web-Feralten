@@ -20,38 +20,53 @@
                 <?php View_Atualizar::Mostrar_Sucesso(); ?>
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Atualizar Dados do Login</label>
+                        <label class="lbPanel">Atualizar Dados do Usuario</label>
                     </div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
+                        	<label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "nome"); ?>">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome Completo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu nome Completo. (Campo Obrigatório)" />
+                            </div>
                             <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("login", "email"); ?>">
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("login", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este email sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
+                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este e-mail sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
 	                        <label for="confemail" class="lbPanel">Digite Novamente Seu E-Mail:</label>
-	                        <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("login", "confemail"); ?>">
+	                        <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "confemail"); ?>">
 	                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                            <input id="confemail" name="confemail" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("login", "confemail") ?>" placeholder="Repetir E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu e-mail novamente da mesma forma para Confirmilo. (Campo Obrigatório)" />
+	                            <input id="confemail" name="confemail" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "confemail") ?>" placeholder="Repetir E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu e-mail novamente da mesma forma para Confirma-lo. (Campo Obrigatório)" />
 	                        </div>
                         </div>
                         <div class="col-sm-6">
-                            <label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("login", "nome"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("login", "nome") ?>" placeholder="Nome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu nome Completo. (Campo Obrigatório)" />
+                        	<label for="fone1" class="lbPanel">Digite Seu Numero de Telefone-1:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "fone1"); ?>">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                <input id="fone1" name="fone1" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone1") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-1. (Campo Obrigatório)" />
+                            </div>
+                            <label for="fone2" class="lbPanel">Digite Seu Numero de Telefone-2:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "fone2"); ?>">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone2") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2. (Campo Opcional)" />
+                            </div>
+                            <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="email_alternativo" name="email_alternativo" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email_alternativo") ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
                             </div>
 	                        <div class="ui buttons linha_inteira btnAtualizar">
-								<button id="salvar_login" name="salvar_login" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+								<button id="salvar_usuario" name="salvar_usuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
 								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_login" name="restaurar_login" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
+								<button id="restaurar_usuario" name="restaurar_usuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
 							</div>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Atualizar Dados Do Usuario</label>
+                        <label class="lbPanel">Atualizar Dados Da Entidade</label>
                     </div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
@@ -74,44 +89,27 @@
 									</div>
                                 </div>
                             </div>
-                            <label for="fone1" class="lbPanel">Digite Seu Numero de Telefone-1:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "fone1"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input id="fone1" name="fone1" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "fone1") ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-1. (Campo Obrigatório)" />
-                            </div>
-                            <label for="fone2" class="lbPanel">Digite Seu Numero de Telefone-2:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "fone2"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "fone2") ?>" placeholder="Fone Ex: (00) 000-000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2. (Campo Opcional)" />
-                            </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="cpf_cnpj" class="lbPanel">Digite Seu CPF ou CNPJ:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "cpf_cnpj"); ?>">
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "cpf_cnpj"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
+                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("entidade", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
                             </div>
-                            <label for="nomedadosusuario" class="lbPanel">Digite um Nome Fantasia:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "nomedadosusuario"); ?>">
+                            <label for="nome_comercial" class="lbPanel">Digite um Nome Comercial:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "nome_comercial"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
-                                <input id="nomedadosusuario" name="nomedadosusuario" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "nomedadosusuario"); ?>" placeholder="Nome Fantasia" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Campo Opcional)" />
+                                <input id="nome_comercial" name="nome_comercial" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("entidade", "nome_comercial"); ?>" placeholder="Nome Comercial" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Campo Opcional)" />
                             </div>
                             <label for="site" class="lbPanel">Digite o Endereço do seu Site:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "site"); ?>">
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "site"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-link"></i></span>
-                                <input id="site" name="site" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "site") ?>" placeholder="Digite o Endereço do seu site" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="emailcontato" class="lbPanel">Digite Um E-Mail Alternativo:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("dadosusuario", "emailcontato"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="emailcontato" name="emailcontato" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("dadosusuario", "emailcontato") ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
+                                <input id="site" name="site" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("entidade", "site") ?>" placeholder="Ex: www.meusite.com.br" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
                             </div>
                             <div class="ui buttons linha_inteira btnAtualizar">
-								<button id="salvar_dadosusuario" name="salvar_dadosusuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+								<button id="salvar_entidade" name="salvar_entidade" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
 								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_dadosusuario" name="restaurar_dadosusuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
+								<button id="restaurar_entidade" name="restaurar_entidade" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
 							</div>
                         </div>
                     </div>

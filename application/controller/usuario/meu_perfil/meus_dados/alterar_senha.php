@@ -17,7 +17,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
         }
         
-        public function Carregar_Pagina($alterar_senha_erros = null, $alterar_senha_campos = null, $alterar_senha_form = null) {
+        public function Carregar_Pagina(?array $alterar_senha_erros = null, ?array $alterar_senha_campos = null, ?array $alterar_senha_form = null) {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		

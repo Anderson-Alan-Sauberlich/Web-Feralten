@@ -13,19 +13,19 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 		
 		private static $categorias;
 		
-		public function set_categorias($categorias) {
+		public function set_categorias(array $categorias) : void {
 			self::$categorias = $categorias;
 		}
 		
-		public function Executar() {
+		public function Executar() : void {
 			require_once RAIZ.'/application/view/html/admin/controle/base_de_conhecimento/cmmv/cadastrar.php';
 		}
 		
-		public static function Incluir_Menu_Admin() {
+		public static function Incluir_Menu_Admin() : void {
 			new View_Admin();
 		}
 		
-		public static function Carregar_Categorias($categorias = null) {
+		public static function Carregar_Categorias(?array $categorias = null) : void {
 			echo "<option value=\"0\">Categoria</option>";
 			
 			if (!empty($categorias) AND $categorias !== null) {
@@ -41,7 +41,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 			}
 		}
 		
-		public static function Carregar_Marcas($marcas = null) {
+		public static function Carregar_Marcas(?array $marcas = null) : void {
 			echo "<option value=\"0\">Marca</option>";
 		
 			if (!empty($marcas) AND $marcas !== false) {
@@ -53,7 +53,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 			}
 		}
 		
-		public static function Carregar_Modelos($modelos = null) {
+		public static function Carregar_Modelos(?array $modelos = null) : void {
 			echo "<option value=\"0\">Modelo</option>";
 		
 			if (!empty($modelos) AND $modelos !== false) {
@@ -65,7 +65,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 			}
 		}
 		
-		public static function Carregar_Versoes($versoes = null) {
+		public static function Carregar_Versoes(?array $versoes = null) : void {
 			echo "<option value=\"0\">Versão</option>";
 		
 			if (!empty($versoes) AND $versoes !== false) {

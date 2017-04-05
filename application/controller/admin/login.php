@@ -13,7 +13,7 @@ namespace application\controller\admin;
             
         }
         
-        public function Carregar_Pagina($login_admin_erros = null) {
+        public function Carregar_Pagina(?array $login_admin_erros = null) {
         	$view = new View_Login();
         	
         	$view->set_login_admin_erros($login_admin_erros);
@@ -21,7 +21,7 @@ namespace application\controller\admin;
         	$view->Executar();
         }
         
-        public function LogOut() {
+        public function LogOut() : void {
         	if (isset($_GET['logout'])) {
         		if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
         			unset($_SESSION['usuario_admin']);

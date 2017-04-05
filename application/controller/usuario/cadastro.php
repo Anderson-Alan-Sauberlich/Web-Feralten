@@ -17,7 +17,7 @@ namespace application\controller\usuario;
             
         }
         
-        public function Carregar_Pagina($cadastro_erros = null, $cadastro_campos = null, $cadastro_form = null) {
+        public function Carregar_Pagina(?array $cadastro_erros = null, ?array $cadastro_campos = null, ?array $cadastro_form = null) : void {
         	$view = new View_Cadastro();
         	
         	$view->set_cadastro_campos($cadastro_campos);
@@ -27,7 +27,7 @@ namespace application\controller\usuario;
         	$view->Executar();
         }
 
-        public function Cadastrar_Usuario() {
+        public function Cadastrar_Usuario() : ?bool {
             $cadastro_erros = array();
             $cadastro_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
 
@@ -131,6 +131,7 @@ namespace application\controller\usuario;
             if (empty($cadastro_erros)) {
             	$usuario->set_id(0);
             	$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
+            	$usuario->set_status_id(2);
             	
             	$usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
             	
