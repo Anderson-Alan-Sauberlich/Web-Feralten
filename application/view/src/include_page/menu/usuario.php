@@ -1,6 +1,10 @@
 <?php
 namespace application\view\src\include_page\menu;
     
+	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
+
+	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	
     class Usuario {
     	
     	private static $status_usuario;
@@ -14,7 +18,7 @@ namespace application\view\src\include_page\menu;
         }
         
         public static function Mostrar_Nome() : void {
-            echo unserialize($_SESSION['usuario'])->get_nome();
+            echo Controller_Usuario::Mostrar_Nome();
         }
         
         public static function Incluir_Mensagem_Status_Usuario() : void {

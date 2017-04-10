@@ -1,11 +1,13 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
-
+	
+	require_once RAIZ.'/application/model/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
 	require_once RAIZ.'/application/controller/usuario/login.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
+	use application\model\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
 	use application\controller\usuario\Login;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
@@ -44,7 +46,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			    	$alterar_senha_erros[] = "Digite a Senha Antiga";
 			    	$alterar_senha_campos['erro_senha_antiga'] = "erro";
 			    } else {
-			    	$senha_usuario = DAO_Usuario::Buscar_Senha_Usuario(unserialize($_SESSION['usuario'])->get_id());
+			    	$senha_usuario = DAO_Usuario::Buscar_Senha_Usuario(Login_Session::get_usuario_id());
 			    		
 			    	if (!password_verify($_POST['senha_antiga'], $senha_usuario)) {
 			    		$alterar_senha_erros[] = "Senha Antiga Incorreta";
@@ -87,11 +89,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            if (empty($alterar_senha_erros)) {
 	            	$senha_nova = password_hash($senha_nova, PASSWORD_DEFAULT);
 					
-	                if (DAO_Usuario::Atualizar_Senha($senha_nova, unserialize($_SESSION['usuario'])->get_id()) !== false) {
-	                	if (Login::Autenticar_Usuario_Logado(unserialize($_SESSION['usuario'])->get_email(), $senha_nova) === false) {
-	                		$alterar_senha_erros[] = "Senha Alterada, porém ocorreu um Erro ao tentar Autenticar o Usuario";
-	                	}
-	                } else {
+	                if (DAO_Usuario::Atualizar_Senha($senha_nova, Login_Session::get_usuario_id()) === false) {
 	                	$alterar_senha_erros[] = "Erro ao tentar Alterar a Senha do Usuario";
 	                	$alterar_senha_campos['erro_senha_antiga'] = "";
 	                	$alterar_senha_campos['erro_senha_nova'] = "";

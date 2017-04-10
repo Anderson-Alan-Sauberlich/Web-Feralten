@@ -3,11 +3,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
 
 	require_once RAIZ.'/application/model/object/peca.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
+	require_once RAIZ.'/application/model/object/status_peca.php';
 	require_once RAIZ.'/application/model/object/categoria_pativel.php';
 	require_once RAIZ.'/application/model/object/marca_pativel.php';
 	require_once RAIZ.'/application/model/object/modelo_pativel.php';
 	require_once RAIZ.'/application/model/object/versao_pativel.php';
 	require_once RAIZ.'/application/model/object/foto_peca.php';
+	require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/dao/categoria.php';
     require_once RAIZ.'/application/model/dao/marca.php';
     require_once RAIZ.'/application/model/dao/modelo.php';
@@ -36,7 +38,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
-	use application\model\object\Dados_Usuario as Object_Dados_Usuario;
+	use application\model\object\Entidade as Object_Entidade;
     use application\model\dao\Categoria as DAO_Categoria;
     use application\model\dao\Marca as DAO_Marca;
     use application\model\dao\Modelo as DAO_Modelo;
@@ -46,11 +48,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
     use application\model\dao\Modelo_Compativel as DAO_Modelo_Compativel;
     use application\model\dao\Versao_Compativel as DAO_Versao_Compativel;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
-	use application\model\dao\Peca as DAO_Peca;
 	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
 	use application\model\dao\Marca_Pativel as DAO_Marca_Pativel;
 	use application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
 	use application\model\dao\Versao_Pativel as DAO_Versao_Pativel;
+	use application\model\dao\Peca as DAO_Peca;
 	use application\model\dao\Endereco as DAO_Endereco;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\model\util\Gerenciar_Imagens;
@@ -63,7 +65,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
             
         }
         
-        public function Carregar_Pagina($cadastrar_erros = null, $cadastrar_campos = null, $cadastrar_form = null, $cadastrar_sucesso = null) {
+        public function Carregar_Pagina(?array $cadastrar_erros = null, ?array $cadastrar_campos = null, ?array $cadastrar_form = null, ?array $cadastrar_sucesso = null) {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -109,7 +111,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function Carregar_Compatibilidade() {
+        public function Carregar_Compatibilidade() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (isset($_GET['categoria'])) {
 	        		if ($_GET['categoria'] == "verificar") {
@@ -149,7 +151,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        private static function Salvar_Session_Compatibilidade() {
+        private static function Salvar_Session_Compatibilidade() : void {
         	$compatibilidade = array();
         		
         	$compatibilidade['categoria'] = array();
@@ -273,7 +275,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$_SESSION['compatibilidade'] = $compatibilidade;
         }
 		
-		private function Cadastrar_Peca() {
+		private function Cadastrar_Peca() : void {
 			$cadastrar_erros = array();
 			$cadastrar_sucesso = array();
 			$cadastrar_campos = array('erro_peca' => "certo");
@@ -484,11 +486,12 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			}
 			
 			if (empty($cadastrar_erros)) {
-				$dados_usuario = new Object_Dados_Usuario();
+				$entidade = new Object_Entidade();
 				
-				$dados_usuario->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+				$entidade->set_id(unserialize($_SESSION['usuario'])->get_id());
+				$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
 				
-				$peca->set_dados_usuario($dados_usuario);
+				$peca->set_entidade($entidade);
 				$peca->set_data_anuncio(date('Y-m-d H:i:s'));
 				
 				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
@@ -653,7 +656,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public function Salvar_Imagem_TMP() {
+		public function Salvar_Imagem_TMP() : void {
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				$arquivo = null;
 				
@@ -685,7 +688,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public function Deletar_Imagem($num_img) {
+		public function Deletar_Imagem(int $num_img) : void {
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagens_tmp'])) {
 					if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
@@ -752,7 +755,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			}
 		}
 
-		public static function Pegar_Imagem_URL($nome_imagem) {
+		public static function Pegar_Imagem_URL(string $nome_imagem) : string {
 			$imagens = new Gerenciar_Imagens();
 			
 			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-400x300");
@@ -768,43 +771,43 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			return DAO_Categoria::BuscarTodos();
 		}
 		
-		public static function Buscar_Id_Marcas_Por_Id_Categoria($id_categoria) {
+		public static function Buscar_Id_Marcas_Por_Id_Categoria(int $id_categoria) {
 			return DAO_Marca::Buscar_Id_Por_Id_Categorai($id_categoria);
 		}
 		
-		public static function Buscar_Id_Modelos_Por_Id_Marca($id_marca) {
+		public static function Buscar_Id_Modelos_Por_Id_Marca(int $id_marca) {
 			return DAO_Modelo::Buscar_Id_Por_Id_Marca($id_marca);
 		}
 		
-		public static function Buscar_Id_Versoes_Por_Id_Modelo($id_modelo) {
+		public static function Buscar_Id_Versoes_Por_Id_Modelo(int $id_modelo) {
 			return DAO_Versao::Buscar_Id_Por_Id_Modelo($id_modelo);
 		}
 		
-		public static function Buscar_Marcas_Por_Categoria($id_categoria) {
+		public static function Buscar_Marcas_Por_Categoria(int $id_categoria) {
 			return DAO_Marca::Buscar_Por_Id_Categorai($id_categoria);
 		}
 		
-		public static function Buscar_Modelos_Por_Marca($id_marca) {
+		public static function Buscar_Modelos_Por_Marca(int $id_marca) {
 			return DAO_Modelo::Buscar_Por_Id_Marca($id_marca);
 		}
 		
-		public static function Buscar_Versoes_Por_Modelo($id_modelo) {
+		public static function Buscar_Versoes_Por_Modelo(int $id_modelo) {
 			return DAO_Versao::Buscar_Por_Id_Modelo($id_modelo);
 		}
 		
-		public static function Buscar_Categoria_Por_Id($id_categoria) {
+		public static function Buscar_Categoria_Por_Id(int $id_categoria) {
 			return DAO_Categoria::BuscarPorCOD($id_categoria);
 		}
 		
-		public static function Buscar_Marca_Por_Id($id_marca) {
+		public static function Buscar_Marca_Por_Id(int $id_marca) {
 			return DAO_Marca::BuscarPorCOD($id_marca);
 		}
 		
-		public static function Buscar_Modelo_Por_Id($id_modelo) {
+		public static function Buscar_Modelo_Por_Id(int $id_modelo) {
 			return DAO_Modelo::BuscarPorCOD($id_modelo);
 		}
 		
-		public static function Buscar_Versao_Por_Id($id_versao) {
+		public static function Buscar_Versao_Por_Id(int $id_versao) {
 			return DAO_Versao::BuscarPorCOD($id_versao);
 		}
 		
@@ -812,31 +815,31 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			return DAO_Status_Peca::BuscarTodos();
 		}
 		
-		public static function Buscar_Categoria_Id_Por_Marca($id_marca) {
+		public static function Buscar_Categoria_Id_Por_Marca(int $id_marca) {
 			return DAO_Marca::Buscar_Categoria_Id($id_marca);
 		}
 		
-		public static function Buscar_Marca_Id_Por_Modelo($id_modelo) {
+		public static function Buscar_Marca_Id_Por_Modelo(int $id_modelo) {
 			return DAO_Modelo::Buscar_Marca_Id($id_modelo);
 		}
 		
-		public static function Buscar_Modelo_Id_Por_Versao($id_versao) {
+		public static function Buscar_Modelo_Id_Por_Versao(int $id_versao) {
 			return DAO_Versao::Buscar_Modelo_Id($id_versao);
 		}
 		
-		public static function Buscar_Categorias_Compativeis($id_categoria) {
+		public static function Buscar_Categorias_Compativeis(int $id_categoria) {
 			return DAO_Categoria_Compativel::BuscarPorCOD($id_categoria);
 		}
 		
-		public static function Buscar_Marcas_Compativeis($id_marca) {
+		public static function Buscar_Marcas_Compativeis(int $id_marca) {
 			return DAO_Marca_Compativel::BuscarPorCOD($id_marca);
 		}
 		
-		public static function Buscar_Modelos_Compativeis($id_modelo) {
+		public static function Buscar_Modelos_Compativeis(int $id_modelo) {
 			return DAO_Modelo_Compativel::BuscarPorCOD($id_modelo);
 		}
 		
-		public static function Buscar_Versoes_Compativeis($id_versao) {
+		public static function Buscar_Versoes_Compativeis(int $id_versao) {
 			return DAO_Versao_Compativel::BuscarPorCOD($id_versao);
 		}
     }

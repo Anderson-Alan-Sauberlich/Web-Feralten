@@ -115,7 +115,7 @@ namespace application\model\dao;
         
         public static function Verificar_CPF_CNPJ(string $cpf_cnpj) {
         	try {
-        		$sql = "SELECT entidade_usr_id FROM tb_entidade WHERE entidade_cpf_cnpj = :cpf_cnpj";
+        		$sql = "SELECT entidade_id FROM tb_entidade WHERE entidade_cpf_cnpj = :cpf_cnpj";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":cpf_cnpj", $cpf_cnpj, PDO::PARAM_STR);
@@ -125,8 +125,8 @@ namespace application\model\dao;
         		
         		$select = 0;
         		
-        		if (isset($row['entidade_usr_id'])) {
-        			$select = $row['entidade_usr_id'];
+        		if (isset($row['entidade_id'])) {
+        			$select = $row['entidade_id'];
         		}
         		
         		return $select;
@@ -160,7 +160,13 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
+                $entidade = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($entidade) AND $entidade != false) {
+                	return self::PopulaUsuario($entidade);
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }

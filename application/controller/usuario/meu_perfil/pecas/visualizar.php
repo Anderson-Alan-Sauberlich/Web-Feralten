@@ -1,10 +1,12 @@
 <?php
 namespace application\controller\usuario\meu_perfil\pecas;
 	
+	require_once RAIZ.'/application/model/util/login_session.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/visualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	require_once RAIZ.'/application/controller/include_page/menu/pesquisa.php';
 	
+	use application\model\util\Login_Session;
 	use application\view\src\usuario\meu_perfil\pecas\Visualizar as View_Visualizar;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	use application\controller\include_page\menu\Pesquisa as Controller_Pesquisa;
@@ -21,7 +23,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		
         		if ($status == 1) {
         			if ($this->Validar_Variaveis()) {
-        				$this->set_peca_usuario(unserialize($_SESSION['usuario'])->get_id());
+        				$this->set_peca_usuario(Login_Session::get_entidade_id());
         				
 	        			$view = new View_Visualizar($status);
 	        			
@@ -39,6 +41,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	} else {
         		return false;
         	}
+        }
+        
+        public static function Mostrar_Nome() : string {
+        	return Login_Session::get_usuario_nome();
         }
     }
 ?>

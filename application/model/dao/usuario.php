@@ -114,15 +114,15 @@ namespace application\model\dao;
             }
         }
 		
-        public static function Atualizar_Token_Ultimo_Login(string $token, string $login, int $id) : bool {
+        public static function Atualizar_Token_Ultimo_Login(Object_Usuario $object_usuario) : bool {
             try {
                 $sql = "UPDATE tb_usuario SET usuario_token_login = :tk, usuario_ultimo_login = :ul WHERE usuario_id = :id";
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-                $p_sql->bindValue(":tk", $token, PDO::PARAM_STR);
-				$p_sql->bindValue(":ul", $login, PDO::PARAM_STR);
+                $p_sql->bindValue(":id", $object_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":tk", $object_usuario->get_token(), PDO::PARAM_STR);
+				$p_sql->bindValue(":ul", $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException $e) {

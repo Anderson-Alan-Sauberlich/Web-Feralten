@@ -1,10 +1,16 @@
 <?php
 namespace application\controller\usuario;
-
+	
+	require_once RAIZ.'/application/model/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
+    require_once RAIZ.'/application/model/dao/acesso_usuario.php';
+    require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/view/src/usuario/login.php';
-
+	
+    use application\model\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
+    use application\model\dao\Acesso_Usuario as DAO_Acesso_Usuario;
+    use application\model\dao\Entidade as DAO_Entidade;
     use application\view\src\usuario\Login as View_Login;
 
     class Login {
@@ -27,29 +33,49 @@ namespace application\controller\usuario;
         	if (isset($_GET['logout'])) {
 	        	if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
 	        		if (isset($_COOKIE['f_m_l'])) {
-	        			if (isset($_SESSION['usuario'])) {
-	        				DAO_Usuario::Atualizar_Token(null, unserialize($_SESSION['usuario'])->get_id());
+	        			if (isset($_SESSION['login'])) {
+	        				DAO_Usuario::Atualizar_Token(null, Login_Session::get_usuario_id());
 	        			}
 	        			 
 	        			setcookie("f_m_l", null, time()-3600, "/");
 	        		}
 	        
-	        		unset($_SESSION['usuario']);
+	        		Login_Session::Finalizar_Login_Session();
+	        		
 	        		$_SESSION['login_sucesso'][] = "LogOut efetuado com Sucesso";
 	        	}
         	}
         }
 		
-		public static function Autenticar_Usuario_Cookie(?int $id_usuario = null, ?string $token = null) : bool {
+		public static function Autenticar_Usuario_Cookie(int $id_usuario, string $token) : bool {
 			$usuario_login = DAO_Usuario::Buscar_Usuario($id_usuario);
 			
 			if ($usuario_login !== false) {
 				if (hash_equals($token, hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token())))) {
-	            	$usuario_login->set_senha(hash_hmac('sha512', $usuario_login->get_senha(), hash('sha512', $usuario_login->get_senha())));
 					$usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
 					$usuario_login->set_token(null);
 					
-					$_SESSION['usuario'] = serialize($usuario_login);
+					Login_Session::set_usuario_id($usuario_login->get_id());
+					Login_Session::set_usuario_nome($usuario_login->get_nome());
+					Login_Session::set_usuario_status($usuario_login->get_status_id());
+					
+					$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+					
+					if (!empty($entidade_login) AND $entidade_login !== false) {
+						$login['entidade'] = $entidade_login->get_id();
+						
+						Login_Session::set_entidade_id($entidade_login->get_id());
+						Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
+						Login_Session::set_entidade_status($entidade_login->get_status_id());
+						 
+						$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
+						 
+						if (!empty($acessos_login) AND $acessos_login !== false) {
+							foreach ($acessos_login as $acesso_login) {
+								Login_Session::set_permissao($acesso_login->get_funcionalidade_id(), $acesso_login->get_permissao_id());
+							}
+						}
+					}
 					
 	                $login = array();
 					
@@ -60,7 +86,7 @@ namespace application\controller\usuario;
 					
 	                setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
 	                
-					$retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login->get_token(), $usuario_login->get_ultimo_login(), $usuario_login->get_id());
+					$retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
 					
 					if ($retorno === false) {
 						return false;
@@ -75,14 +101,30 @@ namespace application\controller\usuario;
 			}
 		}
 		
-        public static function Autenticar_Usuario_Logado(?string $email = null, ?string $senha = null) : bool {
+        public static function Autenticar_Usuario_Logado(string $email, string $senha) : bool {
         	$usuario_login = DAO_Usuario::Autenticar($email);
             
             if (!empty($usuario_login) AND $usuario_login !== false) {
             	if (hash_equals($senha, $usuario_login->get_senha())) {
-            		$usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', $usuario_login->get_senha())));
-					
-					$_SESSION['usuario'] = serialize($usuario_login);
+            		Login_Session::set_usuario_id($usuario_login->get_id());
+            		Login_Session::set_usuario_nome($usuario_login->get_nome());
+            		Login_Session::set_usuario_status($usuario_login->get_status_id());
+            		
+            		$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+            		
+            		if (!empty($entidade_login) AND $entidade_login !== false) {
+            			Login_Session::set_entidade_id($entidade_login->get_id());
+            			Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
+            			Login_Session::set_entidade_status($entidade_login->get_status_id());
+            			
+            			$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
+            			
+            			if (!empty($acessos_login) AND $acessos_login !== false) {
+            				foreach ($acessos_login as $acesso_login) {
+            					Login_Session::set_permissao($acesso_login->get_funcionalidade_id(), $acesso_login->get_permissao_id());
+            				}
+            			}
+            		}
 					
 					return true;
             	} else {
@@ -143,13 +185,32 @@ namespace application\controller\usuario;
             if (empty($login_erros)) {
                 $usuario_login = DAO_Usuario::Autenticar($email);
                 
-                if ($usuario_login !== false) {
+                if (!empty($usuario_login) AND $usuario_login !== false) {
 		            if (password_verify($senha, $usuario_login->get_senha())) {
-		                $usuario_login->set_senha(hash_hmac('sha512', $senha, hash('sha512', $senha)));
 						$usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
 						
-		                $_SESSION['usuario'] = serialize($usuario_login);
-		                
+						Login_Session::set_usuario_id($usuario_login->get_id());
+						Login_Session::set_usuario_nome($usuario_login->get_nome());
+						Login_Session::set_usuario_status($usuario_login->get_status_id());
+						
+						$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+						
+						if (!empty($entidade_login) AND $entidade_login !== false) {
+							$login['entidade'] = $entidade_login->get_id();
+							
+							Login_Session::set_entidade_id($entidade_login->get_id());
+							Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
+							Login_Session::set_entidade_status($entidade_login->get_status_id());
+							
+							$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
+							
+							if (!empty($acessos_login) AND $acessos_login !== false) {
+								foreach ($acessos_login as $acesso_login) {
+									Login_Session::set_permissao($acesso_login->get_funcionalidade_id(), $acesso_login->get_permissao_id());
+								}
+							}
+						}
+						
 		                if (isset($manter_login)) {
 		                    $login = array();
 							
@@ -160,7 +221,7 @@ namespace application\controller\usuario;
 							
 		                    setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
 		                    
-							$retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login->get_token(), $usuario_login->get_ultimo_login(), $usuario_login->get_id());
+							$retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
 		                	
 							if ($retorno === false) {
 								$login_erros[] = "Erro ao tentar Atualizar Usuario";
@@ -192,6 +253,8 @@ namespace application\controller\usuario;
             	$login_form['senha'] = strip_tags($senha);
             	
             	$this->Carregar_Pagina($login_erros, $login_campos, $login_form);
+            	
+            	return false;
             }
         }
     }

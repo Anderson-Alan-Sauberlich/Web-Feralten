@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
-
+	
+	require_once RAIZ.'/application/model/util/login_session.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/model/object/cidade.php';
 	require_once RAIZ.'/application/model/object/estado.php';
@@ -10,6 +11,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php';
     require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
+    use application\model\util\Login_Session;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Cidade as Object_Cidade;
 	use application\model\object\Estado as Object_Estado;
@@ -39,7 +41,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         			if (!empty($enderecos_form)) {
         				$view->set_enderecos_form($enderecos_form);
         			} else {
-        				$endereco_retorno = DAO_Endereco::Buscar_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
+        				$endereco_retorno = DAO_Endereco::Buscar_Por_Id_Usuario(Login_Session::get_entidade_id());
         				
         				if (!empty($endereco_retorno) AND $endereco_retorno != false) {
         					$view->set_enderecos_form($endereco_retorno);
@@ -204,7 +206,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (empty($enderecos_erros)) {
-		            	$endereco->set_dados_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+		            	$endereco->set_entidade_id(Login_Session::get_entidade_id());
 		            	
 		                if (DAO_Endereco::Atualizar($endereco) === false) {
 		                	$enderecos_erros[] = "Erro ao tentar Atualizar Endereço";

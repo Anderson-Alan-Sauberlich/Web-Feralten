@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
+	require_once RAIZ.'/application/model/util/login_session.php';
 	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/usuario.php';
@@ -10,6 +11,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
+	use application\model\util\Login_Session;
 	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
@@ -42,8 +44,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        		unset($_SESSION['imagem_tmp']);
 		        	}
 		        	
-		        	$this->entidade_form = DAO_Entidade::BuscarPorCOD(unserialize($_SESSION['usuario'])->get_id());
-		        	$this->usuario_form = DAO_Usuario::Buscar_Usuario(unserialize($_SESSION['usuario'])->get_id());
+		        	$this->entidade_form = DAO_Entidade::BuscarPorCOD(Login_Session::get_usuario_id());
+		        	$this->usuario_form = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
 		        	
 		        	$view = new View_Atualizar($status);
 		        	
@@ -141,7 +143,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            			$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
 	            			 
 	            			if ($retorno !== false) {
-	            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
+	            				if ($retorno === 0 OR $retorno == Login_Session::get_usuario_id()) {
 	            					$entidade->set_cpf_cnpj($cpf_cnpj);
 	            				} else {
 	            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -204,7 +206,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
 
             if (empty($this->atualizar_erros)) {
-            	$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+            	$entidade->set_usuario_id(Login_Session::get_usuario_id());
             	$entidade->set_imagem($this->Salvar_Imagem());
             	
             	if (empty($entidade->get_imagem())) {
@@ -213,6 +215,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             			$this->atualizar_campos['erro_cpf_cnpj'] = "";
             		} else {
                 		$this->atualizar_sucesso[] = "Entidade Atualizada com Sucesso";
+                		Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                 	}
             	} else if ($entidade->get_imagem() == "del") {
             		$entidade->set_imagem(null);
@@ -222,6 +225,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 		$this->atualizar_campos['erro_cpf_cnpj'] = "";
                 	} else {
                 		$this->atualizar_sucesso[] = "Entidade Atualizada com Sucesso";
+                		Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                 	}
                 } else {
                 	if (DAO_Entidade::Atualizar($entidade) === false) {
@@ -229,6 +233,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 		$this->atualizar_campos['erro_cpf_cnpj'] = "";
                 	} else {
                 		$this->atualizar_sucesso[] = "Entidade Atualizada com Sucesso";
+                		Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                 	}
                 }
             }
@@ -288,7 +293,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
             			$retorno = DAO_Usuario::Verificar_Email($email);
             			
-            			if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
+            			if ($retorno === 0 OR $retorno == Login_Session::get_usuario_id()) {
             				if (strlen($email) <= 150) {
             					$usuario->set_email($email);
             				} else {
@@ -367,9 +372,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             }
             
             if (empty($this->atualizar_erros)) {
-            	$usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
-            	$usuario->set_senha(unserialize($_SESSION['usuario'])->get_senha());
-            	$usuario->set_ultimo_login(unserialize($_SESSION['usuario'])->get_ultimo_login());
+            	$usuario->set_id(Login_Session::get_usuario_id());
             	
                 if (DAO_Usuario::Atualizar($usuario) === false) {
                 	$this->atualizar_erros[] = "Erro ao tentar Atualizar Usuario";
@@ -377,7 +380,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
                 	$this->atualizar_campos['erro_email'] = "";
                 	$this->atualizar_campos['erro_confemail'] = "";
                 } else {
-                	$_SESSION['usuario'] = serialize($usuario);
+                	Login_Session::set_usuario_nome($usuario->get_nome());
                 	
                 	$this->atualizar_sucesso[] = "Usuario Atualizado com Sucesso";
                 }

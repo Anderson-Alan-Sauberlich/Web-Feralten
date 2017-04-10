@@ -6,12 +6,14 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/view/src/include_page/menu/filtro.php';
 	require_once RAIZ.'/application/view/src/include_page/menu/paginacao.php';
 	require_once RAIZ.'/application/view/src/include_page/card_peca.php';
+	require_once RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php';
 	
 	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 	use application\view\src\include_page\menu\Usuario as View_Usuario;
 	use application\view\src\include_page\menu\Filtro as View_Filtro;
 	use application\view\src\include_page\menu\Paginacao as View_Paginacao;
 	use application\view\src\include_page\Card_Peca as View_Card_Peca;
+	use application\controller\usuario\meu_perfil\pecas\Visualizar as Controller_Visualizar;
 	
     class Visualizar {
     	
@@ -64,7 +66,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 	        		$card_peca->Executar($peca);
 	        	}
         	} else {
-        		echo "<div class=\"container\"><h2><label class=\"lbPanel\">".unserialize($_SESSION['usuario'])->get_nome().", nenhuma peça foi encontrada.</label></h2></div>";
+        		echo "<div class=\"container\"><h2><label class=\"lbPanel\">".Controller_Visualizar::Mostrar_Nome().", nenhuma peça foi encontrada.</label></h2></div>";
         		echo "<div class=\"container\"><h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/pecas/cadastrar/\"> Clicando Aqui!</a></h3></div>";
         	}
         }

@@ -1,11 +1,9 @@
 <?php
 namespace application\controller\include_page\menu;
     
-    require_once RAIZ.'/application/model/dao/entidade.php';
-    require_once RAIZ.'/application/model/object/usuario.php';
+    require_once RAIZ.'/application/model/util/login_session.php';
     
-    use application\model\dao\Entidade as DAO_Entidade;
-    use application\model\object\Usuario as Object_Usuario;
+    use application\model\util\Login_Session;
     
     class Usuario {
 
@@ -14,7 +12,7 @@ namespace application\controller\include_page\menu;
         }
         
         public static function Verificar_Autenticacao() : bool {
-            if (empty($_SESSION['usuario'])) {
+            if (empty($_SESSION['login'])) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
                 $_SESSION['login_erros'] = $login_erros;
@@ -26,8 +24,8 @@ namespace application\controller\include_page\menu;
         }
         
         public static function Verificar_Status_Usuario() {
-        	$status = DAO_Entidade::Pegar_Status_Entidade(unserialize($_SESSION['usuario'])->get_id());
-        	// mudar a verificassão do status com urgencia para pegar por entidade e por usuario separadamente
+        	$status = Login_Session::get_entidade_status();
+        	
         	if ($status == null) {
         		return 0;
         	} else if ($status == 1) {
@@ -39,6 +37,10 @@ namespace application\controller\include_page\menu;
         	} else {
         		return null;
         	}
+        }
+        
+        public static function Mostrar_Nome() {
+        	return Login_Session::get_usuario_nome();
         }
     }
 ?>

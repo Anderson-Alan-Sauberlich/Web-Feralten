@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
+	require_once RAIZ.'/application/model/util/login_session.php';
 	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
 	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/object/entidade.php';
@@ -16,6 +17,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/concluir.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
+	use application\model\util\Login_Session;
 	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
 	use application\model\object\usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
@@ -265,7 +267,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			            			$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
 			            			
 			            			if ($retorno !== false) {
-			            				if ($retorno === 0 OR $retorno == unserialize($_SESSION['usuario'])->get_id()) {
+			            				if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
 			            					$entidade->set_cpf_cnpj($cpf_cnpj);
 			            				} else {
 			            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -328,10 +330,10 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (empty($concluir_erros)) {
-		            	$usuario->set_id(unserialize($_SESSION['usuario'])->get_id());
+		            	$usuario->set_id(Login_Session::get_usuario_id());
 		            	
 		            	if (DAO_Usuario::Atualizar_Contato($usuario) !== false) {
-		            		$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+		            		$entidade->set_usuario_id(Login_Session::get_usuario_id());
 		            		$entidade->set_status_id(1);
 		            		$entidade->set_data(date('Y-m-d H:i:s'));
 		            		$entidade->set_imagem($this->Salvar_Imagem());

@@ -1,9 +1,9 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/acesso_usuario.php';
     require_once RAIZ.'/application/model/util/conexao.php';
-
+	
     use application\model\object\Acesso_Usuario as Object_Acesso_Usuario;
     use application\model\util\Conexao;
     use \PDO;
@@ -68,21 +68,50 @@ namespace application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $usuario_id, int $entidade_id) {
             try {
-                $sql = "SELECT acesso_usuario_usr_id, acesso_usuario_ent_id, acesso_usuario_fnc, acesso_usuario_pms_id FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :id";
+                $sql = "SELECT acesso_usuario_fnc, acesso_usuario_pms_id FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :usr_id AND acesso_usuario_ent_id = :ent_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(":usr_id", $usuario_id, PDO::PARAM_INT);
+                $p_sql->bindValue(":ent_id", $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaStatus($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopulaArrayAcessos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function PopulaStatus(array $row) : Object_Acesso_Usuario {
+        public static function PopulaArrayAcessos(array $rows) : array {
+        	$acessos = array();
+        	
+        	foreach ($rows as $row) {
+	        	$object_acesso_usuario = new Object_Acesso_Usuario();
+	        	
+	        	if (isset($row['acesso_usuario_usr_id'])) {
+	        		$object_acesso_usuario->set_usuario_id($row['acesso_usuario_usr_id']);
+	        	}
+	        	
+	        	if (isset($row['acesso_usuario_ent_id'])) {
+	        		$object_acesso_usuario->set_entidade_id($row['acesso_usuario_ent_id']);
+	        	}
+	        	
+	        	if (isset($row['acesso_usuario_fnc'])) {
+	        		$object_acesso_usuario->set_funcionalidade_id($row['acesso_usuario_fnc']);
+	        	}
+	        	
+	        	if (isset($row['acesso_usuario_pms_id'])) {
+	        		$object_acesso_usuario->set_permissao_id($row['acesso_usuario_pms_id']);
+	        	}
+	        	
+	        	$acessos[] = $object_acesso_usuario;
+        	}
+        	
+        	return $acessos;
+        }
+        
+        public static function PopulaAcesso(array $row) : Object_Acesso_Usuario {
             $object_acesso_usuario = new Object_Acesso_Usuario();
             
             if (isset($row['acesso_usuario_usr_id'])) {
@@ -102,6 +131,6 @@ namespace application\model\dao;
             }
             
             return $object_acesso_usuario;
-        }                
+        }
     }
 ?>
