@@ -1,6 +1,8 @@
 <?php
 namespace application\controller\usuario\meu_perfil\pecas;
-
+	
+	require_once RAIZ.'/application/model/util/login_session.php';
+	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/model/object/peca.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/model/object/status_peca.php';
@@ -10,6 +12,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/model/object/versao_pativel.php';
 	require_once RAIZ.'/application/model/object/foto_peca.php';
 	require_once RAIZ.'/application/model/object/entidade.php';
+	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/dao/categoria.php';
     require_once RAIZ.'/application/model/dao/marca.php';
     require_once RAIZ.'/application/model/dao/modelo.php';
@@ -26,10 +29,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/model/dao/peca.php';
 	require_once RAIZ.'/application/model/dao/endereco.php';
 	require_once RAIZ.'/application/model/dao/foto_peca.php';
-	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/cadastrar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
+	use application\model\util\Login_Session;
+	use application\model\util\Gerenciar_Imagens;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
@@ -39,6 +43,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Entidade as Object_Entidade;
+	use application\model\object\Usuario as Object_Usuario;
     use application\model\dao\Categoria as DAO_Categoria;
     use application\model\dao\Marca as DAO_Marca;
     use application\model\dao\Modelo as DAO_Modelo;
@@ -55,7 +60,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\dao\Peca as DAO_Peca;
 	use application\model\dao\Endereco as DAO_Endereco;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
-	use application\model\util\Gerenciar_Imagens;
 	use application\view\src\usuario\meu_perfil\pecas\Cadastrar as View_Cadastrar;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
 		
@@ -284,6 +288,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$status = new Object_Status_Peca();
 			
 			$peca->set_status($status);
+			$peca->set_divulgar_endereco(true);
 				
 			if (!empty($_POST['descricao'])) {
 				$descricao = strip_tags($_POST['descricao']);
@@ -488,13 +493,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			if (empty($cadastrar_erros)) {
 				$entidade = new Object_Entidade();
 				
-				$entidade->set_id(unserialize($_SESSION['usuario'])->get_id());
-				$entidade->set_usuario_id(unserialize($_SESSION['usuario'])->get_id());
+				$entidade->set_id(Login_Session::get_entidade_id());
+				$entidade->set_usuario_id(Login_Session::get_usuario_id());
 				
 				$peca->set_entidade($entidade);
 				$peca->set_data_anuncio(date('Y-m-d H:i:s'));
 				
-				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Usuario(unserialize($_SESSION['usuario'])->get_id());
+				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
 				
 				if ($id_endereco === false) {
 					$cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
@@ -506,6 +511,12 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 					$peca->set_id(0);
 					$peca->set_endereco($endereco);
+					
+					$usuario_responsavel = new Object_Usuario();
+					
+					$usuario_responsavel->set_id(Login_Session::get_usuario_id());
+					
+					$peca->set_responsavel($usuario_responsavel);
 				}
 				
 				$id_peca = DAO_Peca::Inserir($peca);

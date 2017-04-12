@@ -16,6 +16,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/concluir.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
+	require_once RAIZ.'/application/controller/usuario/login.php';
     
 	use application\model\util\Login_Session;
 	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
@@ -32,6 +33,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\util\Gerenciar_Imagens;
 	use application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\usuario\Login as Controller_Login;
     
     class Concluir {
 		
@@ -320,7 +322,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            		if (strlen($nome_comercial) <= 150) {
 		            			$entidade->set_nome_comercial($nome_comercial);
 		            		} else {
-		            			$concluir_erros[] = "Nome Comercial, Não pode conter mais de 45 Caracteres";
+		            			$concluir_erros[] = "Nome Comercial, Não pode conter mais de 150 Caracteres";
 		            			$concluir_campos['erro_nome_comercial'] = "erro";
 		            		}
 		            	} else {
@@ -356,6 +358,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            }
 		            
 		            if (empty($concluir_erros)) {
+		            	Controller_Login::ReAutenticar_Usuario_Logado(Login_Session::get_usuario_id());
+		            	
 		            	return 'certo';
 		            } else {
 		            	$concluir_form = array();

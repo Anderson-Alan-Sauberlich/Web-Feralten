@@ -150,14 +150,36 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function Buscar_Por_Id_Usuario(int $usuario_id) {
+        	try {
+        		$sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
+                		entidade_imagem, entidade_site, entidade_data_cadastro
+                		FROM tb_entidade WHERE entidade_usr_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $usuario_id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		$entidade = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		if (!empty($entidade) AND $entidade != false) {
+        			return self::PopulaUsuario($entidade);
+        		} else {
+        			return false;
+        		}
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function BuscarPorCOD(int $entidade_id) {
             try {
                 $sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial, 
                 		entidade_imagem, entidade_site, entidade_data_cadastro 
-                		FROM tb_entidade WHERE entidade_usr_id = :id";
+                		FROM tb_entidade WHERE entidade_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(":id", $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 $entidade = $p_sql->fetch(PDO::FETCH_ASSOC);
@@ -177,7 +199,7 @@ namespace application\model\dao;
             
             if (isset($row['entidade_id'])) {
             	$object_entidade->set_id($row['entidade_id']);
-            	$object_entidade->set_endereco(DAO_Endereco::Buscar_Por_Id_Usuario($row['entidade_id']));
+            	$object_entidade->set_endereco(DAO_Endereco::Buscar_Por_Id_Entidade($row['entidade_id']));
             }
             
             if (isset($row['entidade_usr_id'])) {

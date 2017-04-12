@@ -44,7 +44,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		        		unset($_SESSION['imagem_tmp']);
 		        	}
 		        	
-		        	$this->entidade_form = DAO_Entidade::BuscarPorCOD(Login_Session::get_usuario_id());
+		        	$this->entidade_form = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
 		        	$this->usuario_form = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
 		        	
 		        	$view = new View_Atualizar($status);
@@ -143,7 +143,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	            			$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
 	            			 
 	            			if ($retorno !== false) {
-	            				if ($retorno === 0 OR $retorno == Login_Session::get_usuario_id()) {
+	            				if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
 	            					$entidade->set_cpf_cnpj($cpf_cnpj);
 	            				} else {
 	            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
@@ -259,7 +259,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             		$nome = preg_replace('/\s+/', " ", $nome);
             		
             		if (strlen($nome) <= 150) {
-            			if (preg_match("/^([a-zA-Z0-9çÇ ,'-]+)$/", $nome)) {
+            			if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $nome)) {
             				$usuario->set_nome(ucwords(strtolower($nome)));
             			} else {
             				$this->atualizar_erros[] = "O Nome Não Pode Conter Caracteres Especiais";

@@ -41,7 +41,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         			if (!empty($enderecos_form)) {
         				$view->set_enderecos_form($enderecos_form);
         			} else {
-        				$endereco_retorno = DAO_Endereco::Buscar_Por_Id_Usuario(Login_Session::get_entidade_id());
+        				$endereco_retorno = DAO_Endereco::Buscar_Por_Id_Entidade(Login_Session::get_entidade_id());
         				
         				if (!empty($endereco_retorno) AND $endereco_retorno != false) {
         					$view->set_enderecos_form($endereco_retorno);

@@ -27,7 +27,7 @@ namespace application\controller\usuario;
         	$view->Executar();
         }
 
-        public function Cadastrar_Usuario() : ?bool {
+        public function Cadastrar_Usuario() {
             $cadastro_erros = array();
             $cadastro_campos = array('erro_nome' => "certo", 'erro_email' =>  "certo", 'erro_confemail' => "certo", 'erro_senha' => "certo");
 
@@ -44,7 +44,7 @@ namespace application\controller\usuario;
 	            	$nome = preg_replace('/\s+/', " ", $nome);
 	            	
 	            	if (strlen($nome) <= 150) {
-	            		if (preg_match("/^([a-zA-Z0-9çÇ ,'-]+)$/", $nome)) {
+	            		if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $nome)) {
 	            			$usuario->set_nome(ucwords(strtolower($nome)));
 	            		} else {
 	            			$cadastro_erros[] = "O Nome Não Pode Conter Caracteres Especiais";

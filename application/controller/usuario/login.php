@@ -59,7 +59,7 @@ namespace application\controller\usuario;
 					Login_Session::set_usuario_nome($usuario_login->get_nome());
 					Login_Session::set_usuario_status($usuario_login->get_status_id());
 					
-					$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+					$entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
 					
 					if (!empty($entidade_login) AND $entidade_login !== false) {
 						$login['entidade'] = $entidade_login->get_id();
@@ -101,16 +101,49 @@ namespace application\controller\usuario;
 			}
 		}
 		
+		public static function ReAutenticar_Usuario_Logado(int $usuario_id) : bool {
+			$usuario_login = DAO_Usuario::Buscar_Usuario($usuario_id);
+			
+			if (!empty($usuario_login) AND $usuario_login !== false) {
+				Login_Session::set_usuario_id($usuario_login->get_id());
+				Login_Session::set_usuario_nome($usuario_login->get_nome());
+				Login_Session::set_usuario_status($usuario_login->get_status_id());
+				
+				$entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
+				
+				if (!empty($entidade_login) AND $entidade_login !== false) {
+					Login_Session::set_entidade_id($entidade_login->get_id());
+					Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
+					Login_Session::set_entidade_status($entidade_login->get_status_id());
+					
+					$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
+					
+					if (!empty($acessos_login) AND $acessos_login !== false) {
+						foreach ($acessos_login as $acesso_login) {
+							Login_Session::set_permissao($acesso_login->get_funcionalidade_id(), $acesso_login->get_permissao_id());
+						}
+					}
+				}
+				
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
         public static function Autenticar_Usuario_Logado(string $email, string $senha) : bool {
         	$usuario_login = DAO_Usuario::Autenticar($email);
             
             if (!empty($usuario_login) AND $usuario_login !== false) {
             	if (hash_equals($senha, $usuario_login->get_senha())) {
+            		Login_Session::Finalizar_Login_Session();
+            		setcookie("f_m_l", null, time()-3600, "/");
+            		
             		Login_Session::set_usuario_id($usuario_login->get_id());
             		Login_Session::set_usuario_nome($usuario_login->get_nome());
             		Login_Session::set_usuario_status($usuario_login->get_status_id());
             		
-            		$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+            		$entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
             		
             		if (!empty($entidade_login) AND $entidade_login !== false) {
             			Login_Session::set_entidade_id($entidade_login->get_id());
@@ -193,7 +226,7 @@ namespace application\controller\usuario;
 						Login_Session::set_usuario_nome($usuario_login->get_nome());
 						Login_Session::set_usuario_status($usuario_login->get_status_id());
 						
-						$entidade_login = DAO_Entidade::BuscarPorCOD($usuario_login->get_id());
+						$entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
 						
 						if (!empty($entidade_login) AND $entidade_login !== false) {
 							$login['entidade'] = $entidade_login->get_id();

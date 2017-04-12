@@ -7,7 +7,7 @@ namespace application\view\src\usuario\meu_perfil;
 	
     class Perfil {
 
-        function __construct($status) {
+        function __construct(int $status) {
             self::$status_usuario = $status;
         }
         

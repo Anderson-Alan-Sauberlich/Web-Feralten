@@ -6,6 +6,7 @@ namespace application\model\dao;
     require_once RAIZ.'/application/model/dao/status_peca.php';
     require_once RAIZ.'/application/model/dao/endereco.php';
     require_once RAIZ.'/application/model/dao/entidade.php';
+    require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
     use application\model\object\Peca as Object_Peca;
@@ -13,6 +14,7 @@ namespace application\model\dao;
     use application\model\dao\Status_Peca as DAO_Status_Peca;
     use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Entidade as DAO_Entidade;
+    use application\model\dao\Usuario as DAO_Usuario;
     use application\model\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -24,14 +26,15 @@ namespace application\model\dao;
         }
         
         public static function Inserir(Object_Peca $object_peca) {
-            try {
-                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco) 
-                        VALUES (:id, :ent_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :divlg_end);";
+            
+                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco) 
+                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :divlg_end);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":id", $object_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":usr_id", $object_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":end_id", $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":st_id", $object_peca->get_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
@@ -46,9 +49,7 @@ namespace application\model\dao;
                 $p_sql->execute();
 				
 				return Conexao::Conectar()->lastInsertId();
-            } catch (PDOException $e) {
-				return false;
-            }
+            
         }
         
         public static function Atualizar(Object_Peca $object_peca) : bool {
@@ -56,6 +57,7 @@ namespace application\model\dao;
                 $sql = "UPDATE tb_peca SET 
                 		peca_id = :id, 
                 		peca_ent_id = :ent_id, 
+						peca_responsavel_usr_id = :usr_id,
                 		peca_end_id = :end_id, 
                 		peca_sts_pec_id = :st_id, 
                 		peca_nome = :nome, 
@@ -71,7 +73,8 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":id", $object_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(":usr_id", $object_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":end_id", $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":st_id", $object_peca->get_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
@@ -104,7 +107,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco FROM tb_peca WHERE peca_id = :id";
+                $sql = "SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco FROM tb_peca WHERE peca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -245,8 +248,12 @@ namespace application\model\dao;
             	$object_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
             }
             
+            if (isset($row['peca_responsavel_usr_id'])) {
+            	$object_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
+            }
+            
             if (isset($row['peca_end_id'])) {
-            	$object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Usuario($row['peca_end_id']));
+            	$object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
             }
             
             if (isset($row['peca_sts_pec_id'])) {
@@ -308,8 +315,12 @@ namespace application\model\dao;
 	        		$object_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
 	        	}
 	        	
+	        	if (isset($row['peca_responsavel_usr_id'])) {
+	        		$object_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
+	        	}
+	        	
 	        	if (isset($row['peca_end_id'])) {
-	        		$object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Usuario($row['peca_end_id']));
+	        		$object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
 	        	}
 	        	
 	        	if (isset($row['peca_sts_pec_id'])) {

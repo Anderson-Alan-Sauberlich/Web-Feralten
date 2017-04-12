@@ -85,12 +85,32 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario(int $id) {
+        public static function Buscar_Por_Id_Endereco(int $endereco_id) {
+        	try {
+        		$sql = "SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $endereco_id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		$endereco = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		if (!empty($endereco) AND $endereco != false) {
+        			return self::PopulaEndereco($endereco);
+        		} else {
+        			return false;
+        		}
+        	} catch (PDOException $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Por_Id_Entidade(int $entidade_id) {
             try {
                 $sql = "SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_ent_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(":id", $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 $endereco = $p_sql->fetch(PDO::FETCH_ASSOC);
@@ -105,12 +125,12 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Usuario(int $id) {
+        public static function Buscar_Id_Por_Id_Entidade(int $entidade_id) {
         	try {
         		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_ent_id = :id";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":id", $entidade_id, PDO::PARAM_INT);
         		$p_sql->execute();
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         		

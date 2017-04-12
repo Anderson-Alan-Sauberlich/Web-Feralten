@@ -33,7 +33,7 @@
 		<span class="right floated"><?php echo date('d/m/Y', strtotime($peca->get_data_anuncio())); ?></span>
 		<span><i class="user icon"></i>livre</span>
 	</div>
-	<?php if ($peca->get_dados_usuario()->get_usuario_id() === unserialize($_SESSION['usuario'])->get_id()) { ?>
+	<?php if ($peca->get_entidade()->get_usuario_id() === $_SESSION['login']['usuario']['id']) { ?>
 		<div class="extra content">
 			<div class="ui two buttons">
 				<button id="atualizar" name="atualizar" value="$peca->get_id();" class="ui inverted green button">Atualizar</button>

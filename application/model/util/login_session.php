@@ -116,7 +116,7 @@ namespace application\model\util;
 		 * @param string $entidade_nome 'Nome da entidade'
 		 * @return void
 		 */
-		public static function set_entidade_nome(string $entidade_nome) : void {
+		public static function set_entidade_nome(?string $entidade_nome) : void {
 			$_SESSION['login']['Entidade']['nome'] = $entidade_nome;
 		}
 		

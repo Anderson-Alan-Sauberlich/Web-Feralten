@@ -195,12 +195,12 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Usuario(int $id) {
+        public static function Buscar_Usuario(int $usuario_id) {
             try {
                 $sql = "SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_token_login, usuario_sts_usr_id, usuario_fone1, usuario_fone2, usuario_email_alternativo FROM tb_usuario WHERE usuario_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(":id", $usuario_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 $usuario = $p_sql->fetch(PDO::FETCH_ASSOC);

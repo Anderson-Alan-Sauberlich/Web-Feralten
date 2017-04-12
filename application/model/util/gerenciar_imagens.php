@@ -1,12 +1,15 @@
 <?php
 namespace application\model\util;
 	
+	require_once RAIZ.'/application/model/util/login_session.php';
+	
+	use application\model\util\Login_Session;
 	use DirectoryIterator;
 	
 	class Gerenciar_Imagens {
 		
 		function __construct() {
-			$this->usuario = unserialize($_SESSION['usuario'])->get_id();
+			$this->usuario = Login_Session::get_usuario_id();
 		}
 		
 		private $caminho;
