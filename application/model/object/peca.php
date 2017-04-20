@@ -28,7 +28,7 @@ namespace application\model\object;
 		private $prioridade;
 		private $status;
 		private $fotos = array();
-		private $divulgar_endereco;
+		private $preferencia_entrega;
 		
 		function __constructor() {
 			
@@ -148,12 +148,12 @@ namespace application\model\object;
 			return $this->fotos[$numero];
 		}
 		
-		public function set_divulgar_endereco(?bool $divulgar_endereco = null) : void {
-			$this->divulgar_endereco = $divulgar_endereco;
+		public function set_preferencia_entrega(?int $preferencia_entrega= null) : void {
+			$this->preferencia_entrega= $preferencia_entrega;
 		}
 		
-		public function get_divulgar_endereco() : ?bool {
-			return $this->divulgar_endereco;
+		public function get_preferencia_entrega() : ?int {
+			return $this->preferencia_entrega;
 		}
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/marca_pativel.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
@@ -17,50 +17,99 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Marca_Pativel $object_marca_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_de, marca_pativel_ano_ate) 
-                        VALUES (:pc_id, :ma_id, :ano_de, :ano_ate);";
+                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pec_id, marca_pativel_mrc_id) 
+                        VALUES (:pec_id, :mrc_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":pc_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ma_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_marca_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_marca_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+                $p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+				
+                if ($p_sql->execute()) {
+                	$anos = $object_marca_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+	                	foreach ($anos as $ano) {
+	                		$sql = "INSERT INTO tb_marca_pativel_ano (marca_pativel_ano_pec_id, marca_pativel_ano_mrc_id, marca_pativel_ano_ano)
+		                        	VALUES (:pec_id, :mrc_id, :ano);";
+	                		
+	                		$p_sql = Conexao::Conectar()->prepare($sql);
+	                		
+	                		$p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
+	                		$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+	                		$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+	                		
+	                		$p_sql->execute();
+	                	}
+	                	
+	                	return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Atualizar(Object_Marca_Pativel $object_marca_pativel) : bool {
+        public static function Atualizar_Anos(Object_Marca_Pativel $object_marca_pativel) : bool {
             try {
-                $sql = "UPDATE tb_marca_pativel SET
-                marca_pativel_pec_id = :pc_id,
-                marca_pativel_mrc_id = :ma_id,
-                marca_pativel_ano_de = :ano_de,
-                marca_pativel_ano_ate = :ano_ate 
-                WHERE marca_pativel_pec_id = :pc_id AND marca_pativel_mrc_id = :ma_id";
-
-                $p_sql = Conexao::Conectar()->prepare($sql);
-				
-                $p_sql->bindValue(":pc_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ma_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_marca_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_marca_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+                if (self::Deletar_Anos($object_marca_pativel->get_peca_id(), $object_marca_pativel->get_marca_id())) {
+                	$anos = $object_marca_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+                		foreach ($anos as $ano) {
+                			$sql = "INSERT INTO tb_marca_pativel_ano (marca_pativel_ano_pec_id, marca_pativel_ano_mrc_id, marca_pativel_ano_ano)
+		                        	VALUES (:pec_id, :mrc_id, :ano);";
+                			
+                			$p_sql = Conexao::Conectar()->prepare($sql);
+                			
+                			$p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+                			
+                			$p_sql->execute();
+                		}
+                		
+                		return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $peca_id, int $marca_id) : bool {
+        	try {
+        		self::Deletar_Anos($peca_id, $marca_id);
+        		
+        		$sql = "DELETE FROM tb_marca_pativel WHERE marca_pativel_pec_id = :pec_id AND marca_pativel_mrc_id = :mrc_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":mrc_id", $marca_id, PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Deletar_Anos(int $peca_id, int $marca_id) : bool {
             try {
-                $sql = "DELETE FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
+                $sql = "DELETE FROM tb_marca_pativel_ano WHERE marca_pativel_ano_pec_id = :pec_id AND marca_pativel_ano_mrc_id = :mrc_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                
+                $p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+                $p_sql->bindValue(":mrc_id", $marca_id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {

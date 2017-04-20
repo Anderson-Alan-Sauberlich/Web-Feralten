@@ -1,6 +1,6 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/versao_pativel.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
@@ -17,17 +17,38 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Versao_Pativel $object_versao_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_versao_pativel (versao_pativel_pec_id, versao_pativel_vrs_id, versao_pativel_ano_de, versao_pativel_ano_ate) 
-                        VALUES (:pc_id, :vs_id, :ano_de, :ano_ate);";
+                $sql = "INSERT INTO tb_versao_pativel (versao_pativel_pec_id, versao_pativel_vrs_id) 
+                        VALUES (:pec_id, :vrs_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":pc_id", $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":vs_id", $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_versao_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_versao_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+                $p_sql->bindValue(":pec_id", $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":vrs_id", $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+				
+                if ($p_sql->execute()) {
+                	$anos = $object_versao_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+                		foreach ($anos as $ano) {
+                			$sql = "INSERT INTO tb_versao_pativel_ano (versao_pativel_ano_pec_id, versao_pativel_ano_vrs_id, versao_pativel_ano_ano)
+		                        	VALUES (:pec_id, :vrs_id, :ano);";
+                			
+                			$p_sql = Conexao::Conectar()->prepare($sql);
+                			
+                			$p_sql->bindValue(":pec_id", $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":vrs_id", $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+                			
+                			$p_sql->execute();
+                		}
+                		
+                		return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
@@ -35,32 +56,60 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Versao_Pativel $object_versao_pativel) : bool {
             try {
-                $sql = "UPDATE tb_versao_pativel SET
-                versao_pativel_pec_id = :pc_id,
-                versao_pativel_vrs_id = :vs_id,
-                versao_pativel_ano_de = :ano_de,
-                versao_pativel_ano_ate = :ano_ate 
-                WHERE versao_pativel_pec_id = :pc_id AND versao_pativel_vrs_id = :vs_id";
-
-                $p_sql = Conexao::Conectar()->prepare($sql);
-				
-                $p_sql->bindValue(":pc_id", $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":vs_id", $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_versao_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_versao_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+				if (self::Deletar_Anos($object_versao_pativel->get_peca_id(), $object_versao_pativel->get_versao_id())) {
+					$anos = $object_versao_pativel->get_anos();
+					
+					if (!empty($anos)) {
+						foreach ($anos as $ano) {
+							$sql = "INSERT INTO tb_versao_pativel_ano (versao_pativel_ano_pec_id, versao_pativel_ano_vrs_id, versao_pativel_ano_ano)
+		                        	VALUES (:pec_id, :vrs_id, :ano);";
+							
+							$p_sql = Conexao::Conectar()->prepare($sql);
+							
+							$p_sql->bindValue(":pec_id", $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+							$p_sql->bindValue(":vrs_id", $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+							$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+							
+							$p_sql->execute();
+						}
+						
+						return true;
+					} else {
+						return true;
+					}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $peca_id, int $versao_id) : bool {
+        	try {
+        		self::Deletar_Anos($peca_id, $versao_id);
+        		
+        		$sql = "DELETE FROM tb_versao_pativel WHERE versao_pativel_pec_id = :pec_id AND versao_pativel_vrs_id = :vrs_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":vrs_id", $versao_id, PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Deletar_Anos(int $peca_id, int $versao_id) : bool {
             try {
-                $sql = "DELETE FROM tb_versao_pativel WHERE versao_pativel_pec_id = :id";
+                $sql = "DELETE FROM tb_versao_pativel_ano WHERE versao_pativel_ano_pec_id = :pec_id AND versao_pativel_ano_vrs_id = :vrs_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                
+                $p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+                $p_sql->bindValue(":vrs_id", $versao_id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {

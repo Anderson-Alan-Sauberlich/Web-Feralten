@@ -21,51 +21,100 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Categoria_Pativel $object_categoria_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_categoria_pativel (categoria_pativel_pec_id, categoria_pativel_ctg_id, categoria_pativel_ano_de, categoria_pativel_ano_ate) 
-                        VALUES (:pc_id, :ca_id, :ano_de, :ano_ate);";
+                $sql = "INSERT INTO tb_categoria_pativel (categoria_pativel_pec_id, categoria_pativel_ctg_id) 
+                        VALUES (:pec_id, :ctg_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
+                $p_sql->bindValue(":pec_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":ctg_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
 
-                return $p_sql->execute();
+                if ($p_sql->execute()) {
+                	$anos = $object_categoria_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+                		foreach ($anos as $ano) {
+		                	$sql = "INSERT INTO tb_categoria_pativel_ano (categoria_pativel_ano_pec_id, categoria_pativel_ano_ctg_id, categoria_pativel_ano_ano)
+		                        	VALUES (:pec_id, :ctg_id, :ano);";
+		                	
+		                	$p_sql = Conexao::Conectar()->prepare($sql);
+		                	
+		                	$p_sql->bindValue(":pec_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+		                	$p_sql->bindValue(":ctg_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+		                	$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+		                	
+		                	$p_sql->execute();
+                		}
+                		
+                		return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Atualizar(Object_Categoria_Pativel $object_categoria_pativel) : bool {
+        public static function Atualizar_Anos(Object_Categoria_Pativel $object_categoria_pativel) : bool {
             try {
-                $sql = "UPDATE tb_categoria_pativel SET
-                categoria_pativel_pec_id = :pc_id,
-                categoria_pativel_ctg_id = :ca_id,
-                categoria_pativel_ano_de = :ano_de,
-                categoria_pativel_ano_ate = :ano_ate 
-                WHERE categoria_pativel_pec_id = :pc_id AND categoria_pativel_ctg_id = :ca_id";
-
-                $p_sql = Conexao::Conectar()->prepare($sql);
-				
-                $p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+            	if (self::Deletar_Anos($object_categoria_pativel->get_peca_id(), $object_categoria_pativel->get_categoria_id())) {
+	            	$anos = $object_categoria_pativel->get_anos();
+	            	
+	            	if (!empty($anos)) {
+	            		foreach ($anos as $ano) {
+	            			$sql = "INSERT INTO tb_categoria_pativel_ano (categoria_pativel_ano_pec_id, categoria_pativel_ano_ctg_id, categoria_pativel_ano_ano)
+			                        	VALUES (:pec_id, :ctg_id, :ano);";
+	            			
+	            			$p_sql = Conexao::Conectar()->prepare($sql);
+	            			
+	            			$p_sql->bindValue(":pec_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+	            			$p_sql->bindValue(":ctg_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+	            			$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+	            			
+	            			$p_sql->execute();
+	            		}
+	            		
+	            		return true;
+	            	} else {
+	            		return true;
+	            	}
+            	} else {
+            		return false;
+            	}
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $peca_id, int $categoria_id) : bool {
+        	try {
+        		self::Deletar_Anos($peca_id, $categoria_id);
+        		
+        		$sql = "DELETE FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :pec_id AND categoria_pativel_ctg_id = :ctg_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":ctg_id", $categoria_id, PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Deletar_Anos(int $peca_id, int $categoria_id) : bool {
             try {
-                $sql = "DELETE FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :id";
+                $sql = "DELETE FROM tb_categoria_pativel_ano WHERE categoria_pativel_ano_pec_id = :pec_id AND categoria_pativel_ano_ctg_id = :ctg_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-
+                
+                $p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+                $p_sql->bindValue(":ctg_id", $categoria_id, PDO::PARAM_INT);
+				
                 return $p_sql->execute();
             } catch (Exception $e) {
 				return false;
@@ -74,7 +123,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT categoria_pativel_pec_id, categoria_pativel_ctg_id, categoria_pativel_ano_de, categoria_pativel_ano_ate FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :id";
+                $sql = "SELECT categoria_pativel_pec_id, categoria_pativel_ctg_id, categoria_pativel_ano_ano FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -93,8 +142,7 @@ namespace application\model\dao;
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
         		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_anos(), PDO::PARAM_INT);
         		$p_sql->execute();
         		$select = $p_sql->fetchAll();
         		$cont = count($select);

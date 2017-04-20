@@ -13,6 +13,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/model/object/foto_peca.php';
 	require_once RAIZ.'/application/model/object/entidade.php';
 	require_once RAIZ.'/application/model/object/usuario.php';
+	require_once RAIZ.'/application/model/dao/preferencia_entrega.php';
     require_once RAIZ.'/application/model/dao/categoria.php';
     require_once RAIZ.'/application/model/dao/marca.php';
     require_once RAIZ.'/application/model/dao/modelo.php';
@@ -44,6 +45,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Entidade as Object_Entidade;
 	use application\model\object\Usuario as Object_Usuario;
+	use application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use application\model\dao\Categoria as DAO_Categoria;
     use application\model\dao\Marca as DAO_Marca;
     use application\model\dao\Modelo as DAO_Modelo;
@@ -288,8 +290,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$status = new Object_Status_Peca();
 			
 			$peca->set_status($status);
-			$peca->set_divulgar_endereco(true);
-				
+			
 			if (!empty($_POST['descricao'])) {
 				$descricao = strip_tags($_POST['descricao']);
 				 
@@ -317,6 +318,18 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				} else {
 					$cadastrar_erros[] = "Status, Selecione um Status Valido.";
 					$cadastrar_campos['erro_status'] = "erro";
+				}
+			}
+			
+			if (!empty($_POST['preferencia_entrega'])) {
+				$valor = 0;
+				
+				foreach ($_POST['preferencia_entrega'] as $preferencia_entrega) {
+					$valor += $preferencia_entrega;
+				}
+				
+				if (!empty($valor) AND filter_var($valor, FILTER_VALIDATE_INT)) {
+					$peca->set_preferencia_entrega($valor);
 				}
 			}
 			
@@ -434,11 +447,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 										$marca_pativel = new Object_Marca_Pativel();
 										$marca_pativel->set_marca_id($marca_selecionada);
 										
-										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_de'])) {
-											$marca_pativel->set_ano_de($_POST['ano_ma_'.$marca_selecionada.'_de']);
-										}
-										if (!empty($_POST['ano_ma_'.$marca_selecionada.'_ate'])) {
-											$marca_pativel->set_ano_ate($_POST['ano_ma_'.$marca_selecionada.'_ate']);
+										if (!empty($_POST['ano_mrc_'.$marca_selecionada])) {
+											$marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
 										}
 										
 										$marcas_pativeis[] = $marca_pativel;
@@ -450,11 +460,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 														$modelo_pativel = new Object_Modelo_Pativel();
 														$modelo_pativel->set_modelo_id($modelo_selecionado);
 														
-														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_de'])) {
-															$modelo_pativel->set_ano_de($_POST['ano_mo_'.$modelo_selecionado.'_de']);
-														}
-														if (!empty($_POST['ano_mo_'.$modelo_selecionado.'_ate'])) {
-															$modelo_pativel->set_ano_ate($_POST['ano_mo_'.$modelo_selecionado.'_ate']);
+														if (!empty($_POST['ano_mdl_'.$modelo_selecionado])) {
+															$modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
 														}
 														
 														$modelos_pativeis[] = $modelo_pativel;
@@ -466,11 +473,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 																		$versao_pativel = new Object_Versao_Pativel();
 																		$versao_pativel->set_versao_id($versao_selecionada);
 			
-																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_de'])) {
-																			$versao_pativel->set_ano_de($_POST['ano_vs_'.$versao_selecionada.'_de']);
-																		}
-																		if (!empty($_POST['ano_vs_'.$versao_selecionada.'_ate'])) {
-																			$versao_pativel->set_ano_ate($_POST['ano_vs_'.$versao_selecionada.'_ate']);
+																		if (!empty($_POST['ano_vrs_'.$versao_selecionada])) {
+																			$versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
 																		}
 			
 																		$versoes_pativeis[] = $versao_pativel;
@@ -598,7 +602,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$this->Carregar_Pagina($cadastrar_erros, $cadastrar_campos, null, $cadastrar_sucesso);
 			} else {
 				$cadastrar_form = array();
-					
+				
 				$cadastrar_form['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['peca'])))));
 				$cadastrar_form['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['fabricante'])))));
 				$cadastrar_form['serie'] = trim(strip_tags($_POST['serie']));
@@ -614,7 +618,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$modelos = null;
 				$versoes = null;
 				$anos = array();
-					
+				
 				if (!empty($_SESSION['compatibilidade']['marca'])) {
 					$marcas = $_SESSION['compatibilidade']['marca'];
 				}
@@ -624,39 +628,27 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				if (!empty($_SESSION['compatibilidade']['versao'])) {
 					$versoes = $_SESSION['compatibilidade']['versao'];
 				}
-					
+				
 				if (!empty($marcas)) {
 					foreach ($marcas as $marca) {
-						if (!empty($_POST['ano_ma_'.$marca.'_de'])) {
-							$anos['ano_ma_'.$marca.'_de'] = $_POST['ano_ma_'.$marca.'_de'];
-						}
-				
-						if (!empty($_POST['ano_ma_'.$marca.'_ate'])) {
-							$anos['ano_ma_'.$marca.'_ate'] = $_POST['ano_ma_'.$marca.'_ate'];
+						if (!empty($_POST['ano_mrc_'.$marca])) {
+							$anos['ano_mrc_'.$marca] = $_POST['ano_mrc_'.$marca];
 						}
 					}
 				}
-					
+				
 				if (!empty($modelos)) {
 					foreach ($modelos as $modelo) {
-						if (!empty($_POST['ano_mo_'.$modelo.'_de'])) {
-							$anos['ano_mo_'.$modelo.'_de'] = $_POST['ano_mo_'.$modelo.'_de'];
-						}
-							
-						if (!empty($_POST['ano_mo_'.$modelo.'_ate'])) {
-							$anos['ano_mo_'.$modelo.'_ate'] = $_POST['ano_mo_'.$modelo.'_ate'];
+						if (!empty($_POST['ano_mdl_'.$modelo])) {
+							$anos['ano_mdl_'.$modelo] = $_POST['ano_mdl_'.$modelo];
 						}
 					}
 				}
-					
+				
 				if (!empty($versoes)) {
 					foreach ($versoes as $versao) {
-						if (!empty($_POST['ano_vs_'.$versao.'_de'])) {
-							$anos['ano_vs_'.$versao.'_de'] = $_POST['ano_vs_'.$versao.'_de'];
-						}
-				
-						if (!empty($_POST['ano_vs_'.$versao.'_ate'])) {
-							$anos['ano_vs_'.$versao.'_ate'] = $_POST['ano_vs_'.$versao.'_ate'];
+						if (!empty($_POST['ano_vrs_'.$versao])) {
+							$anos['ano_vrs_'.$versao] = $_POST['ano_vrs_'.$versao];
 						}
 					}
 				}
@@ -852,6 +844,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		
 		public static function Buscar_Versoes_Compativeis(int $id_versao) {
 			return DAO_Versao_Compativel::BuscarPorCOD($id_versao);
+		}
+		
+		public static function Buscar_Preferencia_Entrega() {
+			return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();
 		}
     }
 ?>

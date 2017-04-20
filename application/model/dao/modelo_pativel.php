@@ -1,6 +1,6 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/modelo_pativel.php';
     require_once RAIZ.'/application/model/util/conexao.php';
     
@@ -17,50 +17,99 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Modelo_Pativel $object_modelo_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_de, modelo_pativel_ano_ate) 
-                        VALUES (:pc_id, :mo_id, :ano_de, :ano_ate);";
+                $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pec_id, modelo_pativel_mdl_id) 
+                        VALUES (:pec_id, :mdl_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":pc_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":mo_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_modelo_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_modelo_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+                $p_sql->bindValue(":pec_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(":mdl_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
+				
+                if ($p_sql->execute()) {
+                	$anos = $object_modelo_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+	                	foreach ($anos as $ano) {
+	                		$sql = "INSERT INTO tb_modelo_pativel_ano (modelo_pativel_ano_pec_id, modelo_pativel_ano_mdl_id, modelo_pativel_ano_ano)
+		                        	VALUES (:pec_id, :mdl_id, :ano);";
+	                		
+	                		$p_sql = Conexao::Conectar()->prepare($sql);
+	                		
+	                		$p_sql->bindValue(":pec_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+	                		$p_sql->bindValue(":mdl_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
+	                		$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+	                		
+	                		$p_sql->execute();
+	                	}
+	                	
+	                	return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Atualizar(Object_Modelo_Pativel $object_modelo_pativel) : bool {
+        public static function Atualizar_Anos(Object_Modelo_Pativel $object_modelo_pativel) : bool {
             try {
-                $sql = "UPDATE tb_modelo_pativel SET
-                modelo_pativel_pec_id = :pc_id,
-                modelo_pativel_mdl_id = :mo_id,
-                modelo_pativel_ano_de = :ano_de,
-                modelo_pativel_ano_ate = :ano_ate 
-                WHERE modelo_pativel_pec_id = :pc_id AND modelo_pativel_mdl_id = :mo_id";
-
-                $p_sql = Conexao::Conectar()->prepare($sql);
-				
-                $p_sql->bindValue(":pc_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":mo_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_de", $object_modelo_pativel->get_ano_de(), PDO::PARAM_INT);
-				$p_sql->bindValue(":ano_ate", $object_modelo_pativel->get_ano_ate(), PDO::PARAM_INT);
-
-                return $p_sql->execute();
+                if (self::Deletar_Anos($object_modelo_pativel->get_peca_id(), $object_modelo_pativel->get_modelo_id())) {
+                	$anos = $object_modelo_pativel->get_anos();
+                	
+                	if (!empty($anos)) {
+                		foreach ($anos as $ano) {
+                			$sql = "INSERT INTO tb_modelo_pativel_ano (modelo_pativel_ano_pec_id, modelo_pativel_ano_mdl_id, modelo_pativel_ano_ano)
+		                        	VALUES (:pec_id, :mdl_id, :ano);";
+                			
+                			$p_sql = Conexao::Conectar()->prepare($sql);
+                			
+                			$p_sql->bindValue(":pec_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":mdl_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
+                			$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
+                			
+                			$p_sql->execute();
+                		}
+                		
+                		return true;
+                	} else {
+                		return true;
+                	}
+                } else {
+                	return false;
+                }
             } catch (PDOException $e) {
 				return false;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $peca_id, int $modelo_id) : bool {
+        	try {
+        		self::Deletar_Anos($peca_id, $modelo_id);
+        		
+        		$sql = "DELETE FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :pec_id AND modelo_pativel_mdl_id = :mdl_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":mdl_id", $modelo_id, PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Deletar_Anos(int $peca_id, int $modelo_id) : bool {
             try {
-                $sql = "DELETE FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
+                $sql = "DELETE FROM tb_modelo_pativel_ano WHERE modelo_pativel_ano_pec_id = :pec_id AND modelo_pativel_ano_mdl_id = :mdl_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                
+                $p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+                $p_sql->bindValue(":mdl_id", $modelo_id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (Exception $e) {

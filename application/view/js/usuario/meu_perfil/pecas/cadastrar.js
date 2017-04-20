@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
+	$('.ui.dropdown').dropdown();
 });
 function Carregar_Categoria(ca) {
 	$.ajax({
@@ -49,6 +50,7 @@ function Carregar_Categoria(ca) {
 		data: { versao:"verificar" }
 	}).done(function(valor) {
 		$("#div_ano").html(valor);
+		$('.ui.dropdown').dropdown();
 	});
 }
 function Carregar_Marca(ma) {
@@ -89,6 +91,7 @@ function Carregar_Marca(ma) {
 		data: { versao:"verificar" }
 	}).done(function(valor) {
 		$("#div_ano").html(valor);
+		$('.ui.dropdown').dropdown();
 	});
 }
 function Carregar_Modelo(mo) {
@@ -119,6 +122,7 @@ function Carregar_Modelo(mo) {
 		data: { versao:"verificar" }
 	}).done(function(valor) {
 		$("#div_ano").html(valor);
+		$('.ui.dropdown').dropdown();
 	});
 }
 function Carregar_Versao(vs) {
@@ -139,6 +143,7 @@ function Carregar_Versao(vs) {
 		data: { versao:"verificar" }
 	}).done(function(valor) {
 		$("#div_ano").html(valor);
+		$('.ui.dropdown').dropdown();
 	});
 }
 function limparCampoFile(img) {

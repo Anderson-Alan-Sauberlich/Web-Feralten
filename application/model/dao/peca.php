@@ -27,8 +27,8 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Peca $object_peca) {
             
-                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco) 
-                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :divlg_end);";
+                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id) 
+                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -44,7 +44,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":data", $object_peca->get_data_anuncio(), PDO::PARAM_STR);
 				$p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
 				$p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);
-				$p_sql->bindValue(":divlg_end", $object_peca->get_divulgar_endereco(), PDO::PARAM_BOOL);
+				$p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
 				
                 $p_sql->execute();
 				
@@ -67,7 +67,7 @@ namespace application\model\dao;
                 		peca_data_anuncio = :data, 
                 		peca_numero_serie = :serie, 
                 		peca_prioridade = :prioridade, 
-                		peca_divulgar_endereco = :divlg_end 
+                		peca_prf_ntr_id = :prf_ntr 
                 		WHERE peca_id = :id";
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -84,7 +84,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":data", $object_peca->get_data_anuncio(), PDO::PARAM_STR);
 				$p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
 				$p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);
-				$p_sql->bindValue(":divlg_end", $object_peca->get_divulgar_endereco(), PDO::PARAM_BOOL);
+				$p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException $e) {
@@ -107,7 +107,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_divulgar_endereco FROM tb_peca WHERE peca_id = :id";
+                $sql = "SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id FROM tb_peca WHERE peca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -288,8 +288,8 @@ namespace application\model\dao;
             	$object_peca->set_prioridade($row['peca_prioridade']);
             }
             
-            if (isset($row['peca_divulgar_endereco'])) {
-            	$object_peca->set_divulgar_endereco($row['peca_divulgar_endereco']);
+            if (isset($row['peca_prf_ntr_id'])) {
+            	$object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
             }
             
             return $object_peca;
@@ -355,8 +355,8 @@ namespace application\model\dao;
 	        		$object_peca->set_prioridade($row['peca_prioridade']);
 	        	}
 	        	
-	        	if (isset($row['peca_divulgar_endereco'])) {
-	        		$object_peca->set_divulgar_endereco($row['peca_divulgar_endereco']);
+	        	if (isset($row['peca_prf_ntr_id'])) {
+	        		$object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
 	        	}
 	        	
 	        	$object_pecas[] = $object_peca;

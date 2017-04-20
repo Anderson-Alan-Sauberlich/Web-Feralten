@@ -368,12 +368,12 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 									} else {
 										if (isset($versoes_compativeis)) {
 											if (in_array($versao->get_id(), $versoes_compativeis)) {
-												echo "<div class=\"col-md-4 col-sm-6 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
+												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
 											} else {
-												echo "<div class=\"col-md-4 col-sm-6 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
+												echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui disabled checkbox\"><input type=\"checkbox\" disabled=\"disabled\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
 											}
 										} else {
-											echo "<div class=\"col-md-4 col-sm-6 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
+											echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checkbox\"><input type=\"checkbox\" onchange=\"Carregar_Versao(this)\" id=\"".$versao->get_id()."\" name=\"versao[]\" value=\"".$versao->get_id()."\"><label>".$versao->get_nome()."</label></div></div>";
 										}
 									}
 								}
@@ -445,37 +445,19 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($marca);
 			$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
 			echo "<div class=\"container-fluid borda_PanelPeca divAno\">";
-			echo "<div class=\"col-md-7 col-sm-6 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()."</label></div>";
-			echo "<div class=\"col-md-5 col-sm-6 col-xs-12\">";
-			echo "<div class=\"row\">";
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_ma_de\" name=\"ano_ma_".$titulo_marca->get_id()."_de\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano De</option>";
-			if (isset($anos_selecionados['ano_ma_'.$marca.'_de'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_ma_'.$marca.'_de']);
+			echo "<div class=\"col-md-10 col-sm-8 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()."</label></div>";
+			echo "<div class=\"col-md-2 col-sm-4 col-xs-12\">";
+			echo "<div class=\"row-fluid\">";
+			echo "<select id=\"ano_mrc\" name=\"ano_mrc_".$titulo_marca->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\" multiple=\"\">";
+			echo "<option value=\"\">Ano Modelo</option>";
+			if (isset($anos_selecionados['ano_mrc_'.$marca])) {
+				self::Mostrar_Anos($anos_selecionados['ano_mrc_'.$marca]);
 			} else {
 				self::Mostrar_Anos();
 			}
 			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_ma_ate\" name=\"ano_ma_".$titulo_marca->get_id()."_ate\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano Até</option>";
-			if (isset($anos_selecionados['ano_ma_'.$marca.'_ate'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_ma_'.$marca.'_ate']);
-			} else {
-				self::Mostrar_Anos();
-			}
-			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "</div>";//row
-			echo "</div>";//col-md-5 col-sm-6 col-xs-12
+			echo "</div>";//row-fluid
+			echo "</div>";//col-md-2 col-sm-4 col-xs-12
 			echo "</div>";//container-fluid
 		}
 
@@ -484,37 +466,19 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
 			$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
 			echo "<div class=\"container-fluid borda_PanelPeca divAno\">";
-			echo "<div class=\"col-md-7 col-sm-6 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()."</label></div>";
-			echo "<div class=\"col-md-5 col-sm-6 col-xs-12\">";
-			echo "<div class=\"row\">";
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_mo_de\" name=\"ano_mo_".$titulo_modelo->get_id()."_de\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano De</option>";
-			if (isset($anos_selecionados['ano_mo_'.$modelo.'_de'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_mo_'.$modelo.'_de']);
+			echo "<div class=\"col-md-10 col-sm-8 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()."</label></div>";
+			echo "<div class=\"col-md-2 col-sm-4 col-xs-12\">";
+			echo "<div class=\"row-fluid\">";
+			echo "<select id=\"ano_mdl\" name=\"ano_mdl_".$titulo_modelo->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\">";
+			echo "<option value=\"\">Ano Modelo</option>";
+			if (isset($anos_selecionados['ano_mdl_'.$modelo])) {
+				self::Mostrar_Anos($anos_selecionados['ano_mdl_'.$modelo]);
 			} else {
 				self::Mostrar_Anos();
 			}
 			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_mo_ate\" name=\"ano_mo_".$titulo_modelo->get_id()."_ate\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano Até</option>";
-			if (isset($anos_selecionados['ano_mo_'.$modelo.'_ate'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_mo_'.$modelo.'_ate']);
-			} else {
-				self::Mostrar_Anos();
-			}
-			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "</div>";//row
-			echo "</div>";//col-md-5 col-sm-6 col-xs-12
+			echo "</div>";//row-fluid
+			echo "</div>";//col-md-2 col-sm-4 col-xs-12
 			echo "</div>";//container-fluid
 		}
 
@@ -524,37 +488,19 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
 			$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
 			echo "<div class=\"container-fluid borda_PanelPeca divAno\">";
-			echo "<div class=\"col-md-7 col-sm-6 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_versao->get_nome()."</label></div>";
-			echo "<div class=\"col-md-5 col-sm-6 col-xs-12\">";
-			echo "<div class=\"row\">";
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_vs_de\" name=\"ano_vs_".$titulo_versao->get_id()."_de\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano De</option>";
-			if (isset($anos_selecionados['ano_vs_'.$versao.'_de'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_vs_'.$versao.'_de']);
+			echo "<div class=\"col-md-10 col-sm-8 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_versao->get_nome()."</label></div>";
+			echo "<div class=\"col-md-2 col-sm-4 col-xs-12\">";
+			echo "<div class=\"row-fluid\">";
+			echo "<select id=\"ano_vrs\" name=\"ano_vrs_".$titulo_versao->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\">";
+			echo "<option value=\"\">Ano Modelo</option>";
+			if (isset($anos_selecionados['ano_vrs_'.$versao])) {
+				self::Mostrar_Anos($anos_selecionados['ano_vrs_'.$versao]);
 			} else {
 				self::Mostrar_Anos();
 			}
 			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "<div class=\"col-md-6 col-sm-6 col-xs-6\">";
-			echo "<div class=\"input-group linha_inteira\">";
-			echo "<select id=\"ano_vs_ate\" name=\"ano_vs_".$titulo_versao->get_id()."_ate\" class=\"form-control form_select\">";
-			echo "<option value=\"0\">Ano Até</option>";
-			if (isset($anos_selecionados['ano_vs_'.$versao.'_ate'])) {
-				self::Mostrar_Anos($anos_selecionados['ano_vs_'.$versao.'_ate']);
-			} else {
-				self::Mostrar_Anos();
-			}
-			echo "</select>";
-			echo "<span class=\"glyphicon glyphicon-menu-down form-control-feedback\"></span>";
-			echo "</div>";//input-group
-			echo "</div>";//col-md-6 col-sm-6 col-xs-6
-			echo "</div>";//row
-			echo "</div>";//col-md-5 col-sm-6 col-xs-12
+			echo "</div>";//row-fluid
+			echo "</div>";//col-md-2 col-sm-4 col-xs-12
 			echo "</div>";//container-fluid
 		}
 
@@ -574,10 +520,26 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 		
-        private static function Mostrar_Anos(?int $ano = null) : void {
-            if (isset($ano)) {
+		public static function Mostrar_Preferencia_Entrega() : void {
+			$preferencias_entregas = Controller_Cadastrar::Buscar_Preferencia_Entrega();
+			
+			foreach ($preferencias_entregas as $preferencia_entrega) {
+				if (isset(self::$cadastrar_form['preferencia_entrega'])) {
+					if (self::$cadastrar_form['preferencia_entrega'] == $preferencia_entrega->get_id()) {
+						echo "<option selected value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
+					} else {
+						echo "<option value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
+					}
+				} else {
+					echo "<option value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
+				}
+			}
+		}
+		
+        private static function Mostrar_Anos(?array $anos = null) : void {
+            if (!empty($anos)) {
 	            for ($i=2017; $i >= 1900; $i--) {
-	            	if ($ano == $i) {
+	            	if (in_array($i, $anos)) {
 	            		echo "<option selected value=\"".$i."\">".$i."</option>";
 	            	} else {
 	            		echo "<option value=\"".$i."\">".$i."</option>";

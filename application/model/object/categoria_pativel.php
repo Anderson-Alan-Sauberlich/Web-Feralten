@@ -5,8 +5,7 @@ namespace application\model\object;
     	
     	private $peca_id;
 		private $categoria_id;
-		private $ano_de;
-		private $ano_ate;
+		private $anos = array();
 		
 		function __constructor() {
 			
@@ -20,7 +19,7 @@ namespace application\model\object;
 			return $this->peca_id;
 		}
 		
-		public function set_categoria_id(?int $categoria_id = null) : void {
+		public function set_categoria_id(int $categoria_id) : void {
 			$this->categoria_id = $categoria_id;
 		}
 		
@@ -28,20 +27,16 @@ namespace application\model\object;
 			return $this->categoria_id;
 		}
 		
-		public function set_ano_de(?string $ano_de = null) : void {
-			$this->ano_de = $ano_de;
+		public function set_ano(?int $ano = null) : void {
+			$this->anos[] = $ano;
 		}
 		
-		public function get_ano_de() : ?string {
-			return $this->ano_de;
+		public function set_anos(?array $anos = null) : void {
+			$this->anos = $anos;
 		}
 		
-		public function set_ano_ate(?string $ano_ate = null) : void {
-			$this->ano_ate = $ano_ate;
-		}
-		
-		public function get_ano_ate() : ?string {
-			return $this->ano_ate;
+		public function get_anos() : ?array {
+			return $this->anos;
 		}
     }
 ?>

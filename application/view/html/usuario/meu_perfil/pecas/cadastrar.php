@@ -115,19 +115,26 @@
                                    	</div>
 		                        </div>
 	                        </div>
-	                        <div class="row-fluid">
+							<div class="row-fluid">
+	                            <label for="descricao" class="lbPanel">Digite a Descrição da Peça:</label>
+	                            <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("descricao"); ?>">
+	                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+	                                <textarea rows="3" id="descricao" name="descricao" class="form-control" placeholder="Descrição da Peça, detalhes e observações inportantes para tornar a peça mais facil de ser encontrada na pesquisa."><?php View_Cadastrar::Manter_Valor("descricao") ?></textarea>
+	                            </div>
+                            </div>
+                            <div class="row-fluid">
 		                        <div class="ui checkbox">
 									<input type="checkbox" id="prioridade" name="prioridade" <?php View_Cadastrar::Manter_Valor("prioridade") ?> value="checked"/>
 									<label for="prioridade" class="lbPanel">Acresentar Alta Prioridade Para a Peça. <small>(Será uma das primeiras a ser exibida por um custo a mais de R$: 5,00)</small></label>
 								</div>
 							</div>
 							<div class="row-fluid">
-	                            <label for="descricao" class="lbPanel">Digite a Descrição da Peça:</label>
-	                            <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("descricao"); ?>">
-	                                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-	                                <textarea rows="3" id="descricao" name="descricao" type="text" class="form-control" placeholder="Descrição da Peça, detalhes e observações inportantes para tornar a peça mais facil de ser encontrada na pesquisa."><?php View_Cadastrar::Manter_Valor("descricao") ?></textarea>
-	                            </div>
-                            </div>
+								<label for="preferencia_entrega" class="lbPanel">Selecione Suas Preferencias de Entrega:</label>
+		                        <select id="preferencia_entrega" name="preferencia_entrega[]" class="ui fluid multiple scrolling search selection dropdown">
+		                        	<option value="">Preferencias de Entrega</option>
+		                        	<?php View_Cadastrar::Mostrar_Preferencia_Entrega(); ?>
+		                        </select>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -139,7 +146,7 @@
                         <div id="drop_zone" class="row-fluid">
                 	       	<div class="col-md-3 col-sm-4 col-xs-12">
                            		<div class="row-fluid">
-									<span id="adicionar_imagem" name="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagensPeca">
+									<span id="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagensPeca">
 										<i class="glyphicon glyphicon-upload"></i> Adicionar Fotos
 										<input id="imagens" value="" accept="image/*" multiple="multiple" type="file">
 									</span>
