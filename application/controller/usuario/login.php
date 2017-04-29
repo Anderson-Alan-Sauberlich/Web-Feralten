@@ -1,13 +1,13 @@
 <?php
 namespace application\controller\usuario;
 	
-	require_once RAIZ.'/application/model/util/login_session.php';
+	require_once RAIZ.'/application/model/common/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/dao/acesso_usuario.php';
     require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/view/src/usuario/login.php';
 	
-    use application\model\util\Login_Session;
+    use application\model\common\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\dao\Acesso_Usuario as DAO_Acesso_Usuario;
     use application\model\dao\Entidade as DAO_Entidade;
@@ -17,6 +17,27 @@ namespace application\controller\usuario;
 
         function __construct() {
             
+        }
+        
+        private $email;
+        private $senha;
+        private $manter_login;
+        private $logout;
+        
+        public function set_email($email) {
+        	$this->email = $email;
+        }
+        
+        public function set_senha($senha) {
+        	$this->senha = $senha;
+        }
+        
+        public function set_manter_login($manter_login = null) {
+        	$this->manter_login = $manter_login;
+        }
+        
+        public function set_logout(string $logout) {
+        	$this->logout = $logout;
         }
         
         public function Carregar_Pagina(?array $login_erros = null, ?array $login_campos = null, ?array $login_form = null) : void {
@@ -30,8 +51,8 @@ namespace application\controller\usuario;
         }
         
         public function LogOut() : void {
-        	if (isset($_GET['logout'])) {
-	        	if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
+        	if (!empty($this->logout)) {
+        		if(hash_equals($this->logout, hash_hmac('sha1', session_id(), sha1(session_id())))) {
 	        		if (isset($_COOKIE['f_m_l'])) {
 	        			if (isset($_SESSION['login'])) {
 	        				DAO_Usuario::Atualizar_Token(null, Login_Session::get_usuario_id());
@@ -171,18 +192,15 @@ namespace application\controller\usuario;
         public function Autenticar_Usuario_Login() : ?bool {
             $login_campos = array('erro_email' => "certo");
             $login_erros = array();
-            $email = null;
-            $senha = null;
-            $manter_login = null;
             
-            if (empty($_POST['email'])) {
+            if (empty($this->email)) {
                 $login_erros[] = "Digite seu Email";
                 $login_campos['erro_email'] = "erro";                
             } else {
-            	$email = trim($_POST['email']);
+            	$this->email = trim($this->email);
             	
-            	if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-            		$retorno = DAO_Usuario::Verificar_Email($email);
+            	if (filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false) {
+            		$retorno = DAO_Usuario::Verificar_Email($this->email);
             		
             		if ($retorno !== false) {
 		            	if ($retorno === 0) {
@@ -199,27 +217,27 @@ namespace application\controller\usuario;
             	}
             }
             
-            if (empty($_POST['password'])) {
+            if (empty($this->senha)) {
                 $login_erros[] = "Digite sua Senha";
                 $login_campos['erro_senha'] = "erro";
             } else {
-            	$senha = strip_tags($_POST['password']);
+            	$senha = strip_tags($this->senha);
             	 
-            	if ($senha !== $_POST['password']) {
+            	if ($senha !== $this->senha) {
             		$login_erros[] = "A Senha Não pode conter Tags de Programação";
             		$login_campos['erro_senha'] = "erro";
             	}
             }
             
-            if (!empty($_POST['manter_login'])) {
-            	$manter_login = true;
+            if (!empty($this->manter_login)) {
+            	$this->manter_login = true;
             }
 
             if (empty($login_erros)) {
-                $usuario_login = DAO_Usuario::Autenticar($email);
+            	$usuario_login = DAO_Usuario::Autenticar($this->email);
                 
                 if (!empty($usuario_login) AND $usuario_login !== false) {
-		            if (password_verify($senha, $usuario_login->get_senha())) {
+                	if (password_verify($this->senha, $usuario_login->get_senha())) {
 						$usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
 						
 						Login_Session::set_usuario_id($usuario_login->get_id());
@@ -244,7 +262,7 @@ namespace application\controller\usuario;
 							}
 						}
 						
-		                if (isset($manter_login)) {
+						if ($this->manter_login === true) {
 		                    $login = array();
 							
 							$usuario_login->set_token(bin2hex(random_bytes(40)));
@@ -282,8 +300,8 @@ namespace application\controller\usuario;
             	
             	$login_form = array();
             	
-            	$login_form['email'] = trim(strip_tags($email));
-            	$login_form['senha'] = strip_tags($senha);
+            	$login_form['email'] = trim(strip_tags($this->email));
+            	$login_form['senha'] = strip_tags($this->senha);
             	
             	$this->Carregar_Pagina($login_erros, $login_campos, $login_form);
             	

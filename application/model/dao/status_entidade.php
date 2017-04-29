@@ -2,10 +2,10 @@
 namespace application\model\dao;
 	
     require_once RAIZ.'/application/model/object/status_entidade.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
 	
     use application\model\object\Status_Entidade as Object_Status_Entidade;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

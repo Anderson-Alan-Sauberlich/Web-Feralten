@@ -1,23 +1,23 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
-	require_once RAIZ.'/application/model/util/login_session.php';
-	require_once RAIZ.'/application/model/util/cpf_cnpj.php';
+	require_once RAIZ.'/application/model/common/util/login_session.php';
+	require_once RAIZ.'/application/model/common/util/cpf_cnpj.php';
+	require_once RAIZ.'/application/model/common/util/gerenciar_imagens.php';
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/dao/entidade.php';
-	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/atualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
-	use application\model\util\Login_Session;
-	use application\model\util\CPF_CNPJ as Class_CPF_CNPJ;
+	use application\model\common\util\Login_Session;
+	use application\model\common\util\CPF_CNPJ;
+	use application\model\common\util\Gerenciar_Imagens;
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\dao\Entidade as DAO_Entidade;
-	use application\model\util\Gerenciar_Imagens;
     use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
     use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	
@@ -27,12 +27,58 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			
         }
         
+        private $nome;
+        private $fone1;
+        private $fone2;
+        private $email;
+        private $confemail;
+        private $email_alternativo;
+        private $cpf_cnpj;
+        private $site;
+        private $nome_comercial;
+        
         private $atualizar_form;
         private $atualizar_erros;
         private $atualizar_sucesso;
         private $atualizar_campos;
         private $entidade_form;
         private $usuario_form;
+        
+        public function set_nome($nome) {
+        	$this->nome = $nome;
+        }
+        
+        public function set_fone1($fone1) {
+        	$this->fone1 = $fone1;
+        }
+        
+        public function set_fone2($fone2 = null) {
+        	$this->fone2 = $fone2;
+        }
+        
+        public function set_email($email) {
+        	$this->email = $email;
+        }
+        
+        public function set_confemail($confemail) {
+        	$this->confemail = $confemail;
+        }
+        
+        public function set_email_alternativo($email_alternativo = null) {
+        	$this->email_alternativo = $email_alternativo;
+        }
+        
+        public function set_cpf_cnpj($cpf_cnpj) {
+        	$this->cpf_cnpj = $cpf_cnpj;
+        }
+        
+        public function set_site($site = null) {
+        	$this->site = $site;
+        }
+        
+        public function set_nome_comercial($nome_comercial = null) {
+        	$this->nome_comercial = $nome_comercial;
+        }
         
         public function Carregar_Pagina() {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -106,18 +152,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         private function Salvar_Usuario() : void {
-        	$this->atualizar_form['nome'] = $_POST['nome'];
-        	$this->atualizar_form['email'] = $_POST['email'];
-        	$this->atualizar_form['confemail'] = $_POST['confemail'];
-        	$this->atualizar_form['fone1'] = $_POST['fone1'];
-        	$this->atualizar_form['fone2'] = $_POST['fone2'];
-        	$this->atualizar_form['email_alternativo'] = $_POST['email_alternativo'];
+        	$this->atualizar_form['nome'] = $this->nome;
+        	$this->atualizar_form['email'] = $this->email;
+        	$this->atualizar_form['confemail'] = $this->confemail;
+        	$this->atualizar_form['fone1'] = $this->fone1;
+        	$this->atualizar_form['fone2'] = $this->fone2;
+        	$this->atualizar_form['email_alternativo'] = $this->email_alternativo;
         }
         
         private function Salvar_Entidade() : void {
-        	$this->atualizar_form['nome_comercial'] = $_POST['nome_comercial'];
-        	$this->atualizar_form['cpf_cnpj'] = $_POST['cpf_cnpj'];
-        	$this->atualizar_form['site'] = $_POST['site'];
+        	$this->atualizar_form['nome_comercial'] = $this->nome_comercial;
+        	$this->atualizar_form['cpf_cnpj'] = $this->cpf_cnpj;
+        	$this->atualizar_form['site'] = $this->site;
         }
         
         private function Atualizar_Entidade() : void {
@@ -127,24 +173,23 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $entidade = new Object_Entidade();
             
-            if (empty($_POST['cpf_cnpj'])) {
+            if (empty($this->cpf_cnpj)) {
                 $this->atualizar_erros[] = "Informe um CPF ou CNPJ";
                 $this->atualizar_campos['erro_cpf_cnpj'] = "erro";
             } else {
-            	$cpf_cnpj = strip_tags($_POST['cpf_cnpj']);
-		        $cpf_cnpj = trim($cpf_cnpj);
-		        $cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
+            	$this->cpf_cnpj = trim($this->cpf_cnpj);
+            	$this->cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $this->cpf_cnpj);
             	 
-            	if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
-            		if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
-            			$class_cpf_cnpj = new Class_CPF_CNPJ($cpf_cnpj);
+            	if (filter_var($this->cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
+            		if (strlen($this->cpf_cnpj) === 11 OR strlen($this->cpf_cnpj) === 14) {
+            			$class_cpf_cnpj = new CPF_CNPJ($this->cpf_cnpj);
             			
             			if ($class_cpf_cnpj->valida()) {
-	            			$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
+            				$retorno = DAO_Entidade::Verificar_CPF_CNPJ($this->cpf_cnpj);
 	            			 
 	            			if ($retorno !== false) {
 	            				if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
-	            					$entidade->set_cpf_cnpj($cpf_cnpj);
+	            					$entidade->set_cpf_cnpj($this->cpf_cnpj);
 	            				} else {
 	            					$this->atualizar_erros[] = "Este CPF/CNPJ já esta Cadastrado";
 	            					$this->atualizar_campos['erro_cpf_cnpj'] = "erro";
@@ -167,15 +212,15 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (!empty($_POST['nome_comercial'])) {
-            	$nome_comercial = strip_tags($_POST['nome_comercial']);
+            if (!empty($this->nome_comercial)) {
+            	$nome_comercial = strip_tags($this->nome_comercial);
             	
-            	if ($nome_comercial === $_POST['nome_comercial']) {
-            		$nome_comercial = trim($nome_comercial);
-            		$nome_comercial = preg_replace('/\s+/', " ", $nome_comercial);
+            	if ($nome_comercial === $this->nome_comercial) {
+            		$this->nome_comercial = trim($this->nome_comercial);
+            		$this->nome_comercial = preg_replace('/\s+/', " ", $this->nome_comercial);
             		 
-            		if (strlen($nome_comercial) <= 150) {
-            			$entidade->set_nome_comercial($nome_comercial);
+            		if (strlen($this->nome_comercial) <= 150) {
+            			$entidade->set_nome_comercial($this->nome_comercial);
             		} else {
             			$this->atualizar_erros[] = "Nome Comercial, Não pode conter mais de 150 Caracteres";
             			$this->atualizar_campos['erro_nome_comercial'] = "erro";
@@ -186,15 +231,15 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (!empty($_POST['site'])) {
-            	$site = strip_tags($_POST['site']);
+            if (!empty($this->site)) {
+            	$site = strip_tags($this->site);
             	 
-            	if ($site === $_POST['site']) {
-            		$site = trim($_POST['site']);
-            		$site = preg_replace('/\s+/', "", $site);
+            	if ($site === $this->site) {
+            		$this->site = trim($this->site);
+            		$this->site = preg_replace('/\s+/', "", $this->site);
             	
-            		if (strlen($site) <= 150) {
-            			$entidade->set_site($site);
+            		if (strlen($this->site) <= 150) {
+            			$entidade->set_site($this->site);
             		} else {
             			$this->atualizar_erros[] = "Site, pode ter no Maximo 150 Caracteres";
             			$this->atualizar_campos['erro_site'] = "erro";
@@ -248,19 +293,19 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             
             $usuario = new Object_Usuario();
             
-            if (empty($_POST['nome'])) {
+            if (empty($this->nome)) {
             	$this->atualizar_erros[] = "Digite Seu Nome Completo";
             	$this->atualizar_campos['erro_nome'] = "erro";
             } else {
-            	$nome = strip_tags($_POST['nome']);
+            	$nome = strip_tags($this->nome);
             	
-            	if ($nome === $_POST['nome']) {
-            		$nome = trim($nome);
-            		$nome = preg_replace('/\s+/', " ", $nome);
+            	if ($nome === $this->nome) {
+            		$this->nome = trim($this->nome);
+            		$this->nome = preg_replace('/\s+/', " ", $this->nome);
             		
-            		if (strlen($nome) <= 150) {
-            			if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $nome)) {
-            				$usuario->set_nome(ucwords(strtolower($nome)));
+            		if (strlen($this->nome) <= 150) {
+            			if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $this->nome)) {
+            				$usuario->set_nome(ucwords(strtolower($this->nome)));
             			} else {
             				$this->atualizar_erros[] = "O Nome Não Pode Conter Caracteres Especiais";
             				$this->atualizar_campos['erro_nome'] = "erro";
@@ -275,27 +320,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (empty($_POST['confemail']) OR empty($_POST['email'])) {
-            	if (empty($_POST['email'])) {
+            if (empty($this->confemail) OR empty($this->email)) {
+            	if (empty($this->email)) {
             		$this->atualizar_erros[] = "Preencha o Campo E-Mail";
             		$this->atualizar_campos['erro_email'] = "erro";
             	}
             	
-            	if (empty($_POST['confemail'])) {
+            	if (empty($this->confemail)) {
             		$this->atualizar_erros[] = "Preencha o Campo Comfirmar E-Mail";
             		$this->atualizar_campos['erro_confemail'] = "erro";
             	}
             } else {
-            	$confemail = trim($_POST['confemail']);
-            	$email = trim($_POST['email']);
+            	$this->confemail = trim($this->confemail);
+            	$this->email = trim($this->email);
             	
-            	if ($confemail === $email) {
-            		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-            			$retorno = DAO_Usuario::Verificar_Email($email);
+            	if ($this->confemail === $this->email) {
+            		if (filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false) {
+            			$retorno = DAO_Usuario::Verificar_Email($this->email);
             			
             			if ($retorno === 0 OR $retorno == Login_Session::get_usuario_id()) {
-            				if (strlen($email) <= 150) {
-            					$usuario->set_email($email);
+            				if (strlen($this->email) <= 150) {
+            					$usuario->set_email($this->email);
             				} else {
             					$this->atualizar_erros[] = "O E-Mail pode ter no maximo 150 Caracteres";
             					$this->atualizar_campos['erro_email'] = "erro";
@@ -318,16 +363,16 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (empty($_POST['fone1'])) {
+            if (empty($this->fone1)) {
             	$this->atualizar_erros[] = "Informe um Nº de Telefone para Telefone 1";
             	$this->atualizar_campos['erro_fone1'] = "erro";
             } else {
-            	$fone1 = trim($_POST['fone1']);
-            	$fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $fone1);
+            	$this->fone1 = trim($this->fone1);
+            	$this->fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $this->fone1);
             	
-            	if (strlen($fone1) === 11 OR strlen($fone1) === 10) {
-            		if (filter_var($fone1, FILTER_VALIDATE_INT)) {
-            			$usuario->set_fone1($fone1);
+            	if (strlen($this->fone1) === 11 OR strlen($this->fone1) === 10) {
+            		if (filter_var($this->fone1, FILTER_VALIDATE_INT)) {
+            			$usuario->set_fone1($this->fone1);
             		} else {
             			$this->atualizar_erros[] = "Telefone-1, Digite Apenas Numeros";
             			$this->atualizar_campos['erro_fone1'] = "erro";
@@ -338,13 +383,13 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (!empty($_POST['fone2'])) {
-            	$fone2 = trim($_POST['fone2']);
-            	$fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $fone2);
+            if (!empty($this->fone2)) {
+            	$this->fone2 = trim($this->fone2);
+            	$this->fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $this->fone2);
             	
-            	if (strlen($fone2) === 11 OR strlen($fone2) === 10) {
-            		if (filter_var($fone2, FILTER_VALIDATE_INT)) {
-            			$usuario->set_fone2($fone2);
+            	if (strlen($this->fone2) === 11 OR strlen($this->fone2) === 10) {
+            		if (filter_var($this->fone2, FILTER_VALIDATE_INT)) {
+            			$usuario->set_fone2($this->fone2);
             		} else {
             			$this->atualizar_erros[] = "Telefone-2, Digite Apenas Numeros";
             			$this->atualizar_campos['erro_fone2'] = "erro";
@@ -355,12 +400,12 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	}
             }
             
-            if (!empty($_POST['email_alternativo'])) {
-            	$email_alternativo = trim($_POST['email_alternativo']);
+            if (!empty($this->email_alternativo)) {
+            	$this->email_alternativo = trim($this->email_alternativo);
             	
-            	if (strlen($email_alternativo) <= 150) {
-            		if (filter_var($email_alternativo, FILTER_VALIDATE_EMAIL)) {
-            			$usuario->set_email_alternativo($email_alternativo);
+            	if (strlen($this->email_alternativo) <= 150) {
+            		if (filter_var($this->email_alternativo, FILTER_VALIDATE_EMAIL)) {
+            			$usuario->set_email_alternativo($this->email_alternativo);
             		} else {
             			$this->atualizar_erros[] = "Digite um E-Mail Alternativo Valido";
             			$this->atualizar_campos['erro_email_alternativo'] = "erro";

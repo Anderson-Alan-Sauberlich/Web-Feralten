@@ -4,12 +4,12 @@ namespace application\model\dao;
     require_once RAIZ.'/application/model/object/endereco.php';
     require_once RAIZ.'/application/model/dao/cidade.php';
     require_once RAIZ.'/application/model/dao/estado.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
     
     use application\model\object\Endereco as Object_Endereco;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

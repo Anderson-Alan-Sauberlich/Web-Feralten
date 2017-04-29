@@ -2,10 +2,10 @@
 namespace application\model\dao;
 	
     require_once RAIZ.'/application/model/object/acesso_usuario.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
 	
     use application\model\object\Acesso_Usuario as Object_Acesso_Usuario;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

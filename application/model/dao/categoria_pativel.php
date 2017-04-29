@@ -4,12 +4,12 @@ namespace application\model\dao;
     require_once RAIZ.'/application/model/object/categoria_pativel.php';
     require_once RAIZ.'/application/model/object/peca.php';
     require_once RAIZ.'/application/model/dao/peca.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
     
     use application\model\object\Categoria_Pativel as Object_Categoria_Pativel;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

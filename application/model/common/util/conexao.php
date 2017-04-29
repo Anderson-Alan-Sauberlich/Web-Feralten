@@ -1,10 +1,8 @@
 <?php
-namespace application\model\util;
+namespace application\model\common\util;
 
     use \PDO;
     use \PDOException;
-    
-    @session_start();
 
     class Conexao {
 

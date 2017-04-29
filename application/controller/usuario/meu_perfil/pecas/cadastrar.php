@@ -1,8 +1,8 @@
 <?php
 namespace application\controller\usuario\meu_perfil\pecas;
 	
-	require_once RAIZ.'/application/model/util/login_session.php';
-	require_once RAIZ.'/application/model/util/gerenciar_imagens.php';
+	require_once RAIZ.'/application/model/common/util/login_session.php';
+	require_once RAIZ.'/application/model/common/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/model/object/peca.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/model/object/status_peca.php';
@@ -33,8 +33,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/cadastrar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
-	use application\model\util\Login_Session;
-	use application\model\util\Gerenciar_Imagens;
+	use application\model\common\util\Login_Session;
+	use application\model\common\util\Gerenciar_Imagens;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
@@ -69,6 +69,67 @@ namespace application\controller\usuario\meu_perfil\pecas;
 
         function __construct() {
             
+        }
+        
+        private $categoria;
+        private $marca;
+        private $modelo;
+        private $versao;
+        private $descricao;
+        private $status;
+        private $preferencia_entrega;
+        private $fabricante;
+        private $peca;
+        private $serie;
+        private $preco;
+        private $prioridade;
+        
+        public function set_categoria($categoria) {
+        	$this->categoria = $categoria;
+        }
+        
+        public function set_marca($marca) {
+        	$this->marca = $marca;
+        }
+        
+        public function set_modelo($modelo) {
+        	$this->modelo = $modelo;
+        }
+        
+        public function set_versao($versao) {
+        	$this->versao = $versao;
+        }
+        
+        public function set_descricao($descricao) {
+        	$this->descricao = $descricao;
+        }
+        
+        public function set_status($status) {
+        	$this->status = $status;
+        }
+        
+        public function set_preferencia_entrega($preferencia_entrega) {
+        	$this->preferencia_entrega = $preferencia_entrega;
+        }
+        
+        public function set_fabricante($fabricante) {
+        	$this->fabricante = $fabricante;
+        }
+        
+        public function set_peca($peca) {
+        	$this->peca = $peca;
+        }
+        
+        public function set_serie($serie) {
+        	$this->serie = $serie;
+        }
+        
+        public function set_preco($preco) {
+        	$this->preco = $preco;
+        }
+        
+        public function set_prioridade($prioridade) {
+        	$this->prioridade = $prioridade;
         }
         
         public function Carregar_Pagina(?array $cadastrar_erros = null, ?array $cadastrar_campos = null, ?array $cadastrar_form = null, ?array $cadastrar_sucesso = null) {
@@ -119,45 +180,45 @@ namespace application\controller\usuario\meu_perfil\pecas;
         
         public function Carregar_Compatibilidade() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
-	        	if (isset($_GET['categoria'])) {
-	        		if ($_GET['categoria'] == "verificar") {
+	        	if (!empty($this->categoria)) {
+	        		if ($this->categoria == "verificar") {
 	        			View_Cadastrar::Carregar_Marcas();
 	        		} else {
-	        			self::Salvar_Session_Compatibilidade();
+	        			$this->Salvar_Session_Compatibilidade();
 	        			View_Cadastrar::Carregar_Categorias();
 	        		}
 	        	}
 	        		
-	        	if (isset($_GET['marca'])) {
-	        		if ($_GET['marca'] == "verificar") {
+	        	if (!empty($this->marca)) {
+	        		if ($this->marca == "verificar") {
 	        			View_Cadastrar::Carregar_Modelos();
 	        		} else {
-	        			self::Salvar_Session_Compatibilidade();
+	        			$this->Salvar_Session_Compatibilidade();
 	        			View_Cadastrar::Carregar_Marcas();
 	        		}
 	        	}
 	        		
-	        	if (isset($_GET['modelo'])) {
-	        		if ($_GET['modelo'] == "verificar") {
+	        	if (!empty($this->modelo)) {
+	        		if ($this->modelo == "verificar") {
 	        			View_Cadastrar::Carregar_Versoes();
 	        		} else {
-	        			self::Salvar_Session_Compatibilidade();
+	        			$this->Salvar_Session_Compatibilidade();
 	        			View_Cadastrar::Carregar_Modelos();
 	        		}
 	        	}
 	        		
-	        	if (isset($_GET['versao'])) {
-	        		if ($_GET['versao'] == "verificar") {
+	        	if (!empty($this->versao)) {
+	        		if ($this->versao == "verificar") {
 	        			View_Cadastrar::Carregar_Anos();
 	        		} else {
-	        			self::Salvar_Session_Compatibilidade();
+	        			$this->Salvar_Session_Compatibilidade();
 	        			View_Cadastrar::Carregar_Versoes();
 	        		}
 	        	}
         	}
         }
         
-        private static function Salvar_Session_Compatibilidade() : void {
+        private function Salvar_Session_Compatibilidade() : void {
         	$compatibilidade = array();
         		
         	$compatibilidade['categoria'] = array();
@@ -170,13 +231,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$compatibilidade = $_SESSION['compatibilidade'];
         	}
         		
-        	if (isset($_GET['categoria'])) {
+        	if (!empty($this->categoria)) {
         		if (isset($compatibilidade['categoria'])) {
-        			if (isset($compatibilidade['categoria'][$_GET['categoria']])) {
-        				unset($compatibilidade['categoria'][$_GET['categoria']]);
+        			if (isset($compatibilidade['categoria'][$this->categoria])) {
+        				unset($compatibilidade['categoria'][$this->categoria]);
         
         				if (isset($compatibilidade['marca'])) {
-        					$id_marcas = self::Buscar_Id_Marcas_Por_Id_Categoria($_GET['categoria']);
+        					$id_marcas = self::Buscar_Id_Marcas_Por_Id_Categoria($this->categoria);
         						
         					foreach ($id_marcas as $id_marca) {
         						if (isset($compatibilidade['marca'][$id_marca])) {
@@ -205,20 +266,20 @@ namespace application\controller\usuario\meu_perfil\pecas;
         					}
         				}
         			} else {
-        				$compatibilidade['categoria'][$_GET['categoria']] = $_GET['categoria'];
+        				$compatibilidade['categoria'][$this->categoria] = $this->categoria;
         			}
         		} else {
-        			$compatibilidade['categoria'][$_GET['categoria']] = $_GET['categoria'];
+        			$compatibilidade['categoria'][$this->categoria] = $this->categoria;
         		}
         	}
         		
-        	if (isset($_GET['marca'])) {
+        	if (!empty($this->marca)) {
         		if (isset($compatibilidade['marca'])) {
-        			if (isset($compatibilidade['marca'][$_GET['marca']])) {
-        				unset($compatibilidade['marca'][$_GET['marca']]);
+        			if (isset($compatibilidade['marca'][$this->marca])) {
+        				unset($compatibilidade['marca'][$this->marca]);
         
         				if (isset($compatibilidade['modelo'])) {
-        					$id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($_GET['marca']);
+        					$id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($this->marca);
         						
         					foreach ($id_modelos as $id_modelo) {
         						if (isset($compatibilidade['modelo'][$id_modelo])) {
@@ -237,20 +298,20 @@ namespace application\controller\usuario\meu_perfil\pecas;
         					}
         				}
         			} else {
-        				$compatibilidade['marca'][$_GET['marca']] = $_GET['marca'];
+        				$compatibilidade['marca'][$this->marca] = $this->marca;
         			}
         		} else {
-        			$compatibilidade['marca'][$_GET['marca']] = $_GET['marca'];
+        			$compatibilidade['marca'][$this->marca] = $this->marca;
         		}
         	}
         		
-        	if (isset($_GET['modelo'])) {
+        	if (!empty($this->modelo)) {
         		if (isset($compatibilidade['modelo'])) {
-        			if (isset($compatibilidade['modelo'][$_GET['modelo']])) {
-        				unset($compatibilidade['modelo'][$_GET['modelo']]);
+        			if (isset($compatibilidade['modelo'][$this->modelo])) {
+        				unset($compatibilidade['modelo'][$this->modelo]);
         
         				if (isset($compatibilidade['versao'])) {
-        					$id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($_GET['modelo']);
+        					$id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($this->modelo);
         						
         					foreach ($id_versoes as $id_versao) {
         						if (isset($compatibilidade['versao'][$id_versao])) {
@@ -259,22 +320,22 @@ namespace application\controller\usuario\meu_perfil\pecas;
         					}
         				}
         			} else {
-        				$compatibilidade['modelo'][$_GET['modelo']] = $_GET['modelo'];
+        				$compatibilidade['modelo'][$this->modelo] = $this->modelo;
         			}
         		} else {
-        			$compatibilidade['modelo'][$_GET['modelo']] = $_GET['modelo'];
+        			$compatibilidade['modelo'][$this->modelo] = $this->modelo;
         		}
         	}
         		
-        	if (isset($_GET['versao'])) {
+        	if (!empty($this->versao)) {
         		if (isset($compatibilidade['versao'])) {
-        			if (isset($compatibilidade['versao'][$_GET['versao']])) {
-        				unset($compatibilidade['versao'][$_GET['versao']]);
+        			if (isset($compatibilidade['versao'][$this->versao])) {
+        				unset($compatibilidade['versao'][$this->versao]);
         			} else {
-        				$compatibilidade['versao'][$_GET['versao']] = $_GET['versao'];
+        				$compatibilidade['versao'][$this->versao] = $this->versao;
         			}
         		} else {
-        			$compatibilidade['versao'][$_GET['versao']] = $_GET['versao'];
+        			$compatibilidade['versao'][$this->versao] = $this->versao;
         		}
         	}
         		
@@ -286,20 +347,20 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$cadastrar_sucesso = array();
 			$cadastrar_campos = array('erro_peca' => "certo");
 			
-			$peca = new Object_Peca();
-			$status = new Object_Status_Peca();
+			$object_peca = new Object_Peca();
+			$object_status = new Object_Status_Peca();
 			
-			$peca->set_status($status);
+			$object_peca->set_status($object_status);
 			
-			if (!empty($_POST['descricao'])) {
-				$descricao = strip_tags($_POST['descricao']);
+			if (!empty($this->descricao)) {
+				$descricao = strip_tags($this->descricao);
 				 
-				if ($descricao === $_POST['descricao']) {
-					$descricao = trim($descricao);
-					$descricao = preg_replace('/\s+/', " ", $descricao);
+				if ($descricao === $this->descricao) {
+					$this->descricao = trim($this->descricao);
+					$this->descricao = preg_replace('/\s+/', " ", $this->descricao);
 					 
-					if (strlen($descricao) <= 1000) {
-						$peca->set_descricao(ucfirst($descricao));
+					if (strlen($this->descricao) <= 1000) {
+						$object_peca->set_descricao(ucfirst($this->descricao));
 					} else {
 						$erros_concluir[] = "Descricao, Não pode conter mais de 1000 Caracteres";
 						$cnclr_campos['erro_descricao'] = "erro";
@@ -310,38 +371,42 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				}
 			}
 			
-			if (!empty($_POST['status'])) {
-				if (filter_var($_POST['status'], FILTER_VALIDATE_INT)) {
-					$status->set_id($_POST['status']);
+			if (!empty($this->status)) {
+				if (filter_var($this->status, FILTER_VALIDATE_INT)) {
+					$object_status->set_id($this->status);
 					
-					$peca->set_status($status);
+					$object_peca->set_status($object_status);
 				} else {
 					$cadastrar_erros[] = "Status, Selecione um Status Valido.";
 					$cadastrar_campos['erro_status'] = "erro";
 				}
 			}
 			
-			if (!empty($_POST['preferencia_entrega'])) {
+			if (!empty($this->preferencia_entrega)) {
 				$valor = 0;
 				
-				foreach ($_POST['preferencia_entrega'] as $preferencia_entrega) {
-					$valor += $preferencia_entrega;
-				}
-				
-				if (!empty($valor) AND filter_var($valor, FILTER_VALIDATE_INT)) {
-					$peca->set_preferencia_entrega($valor);
+				if (is_array($this->preferencia_entrega)) {
+					foreach ($this->preferencia_entrega as $preferencia_entrega) {
+						if (filter_var($preferencia_entrega, FILTER_VALIDATE_INT)) {
+							$valor += $preferencia_entrega;
+						}
+					}
+					
+					if (!empty($valor) AND filter_var($valor, FILTER_VALIDATE_INT)) {
+						$object_peca->set_preferencia_entrega($valor);
+					}
 				}
 			}
 			
-			if (!empty($_POST['fabricante'])) {
-				$fabricante = strip_tags($_POST['fabricante']);
+			if (!empty($this->fabricante)) {
+				$fabricante = strip_tags($this->fabricante);
 				
-				if ($fabricante === $_POST['fabricante']) {
-					$fabricante = trim($fabricante);
-					$fabricante = preg_replace('/\s+/', " ", $fabricante);
+				if ($fabricante === $this->fabricante) {
+					$this->fabricante = trim($this->fabricante);
+					$this->fabricante = preg_replace('/\s+/', " ", $this->fabricante);
 					 
-					if (strlen($fabricante) <= 50) {
-						$peca->set_fabricante(ucwords(strtolower($fabricante)));
+					if (strlen($this->fabricante) <= 50) {
+						$object_peca->set_fabricante(ucwords(strtolower($this->fabricante)));
 					} else {
 						$cadastrar_erros[] = "Fabricante, Não pode conter mais de 50 Caracteres";
 						$cadastrar_campos['erro_fabricante'] = "erro";
@@ -352,15 +417,15 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				}
 			}
 			
-			if (!empty($_POST['peca'])) {
-				$peca_nome = strip_tags($_POST['peca']);
+			if (!empty($this->peca)) {
+				$peca = strip_tags($this->peca);
 				
-				if ($peca_nome === $_POST['peca']) {
-					$peca_nome = trim($peca_nome);
-					$peca_nome = preg_replace('/\s+/', " ", $peca_nome);
+				if ($peca === $this->peca) {
+					$this->peca = trim($this->peca);
+					$this->peca = preg_replace('/\s+/', " ", $this->peca);
 				
-					if (strlen($peca_nome) <= 50) {
-						$peca->set_nome(ucwords(strtolower($peca_nome)));
+					if (strlen($this->peca) <= 50) {
+						$object_peca->set_nome(ucwords(strtolower($this->peca)));
 					} else {
 						$cadastrar_erros[] = "Peca Nome, Não pode conter mais de 50 Caracteres";
 						$cadastrar_campos['erro_peca'] = "erro";
@@ -374,15 +439,15 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$cadastrar_erros[] = "Digite o Nome da Peça";
 			}
 			
-			if (!empty($_POST['serie'])) {
-				$serie = strip_tags($_POST['serie']);
+			if (!empty($this->serie)) {
+				$serie = strip_tags($this->serie);
 				
-				if ($serie === $_POST['serie']) {
-					$serie = trim($serie);
-					$serie = preg_replace('/\s+/', " ", $serie);
+				if ($serie === $this->serie) {
+					$this->serie = trim($this->serie);
+					$this->serie = preg_replace('/\s+/', " ", $this->serie);
 				
-					if (strlen($serie) <= 150) {
-						$peca->set_serie($serie);
+					if (strlen($this->serie) <= 150) {
+						$object_peca->set_serie($this->serie);
 					} else {
 						$cadastrar_erros[] = "Numero de Serie, Não pode conter mais de 150 Caracteres";
 						$cadastrar_campos['erro_serie'] = "erro";
@@ -393,17 +458,17 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				}
 			}
 			
-			if (!empty($_POST['preco'])) {
-				if (filter_var($_POST['preco'], FILTER_VALIDATE_FLOAT)) {
-					$peca->set_preco($_POST['preco']);
+			if (!empty($this->preco)) {
+				if (filter_var($this->preco, FILTER_VALIDATE_FLOAT)) {
+					$object_peca->set_preco($this->preco);
 				} else {
 					$cadastrar_erros[] = "Digite um Preço Valido para a peça";
 					$cadastrar_campos['erro_preco'] = "erro";
 				}
 			}
 			
-			if (!empty($_POST['prioridade'])) {
-				$peca->set_prioridade(true);
+			if (!empty($this->prioridade)) {
+				$object_peca->set_prioridade(true);
 			}
 				
 			$categorias_compativeis = null;
@@ -416,32 +481,32 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$modelos_pativeis = array();
 			$versoes_pativeis = array();
 				
-			if (!empty($_POST['categoria'])) {
-				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($_POST['categoria']));
+			if (!empty($this->categoria)) {
+				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
 			
-				if (!empty($_POST['marca'])) {
-					$marcas_compativeis = self::Buscar_Marcas_Compativeis(current($_POST['marca']));
+				if (!empty($this->marca)) {
+					$marcas_compativeis = self::Buscar_Marcas_Compativeis(current($this->marca));
 						
-					if (!empty($_POST['modelo'])) {
-						$modelos_compativeis = self::Buscar_Modelos_Compativeis(current($_POST['modelo']));
+					if (!empty($this->modelo)) {
+						$modelos_compativeis = self::Buscar_Modelos_Compativeis(current($this->modelo));
 			
-						if (!empty($_POST['versao'])) {
-							$versoes_compativeis = self::Buscar_Versoes_Compativeis(current($_POST['versao']));
+						if (!empty($this->versao)) {
+							$versoes_compativeis = self::Buscar_Versoes_Compativeis(current($this->versao));
 						}
 					}
 				}
 			}
 				
-			if (!empty($_POST['categoria'])) {
-				foreach ($_POST['categoria'] as $categoria_selecionada) {
+			if (!empty($this->categoria)) {
+				foreach ($this->categoria as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {
 						$categoria_pativel = new Object_Categoria_Pativel();
 						$categoria_pativel->set_categoria_id($categoria_selecionada);
 						
 						$categorias_pativeis[] = $categoria_pativel;
 						
-						if (!empty($_POST['marca'])) {
-							foreach ($_POST['marca'] as $marca_selecionada) {
+						if (!empty($this->marca)) {
+							foreach ($this->marca as $marca_selecionada) {
 								if (in_array($marca_selecionada, $marcas_compativeis)) {
 									if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
 										$marca_pativel = new Object_Marca_Pativel();
@@ -453,8 +518,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 										
 										$marcas_pativeis[] = $marca_pativel;
 										
-										if (!empty($_POST['modelo'])) {
-											foreach ($_POST['modelo'] as $modelo_selecionado) {
+										if (!empty($this->modelo)) {
+											foreach ($this->modelo as $modelo_selecionado) {
 												if (in_array($modelo_selecionado, $modelos_compativeis)) {
 													if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
 														$modelo_pativel = new Object_Modelo_Pativel();
@@ -466,8 +531,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 														
 														$modelos_pativeis[] = $modelo_pativel;
 														
-														if (!empty($_POST['versao'])) {
-															foreach ($_POST['versao'] as $versao_selecionada) {
+														if (!empty($this->versao)) {
+															foreach ($this->versao as $versao_selecionada) {
 																if (in_array($versao_selecionada, $versoes_compativeis)) {
 																	if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
 																		$versao_pativel = new Object_Versao_Pativel();
@@ -500,8 +565,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$entidade->set_id(Login_Session::get_entidade_id());
 				$entidade->set_usuario_id(Login_Session::get_usuario_id());
 				
-				$peca->set_entidade($entidade);
-				$peca->set_data_anuncio(date('Y-m-d H:i:s'));
+				$object_peca->set_entidade($entidade);
+				$object_peca->set_data_anuncio(date('Y-m-d H:i:s'));
 				
 				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
 				
@@ -513,17 +578,17 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 					$endereco->set_id($id_endereco);
 					
-					$peca->set_id(0);
-					$peca->set_endereco($endereco);
+					$object_peca->set_id(0);
+					$object_peca->set_endereco($endereco);
 					
 					$usuario_responsavel = new Object_Usuario();
 					
 					$usuario_responsavel->set_id(Login_Session::get_usuario_id());
 					
-					$peca->set_responsavel($usuario_responsavel);
+					$object_peca->set_responsavel($usuario_responsavel);
 				}
 				
-				$id_peca = DAO_Peca::Inserir($peca);
+				$id_peca = DAO_Peca::Inserir($object_peca);
 				
 				if (!empty($id_peca) AND $id_peca !== false) {
 					$retorno = null;
@@ -603,14 +668,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			} else {
 				$cadastrar_form = array();
 				
-				$cadastrar_form['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['peca'])))));
-				$cadastrar_form['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['fabricante'])))));
-				$cadastrar_form['serie'] = trim(strip_tags($_POST['serie']));
-				$cadastrar_form['preco'] = trim(strip_tags($_POST['preco']));
-				$cadastrar_form['status'] = trim(strip_tags($_POST['status']));
-				$cadastrar_form['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($_POST['descricao']))));
+				$cadastrar_form['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->peca)))));
+				$cadastrar_form['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->fabricante)))));
+				$cadastrar_form['serie'] = trim(strip_tags($this->serie));
+				$cadastrar_form['preco'] = trim(strip_tags($this->preco));
+				$cadastrar_form['status'] = trim(strip_tags($this->status));
+				$cadastrar_form['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($this->descricao))));
 				
-				if (isset($_POST['prioridade'])) { 
+				if (!empty($this->prioridade)) { 
 					$cadastrar_form['prioridade'] = true;
 				}
 				

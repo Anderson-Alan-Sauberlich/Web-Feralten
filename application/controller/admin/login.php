@@ -13,6 +13,22 @@ namespace application\controller\admin;
             
         }
         
+        private $usuario;
+        private $senha;
+        private $logout;
+        
+        public function set_usuario($usuario) {
+        	$this->usuario = $usuario;
+        }
+        
+        public function set_senha($senha) {
+        	$this->senha = $senha;
+        }
+        
+        public function set_logout($logout) {
+        	$this->logout = $logout;
+        }
+        
         public function Carregar_Pagina(?array $login_admin_erros = null) {
         	$view = new View_Login();
         	
@@ -22,8 +38,8 @@ namespace application\controller\admin;
         }
         
         public function LogOut() : void {
-        	if (isset($_GET['logout'])) {
-        		if(hash_equals($_GET['logout'], hash_hmac('sha1', session_id(), sha1(session_id())))) {
+        	if (!empty($this->logout)) {
+        		if(hash_equals($this->logout, hash_hmac('sha1', session_id(), sha1(session_id())))) {
         			unset($_SESSION['usuario_admin']);
         		}
         	}
@@ -31,26 +47,20 @@ namespace application\controller\admin;
         
         public function Login() {
         	$login_admin_erros = array();
-        	$usuario = null;
-        	$senha = null;
         
-        	if (empty($_POST['usuario'])) {
+        	if (empty($this->usuario)) {
         		$login_admin_erros[] = "Digite seu Usuario";
-        	} else {
-        		$usuario = $_POST['usuario'];
         	}
-        
-        	if (empty($_POST['senha'])) {
+        	
+        	if (empty($this->senha)) {
         		$login_admin_erros[] = "Digite sua Senha";
-        	} else {
-        		$senha = $_POST['senha'];
         	}
-        
+        	
         	if (empty($login_admin_erros)) {
-        		$usuario_login = DAO_Usuario_Admin::Autenticar($usuario);
+        		$usuario_login = DAO_Usuario_Admin::Autenticar($this->usuario);
         
         		if ($usuario_login !== false) {
-        			if (password_verify($senha, $usuario_login->get_senha())) {
+        			if (password_verify($this->senha, $usuario_login->get_senha())) {
         				$_SESSION['usuario_admin'] = $usuario_login->get_id();
         			} else {
         				$login_admin_erros[] = "Erro ao tentar Autenticar";

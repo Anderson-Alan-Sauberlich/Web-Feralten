@@ -1,9 +1,9 @@
 <?php
 namespace application\controller\include_page\menu;
     
-    require_once RAIZ.'/application/model/util/login_session.php';
+    require_once RAIZ.'/application/model/common/util/login_session.php';
     
-    use application\model\util\Login_Session;
+    use application\model\common\util\Login_Session;
     
     class Usuario {
 

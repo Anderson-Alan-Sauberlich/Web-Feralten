@@ -82,7 +82,7 @@ namespace application\model\object;
 			return $this->fone1;
 		}
 		
-		public function set_fone2(string $fone2) : void {
+		public function set_fone2(?string $fone2) : void {
 			$this->fone2 = $fone2;
 		}
 		
@@ -90,7 +90,7 @@ namespace application\model\object;
 			return $this->fone2;
 		}
 		
-		public function set_email_alternativo(string $email_alternativo) : void {
+		public function set_email_alternativo(?string $email_alternativo) : void {
 			$this->email_alternativo = $email_alternativo;
 		}
 		

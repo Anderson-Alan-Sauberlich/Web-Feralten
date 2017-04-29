@@ -1,5 +1,5 @@
 <?php
-namespace application\model\util;
+namespace application\model\common\util;
 	
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();

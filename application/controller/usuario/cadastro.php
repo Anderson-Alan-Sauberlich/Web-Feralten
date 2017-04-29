@@ -17,6 +17,27 @@ namespace application\controller\usuario;
             
         }
         
+        private $nome;
+        private $email;
+        private $confemail;
+        private $senha;
+        
+        public function set_nome($nome) {
+        	$this->nome = $nome;
+        }
+        
+        public function set_email($email) {
+        	$this->email = $email;
+        }
+        
+        public function set_confemail($confemail) {
+        	$this->confemail = $confemail;
+        }
+        
+        public function set_senha($senha) {
+        	$this->senha = $senha;
+        }
+        
         public function Carregar_Pagina(?array $cadastro_erros = null, ?array $cadastro_campos = null, ?array $cadastro_form = null) : void {
         	$view = new View_Cadastro();
         	
@@ -33,19 +54,19 @@ namespace application\controller\usuario;
 
             $usuario = new Object_Usuario();
             
-            if (empty($_POST['nome'])) {
+            if (empty($this->nome)) {
             	$cadastro_erros[] = "Digite Seu Nome Completo";
             	$cadastro_campos['erro_nome'] = "erro";
             } else {
-            	$nome = strip_tags($_POST['nome']);
+            	$nome = strip_tags($this->nome);
             	
-            	if ($nome === $_POST['nome']) {
-	            	$nome = trim($nome);
-	            	$nome = preg_replace('/\s+/', " ", $nome);
+            	if ($nome === $this->nome) {
+            		$this->nome = trim($this->nome);
+            		$this->nome = preg_replace('/\s+/', " ", $this->nome);
 	            	
-	            	if (strlen($nome) <= 150) {
-	            		if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $nome)) {
-	            			$usuario->set_nome(ucwords(strtolower($nome)));
+            		if (strlen($this->nome) <= 150) {
+            			if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $this->nome)) {
+            				$usuario->set_nome(ucwords(strtolower($this->nome)));
 	            		} else {
 	            			$cadastro_erros[] = "O Nome Não Pode Conter Caracteres Especiais";
 	            			$cadastro_campos['erro_nome'] = "erro";
@@ -60,15 +81,15 @@ namespace application\controller\usuario;
             	}
             }
             
-            if (empty($_POST['senha'])) {
+            if (empty($this->senha)) {
             	$cadastro_erros[] = "Preencha o Campo Senha";
             	$cadastro_campos['erro_senha'] = "erro";
             } else {
-	            if (strlen($_POST['senha']) >= 6 AND strlen($_POST['senha']) <= 20) {
-	            	$senha = strip_tags($_POST['senha']);
+            	if (strlen($this->senha) >= 6 AND strlen($this->senha) <= 20) {
+            		$senha = strip_tags($this->senha);
 	            	 
-	            	if ($senha === $_POST['senha']) {
-	            		$usuario->set_senha($senha);
+            		if ($senha === $this->senha) {
+            			$usuario->set_senha($this->senha);
 	            	} else {
 	            		$cadastro_erros[] = "A Senha Não pode conter Tags de Programação";
 	            		$cadastro_campos['erro_senha'] = "erro";
@@ -79,28 +100,28 @@ namespace application\controller\usuario;
 	            }
             }
 	        
-	        if (empty($_POST['confemail']) OR empty($_POST['email'])) {
-	        	if (empty($_POST['email'])) {
+	        if (empty($this->confemail) OR empty($this->email)) {
+	        	if (empty($this->email)) {
 	        		$cadastro_erros[] = "Preencha o Campo E-Mail";
 	        		$cadastro_campos['erro_email'] = "erro";
 	        	}
 	        	 
-	        	if (empty($_POST['confemail'])) {
+	        	if (empty($this->confemail)) {
 	        		$cadastro_erros[] = "Preencha o Campo Comfirmar E-Mail";
 	        		$cadastro_campos['erro_confemail'] = "erro";
 	        	}
 	        } else {
-	        	$confemail = trim($_POST['confemail']);
-	        	$email = trim($_POST['email']);
+	        	$this->confemail = trim($this->confemail);
+	        	$this->email = trim($this->email);
 	        	
-	        	if ($confemail === $email) {
-	        		if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-	        			if (strlen($email) <= 150) {
-		        			$retorno = DAO_Usuario::Verificar_Email($email);
+	        	if ($this->confemail=== $this->email) {
+	        		if (filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false) {
+	        			if (strlen($this->email) <= 150) {
+	        				$retorno = DAO_Usuario::Verificar_Email($this->email);
 		        			
 			        		if ($retorno !== false) {
 			        			if ($retorno === 0) {
-				        			$usuario->set_email($email);
+			        				$usuario->set_email($this->email);
 				        		} else {
 				        			$cadastro_erros[] = "Este E-Mail Já Esta Cadastrado";
 				        			$cadastro_campos['erro_email'] = "erro";
@@ -153,10 +174,10 @@ namespace application\controller\usuario;
             } else {
                 $cadastro_form = array();
                 
-                $cadastro_form['nome'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($_POST['nome'])))));
-                $cadastro_form['email'] = trim(strip_tags($_POST['email']));
-                $cadastro_form['confemail'] = trim(strip_tags($_POST['confemail']));
-                $cadastro_form['senha'] = strip_tags($_POST['senha']);
+                $cadastro_form['nome'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->nome)))));
+                $cadastro_form['email'] = trim(strip_tags($this->email));
+                $cadastro_form['confemail'] = trim(strip_tags($this->confemail));
+                $cadastro_form['senha'] = strip_tags($this->senha);
                 
                 $this->Carregar_Pagina($cadastro_erros, $cadastro_campos, $cadastro_form);
             }

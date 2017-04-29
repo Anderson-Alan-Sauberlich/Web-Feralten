@@ -2,8 +2,8 @@
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
 	
-	require_once('config.php');
 	require_once('vendor/autoload.php');
+	require_once('config.php');
 	
 	$app = new \Slim\App();
 	
@@ -25,6 +25,10 @@
 			
 			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
 			
+			if (isset($_GET['categoria'])) {
+				$menu_pesquisa->set_categoria($_GET['categoria']);
+			}
+			
 			$menu_pesquisa->Retornar_Marcas_Por_Categoria();
 			
 			return $response;
@@ -34,7 +38,11 @@
 			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
 			
 			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
-				
+			
+			if (isset($_GET['marca'])) {
+				$menu_pesquisa->set_marca($_GET['marca']);
+			}
+			
 			$menu_pesquisa->Retornar_Modelos_Por_Marca();
 			
 			return $response;
@@ -44,7 +52,11 @@
 			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
 			
 			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
-				
+			
+			if (isset($_GET['modelo'])) {
+				$menu_pesquisa->set_modelo($_GET['modelo']);
+			}
+			
 			$menu_pesquisa->Retornar_Versoes_Por_Modelo();
 			
 			return $response;
@@ -66,7 +78,19 @@
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
 			$login = new application\controller\usuario\Login();
-				
+			
+			if (isset($_POST['email'])) {
+				$login->set_email($_POST['email']);
+			}
+			
+			if (isset($_POST['password'])) {
+				$login->set_senha($_POST['password']);
+			}
+			
+			if (isset($_POST['manter_login'])) {
+				$login->set_manter_login(true);
+			}
+			
 			$resposta = $login->Autenticar_Usuario_Login();
 			
 			if ($resposta) {
@@ -80,7 +104,11 @@
 			require_once(RAIZ.'/application/controller/usuario/login.php');
 			
 			$login = new application\controller\usuario\Login();
-				
+			
+			if (isset($_GET['logout'])) {
+				$login->set_logout($_GET['logout']);
+			}
+			
 			$login->LogOut();
 			
 			return $response->withRedirect('/usuario/login/');
@@ -103,6 +131,22 @@
 			
 			$cadastro = new application\controller\usuario\Cadastro();
 				
+			if (isset($_POST['nome'])) {
+				$cadastro->set_nome($_POST['nome']);
+			}
+			
+			if (isset($_POST['email'])) {
+				$cadastro->set_email($_POST['email']);
+			}
+			
+			if (isset($_POST['confemail'])) {
+				$cadastro->set_confemail($_POST['confemail']);
+			}
+			
+			if (isset($_POST['senha'])) {
+				$cadastro->set_senha($_POST['senha']);
+			}
+			
 			$resposta = $cadastro->Cadastrar_Usuario();
 			
 			if ($resposta) {
@@ -151,6 +195,22 @@
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
 			
+			if (isset($_GET['categoria'])) {
+				$cadastrar->set_categoria($_GET['categoria']);
+			}
+			
+			if (isset($_GET['marca'])) {
+				$cadastrar->set_marca($_GET['marca']);
+			}
+			
+			if (isset($_GET['modelo'])) {
+				$cadastrar->set_modelo($_GET['modelo']);
+			}
+			
+			if (isset($_GET['versao'])) {
+				$cadastrar->set_versao($_GET['versao']);
+			}
+			
 			$cadastrar->Carregar_Compatibilidade();
 			
 			return $response;
@@ -160,6 +220,54 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/cadastrar.php');
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+			
+			if (isset($_POST['categoria'])) {
+				$cadastrar->set_categoria($_POST['categoria']);
+			}
+			
+			if (isset($_POST['marca'])) {
+				$cadastrar->set_marca($_GET['marca']);
+			}
+			
+			if (isset($_POST['modelo'])) {
+				$cadastrar->set_modelo($_POST['modelo']);
+			}
+			
+			if (isset($_POST['versao'])) {
+				$cadastrar->set_versao($_POST['versao']);
+			}
+			
+			if (isset($_POST['descricao'])) {
+				$cadastrar->set_descricao($_POST['descricao']);
+			}
+			
+			if (isset($_POST['status'])) {
+				$cadastrar->set_status($_POST['status']);
+			}
+			
+			if (isset($_POST['preferencia_entrega'])) {
+				$cadastrar->set_preferencia_entrega($_POST['preferencia_entrega']);
+			}
+			
+			if (isset($_POST['fabricante'])) {
+				$cadastrar->set_fabricante($_POST['fabricante']);
+			}
+			
+			if (isset($_POST['peca'])) {
+				$cadastrar->set_peca($_POST['peca']);
+			}
+			
+			if (isset($_POST['serie'])) {
+				$cadastrar->set_serie($_POST['serie']);
+			}
+			
+			if (isset($_POST['preco'])) {
+				$cadastrar->set_preco($_POST['preco']);
+			}
+			
+			if (isset($_POST['prioridade'])) {
+				$cadastrar->set_prioridade($_POST['prioridade']);
+			}
 			
 			$resposta = $cadastrar->Verificar_Evento();
 			
@@ -338,7 +446,43 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
 			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
-				
+			
+			if (isset($_POST['nome'])) {
+				$atualizar->set_nome($_POST['nome']);
+			}
+			
+			if (isset($_POST['fone1'])) {
+				$atualizar->set_fone1($_POST['fone1']);
+			}
+			
+			if (isset($_POST['fone2'])) {
+				$atualizar->set_fone2($_POST['fone2']);
+			}
+			
+			if (isset($_POST['email'])) {
+				$atualizar->set_email($_POST['email']);
+			}
+			
+			if (isset($_POST['confemail'])) {
+				$atualizar->set_confemail($_POST['confemail']);
+			}
+			
+			if (isset($_POST['email_alternativo'])) {
+				$atualizar->set_email_alternativo($_POST['email_alternativo']);
+			}
+			
+			if (isset($_POST['cpf_cnpj'])) {
+				$atualizar->set_cpf_cnpj($_POST['cpf_cnpj']);
+			}
+			
+			if (isset($_POST['site'])) {
+				$atualizar->set_site($_POST['site']);
+			}
+			
+			if (isset($_POST['nome_comercial'])) {
+				$atualizar->set_nome_comercial($_POST['nome_comercial']);
+			}
+			
 			$resposta = $atualizar->Verificar_Evento();
 			
 			if ($resposta === false) {
@@ -390,7 +534,19 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/alterar_senha.php');
 			
 			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
-				
+			
+			if (isset($_POST['senha_antiga'])) {
+				$alterar_senha->set_senha_antiga($_POST['senha_antiga']);
+			}
+			
+			if (isset($_POST['senha_nova'])) {
+				$alterar_senha->set_senha_nova($_POST['senha_nova']);
+			}
+			
+			if (isset($_POST['senha_confnova'])) {
+				$alterar_senha->set_senha_confnova($_POST['senha_confnova']);
+			}
+			
 			$resposta = $alterar_senha->Atualizar_Senha_Usuario();
 			
 			if ($resposta === 'certo') {
@@ -424,7 +580,11 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
 			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
-				
+			
+			if (isset($_GET['estado'])) {
+				$enderecos->set_estado($_GET['estado']);
+			}
+			
 			$enderecos->Retornar_Cidades_Por_Estado();
 			
 			return $response;
@@ -434,7 +594,35 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/enderecos.php');
 			
 			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
-				
+			
+			if (isset($_POST['cidade'])) {
+				$enderecos->set_cidade($_POST['cidade']);
+			}
+			
+			if (isset($_POST['estado'])) {
+				$enderecos->set_estado($_POST['estado']);
+			}
+			
+			if (isset($_POST['numero'])) {
+				$enderecos->set_numero($_POST['numero']);
+			}
+			
+			if (isset($_POST['cep'])) {
+				$enderecos->set_cep($_POST['cep']);
+			}
+			
+			if (isset($_POST['bairro'])) {
+				$enderecos->set_bairro($_POST['bairro']);
+			}
+			
+			if (isset($_POST['rua'])) {
+				$enderecos->set_rua($_POST['rua']);
+			}
+			
+			if (isset($_POST['complemento'])) {
+				$enderecos->set_complemento($_POST['complemento']);
+			}
+			
 			$resposta = $enderecos->Atualizar_Endereco();
 			
 			if ($resposta === false) {
@@ -468,7 +656,11 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
-				
+			
+			if (isset($_GET['estado'])) {
+				$concluir->set_estado($_GET['estado']);
+			}
+			
 			$concluir->Retornar_Cidades_Por_Estado();
 			
 			return $response;
@@ -498,7 +690,59 @@
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/concluir.php');
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
-				
+			
+			if (isset($_POST['fone1'])) {
+				$concluir->set_fone1($_POST['fone1']);
+			}
+			
+			if (isset($_POST['fone2'])) {
+				$concluir->set_fone2($_POST['fone2']);
+			}
+			
+			if (isset($_POST['email_alternativo'])) {
+				$concluir->set_email_alternativo($_POST['email_alternativo']);
+			}
+			
+			if (isset($_POST['cidade'])) {
+				$concluir->set_cidade($_POST['cidade']);
+			}
+			
+			if (isset($_POST['estado'])) {
+				$concluir->set_estado($_POST['estado']);
+			}
+			
+			if (isset($_POST['numero'])) {
+				$concluir->set_numero($_POST['numero']);
+			}
+			
+			if (isset($_POST['cep'])) {
+				$concluir->set_cep($_POST['cep']);
+			}
+			
+			if (isset($_POST['bairro'])) {
+				$concluir->set_bairro($_POST['bairro']);
+			}
+			
+			if (isset($_POST['rua'])) {
+				$concluir->set_rua($_POST['rua']);
+			}
+			
+			if (isset($_POST['complemento'])) {
+				$concluir->set_complemento($_POST['complemento']);
+			}
+			
+			if (isset($_POST['cpf_cnpj'])) {
+				$concluir->set_cpf_cnpj($_POST['cpf_cnpj']);
+			}
+			
+			if (isset($_POST['site'])) {
+				$concluir->set_site($_POST['site']);
+			}
+			
+			if (isset($_POST['nome_comercial'])) {
+				$concluir->set_nome_comercial($_POST['nome_comercial']);
+			}
+			
 			$resposta = $concluir->Concluir_Cadastro();
 			
 			if ($resposta === false) {
@@ -680,11 +924,19 @@
 		
 		$app->post('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/login.php');
-				
+			
 			$login = new application\controller\admin\Login();
-				
+			
+			if (isset($_POST['usuario'])) {
+				$login->set_usuario($_POST['usuario']);
+			}
+			
+			if (isset($_POST['senha'])) {
+				$login->set_senha($_POST['senha']);
+			}
+			
 			$resposta = $login->Login();
-				
+			
 			if ($resposta) {
 				return $response->withRedirect('/admin/controle/base-de-conhecimento/cmmv/cadastrar/');
 			} else {
@@ -697,6 +949,10 @@
 			
 			$login = new application\controller\admin\Login();
 			
+			if (isset($_GET['logout'])) {
+				$login->set_logout($_GET['logout']);
+			}
+			
 			$login->LogOut();
 			
 			return $response->withRedirect('/admin/login/');
@@ -706,11 +962,11 @@
 	$app->group('/admin/controle/base-de-conhecimento/cmmv/cadastrar/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
-				
+			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
-				
+			
 			$resposta = $cadastrar->Carregar_Pagina();
-				
+			
 			if ($resposta === false) {
 				return $response->withRedirect('/admin/login/');
 			} else {
@@ -730,21 +986,29 @@
 		
 		$app->get('marcas/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
-				
+			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
-				
+			
+			if (isset($_GET['categoria'])) {
+				$cadastrar->set_categoria($_GET['categoria']);
+			}
+			
 			$cadastrar->Retornar_Marcas_Por_Categoria();
-				
+			
 			return $response;
 		});
 		
 		$app->get('modelos/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
-				
+			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
-				
+			
+			if (isset($_GET['marca'])) {
+				$cadastrar->set_marca($_GET['marca']);
+			}
+			
 			$cadastrar->Retornar_Modelos_Por_Marca();
-				
+			
 			return $response;
 		});
 		
@@ -752,6 +1016,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
 			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+			
+			if (isset($_GET['modelo'])) {
+				$cadastrar->set_modelo($_GET['modelo']);
+			}
 			
 			$cadastrar->Retornar_Versoes_Por_Modelo();
 			
@@ -762,6 +1030,30 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/cadastrar.php');
 			
 			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+			
+			if (isset($_POST['categoria'])) {
+				$cadastrar->set_categoria($_POST['categoria']);
+			}
+			
+			if (isset($_POST['marca'])) {
+				$cadastrar->set_marca($_POST['marca']);
+			}
+			
+			if (isset($_POST['modelo'])) {
+				$cadastrar->set_modelo($_POST['modelo']);
+			}
+			
+			if (isset($_POST['versao'])) {
+				$cadastrar->set_versao($_POST['versao']);
+			}
+			
+			if (isset($_POST['nome'])) {
+				$cadastrar->set_nome($_POST['nome']);
+			}
+			
+			if (isset($_POST['url'])) {
+				$cadastrar->set_url($_POST['url']);
+			}
 			
 			$cadastrar->Cadastrar_CMMV();
 			
@@ -799,6 +1091,10 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
+			if (isset($_GET['categoria'])) {
+				$alterar->set_categoria($_GET['categoria']);
+			}
+			
 			$alterar->Retornar_Marcas_Por_Categoria();
 			
 			return $response;
@@ -808,6 +1104,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			if (isset($_GET['marca'])) {
+				$alterar->set_marca($_GET['marca']);
+			}
 			
 			$alterar->Retornar_Modelos_Por_Marca();
 			
@@ -819,6 +1119,10 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
+			if (isset($_GET['modelo'])) {
+				$alterar->set_modelo($_GET['modelo']);
+			}
+			
 			$alterar->Retornar_Versoes_Por_Modelo();
 			
 			return $response;
@@ -828,6 +1132,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			if (isset($_GET['categoria'])) {
+				$alterar->set_categoria($_GET['categoria']);
+			}
 			
 			$alterar->Retornar_Categoria();
 			
@@ -839,6 +1147,10 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
+			if (isset($_GET['marca'])) {
+				$alterar->set_marca($_GET['marca']);
+			}
+			
 			$alterar->Retornar_Marca();
 			
 			return $response;
@@ -848,6 +1160,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			if (isset($_GET['modelo'])) {
+				$alterar->set_modelo($_GET['modelo']);
+			}
 			
 			$alterar->Retornar_Modelo();
 			
@@ -859,6 +1175,10 @@
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
 			
+			if (isset($_GET['versao'])) {
+				$alterar->set_versao($_GET['versao']);
+			}
+			
 			$alterar->Retornar_Versao();
 			
 			return $response;
@@ -868,6 +1188,30 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/alterar.php');
 			
 			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+			
+			if (isset($_POST['categoria'])) {
+				$alterar->set_categoria($_POST['categoria']);
+			}
+			
+			if (isset($_POST['marca'])) {
+				$alterar->set_marca($_POST['marca']);
+			}
+			
+			if (isset($_POST['modelo'])) {
+				$alterar->set_modelo($_POST['modelo']);
+			}
+			
+			if (isset($_POST['versao'])) {
+				$alterar->set_versao($_POST['versao']);
+			}
+			
+			if (isset($_POST['nome'])) {
+				$alterar->set_nome($_POST['nome']);
+			}
+			
+			if (isset($_POST['url'])) {
+				$alterar->set_url($_POST['url']);
+			}
 			
 			$alterar->Alterar_CMMV();
 			
@@ -905,6 +1249,10 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
 			
+			if (isset($_GET['categoria'])) {
+				$deletar->set_categoria($_GET['categoria']);
+			}
+			
 			$deletar->Retornar_Marcas_Por_Categoria();
 			
 			return $response;
@@ -914,6 +1262,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			if (isset($_GET['marca'])) {
+				$deletar->set_marca($_GET['marca']);
+			}
 			
 			$deletar->Retornar_Modelos_Por_Marca();
 			
@@ -925,6 +1277,10 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
 			
+			if (isset($_GET['modelo'])) {
+				$deletar->set_modelo($_GET['modelo']);
+			}
+			
 			$deletar->Retornar_Versoes_Por_Modelo();
 			
 			return $response;
@@ -934,6 +1290,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			if (isset($_GET['categoria'])) {
+				$deletar->set_categoria($_GET['categoria']);
+			}
 			
 			$deletar->Retornar_Categoria();
 			
@@ -945,6 +1305,10 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
 			
+			if (isset($_GET['marca'])) {
+				$deletar->set_marca($_GET['marca']);
+			}
+			
 			$deletar->Retornar_Marca();
 			
 			return $response;
@@ -954,6 +1318,10 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			if (isset($_GET['modelo'])) {
+				$deletar->set_modelo($_GET['modelo']);
+			}
 			
 			$deletar->Retornar_Modelo();
 			
@@ -965,6 +1333,10 @@
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
 			
+			if (isset($_GET['versao'])) {
+				$deletar->set_versao($_GET['versao']);
+			}
+			
 			$deletar->Retornar_Versao();
 			
 			return $response;
@@ -974,6 +1346,30 @@
 			require_once(RAIZ.'/application/controller/admin/controle/base_de_conhecimento/cmmv/deletar.php');
 			
 			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+			
+			if (isset($_POST['categoria'])) {
+				$deletar->set_categoria($_POST['categoria']);
+			}
+			
+			if (isset($_POST['marca'])) {
+				$deletar->set_marca($_POST['marca']);
+			}
+			
+			if (isset($_POST['modelo'])) {
+				$deletar->set_modelo($_POST['modelo']);
+			}
+			
+			if (isset($_POST['versao'])) {
+				$deletar->set_versao($_POST['versao']);
+			}
+			
+			if (isset($_POST['nome'])) {
+				$deletar->set_nome($_POST['nome']);
+			}
+			
+			if (isset($_POST['url'])) {
+				$deletar->set_url($_POST['url']);
+			}
 			
 			$deletar->Deletar_CMMV();
 			

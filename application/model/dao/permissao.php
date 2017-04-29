@@ -2,10 +2,10 @@
 namespace application\model\dao;
 	
     require_once RAIZ.'/application/model/object/permissao.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
 	
     use application\model\object\Permissao as Object_Permissao;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

@@ -29,6 +29,45 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
             
         }
         
+        private $categoria;
+        private $marca;
+        private $modelo;
+        private $versao;
+        private $nome;
+        private $url;
+        
+        public function set_categoria($categoria) {
+        	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
+        		$this->categoria = $categoria;
+        	}
+        }
+        
+        public function set_marca($marca) {
+        	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
+        		$this->marca = $marca;
+        	}
+        }
+        
+        public function set_modelo($modelo) {
+        	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
+        		$this->modelo = $modelo;
+        	}
+        }
+        
+        public function set_versao($versao) {
+        	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
+        		$this->versao = $versao;
+        	}
+        }
+        
+        public function set_nome($nome) {
+        	$this->nome = $nome;
+        }
+        
+        public function set_url($url) {
+        	$this->url = $url;
+        }
+        
         public function Carregar_Pagina() {
         	if (Controller_Admin::Verificar_Autenticacao()) {
 	        	$view = new View_Cadastrar();
@@ -42,11 +81,11 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         }
         
         public function Cadastrar_CMMV() : void {
-        	if (!empty($_POST['modelo'])) {
+        	if (!empty($this->modelo)) {
         		$this->Cadastrar_Versao();
-        	} else if (!empty($_POST['marca'])) {
+        	} else if (!empty($this->marca)) {
         		$this->Cadastrar_Modelo();
-        	} else if (!empty($_POST['categoria'])) {
+        	} else if (!empty($this->categoria)) {
         		$this->Cadastrar_Marca();
         	} else {
         		$this->Cadastrar_Categoria();
@@ -57,9 +96,9 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	if ($this->Validar_Nome_URL()) {
         		$object_versao = new Object_Versao();
         		
-        		$object_versao->set_modelo_id($_POST['modelo']);
-        		$object_versao->set_nome($_POST['nome']);
-        		$object_versao->set_url($_POST['url']);
+        		$object_versao->set_modelo_id($this->modelo);
+        		$object_versao->set_nome($this->nome);
+        		$object_versao->set_url($this->url);
         		
         		if (DAO_Versao::Verificar_Versao_Repetida($object_versao)) {
         			DAO_Versao::Inserir($object_versao);
@@ -73,9 +112,9 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	if ($this->Validar_Nome_URL()) {
         		$object_modelo = new Object_Modelo();
         		
-        		$object_modelo->set_marca_id($_POST['marca']);
-        		$object_modelo->set_nome($_POST['nome']);
-        		$object_modelo->set_url($_POST['url']);
+        		$object_modelo->set_marca_id($this->marca);
+        		$object_modelo->set_nome($this->nome);
+        		$object_modelo->set_url($this->url);
         		
         		if (DAO_Modelo::Verificar_Modelo_Repetido($object_modelo)) {
         			DAO_Modelo::Inserir($object_modelo);
@@ -89,9 +128,9 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	if ($this->Validar_Nome_URL()) {
         		$object_marca = new Object_Marca();
         		
-        		$object_marca->set_categoria_id($_POST['categoria']);
-        		$object_marca->set_nome($_POST['nome']);
-        		$object_marca->set_url($_POST['url']);
+        		$object_marca->set_categoria_id($this->categoria);
+        		$object_marca->set_nome($this->nome);
+        		$object_marca->set_url($this->url);
         		
         		if (DAO_Marca::Verificar_Marca_Repetida($object_marca)) {
         			DAO_Marca::Inserir($object_marca);
@@ -105,8 +144,8 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         	if ($this->Validar_Nome_URL()) {
         		$object_categoria = new Object_Categoria();
         		
-        		$object_categoria->set_nome($_POST['nome']);
-        		$object_categoria->set_url($_POST['url']);
+        		$object_categoria->set_nome($this->nome);
+        		$object_categoria->set_url($this->url);
         		
         		if (DAO_Categoria::Verificar_Categoria_Repetida($object_categoria)) {
         			DAO_Categoria::Inserir($object_categoria);
@@ -117,7 +156,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         }
         
         private function Validar_Nome_URL() : bool {
-        	if (!empty($_POST['nome']) AND !empty($_POST['url'])) {
+        	if (!empty($this->nome) AND !empty($this->url)) {
         		return true;
         	} else {
         		echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Nome/URL Não Informado</b></div>";
@@ -131,15 +170,15 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         }
         
         public function Retornar_Marcas_Por_Categoria() : void {
-        	View_Cadastrar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($_GET['categoria']));
+        	View_Cadastrar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($this->categoria));
         }
         
         public function Retornar_Modelos_Por_Marca() : void {
-        	View_Cadastrar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($_GET['marca']));
+        	View_Cadastrar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($this->marca));
         }
         
         public function Retornar_Versoes_Por_Modelo() : void {
-        	View_Cadastrar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($_GET['modelo']));
+        	View_Cadastrar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($this->modelo));
         }
         
         private function Buscar_Marca_Por_Id_Categoria(?int $categoria) {

@@ -2,10 +2,10 @@
 namespace application\model\dao;
 
     require_once RAIZ.'/application/model/object/versao.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
     
     use application\model\object\Versao as Object_Versao;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

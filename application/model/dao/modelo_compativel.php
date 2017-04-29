@@ -2,10 +2,10 @@
 namespace application\model\dao;
 	
 	require_once RAIZ.'/application/model/object/modelo_compativel.php';
-	require_once RAIZ.'/application/model/util/conexao.php';
+	require_once RAIZ.'/application/model/common/util/conexao.php';
 	
 	use application\model\object\Modelo_Compativel as Object_Modelo_Compativel;
-	use application\model\util\Conexao;
+	use application\model\common\util\Conexao;
 	use \PDO;
 	use \PDOException;
 	

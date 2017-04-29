@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
-	require_once RAIZ.'/application/model/util/login_session.php';
+	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/model/object/cidade.php';
 	require_once RAIZ.'/application/model/object/estado.php';
@@ -11,7 +11,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php';
     require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
-    use application\model\util\Login_Session;
+    use application\model\common\util\Login_Session;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Cidade as Object_Cidade;
 	use application\model\object\Estado as Object_Estado;
@@ -25,6 +25,42 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 
         function __construct() {
             
+        }
+        
+        private $estado;
+        private $cidade;
+        private $numero;
+        private $cep;
+        private $bairro;
+        private $rua;
+        private $complemento;
+        
+        public function set_estado($estado) {
+        	$this->estado = $estado;
+        }
+        
+        public function set_cidade($cidade) {
+        	$this->cidade = $cidade;
+        }
+        
+        public function set_numero($numero) {
+        	$this->numero = $numero;
+        }
+        
+        public function set_cep($cep) {
+        	$this->cep = $cep;
+        }
+        
+        public function set_bairro($bairro) {
+        	$this->bairro = $bairro;
+        }
+        
+        public function set_rua($rua) {
+        	$this->rua = $rua;
+        }
+        
+        public function set_complemento($complemento = null) {
+        	$this->complemento = $complemento;
         }
         
         public function Carregar_Pagina(?array $enderecos_erros = null, ?array $enderecos_campos = null, ?array $enderecos_sucesso = null, ?Object_Endereco $enderecos_form = null) {
@@ -61,9 +97,11 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public function Retornar_Cidades_Por_Estado() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
-	        	if (isset($_GET['estado'])) {
-	        		View_Enderecos::Mostrar_Cidades($_GET['estado']);
-	        	}
+        		if (!empty($this->estado)) {
+        			if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
+        				View_Enderecos::Mostrar_Cidades($this->estado);
+        			}
+        		}
         	}
         }
 		
@@ -79,15 +117,15 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            
 		            $endereco = new Object_Endereco();
 		            
-		            if (!empty($_POST['complemento'])) {
-		            	$complemento = strip_tags($_POST['complemento']);
+		            if (!empty($this->complemento)) {
+		            	$complemento = strip_tags($this->complemento);
 		            	 
-		            	if ($complemento === $_POST['complemento']) {
-		            		$complemento = trim($complemento);
-		            		$complemento = preg_replace('/\s+/', " ", $complemento);
+		            	if ($complemento === $this->complemento) {
+		            		$this->complemento = trim($this->complemento);
+		            		$this->complemento = preg_replace('/\s+/', " ", $this->complemento);
 		            		 
-		            		if (strlen($complemento) <= 150) {
-		            			$endereco->set_complemento(ucfirst(strtolower($complemento)));
+		            		if (strlen($this->complemento) <= 150) {
+		            			$endereco->set_complemento(ucfirst(strtolower($this->complemento)));
 		            		} else {
 		            			$enderecos_erros[] = "Complemento, Não pode conter mais de 150 Caracteres";
 		            			$enderecos_campos['erro_complemento'] = "erro";
@@ -98,18 +136,18 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (empty($_POST['rua'])) {
+		            if (empty($this->rua)) {
 		            	$enderecos_erros[] = "Informe sua Rua";
 		            	$enderecos_campos['erro_rua'] = "erro";
 		            } else {
-		            	$rua = strip_tags($_POST['rua']);
+		            	$rua = strip_tags($this->rua);
 		            
-		            	if ($rua === $_POST['rua']) {
-		            		$rua = trim($rua);
-		            		$rua = preg_replace('/\s+/', " ", $rua);
+		            	if ($rua === $this->rua) {
+		            		$this->rua = trim($this->rua);
+		            		$this->rua = preg_replace('/\s+/', " ", $this->rua);
 		            		 
-		            		if (strlen($rua) <= 150) {
-		            			$endereco->set_rua(ucwords(strtolower($rua)));
+		            		if (strlen($this->rua) <= 150) {
+		            			$endereco->set_rua(ucwords(strtolower($this->rua)));
 		            		} else {
 		            			$enderecos_erros[] = "Rua, Não pode conter mais de 150 Caracteres";
 		            			$enderecos_campos['erro_rua'] = "erro";
@@ -120,20 +158,20 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (empty($_POST['bairro'])) {
+		            if (empty($this->bairro)) {
 		            	$enderecos_erros[] = "Informe seu Bairro";
 		            	$enderecos_campos['erro_bairro'] = "erro";
 		            } else {
-		            	$bairro = strip_tags($_POST['bairro']);
+		            	$bairro = strip_tags($this->bairro);
 		            	 
-		            	if ($bairro === $_POST['bairro']) {
-		            		$bairro = trim($bairro);
-		            		$bairro = preg_replace('/\s+/', " ", $bairro);
+		            	if ($bairro === $this->bairro) {
+		            		$this->bairro = trim($this->bairro);
+		            		$this->bairro = preg_replace('/\s+/', " ", $this->bairro);
 		            
-		            		if (strlen($bairro) <= 45) {
-		            			$endereco->set_bairro(ucwords(strtolower($bairro)));
+		            		if (strlen($this->bairro) <= 150) {
+		            			$endereco->set_bairro(ucwords(strtolower($this->bairro)));
 		            		} else {
-		            			$enderecos_erros[] = "Bairro, Não pode conter mais de 45 Caracteres";
+		            			$enderecos_erros[] = "Bairro, Não pode conter mais de 150 Caracteres";
 		            			$enderecos_campos['erro_bairro'] = "erro";
 		            		}
 		            	} else {
@@ -142,16 +180,16 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (empty($_POST['cep'])) {
+		            if (empty($this->cep)) {
 		            	$enderecos_erros[] = "Informe seu CEP";
 		            	$enderecos_campos['erro_cep'] = "erro";
 		            } else {
-		            	$cep = trim($_POST['cep']);
-		            	$cep = preg_replace('/[^a-zA-Z0-9]/', "", $cep);
+		            	$this->cep = trim($this->cep);
+		            	$this->cep = preg_replace('/[^a-zA-Z0-9]/', "", $this->cep);
 		            	
-		            	if (strlen($cep) === 8) {
-		            		if (filter_var($cep, FILTER_VALIDATE_INT)) {
-		            			$endereco->set_cep($cep);
+		            	if (strlen($this->cep) === 8) {
+		            		if (filter_var($this->cep, FILTER_VALIDATE_INT)) {
+		            			$endereco->set_cep($this->cep);
 		            		} else {
 		            			$enderecos_erros[] = "CEP, Digite Apenas os Numeros";
 		            			$enderecos_campos['erro_cep'] = "erro";
@@ -162,17 +200,17 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (empty($_POST['numero'])) {
+		            if (empty($this->numero)) {
 		            	$enderecos_erros[] = "Informe o Numero do seu Endereço";
 		            	$enderecos_campos['erro_numero'] = "erro";
 		            } else {
-		            	$numero = strip_tags($_POST['numero']);
+		            	$numero = strip_tags($this->numero);
 		            	 
-		            	if ($numero === $_POST['numero']) {
-		            		$numero = trim($numero);
+		            	if ($numero === $this->numero) {
+		            		$this->numero = trim($this->numero);
 		            
-		            		if (strlen($numero) <= 10) {
-		            			$endereco->set_numero($numero);
+		            		if (strlen($this->numero) <= 10) {
+		            			$endereco->set_numero($this->numero);
 		            		} else {
 		            			$enderecos_erros[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
 		            			$enderecos_campos['erro_numero'] = "erro";
@@ -183,26 +221,36 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	}
 		            }
 		            
-		            if (empty($_POST['cidade']) OR $_POST['cidade'] <= 0) {
-		            	$enderecos_erros[] = "Seleciona sua Cidade";
+		            if (empty($_POST['cidade'])) {
+		            	$enderecos_erros[] = "Selecione sua Cidade";
 		            	$enderecos_campos['erro_cidade'] = "erro";
 		            } else {
-		            	$cidade = new Object_Cidade();
-		            	
-		            	$cidade->set_id($_POST['cidade']);
-		            	
-		            	$endereco->set_cidade($cidade);
+		            	if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
+			            	$cidade = new Object_Cidade();
+			            	
+			            	$cidade->set_id($_POST['cidade']);
+			            	
+			            	$endereco->set_cidade($cidade);
+		            	} else {
+		            		$enderecos_erros[] = "Selecione uma Cidade Válida";
+		            		$enderecos_campos['erro_cidade'] = "erro";
+		            	}
 		            }
 		            
-		            if (empty($_POST['estado']) OR $_POST['estado'] <= 0) {
-		            	$enderecos_erros[] = "Seleciona seu Estado";
+		            if (empty($_POST['estado'])) {
+		            	$enderecos_erros[] = "Selecione seu Estado";
 		            	$enderecos_campos['erro_estado'] = "erro";
 		            } else {
-		            	$estado = new Object_Estado();
-		            	
-		            	$estado->set_id($_POST['estado']);
-		            	
-		            	$endereco->set_estado($estado);
+		            	if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
+			            	$estado = new Object_Estado();
+			            	
+			            	$estado->set_id($_POST['estado']);
+			            	
+			            	$endereco->set_estado($estado);
+		            	} else {
+		            		$enderecos_erros[] = "Selecione um Estado Válido";
+		            		$enderecos_campos['erro_estado'] = "erro";
+		            	}
 		            }
 		            
 		            if (empty($enderecos_erros)) {

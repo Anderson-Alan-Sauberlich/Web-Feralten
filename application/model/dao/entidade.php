@@ -3,11 +3,11 @@ namespace application\model\dao;
 
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/dao/endereco.php';
-    require_once RAIZ.'/application/model/util/conexao.php';
+    require_once RAIZ.'/application/model/common/util/conexao.php';
     
     use application\model\object\Entidade as Object_Entidade;
     use application\model\dao\Endereco as DAO_Endereco;
-    use application\model\util\Conexao;
+    use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
 	

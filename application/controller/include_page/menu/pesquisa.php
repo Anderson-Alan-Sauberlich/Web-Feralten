@@ -87,7 +87,31 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_categoria($url_categoria) : void {
+        public function set_categoria($categoria) {
+        	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
+        		$this->categoria = $categoria;
+        	}
+        }
+        
+        public function set_marca($marca) {
+        	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
+        		$this->marca = $marca;
+        	}
+        }
+        
+        public function set_modelo($modelo) {
+        	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
+        		$this->modelo = $modelo;
+        	}
+        }
+        
+        public function set_versao($versao) {
+        	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
+        		$this->versao = $versao;
+        	}
+        }
+        
+        public function set_categoria_url($url_categoria) : void {
         	if (!empty($url_categoria)) {
         		$url_categoria = trim($url_categoria);
         		
@@ -101,7 +125,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_marca($url_marca) : void {
+        public function set_marca_url($url_marca) : void {
         	if (!empty($url_marca)) {
         		$url_marca = trim($url_marca);
         		
@@ -115,7 +139,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_modelo($url_modelo) : void {
+        public function set_modelo_url($url_modelo) : void {
         	if (!empty($url_modelo)) {
         		$url_modelo = trim($url_modelo);
         		
@@ -129,7 +153,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_versao($url_versao) : void {
+        public function set_versao_url($url_versao) : void {
         	if (!empty($url_versao)) {
         		$url_versao = trim($url_versao);
         		
@@ -173,7 +197,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_peca_usuario(int $id_usuario) : void {
+        public function set_peca_usuario(int $id_usuario = null) : void {
         	if (!empty($id_usuario)) {
         		if (filter_var($id_usuario, FILTER_VALIDATE_INT) !== false) {
         			$entidade = new Object_Entidade();
@@ -192,15 +216,15 @@ namespace application\controller\include_page\menu;
         }
         
         public function Retornar_Marcas_Por_Categoria() {
-        	View_Pesquisa::Carregar_Marcas($_GET['categoria']);
+        	View_Pesquisa::Carregar_Marcas($this->categoria);
         }
         
         public function Retornar_Modelos_Por_Marca() {
-        	View_Pesquisa::Carregar_Modelos($_GET['marca']);
+        	View_Pesquisa::Carregar_Modelos($this->marca);
         }
         
         public function Retornar_Versoes_Por_Modelo() {
-        	View_Pesquisa::Carregar_Versoes($_GET['modelo']);
+        	View_Pesquisa::Carregar_Versoes($this->modelo);
         }
         
         public static function Buscar_Todas_Categorias() {

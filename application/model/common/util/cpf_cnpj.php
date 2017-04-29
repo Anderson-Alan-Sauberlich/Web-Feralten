@@ -1,5 +1,5 @@
 <?php
-namespace application\model\util;
+namespace application\model\common\util;
 
 	/**
 	 * ValidaCPFCNPJ valida e formata CPF e CNPJ
