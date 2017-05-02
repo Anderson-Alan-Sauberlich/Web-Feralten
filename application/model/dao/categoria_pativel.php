@@ -12,6 +12,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Categoria_Pativel {
         
@@ -53,7 +54,7 @@ namespace application\model\dao;
                 } else {
                 	return false;
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -84,7 +85,7 @@ namespace application\model\dao;
             	} else {
             		return false;
             	}
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -130,7 +131,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::Popula_Categoria_Pativeis($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -148,7 +149,7 @@ namespace application\model\dao;
         		$cont = count($select);
         		
         		return ceil($cont / 9);
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -260,7 +261,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         		
         		return DAO_Peca::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }

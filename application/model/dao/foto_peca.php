@@ -8,6 +8,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Foto_Peca {
 
@@ -27,7 +28,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -43,7 +44,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -56,7 +57,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":pc_id", $id_peca, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -70,7 +71,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":num", $num_peca, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -84,7 +85,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaFotosPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -99,7 +100,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaFotoPeca($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }

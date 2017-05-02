@@ -8,6 +8,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Usuario_Admin {
 
@@ -28,7 +29,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -44,7 +45,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":nome", $object_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -59,7 +60,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":ps", $senha, PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -72,7 +73,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -94,7 +95,7 @@ namespace application\model\dao;
                 }
                 
                 return $select;
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -108,7 +109,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -124,7 +125,7 @@ namespace application\model\dao;
 				$row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 return $row['usuario_admin_senha'];
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -144,7 +145,7 @@ namespace application\model\dao;
                 } else {
                 	return false;
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }

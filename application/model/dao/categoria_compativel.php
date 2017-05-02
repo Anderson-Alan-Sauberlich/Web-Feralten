@@ -8,6 +8,7 @@ namespace application\model\dao;
 	use application\model\common\util\Conexao;
 	use \PDO;
 	use \PDOException;
+	use \Exception;
 	
 	class Categoria_Compativel {
 	
@@ -26,7 +27,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":com_id", $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
-			} catch (PDOException $e) {
+			} catch (PDOException | Exception $e) {
 				return false;
 			}
 		}
@@ -42,7 +43,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":com_id", $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
-			} catch (PDOException $e) {
+			} catch (PDOException | Exception $e) {
 				return false;
 			}
 		}
@@ -55,7 +56,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
-			} catch (PDOException $e) {
+			} catch (PDOException | Exception $e) {
 				return false;
 			}
 		}
@@ -68,7 +69,7 @@ namespace application\model\dao;
 				$p_sql->execute();
 	
 				return self::PopulaCategoriasCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
-			} catch (PDOException $e) {
+			} catch (PDOException | Exception $e) {
 				return false;
 			}
 		}
@@ -82,7 +83,7 @@ namespace application\model\dao;
 				$p_sql->execute();
 	
 				return self::PopulaCategoriasCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
-			} catch (PDOException $e) {
+			} catch (PDOException | Exception $e) {
 				return false;
 			}
 		}

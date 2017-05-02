@@ -12,6 +12,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Endereco {
 
@@ -37,7 +38,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -67,7 +68,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -80,7 +81,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -100,7 +101,7 @@ namespace application\model\dao;
         		} else {
         			return false;
         		}
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -120,7 +121,7 @@ namespace application\model\dao;
                 } else {
                 	return false;
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -135,7 +136,7 @@ namespace application\model\dao;
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         		
         		return $row['endereco_id'];
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }

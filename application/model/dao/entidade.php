@@ -10,6 +10,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
 	class Entidade {
 
@@ -36,7 +37,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return Conexao::Conectar()->lastInsertId();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -59,7 +60,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -80,7 +81,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -95,7 +96,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":imagem", $imagem, PDO::PARAM_STR);
                 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -108,7 +109,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -130,7 +131,7 @@ namespace application\model\dao;
         		}
         		
         		return $select;
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -145,7 +146,7 @@ namespace application\model\dao;
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 return $row['entidade_sts_ent_id'];
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -167,7 +168,7 @@ namespace application\model\dao;
         		} else {
         			return false;
         		}
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -189,7 +190,7 @@ namespace application\model\dao;
                 } else {
                 	return false;
                 }
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }

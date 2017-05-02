@@ -18,6 +18,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Peca {
         
@@ -87,7 +88,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
 				
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -100,7 +101,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -114,7 +115,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaPeca($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -171,7 +172,7 @@ namespace application\model\dao;
         		$cont = count($select);
         		
         		return ceil($cont / 9);
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -231,7 +232,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         		
         		return self::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }

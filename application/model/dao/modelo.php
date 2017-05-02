@@ -8,6 +8,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Modelo {
         
@@ -27,7 +28,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -44,7 +45,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -57,7 +58,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -71,7 +72,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -85,7 +86,7 @@ namespace application\model\dao;
         		$p_sql->execute();
         
         		return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -101,7 +102,7 @@ namespace application\model\dao;
                 $row = $p_sql->fetch(PDO::FETCH_ASSOC);
 				
                 return $row['modelo_mrc_id'];
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -115,7 +116,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -135,7 +136,7 @@ namespace application\model\dao;
         		}
         		
         		return $id_modelos;
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -151,7 +152,7 @@ namespace application\model\dao;
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
         		return $row['modelo_id'];
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }
@@ -172,7 +173,7 @@ namespace application\model\dao;
         		} else {
         			return true;
         		}
-        	} catch (PDOException $e) {
+        	} catch (PDOException | Exception $e) {
         		return false;
         	}
         }

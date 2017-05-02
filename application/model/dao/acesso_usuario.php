@@ -8,6 +8,7 @@ namespace application\model\dao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
+    use \Exception;
 	
     class Acesso_Usuario {
         
@@ -28,7 +29,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":pms_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -50,7 +51,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":pms_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -63,7 +64,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
@@ -78,7 +79,7 @@ namespace application\model\dao;
                 $p_sql->execute();
                 
                 return self::PopulaArrayAcessos($p_sql->fetchAll(PDO::FETCH_ASSOC));
-            } catch (PDOException $e) {
+            } catch (PDOException | Exception $e) {
 				return false;
             }
         }
