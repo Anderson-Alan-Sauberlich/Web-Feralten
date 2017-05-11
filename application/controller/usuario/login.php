@@ -1,17 +1,20 @@
 <?php
 namespace application\controller\usuario;
 	
+	require_once RAIZ.'/application/model/common/util/filtro.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/dao/acesso_usuario.php';
     require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/view/src/usuario/login.php';
 	
+    use application\model\common\util\Filtro;
     use application\model\common\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\dao\Acesso_Usuario as DAO_Acesso_Usuario;
     use application\model\dao\Entidade as DAO_Entidade;
     use application\view\src\usuario\Login as View_Login;
+    use \Exception;
 
     class Login {
 
@@ -23,29 +26,51 @@ namespace application\controller\usuario;
         private $senha;
         private $manter_login;
         private $logout;
+        private $login_campos = array();
+        private $login_erros = array();
+        private $login_form = array();
         
         public function set_email($email) {
-        	$this->email = $email;
+        	try {
+        		$this->email = Filtro::Usuario()::validar_email_login($email);
+        		$this->login_campos['erro_email'] = "certo";
+        	} catch (Exception $e) {
+        		$this->login_erros[] = $e->getMessage();
+        		$this->login_campos['erro_email'] = "erro";
+        		
+        		$this->email = Filtro::Usuario()::filtrar_email($email);
+        	}
         }
         
         public function set_senha($senha) {
-        	$this->senha = $senha;
+        	try {
+        		$this->senha = Filtro::Usuario()::validar_senha_login($senha);
+        	} catch (Exception $e) {
+        		$this->login_erros[] = $e->getMessage();
+        		$this->login_campos['erro_senha'] = "erro";
+        		
+        		$this->senha = Filtro::Usuario()::filtrar_senha($senha);
+        	}
         }
         
         public function set_manter_login($manter_login = null) {
-        	$this->manter_login = $manter_login;
+        	try {
+        		$this->manter_login = Filtro::Usuario()::validar_manter_login($manter_login);
+        	} catch (Exception $e) {
+        		$this->manter_login = Filtro::Usuario()::filtrar_manter_login($manter_login);
+        	}
         }
         
-        public function set_logout(string $logout) {
+        public function set_logout($logout) {
         	$this->logout = $logout;
         }
         
-        public function Carregar_Pagina(?array $login_erros = null, ?array $login_campos = null, ?array $login_form = null) : void {
+        public function Carregar_Pagina() : void {
         	$view = new View_Login();
         	
-        	$view->set_login_campos($login_campos);
-        	$view->set_login_erros($login_erros);
-        	$view->set_login_form($login_form);
+        	$view->set_login_campos($this->login_campos);
+        	$view->set_login_erros($this->login_erros);
+        	$view->set_login_form($this->login_form);
         	
         	$view->Executar();
         }
@@ -190,50 +215,7 @@ namespace application\controller\usuario;
         }
 
         public function Autenticar_Usuario_Login() : ?bool {
-            $login_campos = array('erro_email' => "certo");
-            $login_erros = array();
-            
-            if (empty($this->email)) {
-                $login_erros[] = "Digite seu Email";
-                $login_campos['erro_email'] = "erro";                
-            } else {
-            	$this->email = trim($this->email);
-            	
-            	if (filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false) {
-            		$retorno = DAO_Usuario::Verificar_Email($this->email);
-            		
-            		if ($retorno !== false) {
-		            	if ($retorno === 0) {
-			                $login_erros[] = "Email não Cadastrado";
-			                $login_campos['erro_email'] = "erro";
-		            	}
-            		} else {
-            			$login_erros[] = "Erro ao tentar Encontrar E-Mail";
-            			$login_campos['erro_email'] = "";
-            		}
-            	} else {
-            		$login_erros[] = "Este E-Mail Não é Valido";
-		            $login_campos['erro_email'] = "erro";
-            	}
-            }
-            
-            if (empty($this->senha)) {
-                $login_erros[] = "Digite sua Senha";
-                $login_campos['erro_senha'] = "erro";
-            } else {
-            	$senha = strip_tags($this->senha);
-            	 
-            	if ($senha !== $this->senha) {
-            		$login_erros[] = "A Senha Não pode conter Tags de Programação";
-            		$login_campos['erro_senha'] = "erro";
-            	}
-            }
-            
-            if (!empty($this->manter_login)) {
-            	$this->manter_login = true;
-            }
-
-            if (empty($login_erros)) {
+            if (empty($this->login_erros)) {
             	$usuario_login = DAO_Usuario::Autenticar($this->email);
                 
                 if (!empty($usuario_login) AND $usuario_login !== false) {
@@ -275,35 +257,33 @@ namespace application\controller\usuario;
 							$retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
 		                	
 							if ($retorno === false) {
-								$login_erros[] = "Erro ao tentar Atualizar Usuario";
+								$this->login_erros[] = "Erro ao tentar Atualizar Usuario";
 							}
 		                } else {
 		                    $retorno = DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
 		                	
 		                    if ($retorno === false) {
-		                    	$login_erros[] = "Erro ao tentar Atualizar Usuario";
+		                    	$this->login_erros[] = "Erro ao tentar Atualizar Usuario";
 		                    }
 		                }
 		            } else {
-		                $login_erros[] = "Senha Incorreta";
-		                $login_campos['erro_senha'] = "erro";
+		                $this->login_erros[] = "Senha Incorreta";
+		                $this->login_campos['erro_senha'] = "erro";
 		            }
                 } else {
-                	$login_erros[] = "Erro ao tentar Autenticar Usuario";
+                	$this->login_erros[] = "Erro ao tentar Autenticar Usuario";
                 }
             }
             
-            if (empty($login_erros)) {
+            if (empty($this->login_erros)) {
             	return true;
             } else {
             	setcookie("f_m_l", null, time()-3600, "/");
             	
-            	$login_form = array();
+            	$this->login_form['email'] = $this->email;
+            	$this->login_form['senha'] = $this->senha;
             	
-            	$login_form['email'] = trim(strip_tags($this->email));
-            	$login_form['senha'] = strip_tags($this->senha);
-            	
-            	$this->Carregar_Pagina($login_erros, $login_campos, $login_form);
+            	$this->Carregar_Pagina();
             	
             	return false;
             }

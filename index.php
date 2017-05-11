@@ -79,17 +79,11 @@
 			
 			$login = new application\controller\usuario\Login();
 			
-			if (isset($_POST['email'])) {
-				$login->set_email($_POST['email']);
-			}
+			$login->set_email(isset($_POST['email']) ? $_POST['email'] : null);
 			
-			if (isset($_POST['password'])) {
-				$login->set_senha($_POST['password']);
-			}
+			$login->set_senha(isset($_POST['password']) ? $_POST['password'] : null);
 			
-			if (isset($_POST['manter_login'])) {
-				$login->set_manter_login(true);
-			}
+			$login->set_manter_login(isset($_POST['manter_login']) ? true : null);
 			
 			$resposta = $login->Autenticar_Usuario_Login();
 			
@@ -105,9 +99,7 @@
 			
 			$login = new application\controller\usuario\Login();
 			
-			if (isset($_GET['logout'])) {
-				$login->set_logout($_GET['logout']);
-			}
+			$login->set_logout(isset($_GET['logout']) ? $_GET['logout'] : null);
 			
 			$login->LogOut();
 			
@@ -131,21 +123,13 @@
 			
 			$cadastro = new application\controller\usuario\Cadastro();
 				
-			if (isset($_POST['nome'])) {
-				$cadastro->set_nome($_POST['nome']);
-			}
+			$cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 			
-			if (isset($_POST['email'])) {
-				$cadastro->set_email($_POST['email']);
-			}
+			$cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
 			
-			if (isset($_POST['confemail'])) {
-				$cadastro->set_confemail($_POST['confemail']);
-			}
+			$cadastro->set_confemail(isset($_POST['confemail']) ? $_POST['confemail'] : null);
 			
-			if (isset($_POST['senha'])) {
-				$cadastro->set_senha($_POST['senha']);
-			}
+			$cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
 			
 			$resposta = $cadastro->Cadastrar_Usuario();
 			
