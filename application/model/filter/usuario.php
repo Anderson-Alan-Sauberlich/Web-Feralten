@@ -52,17 +52,31 @@ namespace application\model\filter;
 		}
 		
 		public static function validar_email($email = null) : string {
-			
-		}
-		
-		public static function filtrar_email($email = null) : string {
-			$valor = "";
-			
-			if (!empty($email)) {
-				$valor = trim(strip_tags($email));
+			if (empty($email)) {
+				throw new Exception("Preencha o Campo E-Mail");
+			} else {
+				$email = trim($email);
+				
+				if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
+					if (strlen($email) <= 150) {
+						$retorno = DAO_Usuario::Verificar_Email($email);
+							
+						if ($retorno !== false) {
+							if ($retorno === 0) {
+								return $email;
+							} else {
+								throw new Exception("Este E-Mail Já Esta Cadastrado");
+							}
+						} else {
+							throw new Exception("Erro ao tentar Encontrar E-Mail");
+						}
+					} else {
+						throw new Exception("O E-Mail pode ter no maximo 150 Caracteres");
+					}
+				} else {
+					throw new Exception("Este E-Mail Não é Valido");
+				}
 			}
-			
-			return $valor;
 		}
 		
 		public static function validar_confemail($confemail = null, $email = null) : string {
@@ -72,27 +86,7 @@ namespace application\model\filter;
 				$confemail = trim($confemail);
 				$email = trim($email);
 				
-				if ($confemail === $email) {
-					if (filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {
-						if (strlen($email) <= 150) {
-							$retorno = DAO_Usuario::Verificar_Email($email);
-							
-							if ($retorno !== false) {
-								if ($retorno === 0) {
-									return $email;
-								} else {
-									throw new Exception("Este E-Mail Já Esta Cadastrado");
-								}
-							} else {
-								throw new Exception("Erro ao tentar Encontrar E-Mail");
-							}
-						} else {
-							throw new Exception("O E-Mail pode ter no maximo 150 Caracteres");
-						}
-					} else {
-						throw new Exception("Este E-Mail Não é Valido");
-					}
-				} else {
+				if ($confemail !== $email) {
 					throw new Exception("Digite os E-Mails Duas Vezes Igualmente");
 				}
 			}
@@ -120,6 +114,16 @@ namespace application\model\filter;
 					throw new Exception("Este E-Mail Não é Valido");
 				}
 			}
+		}
+		
+		public static function filtrar_email($email = null) : string {
+			$valor = "";
+			
+			if (!empty($email)) {
+				$valor = trim(strip_tags($email));
+			}
+			
+			return $valor;
 		}
 		
 		public static function validar_senha_login($senha = null) : string {
@@ -180,6 +184,70 @@ namespace application\model\filter;
 			}
 		}
 		
+		public static function validar_ultimo_login($ultimo_login = null) : void {
+			
+		}
+		
+		public static function validar_token($token = null) : void {
+			
+		}
+		
+		public static function validar_status_id($status_id = null) : void {
+			
+		}
+		
+		public static function validar_fone1($fone1 = null) : int {
+			if (empty($fone1)) {
+				throw new Exception("Informe um Nº de Telefone para Telefone-1");
+			} else {
+				$fone1 = trim($fone1);
+				$fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $fone1);
+				
+				if (strlen($fone1) === 11 OR strlen($fone1) === 10) {
+					if (filter_var($fone1, FILTER_VALIDATE_INT)) {
+						return $fone1;
+					} else {
+						throw new Exception("Telefone-1, Digite Apenas Numeros");
+					}
+				} else {
+					throw new Exception("Telefone-1 deve conter 10 ou 11 Dígitos");
+				}
+			}
+		}
+		
+		public static function validar_fone2($fone2 = null) : int {
+			if (!empty($fone2)) {
+				$fone2 = trim($fone2);
+				$fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $fone2);
+				
+				if (strlen($fone2) === 11 OR strlen($fone2) === 10) {
+					if (filter_var($fone2, FILTER_VALIDATE_INT)) {
+						return $fone2;
+					} else {
+						throw new Exception("Telefone-2, Digite Apenas Numeros");
+					}
+				} else {
+					throw new Exception("Telefone-2 deve conter 10 ou 11 Dígitos");
+				}
+			}
+		}
+		
+		public static function validar_email_alternativo($email_alternativo = null) : string {
+			if (!empty($email_alternativo)) {
+				$email_alternativo = trim($email_alternativo);
+				
+				if (strlen($email_alternativo) <= 150) {
+					if (filter_var($email_alternativo, FILTER_VALIDATE_EMAIL)) {
+						return $email_alternativo;
+					} else {
+						throw new Exception("Digite um E-Mail Alternativo Valido");
+					}
+				} else {
+					throw new Exception("E-Mail Alternativo Não pode ter mais de 150 Caracteres");
+				}
+			}
+		}
+		
 		public static function filtrar_ultimo_login($ultimo_login = null) : void {
             
 		}
@@ -192,16 +260,14 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function filtrar_fone1($fone1 = null) : void {
+		public static function filtrar_fone($fone = null) : string {
+			$valor = "";
 			
-		}
-		
-		public static function filtrar_fone2($fone2 = null) : void {
+			if (!empty($fone)) {
+				$valor = trim(strip_tags($fone));
+			}
 			
-		}
-		
-		public static function filtrar_email_alternativo($email_alternativo = null) : void {
-			
+			return $valor;
 		}
     }
 ?>

@@ -59,9 +59,6 @@ namespace application\controller\usuario;
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_confemail'] = "erro";
-        		if ($this->cadastro_campos['erro_email'] !== "certo") {
-        			$this->cadastro_campos['erro_email'] = "erro";
-        		}
         		
         		$this->confemail = Filtro::Usuario()::filtrar_email($confemail);
         	}
@@ -90,61 +87,15 @@ namespace application\controller\usuario;
         }
 
         public function Cadastrar_Usuario() {
-            $usuario = new Object_Usuario();
-            
-	        if (empty($this->confemail) OR empty($this->email)) {
-	        	if (empty($this->email)) {
-	        		$this->cadastro_erros[] = "Preencha o Campo E-Mail";
-	        		$this->cadastro_campos['erro_email'] = "erro";
-	        	}
-	        	 
-	        	if (empty($this->confemail)) {
-	        		$this->cadastro_erros[] = "Preencha o Campo Comfirmar E-Mail";
-	        		$this->cadastro_campos['erro_confemail'] = "erro";
-	        	}
-	        } else {
-	        	$this->confemail = trim($this->confemail);
-	        	$this->email = trim($this->email);
-	        	
-	        	if ($this->confemail=== $this->email) {
-	        		if (filter_var($this->email, FILTER_VALIDATE_EMAIL) !== false) {
-	        			if (strlen($this->email) <= 150) {
-	        				$retorno = DAO_Usuario::Verificar_Email($this->email);
-		        			
-			        		if ($retorno !== false) {
-			        			if ($retorno === 0) {
-			        				$usuario->set_email($this->email);
-				        		} else {
-				        			$this->cadastro_erros[] = "Este E-Mail Já Esta Cadastrado";
-				        			$this->cadastro_campos['erro_email'] = "erro";
-				        			$this->cadastro_campos['erro_confemail'] = "erro";
-				        		}
-			        		} else {
-			        			$this->cadastro_erros[] = "Erro ao tentar Encontrar E-Mail";
-			        			$this->cadastro_campos['erro_email'] = "";
-			        			$this->cadastro_campos['erro_confemail'] = "";
-			        		}
-		        		} else {
-		        			$this->cadastro_erros[] = "O E-Mail pode ter no maximo 150 Caracteres";
-		        			$this->cadastro_campos['erro_email'] = "erro";
-		        			$this->cadastro_campos['erro_confemail'] = "erro";
-		        		}
-	        		} else {
-	        			$this->cadastro_erros[] = "Este E-Mail Não é Valido";
-	        			$this->cadastro_campos['erro_email'] = "erro";
-	        			$this->cadastro_campos['erro_confemail'] = "erro";
-	        		}
-	        	} else {
-	        		$this->cadastro_erros[] = "Digite o E-Mails Duas Vezes Igualmente";
-	        		$this->cadastro_campos['erro_email'] = "erro";
-	        		$this->cadastro_campos['erro_confemail'] = "erro";
-	        	}
-	        }
-            
             if (empty($this->cadastro_erros)) {
+            	$usuario = new Object_Usuario();
             	$usuario->set_id(0);
             	$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
             	$usuario->set_status_id(2);
+            	$usuario->set_fone1('00000000');
+            	$usuario->set_nome($this->nome);
+            	$usuario->set_email($this->email);
+            	$usuario->set_senha($this->senha);
             	
             	$usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
             	
@@ -165,9 +116,9 @@ namespace application\controller\usuario;
             	return true;
             } else {
                 $this->cadastro_form['nome'] = $this->nome;
-                $this->cadastro_form['email'] = trim(strip_tags($this->email));
-                $this->cadastro_form['confemail'] = trim(strip_tags($this->confemail));
-                $this->cadastro_form['senha'] = strip_tags($this->senha);
+                $this->cadastro_form['email'] = $this->email;
+                $this->cadastro_form['confemail'] = $this->confemail;
+                $this->cadastro_form['senha'] = $this->senha;
                 
                 $this->Carregar_Pagina();
             }

@@ -1,8 +1,8 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
+	require_once RAIZ.'/application/model/common/util/filtro.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
-	require_once RAIZ.'/application/model/common/util/cpf_cnpj.php';
 	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/endereco.php';
@@ -18,8 +18,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	require_once RAIZ.'/application/controller/usuario/login.php';
     
+	use application\model\common\util\Filtro;
 	use application\model\common\util\Login_Session;
-	use application\model\common\util\CPF_CNPJ;
 	use application\model\common\util\Gerenciar_Imagens;
 	use application\model\object\usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
@@ -34,7 +34,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	use application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	use application\controller\usuario\Login as Controller_Login;
-    
+    use \Exception;
+	
     class Concluir {
 		
         function __construct() {
@@ -54,69 +55,171 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         private $cpf_cnpj;
         private $site;
         private $nome_comercial;
+        private $concluir_erros = array();
+        private $concluir_campos = array();
+        private $concluir_form = array();
         
         public function set_fone1($fone1) {
-        	$this->fone1 = $fone1;
+        	try {
+        		$this->fone1 = Filtro::Usuario()::validar_fone1($fone1);
+        		$this->concluir_campos['erro_fone1'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_fone1'] = 'erro';
+        		
+        		$this->fone1 = Filtro::Usuario()::filtrar_fone($fone1);
+        	}
         }
         
         public function set_fone2($fone2 = null) {
-        	$this->fone2 = $fone2;
+        	try {
+        		$this->fone2 = Filtro::Usuario()::validar_fone2($fone2);
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_fone2'] = 'erro';
+        		
+        		$this->fone2 = Filtro::Usuario()::filtrar_fone($fone2);
+        	}
         }
         
         public function set_email_alternativo($email_alternativo = null) {
-        	$this->email_alternativo = $email_alternativo;
+        	try {
+        		$this->email_alternativo = Filtro::Usuario()::validar_email_alternativo($email_alternativo);
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_email_alternativo'] = 'erro';
+        		
+        		$this->email_alternativo = Filtro::Usuario()::filtrar_email($email_alternativo);
+        	}
         }
         
         public function set_estado($estado) {
-        	$this->estado = $estado;
+        	try {
+        		$this->estado = Filtro::Endereco()::validar_estado($estado);
+        		$this->concluir_campos['erro_estado'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_estado'] = 'erro';
+        		
+        		$this->estado = Filtro::Endereco()::filtrar_estado($estado);
+        	}
         }
         
         public function set_cidade($cidade) {
-        	$this->cidade = $cidade;
+        	try {
+        		$this->cidade = Filtro::Endereco()::validar_cidade($cidade);
+        		$this->concluir_campos['erro_cidade'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_cidade'] = 'erro';
+        		
+        		$this->cidade = Filtro::Endereco()::filtrar_cidade($cidade);
+        	}
         }
         
         public function set_numero($numero) {
-        	$this->numero = $numero;
+        	try {
+        		$this->numero = Filtro::Endereco()::validar_numero($numero);
+        		$this->concluir_campos['erro_numero'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_numero'] = 'erro';
+        		
+        		$this->numero = Filtro::Endereco()::filtrar_numero($numero);
+        	}
         }
         
         public function set_cep($cep) {
-        	$this->cep = $cep;
+        	try {
+        		$this->cep = Filtro::Endereco()::validar_cep($cep);
+        		$this->concluir_campos['erro_cep'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_cep'] = 'erro';
+        		
+        		$this->cep = Filtro::Endereco()::filtrar_cep($cep);
+        	}
         }
         
         public function set_bairro($bairro) {
-        	$this->bairro = $bairro;
+        	try {
+        		$this->bairro = Filtro::Endereco()::validar_bairro($bairro);
+        		$this->concluir_campos['erro_bairro'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_bairro'] = 'erro';
+        		
+        		$this->bairro = Filtro::Endereco()::filtrar_bairro($bairro);
+        	}
         }
         
         public function set_rua($rua) {
-        	$this->rua = $rua;
+        	try {
+        		$this->rua = Filtro::Endereco()::validar_rua($rua);
+        		$this->concluir_campos['erro_rua'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_rua'] = 'erro';
+        		
+        		$this->rua = Filtro::Endereco()::filtrar_rua($rua);
+        	}
         }
         
         public function set_complemento($complemento = null) {
-        	$this->complemento = $complemento;
+        	try {
+        		$this->complemento = Filtro::Endereco()::validar_complemento($complemento);
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_complemento'] = 'erro';
+        		
+        		$this->complemento = Filtro::Endereco()::filtrar_complemento($complemento);
+        	}
         }
         
         public function set_cpf_cnpj($cpf_cnpj) {
-        	$this->cpf_cnpj = $cpf_cnpj;
+        	try {
+        		$this->cpf_cnpj = Filtro::Entidade()::validar_cpf_cnpj($cpf_cnpj);
+        		$this->concluir_campos['erro_cpf_cnpj'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_cpf_cnpj'] = 'erro';
+        		
+        		$this->cpf_cnpj = Filtro::Entidade()::filtrar_cpf_cnpj($cpf_cnpj);
+        	}
         }
         
         public function set_site($site = null) {
-        	$this->site = $site;
+        	try {
+        		$this->site = Filtro::Entidade()::validar_site($site);
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_site'] = 'erro';
+        		
+        		$this->site = Filtro::Entidade()::filtrar_site($site);
+        	}
         }
         
         public function set_nome_comercial($nome_comercial = null) {
-        	$this->nome_comercial = $nome_comercial;
+        	try {
+        		$this->nome_comercial = Filtro::Entidade()::validar_nome_comercial($nome_comercial);
+        	} catch (Exception $e) {
+        		$this->concluir_erros[] = $e->getMessage();
+        		$this->concluir_campos['erro_nome_comercial'] = 'erro';
+        		
+        		$this->nome_comercial = Filtro::Entidade()::filtrar_nome_comercial($nome_comercial);
+        	}
         }
         
-        public function Carregar_Pagina(?array $concluir_erros = null, ?array $concluir_campos = null, ?array $concluir_form = null) {
+        public function Carregar_Pagina() {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
         			$view = new View_Concluir($status);
         			
-        			$view->set_concluir_campos($concluir_campos);
-        			$view->set_concluir_erros($concluir_erros);
-        			$view->set_concluir_form($concluir_form);
+        			$view->set_concluir_campos($this->concluir_campos);
+        			$view->set_concluir_erros($this->concluir_erros);
+        			$view->set_concluir_form($this->concluir_form);
         			 
         			$view->Executar();
         		}
@@ -132,282 +235,27 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 0) {
-		           	$concluir_erros = array();
-		            $concluir_campos = array('erro_fone1' => "certo", 'erro_cidade' => "certo", 'erro_estado' => "certo", 'erro_numero' => "certo",
-		            					  'erro_cep' => "certo", 'erro_bairro' => "certo", 'erro_rua' => "certo", 'erro_cpf_cnpj' => "certo");
-		            
-		            $usuario = new Object_Usuario();
-		            $entidade = new Object_Entidade();
-		            $endereco = new Object_Endereco();
-		            
-		            if (empty($this->fone1)) {
-		                $concluir_erros[] = "Informe um Nº de Telefone para Telefone-1";
-		                $concluir_campos['erro_fone1'] = "erro";
-		            } else {
-		            	$this->fone1 = trim($this->fone1);
-		            	$this->fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $this->fone1);
+		            if (empty($this->concluir_erros)) {
+		            	$usuario = new Object_Usuario();
+		            	$entidade = new Object_Entidade();
+		            	$endereco = new Object_Endereco();
 		            	
-		            	if (strlen($this->fone1) === 11 OR strlen($this->fone1) === 10) {
-		            		if (filter_var($this->fone1, FILTER_VALIDATE_INT)) {
-		            			$usuario->set_fone1($this->fone1);
-		            		} else {
-		            			$concluir_erros[] = "Telefone-1, Digite Apenas Numeros";
-		            			$concluir_campos['erro_fone1'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Telefone-1 deve conter 10 ou 11 Dígitos";
-		            		$concluir_campos['erro_fone1'] = "erro";
-		            	}
-		            }
-		            
-		            if (!empty($this->fone2)) {
-		            	$this->fone2 = trim($this->fone2);
-		            	$this->fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $this->fone2);
-		            	 
-		            	if (strlen($this->fone2) === 11 OR strlen($this->fone2) === 10) {
-		            		if (filter_var($this->fone2, FILTER_VALIDATE_INT)) {
-		            			$usuario->set_fone2($this->fone2);
-		            		} else {
-		            			$concluir_erros[] = "Telefone-2, Digite Apenas Numeros";
-		            			$concluir_campos['erro_fone2'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Telefone-2 deve conter 10 ou 11 Dígitos";
-		            		$concluir_campos['erro_fone2'] = "erro";
-		            	}
-		            }
-		            
-		            if (!empty($this->email_alternativo)) {
-		            	$this->email_alternativo = trim($this->email_alternativo);
-		            	
-		            	if (strlen($this->email_alternativo) <= 150) {
-		            		if (filter_var($this->email_alternativo, FILTER_VALIDATE_EMAIL)) {
-		            			$usuario->set_email_alternativo($this->email_alternativo);
-			            	} else {
-			            		$concluir_erros[] = "Digite um E-Mail Alternativo Valido";
-			            		$concluir_campos['erro_emailcontato'] = "erro";
-			            	}
-		            	} else {
-		            		$concluir_erros[] = "E-Mail Alternativo Não pode ter mais de 150 Caracteres";
-		            		$concluir_campos['erro_emailcontato'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->cidade)) {
-		                $concluir_erros[] = "Selecione sua Cidade";
-		                $concluir_campos['erro_cidade'] = "erro";
-		            } else {
-		            	if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
-			            	$cidade = new Object_Cidade();
-			            	
-			            	$cidade->set_id($this->cidade);
-			            	
-			            	$endereco->set_cidade($cidade);
-		            	} else {
-		            		$concluir_erros[] = "Selecione uma Cidade Válida";
-		            		$concluir_campos['erro_cidade'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->estado)) {
-		                $concluir_erros[] = "Selecione seu Estado";
-		                $concluir_campos['erro_estado'] = "erro";
-		            } else {
-		            	if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
-		            		$estado = new Object_Estado();
-		            		
-		            		$estado->set_id($this->estado);
-		            		
-		            		$endereco->set_estado($estado);
-		            	} else {
-		            		$concluir_erros[] = "Selecione um Estado Válido";
-		            		$concluir_campos['erro_estado'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->numero)) {
-		                $concluir_erros[] = "Informe o Numero do seu Endereço";
-		                $concluir_campos['erro_numero'] = "erro";
-		            } else {
-		            	$numero = strip_tags($this->numero);
-		            	
-		            	if ($numero === $this->numero) {
-		            		$this->numero = trim($this->numero);
-			            	
-		            		if (strlen($this->numero) <= 10) {
-		            			$endereco->set_numero($this->numero);
-			            	} else {
-			            		$concluir_erros[] = "Numero do Estabelecimento, Não pode conter mais de 10 Caracteres";
-			            		$concluir_campos['erro_numero'] = "erro";
-			            	}
-		            	} else {
-		            		$concluir_erros[] = "Numero do Estabelecimento, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_numero'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->cep)) {
-		                $concluir_erros[] = "Informe seu CEP";
-		                $concluir_campos['erro_cep'] = "erro";
-		            } else {
-		            	$this->cep = trim($this->cep);
-		            	$this->cep = preg_replace('/[^a-zA-Z0-9]/', "", $this->cep);
-		            	
-		            	if (strlen($this->cep) === 8) {
-		            		if (filter_var($this->cep, FILTER_VALIDATE_INT)) {
-		            			$endereco->set_cep($this->cep);
-			            	} else {
-			            		$concluir_erros[] = "CEP, Digite Apenas os Numeros";
-			            		$concluir_campos['erro_cep'] = "erro";
-			            	}
-		            	} else {
-		            		$concluir_erros[] = "CEP Deve conter 8 Numeros";
-		            		$concluir_campos['erro_cep'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->bairro)) {
-		                $concluir_erros[] = "Informe seu Bairro";
-		                $concluir_campos['erro_bairro'] = "erro";
-		            } else {
-		            	$bairro = strip_tags($this->bairro);
-		            	
-		            	if ($bairro === $_POST['bairro']) {
-		            		$this->bairro = trim($this->bairro);
-		            		$this->bairro = preg_replace('/\s+/', " ", $this->bairro);
-			            	
-		            		if (strlen($this->bairro) <= 150) {
-		            			$endereco->set_bairro(ucwords(strtolower($this->bairro)));
-			            	} else {
-			            		$concluir_erros[] = "Bairro, Não pode conter mais de 150 Caracteres";
-			            		$concluir_campos['erro_bairro'] = "erro";
-			            	}
-		            	} else {
-		            		$concluir_erros[] = "Bairro, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_bairro'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->rua)) {
-		                $concluir_erros[] = "Informe sua Rua";
-		                $concluir_campos['erro_rua'] = "erro";
-		            } else {
-		            	$rua = strip_tags($this->rua);
-		            	 
-		            	if ($rua === $this->rua) {
-		            		$this->rua = trim($this->rua);
-		            		$this->rua = preg_replace('/\s+/', " ", $this->rua);
-		            	
-		            		if (strlen($this->rua) <= 150) {
-		            			$endereco->set_rua(ucwords(strtolower($this->rua)));
-		            		} else {
-		            			$concluir_erros[] = "Rua, Não pode conter mais de 150 Caracteres";
-		            			$concluir_campos['erro_rua'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Rua, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_rua'] = "erro";
-		            	}
-		            }
-		            
-		            if (!empty($this->complemento)) {
-		            	$complemento = strip_tags($this->complemento);
-		            	
-		            	if ($complemento === $this->complemento) {
-		            		$this->complemento = trim($this->complemento);
-		            		$this->complemento = preg_replace('/\s+/', " ", $this->complemento);
-		            		 
-		            		if (strlen($this->complemento) <= 150) {
-		            			$endereco->set_complemento(ucfirst(strtolower($this->complemento)));
-		            		} else {
-		            			$concluir_erros[] = "Complemento, Não pode conter mais de 150 Caracteres";
-		            			$concluir_campos['erro_complemento'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Complemento, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_complemento'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($this->cpf_cnpj)) {
-		                $concluir_erros[] = "Informe seu CPF ou CNPJ";
-		                $concluir_campos['erro_cpf_cnpj'] = "erro";
-		            } else {
-		            	$this->cpf_cnpj = trim($this->cpf_cnpj);
-		            	$this->cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $this->cpf_cnpj);
-		            	
-		            	if (filter_var($this->cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
-		            		if (strlen($this->cpf_cnpj) === 11 OR strlen($this->cpf_cnpj) === 14) {
-		            			$class_cpf_cnpj = new CPF_CNPJ($this->cpf_cnpj);
-		            			 
-		            			if ($class_cpf_cnpj->valida()) {
-		            				$retorno = DAO_Entidade::Verificar_CPF_CNPJ($this->cpf_cnpj);
-			            			
-			            			if ($retorno !== false) {
-			            				if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
-			            					$entidade->set_cpf_cnpj($this->cpf_cnpj);
-			            				} else {
-			            					$concluir_erros[] = "Este CPF/CNPJ já esta Cadastrado";
-			            					$concluir_campos['erro_cpf_cnpj'] = "erro";
-			            				}
-			            			} else {
-			            				$concluir_erros[] = "Erro ao tentar Encontrar CPF/CNPJ";
-			            				$concluir_campos['erro_cpf_cnpj'] = "erro";
-			            			}
-		            			} else {
-		            				$concluir_erros[] = "CPF/CNPJ Inválido";
-		            				$concluir_campos['erro_cpf_cnpj'] = "erro";
-		            			}
-		            		} else {
-		            			$concluir_erros[] = "CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres";
-		            			$concluir_campos['erro_cpf_cnpj'] = "erro";
-		            		}
-	            		} else {
-	            			$concluir_erros[] = "CPF/CNPJ, Digite Apenas Numeros";
-	            			$concluir_campos['erro_cpf_cnpj'] = "erro";
-	            		}
-		            }
-		            
-		            if (!empty($this->site)) {
-		            	$site = strip_tags($this->site);
-		            	
-		            	if ($site === $this->site) {
-		            		$this->site = trim($this->site);
-		            		$this->site = preg_replace('/\s+/', "", $this->site);
-		            		
-		            		if (strlen($this->site) <= 150) {
-		            			$entidade->set_site($this->site);
-		            		} else {
-		            			$concluir_erros[] = "Site, pode ter no Maximo 150 Caracteres";
-		            			$concluir_campos['erro_site'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Site, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_site'] = "erro";
-		            	}
-		            }
-		            
-		            if (!empty($this->nome_comercial)) {
-		            	$nome_comercial = strip_tags($this->nome_comercial);
-		            	 
-		            	if ($nome_comercial === $this->nome_comercial) {
-		            		$this->nome_comercial = trim($this->nome_comercial);
-		            		$this->nome_comercial = preg_replace('/\s+/', " ", $this->nome_comercial);
-		            	
-		            		if (strlen($this->nome_comercial) <= 150) {
-		            			$entidade->set_nome_comercial($this->nome_comercial);
-		            		} else {
-		            			$concluir_erros[] = "Nome Comercial, Não pode conter mais de 150 Caracteres";
-		            			$concluir_campos['erro_nome_comercial'] = "erro";
-		            		}
-		            	} else {
-		            		$concluir_erros[] = "Nome Comercial, Não pode conter Tags de Programação";
-		            		$concluir_campos['erro_nome_comercial'] = "erro";
-		            	}
-		            }
-		            
-		            if (empty($concluir_erros)) {
+		            	$usuario->set_fone1($this->fone1);
+		            	$usuario->set_fone2($this->fone2);
+		            	$usuario->set_email_alternativo($this->email_alternativo);
 		            	$usuario->set_id(Login_Session::get_usuario_id());
+		            	
+		            	$endereco->set_cidade($this->cidade);
+		            	$endereco->set_estado($this->estado);
+		            	$endereco->set_numero($this->numero);
+		            	$endereco->set_cep($this->cep);
+		            	$endereco->set_bairro($this->bairro);
+		            	$endereco->set_rua($this->rua);
+		            	$endereco->set_complemento($this->complemento);
+		            	
+		            	$entidade->set_cpf_cnpj($this->cpf_cnpj);
+		            	$entidade->set_site($this->site);
+		            	$entidade->set_nome_comercial($this->nome_comercial);
 		            	
 		            	if (DAO_Usuario::Atualizar_Contato($usuario) !== false) {
 		            		$entidade->set_usuario_id(Login_Session::get_usuario_id());
@@ -422,38 +270,36 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 			                	$endereco->set_entidade_id($retorno);
 			                	
 			                	if (DAO_Endereco::Inserir($endereco) === false) {
-			                		$concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
+			                		$this->concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
 			                	}
 			            	} else {
-			            		$concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
+			            		$this->concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
 			            	}
 		            	} else {
-		            		$concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
+		            		$this->concluir_erros[] = "Erro ao tentar Inserir Dados do Usuario";
 		            	}
 		            }
 		            
-		            if (empty($concluir_erros)) {
+		            if (empty($this->concluir_erros)) {
 		            	Controller_Login::ReAutenticar_Usuario_Logado(Login_Session::get_usuario_id());
 		            	
 		            	return 'certo';
 		            } else {
-		            	$concluir_form = array();
+		            	$this->concluir_form['fone1'] = $this->fone1;
+		            	$this->concluir_form['fone2'] = $this->fone2;
+		            	$this->concluir_form['cidade'] = strip_tags($this->cidade);
+		            	$this->concluir_form['estado'] = strip_tags($this->estado);
+		            	$this->concluir_form['numero'] = $this->numero;
+		            	$this->concluir_form['cep'] = $this->cep;
+		            	$this->concluir_form['rua'] = $this->rua;
+		            	$this->concluir_form['complemento'] = $this->complemento;
+		            	$this->concluir_form['bairro'] = $this->bairro;
+		            	$this->concluir_form['cpf_cnpj'] = $this->cpf_cnpj;
+		            	$this->concluir_form['nome_comercial'] = $this->nome_comercial;
+		            	$this->concluir_form['email_alternativo'] = $this->email_alternativo;
+		            	$this->concluir_form['site'] = $this->site;
 		            	
-		            	$concluir_form['fone1'] = trim(strip_tags($this->fone1));
-		            	$concluir_form['fone2'] = trim(strip_tags($this->fone2));
-		            	$concluir_form['cidade'] = strip_tags($this->cidade);
-		            	$concluir_form['estado'] = strip_tags($this->estado);
-		            	$concluir_form['numero'] = trim(strip_tags($this->numero));
-		            	$concluir_form['cep'] = strip_tags($this->cep);
-		            	$concluir_form['rua'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->rua)))));
-		            	$concluir_form['complemento'] = ucfirst(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->complemento)))));
-		            	$concluir_form['bairro'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->bairro)))));
-		            	$concluir_form['cpf_cnpj'] = strip_tags($this->cpf_cnpj);
-		            	$concluir_form['nome_comercial'] = trim(strip_tags($this->nome_comercial));
-		            	$concluir_form['email_alternativo'] = trim(strip_tags($this->email_alternativo));
-		            	$concluir_form['site'] = trim(strip_tags($this->site));
-		            	
-		            	$this->Carregar_Pagina($concluir_erros, $concluir_campos, $concluir_form);
+		            	$this->Carregar_Pagina();
 		            }
         		} else {
         			return $status;

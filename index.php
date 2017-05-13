@@ -675,57 +675,31 @@
 			
 			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
 			
-			if (isset($_POST['fone1'])) {
-				$concluir->set_fone1($_POST['fone1']);
-			}
+			$concluir->set_fone1(isset($_POST['fone1']) ? $_POST['fone1'] : null);
 			
-			if (isset($_POST['fone2'])) {
-				$concluir->set_fone2($_POST['fone2']);
-			}
+			$concluir->set_fone2(isset($_POST['fone2']) ? $_POST['fone2'] : null);
 			
-			if (isset($_POST['email_alternativo'])) {
-				$concluir->set_email_alternativo($_POST['email_alternativo']);
-			}
+			$concluir->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
 			
-			if (isset($_POST['cidade'])) {
-				$concluir->set_cidade($_POST['cidade']);
-			}
+			$concluir->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
 			
-			if (isset($_POST['estado'])) {
-				$concluir->set_estado($_POST['estado']);
-			}
+			$concluir->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
 			
-			if (isset($_POST['numero'])) {
-				$concluir->set_numero($_POST['numero']);
-			}
+			$concluir->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
 			
-			if (isset($_POST['cep'])) {
-				$concluir->set_cep($_POST['cep']);
-			}
+			$concluir->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
 			
-			if (isset($_POST['bairro'])) {
-				$concluir->set_bairro($_POST['bairro']);
-			}
+			$concluir->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
 			
-			if (isset($_POST['rua'])) {
-				$concluir->set_rua($_POST['rua']);
-			}
+			$concluir->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
 			
-			if (isset($_POST['complemento'])) {
-				$concluir->set_complemento($_POST['complemento']);
-			}
+			$concluir->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
 			
-			if (isset($_POST['cpf_cnpj'])) {
-				$concluir->set_cpf_cnpj($_POST['cpf_cnpj']);
-			}
+			$concluir->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
 			
-			if (isset($_POST['site'])) {
-				$concluir->set_site($_POST['site']);
-			}
+			$concluir->set_site(isset($_POST['site']) ? $_POST['site'] : null);
 			
-			if (isset($_POST['nome_comercial'])) {
-				$concluir->set_nome_comercial($_POST['nome_comercial']);
-			}
+			$concluir->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
 			
 			$resposta = $concluir->Concluir_Cadastro();
 			
