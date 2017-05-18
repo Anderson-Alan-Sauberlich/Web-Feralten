@@ -9,6 +9,14 @@ namespace application\model\filter;
 			
 		}
 		
+		public static function validar_id($id = null) : void {
+			
+		}
+		
+		public static function validar_nome($nome = null) : void {
+			
+		}
+		
 		public static function filtrar_id($id = null) : void {
 			
 		}

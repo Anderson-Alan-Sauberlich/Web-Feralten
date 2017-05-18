@@ -196,7 +196,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			if (!empty(self::$enderecos_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$enderecos_erros as $value) {
-                    echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" . $value . "</div>";
+                    echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>$value</div>";
                 }
                 echo "</div></div>";
             }
@@ -206,7 +206,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 			if (!empty(self::$enderecos_sucesso)) {
 				echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$enderecos_sucesso as $value) {
-                	echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><strong><span class=\"glyphicon glyphicon-ok\"></span></strong> " . $value . "</div>";
+                	echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>$value</div>";
 				}
 				echo "</div></div>";
             }

@@ -7,6 +7,7 @@ namespace application\model\filter;
 	
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\CPF_CNPJ;
+	use application\model\dao\Entidade as DAO_Entidade;
 	use \Exception;
 	
 	class Entidade {
@@ -15,21 +16,21 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_id($id = null) : void {
+		public static function validar_id($id = null) : int {
 			
 		}
 		
-		public static function validar_usuario_id($usuario_id = null) : void {
+		public static function validar_usuario_id($usuario_id = null) : int {
 			
 		}
 		
-		public static function validar_status_id($status_id = null) : void {
+		public static function validar_status_id($status_id = null) : int {
 			
 		}
 		
 		public static function validar_cpf_cnpj($cpf_cnpj = null) : string {
 			if (empty($cpf_cnpj)) {
-				throw new Exception("Informe seu CPF ou CNPJ");
+				throw new Exception('Informe seu CPF ou CNPJ');
 			} else {
 				$cpf_cnpj = trim($cpf_cnpj);
 				$cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
@@ -45,24 +46,24 @@ namespace application\model\filter;
 								if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
 									return $cpf_cnpj;
 								} else {
-									throw new Exception("Este CPF/CNPJ já esta Cadastrado");
+									throw new Exception('Este CPF/CNPJ já esta Cadastrado');
 								}
 							} else {
-								throw new Exception("Erro ao tentar Encontrar CPF/CNPJ");
+								throw new Exception('Erro ao tentar Encontrar CPF/CNPJ');
 							}
 						} else {
-							throw new Exception("CPF/CNPJ Inválido");
+							throw new Exception('CPF/CNPJ Inválido');
 						}
 					} else {
-						throw new Exception("CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres");
+						throw new Exception('CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres');
 					}
 				} else {
-					throw new Exception("CPF/CNPJ, Digite Apenas Numeros");
+					throw new Exception('CPF/CNPJ, Digite Apenas Numeros');
 				}
 			}
 		}
 		
-		public static function validar_nome_comercial($nome_comercial = null) : string {
+		public static function validar_nome_comercial($nome_comercial = null) : ?string {
 			if (!empty($nome_comercial)) {
 				$valor = strip_tags($nome_comercial);
 				
@@ -73,11 +74,13 @@ namespace application\model\filter;
 					if (strlen($nome_comercial) <= 150) {
 						return $nome_comercial;
 					} else {
-						throw new Exception("Nome Comercial, Não pode conter mais de 150 Caracteres");
+						throw new Exception('Nome Comercial, Não pode conter mais de 150 Caracteres');
 					}
 				} else {
-					throw new Exception("Nome Comercial, Não pode conter Tags de Programação");
+					throw new Exception('Nome Comercial, Não pode conter Tags de Programação');
 				}
+			} else {
+				return null;
 			}
 		}
 		
@@ -85,7 +88,7 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_site($site = null) : string {
+		public static function validar_site($site = null) : ?string {
 			if (!empty($site)) {
 				$valor = strip_tags($site);
 				
@@ -96,11 +99,13 @@ namespace application\model\filter;
 					if (strlen($site) <= 150) {
 						return $site;
 					} else {
-						throw new Exception("Site, pode ter no Maximo 150 Caracteres");
+						throw new Exception('Site, pode ter no Maximo 150 Caracteres');
 					}
 				} else {
-					throw new Exception("Site, Não pode conter Tags de Programação");
+					throw new Exception('Site, Não pode conter Tags de Programação');
 				}
+			} else {
+				return null;
 			}
 		}
 		
@@ -138,8 +143,8 @@ namespace application\model\filter;
         	return $valor;
         }
         
-        public static function filtrar_nome_comercial($nome_comercial = null) : void {
-        	$valor = "";
+        public static function filtrar_nome_comercial($nome_comercial = null) : ?string {
+        	$valor = null;
         	
         	if (!empty($nome_comercial)) {
         		$valor = trim(strip_tags($nome_comercial));
@@ -152,8 +157,8 @@ namespace application\model\filter;
             
         }
 		
-        public static function filtrar_site($site = null) : void {
-        	$valor = "";
+        public static function filtrar_site($site = null) : ?string {
+        	$valor = null;
         	
         	if (!empty($site)) {
         		$valor = trim(strip_tags($site));

@@ -38,7 +38,7 @@ namespace application\controller\usuario;
         		$this->login_erros[] = $e->getMessage();
         		$this->login_campos['erro_email'] = "erro";
         		
-        		$this->email = Filtro::Usuario()::filtrar_email($email);
+        		$this->email = Filtro::Usuario()::filtrar_email_login($email);
         	}
         }
         

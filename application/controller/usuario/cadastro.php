@@ -54,13 +54,13 @@ namespace application\controller\usuario;
         
         public function set_confemail($confemail) {
         	try {
-        		$this->confemail= Filtro::Usuario()::validar_confemail($confemail);
+        		$this->confemail= Filtro::Usuario()::validar_confemail($confemail, $this->email);
         		$this->cadastro_campos['erro_confemail'] = "certo";
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_confemail'] = "erro";
         		
-        		$this->confemail = Filtro::Usuario()::filtrar_email($confemail);
+        		$this->confemail = Filtro::Usuario()::filtrar_confemail($confemail);
         	}
         }
         

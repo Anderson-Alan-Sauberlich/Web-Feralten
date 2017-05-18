@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\pecas;
 	
+	require_once RAIZ.'/application/model/common/util/filtro.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/common/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/model/object/peca.php';
@@ -33,6 +34,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/cadastrar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
+	use application\model\common\util\Filtro;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\Gerenciar_Imagens;
 	use application\model\object\Peca as Object_Peca;
@@ -64,7 +66,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\view\src\usuario\meu_perfil\pecas\Cadastrar as View_Cadastrar;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
-		
+	use \Exception;
+	
     class Cadastrar {
 
         function __construct() {
@@ -83,71 +86,158 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $serie;
         private $preco;
         private $prioridade;
+        private $cadastrar_erros = array();
+        private $cadastrar_sucesso = array();
+        private $cadastrar_campos = array();
+        private $cadastrar_form = array();
         
         public function set_categoria($categoria) {
-        	$this->categoria = $categoria;
+        	try {
+        		//$this->categoria = Filtro::Categoria()::validar_id($categoria);
+        		$this->categoria = $categoria;
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->categoria = Filtro::Categoria()::filtrar_id($categoria);
+        	}
         }
         
         public function set_marca($marca) {
-        	$this->marca = $marca;
+        	try {
+        		//$this->marca = Filtro::Marca()::validar_id($marca);
+        		$this->marca = $marca;
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->marca = Filtro::Marca()::filtrar_id($marca);
+        	}
         }
         
         public function set_modelo($modelo) {
-        	$this->modelo = $modelo;
+        	try {
+        		//$this->modelo = Filtro::Modelo()::validar_id($modelo);
+        		$this->modelo = $modelo;
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->modelo = Filtro::Modelo()::filtrar_id($modelo);
+        	}
         }
         
         public function set_versao($versao) {
-        	$this->versao = $versao;
+        	try {
+        		//$this->versao = Filtro::Versao()::validar_id($versao);
+        		$this->versao = $versao;
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->versao = Filtro::Versao()::filtrar_id($versao);
+        	}
         }
         
         public function set_descricao($descricao) {
-        	$this->descricao = $descricao;
+        	try {
+        		$this->descricao = Filtro::Peca()::validar_descricao($descricao);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_descricao'] = 'erro';
+        		
+        		$this->descricao = Filtro::Peca()::filtrar_descricao($descricao);
+        	}
         }
         
         public function set_status($status) {
-        	$this->status = $status;
+        	try {
+        		$this->status = Filtro::Peca()::validar_status($status);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_status'] = 'erro';
+        		
+        		$this->status = Filtro::Peca()::filtrar_status($status);
+        	}
         }
         
         public function set_preferencia_entrega($preferencia_entrega) {
-        	$this->preferencia_entrega = $preferencia_entrega;
+        	try {
+        		$this->preferencia_entrega = Filtro::Peca()::validar_preferencia_entrega($preferencia_entrega);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->preferencia_entrega = Filtro::Peca()::filtrar_preferencia_entrega($preferencia_entrega);
+        	}
         }
         
         public function set_fabricante($fabricante) {
-        	$this->fabricante = $fabricante;
+        	try {
+        		$this->fabricante = Filtro::Peca()::validar_fabricante($fabricante);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_fabricante'] = 'erro';
+        		
+        		$this->fabricante = Filtro::Peca()::filtrar_fabricante($fabricante);
+        	}
         }
         
         public function set_peca($peca) {
-        	$this->peca = $peca;
+        	try {
+        		$this->peca = Filtro::Peca()::validar_nome($peca);
+        		$this->cadastrar_campos['erro_peca'] = 'certo';
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_peca'] = 'erro';
+        		
+        		$this->peca = Filtro::Peca()::filtrar_nome($peca);
+        	}
         }
         
         public function set_serie($serie) {
-        	$this->serie = $serie;
+        	try {
+        		$this->serie = Filtro::Peca()::validar_serie($serie);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_serie'] = 'erro';
+        		
+        		$this->serie = Filtro::Peca()::filtrar_serie($serie);
+        	}
         }
         
         public function set_preco($preco) {
-        	$this->preco = $preco;
+        	try {
+        		$this->preco = Filtro::Peca()::validar_preco($preco);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		$this->cadastrar_campos['erro_preco'] = 'erro';
+        		
+        		$this->preco = Filtro::Peca()::filtrar_preco($preco);
+        	}
         }
         
         public function set_prioridade($prioridade) {
-        	$this->prioridade = $prioridade;
+        	try {
+        		$this->prioridade = Filtro::Peca()::validar_prioridade($prioridade);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
+        		
+        		$this->prioridade = Filtro::Peca()::filtrar_prioridade($prioridade);
+        	}
         }
         
-        public function Carregar_Pagina(?array $cadastrar_erros = null, ?array $cadastrar_campos = null, ?array $cadastrar_form = null, ?array $cadastrar_sucesso = null) {
+        public function Carregar_Pagina() {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			if (empty($cadastrar_form)) {
+        			if (empty($this->cadastrar_form)) {
         				unset($_SESSION['compatibilidade']);
         				$this->Deletar_Imagem(123);
         			}
         			
         			$view = new View_Cadastrar($status);
         			
-        			$view->set_cadastrar_campos($cadastrar_campos);
-        			$view->set_cadastrar_erros($cadastrar_erros);
-        			$view->set_cadastrar_form($cadastrar_form);
-        			$view->set_cadastrar_sucesso($cadastrar_sucesso);
+        			$view->set_cadastrar_campos($this->cadastrar_campos);
+        			$view->set_cadastrar_erros($this->cadastrar_erros);
+        			$view->set_cadastrar_form($this->cadastrar_form);
+        			$view->set_cadastrar_sucesso($this->cadastrar_sucesso);
         			 
         			$view->Executar();
         		}
@@ -343,134 +433,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
 		
 		private function Cadastrar_Peca() : void {
-			$cadastrar_erros = array();
-			$cadastrar_sucesso = array();
-			$cadastrar_campos = array('erro_peca' => "certo");
-			
-			$object_peca = new Object_Peca();
-			$object_status = new Object_Status_Peca();
-			
-			$object_peca->set_status($object_status);
-			
-			if (!empty($this->descricao)) {
-				$descricao = strip_tags($this->descricao);
-				 
-				if ($descricao === $this->descricao) {
-					$this->descricao = trim($this->descricao);
-					$this->descricao = preg_replace('/\s+/', " ", $this->descricao);
-					 
-					if (strlen($this->descricao) <= 1000) {
-						$object_peca->set_descricao(ucfirst($this->descricao));
-					} else {
-						$erros_concluir[] = "Descricao, Não pode conter mais de 1000 Caracteres";
-						$cnclr_campos['erro_descricao'] = "erro";
-					}
-				} else {
-					$cadastrar_erros[] = "Descricao, Não pode conter Tags de Programação";
-					$cadastrar_campos['erro_descricao'] = "erro";
-				}
-			}
-			
-			if (!empty($this->status)) {
-				if (filter_var($this->status, FILTER_VALIDATE_INT)) {
-					$object_status->set_id($this->status);
-					
-					$object_peca->set_status($object_status);
-				} else {
-					$cadastrar_erros[] = "Status, Selecione um Status Valido.";
-					$cadastrar_campos['erro_status'] = "erro";
-				}
-			}
-			
-			if (!empty($this->preferencia_entrega)) {
-				$valor = 0;
-				
-				if (is_array($this->preferencia_entrega)) {
-					foreach ($this->preferencia_entrega as $preferencia_entrega) {
-						if (filter_var($preferencia_entrega, FILTER_VALIDATE_INT)) {
-							$valor += $preferencia_entrega;
-						}
-					}
-					
-					if (!empty($valor) AND filter_var($valor, FILTER_VALIDATE_INT)) {
-						$object_peca->set_preferencia_entrega($valor);
-					}
-				}
-			}
-			
-			if (!empty($this->fabricante)) {
-				$fabricante = strip_tags($this->fabricante);
-				
-				if ($fabricante === $this->fabricante) {
-					$this->fabricante = trim($this->fabricante);
-					$this->fabricante = preg_replace('/\s+/', " ", $this->fabricante);
-					 
-					if (strlen($this->fabricante) <= 50) {
-						$object_peca->set_fabricante(ucwords(strtolower($this->fabricante)));
-					} else {
-						$cadastrar_erros[] = "Fabricante, Não pode conter mais de 50 Caracteres";
-						$cadastrar_campos['erro_fabricante'] = "erro";
-					}
-				} else {
-					$cadastrar_erros[] = "Fabricante, Não pode conter Tags de Programação";
-					$cadastrar_campos['erro_fabricante'] = "erro";
-				}
-			}
-			
-			if (!empty($this->peca)) {
-				$peca = strip_tags($this->peca);
-				
-				if ($peca === $this->peca) {
-					$this->peca = trim($this->peca);
-					$this->peca = preg_replace('/\s+/', " ", $this->peca);
-				
-					if (strlen($this->peca) <= 50) {
-						$object_peca->set_nome(ucwords(strtolower($this->peca)));
-					} else {
-						$cadastrar_erros[] = "Peca Nome, Não pode conter mais de 50 Caracteres";
-						$cadastrar_campos['erro_peca'] = "erro";
-					}
-				} else {
-					$cadastrar_erros[] = "Peca Nome, Não pode conter Tags de Programação";
-					$cadastrar_campos['erro_peca'] = "erro";
-				}
-			} else {
-				$cadastrar_campos['erro_peca'] = "erro";
-				$cadastrar_erros[] = "Digite o Nome da Peça";
-			}
-			
-			if (!empty($this->serie)) {
-				$serie = strip_tags($this->serie);
-				
-				if ($serie === $this->serie) {
-					$this->serie = trim($this->serie);
-					$this->serie = preg_replace('/\s+/', " ", $this->serie);
-				
-					if (strlen($this->serie) <= 150) {
-						$object_peca->set_serie($this->serie);
-					} else {
-						$cadastrar_erros[] = "Numero de Serie, Não pode conter mais de 150 Caracteres";
-						$cadastrar_campos['erro_serie'] = "erro";
-					}
-				} else {
-					$cadastrar_erros[] = "Numero de Serie, Não pode conter Tags de Programação";
-					$cadastrar_campos['erro_serie'] = "erro";
-				}
-			}
-			
-			if (!empty($this->preco)) {
-				if (filter_var($this->preco, FILTER_VALIDATE_FLOAT)) {
-					$object_peca->set_preco($this->preco);
-				} else {
-					$cadastrar_erros[] = "Digite um Preço Valido para a peça";
-					$cadastrar_campos['erro_preco'] = "erro";
-				}
-			}
-			
-			if (!empty($this->prioridade)) {
-				$object_peca->set_prioridade(true);
-			}
-				
 			$categorias_compativeis = null;
 			$marcas_compativeis = null;
 			$modelos_compativeis = null;
@@ -480,7 +442,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			$marcas_pativeis = array();
 			$modelos_pativeis = array();
 			$versoes_pativeis = array();
-				
+			
 			if (!empty($this->categoria)) {
 				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
 			
@@ -559,8 +521,23 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				}
 			}
 			
-			if (empty($cadastrar_erros)) {
+			if (empty($this->cadastrar_erros)) {
+				$object_peca = new Object_Peca();
+				$object_status = new Object_Status_Peca();
 				$entidade = new Object_Entidade();
+				
+				if ($this->status > 0) {
+					$object_status->set_id($this->status);
+				}
+				
+				$object_peca->set_status($object_status);
+				$object_peca->set_descricao($this->descricao);
+				$object_peca->set_preferencia_entrega($this->preferencia_entrega);
+				$object_peca->set_fabricante($this->fabricante);
+				$object_peca->set_nome($this->peca);
+				$object_peca->set_serie($this->serie);
+				$object_peca->set_preco($this->preco);
+				$object_peca->set_prioridade($this->prioridade);
 				
 				$entidade->set_id(Login_Session::get_entidade_id());
 				$entidade->set_usuario_id(Login_Session::get_usuario_id());
@@ -571,8 +548,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
 				
 				if ($id_endereco === false) {
-					$cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
-					$cadastrar_campos['erro_peca'] = "";
+					$this->cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
+					$this->cadastrar_campos['erro_peca'] = "";
 				} else {
 					$endereco = new Object_Endereco();
 					
@@ -626,8 +603,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					}
 					
 					if ($retorno === false) {
-						$cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
-						$cadastrar_campos['erro_peca'] = "";
+						$this->cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+						$this->cadastrar_campos['erro_peca'] = "";
 					}
 					
 					if (!empty($_SESSION['imagens_tmp'])) {
@@ -648,36 +625,31 @@ namespace application\controller\usuario\meu_perfil\pecas;
 								$foto_peca->set_numero($indice);
 								
 								if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-									$cadastrar_erros[] = "Erro ao tentar adicionar Foto $indice para a Peça";
-									$cadastrar_campos['erro_peca'] = "";
+									$this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $indice para a Peça";
+									$this->cadastrar_campos['erro_peca'] = "";
 								}
 							}
 						}
 					}
 				} else {
-					$cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
-					$cadastrar_campos['erro_peca'] = "";
+					$this->cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
+					$this->cadastrar_campos['erro_peca'] = "";
 				}
 			}
 			
-			if (empty($cadastrar_erros)) {
-				$cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
-				$cadastrar_campos['erro_peca'] = "";
+			if (empty($this->cadastrar_erros)) {
+				$this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
+				$this->cadastrar_campos['erro_peca'] = "";
 				
-				$this->Carregar_Pagina($cadastrar_erros, $cadastrar_campos, null, $cadastrar_sucesso);
+				$this->Carregar_Pagina();
 			} else {
-				$cadastrar_form = array();
-				
-				$cadastrar_form['peca'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->peca)))));
-				$cadastrar_form['fabricante'] = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($this->fabricante)))));
-				$cadastrar_form['serie'] = trim(strip_tags($this->serie));
-				$cadastrar_form['preco'] = trim(strip_tags($this->preco));
-				$cadastrar_form['status'] = trim(strip_tags($this->status));
-				$cadastrar_form['descricao'] = ucfirst(preg_replace('/\s+/', " ", trim(strip_tags($this->descricao))));
-				
-				if (!empty($this->prioridade)) { 
-					$cadastrar_form['prioridade'] = true;
-				}
+				$this->cadastrar_form['peca'] = $this->peca;
+				$this->cadastrar_form['fabricante'] = $this->fabricante;
+				$this->cadastrar_form['serie'] = $this->serie;
+				$this->cadastrar_form['preco'] = $this->preco;
+				$this->cadastrar_form['status'] = $this->status;
+				$this->cadastrar_form['descricao'] = $this->descricao;
+				$this->cadastrar_form['prioridade'] = $this->prioridade;
 				
 				$marcas = null;
 				$modelos = null;
@@ -720,7 +692,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 				$_SESSION['compatibilidade']['ano'] = $anos;
 				
-				$this->Carregar_Pagina($cadastrar_erros, $cadastrar_campos, $cadastrar_form, $cadastrar_sucesso);
+				$this->Carregar_Pagina();
 			}
 		}
 		

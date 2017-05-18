@@ -1,11 +1,14 @@
 <?php
 namespace application\controller\admin;
 	
+	require_once RAIZ.'/application/model/common/util/filtro.php';
 	require_once RAIZ.'/application/model/dao/usuario_admin.php';
 	require_once RAIZ.'/application/view/src/admin/login.php';
 	
+	use application\model\common\util\Filtro;
 	use application\model\dao\Usuario_Admin as DAO_Usuario_Admin;
 	use application\view\src\admin\Login as View_Login;
+	use \Exception;
 	
     class Login {
 
@@ -16,23 +19,42 @@ namespace application\controller\admin;
         private $usuario;
         private $senha;
         private $logout;
+        private $login_admin_erros = array();
         
         public function set_usuario($usuario) {
-        	$this->usuario = $usuario;
+        	try {
+        		$this->usuario = Filtro::Usuario_Admin()::validar_usuario($usuario);
+        	} catch (Exception $e) {
+        		$this->login_admin_erros[] = $e->getMessage();
+        		
+        		$this->usuario = Filtro::Usuario_Admin()::filtrar_usuario($usuario);
+        	}
         }
         
         public function set_senha($senha) {
-        	$this->senha = $senha;
+        	try {
+        		$this->senha = Filtro::Usuario_Admin()::validar_senha($senha);
+	        } catch (Exception $e) {
+	        	$this->login_admin_erros[] = $e->getMessage();
+	        	
+	        	$this->senha = Filtro::Usuario_Admin()::filtrar_senha($senha);
+	        }
         }
         
         public function set_logout($logout) {
-        	$this->logout = $logout;
+        	try {
+        		$this->logout = Filtro::Usuario_Admin()::validar_logout($logout);
+	        } catch (Exception $e) {
+	        	$this->login_admin_erros[] = $e->getMessage();
+	        	
+	        	$this->logout = Filtro::Usuario_Admin()::filtrar_logout($logout);
+	        }
         }
         
-        public function Carregar_Pagina(?array $login_admin_erros = null) {
+        public function Carregar_Pagina() {
         	$view = new View_Login();
         	
-        	$view->set_login_admin_erros($login_admin_erros);
+        	$view->set_login_admin_erros($this->login_admin_erros);
         	
         	$view->Executar();
         }
@@ -46,34 +68,24 @@ namespace application\controller\admin;
         }
         
         public function Login() {
-        	$login_admin_erros = array();
-        
-        	if (empty($this->usuario)) {
-        		$login_admin_erros[] = "Digite seu Usuario";
-        	}
-        	
-        	if (empty($this->senha)) {
-        		$login_admin_erros[] = "Digite sua Senha";
-        	}
-        	
-        	if (empty($login_admin_erros)) {
+        	if (empty($this->login_admin_erros)) {
         		$usuario_login = DAO_Usuario_Admin::Autenticar($this->usuario);
         
         		if ($usuario_login !== false) {
         			if (password_verify($this->senha, $usuario_login->get_senha())) {
         				$_SESSION['usuario_admin'] = $usuario_login->get_id();
         			} else {
-        				$login_admin_erros[] = "Erro ao tentar Autenticar";
+        				$this->login_admin_erros[] = "Erro ao tentar Autenticar";
         			}
         		} else {
-        			$login_admin_erros[] = "Erro ao tentar Autenticar";
+        			$this->login_admin_erros[] = "Erro ao tentar Autenticar";
         		}
         	}
         
-        	if (empty($login_admin_erros)) {
+        	if (empty($this->login_admin_erros)) {
         		return true;
         	} else {
-        		$this->Carregar_Pagina($login_admin_erros);
+        		$this->Carregar_Pagina();
         	}
         }
     }

@@ -205,53 +205,29 @@
 			
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
 			
-			if (isset($_POST['categoria'])) {
-				$cadastrar->set_categoria($_POST['categoria']);
-			}
+			$cadastrar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
 			
-			if (isset($_POST['marca'])) {
-				$cadastrar->set_marca($_GET['marca']);
-			}
+			$cadastrar->set_marca(isset($_POST['marca']) ? $_GET['marca'] : null);
 			
-			if (isset($_POST['modelo'])) {
-				$cadastrar->set_modelo($_POST['modelo']);
-			}
+			$cadastrar->set_modelo(isset($_POST['modelo']) ? $_POST['modelo'] : null);
 			
-			if (isset($_POST['versao'])) {
-				$cadastrar->set_versao($_POST['versao']);
-			}
+			$cadastrar->set_versao(isset($_POST['versao']) ? $_POST['versao'] : null);
 			
-			if (isset($_POST['descricao'])) {
-				$cadastrar->set_descricao($_POST['descricao']);
-			}
+			$cadastrar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
 			
-			if (isset($_POST['status'])) {
-				$cadastrar->set_status($_POST['status']);
-			}
+			$cadastrar->set_status(isset($_POST['status']) ? $_POST['status'] : null);
 			
-			if (isset($_POST['preferencia_entrega'])) {
-				$cadastrar->set_preferencia_entrega($_POST['preferencia_entrega']);
-			}
+			$cadastrar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
 			
-			if (isset($_POST['fabricante'])) {
-				$cadastrar->set_fabricante($_POST['fabricante']);
-			}
+			$cadastrar->set_fabricante(isset($_POST['fabricante']) ? $_POST['fabricante'] : null);
 			
-			if (isset($_POST['peca'])) {
-				$cadastrar->set_peca($_POST['peca']);
-			}
+			$cadastrar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
 			
-			if (isset($_POST['serie'])) {
-				$cadastrar->set_serie($_POST['serie']);
-			}
+			$cadastrar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
 			
-			if (isset($_POST['preco'])) {
-				$cadastrar->set_preco($_POST['preco']);
-			}
+			$cadastrar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
 			
-			if (isset($_POST['prioridade'])) {
-				$cadastrar->set_prioridade($_POST['prioridade']);
-			}
+			$cadastrar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
 			
 			$resposta = $cadastrar->Verificar_Evento();
 			
@@ -426,46 +402,44 @@
 			}
 		});
 		
-		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+		$app->post('usuario/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
 			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
 			
-			if (isset($_POST['nome'])) {
-				$atualizar->set_nome($_POST['nome']);
-			}
+			$atualizar->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 			
-			if (isset($_POST['fone1'])) {
-				$atualizar->set_fone1($_POST['fone1']);
-			}
+			$atualizar->set_fone1(isset($_POST['fone1']) ? $_POST['fone1'] : null);
 			
-			if (isset($_POST['fone2'])) {
-				$atualizar->set_fone2($_POST['fone2']);
-			}
+			$atualizar->set_fone2(isset($_POST['fone2']) ? $_POST['fone2'] : null);
 			
-			if (isset($_POST['email'])) {
-				$atualizar->set_email($_POST['email']);
-			}
+			$atualizar->set_email(isset($_POST['email']) ? $_POST['email'] : null);
 			
-			if (isset($_POST['confemail'])) {
-				$atualizar->set_confemail($_POST['confemail']);
-			}
+			$atualizar->set_confemail(isset($_POST['confemail']) ? $_POST['confemail'] : null);
 			
-			if (isset($_POST['email_alternativo'])) {
-				$atualizar->set_email_alternativo($_POST['email_alternativo']);
-			}
+			$atualizar->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
 			
-			if (isset($_POST['cpf_cnpj'])) {
-				$atualizar->set_cpf_cnpj($_POST['cpf_cnpj']);
-			}
+			$resposta = $atualizar->Verificar_Evento();
 			
-			if (isset($_POST['site'])) {
-				$atualizar->set_site($_POST['site']);
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
 			}
+		});
+		
+		$app->post('entidade/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/meus_dados/atualizar.php');
 			
-			if (isset($_POST['nome_comercial'])) {
-				$atualizar->set_nome_comercial($_POST['nome_comercial']);
-			}
+			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+			
+			$atualizar->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
+			
+			$atualizar->set_site(isset($_POST['site']) ? $_POST['site'] : null);
+			
+			$atualizar->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
 			
 			$resposta = $atualizar->Verificar_Evento();
 			
@@ -519,17 +493,11 @@
 			
 			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
 			
-			if (isset($_POST['senha_antiga'])) {
-				$alterar_senha->set_senha_antiga($_POST['senha_antiga']);
-			}
+			$alterar_senha->set_senha_antiga(isset($_POST['senha_antiga']) ? $_POST['senha_antiga'] : null);
 			
-			if (isset($_POST['senha_nova'])) {
-				$alterar_senha->set_senha_nova($_POST['senha_nova']);
-			}
+			$alterar_senha->set_senha_nova(isset($_POST['senha_nova']) ? $_POST['senha_nova'] : null);
 			
-			if (isset($_POST['senha_confnova'])) {
-				$alterar_senha->set_senha_confnova($_POST['senha_confnova']);
-			}
+			$alterar_senha->set_senha_confnova(isset($_POST['senha_confnova']) ? $_POST['senha_confnova'] : null);
 			
 			$resposta = $alterar_senha->Atualizar_Senha_Usuario();
 			
@@ -579,33 +547,19 @@
 			
 			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
 			
-			if (isset($_POST['cidade'])) {
-				$enderecos->set_cidade($_POST['cidade']);
-			}
+			$enderecos->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
 			
-			if (isset($_POST['estado'])) {
-				$enderecos->set_estado($_POST['estado']);
-			}
+			$enderecos->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
 			
-			if (isset($_POST['numero'])) {
-				$enderecos->set_numero($_POST['numero']);
-			}
+			$enderecos->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
 			
-			if (isset($_POST['cep'])) {
-				$enderecos->set_cep($_POST['cep']);
-			}
+			$enderecos->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
 			
-			if (isset($_POST['bairro'])) {
-				$enderecos->set_bairro($_POST['bairro']);
-			}
+			$enderecos->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
 			
-			if (isset($_POST['rua'])) {
-				$enderecos->set_rua($_POST['rua']);
-			}
+			$enderecos->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
 			
-			if (isset($_POST['complemento'])) {
-				$enderecos->set_complemento($_POST['complemento']);
-			}
+			$enderecos->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
 			
 			$resposta = $enderecos->Atualizar_Endereco();
 			
@@ -885,13 +839,9 @@
 			
 			$login = new application\controller\admin\Login();
 			
-			if (isset($_POST['usuario'])) {
-				$login->set_usuario($_POST['usuario']);
-			}
+			$login->set_usuario(isset($_POST['usuario']) ? $_POST['usuario'] : null);
 			
-			if (isset($_POST['senha'])) {
-				$login->set_senha($_POST['senha']);
-			}
+			$login->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
 			
 			$resposta = $login->Login();
 			

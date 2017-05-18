@@ -67,7 +67,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_fone1'] = 'erro';
         		
-        		$this->fone1 = Filtro::Usuario()::filtrar_fone($fone1);
+        		$this->fone1 = Filtro::Usuario()::filtrar_fone1($fone1);
         	}
         }
         
@@ -78,7 +78,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_fone2'] = 'erro';
         		
-        		$this->fone2 = Filtro::Usuario()::filtrar_fone($fone2);
+        		$this->fone2 = Filtro::Usuario()::filtrar_fone2($fone2);
         	}
         }
         
@@ -89,31 +89,31 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_email_alternativo'] = 'erro';
         		
-        		$this->email_alternativo = Filtro::Usuario()::filtrar_email($email_alternativo);
+        		$this->email_alternativo = Filtro::Usuario()::filtrar_email_alternativo($email_alternativo);
         	}
         }
         
         public function set_estado($estado) {
         	try {
-        		$this->estado = Filtro::Endereco()::validar_estado($estado);
+        		$this->estado = Filtro::Estado()::validar_id($estado);
         		$this->concluir_campos['erro_estado'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_estado'] = 'erro';
         		
-        		$this->estado = Filtro::Endereco()::filtrar_estado($estado);
+        		$this->estado = Filtro::Estado()::filtrar_id($estado);
         	}
         }
         
         public function set_cidade($cidade) {
         	try {
-        		$this->cidade = Filtro::Endereco()::validar_cidade($cidade);
+        		$this->cidade = Filtro::Cidade()::validar_id($cidade);
         		$this->concluir_campos['erro_cidade'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_cidade'] = 'erro';
         		
-        		$this->cidade = Filtro::Endereco()::filtrar_cidade($cidade);
+        		$this->cidade = Filtro::Cidade()::filtrar_id($cidade);
         	}
         }
         
@@ -239,14 +239,20 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            	$usuario = new Object_Usuario();
 		            	$entidade = new Object_Entidade();
 		            	$endereco = new Object_Endereco();
+		            	$object_cidade = new Object_Cidade();
+		            	$object_estado = new Object_Estado();
+		            	
+		            	$object_estado->set_id($this->estado);
+		            	
+		            	$object_cidade->set_id($this->cidade);
 		            	
 		            	$usuario->set_fone1($this->fone1);
 		            	$usuario->set_fone2($this->fone2);
 		            	$usuario->set_email_alternativo($this->email_alternativo);
 		            	$usuario->set_id(Login_Session::get_usuario_id());
 		            	
-		            	$endereco->set_cidade($this->cidade);
-		            	$endereco->set_estado($this->estado);
+		            	$endereco->set_cidade($object_cidade);
+		            	$endereco->set_estado($object_estado);
 		            	$endereco->set_numero($this->numero);
 		            	$endereco->set_cep($this->cep);
 		            	$endereco->set_bairro($this->bairro);
@@ -287,8 +293,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		            } else {
 		            	$this->concluir_form['fone1'] = $this->fone1;
 		            	$this->concluir_form['fone2'] = $this->fone2;
-		            	$this->concluir_form['cidade'] = strip_tags($this->cidade);
-		            	$this->concluir_form['estado'] = strip_tags($this->estado);
+		            	$this->concluir_form['cidade'] = $this->cidade;
+		            	$this->concluir_form['estado'] = $this->estado;
 		            	$this->concluir_form['numero'] = $this->numero;
 		            	$this->concluir_form['cep'] = $this->cep;
 		            	$this->concluir_form['rua'] = $this->rua;

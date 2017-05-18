@@ -9,6 +9,22 @@ namespace application\model\filter;
 			
 		}
 		
+		public static function validar_peca_id($peca_id = null) : void {
+			
+		}
+		
+		public static function validar_marca_id($marca_id = null) : void {
+			
+		}
+		
+		public static function validar_ano($ano = null) : void {
+			
+		}
+		
+		public static function validar_anos($anos = null) : void {
+			
+		}
+		
 		public static function filtrar_peca_id($peca_id = null) : void {
 			
 		}

@@ -9,11 +9,11 @@ namespace application\model\filter;
 			
 		}
 		
-		public function filtrar_id($id = null) : void {
+		public function validar_id($id = null) : void {
 			
 		}
 		
-		public function filtrar_nome($nome = null) : void {
+		public function validar_nome($nome = null) : void {
 			
 		}
     }

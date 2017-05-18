@@ -9,6 +9,18 @@ namespace application\model\filter;
 			
 		}
 		
+		public function validar_peca_id($peca_id = null) : void {
+			
+		}
+		
+		public function validar_endereco($endereco = null) : void {
+			
+		}
+		
+		public function validar_numero($numero = null) : void {
+			
+		}
+		
 		public function filtrar_peca_id($peca_id = null) : void {
 			
 		}

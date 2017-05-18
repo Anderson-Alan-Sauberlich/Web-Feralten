@@ -1,3 +1,6 @@
+$(document).ready(function() {
+	window.history.pushState("Atualizar | Feralten", "Atualizar | Feralten", "/usuario/meu-perfil/meus-dados/atualizar/");
+});
 var loadFile = function(event) {
 	if (event.target.files.length = 1) {
 		var imagem = event.target.files[0];

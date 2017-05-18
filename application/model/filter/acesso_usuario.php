@@ -9,6 +9,22 @@ namespace application\model\filter;
 			
 		}
 		
+		public static function validar_usuario_id($usuario_id = null) : void {
+			
+		}
+		
+		public static function validar_entidade_id($entidade_id = null) : void {
+			
+		}
+		
+		public static function validar_funcionalidade_id($funcionalidade_id = null) : void {
+			
+		}
+		
+		public static function validar_permissao_id($permissao_id = null) : void {
+			
+		}
+		
 		public static function filtrar_usuario_id($usuario_id = null) : void {
 			
 		}

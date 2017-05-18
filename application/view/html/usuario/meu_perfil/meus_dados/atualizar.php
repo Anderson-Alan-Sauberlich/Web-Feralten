@@ -15,13 +15,13 @@
     <section class="ui container" role="main">
         <?php View_Atualizar::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
-            <form id="form_atualizar" name="form_atualizar" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/" method="post" role="form">
-                <?php View_Atualizar::Mostrar_Erros(); ?>
-                <?php View_Atualizar::Mostrar_Sucesso(); ?>
-                <div class="panel panel-default sombra_painel">
-                    <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Atualizar Dados do Usuario</label>
-                    </div>
+            <?php View_Atualizar::Mostrar_Erros(); ?>
+            <?php View_Atualizar::Mostrar_Sucesso(); ?>
+            <form id="form_atualizar_usuario" name="form_atualizar_usuario" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/usuario/" method="post" role="form">
+            	<div class="panel panel-default sombra_painel">
+                	<div class="panel-heading sombra_painel centralizar">
+                    	<label class="lbPanel">Atualizar Dados do Usuario</label>
+                	</div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
                         	<label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
@@ -64,6 +64,8 @@
                         </div>
                     </div>
                 </div>
+            </form>
+            <form id="form_atualizar_entidade" name="form_atualizar_entidade" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/entidade/" method="post" role="form">
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
                         <label class="lbPanel">Atualizar Dados Da Entidade</label>

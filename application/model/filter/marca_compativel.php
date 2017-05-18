@@ -8,12 +8,20 @@ namespace application\model\filter;
 		function __constructor() {
 				
 		}
-	
-		public static function set_da_id($da_id = null) : void {
+		
+		public static function validar_da_id($da_id = null) : void {
+			
+		}
+		
+		public static function validar_com_id($com_id = null) : void {
+			
+		}
+		
+		public static function filtrar_da_id($da_id = null) : void {
 			
 		}
 	
-		public static function set_com_id($com_id = null) : void {
+		public static function filtrar_com_id($com_id = null) : void {
 			
 		}
 	}
