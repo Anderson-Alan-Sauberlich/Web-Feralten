@@ -5,6 +5,8 @@ namespace application\model\object;
     	
     	private $peca_id;
 		private $versao_id;
+		private $ano_de;
+		private $ano_ate;
 		private $anos = array();
 		
 		function __constructor() {
@@ -37,6 +39,22 @@ namespace application\model\object;
 		
 		public function get_anos() : ?array {
 			return $this->anos;
+		}
+		
+		public function set_ano_de(?int $ano_de = null) : void {
+			$this->ano_de = $ano_de;
+		}
+		
+		public function get_ano_de() : ?int {
+			return $this->ano_de;
+		}
+		
+		public function set_ano_ate(?int $ano_ate = null) : void {
+			$this->ano_ate = $ano_ate;
+		}
+		
+		public function get_ano_ate() : ?int {
+			return $this->ano_ate;
 		}
     }
 ?>

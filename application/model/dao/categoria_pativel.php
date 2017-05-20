@@ -183,7 +183,7 @@ namespace application\model\dao;
         		}
         		$pesquisa .= "categoria_pativel_ano_ate = :ano_ate";
         	}
-        	if (!empty($object_peca->get_dados_usuario()->get_usuario_id())) {
+        	if (!empty($object_peca->get_entidade()->get_usuario_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}

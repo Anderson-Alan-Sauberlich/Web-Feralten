@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\include_page\menu;
 	
+	require_once RAIZ.'/application/model/common/util/filtro.php';
 	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
 	require_once RAIZ.'/application/model/dao/peca.php';
 	require_once RAIZ.'/application/model/dao/categoria_pativel.php';
@@ -18,6 +19,7 @@ namespace application\controller\include_page\menu;
 	require_once RAIZ.'/application/model/object/versao_pativel.php';
 	require_once RAIZ.'/application/model/object/entidade.php';
 	
+	use application\model\common\util\Filtro;
 	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 	use application\model\dao\Peca as DAO_Peca;
 	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
@@ -255,13 +257,7 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        protected function Validar_Variaveis() {
-        	
-        	
-        	return true;
-        }
-        
-        protected function Buscar_Pecas() : ?array {
+        public function Buscar_Pecas() : ?array {
         	$retorno = null;
         	 
         	if (!empty($this->versao)) {

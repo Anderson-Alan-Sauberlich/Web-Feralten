@@ -268,19 +268,19 @@
 			$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
 			
 			if (isset($args['categoria'])) {
-				$visualizar->set_categoria($args['categoria']);
+				$visualizar->set_categoria_url($args['categoria']);
 			}
 			
 			if (isset($args['marca'])) {
-				$visualizar->set_marca($args['marca']);
+				$visualizar->set_marca_url($args['marca']);
 			}
 			
 			if (isset($args['modelo'])) {
-				$visualizar->set_modelo($args['modelo']);
+				$visualizar->set_modelo_url($args['modelo']);
 			}
 			
 			if (isset($args['versao'])) {
-				$visualizar->set_versao($args['versao']);
+				$visualizar->set_versao_url($args['versao']);
 			}
 			
 			if (isset($_GET['ano_de'])) {
@@ -292,7 +292,7 @@
 			}
 			
 			if (isset($_GET['peca'])) {
-				$visualizar->set_peca($_GET['peca']);
+				$visualizar->set_peca_nome($_GET['peca']);
 			}
 			
 			if (isset($_GET['pagina'])) {
