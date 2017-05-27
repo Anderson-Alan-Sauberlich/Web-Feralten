@@ -207,7 +207,7 @@
 			
 			$cadastrar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
 			
-			$cadastrar->set_marca(isset($_POST['marca']) ? $_GET['marca'] : null);
+			$cadastrar->set_marca(isset($_POST['marca']) ? $_POST['marca'] : null);
 			
 			$cadastrar->set_modelo(isset($_POST['modelo']) ? $_POST['modelo'] : null);
 			

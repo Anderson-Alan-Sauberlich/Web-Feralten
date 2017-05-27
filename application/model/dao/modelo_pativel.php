@@ -2,13 +2,18 @@
 namespace application\model\dao;
 	
     require_once RAIZ.'/application/model/object/modelo_pativel.php';
+    require_once RAIZ.'/application/model/object/peca.php';
+    require_once RAIZ.'/application/model/dao/peca.php';
     require_once RAIZ.'/application/model/common/util/conexao.php';
     
     use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
+    use application\model\object\Peca as Object_Peca;
+    use application\model\dao\Peca as DAO_Peca;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
+    use \PDOStatement;
 	
     class Modelo_Pativel {
         
@@ -130,6 +135,107 @@ namespace application\model\dao;
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Buscar_Numero_Paginas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca) {
+        	try {
+        		$pesquisa = "";
+        		
+        		$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca);
+        		
+        		$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_modelo_pativel);
+        		
+        		$sql = "SELECT peca_id FROM vw_modelo_peca WHERE $pesquisa";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca);
+        		
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_modelo_pativel);
+        		
+        		$p_sql->execute();
+        		$select = $p_sql->fetchAll();
+        		$cont = count($select);
+        		
+        		return ceil($cont / 9);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Pecas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, int $pg) {
+        	$limite = 9;
+        	$inicio = ($pg * $limite) - $limite;
+        	$pesquisa = "";
+        	
+        	$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca);
+        	
+        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_modelo_pativel);
+        	
+        	try {
+        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
+        		FROM vw_modelo_peca WHERE $pesquisa LIMIT :inicio, :limite";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca);
+        		
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_modelo_pativel);
+        		
+        		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
+        		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return DAO_Peca::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Modelo_Pativel $object_modelo_pativel) : string {
+        	if (!empty($object_modelo_pativel->get_peca_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "modelo_pativel_pec_id = :pec_id";
+        	}
+        	if (!empty($object_modelo_pativel->get_modelo_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "modelo_pativel_mdl_id = :mdl_id";
+        	}
+        	if (!empty($object_modelo_pativel->get_ano_de())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "modelo_pativel_ano_ano >= :ano_de";
+        	}
+        	if (!empty($object_modelo_pativel->get_ano_ate())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "modelo_pativel_ano_ano <= :ano_ate";
+        	}
+        	
+        	return $pesquisa;
+        }
+        
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Modelo_Pativel $object_modelo_pativel) : PDOStatement {
+        	if (!empty($object_modelo_pativel->get_peca_id())) {
+        		$p_sql->bindValue(":pec_id", $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_modelo_pativel->get_modelo_id())) {
+        		$p_sql->bindValue(":mdl_id", $object_modelo_pativel->get_modelo_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_modelo_pativel->get_ano_de())) {
+        		$p_sql->bindValue(":ano_de", $object_modelo_pativel->get_ano_de(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_modelo_pativel->get_ano_ate())) {
+        		$p_sql->bindValue(":ano_ate", $object_modelo_pativel->get_ano_ate(), PDO::PARAM_INT);
+        	}
+        	
+        	return $p_sql;
         }
         
         public static function Popula_Modelo_Pativeis(array $rows) : array {

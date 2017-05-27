@@ -13,6 +13,7 @@ namespace application\model\dao;
     use \PDO;
     use \PDOException;
     use \Exception;
+    use \PDOStatement;
 	
     class Categoria_Pativel {
         
@@ -138,12 +139,20 @@ namespace application\model\dao;
         
         public static function Buscar_Numero_Paginas(Object_Categoria_Pativel $object_categoria_pativel, Object_Peca $object_peca) {
         	try {
-        		$sql = "SELECT peca_id FROM vw_categoria_peca WHERE categoria_pativel_pec_id = :pc_id OR categoria_pativel_ctg_id = :ca_id OR categoria_pativel_ano_de = :ano_de OR categoria_pativel_ano_ate = :ano_ate";
+        		$pesquisa = "";
+        		
+        		$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca);
+        		
+        		$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_categoria_pativel);
+        		
+        		$sql = "SELECT peca_id FROM vw_categoria_peca WHERE $pesquisa";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_anos(), PDO::PARAM_INT);
+        		
+        		$p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca);
+        		
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_categoria_pativel);
+        		
         		$p_sql->execute();
         		$select = $p_sql->fetchAll();
         		$cont = count($select);
@@ -159,103 +168,20 @@ namespace application\model\dao;
         	$inicio = ($pg * $limite) - $limite;
         	$pesquisa = "";
         	
-        	if (!empty($object_categoria_pativel->get_peca_id())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "categoria_pativel_pec_id = :pc_id";
-        	}
-        	if (!empty($object_categoria_pativel->get_categoria_id())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "categoria_pativel_ctg_id = :ca_id";
-        	}
-        	if (!empty($object_categoria_pativel->get_ano_de())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "categoria_pativel_ano_de = :ano_de";
-        	}
-        	if (!empty($object_categoria_pativel->get_ano_ate())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "categoria_pativel_ano_ate = :ano_ate";
-        	}
-        	if (!empty($object_peca->get_entidade()->get_usuario_id())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_entidade_id = :ent_id";
-        	}
-        	if (!empty($object_peca->get_status())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_sts_pec_id = :sp_id";
-        	}
-        	if (!empty($object_peca->get_nome())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_nome = :nome";
-        	}
-        	if (!empty($object_peca->get_fabricante())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_fabricante = :fabricante";
-        	}
-        	if (!empty($object_peca->get_preco())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_preco = :preco";
-        	}
-        	if (!empty($object_peca->get_descricao())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_descricao = :descricao";
-        	}
-        	if (!empty($object_peca->get_data_anuncio())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_data_anuncio = :data";
-        	}
-        	if (!empty($object_peca->get_serie())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_numero_serie = :serie";
-        	}
-        	if (!empty($object_peca->get_prioridade())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "peca_prioridade = :prioridade";
-        	}
+        	$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca);
+        	
+        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_categoria_pativel);
         	
         	try {
         		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
         				FROM vw_categoria_peca WHERE $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		//$p_sql->bindValue(":pc_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ca_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
-        		//$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
-        		//$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":ent_id", $object_peca->get_entidade()->get_usuario_id(), PDO::PARAM_INT);
-        		/*$p_sql->bindValue(":sp_id", $object_peca->get_status(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":fabricante", $object_peca->get_fabricante(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":preco", $object_peca->get_preco(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":descricao", $object_peca->get_descricao(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":data", $object_peca->get_data_anuncio(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);*/
+        		
+        		$p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca);
+        		
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_categoria_pativel);
+        		
         		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
         		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
         		$p_sql->execute();
@@ -264,6 +190,52 @@ namespace application\model\dao;
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
+        }
+        
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Categoria_Pativel $object_categoria_pativel) : string {
+        	if (!empty($object_categoria_pativel->get_peca_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "categoria_pativel_pec_id = :pec_id";
+        	}
+        	if (!empty($object_categoria_pativel->get_categoria_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "categoria_pativel_ctg_id = :ctg_id";
+        	}
+        	if (!empty($object_categoria_pativel->get_ano_de())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "categoria_pativel_ano_ano >= :ano_de";
+        	}
+        	if (!empty($object_categoria_pativel->get_ano_ate())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "categoria_pativel_ano_ano <= :ano_ate";
+        	}
+        	
+        	return $pesquisa;
+        }
+        
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Categoria_Pativel $object_categoria_pativel) : PDOStatement {
+        	if (!empty($object_categoria_pativel->get_peca_id())) {
+        		$p_sql->bindValue(":pec_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_categoria_pativel->get_categoria_id())) {
+        		$p_sql->bindValue(":ctg_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_categoria_pativel->get_ano_de())) {
+        		$p_sql->bindValue(":ano_de", $object_categoria_pativel->get_ano_de(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_categoria_pativel->get_ano_ate())) {
+        		$p_sql->bindValue(":ano_ate", $object_categoria_pativel->get_ano_ate(), PDO::PARAM_INT);
+        	}
+        	
+        	return $p_sql;
         }
         
         public static function Popula_Categoria_Pativeis(array $rows) : array {

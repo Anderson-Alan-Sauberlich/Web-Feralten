@@ -141,6 +141,97 @@ namespace application\model\dao;
         	}
         }
         
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Endereco $object_endereco) : string {
+        	if (!empty($object_endereco->get_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_id = :end_id";
+        	}
+        	if (!empty($object_endereco->get_entidade_id())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_ent_id = :ent_id";
+        	}
+        	if (!empty($object_endereco->get_cidade())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_cid_id = :cid_id";
+        	}
+        	if (!empty($object_endereco->get_estado())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_est_id = :est_id";
+        	}
+        	if (!empty($object_endereco->get_numero())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_numero = :numero";
+        	}
+        	if (!empty($object_endereco->get_cep())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_cep = :cep";
+        	}
+        	if (!empty($object_endereco->get_rua())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_rua = :rua";
+        	}
+        	if (!empty($object_endereco->get_complemento())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_complemento = :complemento";
+        	}
+        	if (!empty($object_endereco->get_bairro())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "endereco_bairro = :bairro";
+        	}
+        	
+        	return $pesquisa;
+        }
+        
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Endereco $object_endereco) : PDOStatement {
+        	if (!empty($object_endereco->get_id())) {
+        		$p_sql->bindValue(":end_id", $object_endereco->get_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_endereco->get_entidade_id())) {
+        		$p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_endereco->get_cidade())) {
+        		$p_sql->bindValue(":cid_id", $object_endereco->get_cidade(), PDO::PARAM_STR);
+        	}
+        	if (!empty($object_endereco->get_estado())) {
+        		$p_sql->bindValue(":est_id", $object_endereco->get_estado(), PDO::PARAM_STR);
+        	}
+        	if (!empty($object_endereco->get_numero())) {
+        		$p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_INT);
+        	}
+        	if (!empty($object_endereco->get_cep())) {
+        		$p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
+        	}
+        	if (!empty($object_endereco->get_rua())) {
+        		$p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
+        	}
+        	if (!empty($object_endereco->get_complemento())) {
+        		$p_sql->bindValue(":complemento", $object_endereco->get_complemento(), PDO::PARAM_STR);
+        	}
+        	if (!empty($object_endereco->get_bairro())) {
+        		$p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_BOOL);
+        	}
+        	
+        	return $p_sql;
+        }
+        
         public static function PopulaEndereco(array $row) : Object_Endereco {
             $object_endereco = new Object_Endereco();
             

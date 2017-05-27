@@ -146,7 +146,7 @@ namespace application\model\dao;
         		$sql = "SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND versao_url = :url";
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":mo_id", $marca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(":mo_id", $modelo_id, PDO::PARAM_INT);
         		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
         		$p_sql->execute();
         		$row = $p_sql->fetch(PDO::FETCH_ASSOC);

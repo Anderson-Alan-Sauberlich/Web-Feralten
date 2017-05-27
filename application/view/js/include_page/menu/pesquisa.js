@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('.ui.accordion').accordion();
 	$('.ui.checkbox').checkbox();
-	$('.ui.dropdown').dropdown('save defaults');
+	//$('.ui.dropdown').dropdown('save defaults');
 	$(".ui.dropdown").dropdown({message: {noResults: "Nenhum Resultado..."}});
 	Accordion_Categoria();
 });

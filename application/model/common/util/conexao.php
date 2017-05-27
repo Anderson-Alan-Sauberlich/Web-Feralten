@@ -27,7 +27,7 @@ namespace application\model\common\util;
         private static $DB_NAME = 'FERALTEN_BD';
         private static $DB_CHRS = 'utf8';
 
-        public static function Conectar() {
+        public static function Conectar() : PDO {
             if (!isset(self::$conection)) {
                 self::$conection = new PDO(
                 		
@@ -39,7 +39,7 @@ namespace application\model\common\util;
             return self::$conection;
         }
 
-        public function Disconnect(){
+        public function Disconnect() {
             self::$conection = null;
         }
     }

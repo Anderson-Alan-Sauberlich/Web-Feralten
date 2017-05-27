@@ -445,20 +445,20 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			
 			if (!empty($this->categoria)) {
 				$categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
-			
+				
 				if (!empty($this->marca)) {
 					$marcas_compativeis = self::Buscar_Marcas_Compativeis(current($this->marca));
-						
+					
 					if (!empty($this->modelo)) {
 						$modelos_compativeis = self::Buscar_Modelos_Compativeis(current($this->modelo));
-			
+						
 						if (!empty($this->versao)) {
 							$versoes_compativeis = self::Buscar_Versoes_Compativeis(current($this->versao));
 						}
 					}
 				}
 			}
-				
+			
 			if (!empty($this->categoria)) {
 				foreach ($this->categoria as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {

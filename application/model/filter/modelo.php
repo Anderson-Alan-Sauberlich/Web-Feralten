@@ -29,8 +29,18 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_url($url = null) : void {
-			
+		public static function validar_url($url_modelo = null) : string {
+			if (empty($url_modelo)) {
+				throw new Exception('URL do Modelo não Informado');
+			} else {
+				$url_modelo = trim($url_modelo);
+				
+				if (strip_tags($url_modelo) === $url_modelo) {
+					return $url_modelo;
+				} else {
+					throw new Exception('URL do Modelo Inválida');
+				}
+			}
 		}
 		
 		public static function filtrar_id($id = null) : int {
@@ -51,8 +61,14 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function filtrar_url($url = null) : void {
+		public static function filtrar_url($url_modelo = null) : string {
+			$valor = '';
 			
+			if (!empty($url_modelo) AND filter_var($url_modelo, FILTER_VALIDATE_URL)) {
+				$valor = $url_modelo;
+			}
+			
+			return $valor;
 		}
     }
 ?>

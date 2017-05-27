@@ -21,21 +21,26 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         	self::$status_usuario = $status;
         }
         
+        private static $form_pesquisa;
         private static $status_usuario;
         private static $pecas;
         private static $pagina;
         private static $paginas;
         
-        public function set_pecas($pecas) {
+        public function set_pecas($pecas) : void {
         	self::$pecas = $pecas;
         }
         
-        public function set_pagina($pagina) {
+        public function set_pagina($pagina) : void {
         	self::$pagina = $pagina;
         }
         
-        public function set_paginas($paginas) {
+        public function set_paginas($paginas) : void {
         	self::$paginas = $paginas;
+        }
+        
+        public function set_form_pesquisa($form_pesquisa) : void {
+        	self::$form_pesquisa = $form_pesquisa;
         }
         
         public function Executar() {
@@ -43,7 +48,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Pesquisa('/usuario/meu-perfil/pecas/visualizar/');
+        	new View_Pesquisa('/usuario/meu-perfil/pecas/visualizar/', self::$form_pesquisa);
         }
         
         public static function Incluir_Menu_Usuario() {

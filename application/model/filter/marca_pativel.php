@@ -1,6 +1,9 @@
 <?php
 namespace application\model\filter;
 	
+	require_once RAIZ.'/application/model/filter/categoria_pativel.php';
+	
+	use application\model\filter\Categoria_Pativel;
 	use \Exception;
 	
     class Marca_Pativel {
@@ -21,6 +24,14 @@ namespace application\model\filter;
 			
 		}
 		
+		public static function validar_ano_de($ano_de = null) : ?int {
+			return Categoria_Pativel::validar_ano_de($ano_de);
+		}
+		
+		public static function validar_ano_ate($ano_ate = null) : ?int {
+			return Categoria_Pativel::validar_ano_ate($ano_ate);
+		}
+		
 		public static function validar_anos($anos = null) : void {
 			
 		}
@@ -35,6 +46,14 @@ namespace application\model\filter;
 		
 		public static function filtrar_ano($ano = null) : void {
 			
+		}
+		
+		public static function filtrar_ano_de($ano_de = null) : ?int {
+			return Categoria_Pativel::filtrar_ano_de($ano_de);
+		}
+		
+		public static function filtrar_ano_ate($ano_ate = null) : ?int {
+			return Categoria_Pativel::filtrar_ano_ate($ano_ate);
 		}
 		
 		public static function filtrar_anos($anos = null) : void {

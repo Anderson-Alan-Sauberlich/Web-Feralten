@@ -29,8 +29,18 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_url($url = null) : void {
-			
+		public static function validar_url($url_marca = null) : string {
+			if (empty($url_marca)) {
+				throw new Exception('URL da Marca não Informado');
+			} else {
+				$url_marca = trim($url_marca);
+				
+				if (strip_tags($url_marca) === $url_marca) {
+					return $url_marca;
+				} else {
+					throw new Exception('URL da Marca Inválida');
+				}
+			}
 		}
 		
 		public static function filtrar_id($id = null) : int {
@@ -51,8 +61,14 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function filtrar_url($url = null) : void {
+		public static function filtrar_url($url_marca = null) : string {
+			$valor = '';
 			
+			if (!empty($url_marca) AND filter_var($url_marca, FILTER_VALIDATE_URL)) {
+				$valor = $url_marca;
+			}
+			
+			return $valor;
 		}
     }
 ?>

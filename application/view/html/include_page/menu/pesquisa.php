@@ -43,7 +43,7 @@
                             	<div class="row-fluid buscaDropEspaco">
 			                    	<select id="ano_de" name="ano_de" class="ui fluid scrolling search selection dropdown">
 										<option value="0">Ano De</option>
-										<?php View_Pesquisa::Carregar_Anos(); ?>
+										<?php View_Pesquisa::Carregar_Ano_De(); ?>
 									</select>
 								</div>
                             </div>
@@ -51,7 +51,7 @@
                             	<div class="row-fluid buscaDropEspaco">
 		                           	<select id="ano_ate" name="ano_ate" class="ui fluid scrolling search selection dropdown">
 										<option value="0">Ano Até</option>
-										<?php View_Pesquisa::Carregar_Anos(); ?>
+										<?php View_Pesquisa::Carregar_Ano_Ate(); ?>
 									</select>
 								</div>
                             </div>
@@ -62,7 +62,7 @@
                 	<div class="col-md-9 col-sm-12 col-xs-12">
 	          			<div class="ui fluid big left icon input">
 							<i class="search icon"></i>
-							<input id="peca" name="peca" placeholder="Digite o que deseja Procurar..." type="text">
+							<input id="peca" name="peca" value="<?php View_Pesquisa::Manter_Valor_Pesquisa(); ?>" placeholder="Digite o que deseja Procurar..." type="text">
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-12 col-xs-12">

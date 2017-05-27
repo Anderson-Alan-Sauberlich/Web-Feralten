@@ -36,6 +36,7 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Entidade as Object_Entidade;
+	use \Exception;
 	
     class Pesquisa {
 
@@ -43,6 +44,7 @@ namespace application\controller\include_page\menu;
             $this->object_peca = new Object_Peca();
         }
         
+        private $form_pesquisar = array();
         private $pagina = 0;
         private $paginas = 0;
         private $categoria;
@@ -89,123 +91,101 @@ namespace application\controller\include_page\menu;
         	}
         }
         
-        public function set_categoria($categoria) {
-        	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
-        		$this->categoria = $categoria;
+        public function set_categoria($categoria): void {
+        	try {
+        		$this->categoria = Filtro::Categoria()::validar_id($categoria);
+        	} catch (Exception $e) {
+        		$this->categoria = Filtro::Categoria()::filtrar_id($categoria);
         	}
         }
         
-        public function set_marca($marca) {
-        	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
-        		$this->marca = $marca;
+        public function set_marca($marca) : void {
+        	try {
+        		$this->marca = Filtro::Marca()::validar_id($marca);
+        	} catch (Exception $e) {
+        		$this->marca = Filtro::Marca()::filtrar_id($marca);
         	}
         }
         
-        public function set_modelo($modelo) {
-        	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
-        		$this->modelo = $modelo;
+        public function set_modelo($modelo) : void {
+        	try {
+        		$this->modelo = Filtro::Modelo()::validar_id($modelo);
+        	} catch (Exception $e) {
+        		$this->modelo = Filtro::Modelo()::filtrar_id($modelo);
         	}
         }
         
-        public function set_versao($versao) {
-        	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
-        		$this->versao = $versao;
+        public function set_versao($versao) : void {
+        	try {
+        		$this->versao = Filtro::Versao()::validar_id($versao);
+        	} catch (Exception $e) {
+        		$this->versao = Filtro::Versao()::filtrar_id($versao);
         	}
         }
         
         public function set_categoria_url($url_categoria) : void {
-        	if (!empty($url_categoria)) {
-        		$url_categoria = trim($url_categoria);
-        		
-        		if (strip_tags($url_categoria) === $url_categoria) {
-        			$retorno = DAO_Categoria::Buscar_ID_Por_URL($url_categoria);
-        			
-        			if (!empty($retorno) AND $retorno !== false) {
-        				$this->categoria = $retorno;
-        			}
-        		}
+        	try {
+        		$this->set_categoria(DAO_Categoria::Buscar_ID_Por_URL(Filtro::Categoria()::validar_url($url_categoria)));
+        	} catch (Exception $e) {
+        		$this->categoria = 0;
         	}
         }
         
         public function set_marca_url($url_marca) : void {
-        	if (!empty($url_marca)) {
-        		$url_marca = trim($url_marca);
-        		
-        		if (strip_tags($url_marca) === $url_marca) {
-	        		$retorno = DAO_Marca::Buscar_ID_Por_URL($this->categoria, $url_marca);
-	        		
-	        		if (!empty($retorno) AND $retorno !== false) {
-	        			$this->marca = $retorno;
-	        		}
-        		}
+        	try {
+        		$this->set_marca(DAO_Marca::Buscar_ID_Por_URL($this->categoria, Filtro::Marca()::validar_url($url_marca)));
+        	} catch (Exception $e) {
+        		$this->marca = 0;
         	}
         }
         
         public function set_modelo_url($url_modelo) : void {
-        	if (!empty($url_modelo)) {
-        		$url_modelo = trim($url_modelo);
-        		
-        		if (strip_tags($url_modelo) === $url_modelo) {
-	        		$retorno = DAO_Modelo::Buscar_ID_Por_URL($this->marca, $url_modelo);
-	        		
-	        		if (!empty($retorno) AND $retorno !== false) {
-	        			$this->modelo = $retorno;
-	        		}
-        		}
+        	try {
+        		$this->set_modelo(DAO_Modelo::Buscar_ID_Por_URL($this->marca, Filtro::Modelo()::validar_url($url_modelo)));
+        	} catch (Exception $e) {
+        		$this->modelo = 0;
         	}
         }
         
         public function set_versao_url($url_versao) : void {
-        	if (!empty($url_versao)) {
-        		$url_versao = trim($url_versao);
-        		
-        		if (strip_tags($url_versao) === $url_versao) {
-	        		$retorno = DAO_Versao::Buscar_ID_Por_URL($this->modelo, $url_versao);
-	        		
-	        		if (!empty($retorno) AND $retorno !== false) {
-	        			$this->versao = $retorno;
-	        		}
-        		}
+        	try {
+        		$this->set_versao(DAO_Versao::Buscar_ID_Por_URL($this->modelo, Filtro::Versao()::validar_url($url_versao)));
+        	} catch (Exception $e) {
+        		$this->versao = 0;
         	}
         }
         
         public function set_ano_de($ano_de) : void {
-        	if (!empty($ano_de)) {
-        		$ano_de = trim($ano_de);
-        		
-        		if (filter_var($ano_de, FILTER_VALIDATE_INT) !== false) {
-        			 $this->ano_de = $ano_de;
-        		}
+        	try {
+        		$this->ano_de = Filtro::Categoria_Pativel()::validar_ano_de($ano_de);
+        	} catch (Exception $e) {
+        		$this->ano_de = Filtro::Categoria_Pativel()::filtrar_ano_de($ano_de);
         	}
         }
         
         public function set_ano_ate($ano_ate) : void {
-        	if (!empty($ano_ate)) {
-        		$ano_ate = trim($ano_ate);
-        		
-        		if (filter_var($ano_ate, FILTER_VALIDATE_INT) !== false) {
-        			$this->ano_ate = $ano_ate;
-        		}
+        	try {
+        		$this->ano_ate = Filtro::Categoria_Pativel()::validar_ano_ate($ano_ate);
+        	} catch (Exception $e) {
+        		$this->ano_ate = Filtro::Categoria_Pativel()::filtrar_ano_ate($ano_ate);
         	}
         }
         
         public function set_peca_nome($nome_peca) : void {
-        	if (!empty($nome_peca)) {
-        		$nome_peca = trim($nome_peca);
+        	try {
+        		$this->object_peca->set_nome(Filtro::Peca()::validar_nome($nome_peca));
+        	} catch (Exception $e) {
         		
-        		if (strip_tags($nome_peca) === $nome_peca) {
-        			$this->object_peca->set_nome($nome_peca);
-        		}
         	}
         }
         
         public function set_peca_usuario(int $id_usuario = null) : void {
-        	if (!empty($id_usuario)) {
-        		if (filter_var($id_usuario, FILTER_VALIDATE_INT) !== false) {
-        			$entidade = new Object_Entidade();
-        			$entidade->set_usuario_id($id_usuario);
-        			$this->object_peca->set_entidade($entidade);
-        		}
+        	try {
+        		$entidade = new Object_Entidade();
+        		$entidade->set_usuario_id(Filtro::Peca()::validar_responsavel($id_usuario));
+        		$this->object_peca->set_entidade($entidade);
+        	} catch (Exception $e) {
+        		
         	}
         }
         
@@ -215,6 +195,18 @@ namespace application\controller\include_page\menu;
         
         public function get_paginas() : ?int {
         	return $this->paginas;
+        }
+        
+        public function get_form() : ?array {
+        	$this->form_pesquisar['categoria'] = $this->categoria;
+        	$this->form_pesquisar['marca'] = $this->marca;
+        	$this->form_pesquisar['modelo'] = $this->modelo;
+        	$this->form_pesquisar['versao'] = $this->versao;
+        	$this->form_pesquisar['peca_nome'] = $this->object_peca->get_nome();
+        	$this->form_pesquisar['ano_de'] = $this->ano_de;
+        	$this->form_pesquisar['ano_ate'] = $this->ano_ate;
+        	
+        	return $this->form_pesquisar;
         }
         
         public function Retornar_Marcas_Por_Categoria() {

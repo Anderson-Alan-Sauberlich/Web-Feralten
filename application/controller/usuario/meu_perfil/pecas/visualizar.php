@@ -65,6 +65,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	        			$view->set_pecas($this->controller_pesquisa->Buscar_Pecas());
 	        			$view->set_pagina($this->controller_pesquisa->get_pagina());
 	        			$view->set_paginas($this->controller_pesquisa->get_paginas());
+	        			$view->set_form_pesquisa($this->controller_pesquisa->get_form());
 	        			
 	        			$view->Executar();
         			} else {

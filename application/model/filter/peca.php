@@ -17,8 +17,16 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_responsavel($usuario_responsavel = null) : void {
-			
+		public static function validar_responsavel($usuario_responsavel = null) : int {
+			if (!empty($usuario_responsavel)) {
+				if (filter_var($usuario_responsavel, FILTER_VALIDATE_INT) !== false) {
+					return $usuario_responsavel;
+				} else {
+					throw new Exception('Usuario Responsavel Invalido');
+				}
+			} else {
+				throw new Exception('Usuario Responsavel Não Informado');
+			}
 		}
 		
 		public static function validar_nome($nome = null) : string {
@@ -177,6 +185,30 @@ namespace application\model\filter;
 			}
 		}
 		
+		public static function validar_pesquisa($pesquisa = null) : ?string {
+			if (!empty($pesquisa)) {
+				$pesquisa = trim($pesquisa);
+				
+				if (strip_tags($pesquisa) === $pesquisa) {
+					return $pesquisa;
+				} else {
+					return null;
+				}
+			} else {
+				return null;
+			}
+		}
+		
+		public static function filtrar_pesquisa($pesquisa = null) : ?string {
+			$valor = null;
+			
+			if (!empty($pesquisa)) {
+				$valor = trim(strip_tags($pesquisa));
+			}
+			
+			return $valor;
+		}
+		
 		public static function filtrar_id($id = null) : void {
 			
 		}
@@ -185,8 +217,14 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function filtrar_responsavel($usuario_responsavel = null) : void {
+		public static function filtrar_responsavel($usuario_responsavel = null) : ?int {
+			$valor = null;
 			
+			if (!empty($usuario_responsavel) AND filter_var($usuario_responsavel, FILTER_VALIDATE_INT)) {
+				$valor = trim($usuario_responsavel);
+			}
+			
+			return $valor;
 		}
 		
 		public static function filtrar_nome($nome = null) : string {
