@@ -1,8 +1,7 @@
 $(document).ready(function() {
 	$('.ui.accordion').accordion();
 	$('.ui.checkbox').checkbox();
-	//$('.ui.dropdown').dropdown('save defaults');
-	$(".ui.dropdown").dropdown({message: {noResults: "Nenhum Resultado..."}});
+	$('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
 	Accordion_Categoria();
 });
 function Accordion_Categoria() {
@@ -10,46 +9,72 @@ function Accordion_Categoria() {
 	$('#content_categoria').addClass('active');
 }
 function Carregar_Categoria(ca) {
-    $("#marca").html('<option>Carregando...</option>');
-    $.get('/menu-pesquisa/marca/', 
-    {categoria:$(ca).val()},
-    function(valor) {
-        $("#marca").html(valor);
-        $("#modelo").html('<option value="0">Modelo</option>');
+	if ($(ca).val() != 0 && $(ca).val() != null) {
+	    $("#marca").html('<option>Carregando...</option>');
+	    $.get('/menu-pesquisa/marca/', 
+	    {categoria:$(ca).val()},
+	    function(valor) {
+	        $("#marca").html(valor);
+	        $("#modelo").html('<option value="0">Modelo</option>');
+	        $("#versao").html('<option value="0">Versão</option>');
+	        $('#marca').dropdown('set text', 'Marca');
+	        $('#modelo').dropdown('set text', 'Modelo');
+	       	$('#versao').dropdown('set text', 'Versão');
+	       	$('#marca').dropdown('set value', '0');
+	        $('#modelo').dropdown('set value', '0');
+	       	$('#versao').dropdown('set value', '0');
+	    });
+	} else {
+		$("#marca").html('<option value="0">Marca</option>');
+		$("#modelo").html('<option value="0">Modelo</option>');
         $("#versao").html('<option value="0">Versão</option>');
-        $('#marca').dropdown('restore default value');
-        $('#modelo').dropdown('restore default value');
-       	$('#versao').dropdown('restore default value');
-        $('#marca').dropdown('restore default text');
-        $('#modelo').dropdown('restore default text');
-       	$('#versao').dropdown('restore default text');
-    });
+        $('#marca').dropdown('set text', 'Marca');
+        $('#modelo').dropdown('set text', 'Modelo');
+       	$('#versao').dropdown('set text', 'Versão');
+       	$('#marca').dropdown('set value', '0');
+        $('#modelo').dropdown('set value', '0');
+       	$('#versao').dropdown('set value', '0');
+	}
 }
 $(document).ready(function( ) {
 	$("#marca").change(function() {
-    	$("#modelo").html('<option>Carregando...</option>');
-        $.get('/menu-pesquisa/modelo/', 
-        {marca:$(this).val()},
-        function(valor) {
-        	$("#modelo").html(valor);
-        	$("#versao").html('<option value="0">Versão</option>');
-        	$('#modelo').dropdown('restore default value');
-           	$('#versao').dropdown('restore default value');
-           	$('#modelo').dropdown('restore default text');
-           	$('#versao').dropdown('restore default text');
-        });
+		if ($(this).val() != 0 && $(this).val() != null) {
+	    	$("#modelo").html('<option>Carregando...</option>');
+	        $.get('/menu-pesquisa/modelo/', 
+	        {marca:$(this).val()},
+	        function(valor) {
+	        	$("#modelo").html(valor);
+	        	$("#versao").html('<option value="0">Versão</option>');
+	        	$('#modelo').dropdown('set text', 'Modelo');
+	           	$('#versao').dropdown('set text', 'Versão');
+	            $('#modelo').dropdown('set value', '0');
+	           	$('#versao').dropdown('set value', '0');
+	        });
+		} else {
+			$("#modelo").html('<option value="0">Modelo</option>');
+			$("#versao").html('<option value="0">Versão</option>');
+        	$('#modelo').dropdown('set text', 'Modelo');
+           	$('#versao').dropdown('set text', 'Versão');
+            $('#modelo').dropdown('set value', '0');
+           	$('#versao').dropdown('set value', '0');
+		}
    });
 });
 $(document).ready(function() {
 	$("#modelo").change(function() {
-    	$("#versao").html('<option>Carregando...</option>');
-        $.get('/menu-pesquisa/versao/', 
-        {modelo:$(this).val()},
-        function(valor) {
-        	$("#versao").html(valor);
-        	$('#versao').dropdown('restore default value');
-        	$('#versao').dropdown('restore default text');
-        });
+		if ($(this).val() != 0 && $(this).val() != null) {
+	    	$("#versao").html('<option>Carregando...</option>');
+	        $.get('/menu-pesquisa/versao/', 
+	        {modelo:$(this).val()},
+	        function(valor) {
+	        	$("#versao").html(valor);
+	        	$('#versao').dropdown('set text', 'Versão');
+	           	$('#versao').dropdown('set value', '0');
+	        });
+		} else {
+			$('#versao').dropdown('set text', 'Versão');
+           	$('#versao').dropdown('set value', '0');
+		}
    });
 });
 function Pesquisar() {

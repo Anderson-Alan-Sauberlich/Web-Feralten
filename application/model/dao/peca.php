@@ -179,53 +179,62 @@ namespace application\model\dao;
         			$pesquisa .= "peca_ent_id = :ent_id";
         		}
         	}
+        	
         	if (!empty($object_peca->get_endereco())) {
         		$object_endereco = $object_peca->get_endereco();
         		
         		$pesquisa = DAO_Endereco::Criar_String_Pesquisa($pesquisa, $object_endereco);
         	}
+        	
         	if (!empty($object_peca->get_status())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_sts_pec_id = :sp_id";
         	}
+        	
         	if (!empty($object_peca->get_nome())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_nome LIKE '%' :nome '%'";
         	}
+        	
         	if (!empty($object_peca->get_fabricante())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_fabricante LIKE '%' :fabricante '%'";
         	}
+        	
         	if (!empty($object_peca->get_preco())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_preco = :preco";
         	}
+        	
         	if (!empty($object_peca->get_descricao())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_descricao LIKE '%' :descricao '%'";
         	}
+        	
         	if (!empty($object_peca->get_data_anuncio())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_data_anuncio = :data_anuncio";
         	}
+        	
         	if (!empty($object_peca->get_serie())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_numero_serie = :numero_serie";
         	}
+        	
         	if (!empty($object_peca->get_prioridade())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
@@ -244,30 +253,39 @@ namespace application\model\dao;
         			$p_sql->bindValue(":ent_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
         		}
         	}
+        	
         	if (!empty($object_peca->get_endereco())) {
         		$p_sql = DAO_Endereco::Bind_String_Pesquisa($p_sql, $object_endereco);
         	}
+        	
         	if (!empty($object_peca->get_status())) {
         		$p_sql->bindValue(":sp_id", $object_peca->get_status(), PDO::PARAM_INT);
         	}
+        	
         	if (!empty($object_peca->get_nome())) {
         		$p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
         	}
+        	
         	if (!empty($object_peca->get_fabricante())) {
         		$p_sql->bindValue(":fabricante", $object_peca->get_fabricante(), PDO::PARAM_STR);
         	}
+        	
         	if (!empty($object_peca->get_preco())) {
         		$p_sql->bindValue(":preco", $object_peca->get_preco(), PDO::PARAM_INT);
         	}
+        	
         	if (!empty($object_peca->get_descricao())) {
         		$p_sql->bindValue(":descricao", $object_peca->get_descricao(), PDO::PARAM_STR);
         	}
+        	
         	if (!empty($object_peca->get_data_anuncio())) {
         		$p_sql->bindValue(":data", $object_peca->get_data_anuncio(), PDO::PARAM_STR);
         	}
+        	
         	if (!empty($object_peca->get_serie())) {
         		$p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
         	}
+        	
         	if (!empty($object_peca->get_prioridade())) {
         		$p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);
         	}

@@ -469,7 +469,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			echo "<div class=\"col-md-10 col-sm-8 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()."</label></div>";
 			echo "<div class=\"col-md-2 col-sm-4 col-xs-12\">";
 			echo "<div class=\"row-fluid\">";
-			echo "<select id=\"ano_mdl\" name=\"ano_mdl_".$titulo_modelo->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\">";
+			echo "<select id=\"ano_mdl\" name=\"ano_mdl_".$titulo_modelo->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\" multiple=\"\">";
 			echo "<option value=\"\">Ano Modelo</option>";
 			if (isset($anos_selecionados['ano_mdl_'.$modelo])) {
 				self::Mostrar_Anos($anos_selecionados['ano_mdl_'.$modelo]);
@@ -491,7 +491,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			echo "<div class=\"col-md-10 col-sm-8 col-xs-12\"><label>".$titulo_categoria->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_marca->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_modelo->get_nome()." <i class=\"lbPanel glyphicon glyphicon-hand-right\"></i> ".$titulo_versao->get_nome()."</label></div>";
 			echo "<div class=\"col-md-2 col-sm-4 col-xs-12\">";
 			echo "<div class=\"row-fluid\">";
-			echo "<select id=\"ano_vrs\" name=\"ano_vrs_".$titulo_versao->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\">";
+			echo "<select id=\"ano_vrs\" name=\"ano_vrs_".$titulo_versao->get_id()."[]\" class=\"ui fluid multiple scrolling search selection dropdown\" multiple=\"\">";
 			echo "<option value=\"\">Ano Modelo</option>";
 			if (isset($anos_selecionados['ano_vrs_'.$versao])) {
 				self::Mostrar_Anos($anos_selecionados['ano_vrs_'.$versao]);

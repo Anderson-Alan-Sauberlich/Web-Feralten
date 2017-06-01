@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('.ui.dropdown').dropdown('save defaults');
+	$('.ui.dropdown').dropdown();
 });
 $(document).ready(function( ) {
 	$("#categoria").change(function() {
@@ -7,24 +7,24 @@ $(document).ready(function( ) {
 			Recarregar_Marcas();
 			$("#modelo").html('<option value="0">Modelo</option>');
 	       	$("#versao").html('<option value="0">Versão</option>');
-	       	$('#marca').dropdown('restore default value');
-	       	$('#modelo').dropdown('restore default value');
-	       	$('#versao').dropdown('restore default value');
-	       	$('#marca').dropdown('restore default text');
-	       	$('#modelo').dropdown('restore default text');
-	       	$('#versao').dropdown('restore default text');
+	       	$('#marca').dropdown('set value', '0');
+	       	$('#modelo').dropdown('set value', '0');
+	       	$('#versao').dropdown('set value', '0');
+	       	$('#marca').dropdown('set text', 'Marca');
+	       	$('#modelo').dropdown('set text', 'Modelo');
+	       	$('#versao').dropdown('set text', 'Versão');
 	       	$("#lb_item").html('Categoria');
 		    Sincronizar_Categoria();
 		} else if (true) {
 			$("#marca").html('<option value="0">Marca</option>');
 			$("#modelo").html('<option value="0">Modelo</option>');
 	       	$("#versao").html('<option value="0">Versão</option>');
-	       	$('#marca').dropdown('restore default value');
-	       	$('#modelo').dropdown('restore default value');
-	       	$('#versao').dropdown('restore default value');
-	       	$('#marca').dropdown('restore default text');
-	       	$('#modelo').dropdown('restore default text');
-	       	$('#versao').dropdown('restore default text');
+	       	$('#marca').dropdown('set value', '0');
+	       	$('#modelo').dropdown('set value', '0');
+	       	$('#versao').dropdown('set value', '0');
+	       	$('#marca').dropdown('set text', 'Marca');
+	       	$('#modelo').dropdown('set text', 'Modelo');
+	       	$('#versao').dropdown('set text', 'Versão');
 	       	$("#lb_item").html('Nada');
 	       	$("#nome").val("");
 		   	$("#url").val("");
@@ -34,19 +34,19 @@ $(document).ready(function( ) {
 		if ($("#marca").val() != 0 && $("#marca").val() != null) {
 			Recarregar_Modelos();
 	        $("#versao").html('<option value="0">Versão</option>');
-        	$('#modelo').dropdown('restore default value');
-        	$('#versao').dropdown('restore default value');
-        	$('#modelo').dropdown('restore default text');
-        	$('#versao').dropdown('restore default text');
+	        $('#modelo').dropdown('set value', '0');
+        	$('#versao').dropdown('set value', '0');
+        	$('#modelo').dropdown('set text', 'Modelo');
+        	$('#versao').dropdown('set text', 'Versão');
         	$("#lb_item").html('Marca');
 	        Sincronizar_Marca();
 		} else if ($("#categoria").val() != 0 && $("#categoria").val() != null) {
 			$("#modelo").html('<option value="0">Modelo</option>');
 			$("#versao").html('<option value="0">Versão</option>');
-        	$('#modelo').dropdown('restore default value');
-        	$('#versao').dropdown('restore default value');
-        	$('#modelo').dropdown('restore default text');
-        	$('#versao').dropdown('restore default text');
+			$('#modelo').dropdown('set value', '0');
+        	$('#versao').dropdown('set value', '0');
+        	$('#modelo').dropdown('set text', 'Modelo');
+        	$('#versao').dropdown('set text', 'Versão');
         	$("#lb_item").html('Categoria');
         	Sincronizar_Categoria();
 		}
@@ -54,14 +54,14 @@ $(document).ready(function( ) {
 	$("#modelo").change(function() {
 		if ($("#modelo").val() != 0 && $("#modelo").val() != null) {
 			Recarregar_Versoes();
-			$('#versao').dropdown('restore default value');
-        	$('#versao').dropdown('restore default text');
+			$('#versao').dropdown('set value', '0');
+        	$('#versao').dropdown('set text', 'Versão');
         	$("#lb_item").html('Modelo');
 	        Sincronizar_Modelo();
 		} else if ($("#marca").val() != 0 && $("#marca").val() != null) {
 			$("#versao").html('<option value="0">Versão</option>');
-        	$('#versao').dropdown('restore default value');
-        	$('#versao').dropdown('restore default text');
+			$('#versao').dropdown('set value', '0');
+        	$('#versao').dropdown('set text', 'Versão');
         	$("#lb_item").html('Marca');
         	Sincronizar_Marca();
 		}
@@ -84,8 +84,8 @@ function Recarregar_Categoria() {
 		async: false,
 	}).done(function(valor) {
 		$("#categoria").html(valor);
-		$('#categoria').dropdown('restore default value');
-		$('#categoria').dropdown('restore default text');
+		$('#categoria').dropdown('set value', '0');
+		$('#categoria').dropdown('set text', 'Categoria');
 		$("#lb_item").html('Nada');
 		$("#nome").val("");
 	   	$("#url").val("");
@@ -102,8 +102,8 @@ function Recarregar_Marcas() {
 		}
 	}).done(function(valor) {
 		$("#marca").html(valor);
-		$('#marca').dropdown('restore default value');
-		$('#marca').dropdown('restore default text');
+		$('#marca').dropdown('set value', '0');
+		$('#marca').dropdown('set text', 'Marca');
 		$("#lb_item").html('Categoria');
 		Sincronizar_Categoria();
 	});
@@ -119,8 +119,8 @@ function Recarregar_Modelos() {
 		}
 	}).done(function(valor) {
 		$("#modelo").html(valor);
-		$('#modelo').dropdown('restore default value');
-		$('#modelo').dropdown('restore default text');
+		$('#modelo').dropdown('set value', '0');
+		$('#modelo').dropdown('set text', 'Modelo');
 		$("#lb_item").html('Marca');
 		Sincronizar_Marca()
 	});
@@ -136,8 +136,8 @@ function Recarregar_Versoes() {
 		}
 	}).done(function(valor) {
 		$("#versao").html(valor);
-		$('#versao').dropdown('restore default value');
-		$('#versao').dropdown('restore default text');
+		$('#versao').dropdown('set value', '0');
+		$('#versao').dropdown('set text', 'Versão');
 		$("#lb_item").html('Modelo');
 		Sincronizar_Modelo();
 	});

@@ -68,20 +68,22 @@ namespace application\view\src\include_page\menu;
         		}
         	}
         	
-            echo "<option value=\"0\">Marca</option>";
-            
-            if (!empty($marcas) AND $marcas !== false) {
-	            foreach ($marcas as $marca) {
-	            	if (isset(self::$form_pesquisa['marca'])) {
-		            	if (self::$form_pesquisa['marca'] == $marca->get_id()) {
-		                	echo "<option selected value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
+        	echo "<option  value=\"0\">Marca</option>";
+        	
+            if ($marcas !== false) {
+            	if (!empty($marcas)) {
+		            foreach ($marcas as $marca) {
+		            	if (isset(self::$form_pesquisa['marca'])) {
+			            	if (self::$form_pesquisa['marca'] == $marca->get_id()) {
+			                	echo "<option selected value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
+			            	} else {
+			            		echo "<option value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
+			            	}
 		            	} else {
 		            		echo "<option value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
 		            	}
-	            	} else {
-	            		echo "<option value=\"".$marca->get_id()."\" data-url=\"".$marca->get_url()."\">".$marca->get_nome()."</option>";
-	            	}
-	            }
+		            }
+            	}
             } else {
             	echo "<option value=\"\">Erro</option>";
             }
@@ -100,18 +102,20 @@ namespace application\view\src\include_page\menu;
         	
             echo "<option value=\"0\">Modelo</option>";
             
-            if (!empty($modelos) AND $modelos !== false) {
-	            foreach ($modelos as $modelo) {
-	            	if (isset(self::$form_pesquisa['modelo'])) {
-		            	if (self::$form_pesquisa['modelo'] == $modelo->get_id()) {
-		                	echo "<option selected value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
+            if ($modelos !== false) {
+            	if (!empty($modelos)) {
+		            foreach ($modelos as $modelo) {
+		            	if (isset(self::$form_pesquisa['modelo'])) {
+			            	if (self::$form_pesquisa['modelo'] == $modelo->get_id()) {
+			                	echo "<option selected value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
+			            	} else {
+			            		echo "<option value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
+			            	}
 		            	} else {
 		            		echo "<option value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
 		            	}
-	            	} else {
-	            		echo "<option value=\"".$modelo->get_id()."\" data-url=\"".$modelo->get_url()."\">".$modelo->get_nome()."</option>";
-	            	}
-	            }
+		            }
+            	}
             } else {
             	echo "<option value=\"\">Erro</option>";
             }
@@ -130,17 +134,19 @@ namespace application\view\src\include_page\menu;
         	
         	echo "<option value=\"0\">Versão</option>";
         
-        	if (!empty($versoes) AND $versoes !== false) {
-        		foreach ($versoes as $versao) {
-        			if (isset(self::$form_pesquisa['versao'])) {
-	        			if (self::$form_pesquisa['versao'] == $versao->get_id()) {
-	        				echo "<option selected value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
+        	if ($versoes !== false) {
+        		if (!empty($versoes)) {
+	        		foreach ($versoes as $versao) {
+	        			if (isset(self::$form_pesquisa['versao'])) {
+		        			if (self::$form_pesquisa['versao'] == $versao->get_id()) {
+		        				echo "<option selected value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
+		        			} else {
+		        				echo "<option value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
+		        			}
 	        			} else {
 	        				echo "<option value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
 	        			}
-        			} else {
-        				echo "<option value=\"".$versao->get_id()."\" data-url=\"".$versao->get_url()."\">".$versao->get_nome()."</option>";
-        			}
+	        		}
         		}
         	} else {
         		echo "<option value=\"\">Erro</option>";

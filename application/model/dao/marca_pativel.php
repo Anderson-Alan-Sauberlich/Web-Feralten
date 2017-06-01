@@ -23,26 +23,35 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Marca_Pativel $object_marca_pativel) : bool {
             try {
-                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pec_id, marca_pativel_mrc_id) 
-                        VALUES (:pec_id, :mrc_id);";
+                $sql = "INSERT INTO tb_marca_pativel (marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_id) 
+                        VALUES (:pec_id, :mrc_id, :ano_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
 				
+				$proximo_id_ano = null;
+				
+				if (empty($object_marca_pativel->get_anos())) {
+					$p_sql->bindValue(":ano_id", null, PDO::PARAM_INT);
+				} else {
+					$proximo_id_ano = self::Pegar_Proximo_Id_Ano();
+					
+					$p_sql->bindValue(":ano_id", $proximo_id_ano, PDO::PARAM_INT);
+				}
+				
                 if ($p_sql->execute()) {
                 	$anos = $object_marca_pativel->get_anos();
                 	
-                	if (!empty($anos)) {
+                	if (!empty($anos) AND !empty($proximo_id_ano)) {
 	                	foreach ($anos as $ano) {
-	                		$sql = "INSERT INTO tb_marca_pativel_ano (marca_pativel_ano_pec_id, marca_pativel_ano_mrc_id, marca_pativel_ano_ano)
-		                        	VALUES (:pec_id, :mrc_id, :ano);";
+	                		$sql = "INSERT INTO tb_marca_pativel_ano (marca_pativel_ano_id, marca_pativel_ano_ano)
+		                        	VALUES (:ano_id, :ano);";
 	                		
 	                		$p_sql = Conexao::Conectar()->prepare($sql);
 	                		
-	                		$p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
-	                		$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+	                		$p_sql->bindValue(":ano_id", $proximo_id_ano, PDO::PARAM_INT);
 	                		$p_sql->bindValue(":ano", $ano, PDO::PARAM_INT);
 	                		
 	                		$p_sql->execute();
@@ -123,6 +132,20 @@ namespace application\model\dao;
             }
         }
         
+        private static function Pegar_Proximo_Id_Ano() : ?int {
+        	try {
+        		$sql = "SELECT fc_achar_id_livre_ano_marca()";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return null;
+        	}
+        }
+        
         public static function BuscarPorCOD(int $id) {
             try {
                 $sql = "SELECT marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_de, marca_pativel_ano_ate FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
@@ -199,23 +222,36 @@ namespace application\model\dao;
         		}
         		$pesquisa .= "marca_pativel_pec_id = :pec_id";
         	}
+        	
         	if (!empty($object_marca_pativel->get_marca_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "marca_pativel_mrc_id = :mrc_id";
         	}
-        	if (!empty($object_marca_pativel->get_ano_de())) {
+        	
+        	if (!empty($object_marca_pativel->get_ano_de()) OR !empty($object_marca_pativel->get_ano_ate())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
-        		$pesquisa .= "marca_pativel_ano_ano >= :ano_de";
-        	}
-        	if (!empty($object_marca_pativel->get_ano_ate())) {
-        		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
-        		}
-        		$pesquisa .= "marca_pativel_ano_ano <= :ano_ate";
+        		
+        		$pesquisa_ano = "";
+        		
+	        	if (!empty($object_marca_pativel->get_ano_de())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "marca_pativel_ano_ano >= :ano_de";
+	        	}
+	        	
+	        	if (!empty($object_marca_pativel->get_ano_ate())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "marca_pativel_ano_ano <= :ano_ate";
+	        	}
+	        	
+	        	$pesquisa .= "marca_pativel_ano_id IN (SELECT marca_pativel_ano_id FROM tb_marca_pativel_ano WHERE $pesquisa_ano)";
         	}
         	
         	return $pesquisa;
@@ -225,12 +261,15 @@ namespace application\model\dao;
         	if (!empty($object_marca_pativel->get_peca_id())) {
         		$p_sql->bindValue(":pec_id", $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
         	}
+        	
         	if (!empty($object_marca_pativel->get_marca_id())) {
         		$p_sql->bindValue(":mrc_id", $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
         	}
+        	
         	if (!empty($object_marca_pativel->get_ano_de())) {
         		$p_sql->bindValue(":ano_de", $object_marca_pativel->get_ano_de(), PDO::PARAM_INT);
         	}
+        	
         	if (!empty($object_marca_pativel->get_ano_ate())) {
         		$p_sql->bindValue(":ano_ate", $object_marca_pativel->get_ano_ate(), PDO::PARAM_INT);
         	}

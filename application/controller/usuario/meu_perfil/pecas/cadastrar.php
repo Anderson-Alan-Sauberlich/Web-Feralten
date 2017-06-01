@@ -474,8 +474,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 										$marca_pativel = new Object_Marca_Pativel();
 										$marca_pativel->set_marca_id($marca_selecionada);
 										
-										if (!empty($_POST['ano_mrc_'.$marca_selecionada])) {
+										if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
 											$marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
+											exit(var_dump($_POST['ano_mrc_'.$marca_selecionada]));
 										}
 										
 										$marcas_pativeis[] = $marca_pativel;
@@ -487,7 +488,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 														$modelo_pativel = new Object_Modelo_Pativel();
 														$modelo_pativel->set_modelo_id($modelo_selecionado);
 														
-														if (!empty($_POST['ano_mdl_'.$modelo_selecionado])) {
+														if (isset($_POST['ano_mdl_'.$modelo_selecionado]) AND !empty($_POST['ano_mdl_'.$modelo_selecionado])) {
 															$modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
 														}
 														
@@ -500,7 +501,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 																		$versao_pativel = new Object_Versao_Pativel();
 																		$versao_pativel->set_versao_id($versao_selecionada);
 			
-																		if (!empty($_POST['ano_vrs_'.$versao_selecionada])) {
+																		if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
 																			$versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
 																		}
 			
