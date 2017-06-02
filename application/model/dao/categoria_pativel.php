@@ -232,7 +232,7 @@ namespace application\model\dao;
         	
         	if (!empty($object_categoria_pativel->get_ano_de()) OR !empty($object_categoria_pativel->get_ano_ate())) {
         		if (!empty($pesquisa)) {
-        			$pesquisa .= " AND ";
+        			$pesquisa .= " AND (";
         		}
         		
         		$pesquisa_ano = "";
@@ -252,6 +252,72 @@ namespace application\model\dao;
 	        	}
 	        	
 	        	$pesquisa .= "categoria_pativel_ano_id IN (SELECT categoria_pativel_ano_id FROM tb_categoria_pativel_ano WHERE $pesquisa_ano)";
+	        	
+	        	if (!empty($pesquisa)) {
+	        		$pesquisa .= " OR ";
+	        	}
+	        	
+	        	$pesquisa_ano = "";
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_de())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "marca_pativel_ano_ano >= :ano_de";
+	        	}
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_ate())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "marca_pativel_ano_ano <= :ano_ate";
+	        	}
+	        	
+	        	$pesquisa .= "marca_pativel_ano_id IN (SELECT marca_pativel_ano_id FROM tb_marca_pativel_ano WHERE $pesquisa_ano)";
+	        	
+	        	if (!empty($pesquisa)) {
+	        		$pesquisa .= " OR ";
+	        	}
+	        	
+	        	$pesquisa_ano = "";
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_de())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "modelo_pativel_ano_ano >= :ano_de";
+	        	}
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_ate())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "modelo_pativel_ano_ano <= :ano_ate";
+	        	}
+	        	
+	        	$pesquisa .= "modelo_pativel_ano_id IN (SELECT modelo_pativel_ano_id FROM tb_modelo_pativel_ano WHERE $pesquisa_ano)";
+	        	
+	        	if (!empty($pesquisa)) {
+	        		$pesquisa .= " OR ";
+	        	}
+	        	
+	        	$pesquisa_ano = "";
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_de())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "versao_pativel_ano_ano >= :ano_de";
+	        	}
+	        	
+	        	if (!empty($object_categoria_pativel->get_ano_ate())) {
+	        		if (!empty($pesquisa_ano)) {
+	        			$pesquisa_ano .= " AND ";
+	        		}
+	        		$pesquisa_ano .= "versao_pativel_ano_ano <= :ano_ate";
+	        	}
+	        	
+	        	$pesquisa .= "versao_pativel_ano_id IN (SELECT versao_pativel_ano_id FROM tb_versao_pativel_ano WHERE $pesquisa_ano))";
         	}
         	
         	return $pesquisa;
