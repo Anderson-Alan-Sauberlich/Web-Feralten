@@ -121,17 +121,23 @@ namespace application\model\dao;
             }
         }
         
-        public static function Buscar_Numero_Paginas(Object_Peca $object_peca) {
+        public static function Buscar_Numero_Paginas(Object_Peca $object_peca, array $form_filtro) {
         	$pesquisa = "";
         	
-        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca);
+        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+        	
+        	if (!empty($pesquisa)) {
+        		if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
+        			$pesquisa = " WHERE $pesquisa";
+        		}
+        	}
         	
         	try {
-        		$sql = "SELECT peca_id FROM vw_peca WHERE $pesquisa";
+        		$sql = "SELECT peca_id FROM vw_peca $pesquisa";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
-        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca);
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
         		
         		$p_sql->execute();
         		$select = $p_sql->fetchAll();
@@ -143,20 +149,26 @@ namespace application\model\dao;
         	}
         }
         
-        public static function Buscar_Pecas(Object_Peca $object_peca, int $pg) {
+        public static function Buscar_Pecas(Object_Peca $object_peca, array $form_filtro, int $pg) {
         	$limite = 9;
         	$inicio = ($pg * $limite) - $limite;
         	$pesquisa = "";
         	
-        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca);
+        	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+        	
+        	if (!empty($pesquisa)) {
+        		if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
+        			$pesquisa = " WHERE $pesquisa";
+        		}
+        	}
         	
         	try {
         		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
-        		FROM vw_peca WHERE $pesquisa LIMIT :inicio, :limite";
+        		FROM vw_peca $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
-        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca);
+        		$p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
         		
         		$p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
         		$p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
@@ -168,7 +180,7 @@ namespace application\model\dao;
         	}
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Peca $object_peca) : string {
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Peca $object_peca, array $form_filtro) : string {
         	if (!empty($object_peca->get_entidade())) {
         		$object_entidade = $object_peca->get_entidade();
         		
@@ -242,10 +254,52 @@ namespace application\model\dao;
         		$pesquisa .= "peca_prioridade = :prioridade";
         	}
         	
+        	if (!empty($form_filtro)) {
+        		$pesquisa .= self::Gerar_String_Order_By($form_filtro);
+        	}
+        	
         	return $pesquisa;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Peca $object_peca) : PDOStatement {
+        public static function Gerar_String_Order_By(array $form_filtro) : string {
+        	$order_by = "";
+        	
+        	if (!empty($form_filtro['ordem_preco'])) {
+        		if (!empty($order_by)) {
+        			$order_by .= ", ";
+        		}
+        		
+        		$order_by .= "peca_preco ";
+        		
+        		if ($form_filtro['ordem_preco'] == 'por_menor') {
+        			$order_by .= "ASC";
+        		} else if ($form_filtro['ordem_preco'] = 'por_maior') {
+        			$order_by .= "DESC";
+        		}
+        	}
+        	
+        	if (!empty($form_filtro['ordem_data'])) {
+        		if (!empty($order_by)) {
+        			$order_by .= ", ";
+        		}
+        		
+        		$order_by .= "peca_data_anuncio ";
+        		
+        		if ($form_filtro['ordem_data'] == 'menos_recente') {
+        			$order_by .= "ASC";
+        		} else if ($form_filtro['ordem_data'] = 'mais_recente') {
+        			$order_by .= "DESC";
+        		}
+        	}
+        	
+        	if (!empty($order_by)) {
+        		$order_by = " ORDER BY $order_by";
+        	}
+        	
+        	return $order_by;
+        }
+        
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Peca $object_peca, array $form_filtro) : PDOStatement {
         	if (!empty($object_peca->get_entidade())) {
         		$object_entidade = $object_peca->get_entidade();
         		
@@ -255,11 +309,13 @@ namespace application\model\dao;
         	}
         	
         	if (!empty($object_peca->get_endereco())) {
+        		$object_endereco = $object_peca->get_endereco();
+        		
         		$p_sql = DAO_Endereco::Bind_String_Pesquisa($p_sql, $object_endereco);
         	}
         	
         	if (!empty($object_peca->get_status())) {
-        		$p_sql->bindValue(":sp_id", $object_peca->get_status(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":sp_id", $object_peca->get_status()->get_id(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_peca->get_nome())) {

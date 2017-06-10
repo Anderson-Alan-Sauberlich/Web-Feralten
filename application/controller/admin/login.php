@@ -1,11 +1,11 @@
 <?php
 namespace application\controller\admin;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/dao/usuario_admin.php';
 	require_once RAIZ.'/application/view/src/admin/login.php';
 	
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
 	use application\model\dao\Usuario_Admin as DAO_Usuario_Admin;
 	use application\view\src\admin\Login as View_Login;
 	use \Exception;
@@ -23,31 +23,31 @@ namespace application\controller\admin;
         
         public function set_usuario($usuario) {
         	try {
-        		$this->usuario = Filtro::Usuario_Admin()::validar_usuario($usuario);
+        		$this->usuario = Validador::Usuario_Admin()::validar_usuario($usuario);
         	} catch (Exception $e) {
         		$this->login_admin_erros[] = $e->getMessage();
         		
-        		$this->usuario = Filtro::Usuario_Admin()::filtrar_usuario($usuario);
+        		$this->usuario = Validador::Usuario_Admin()::filtrar_usuario($usuario);
         	}
         }
         
         public function set_senha($senha) {
         	try {
-        		$this->senha = Filtro::Usuario_Admin()::validar_senha($senha);
+        		$this->senha = Validador::Usuario_Admin()::validar_senha($senha);
 	        } catch (Exception $e) {
 	        	$this->login_admin_erros[] = $e->getMessage();
 	        	
-	        	$this->senha = Filtro::Usuario_Admin()::filtrar_senha($senha);
+	        	$this->senha = Validador::Usuario_Admin()::filtrar_senha($senha);
 	        }
         }
         
         public function set_logout($logout) {
         	try {
-        		$this->logout = Filtro::Usuario_Admin()::validar_logout($logout);
+        		$this->logout = Validador::Usuario_Admin()::validar_logout($logout);
 	        } catch (Exception $e) {
 	        	$this->login_admin_erros[] = $e->getMessage();
 	        	
-	        	$this->logout = Filtro::Usuario_Admin()::filtrar_logout($logout);
+	        	$this->logout = Validador::Usuario_Admin()::filtrar_logout($logout);
 	        }
         }
         

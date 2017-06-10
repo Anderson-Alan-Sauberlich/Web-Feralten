@@ -1,7 +1,7 @@
+$('.ui.accordion').accordion();
+$('.ui.checkbox').checkbox();
+$('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
 $(document).ready(function() {
-	$('.ui.accordion').accordion();
-	$('.ui.checkbox').checkbox();
-	$('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
 	Accordion_Categoria();
 });
 function Accordion_Categoria() {
@@ -83,6 +83,21 @@ function Pesquisar() {
 	var ano_de = $("#ano_de").val();
 	var ano_ate = $("#ano_ate").val();
 	var peca = $("#peca").val();
+	var ordem_preco = $("#ordem_preco").val();
+	var ordem_data = $("#ordem_data").val();
+	var status = $("#status").val();
+	var estado = $("#estado").find("option:selected").data('url');
+	var cidade = $("#cidade").find("option:selected").data('url');
+	
+	if (estado != 0 && estado != "" && estado != undefined) {
+		base_url = base_url + "em/" + estado + "/";
+		
+		if (cidade != 0 && cidade != "" && cidade != undefined) {
+			base_url = base_url + cidade + "/";
+		} else {
+			base_url = base_url + "estoque/";
+		}
+	}
 	
 	if (categoria != 0 && categoria != "" && categoria != undefined) {
 		$("input[name='categoria']:checked").prop('disabled', true);
@@ -109,6 +124,12 @@ function Pesquisar() {
 		}
 	}
 	
+	$("#estado").prop('disabled', true);
+	$("#estado").prop('readonly', true);
+	
+	$("#cidade").prop('disabled', true);
+	$("#cidade").prop('readonly', true);
+	
 	if (ano_de == 0 || ano_de == "" || ano_de == undefined) {
 		$("#ano_de").prop('disabled', true);
 		$("#ano_de").prop('readonly', true);
@@ -122,6 +143,21 @@ function Pesquisar() {
 	if (peca == 0 || peca == "" || peca == undefined) {
 		$("#peca").prop('disabled', true);
 		$("#peca").prop('readonly', true);
+	}
+	
+	if (ordem_preco == 0 || ordem_preco == "" || ordem_preco == undefined) {
+		$("#ordem_preco").prop('disabled', true);
+		$("#ordem_preco").prop('readonly', true);
+	}
+	
+	if (ordem_data == 0 || ordem_data == "" || ordem_data == undefined) {
+		$("#ordem_data").prop('disabled', true);
+		$("#ordem_data").prop('readonly', true);
+	}
+	
+	if (status == 0 || status == "" || status == undefined) {
+		$("#status").prop('disabled', true);
+		$("#status").prop('readonly', true);
 	}
 	
 	$("#searschform").attr("action", base_url);

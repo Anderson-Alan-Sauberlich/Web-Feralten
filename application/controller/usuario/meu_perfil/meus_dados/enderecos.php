@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/object/endereco.php';
 	require_once RAIZ.'/application/model/object/cidade.php';
@@ -12,7 +12,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/enderecos.php';
     require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
-    use application\model\common\util\Filtro;
+    use application\model\common\util\Validador;
     use application\model\common\util\Login_Session;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Cidade as Object_Cidade;
@@ -45,84 +45,84 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public function set_estado($estado) {
         	try {
-        		$this->estado = Filtro::Estado()::validar_id($estado);
+        		$this->estado = Validador::Estado()::validar_id($estado);
         		$this->enderecos_campos['erro_estado'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_estado'] = "erro";
         		
-        		$this->estado = Filtro::Estado()::filtrar_id($estado);
+        		$this->estado = Validador::Estado()::filtrar_id($estado);
         	}
         }
         
         public function set_cidade($cidade) {
         	try {
-        		$this->cidade = Filtro::Cidade()::validar_id($cidade);
+        		$this->cidade = Validador::Cidade()::validar_id($cidade);
         		$this->enderecos_campos['erro_cidade'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_cidade'] = "erro";
         		
-        		$this->cidade = Filtro::Cidade()::filtrar_id($cidade);
+        		$this->cidade = Validador::Cidade()::filtrar_id($cidade);
         	}
         }
         
         public function set_numero($numero) {
         	try {
-        		$this->numero = Filtro::Endereco()::validar_numero($numero);
+        		$this->numero = Validador::Endereco()::validar_numero($numero);
         		$this->enderecos_campos['erro_numero'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_numero'] = "erro";
         		
-        		$this->numero = Filtro::Endereco()::filtrar_numero($numero);
+        		$this->numero = Validador::Endereco()::filtrar_numero($numero);
         	}
         }
         
         public function set_cep($cep) {
         	try {
-        		$this->cep = Filtro::Endereco()::validar_cep($cep);
+        		$this->cep = Validador::Endereco()::validar_cep($cep);
         		$this->enderecos_campos['erro_cep'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_'] = "erro";
         		
-        		$this->cep = Filtro::Endereco()::filtrar_cep($cep);
+        		$this->cep = Validador::Endereco()::filtrar_cep($cep);
         	}
         }
         
         public function set_bairro($bairro) {
         	try {
-        		$this->bairro = Filtro::Endereco()::validar_bairro($bairro);
+        		$this->bairro = Validador::Endereco()::validar_bairro($bairro);
         		$this->enderecos_campos['erro_bairro'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_bairro'] = "erro";
         		
-        		$this->bairro = Filtro::Endereco()::filtrar_bairro($bairro);
+        		$this->bairro = Validador::Endereco()::filtrar_bairro($bairro);
         	}
         }
         
         public function set_rua($rua) {
         	try {
-        		$this->rua = Filtro::Endereco()::validar_rua($rua);
+        		$this->rua = Validador::Endereco()::validar_rua($rua);
         		$this->enderecos_campos['erro_rua'] = "certo";
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_rua'] = "erro";
         		
-        		$this->rua = Filtro::Endereco()::filtrar_rua($rua);
+        		$this->rua = Validador::Endereco()::filtrar_rua($rua);
         	}
         }
         
         public function set_complemento($complemento = null) {
         	try {
-        		$this->complemento = Filtro::Endereco()::validar_complemento($complemento);
+        		$this->complemento = Validador::Endereco()::validar_complemento($complemento);
         	} catch (Exception $e) {
         		$this->enderecos_erros[] = $e->getMessage();
         		$this->enderecos_campos['erro_complemento'] = "erro";
         		
-        		$this->complemento = Filtro::Endereco()::filtrar_complemento($complemento);
+        		$this->complemento = Validador::Endereco()::filtrar_complemento($complemento);
         	}
         }
         

@@ -77,6 +77,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function Buscar_Id_Por_Uf(string $uf) {
+        	try {
+        		$sql = "SELECT estado_id FROM tb_estado WHERE estado_uf = :uf";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":uf", $uf, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
         public static function BuscarTodos() {
             try {
                 $sql = "SELECT estado_id, estado_uf, estado_nome FROM tb_estado";

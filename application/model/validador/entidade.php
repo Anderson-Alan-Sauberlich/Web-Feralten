@@ -1,5 +1,5 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/common/util/cpf_cnpj.php';

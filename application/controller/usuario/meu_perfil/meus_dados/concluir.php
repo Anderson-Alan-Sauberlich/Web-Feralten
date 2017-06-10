@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/object/entidade.php';
@@ -18,7 +18,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	require_once RAIZ.'/application/controller/usuario/login.php';
     
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\Gerenciar_Imagens;
 	use application\model\object\usuario as Object_Usuario;
@@ -61,152 +61,152 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public function set_fone1($fone1) {
         	try {
-        		$this->fone1 = Filtro::Usuario()::validar_fone1($fone1);
+        		$this->fone1 = Validador::Usuario()::validar_fone1($fone1);
         		$this->concluir_campos['erro_fone1'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_fone1'] = 'erro';
         		
-        		$this->fone1 = Filtro::Usuario()::filtrar_fone1($fone1);
+        		$this->fone1 = Validador::Usuario()::filtrar_fone1($fone1);
         	}
         }
         
         public function set_fone2($fone2 = null) {
         	try {
-        		$this->fone2 = Filtro::Usuario()::validar_fone2($fone2);
+        		$this->fone2 = Validador::Usuario()::validar_fone2($fone2);
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_fone2'] = 'erro';
         		
-        		$this->fone2 = Filtro::Usuario()::filtrar_fone2($fone2);
+        		$this->fone2 = Validador::Usuario()::filtrar_fone2($fone2);
         	}
         }
         
         public function set_email_alternativo($email_alternativo = null) {
         	try {
-        		$this->email_alternativo = Filtro::Usuario()::validar_email_alternativo($email_alternativo);
+        		$this->email_alternativo = Validador::Usuario()::validar_email_alternativo($email_alternativo);
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_email_alternativo'] = 'erro';
         		
-        		$this->email_alternativo = Filtro::Usuario()::filtrar_email_alternativo($email_alternativo);
+        		$this->email_alternativo = Validador::Usuario()::filtrar_email_alternativo($email_alternativo);
         	}
         }
         
         public function set_estado($estado) {
         	try {
-        		$this->estado = Filtro::Estado()::validar_id($estado);
+        		$this->estado = Validador::Estado()::validar_id($estado);
         		$this->concluir_campos['erro_estado'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_estado'] = 'erro';
         		
-        		$this->estado = Filtro::Estado()::filtrar_id($estado);
+        		$this->estado = Validador::Estado()::filtrar_id($estado);
         	}
         }
         
         public function set_cidade($cidade) {
         	try {
-        		$this->cidade = Filtro::Cidade()::validar_id($cidade);
+        		$this->cidade = Validador::Cidade()::validar_id($cidade);
         		$this->concluir_campos['erro_cidade'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_cidade'] = 'erro';
         		
-        		$this->cidade = Filtro::Cidade()::filtrar_id($cidade);
+        		$this->cidade = Validador::Cidade()::filtrar_id($cidade);
         	}
         }
         
         public function set_numero($numero) {
         	try {
-        		$this->numero = Filtro::Endereco()::validar_numero($numero);
+        		$this->numero = Validador::Endereco()::validar_numero($numero);
         		$this->concluir_campos['erro_numero'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_numero'] = 'erro';
         		
-        		$this->numero = Filtro::Endereco()::filtrar_numero($numero);
+        		$this->numero = Validador::Endereco()::filtrar_numero($numero);
         	}
         }
         
         public function set_cep($cep) {
         	try {
-        		$this->cep = Filtro::Endereco()::validar_cep($cep);
+        		$this->cep = Validador::Endereco()::validar_cep($cep);
         		$this->concluir_campos['erro_cep'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_cep'] = 'erro';
         		
-        		$this->cep = Filtro::Endereco()::filtrar_cep($cep);
+        		$this->cep = Validador::Endereco()::filtrar_cep($cep);
         	}
         }
         
         public function set_bairro($bairro) {
         	try {
-        		$this->bairro = Filtro::Endereco()::validar_bairro($bairro);
+        		$this->bairro = Validador::Endereco()::validar_bairro($bairro);
         		$this->concluir_campos['erro_bairro'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_bairro'] = 'erro';
         		
-        		$this->bairro = Filtro::Endereco()::filtrar_bairro($bairro);
+        		$this->bairro = Validador::Endereco()::filtrar_bairro($bairro);
         	}
         }
         
         public function set_rua($rua) {
         	try {
-        		$this->rua = Filtro::Endereco()::validar_rua($rua);
+        		$this->rua = Validador::Endereco()::validar_rua($rua);
         		$this->concluir_campos['erro_rua'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_rua'] = 'erro';
         		
-        		$this->rua = Filtro::Endereco()::filtrar_rua($rua);
+        		$this->rua = Validador::Endereco()::filtrar_rua($rua);
         	}
         }
         
         public function set_complemento($complemento = null) {
         	try {
-        		$this->complemento = Filtro::Endereco()::validar_complemento($complemento);
+        		$this->complemento = Validador::Endereco()::validar_complemento($complemento);
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_complemento'] = 'erro';
         		
-        		$this->complemento = Filtro::Endereco()::filtrar_complemento($complemento);
+        		$this->complemento = Validador::Endereco()::filtrar_complemento($complemento);
         	}
         }
         
         public function set_cpf_cnpj($cpf_cnpj) {
         	try {
-        		$this->cpf_cnpj = Filtro::Entidade()::validar_cpf_cnpj($cpf_cnpj);
+        		$this->cpf_cnpj = Validador::Entidade()::validar_cpf_cnpj($cpf_cnpj);
         		$this->concluir_campos['erro_cpf_cnpj'] = 'certo';
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_cpf_cnpj'] = 'erro';
         		
-        		$this->cpf_cnpj = Filtro::Entidade()::filtrar_cpf_cnpj($cpf_cnpj);
+        		$this->cpf_cnpj = Validador::Entidade()::filtrar_cpf_cnpj($cpf_cnpj);
         	}
         }
         
         public function set_site($site = null) {
         	try {
-        		$this->site = Filtro::Entidade()::validar_site($site);
+        		$this->site = Validador::Entidade()::validar_site($site);
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_site'] = 'erro';
         		
-        		$this->site = Filtro::Entidade()::filtrar_site($site);
+        		$this->site = Validador::Entidade()::filtrar_site($site);
         	}
         }
         
         public function set_nome_comercial($nome_comercial = null) {
         	try {
-        		$this->nome_comercial = Filtro::Entidade()::validar_nome_comercial($nome_comercial);
+        		$this->nome_comercial = Validador::Entidade()::validar_nome_comercial($nome_comercial);
         	} catch (Exception $e) {
         		$this->concluir_erros[] = $e->getMessage();
         		$this->concluir_campos['erro_nome_comercial'] = 'erro';
         		
-        		$this->nome_comercial = Filtro::Entidade()::filtrar_nome_comercial($nome_comercial);
+        		$this->nome_comercial = Validador::Entidade()::filtrar_nome_comercial($nome_comercial);
         	}
         }
         

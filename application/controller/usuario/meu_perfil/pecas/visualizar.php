@@ -5,23 +5,35 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/visualizar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	require_once RAIZ.'/application/controller/include_page/menu/pesquisa.php';
+	require_once RAIZ.'/application/controller/include_page/menu/filtro.php';
 	
 	use application\model\common\util\Login_Session;
 	use application\view\src\usuario\meu_perfil\pecas\Visualizar as View_Visualizar;
 	use application\controller\include_page\menu\Usuario as Controller_Usuario;
 	use application\controller\include_page\menu\Pesquisa as Controller_Pesquisa;
+	use application\controller\include_page\menu\Filtro as Controller_Filtro;
 				
     class Visualizar {
 
         function __construct() {
         	$this->controller_pesquisa = new Controller_Pesquisa();
+        	$this->controller_filtro = new Controller_Filtro();
         }
         
         private $erros_visualizar = array();
         private $controller_pesquisa;
+        private $controller_filtro;
         
         public function set_pagina($pagina) : void {
         	$this->controller_pesquisa->set_pagina($pagina);
+        }
+        
+        public function set_estado_uf($estado_uf) : void {
+        	$this->controller_filtro->set_estado_uf($estado_uf);
+        }
+        
+        public function set_cidade_url($cidade_url) : void {
+        	$this->controller_filtro->set_cidade_url($cidade_url);
         }
         
         public function set_categoria_url($url_categoria) : void {
@@ -52,6 +64,18 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->controller_pesquisa->set_peca_nome($nome_peca);
         }
         
+        public function set_ordem_preco($ordem_preco) : void {
+        	$this->controller_filtro->set_ordem_preco($ordem_preco);
+        }
+        
+        public function set_ordem_data($ordem_data) : void {
+        	$this->controller_filtro->set_ordem_data($ordem_data);
+        }
+        
+        public function set_status($status) : void {
+        	$this->controller_filtro->set_status($status);
+        }
+        
         public function Carregar_Pagina() {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
@@ -59,6 +83,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		if ($status == 1) {
         			if (empty($this->erros_visualizar)) {
         				$this->controller_pesquisa->set_peca_usuario(Login_Session::get_entidade_id());
+        				$this->controller_pesquisa->set_object_controller_filtro($this->controller_filtro);
         				
 	        			$view = new View_Visualizar($status);
 	        			
@@ -66,6 +91,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	        			$view->set_pagina($this->controller_pesquisa->get_pagina());
 	        			$view->set_paginas($this->controller_pesquisa->get_paginas());
 	        			$view->set_form_pesquisa($this->controller_pesquisa->get_form());
+	        			$view->set_form_filtro($this->controller_filtro->get_form());
 	        			
 	        			$view->Executar();
         			} else {

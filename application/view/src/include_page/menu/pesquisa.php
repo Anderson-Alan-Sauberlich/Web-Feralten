@@ -7,14 +7,12 @@ namespace application\view\src\include_page\menu;
     
     class Pesquisa {
 		
-    	function __construct(string $base_url, $form_pesquisa = null) {
-        	self::$base_url = $base_url;
+    	function __construct(?array $form_pesquisa = null) {
         	self::$form_pesquisa = $form_pesquisa;
         	
         	require_once RAIZ.'/application/view/html/include_page/menu/pesquisa.php';
         }
         
-        private static $base_url;
         private static $form_pesquisa;
         
         public static function Carregar_Ano_De() : void {
@@ -157,10 +155,6 @@ namespace application\view\src\include_page\menu;
         	if (isset(self::$form_pesquisa['peca_nome'])) {
         		echo self::$form_pesquisa['peca_nome'];
         	}
-        }
-        
-        public static function Mostrar_Base_URL() : void {
-        	echo self::$base_url;
         }
     }
 ?>

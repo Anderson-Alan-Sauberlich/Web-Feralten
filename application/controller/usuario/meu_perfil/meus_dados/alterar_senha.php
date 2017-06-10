@@ -1,13 +1,13 @@
 <?php
 namespace application\controller\usuario\meu_perfil\meus_dados;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/meus_dados/alterar_senha.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
     
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
 	use application\model\common\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
@@ -29,37 +29,37 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public function set_senha_antiga($senha_antiga){
         	try {
-        		$this->senha_antiga = Filtro::Usuario()::validar_senha_antiga($senha_antiga);
+        		$this->senha_antiga = Validador::Usuario()::validar_senha_antiga($senha_antiga);
         		$this->alterar_senha_campos['erro_senha_antiga'] = "certo";
         	} catch (Exception $e) {
         		$this->alterar_senha_erros[] = $e->getMessage();
         		$this->alterar_senha_campos['erro_senha_antiga'] = "erro";
         		
-        		$this->senha_antiga = Filtro::Usuario()::filtrar_senha_antiga($senha_antiga);
+        		$this->senha_antiga = Validador::Usuario()::filtrar_senha_antiga($senha_antiga);
         	}
         }
         
         public function set_senha_nova($senha_nova) {
         	try {
-        		$this->senha_nova = Filtro::Usuario()::validar_senha_nova($senha_nova);
+        		$this->senha_nova = Validador::Usuario()::validar_senha_nova($senha_nova);
         		$this->alterar_senha_campos['erro_senha_nova'] = 'certo';
         	} catch (Exception $e) {
         		$this->alterar_senha_erros[] = $e->getMessage();
         		$this->alterar_senha_campos['erro_senha_nova'] = 'erro';
         		
-        		$this->senha_nova = Filtro::Usuario()::filtrar_senha_nova($senha_nova);
+        		$this->senha_nova = Validador::Usuario()::filtrar_senha_nova($senha_nova);
         	}
         }
         
         public function set_senha_confnova($senha_confnova) {
         	try {
-        		$this->senha_confnova = Filtro::Usuario()::validar_senha_confnova($senha_confnova, $this->senha_nova);
+        		$this->senha_confnova = Validador::Usuario()::validar_senha_confnova($senha_confnova, $this->senha_nova);
         		$this->alterar_senha_campos['erro_senha_confnova'] = 'certo';
         	} catch (Exception $e) {
         		$this->alterar_senha_erros[] = $e->getMessage();
         		$this->alterar_senha_campos['erro_senha_confnova'] = 'erro';
         		
-        		$this->senha_confnova = Filtro::Usuario()::filtrar_senha_confnova($senha_confnova);
+        		$this->senha_confnova = Validador::Usuario()::filtrar_senha_confnova($senha_confnova);
         	}
         }
         

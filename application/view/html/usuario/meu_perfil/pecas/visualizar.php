@@ -14,19 +14,21 @@
     <section class="ui container" role="main">
         <?php View_Visualizar::Incluir_Menu_Usuario(); ?>
 		<div class="container-fluid margem-inferior-pouco">
-			<div class="row">
-				<?php View_Visualizar::Incluir_Menu_Pesquisa(); ?>
-				<div class="col-sm-4 col-md-3 col-lg-3">
-					<?php View_Visualizar::Incluir_Menu_Filtro(); ?>
-				</div>
-				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-					<div class="row">
-						<div class="ui three stackable doubling link raised cards" id="div_pecas">
-							<?php View_Visualizar::Mostrar_Cards_Pecas(); ?>
+			<form id="searschform" class="form-horizontal" name="searschform" action="/usuario/meu-perfil/pecas/visualizar/" method="get" role="form">
+				<div class="row">
+					<?php View_Visualizar::Incluir_Menu_Pesquisa(); ?>
+					<div class="col-sm-4 col-md-3 col-lg-3">
+						<?php View_Visualizar::Incluir_Menu_Filtro(); ?>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+						<div class="row">
+							<div class="ui three stackable doubling link raised cards" id="div_pecas">
+								<?php View_Visualizar::Mostrar_Cards_Pecas(); ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 		<?php View_Visualizar::Incluir_Menu_Paginacao(); ?>
     </section>

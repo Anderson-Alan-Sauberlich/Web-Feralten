@@ -1,5 +1,5 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	use \Exception;
 	
@@ -108,13 +108,45 @@ namespace application\model\filter;
 			}
 		}
 		
+		public static function validar_ordem_preco($ordem_preco = null) : ?string {
+			if (!empty($ordem_preco)) {
+				$valor = strip_tags($ordem_preco);
+				
+				if ($valor === $ordem_preco) {
+					$ordem_preco = trim($ordem_preco);
+					
+					return strtolower($ordem_preco);
+				} else {
+					throw new Exception('Ordem do Preço, Não pode conter Tags de Programação');
+				}
+			} else {
+				return null;
+			}
+		}
+		
 		public static function validar_data_anuncio($data_anuncio = null) : void {
 			
 		}
 		
+		public static function validar_ordem_data($ordem_data) {
+			if (!empty($ordem_data)) {
+				$valor = strip_tags($ordem_data);
+				
+				if ($valor === $ordem_data) {
+					$ordem_data = trim($ordem_data);
+					
+					return strtolower($ordem_data);
+				} else {
+					throw new Exception('Ordem da Data, Não pode conter Tags de Programação');
+				}
+			} else {
+				return null;
+			}
+		}
+		
 		public static function validar_descricao($descricao = null) : ?string {
 			if (!empty($descricao)) {
-				$valor = strip_tags($this->descricao);
+				$valor = strip_tags($descricao);
 				
 				if ($valor === $descricao) {
 					$descricao = trim($descricao);
@@ -271,7 +303,15 @@ namespace application\model\filter;
 			return $valor;
 		}
 		
+		public static function filtrar_ordem_preco($ordem_preco = null) : ?string {
+			
+		}
+		
 		public static function filtrar_data_anuncio($data_anuncio = null) : void {
+			
+		}
+		
+		public static function filtrar_ordem_data($ordem_data) {
 			
 		}
 		

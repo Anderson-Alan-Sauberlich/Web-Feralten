@@ -28,7 +28,7 @@
                             <div class="input-group <?php View_Enderecos::Incluir_Classe_Erros("estado"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
                                 <select id="estado" name="estado" class="form-control form_select">
-                                    <option>Selecione seu Estado</option>
+                                    <option value="0">Selecione seu Estado</option>
                                     <?php View_Enderecos::Mostrar_Estados(); ?>
                                 </select>
                                 <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>

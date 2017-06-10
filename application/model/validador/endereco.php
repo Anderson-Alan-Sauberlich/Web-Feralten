@@ -1,5 +1,5 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	require_once RAIZ.'/application/model/object/cidade.php';
 	require_once RAIZ.'/application/model/object/estado.php';

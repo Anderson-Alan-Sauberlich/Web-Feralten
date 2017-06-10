@@ -16,7 +16,7 @@ namespace application\view\src;
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Pesquisa('/pecas/resultados/');
+        	new View_Pesquisa();
         }
     }
 ?>

@@ -19,6 +19,22 @@
 		});
 	});
 	
+	$app->group('/menu-filtro/', function() use ($app) {
+		$app->get('cidades/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/include_page/menu/filtro.php');
+			
+			$menu_filtro = new application\controller\include_page\menu\Filtro();
+			
+			if (isset($_GET['estado'])) {
+				$menu_filtro->set_estado($_GET['estado']);
+			}
+			
+			$menu_filtro->Retornar_Cidades_Por_Estado();
+			
+			return $response;
+		});
+	});
+		
 	$app->group('/menu-pesquisa/', function() use ($app) {
 		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/include_page/menu/pesquisa.php');
@@ -262,54 +278,140 @@
 	});
 	
 	$app->group('/usuario/meu-perfil/pecas/visualizar/', function() use ($app) {
-		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
-			
-			$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
-			
-			if (isset($args['categoria'])) {
-				$visualizar->set_categoria_url($args['categoria']);
-			}
-			
-			if (isset($args['marca'])) {
-				$visualizar->set_marca_url($args['marca']);
-			}
-			
-			if (isset($args['modelo'])) {
-				$visualizar->set_modelo_url($args['modelo']);
-			}
-			
-			if (isset($args['versao'])) {
-				$visualizar->set_versao_url($args['versao']);
-			}
-			
-			if (isset($_GET['ano_de'])) {
-				$visualizar->set_ano_de($_GET['ano_de']);
-			}
-			
-			if (isset($_GET['ano_ate'])) {
-				$visualizar->set_ano_ate($_GET['ano_ate']);
-			}
-			
-			if (isset($_GET['peca'])) {
-				$visualizar->set_peca_nome($_GET['peca']);
-			}
-			
-			if (isset($_GET['pagina'])) {
-				$visualizar->set_pagina($_GET['pagina']);
-			}
-			
-			$resposta = $visualizar->Carregar_Pagina();
-			
-			if ($resposta === false) {
-				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta === 'erro') {
-				return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
-			} else if ($resposta != 1) {
-				return $response->withRedirect('/usuario/meu-perfil/');
-			} else {
-				return $response;
-			}
+		$app->group('em/', function() use ($app) {
+			$app->get('{estado}/{cidade}/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
+				require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
+				
+				$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
+				
+				if (isset($args['estado'])) {
+					$visualizar->set_estado_uf($args['estado']);
+				}
+				
+				if (isset($args['cidade'])) {
+					$visualizar->set_cidade_url($args['cidade']);
+				}
+				
+				if (isset($args['categoria'])) {
+					$visualizar->set_categoria_url($args['categoria']);
+				}
+				
+				if (isset($args['marca'])) {
+					$visualizar->set_marca_url($args['marca']);
+				}
+				
+				if (isset($args['modelo'])) {
+					$visualizar->set_modelo_url($args['modelo']);
+				}
+				
+				if (isset($args['versao'])) {
+					$visualizar->set_versao_url($args['versao']);
+				}
+				
+				if (isset($_GET['ano_de'])) {
+					$visualizar->set_ano_de($_GET['ano_de']);
+				}
+				
+				if (isset($_GET['ano_ate'])) {
+					$visualizar->set_ano_ate($_GET['ano_ate']);
+				}
+				
+				if (isset($_GET['peca'])) {
+					$visualizar->set_peca_nome($_GET['peca']);
+				}
+				
+				if (isset($_GET['pagina'])) {
+					$visualizar->set_pagina($_GET['pagina']);
+				}
+				
+				if (isset($_GET['ordem_preco'])) {
+					$visualizar->set_ordem_preco($_GET['ordem_preco']);
+				}
+				
+				if (isset($_GET['ordem_data'])) {
+					$visualizar->set_ordem_data($_GET['ordem_data']);
+				}
+				
+				if (isset($_GET['status'])) {
+					$visualizar->set_status($_GET['status']);
+				}
+				
+				$resposta = $visualizar->Carregar_Pagina();
+				
+				if ($resposta === false) {
+					return $response->withRedirect('/usuario/login/');
+				} else if ($resposta === 'erro') {
+					return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
+				} else if ($resposta != 1) {
+					return $response->withRedirect('/usuario/meu-perfil/');
+				} else {
+					return $response;
+				}
+			});
+		});
+		
+		$app->group('', function() use ($app) {
+			$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
+				require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/visualizar.php');
+				
+				$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
+				
+				if (isset($args['categoria'])) {
+					$visualizar->set_categoria_url($args['categoria']);
+				}
+				
+				if (isset($args['marca'])) {
+					$visualizar->set_marca_url($args['marca']);
+				}
+				
+				if (isset($args['modelo'])) {
+					$visualizar->set_modelo_url($args['modelo']);
+				}
+				
+				if (isset($args['versao'])) {
+					$visualizar->set_versao_url($args['versao']);
+				}
+				
+				if (isset($_GET['ano_de'])) {
+					$visualizar->set_ano_de($_GET['ano_de']);
+				}
+				
+				if (isset($_GET['ano_ate'])) {
+					$visualizar->set_ano_ate($_GET['ano_ate']);
+				}
+				
+				if (isset($_GET['peca'])) {
+					$visualizar->set_peca_nome($_GET['peca']);
+				}
+				
+				if (isset($_GET['pagina'])) {
+					$visualizar->set_pagina($_GET['pagina']);
+				}
+				
+				if (isset($_GET['ordem_preco'])) {
+					$visualizar->set_ordem_preco($_GET['ordem_preco']);
+				}
+				
+				if (isset($_GET['ordem_data'])) {
+					$visualizar->set_ordem_data($_GET['ordem_data']);
+				}
+				
+				if (isset($_GET['status'])) {
+					$visualizar->set_status($_GET['status']);
+				}
+				
+				$resposta = $visualizar->Carregar_Pagina();
+				
+				if ($resposta === false) {
+					return $response->withRedirect('/usuario/login/');
+				} else if ($resposta === 'erro') {
+					return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
+				} else if ($resposta != 1) {
+					return $response->withRedirect('/usuario/meu-perfil/');
+				} else {
+					return $response;
+				}
+			});
 		});
 	});
 	
@@ -800,14 +902,124 @@
 	});
 	
 	$app->group('/pecas/resultados/', function() use ($app) {
-		$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pecas/resultados.php');
-			
-			$resultados = new application\controller\pecas\Resultados();
-			
-			$resultados->Carregar_Pagina();
-			
-			return $response;
+		$app->group('em/', function() use ($app) {
+			$app->get('{estado}/{cidade}/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
+				require_once(RAIZ.'/application/controller/pecas/resultados.php');
+				
+				$resultados = new application\controller\pecas\Resultados();
+				
+				if (isset($args['estado'])) {
+					$resultados->set_estado_uf($args['estado']);
+				}
+				
+				if (isset($args['cidade'])) {
+					$resultados->set_cidade_url($args['cidade']);
+				}
+				
+				if (isset($args['categoria'])) {
+					$resultados->set_categoria_url($args['categoria']);
+				}
+				
+				if (isset($args['marca'])) {
+					$resultados->set_marca_url($args['marca']);
+				}
+				
+				if (isset($args['modelo'])) {
+					$resultados->set_modelo_url($args['modelo']);
+				}
+				
+				if (isset($args['versao'])) {
+					$resultados->set_versao_url($args['versao']);
+				}
+				
+				if (isset($_GET['ano_de'])) {
+					$resultados->set_ano_de($_GET['ano_de']);
+				}
+				
+				if (isset($_GET['ano_ate'])) {
+					$resultados->set_ano_ate($_GET['ano_ate']);
+				}
+				
+				if (isset($_GET['peca'])) {
+					$resultados->set_peca_nome($_GET['peca']);
+				}
+				
+				if (isset($_GET['pagina'])) {
+					$resultados->set_pagina($_GET['pagina']);
+				}
+				
+				if (isset($_GET['ordem_preco'])) {
+					$resultados->set_ordem_preco($_GET['ordem_preco']);
+				}
+				
+				if (isset($_GET['ordem_data'])) {
+					$resultados->set_ordem_data($_GET['ordem_data']);
+				}
+				
+				if (isset($_GET['status'])) {
+					$resultados->set_status($_GET['status']);
+				}
+				
+				$resultados->Carregar_Pagina();
+				
+				return $response;
+			});
+		});
+		
+		$app->group('', function() use ($app) {
+			$app->get('[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
+				require_once(RAIZ.'/application/controller/pecas/resultados.php');
+				
+				$resultados = new application\controller\pecas\Resultados();
+				
+				if (isset($args['categoria'])) {
+					$resultados->set_categoria_url($args['categoria']);
+				}
+				
+				if (isset($args['marca'])) {
+					$resultados->set_marca_url($args['marca']);
+				}
+				
+				if (isset($args['modelo'])) {
+					$resultados->set_modelo_url($args['modelo']);
+				}
+				
+				if (isset($args['versao'])) {
+					$resultados->set_versao_url($args['versao']);
+				}
+				
+				if (isset($_GET['ano_de'])) {
+					$resultados->set_ano_de($_GET['ano_de']);
+				}
+				
+				if (isset($_GET['ano_ate'])) {
+					$resultados->set_ano_ate($_GET['ano_ate']);
+				}
+				
+				if (isset($_GET['peca'])) {
+					$resultados->set_peca_nome($_GET['peca']);
+				}
+				
+				if (isset($_GET['pagina'])) {
+					$resultados->set_pagina($_GET['pagina']);
+				}
+				
+				if (isset($_GET['ordem_preco'])) {
+					$resultados->set_ordem_preco($_GET['ordem_preco']);
+				}
+				
+				if (isset($_GET['ordem_data'])) {
+					$resultados->set_ordem_data($_GET['ordem_data']);
+				}
+				
+				if (isset($_GET['status'])) {
+					$resultados->set_status($_GET['status']);
+				}
+				
+				$resultados->Carregar_Pagina();
+				
+				return $response;
+			});
 		});
 	});
 	

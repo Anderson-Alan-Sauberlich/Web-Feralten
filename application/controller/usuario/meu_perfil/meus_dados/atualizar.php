@@ -4,7 +4,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/common/util/cpf_cnpj.php';
 	require_once RAIZ.'/application/model/common/util/gerenciar_imagens.php';
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
     require_once RAIZ.'/application/model/object/entidade.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
@@ -15,7 +15,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\CPF_CNPJ;
 	use application\model\common\util\Gerenciar_Imagens;
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Entidade as Object_Entidade;
     use application\model\dao\Usuario as DAO_Usuario;
@@ -48,105 +48,105 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         
         public function set_nome($nome) {
         	try {
-        		$this->nome = Filtro::Usuario()::validar_nome($nome);
+        		$this->nome = Validador::Usuario()::validar_nome($nome);
         		$this->atualizar_campos['erro_nome'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_nome'] = 'erro';
         		
-        		$this->nome = Filtro::Usuario()::filtrar_nome($nome);
+        		$this->nome = Validador::Usuario()::filtrar_nome($nome);
         	}
         } 
         
         public function set_fone1($fone1) {
         	try {
-        		$this->fone1 = Filtro::Usuario()::validar_fone1($fone1);
+        		$this->fone1 = Validador::Usuario()::validar_fone1($fone1);
         		$this->atualizar_campos['erro_fone1'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_fone1'] = 'erro';
         		
-        		$this->fone1 = Filtro::Usuario()::filtrar_fone1($fone1);
+        		$this->fone1 = Validador::Usuario()::filtrar_fone1($fone1);
         	}
         }
         
         public function set_fone2($fone2 = null) {
         	try {
-        		$this->fone2 = Filtro::Usuario()::validar_fone2($fone2);
+        		$this->fone2 = Validador::Usuario()::validar_fone2($fone2);
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_fone2'] = 'erro';
         		
-        		$this->fone2 = Filtro::Usuario()::filtrar_fone2($fone2);
+        		$this->fone2 = Validador::Usuario()::filtrar_fone2($fone2);
         	}
         }
         
         public function set_email($email) {
         	try {
-        		$this->email = Filtro::Usuario()::validar_email($email);
+        		$this->email = Validador::Usuario()::validar_email($email);
         		$this->atualizar_campos['erro_email'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_email'] = 'erro';
         		
-        		$this->email = Filtro::Usuario()::filtrar_email($email);
+        		$this->email = Validador::Usuario()::filtrar_email($email);
         	}
         }
         
         public function set_confemail($confemail) {
         	try {
-        		$this->confemail = Filtro::Usuario()::validar_confemail($confemail, $this->email);
+        		$this->confemail = Validador::Usuario()::validar_confemail($confemail, $this->email);
         		$this->atualizar_campos['erro_confemail'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_confemail'] = 'erro';
         		
-        		$this->confemail = Filtro::Usuario()::filtrar_confemail($confemail);
+        		$this->confemail = Validador::Usuario()::filtrar_confemail($confemail);
         	}
         }
         
         public function set_email_alternativo($email_alternativo = null) {
         	try {
-        		$this->email_alternativo = Filtro::Usuario()::validar_email_alternativo($email_alternativo);
+        		$this->email_alternativo = Validador::Usuario()::validar_email_alternativo($email_alternativo);
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_email_alternativo'] = 'erro';
         		
-        		$this->email_alternativo = Filtro::Usuario()::filtrar_email_alternativo($email_alternativo);
+        		$this->email_alternativo = Validador::Usuario()::filtrar_email_alternativo($email_alternativo);
         	}
         }
         
         public function set_cpf_cnpj($cpf_cnpj) {
         	try {
-        		$this->cpf_cnpj = Filtro::Entidade()::validar_cpf_cnpj($cpf_cnpj);
+        		$this->cpf_cnpj = Validador::Entidade()::validar_cpf_cnpj($cpf_cnpj);
         		$this->atualizar_campos['erro_cpf_cnpj'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_cpf_cnpj'] = 'erro';
         		
-        		$this->cpf_cnpj = Filtro::Entidade()::filtrar_cpf_cnpj($cpf_cnpj);
+        		$this->cpf_cnpj = Validador::Entidade()::filtrar_cpf_cnpj($cpf_cnpj);
         	}
         }
         
         public function set_site($site = null) {
         	try {
-        		$this->site = Filtro::Entidade()::validar_site($site);
+        		$this->site = Validador::Entidade()::validar_site($site);
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_site'] = 'erro';
         		
-        		$this->site = Filtro::Entidade()::filtrar_site($site);
+        		$this->site = Validador::Entidade()::filtrar_site($site);
         	}
         }
         
         public function set_nome_comercial($nome_comercial = null) {
         	try {
-        		$this->nome_comercial = Filtro::Entidade()::validar_nome_comercial($nome_comercial);
+        		$this->nome_comercial = Validador::Entidade()::validar_nome_comercial($nome_comercial);
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
         		$this->atualizar_campos['erro_nome_comercial'] = 'erro';
         		
-        		$this->nome_comercial = Filtro::Entidade()::filtrar_nome_comercial($nome_comercial);
+        		$this->nome_comercial = Validador::Entidade()::filtrar_nome_comercial($nome_comercial);
         	}
         }
         

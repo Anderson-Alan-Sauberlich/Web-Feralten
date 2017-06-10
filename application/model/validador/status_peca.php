@@ -1,9 +1,9 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	use \Exception;
 	
-    class Permissao {
+    class Status_Peca {
     	
 		function __constructor() {
 			

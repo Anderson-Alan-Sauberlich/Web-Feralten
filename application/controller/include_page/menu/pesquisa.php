@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\include_page\menu;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
 	require_once RAIZ.'/application/model/dao/peca.php';
 	require_once RAIZ.'/application/model/dao/categoria_pativel.php';
@@ -18,8 +18,12 @@ namespace application\controller\include_page\menu;
 	require_once RAIZ.'/application/model/object/modelo_pativel.php';
 	require_once RAIZ.'/application/model/object/versao_pativel.php';
 	require_once RAIZ.'/application/model/object/entidade.php';
+	require_once RAIZ.'/application/model/object/endereco.php';
+	require_once RAIZ.'/application/model/object/estado.php';
+	require_once RAIZ.'/application/model/object/cidade.php';
+	require_once RAIZ.'/application/controller/include_page/menu/filtro.php';
 	
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
 	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 	use application\model\dao\Peca as DAO_Peca;
 	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
@@ -36,15 +40,17 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Entidade as Object_Entidade;
+	use application\model\object\Endereco as Object_Endereco;
+	use application\controller\include_page\menu\Filtro as Controller_Filtro;
 	use \Exception;
 	
     class Pesquisa {
 
         function __construct() {
             $this->object_peca = new Object_Peca();
+            $this->object_controller_filtro = new Controller_Filtro();
         }
         
-        private $form_pesquisar = array();
         private $pagina = 0;
         private $paginas = 0;
         private $categoria;
@@ -54,6 +60,7 @@ namespace application\controller\include_page\menu;
         private $ano_de;
         private $ano_ate;
         private $object_peca;
+        private $object_controller_filtro;
         
         public function set_pagina($pagina) : void {
         	if (!empty($pagina)) {
@@ -93,39 +100,39 @@ namespace application\controller\include_page\menu;
         
         public function set_categoria($categoria): void {
         	try {
-        		$this->categoria = Filtro::Categoria()::validar_id($categoria);
+        		$this->categoria = Validador::Categoria()::validar_id($categoria);
         	} catch (Exception $e) {
-        		$this->categoria = Filtro::Categoria()::filtrar_id($categoria);
+        		$this->categoria = Validador::Categoria()::filtrar_id($categoria);
         	}
         }
         
         public function set_marca($marca) : void {
         	try {
-        		$this->marca = Filtro::Marca()::validar_id($marca);
+        		$this->marca = Validador::Marca()::validar_id($marca);
         	} catch (Exception $e) {
-        		$this->marca = Filtro::Marca()::filtrar_id($marca);
+        		$this->marca = Validador::Marca()::filtrar_id($marca);
         	}
         }
         
         public function set_modelo($modelo) : void {
         	try {
-        		$this->modelo = Filtro::Modelo()::validar_id($modelo);
+        		$this->modelo = Validador::Modelo()::validar_id($modelo);
         	} catch (Exception $e) {
-        		$this->modelo = Filtro::Modelo()::filtrar_id($modelo);
+        		$this->modelo = Validador::Modelo()::filtrar_id($modelo);
         	}
         }
         
         public function set_versao($versao) : void {
         	try {
-        		$this->versao = Filtro::Versao()::validar_id($versao);
+        		$this->versao = Validador::Versao()::validar_id($versao);
         	} catch (Exception $e) {
-        		$this->versao = Filtro::Versao()::filtrar_id($versao);
+        		$this->versao = Validador::Versao()::filtrar_id($versao);
         	}
         }
         
         public function set_categoria_url($url_categoria) : void {
         	try {
-        		$this->set_categoria(DAO_Categoria::Buscar_ID_Por_URL(Filtro::Categoria()::validar_url($url_categoria)));
+        		$this->set_categoria(DAO_Categoria::Buscar_ID_Por_URL(Validador::Categoria()::validar_url($url_categoria)));
         	} catch (Exception $e) {
         		$this->categoria = 0;
         	}
@@ -133,7 +140,7 @@ namespace application\controller\include_page\menu;
         
         public function set_marca_url($url_marca) : void {
         	try {
-        		$this->set_marca(DAO_Marca::Buscar_ID_Por_URL($this->categoria, Filtro::Marca()::validar_url($url_marca)));
+        		$this->set_marca(DAO_Marca::Buscar_ID_Por_URL($this->categoria, Validador::Marca()::validar_url($url_marca)));
         	} catch (Exception $e) {
         		$this->marca = 0;
         	}
@@ -141,7 +148,7 @@ namespace application\controller\include_page\menu;
         
         public function set_modelo_url($url_modelo) : void {
         	try {
-        		$this->set_modelo(DAO_Modelo::Buscar_ID_Por_URL($this->marca, Filtro::Modelo()::validar_url($url_modelo)));
+        		$this->set_modelo(DAO_Modelo::Buscar_ID_Por_URL($this->marca, Validador::Modelo()::validar_url($url_modelo)));
         	} catch (Exception $e) {
         		$this->modelo = 0;
         	}
@@ -149,7 +156,7 @@ namespace application\controller\include_page\menu;
         
         public function set_versao_url($url_versao) : void {
         	try {
-        		$this->set_versao(DAO_Versao::Buscar_ID_Por_URL($this->modelo, Filtro::Versao()::validar_url($url_versao)));
+        		$this->set_versao(DAO_Versao::Buscar_ID_Por_URL($this->modelo, Validador::Versao()::validar_url($url_versao)));
         	} catch (Exception $e) {
         		$this->versao = 0;
         	}
@@ -157,23 +164,23 @@ namespace application\controller\include_page\menu;
         
         public function set_ano_de($ano_de) : void {
         	try {
-        		$this->ano_de = Filtro::Categoria_Pativel()::validar_ano_de($ano_de);
+        		$this->ano_de = Validador::Categoria_Pativel()::validar_ano_de($ano_de);
         	} catch (Exception $e) {
-        		$this->ano_de = Filtro::Categoria_Pativel()::filtrar_ano_de($ano_de);
+        		$this->ano_de = Validador::Categoria_Pativel()::filtrar_ano_de($ano_de);
         	}
         }
         
         public function set_ano_ate($ano_ate) : void {
         	try {
-        		$this->ano_ate = Filtro::Categoria_Pativel()::validar_ano_ate($ano_ate);
+        		$this->ano_ate = Validador::Categoria_Pativel()::validar_ano_ate($ano_ate);
         	} catch (Exception $e) {
-        		$this->ano_ate = Filtro::Categoria_Pativel()::filtrar_ano_ate($ano_ate);
+        		$this->ano_ate = Validador::Categoria_Pativel()::filtrar_ano_ate($ano_ate);
         	}
         }
         
         public function set_peca_nome($nome_peca) : void {
         	try {
-        		$this->object_peca->set_nome(Filtro::Peca()::validar_nome($nome_peca));
+        		$this->object_peca->set_nome(Validador::Peca()::validar_nome($nome_peca));
         	} catch (Exception $e) {
         		
         	}
@@ -182,10 +189,32 @@ namespace application\controller\include_page\menu;
         public function set_peca_usuario(int $id_usuario = null) : void {
         	try {
         		$entidade = new Object_Entidade();
-        		$entidade->set_usuario_id(Filtro::Peca()::validar_responsavel($id_usuario));
+        		$entidade->set_usuario_id(Validador::Peca()::validar_responsavel($id_usuario));
         		$this->object_peca->set_entidade($entidade);
         	} catch (Exception $e) {
         		
+        	}
+        }
+        
+        public function set_object_controller_filtro(Controller_Filtro $object_controller_filtro) : void {
+        	$this->object_controller_filtro = $object_controller_filtro;
+        	
+        	if (!empty($object_controller_filtro->get_estado()) OR !empty($object_controller_filtro->get_cidade())) {
+        		$object_endereco = new Object_Endereco();
+        		
+        		if (!empty($object_controller_filtro->get_estado())) {
+        			$object_endereco->set_estado($object_controller_filtro->get_object_estado());
+        		}
+        		
+        		if (!empty($object_controller_filtro->get_cidade())) {
+        			$object_endereco->set_cidade($object_controller_filtro->get_object_cidade());
+        		}
+        		
+        		$this->object_peca->set_endereco($object_endereco);
+        	}
+        	
+        	if (!empty($object_controller_filtro->get_status())) {
+        		$this->object_peca->set_status($object_controller_filtro->get_object_status());
         	}
         }
         
@@ -198,26 +227,28 @@ namespace application\controller\include_page\menu;
         }
         
         public function get_form() : ?array {
-        	$this->form_pesquisar['categoria'] = $this->categoria;
-        	$this->form_pesquisar['marca'] = $this->marca;
-        	$this->form_pesquisar['modelo'] = $this->modelo;
-        	$this->form_pesquisar['versao'] = $this->versao;
-        	$this->form_pesquisar['peca_nome'] = $this->object_peca->get_nome();
-        	$this->form_pesquisar['ano_de'] = $this->ano_de;
-        	$this->form_pesquisar['ano_ate'] = $this->ano_ate;
+        	$form_pesquisar = array();
         	
-        	return $this->form_pesquisar;
+        	$form_pesquisar['categoria'] = $this->categoria;
+        	$form_pesquisar['marca'] = $this->marca;
+        	$form_pesquisar['modelo'] = $this->modelo;
+        	$form_pesquisar['versao'] = $this->versao;
+        	$form_pesquisar['peca_nome'] = $this->object_peca->get_nome();
+        	$form_pesquisar['ano_de'] = $this->ano_de;
+        	$form_pesquisar['ano_ate'] = $this->ano_ate;
+        	
+        	return $form_pesquisar;
         }
         
-        public function Retornar_Marcas_Por_Categoria() {
+        public function Retornar_Marcas_Por_Categoria() : void {
         	View_Pesquisa::Carregar_Marcas($this->categoria);
         }
         
-        public function Retornar_Modelos_Por_Marca() {
+        public function Retornar_Modelos_Por_Marca() : void {
         	View_Pesquisa::Carregar_Modelos($this->marca);
         }
         
-        public function Retornar_Versoes_Por_Modelo() {
+        public function Retornar_Versoes_Por_Modelo() : void {
         	View_Pesquisa::Carregar_Versoes($this->modelo);
         }
         
@@ -272,9 +303,9 @@ namespace application\controller\include_page\menu;
         }
         
         private function Buscar_Por_Usuario() {
-        	$this->set_paginas(DAO_Peca::Buscar_Numero_Paginas($this->object_peca));
+        	$this->set_paginas(DAO_Peca::Buscar_Numero_Paginas($this->object_peca, $this->object_controller_filtro->get_form()));
         	
-        	return DAO_Peca::Buscar_Pecas($this->object_peca, $this->pagina);
+        	return DAO_Peca::Buscar_Pecas($this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Categoria() {
@@ -284,9 +315,9 @@ namespace application\controller\include_page\menu;
         	$object_categoria_pativel->set_ano_de($this->ano_de);
         	$object_categoria_pativel->set_ano_ate($this->ano_ate);
         	
-        	$this->set_paginas(DAO_Categoria_Pativel::Buscar_Numero_Paginas($object_categoria_pativel, $this->object_peca));
+        	$this->set_paginas(DAO_Categoria_Pativel::Buscar_Numero_Paginas($object_categoria_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
         	
-        	return DAO_Categoria_Pativel::Buscar_Pecas($object_categoria_pativel, $this->object_peca, $this->pagina);
+        	return DAO_Categoria_Pativel::Buscar_Pecas($object_categoria_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Marca() {
@@ -296,9 +327,9 @@ namespace application\controller\include_page\menu;
         	$object_marca_pativel->set_ano_de($this->ano_de);
         	$object_marca_pativel->set_ano_ate($this->ano_ate);
         	
-        	$this->set_paginas(DAO_Marca_Pativel::Buscar_Numero_Paginas($object_marca_pativel, $this->object_peca));
+        	$this->set_paginas(DAO_Marca_Pativel::Buscar_Numero_Paginas($object_marca_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
         	 
-        	return DAO_Marca_Pativel::Buscar_Pecas($object_marca_pativel, $this->object_peca, $this->pagina);
+        	return DAO_Marca_Pativel::Buscar_Pecas($object_marca_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Modelo() {
@@ -308,9 +339,9 @@ namespace application\controller\include_page\menu;
         	$object_modelo_pativel->set_ano_de($this->ano_de);
         	$object_modelo_pativel->set_ano_ate($this->ano_ate);
         	
-        	$this->set_paginas(DAO_Modelo_Pativel::Buscar_Numero_Paginas($object_modelo_pativel, $this->object_peca));
+        	$this->set_paginas(DAO_Modelo_Pativel::Buscar_Numero_Paginas($object_modelo_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
         	
-        	return DAO_Modelo_Pativel::Buscar_Pecas($object_modelo_pativel, $this->object_peca, $this->pagina);
+        	return DAO_Modelo_Pativel::Buscar_Pecas($object_modelo_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Versao() {
@@ -320,9 +351,9 @@ namespace application\controller\include_page\menu;
         	$object_versao_pativel->set_ano_de($this->ano_de);
         	$object_versao_pativel->set_ano_ate($this->ano_ate);
         	
-        	$this->set_paginas(DAO_Versao_Pativel::Buscar_Numero_Paginas($object_versao_pativel, $this->object_peca));
+        	$this->set_paginas(DAO_Versao_Pativel::Buscar_Numero_Paginas($object_versao_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
         	 
-        	return DAO_Versao_Pativel::Buscar_Pecas($object_versao_pativel, $this->object_peca, $this->pagina);
+        	return DAO_Versao_Pativel::Buscar_Pecas($object_versao_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
         }
     }
 ?>

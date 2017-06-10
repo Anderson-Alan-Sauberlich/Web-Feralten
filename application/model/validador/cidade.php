@@ -1,5 +1,5 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	use \Exception;
 	
@@ -29,10 +29,26 @@ namespace application\model\filter;
 			
 		}
 		
+		public static function validar_url($url = null) : string {
+			if (!empty($url)) {
+				$valor = strip_tags($url);
+				
+				if ($valor === $url) {
+					$url = trim($url);
+					
+					return strtolower($url);
+				} else {
+					throw new Exception('URL, Não pode conter Tags de Programação');
+				}
+			} else {
+				throw new Exception('URL, Não Informada');
+			}
+		}
+		
 		public static function filtrar_id($id = null) : int {
 			$valor = 0;
 			
-			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_INT)) {
+			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_FLOAT)) {
 				$valor = $id;
 			}
 			

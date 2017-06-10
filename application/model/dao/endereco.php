@@ -13,6 +13,7 @@ namespace application\model\dao;
     use \PDO;
     use \PDOException;
     use \Exception;
+    use \PDOStatement;
 	
     class Endereco {
 
@@ -208,10 +209,10 @@ namespace application\model\dao;
         		$p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_cidade())) {
-        		$p_sql->bindValue(":cid_id", $object_endereco->get_cidade(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":cid_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_estado())) {
-        		$p_sql->bindValue(":est_id", $object_endereco->get_estado(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":est_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_numero())) {
         		$p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_INT);
@@ -226,7 +227,7 @@ namespace application\model\dao;
         		$p_sql->bindValue(":complemento", $object_endereco->get_complemento(), PDO::PARAM_STR);
         	}
         	if (!empty($object_endereco->get_bairro())) {
-        		$p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_BOOL);
+        		$p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
         	}
         	
         	return $p_sql;

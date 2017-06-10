@@ -22,6 +22,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
         
         private static $form_pesquisa;
+        private static $form_filtro;
         private static $status_usuario;
         private static $pecas;
         private static $pagina;
@@ -43,12 +44,16 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         	self::$form_pesquisa = $form_pesquisa;
         }
         
+        public function set_form_filtro($form_filtro) : void {
+        	self::$form_filtro = $form_filtro;
+        }
+        
         public function Executar() {
         	require_once RAIZ.'/application/view/html/usuario/meu_perfil/pecas/visualizar.php';
         }
         
         public static function Incluir_Menu_Pesquisa() {
-        	new View_Pesquisa('/usuario/meu-perfil/pecas/visualizar/', self::$form_pesquisa);
+        	new View_Pesquisa(self::$form_pesquisa);
         }
         
         public static function Incluir_Menu_Usuario() {
@@ -56,7 +61,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         }
         
         public static function Incluir_Menu_Filtro() {
-        	new View_Filtro();
+        	new View_Filtro(self::$form_filtro);
         }
         
         public static function Incluir_Menu_Paginacao() {

@@ -11,7 +11,9 @@
     	<?php include_once RAIZ.'/application/view/html/include_page/header/cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Pagina_Inicial::Incluir_Menu_Pesquisa(); ?>
+    	<form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
+        	<?php View_Pagina_Inicial::Incluir_Menu_Pesquisa(); ?>
+        </form>
         
         <div class="container-fluid">
             <div class="row-fluid">

@@ -1,12 +1,12 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
-	require_once RAIZ.'/application/model/filter/categoria_pativel.php';
+	require_once RAIZ.'/application/model/validador/categoria_pativel.php';
 	
-	use application\model\filter\Categoria_Pativel;
+	use application\model\validador\Categoria_Pativel;
 	use \Exception;
 	
-    class Modelo_Pativel {
+    class Marca_Pativel {
     	
 		function __constructor() {
 			
@@ -16,7 +16,7 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function validar_modelo_id($modelo_id = null) : void {
+		public static function validar_marca_id($marca_id = null) : void {
 			
 		}
 		
@@ -40,7 +40,7 @@ namespace application\model\filter;
 			
 		}
 		
-		public static function filtrar_modelo_id($modelo_id = null) : void {
+		public static function filtrar_marca_id($marca_id = null) : void {
 			
 		}
 		

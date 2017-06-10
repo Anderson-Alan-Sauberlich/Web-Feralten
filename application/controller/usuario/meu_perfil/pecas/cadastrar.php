@@ -1,7 +1,7 @@
 <?php
 namespace application\controller\usuario\meu_perfil\pecas;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
 	require_once RAIZ.'/application/model/common/util/gerenciar_imagens.php';
 	require_once RAIZ.'/application/model/object/peca.php';
@@ -34,7 +34,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	require_once RAIZ.'/application/view/src/usuario/meu_perfil/pecas/cadastrar.php';
 	require_once RAIZ.'/application/controller/include_page/menu/usuario.php';
 	
-	use application\model\common\util\Filtro;
+	use application\model\common\util\Validador;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\Gerenciar_Imagens;
 	use application\model\object\Peca as Object_Peca;
@@ -93,132 +93,132 @@ namespace application\controller\usuario\meu_perfil\pecas;
         
         public function set_categoria($categoria) {
         	try {
-        		//$this->categoria = Filtro::Categoria()::validar_id($categoria);
+        		//$this->categoria = Validador::Categoria()::validar_id($categoria);
         		$this->categoria = $categoria;
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->categoria = Filtro::Categoria()::filtrar_id($categoria);
+        		$this->categoria = Validador::Categoria()::filtrar_id($categoria);
         	}
         }
         
         public function set_marca($marca) {
         	try {
-        		//$this->marca = Filtro::Marca()::validar_id($marca);
+        		//$this->marca = Validador::Marca()::validar_id($marca);
         		$this->marca = $marca;
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->marca = Filtro::Marca()::filtrar_id($marca);
+        		$this->marca = Validador::Marca()::filtrar_id($marca);
         	}
         }
         
         public function set_modelo($modelo) {
         	try {
-        		//$this->modelo = Filtro::Modelo()::validar_id($modelo);
+        		//$this->modelo = Validador::Modelo()::validar_id($modelo);
         		$this->modelo = $modelo;
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->modelo = Filtro::Modelo()::filtrar_id($modelo);
+        		$this->modelo = Validador::Modelo()::filtrar_id($modelo);
         	}
         }
         
         public function set_versao($versao) {
         	try {
-        		//$this->versao = Filtro::Versao()::validar_id($versao);
+        		//$this->versao = Validador::Versao()::validar_id($versao);
         		$this->versao = $versao;
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->versao = Filtro::Versao()::filtrar_id($versao);
+        		$this->versao = Validador::Versao()::filtrar_id($versao);
         	}
         }
         
         public function set_descricao($descricao) {
         	try {
-        		$this->descricao = Filtro::Peca()::validar_descricao($descricao);
+        		$this->descricao = Validador::Peca()::validar_descricao($descricao);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_descricao'] = 'erro';
         		
-        		$this->descricao = Filtro::Peca()::filtrar_descricao($descricao);
+        		$this->descricao = Validador::Peca()::filtrar_descricao($descricao);
         	}
         }
         
         public function set_status($status) {
         	try {
-        		$this->status = Filtro::Peca()::validar_status($status);
+        		$this->status = Validador::Peca()::validar_status($status);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_status'] = 'erro';
         		
-        		$this->status = Filtro::Peca()::filtrar_status($status);
+        		$this->status = Validador::Peca()::filtrar_status($status);
         	}
         }
         
         public function set_preferencia_entrega($preferencia_entrega) {
         	try {
-        		$this->preferencia_entrega = Filtro::Peca()::validar_preferencia_entrega($preferencia_entrega);
+        		$this->preferencia_entrega = Validador::Peca()::validar_preferencia_entrega($preferencia_entrega);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->preferencia_entrega = Filtro::Peca()::filtrar_preferencia_entrega($preferencia_entrega);
+        		$this->preferencia_entrega = Validador::Peca()::filtrar_preferencia_entrega($preferencia_entrega);
         	}
         }
         
         public function set_fabricante($fabricante) {
         	try {
-        		$this->fabricante = Filtro::Peca()::validar_fabricante($fabricante);
+        		$this->fabricante = Validador::Peca()::validar_fabricante($fabricante);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_fabricante'] = 'erro';
         		
-        		$this->fabricante = Filtro::Peca()::filtrar_fabricante($fabricante);
+        		$this->fabricante = Validador::Peca()::filtrar_fabricante($fabricante);
         	}
         }
         
         public function set_peca($peca) {
         	try {
-        		$this->peca = Filtro::Peca()::validar_nome($peca);
+        		$this->peca = Validador::Peca()::validar_nome($peca);
         		$this->cadastrar_campos['erro_peca'] = 'certo';
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_peca'] = 'erro';
         		
-        		$this->peca = Filtro::Peca()::filtrar_nome($peca);
+        		$this->peca = Validador::Peca()::filtrar_nome($peca);
         	}
         }
         
         public function set_serie($serie) {
         	try {
-        		$this->serie = Filtro::Peca()::validar_serie($serie);
+        		$this->serie = Validador::Peca()::validar_serie($serie);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_serie'] = 'erro';
         		
-        		$this->serie = Filtro::Peca()::filtrar_serie($serie);
+        		$this->serie = Validador::Peca()::filtrar_serie($serie);
         	}
         }
         
         public function set_preco($preco) {
         	try {
-        		$this->preco = Filtro::Peca()::validar_preco($preco);
+        		$this->preco = Validador::Peca()::validar_preco($preco);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		$this->cadastrar_campos['erro_preco'] = 'erro';
         		
-        		$this->preco = Filtro::Peca()::filtrar_preco($preco);
+        		$this->preco = Validador::Peca()::filtrar_preco($preco);
         	}
         }
         
         public function set_prioridade($prioridade) {
         	try {
-        		$this->prioridade = Filtro::Peca()::validar_prioridade($prioridade);
+        		$this->prioridade = Validador::Peca()::validar_prioridade($prioridade);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
         		
-        		$this->prioridade = Filtro::Peca()::filtrar_prioridade($prioridade);
+        		$this->prioridade = Validador::Peca()::filtrar_prioridade($prioridade);
         	}
         }
         

@@ -1,5 +1,5 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
     
 	use \Exception;
 	

@@ -1,14 +1,14 @@
 <?php
 namespace application\controller\usuario;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
 	require_once RAIZ.'/application/model/common/util/login_session.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/dao/acesso_usuario.php';
     require_once RAIZ.'/application/model/dao/entidade.php';
     require_once RAIZ.'/application/view/src/usuario/login.php';
 	
-    use application\model\common\util\Filtro;
+    use application\model\common\util\Validador;
     use application\model\common\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\dao\Acesso_Usuario as DAO_Acesso_Usuario;
@@ -32,32 +32,32 @@ namespace application\controller\usuario;
         
         public function set_email($email) {
         	try {
-        		$this->email = Filtro::Usuario()::validar_email_login($email);
+        		$this->email = Validador::Usuario()::validar_email_login($email);
         		$this->login_campos['erro_email'] = "certo";
         	} catch (Exception $e) {
         		$this->login_erros[] = $e->getMessage();
         		$this->login_campos['erro_email'] = "erro";
         		
-        		$this->email = Filtro::Usuario()::filtrar_email_login($email);
+        		$this->email = Validador::Usuario()::filtrar_email_login($email);
         	}
         }
         
         public function set_senha($senha) {
         	try {
-        		$this->senha = Filtro::Usuario()::validar_senha_login($senha);
+        		$this->senha = Validador::Usuario()::validar_senha_login($senha);
         	} catch (Exception $e) {
         		$this->login_erros[] = $e->getMessage();
         		$this->login_campos['erro_senha'] = "erro";
         		
-        		$this->senha = Filtro::Usuario()::filtrar_senha($senha);
+        		$this->senha = Validador::Usuario()::filtrar_senha($senha);
         	}
         }
         
         public function set_manter_login($manter_login = null) {
         	try {
-        		$this->manter_login = Filtro::Usuario()::validar_manter_login($manter_login);
+        		$this->manter_login = Validador::Usuario()::validar_manter_login($manter_login);
         	} catch (Exception $e) {
-        		$this->manter_login = Filtro::Usuario()::filtrar_manter_login($manter_login);
+        		$this->manter_login = Validador::Usuario()::filtrar_manter_login($manter_login);
         	}
         }
         

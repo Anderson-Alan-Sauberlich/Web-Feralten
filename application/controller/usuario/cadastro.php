@@ -1,13 +1,13 @@
 <?php
 namespace application\controller\usuario;
 	
-	require_once RAIZ.'/application/model/common/util/filtro.php';
+	require_once RAIZ.'/application/model/common/util/validador.php';
     require_once RAIZ.'/application/model/dao/usuario.php';
     require_once RAIZ.'/application/model/object/usuario.php';
     require_once RAIZ.'/application/controller/usuario/login.php';
     require_once RAIZ.'/application/view/src/usuario/cadastro.php';
 	
-    use application\model\common\util\Filtro;
+    use application\model\common\util\Validador;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\Login;
@@ -30,49 +30,49 @@ namespace application\controller\usuario;
         
         public function set_nome($nome) {
         	try {
-        		$this->nome = Filtro::Usuario()::validar_nome($nome);
+        		$this->nome = Validador::Usuario()::validar_nome($nome);
         		$this->cadastro_campos['erro_nome'] = "certo";
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_nome'] = "erro";
         		
-        		$this->nome = Filtro::Usuario()::filtrar_nome($nome);
+        		$this->nome = Validador::Usuario()::filtrar_nome($nome);
         	}
         }
         
         public function set_email($email) {
         	try {
-        		$this->email = Filtro::Usuario()::validar_email($email);
+        		$this->email = Validador::Usuario()::validar_email($email);
         		$this->cadastro_campos['erro_email'] = "certo";
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_email'] = "erro";
         		
-        		$this->email = Filtro::Usuario()::filtrar_email($email);
+        		$this->email = Validador::Usuario()::filtrar_email($email);
         	}
         }
         
         public function set_confemail($confemail) {
         	try {
-        		$this->confemail= Filtro::Usuario()::validar_confemail($confemail, $this->email);
+        		$this->confemail= Validador::Usuario()::validar_confemail($confemail, $this->email);
         		$this->cadastro_campos['erro_confemail'] = "certo";
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_confemail'] = "erro";
         		
-        		$this->confemail = Filtro::Usuario()::filtrar_confemail($confemail);
+        		$this->confemail = Validador::Usuario()::filtrar_confemail($confemail);
         	}
         }
         
         public function set_senha($senha) {
         	try {
-        		$this->senha = Filtro::Usuario()::validar_senha($senha);
+        		$this->senha = Validador::Usuario()::validar_senha($senha);
         		$this->cadastro_campos['erro_senha'] = "certo";
         	} catch (Exception $e) {
         		$this->cadastro_erros[] = $e->getMessage();
         		$this->cadastro_campos['erro_senha'] = "erro";
         		
-        		$this->senha = Filtro::Usuario()::filtrar_senha($senha);
+        		$this->senha = Validador::Usuario()::filtrar_senha($senha);
         	}
         }
         

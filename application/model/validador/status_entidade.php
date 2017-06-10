@@ -1,9 +1,9 @@
 <?php
-namespace application\model\filter;
+namespace application\model\validador;
 	
 	use \Exception;
 	
-    class Funcionalidade {
+    class Status_Entidade {
     	
 		function __constructor() {
 			

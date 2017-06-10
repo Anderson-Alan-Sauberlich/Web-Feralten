@@ -6,6 +6,7 @@ namespace application\model\object;
     	private $id;
 		private $estado_id;
 		private $nome;
+		private $url;
 		
 		function __constructor() {
 			
@@ -33,6 +34,14 @@ namespace application\model\object;
 		
 		public function get_nome() : ?string {
 			return $this->nome;
+		}
+		
+		public function set_url(string $url) : void {
+			$this->url = $url;
+		}
+		
+		public function get_url() : ?string {
+			return $this->url;
 		}
     }
 ?>

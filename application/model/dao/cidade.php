@@ -1,6 +1,6 @@
 <?php
 namespace application\model\dao;
-
+	
     require_once RAIZ.'/application/model/object/cidade.php';
     require_once RAIZ.'/application/model/common/util/conexao.php';
     
@@ -11,22 +11,23 @@ namespace application\model\dao;
     use \Exception;
 	
     class Cidade {
-
+		
         function __construct() {
             
         }
         
         public static function Inserir(Object_Cidade $object_cidade) : bool {
             try {
-                $sql = "INSERT INTO tb_cidade (cidade_id, cidade_est_id, cidade_nome) 
-                        VALUES (:id, :es_id, :nome);";
+                $sql = "INSERT INTO tb_cidade (cidade_id, cidade_est_id, cidade_nome, cidade_url) 
+                        VALUES (:id, :es_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-
+				
                 $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
-
+                $p_sql->bindValue(":url", $object_cidade->get_url(), PDO::PARAM_STR);
+				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
@@ -38,7 +39,8 @@ namespace application\model\dao;
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
                 cidade_est_id = :es_id,
-                cidade_nome = :nome 
+                cidade_nome = :nome,
+				cidade_url = :url 
                 WHERE cidade_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -46,7 +48,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
-
+                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
@@ -59,7 +62,7 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-
+				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
@@ -68,7 +71,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome FROM tb_cidade WHERE cidade_est_id = :id";
+                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_est_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -82,7 +85,7 @@ namespace application\model\dao;
         
         public static function Buscar_Por_ID_Cidade(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome FROM tb_cidade WHERE cidade_id = :id";
+                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -92,6 +95,20 @@ namespace application\model\dao;
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Url(string $url) {
+        	try {
+        		$sql = "SELECT cidade_id FROM tb_cidade WHERE cidade_url = :url";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
         }
         
         public static function PopulaCidades(array $rows) : array {
@@ -110,6 +127,10 @@ namespace application\model\dao;
                 
                 if (isset($row['cidade_nome'])) {
                 	$object_cidade->set_nome($row['cidade_nome']);
+                }
+                
+                if (isset($row['cidade_url'])) {
+                	$object_cidade->set_url($row['cidade_url']);
                 }
                 
                 $cidades[] = $object_cidade;
@@ -131,6 +152,10 @@ namespace application\model\dao;
             
             if (isset($row['cidade_nome'])) {
             	$object_cidade->set_nome($row['cidade_nome']);
+            }
+            
+            if (isset($row['cidade_url'])) {
+            	$object_cidade->set_url($row['cidade_url']);
             }
             
             return $object_cidade;
