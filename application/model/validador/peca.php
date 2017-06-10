@@ -9,8 +9,16 @@ namespace application\model\validador;
 			
 		}
 		
-		public static function validar_id($id = null) : void {
-			
+		public static function validar_id($id = null) : int {
+			if (!empty($id)) {
+				if (filter_var($id, FILTER_VALIDATE_INT) !== false) {
+					return $id;
+				} else {
+					throw new Exception('Id da Peça Invalido');
+				}
+			} else {
+				throw new Exception('Id da Peça Não Informado');
+			}
 		}
 		
 		public static function validar_entidade($entidade = null) : void {
@@ -241,8 +249,14 @@ namespace application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : ?int {
+			$valor = null;
 			
+			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_INT)) {
+				$valor = trim($id);
+			}
+			
+			return $valor;
 		}
 		
 		public static function filtrar_entidade($entidade = null) : void {

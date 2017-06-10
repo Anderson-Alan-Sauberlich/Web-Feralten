@@ -416,12 +416,100 @@
 	});
 	
 	$app->group('/usuario/meu-perfil/pecas/atualizar/', function() use ($app) {
-		$app->get('', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('compatibilidade/', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
-		
+			
 			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
 			
+			if (isset($_GET['categoria'])) {
+				$atualizar->set_categoria($_GET['categoria']);
+			}
+			
+			if (isset($_GET['marca'])) {
+				$atualizar->set_marca($_GET['marca']);
+			}
+			
+			if (isset($_GET['modelo'])) {
+				$atualizar->set_modelo($_GET['modelo']);
+			}
+			
+			if (isset($_GET['versao'])) {
+				$atualizar->set_versao($_GET['versao']);
+			}
+			
+			$atualizar->Carregar_Compatibilidade();
+			
+			return $response;
+		});
+		
+		$app->get('[{peca}/]', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
+			
+			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			$atualizar->set_peca_id(isset($args['peca']) ? $args['peca'] : null);
+			
 			$resposta = $atualizar->Carregar_Pagina();
+			
+			if ($resposta === false) {
+				return $response->withRedirect('/usuario/login/');
+			} else if ($resposta != 1) {
+				return $response->withRedirect('/usuario/meu-perfil/');
+			} else {
+				return $response;
+			}
+		});
+		
+		$app->delete('imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
+			
+			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			$atualizar->Deletar_Imagem($args['img']);
+			
+			return $response;
+		});
+		
+		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
+			
+			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			$atualizar->Salvar_Imagem_TMP();
+			
+			return $response;
+		});
+		
+		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
+			
+			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			$atualizar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
+			
+			$atualizar->set_marca(isset($_POST['marca']) ? $_POST['marca'] : null);
+			
+			$atualizar->set_modelo(isset($_POST['modelo']) ? $_POST['modelo'] : null);
+			
+			$atualizar->set_versao(isset($_POST['versao']) ? $_POST['versao'] : null);
+			
+			$atualizar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
+			
+			$atualizar->set_status(isset($_POST['status']) ? $_POST['status'] : null);
+			
+			$atualizar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
+			
+			$atualizar->set_fabricante(isset($_POST['fabricante']) ? $_POST['fabricante'] : null);
+			
+			$atualizar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
+			
+			$atualizar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
+			
+			$atualizar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
+			
+			$atualizar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
+			
+			$resposta = $atualizar->Verificar_Evento();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');

@@ -22,7 +22,7 @@ namespace application\view\src\include_page\menu;
         }
         
         public static function Incluir_Mensagem_Status_Usuario() : void {
-        	if (isset(self::$status_usuario)) {
+        	if (!empty(self::$status_usuario)) {
 	        	if (self::$status_usuario === 0 
 	        		AND self::$url_menu[1] !== 'concluir'
 	        		AND self::$url_menu[1] !== 'alterar-senha') {

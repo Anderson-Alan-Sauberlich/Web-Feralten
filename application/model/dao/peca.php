@@ -128,7 +128,7 @@ namespace application\model\dao;
         	
         	if (!empty($pesquisa)) {
         		if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
-        			$pesquisa = " WHERE $pesquisa";
+        			$pesquisa = "WHERE $pesquisa";
         		}
         	}
         	
@@ -158,7 +158,7 @@ namespace application\model\dao;
         	
         	if (!empty($pesquisa)) {
         		if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
-        			$pesquisa = " WHERE $pesquisa";
+        			$pesquisa = "WHERE $pesquisa";
         		}
         	}
         	

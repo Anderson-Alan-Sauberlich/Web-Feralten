@@ -168,7 +168,13 @@ namespace application\model\dao;
         		
         		$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
         		
-        		$sql = "SELECT peca_id FROM vw_categoria_peca WHERE $pesquisa";
+        		if (!empty($pesquisa)) {
+        			if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
+        				$pesquisa = "WHERE $pesquisa";
+        			}
+        		}
+        		
+        		$sql = "SELECT peca_id FROM vw_categoria_peca $pesquisa";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
@@ -195,9 +201,15 @@ namespace application\model\dao;
         	
         	$pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
         	
+        	if (!empty($pesquisa)) {
+        		if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
+        			$pesquisa = "WHERE $pesquisa";
+        		}
+        	}
+        	
         	try {
         		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
-        				FROM vw_categoria_peca WHERE $pesquisa LIMIT :inicio, :limite";
+        				FROM vw_categoria_peca $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
