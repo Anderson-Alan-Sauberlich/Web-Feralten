@@ -91,6 +91,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $atualizar_sucesso = array();
         private $atualizar_campos = array();
         private $atualizar_form = array();
+        private $atualizar_imagens = array();
         
         public function set_peca_id($peca_id) {
         	try {
@@ -238,22 +239,78 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			if (empty($this->atualizar_form)) {
-        				unset($_SESSION['compatibilidade']);
-        				$this->Deletar_Imagem(123);
+        			if (!empty($this->peca_id) AND $this->Verificar_Dono_Peca($this->peca_id)) {
+	        			if (empty($this->atualizar_form)) {
+	        				unset($_SESSION['compatibilidade']);
+	        				$this->Deletar_Imagem(123);
+	        				
+	        				$this->set_form(DAO_Peca::BuscarPorCOD($this->peca_id));
+	        				
+	        				$categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
+	        				$marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
+	        				$modelos = DAO_Modelo_Pativel::BuscarPorCOD($this->peca_id);
+	        				$versoes = DAO_Versao_Pativel::BuscarPorCOD($this->peca_id);
+	        				
+	        				foreach ($categorias as $categoria) {
+	        					$_SESSION['compatibilidade']['categoria'][$categoria] = $categoria;
+	        				}
+	        				
+	        				foreach ($marcas as $marca) {
+	        					$_SESSION['compatibilidade']['marca'][$marca->get_marca_id()] = $marca->get_marca_id();
+	        					
+	        					if (!empty($marca->get_ano_id())) {
+	        						$_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_marca_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
+	        					}
+	        				}
+	        				
+	        				foreach ($modelos as $modelo) {
+	        					$_SESSION['compatibilidade']['modelo'][$modelo->get_modelo_id()] = $modelo->get_modelo_id();
+	        					
+	        					if (!empty($modelo->get_ano_id())) {
+	        						$_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_modelo_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
+	        					}
+	        				}
+	        				
+	        				foreach ($versoes as $versao) {
+	        					$_SESSION['compatibilidade']['versao'][$versao->get_versao_id()] = $versao->get_versao_id();
+	        					
+	        					if (!empty($versao->get_ano_id())) {
+	        						$_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_versao_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
+	        					}
+	        				}
+	        				
+	        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+	        				
+	        				if (!empty($fotos)) {
+	        					foreach ($fotos as $foto) {
+	        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
+	        					}
+	        				}
+	        			}
+	        			
+	        			$view = new View_Atualizar($status);
+	        			
+	        			$view->set_atualizar_campos($this->atualizar_campos);
+	        			$view->set_atualizar_erros($this->atualizar_erros);
+	        			$view->set_atualizar_form($this->atualizar_form);
+	        			$view->set_atualizar_sucesso($this->atualizar_sucesso);
+	        			$view->set_atualizar_imagens($this->atualizar_imagens);
+	        			
+	        			$view->Executar();
+        			} else {
+        				return 'erro';
         			}
-        			
-        			$view = new View_Atualizar($status);
-        			
-        			$view->set_atualizar_campos($this->atualizar_campos);
-        			$view->set_atualizar_erros($this->atualizar_erros);
-        			$view->set_atualizar_form($this->atualizar_form);
-        			$view->set_atualizar_sucesso($this->atualizar_sucesso);
-        			
-        			$view->Executar();
+        		} else {
+        			return 1;
         		}
-        		
-        		return $status;
+        	} else {
+        		return false;
+        	}
+        }
+        
+        private function Verificar_Dono_Peca($peca) : bool {
+        	if (DAO_Peca::Retornar_Dono_Peca($peca) == Login_Session::get_usuario_id()) {
+        		return true;
         	} else {
         		return false;
         	}
@@ -264,16 +321,20 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status == 1) {
-        			if (isset($_POST['salvar'])) {
-        				$this->Atualizar_Peca();
-        			} else if (isset($_POST['restaurar'])) {
-        				unset($_SESSION['compatibilidade']);
-        				$this->Deletar_Imagem(123);
-        				$this->Carregar_Pagina();
+        			if (!empty($this->peca_id)) {
+	        			if (isset($_POST['salvar'])) {
+	        				$this->Atualizar_Peca();
+	        			} else if (isset($_POST['restaurar'])) {
+	        				unset($_SESSION['compatibilidade']);
+	        				$this->Deletar_Imagem(123);
+	        				$this->Carregar_Pagina();
+	        			}
+        			} else {
+        				return 'erro';
         			}
+        		} else {
+        			return 1;
         		}
-        		
-        		return $status;
         	} else {
         		return false;
         	}
@@ -487,7 +548,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
         								
         								if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
         									$marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
-        									exit(var_dump($_POST['ano_mrc_'.$marca_selecionada]));
         								}
         								
         								$marcas_pativeis[] = $marca_pativel;
@@ -542,6 +602,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			$object_status->set_id($this->status);
         		}
         		
+        		$object_peca->set_id($this->peca_id);
         		$object_peca->set_status($object_status);
         		$object_peca->set_descricao($this->descricao);
         		$object_peca->set_preferencia_entrega($this->preferencia_entrega);
@@ -567,7 +628,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			
         			$endereco->set_id($id_endereco);
         			
-        			$object_peca->set_id(0);
         			$object_peca->set_endereco($endereco);
         			
         			$usuario_responsavel = new Object_Usuario();
@@ -577,13 +637,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			$object_peca->set_responsavel($usuario_responsavel);
         		}
         		
-        		$id_peca = DAO_Peca::Atualizar($object_peca);
-        		
-        		if (!empty($id_peca) AND $id_peca !== false) {
+        		if (DAO_Peca::Atualizar($object_peca)) {
         			$retorno = null;
         			
         			foreach ($categorias_pativeis as $pativel) {
-        				$pativel->set_peca_id($id_peca);
+        				$pativel->set_peca_id($this->peca_id);
         				
         				if (DAO_Categoria_Pativel::Inserir($pativel) === false) {
         					$retorno = false;
@@ -591,7 +649,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			}
         			
         			foreach ($marcas_pativeis as $pativel) {
-        				$pativel->set_peca_id($id_peca);
+        				$pativel->set_peca_id($this->peca_id);
         				
         				if (DAO_Marca_Pativel::Inserir($pativel) === false) {
         					$retorno = false;
@@ -599,7 +657,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			}
         			
         			foreach ($modelos_pativeis as $pativel) {
-        				$pativel->set_peca_id($id_peca);
+        				$pativel->set_peca_id($this->peca_id);
         				
         				if (DAO_Modelo_Pativel::Inserir($pativel) === false) {
         					$retorno = false;
@@ -607,7 +665,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			}
         			
         			foreach ($versoes_pativeis as $pativel) {
-        				$pativel->set_peca_id($id_peca);
+        				$pativel->set_peca_id($this->peca_id);
         				
         				if (DAO_Versao_Pativel::Inserir($pativel) === false) {
         					$retorno = false;
@@ -623,9 +681,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
         				$imagens = new Gerenciar_Imagens();
         				$diretorios_imagens = array();
         				
-        				$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca);
+        				$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $this->peca_id);
         				
-        				if (isset($diretorios_imagens)) {
+        				if (!empty($diretorios_imagens)) {
         					$indice = 0;
         					
         					foreach ($diretorios_imagens as $diretorio) {
@@ -653,15 +711,11 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$this->atualizar_sucesso[] = "Peça Atualizada Com Sucesso";
         		$this->atualizar_campos['erro_peca'] = "";
         		
+        		$this->get_form();
+        		
         		$this->Carregar_Pagina();
         	} else {
-        		$this->atualizar_form['peca'] = $this->peca;
-        		$this->atualizar_form['fabricante'] = $this->fabricante;
-        		$this->atualizar_form['serie'] = $this->serie;
-        		$this->atualizar_form['preco'] = $this->preco;
-        		$this->atualizar_form['status'] = $this->status;
-        		$this->atualizar_form['descricao'] = $this->descricao;
-        		$this->atualizar_form['prioridade'] = $this->prioridade;
+        		$this->get_form();
         		
         		$marcas = null;
         		$modelos = null;
@@ -708,6 +762,31 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
+        public function get_form() : ?array {
+        	$this->atualizar_form['peca_id'] = $this->peca_id;
+        	$this->atualizar_form['peca'] = $this->peca;
+        	$this->atualizar_form['fabricante'] = $this->fabricante;
+        	$this->atualizar_form['serie'] = $this->serie;
+        	$this->atualizar_form['preco'] = $this->preco;
+        	$this->atualizar_form['status'] = $this->status;
+        	$this->atualizar_form['descricao'] = $this->descricao;
+        	$this->atualizar_form['prioridade'] = $this->prioridade;
+        	
+        	return $this->atualizar_form;
+        }
+        
+        public function set_form(Object_Peca $object_peca) : ?array {
+        	$this->peca = $object_peca->get_nome();
+        	$this->fabricante = $object_peca->get_fabricante();
+        	$this->serie = $object_peca->get_serie();
+        	$this->preco = $object_peca->get_preco();
+        	$this->status = $object_peca->get_status();
+        	$this->descricao = $object_peca->get_descricao();
+        	$this->prioridade = $object_peca->get_prioridade();
+        	
+        	return $this->get_form();
+        }
+        
         public function Salvar_Imagem_TMP() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$arquivo = null;
@@ -733,7 +812,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         				$_SESSION['imagens_tmp'][3] = $imagens->get_nome();
         			}
         			
-        			echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+        			echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
         		} else {
         			echo "/application/view/resources/img/imagem_indisponivel.png";
         		}

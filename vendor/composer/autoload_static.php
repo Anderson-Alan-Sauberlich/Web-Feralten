@@ -53,6 +53,10 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/',
+    );
+
     public static $prefixesPsr0 = array (
         'P' => 
         array (
@@ -68,6 +72,7 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953::$prefixesPsr0;
 
         }, null, ClassLoader::class);

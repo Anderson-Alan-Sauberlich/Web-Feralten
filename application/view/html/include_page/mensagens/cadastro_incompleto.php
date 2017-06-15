@@ -23,4 +23,4 @@
     	</a>
 	</div>
 </div>
-<script type="text/javascript">$('.ui.modal').modal('show');</script>
+<script type="text/javascript" src="/application/view/js/include_page/mensagens/cadastro_incompleto.js"></script>

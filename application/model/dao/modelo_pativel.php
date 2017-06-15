@@ -148,16 +148,44 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_de, modelo_pativel_ano_ate FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
+                $sql = "SELECT modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::Popula_Modelo_Pativeis($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::Popula_Modelo_Pativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Peca(int $id_peca) {
+        	try {
+        		$sql = "SELECT modelo_pativel_mdl_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_peca, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Ano_Por_Id_Ano(int $id_ano) {
+        	try {
+        		$sql = "SELECT modelo_pativel_ano_ano FROM tb_modelo_pativel_ano WHERE modelo_pativel_ano_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_ano, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
         }
         
         public static function Buscar_Numero_Paginas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro) {
@@ -325,12 +353,8 @@ namespace application\model\dao;
 	            	$object_modelo_pativel->set_modelo_id($row['modelo_pativel_mdl_id']);
 	            }
 	            
-	            if (isset($row['modelo_pativel_ano_de'])) {
-	            	$object_modelo_pativel->set_ano_de($row['modelo_pativel_ano_de']);
-	            }
-	            
-	            if (isset($row['modelo_pativel_ano_ate'])) {
-	            	$object_modelo_pativel->set_ano_ate($row['modelo_pativel_ano_ate']);
+	            if (isset($row['modelo_pativel_ano_id'])) {
+	            	$object_modelo_pativel->set_ano_id($row['modelo_pativel_ano_id']);
 	            }
 	            
 				$pativeis[] = $object_modelo_pativel;

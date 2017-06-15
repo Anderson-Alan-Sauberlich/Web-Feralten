@@ -46,13 +46,13 @@ namespace application\model\common\util;
 		}
 		
 		public function Armazenar_Imagem_Temporaria($arquivo) {
-            $info = explode("/", $arquivo['type']);
+            $info = explode('/', $arquivo['type']);
             
             $this->tipo = $info[0];
             $this->extensao = $info[1];
 			
-			$this->pasta_usuario = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/";
-            $this->diretorio = $this->pasta_usuario."tmp/";
+			$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
+            $this->diretorio = $this->pasta_usuario.'tmp/';
             
             if (file_exists($this->pasta_usuario)) {
             	if (!file_exists($this->diretorio)) {
@@ -73,7 +73,7 @@ namespace application\model\common\util;
 				
 				$this->caminho = $this->diretorio.$this->nome;
                 
-                $imagem_tmp = $this->caminho.".".$this->extensao;
+                $imagem_tmp = $this->caminho.'.'.$this->extensao;
                 
                 move_uploaded_file($arquivo['tmp_name'], $imagem_tmp);
                 
@@ -85,13 +85,13 @@ namespace application\model\common\util;
 				
 				unlink($imagem_tmp);
             } else if (isset($extensao) AND isset($tipo)) {
-                return "O Arquivo selecionado não é uma imagem Valida";
+                return 'O Arquivo selecionado não é uma imagem Valida';
             }
 		}
 
 		public function Atualizar_Imagem_Usuario($nome_tmp) {
-        	$this->pasta_usuario = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/";
-        	$this->diretorio = $this->pasta_usuario."tmp/";
+        	$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
+        	$this->diretorio = $this->pasta_usuario.'tmp/';
 
 			$this->Deletar_Imagem_Usuario();
 			
@@ -109,14 +109,14 @@ namespace application\model\common\util;
 				}
 				
 				if (isset($this->tipo)) {
-					return "/imagens/".$this->usuario."/".$nome_tmp."-@.".$this->tipo;
+					return '/imagens/'.$this->usuario.'/'.$nome_tmp.'-@.'.$this->tipo;
 				}
 			}
 		}
 		
 		public function Arquivar_Imagem_Usuario($nome_tmp) {
-        	$this->pasta_usuario = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/";
-        	$this->diretorio = $this->pasta_usuario."tmp/";
+        	$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
+        	$this->diretorio = $this->pasta_usuario.'tmp/';
 			
 			if (file_exists($this->diretorio)) {
 				$this->Gerenciar_Temporarios();
@@ -132,7 +132,7 @@ namespace application\model\common\util;
 				}
 				
 				if (isset($this->tipo)) {
-					return "/imagens/".$this->usuario."/".$nome_tmp."-@.".$this->tipo;
+					return '/imagens/'.$this->usuario.'/'.$nome_tmp.'-@.'.$this->tipo;
 				} else {
 					return false;
 				}
@@ -140,9 +140,9 @@ namespace application\model\common\util;
 		}
 		
         public function Arquivar_Imagem_Peca($nomes_tmp, $id_peca) {
-        	$this->pasta_usuario = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/";
-        	$this->diretorio = $this->pasta_usuario."tmp/";
-			$this->caminho = $this->pasta_usuario.$id_peca."/";
+        	$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
+        	$this->diretorio = $this->pasta_usuario.'tmp/';
+			$this->caminho = $this->pasta_usuario.$id_peca.'/';
 			
 			if (file_exists($this->diretorio)) {
 				$this->Gerenciar_Temporarios();
@@ -163,8 +163,8 @@ namespace application\model\common\util;
 						}
 					}
 					
-					if (isset($this->tipo)) {
-						$imagens_peca[] = "/imagens/".$this->usuario."/".$id_peca."/".$nome_img."-@.".$this->tipo;
+					if (!empty($this->tipo)) {
+						$imagens_peca[] = '/imagens/'.$this->usuario.'/'.$id_peca.'/'.$nome_img.'-@.'.$this->tipo;
 					}
 				}
 				
@@ -174,18 +174,18 @@ namespace application\model\common\util;
 		
 		public function Deletar_Imagem_Usuario() {
 			if (empty($this->pasta_usuario)) {
-				$this->pasta_usuario = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/";
+				$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario."/";
 			}
 			
 			if (file_exists($this->pasta_usuario)) {
 			    $iterator = new DirectoryIterator($this->pasta_usuario);
 			    
 				foreach ($iterator as $entry) {
-					if (strpos($entry->getFilename(), "100x75") !== false
-					OR strpos($entry->getFilename(), "200x150") !== false
-					OR strpos($entry->getFilename(), "320x240") !== false
-					OR strpos($entry->getFilename(), "400x300") !== false
-					OR strpos($entry->getFilename(), "800x600") !== false) {
+					if (strpos($entry->getFilename(), '100x75') !== false
+					OR strpos($entry->getFilename(), '200x150') !== false
+					OR strpos($entry->getFilename(), '320x240') !== false
+					OR strpos($entry->getFilename(), '400x300') !== false
+					OR strpos($entry->getFilename(), '800x600') !== false) {
 						unlink($entry->getPathname());
 					}
 				}
@@ -193,7 +193,7 @@ namespace application\model\common\util;
 		}
         
 		public function Deletar_Imagem_Temporaria($nome_imagem) {
-			$this->diretorio = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/tmp/";
+			$this->diretorio = RAIZ.'/imagens/'.$this->usuario.'/tmp/';
 			
 			if (file_exists($this->diretorio)) {
 				$this->Gerenciar_Temporarios();
@@ -211,7 +211,7 @@ namespace application\model\common\util;
         public static function Gerar_Data_URL($imagem) {
 			$tipo = pathinfo($imagem, PATHINFO_EXTENSION);
 			
-			if ($tipo == "jpg" OR $tipo == "jpeg" OR $tipo == "png") {
+			if ($tipo == 'jpg' OR $tipo == 'jpeg' OR $tipo == 'png') {
 				$data = file_get_contents($imagem);
 				$base64 = 'data:image/'.$tipo.';base64,'.base64_encode($data);
 				return $base64;
@@ -219,7 +219,7 @@ namespace application\model\common\util;
         }
 		
 		public function Pegar_Caminho_Por_Nome_Imagem($nome) {
-			$this->diretorio = $_SERVER['DOCUMENT_ROOT']."/imagens/".$this->usuario."/tmp/";
+			$this->diretorio = RAIZ.'/imagens/'.$this->usuario.'/tmp/';
 		    
 			if (file_exists($this->diretorio)) {
 				$this->Gerenciar_Temporarios();
@@ -235,7 +235,7 @@ namespace application\model\common\util;
 		}
 		
 		private function Validar_Imagem() {
-			if ($this->tipo == "image" AND ($this->extensao == "jpg" OR $this->extensao == "jpeg" OR $this->extensao == "png")) {
+			if ($this->tipo == 'image' AND ($this->extensao == 'jpg' OR $this->extensao == 'jpeg' OR $this->extensao == 'png')) {
 				return true;
 			} else {
 				return false;
@@ -263,16 +263,16 @@ namespace application\model\common\util;
                 $fundo = imagecreatetruecolor($largura_padrao, $altura_padrao);
 				
                 switch ($this->extensao) {
-                    case "jpeg":
-						$this->destino = $this->caminho."-".$largura_padrao."x".$altura_padrao.".".$this->extensao;
+                    case 'jpeg':
+						$this->destino = $this->caminho.'-'.$largura_padrao.'x'.$altura_padrao.'.'.$this->extensao;
                         $origem = imagecreatefromjpeg($imagem_tmp);
                         imagecopyresampled($nova_imagem, $origem, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura, $altura);
                         imagecopy($fundo, $nova_imagem, (($largura_padrao - $nova_largura) / 2), (($altura_padrao - $nova_altura) / 2), 0, 0, $nova_largura, $nova_altura);
                         imagejpeg($fundo, $this->destino, 100);
                         break;
                         
-                    case "png":
-						$this->destino = $this->caminho."-".$largura_padrao."x".$altura_padrao.".".$this->extensao;
+                    case 'png':
+						$this->destino = $this->caminho.'-'.$largura_padrao.'x'.$altura_padrao.'.'.$this->extensao;
                         $origem = imagecreatefrompng($imagem_tmp);
                         imagecopyresampled($nova_imagem, $origem, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura, $altura);
                         imagecopy($fundo, $nova_imagem, (($largura_padrao - $nova_largura) / 2), (($altura_padrao - $nova_altura) / 2), 0, 0, $nova_largura, $nova_altura);

@@ -1,4 +1,4 @@
-<?php require_once RAIZ.'/application/view/src/pagina_inicial.php'; ?>
+<?php //require_once RAIZ.'/application/view/src/pagina_inicial.php'; ?>
 <?php use application\view\src\Pagina_Inicial as View_Pagina_Inicial; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">

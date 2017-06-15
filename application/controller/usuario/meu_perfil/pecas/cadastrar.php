@@ -476,7 +476,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 										
 										if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
 											$marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
-											exit(var_dump($_POST['ano_mrc_'.$marca_selecionada]));
 										}
 										
 										$marcas_pativeis[] = $marca_pativel;

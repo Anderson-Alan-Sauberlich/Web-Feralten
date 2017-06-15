@@ -15,7 +15,7 @@
         <?php View_Atualizar::Incluir_Menu_Usuario(); ?>
             
 		<div class="panel-group">
-            <form id="form_atualizar_pecas" name="form_atualizar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/atualizar/" method="post" role="form">
+            <form id="form_atualizar_pecas" name="form_atualizar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/atualizar/<?php View_Atualizar::Mostrar_Id_Peca(); ?>/" method="post" role="form">
                 <?php View_Atualizar::Mostrar_Sucesso(); ?>
                 <?php View_Atualizar::Mostrar_Erros(); ?>
                 <div class="panel panel-default sombra_painel">

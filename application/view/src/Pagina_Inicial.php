@@ -12,7 +12,7 @@ namespace application\view\src;
         }
         
         public function Executar() {
-        	require_once RAIZ.'/application/view/html/pagina_inicial.php';
+        	require_once RAIZ.'/application/view/html/Pagina_Inicial.php';
         }
         
         public static function Incluir_Menu_Pesquisa() {

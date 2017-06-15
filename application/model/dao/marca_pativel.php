@@ -148,16 +148,44 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_de, marca_pativel_ano_ate FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
+                $sql = "SELECT marca_pativel_pec_id, marca_pativel_mrc_id, marca_pativel_ano_id FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::Popula_Marca_Pativeis($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::Popula_Marca_Pativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Peca(int $id_peca) {
+        	try {
+        		$sql = "SELECT marca_pativel_mrc_id FROM tb_marca_pativel WHERE marca_pativel_pec_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_peca, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Ano_Por_Id_Ano(int $id_ano) {
+        	try {
+        		$sql = "SELECT marca_pativel_ano_ano FROM tb_marca_pativel_ano WHERE marca_pativel_ano_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_ano, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
         }
         
         public static function Buscar_Numero_Paginas(Object_Marca_Pativel $object_marca_pativel, Object_Peca $object_peca, array $form_filtro) {
@@ -348,12 +376,8 @@ namespace application\model\dao;
 	            	$object_marca_pativel->set_marca_id($row['marca_pativel_mrc_id']);
 	            }
 	            
-	            if (isset($row['marca_pativel_ano_de'])) {
-	            	$object_marca_pativel->set_ano_de($row['marca_pativel_ano_de']);
-	            }
-	            
-	            if (isset($row['marca_pativel_ano_ate'])) {
-	            	$object_marca_pativel->set_ano_ate($row['marca_pativel_ano_ate']);
+	            if (isset($row['marca_pativel_ano_id'])) {
+	            	$object_marca_pativel->set_ano_id($row['marca_pativel_ano_id']);
 	            }
 	            
 				$pativeis[] = $object_marca_pativel;

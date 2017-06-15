@@ -10,5 +10,10 @@
     "require": {
         "php": ">=5.2.8",
 		"slim/slim": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "": ""
+        }
     }
 }

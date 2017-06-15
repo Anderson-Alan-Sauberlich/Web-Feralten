@@ -8,6 +8,7 @@ namespace application\model\object;
 		private $ano_de;
 		private $ano_ate;
 		private $anos = array();
+		private $ano_id;
 		
 		function __constructor() {
 			
@@ -55,6 +56,14 @@ namespace application\model\object;
 		
 		public function get_ano_ate() : ?int {
 			return $this->ano_ate;
+		}
+		
+		public function set_ano_id(int $ano_id) : void {
+			$this->ano_id = $ano_id;
+		}
+		
+		public function get_ano_id() : ?int {
+			return $this->ano_id;
 		}
     }
 ?>

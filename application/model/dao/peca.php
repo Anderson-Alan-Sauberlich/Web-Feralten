@@ -349,6 +349,20 @@ namespace application\model\dao;
         	return $p_sql;
         }
         
+        public static function Retornar_Dono_Peca($id) {
+        	try {
+        		$sql = "SELECT peca_responsavel_usr_id FROM tb_peca WHERE peca_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
         public static function PopulaPeca(array $row) : Object_Peca {
             $object_peca = new Object_Peca();
             

@@ -1,15 +1,16 @@
 <?php
+	
+	require_once('config.php');
+	require_once('vendor/autoload.php');
+	
 	use \Psr\Http\Message\ServerRequestInterface as Request;
 	use \Psr\Http\Message\ResponseInterface as Response;
-	
-	require_once('vendor/autoload.php');
-	require_once('config.php');
 	
 	$app = new \Slim\App();
 	
 	$app->group('/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			require_once(RAIZ.'/application/controller/pagina_inicial.php');
+			//require_once(RAIZ.'/application/controller/pagina_inicial.php');
 			
 			$pagina_inicial = new application\controller\Pagina_Inicial();
 			
@@ -453,8 +454,10 @@
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
+			} else if ($resposta === 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
+			} else if ($resposta === 'erro') {
+				return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
 			} else {
 				return $response;
 			}
@@ -480,7 +483,7 @@
 			return $response;
 		});
 		
-		$app->post('', function(Request $request, Response $response, $args) use ($app) {
+		$app->post('[{peca}/]', function(Request $request, Response $response, $args) use ($app) {
 			require_once(RAIZ.'/application/controller/usuario/meu_perfil/pecas/atualizar.php');
 			
 			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
@@ -509,12 +512,16 @@
 			
 			$atualizar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
 			
+			$atualizar->set_peca_id(isset($args['peca']) ? $args['peca'] : null);
+			
 			$resposta = $atualizar->Verificar_Evento();
 			
 			if ($resposta === false) {
 				return $response->withRedirect('/usuario/login/');
-			} else if ($resposta != 1) {
+			} else if ($resposta === 1) {
 				return $response->withRedirect('/usuario/meu-perfil/');
+			} else if ($resposta === 'erro') {
+				return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
 			} else {
 				return $response;
 			}

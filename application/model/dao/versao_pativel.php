@@ -148,16 +148,44 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT versao_pativel_pec_id, versao_pativel_vrs_id, versao_pativel_ano_de, versao_pativel_ano_ate FROM tb_versao_pativel WHERE versao_pativel_pec_id = :id";
+                $sql = "SELECT versao_pativel_pec_id, versao_pativel_vrs_id, versao_pativel_ano_id FROM tb_versao_pativel WHERE versao_pativel_pec_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::Popula_Lista_Pativeis($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::Popula_Lista_Pativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Buscar_Id_Por_Id_Peca(int $id_peca) {
+        	try {
+        		$sql = "SELECT versao_pativel_vrs_id FROM tb_versao_pativel WHERE versao_pativel_pec_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_peca, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Buscar_Ano_Por_Id_Ano(int $id_ano) {
+        	try {
+        		$sql = "SELECT versao_pativel_ano_ano FROM tb_versao_pativel_ano WHERE versao_pativel_ano_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id_ano, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
         }
         
         public static function Buscar_Numero_Paginas(Object_Versao_Pativel $object_versao_pativel, Object_Peca $object_peca, array $form_filtro) {
@@ -303,12 +331,8 @@ namespace application\model\dao;
 	            	$object_versao_pativel->set_versao_id($row['versao_pativel_vrs_id']);
 	            }
 	            
-	            if (isset($row['versao_pativel_ano_de'])) {
-	            	$object_versao_pativel->set_ano_de($row['versao_pativel_ano_de']);
-	            }
-	            
-	            if (isset($row['versao_pativel_ano_ate'])) {
-	            	$object_versao_pativel->set_ano_ate($row['versao_pativel_ano_ate']);
+	            if (isset($row['versao_pativel_ano_id'])) {
+	            	$object_versao_pativel->set_ano_id($row['versao_pativel_ano_id']);
 	            }
 	            
 				$pativeis[] = $object_versao_pativel;
