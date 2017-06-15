@@ -1,16 +1,16 @@
 <?php
-namespace application\controller;
+namespace application\controller\publicidade;
 	
-	use application\view\src\Pagina_Inicial as View_Pagina_Inicial;
+	use application\view\src\publicidade\Dicas as View_Dicas;
 	
-    class Pagina_Inicial {
-		
+    class Dicas {
+
         function __construct() {
             
         }
         
         public function Carregar_Pagina() {
-        	$view = new View_Pagina_Inicial();
+        	$view = new View_Dicas();
         	
         	$view->Executar();
         }

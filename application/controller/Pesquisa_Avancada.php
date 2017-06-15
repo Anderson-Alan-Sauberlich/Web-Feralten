@@ -1,16 +1,16 @@
 <?php
 namespace application\controller;
 	
-	use application\view\src\Pagina_Inicial as View_Pagina_Inicial;
+	use application\view\src\Pesquisa_Avancada as View_Pesquisa_Avancada;
 	
-    class Pagina_Inicial {
-		
+    class Pesquisa_Avancada {
+
         function __construct() {
             
         }
         
         public function Carregar_Pagina() {
-        	$view = new View_Pagina_Inicial();
+        	$view = new View_Pesquisa_Avancada();
         	
         	$view->Executar();
         }

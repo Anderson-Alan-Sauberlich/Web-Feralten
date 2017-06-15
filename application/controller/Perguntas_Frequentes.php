@@ -1,16 +1,16 @@
 <?php
 namespace application\controller;
 	
-	use application\view\src\Pagina_Inicial as View_Pagina_Inicial;
+	use application\view\src\Perguntas_Frequentes as View_Perguntas_Frequentes;
 	
-    class Pagina_Inicial {
-		
+    class Perguntas_Frequentes {
+
         function __construct() {
             
         }
         
         public function Carregar_Pagina() {
-        	$view = new View_Pagina_Inicial();
+        	$view = new View_Perguntas_Frequentes();
         	
         	$view->Executar();
         }

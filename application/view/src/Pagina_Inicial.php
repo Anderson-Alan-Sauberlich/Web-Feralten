@@ -1,8 +1,6 @@
 <?php
 namespace application\view\src;
-
-	require_once RAIZ.'/application/view/src/include_page/menu/pesquisa.php';
-
+	
 	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
 			
     class Pagina_Inicial {

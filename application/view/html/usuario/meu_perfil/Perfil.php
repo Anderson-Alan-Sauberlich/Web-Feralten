@@ -1,20 +1,18 @@
-<?php use application\view\src\Pagina_Inicial as View_Pagina_Inicial; ?>
+<?php use application\view\src\usuario\meu_perfil\Perfil as View_Perfil; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/application/view/html/include_page/head/Default.php'; ?>
-    <title>Pagina-Inicial | Feralten</title>
+    <title>Meu-Perfeil | Feralten</title>
 </head>
 <body>
     <header>
-    	<?php include_once RAIZ.'/application/view/html/include_page/header/Cabecalho.php'; ?>
+        <?php include_once RAIZ.'/application/view/html/include_page/header/Cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
-    	<form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
-        	<?php View_Pagina_Inicial::Incluir_Menu_Pesquisa(); ?>
-        </form>
+        <?php View_Perfil::Incluir_Menu_Usuario(); ?>
         
-        <div class="container-fluid">
+		<div class="container-fluid">
             <div class="row-fluid">
                 <img src="/application/view/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
             </div>
