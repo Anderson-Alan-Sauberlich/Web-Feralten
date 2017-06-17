@@ -142,12 +142,85 @@ namespace application\model\object;
 			return $this->fotos[$numero];
 		}
 		
-		public function set_preferencia_entrega(?int $preferencia_entrega= null) : void {
+		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void {
 			$this->preferencia_entrega= $preferencia_entrega;
 		}
 		
 		public function get_preferencia_entrega() : ?int {
 			return $this->preferencia_entrega;
+		}
+		
+		public function set_preferencias_entrega(?array $preferencais_entrega) : void {
+			if (!empty($preferencais_entrega)) {
+				$valor = 0;
+				
+				foreach ($preferencais_entrega as $preferencia_entrega) {
+					if (filter_var($preferencia_entrega, FILTER_VALIDATE_INT)) {
+						$valor += $preferencia_entrega;
+					}
+				}
+				
+				if (!empty($valor) AND filter_var($valor, FILTER_VALIDATE_INT) AND $valor > 0) {
+					$this->preferencia_entrega = $valor;
+				}
+			}
+		}
+		
+		public static function get_preferencias_entrega(?int $preferencia_entrega = null) : ?array {
+			$preferencais_entrega = array();
+			
+			if (!empty($preferencia_entrega)) {
+				if ($preferencia_entrega == 1) {
+					$preferencais_entrega[] = 1;
+				} else if ($preferencia_entrega == 2) {
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 3) {
+					$preferencais_entrega[] = 1;
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 4) {
+					$preferencais_entrega[] = 4;
+				} else if ($preferencia_entrega == 5) {
+					$preferencais_entrega[] = 4;
+					$preferencais_entrega[] = 1;
+				} else if ($preferencia_entrega == 6) {
+					$preferencais_entrega[] = 4;
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 7) {
+					$preferencais_entrega[] = 1;
+					$preferencais_entrega[] = 2;
+					$preferencais_entrega[] = 4;
+				} else if ($preferencia_entrega == 8) {
+					$preferencais_entrega[] = 8;
+				} else if ($preferencia_entrega == 9) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 1;
+				} else if ($preferencia_entrega == 10) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 11) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 1;
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 12) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 4;
+				} else if ($preferencia_entrega == 13) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 1;
+					$preferencais_entrega[] = 4;
+				} else if ($preferencia_entrega == 14) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 4;
+					$preferencais_entrega[] = 2;
+				} else if ($preferencia_entrega == 15) {
+					$preferencais_entrega[] = 8;
+					$preferencais_entrega[] = 1;
+					$preferencais_entrega[] = 2;
+					$preferencais_entrega[] = 4;
+				}
+			}
+			
+			return $preferencais_entrega;
 		}
     }
 ?>

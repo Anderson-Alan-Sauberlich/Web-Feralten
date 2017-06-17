@@ -58,7 +58,7 @@ namespace application\model\object;
 			return $this->ano_ate;
 		}
 		
-		public function set_ano_id(int $ano_id) : void {
+		public function set_ano_id(?int $ano_id = null) : void {
 			$this->ano_id = $ano_id;
 		}
 		

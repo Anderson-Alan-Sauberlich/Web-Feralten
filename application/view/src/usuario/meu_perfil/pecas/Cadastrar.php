@@ -522,7 +522,7 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			
 			foreach ($preferencias_entregas as $preferencia_entrega) {
 				if (isset(self::$cadastrar_form['preferencia_entrega'])) {
-					if (self::$cadastrar_form['preferencia_entrega'] == $preferencia_entrega->get_id()) {
+					if (in_array($preferencia_entrega->get_id(), self::$cadastrar_form['preferencia_entrega'])) {
 						echo "<option selected value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
 					} else {
 						echo "<option value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";

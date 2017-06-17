@@ -130,7 +130,7 @@
 							</div>
 							<div class="row-fluid">
 								<label for="preferencia_entrega" class="lbPanel">Selecione Suas Preferencias de Entrega:</label>
-		                        <select id="preferencia_entrega" name="preferencia_entrega[]" class="ui fluid multiple scrolling search selection dropdown">
+		                        <select id="preferencia_entrega" name="preferencia_entrega[]" multiple="multiple" class="ui fluid multiple scrolling search selection dropdown">
 		                        	<option value="">Preferencias de Entrega</option>
 		                        	<?php View_Atualizar::Mostrar_Preferencia_Entrega(); ?>
 		                        </select>

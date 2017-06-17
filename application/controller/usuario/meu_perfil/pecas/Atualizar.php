@@ -211,48 +211,54 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	        				unset($_SESSION['compatibilidade']);
 	        				$this->Deletar_Imagem(123);
 	        				
-	        				$this->set_form(DAO_Peca::BuscarPorCOD($this->peca_id));
+	        				$object_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
 	        				
-	        				$categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
-	        				$marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
-	        				$modelos = DAO_Modelo_Pativel::BuscarPorCOD($this->peca_id);
-	        				$versoes = DAO_Versao_Pativel::BuscarPorCOD($this->peca_id);
-	        				
-	        				foreach ($categorias as $categoria) {
-	        					$_SESSION['compatibilidade']['categoria'][$categoria] = $categoria;
-	        				}
-	        				
-	        				foreach ($marcas as $marca) {
-	        					$_SESSION['compatibilidade']['marca'][$marca->get_marca_id()] = $marca->get_marca_id();
-	        					
-	        					if (!empty($marca->get_ano_id())) {
-	        						$_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_marca_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
-	        					}
-	        				}
-	        				
-	        				foreach ($modelos as $modelo) {
-	        					$_SESSION['compatibilidade']['modelo'][$modelo->get_modelo_id()] = $modelo->get_modelo_id();
-	        					
-	        					if (!empty($modelo->get_ano_id())) {
-	        						$_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_modelo_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
-	        					}
-	        				}
-	        				
-	        				foreach ($versoes as $versao) {
-	        					$_SESSION['compatibilidade']['versao'][$versao->get_versao_id()] = $versao->get_versao_id();
-	        					
-	        					if (!empty($versao->get_ano_id())) {
-	        						$_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_versao_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
-	        					}
-	        				}
-	        				
-	        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
-	        				
-	        				if (!empty($fotos)) {
-	        					foreach ($fotos as $foto) {
-	        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
-	        					}
-	        				}
+	        				if (!empty($object_peca) AND $object_peca !== false) {
+	        					$this->set_form($object_peca);
+		        				
+		        				$categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
+		        				$marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
+		        				$modelos = DAO_Modelo_Pativel::BuscarPorCOD($this->peca_id);
+		        				$versoes = DAO_Versao_Pativel::BuscarPorCOD($this->peca_id);
+		        				
+		        				foreach ($categorias as $categoria) {
+		        					$_SESSION['compatibilidade']['categoria'][$categoria] = $categoria;
+		        				}
+		        				
+		        				foreach ($marcas as $marca) {
+		        					$_SESSION['compatibilidade']['marca'][$marca->get_marca_id()] = $marca->get_marca_id();
+		        					
+		        					if (!empty($marca->get_ano_id())) {
+		        						$_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_marca_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
+		        					}
+		        				}
+		        				
+		        				foreach ($modelos as $modelo) {
+		        					$_SESSION['compatibilidade']['modelo'][$modelo->get_modelo_id()] = $modelo->get_modelo_id();
+		        					
+		        					if (!empty($modelo->get_ano_id())) {
+		        						$_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_modelo_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
+		        					}
+		        				}
+		        				
+		        				foreach ($versoes as $versao) {
+		        					$_SESSION['compatibilidade']['versao'][$versao->get_versao_id()] = $versao->get_versao_id();
+		        					
+		        					if (!empty($versao->get_ano_id())) {
+		        						$_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_versao_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
+		        					}
+		        				}
+		        				
+		        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+		        				
+		        				if (!empty($fotos)) {
+		        					foreach ($fotos as $foto) {
+		        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
+		        					}
+		        				}
+		        			} else {
+		        				return 'erro';
+		        			}
 	        			}
 	        			
 	        			$view = new View_Atualizar($status);
@@ -610,7 +616,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			foreach ($categorias_pativeis as $pativel) {
         				$pativel->set_peca_id($this->peca_id);
         				
-        				if (DAO_Categoria_Pativel::Inserir($pativel) === false) {
+        				if (DAO_Categoria_Pativel::Atualizar($pativel) === false) {
         					$retorno = false;
         				}
         			}
@@ -618,7 +624,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			foreach ($marcas_pativeis as $pativel) {
         				$pativel->set_peca_id($this->peca_id);
         				
-        				if (DAO_Marca_Pativel::Inserir($pativel) === false) {
+        				if (DAO_Marca_Pativel::Atualizar($pativel) === false) {
         					$retorno = false;
         				}
         			}
@@ -626,7 +632,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			foreach ($modelos_pativeis as $pativel) {
         				$pativel->set_peca_id($this->peca_id);
         				
-        				if (DAO_Modelo_Pativel::Inserir($pativel) === false) {
+        				if (DAO_Modelo_Pativel::Atualizar($pativel) === false) {
         					$retorno = false;
         				}
         			}
@@ -634,7 +640,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			foreach ($versoes_pativeis as $pativel) {
         				$pativel->set_peca_id($this->peca_id);
         				
-        				if (DAO_Versao_Pativel::Inserir($pativel) === false) {
+        				if (DAO_Versao_Pativel::Atualizar($pativel) === false) {
         					$retorno = false;
         				}
         			}
@@ -738,6 +744,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->atualizar_form['status'] = $this->status;
         	$this->atualizar_form['descricao'] = $this->descricao;
         	$this->atualizar_form['prioridade'] = $this->prioridade;
+        	$this->atualizar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
         	
         	return $this->atualizar_form;
         }
@@ -750,6 +757,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->status = $object_peca->get_status();
         	$this->descricao = $object_peca->get_descricao();
         	$this->prioridade = $object_peca->get_prioridade();
+        	$this->preferencia_entrega = $object_peca->get_preferencia_entrega();
         	
         	return $this->get_form();
         }
@@ -757,13 +765,17 @@ namespace application\controller\usuario\meu_perfil\pecas;
         public function Salvar_Imagem_TMP() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$arquivo = null;
+        		$numero = null;
         		
         		if (isset($_FILES['imagem1']) AND $_FILES['imagem1']['error'] === 0) {
         			$arquivo = $_FILES['imagem1'];
+        			$numero = 1;
         		} else if (isset($_FILES['imagem2']) AND $_FILES['imagem2']['error'] === 0) {
         			$arquivo = $_FILES['imagem2'];
+        			$numero = 2;
         		} else if (isset($_FILES['imagem3']) AND $_FILES['imagem3']['error'] === 0) {
         			$arquivo = $_FILES['imagem3'];
+        			$numero = 3;
         		}
         		
         		if (!empty($arquivo)) {
@@ -771,12 +783,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
         			
         			$imagens->Armazenar_Imagem_Temporaria($arquivo);
         			
-        			if (empty($_SESSION['imagens_tmp'][1])) {
-        				$_SESSION['imagens_tmp'][1] = $imagens->get_nome();
-        			} else if (empty($_SESSION['imagens_tmp'][2])) {
-        				$_SESSION['imagens_tmp'][2] = $imagens->get_nome();
-        			} else if (empty($_SESSION['imagens_tmp'][3])) {
-        				$_SESSION['imagens_tmp'][3] = $imagens->get_nome();
+        			if (!isset($_SESSION['imagens_tmp'][$numero])) {
+        				$_SESSION['imagens_tmp'][$numero] = $imagens->get_nome();
         			}
         			
         			echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());

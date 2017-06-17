@@ -617,6 +617,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$this->cadastrar_form['status'] = $this->status;
 				$this->cadastrar_form['descricao'] = $this->descricao;
 				$this->cadastrar_form['prioridade'] = $this->prioridade;
+				$this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
 				
 				$marcas = null;
 				$modelos = null;
