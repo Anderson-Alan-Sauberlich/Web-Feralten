@@ -75,7 +75,7 @@ namespace application\model\dao;
             																 $object_categoria_pativel->get_categoria_id()));
             	}
             	
-            	if (self::Deletar($object_categoria_pativel)) {
+            	if (self::Deletar_Por_Objeto($object_categoria_pativel)) {
             		if (self::Inserir($object_categoria_pativel)) {
             			return true;
             		} else {
@@ -89,7 +89,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function Deletar(Object_Categoria_Pativel $object_categoria_pativel) : bool {
+        public static function Deletar_Por_Objeto(Object_Categoria_Pativel $object_categoria_pativel) : bool {
         	try {
         		if (!empty($object_categoria_pativel->get_ano_id())) {
         			self::Deletar_Anos($object_categoria_pativel->get_ano_id());
@@ -101,6 +101,32 @@ namespace application\model\dao;
         		
         		$p_sql->bindValue(":pec_id", $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
         		$p_sql->bindValue(":ctg_id", $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (Exception $e) {
+        		return false;
+        	}
+        }
+        
+        public static function Deletar(int $id_peca) : bool {
+        	try {
+        		$id_anos = self::Pegar_Id_Anos($id_peca);
+        		
+        		if (!empty($id_anos)) {
+	        		foreach ($id_anos as $id_ano) {
+	        			if (!empty($id_ano)) {
+	        				if (self::Deletar_Anos($id_ano)) {
+	        					self::Salvar_Id_Ano($id_ano);
+	        				}
+	        			}
+	        		}
+        		}
+        		
+        		$sql = "DELETE FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :pec_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pec_id", $id_peca, PDO::PARAM_INT);
         		
         		return $p_sql->execute();
         	} catch (Exception $e) {
@@ -120,6 +146,21 @@ namespace application\model\dao;
             } catch (Exception $e) {
 				return false;
             }
+        }
+        
+        private static function Salvar_Id_Ano(int $id) : bool {
+        	try {
+        		$sql = "INSERT INTO tb_id_livre_ano_ctg (id_livre_ano_ctg)
+                        VALUES (:id);";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		
+        		return $p_sql->execute();
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
         }
         
         private static function Pegar_Proximo_Id_Ano() : ?int {
@@ -149,6 +190,26 @@ namespace application\model\dao;
         		
         		if (!empty($id_ano) AND $id_ano != false) {
         			return $id_ano;
+        		} else {
+        			return null;
+        		}
+        	} catch (PDOException | Exception $e) {
+        		return null;
+        	}
+        }
+        
+        public static function Pegar_Id_Anos(int $peca_id) : ?array {
+        	try {
+        		$sql = "SELECT categoria_pativel_ano_id FROM tb_categoria_pativel WHERE categoria_pativel_pec_id = :pec_id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":pec_id", $peca_id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		$id_anos = $p_sql->fetchAll(PDO::FETCH_COLUMN);
+        		
+        		if (!empty($id_anos) AND $id_anos != false) {
+        			return $id_anos;
         		} else {
         			return null;
         		}

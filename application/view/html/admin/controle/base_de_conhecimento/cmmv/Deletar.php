@@ -3,7 +3,6 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/application/view/html/include_page/head/Admin.php'; ?>
-	<script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\deletar.js"></script>
 	<title>Del CMMV | Feralten</title>
 </head>
 <body>
@@ -56,7 +55,8 @@
 	    </div>
     </section>
     <footer>
-        <?php //include_once RAIZ.'/application/view/html/include_page/footer/Rodape.php'; ?>        
+        <?php //include_once RAIZ.'/application/view/html/include_page/footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\deletar.js"></script>
     </footer>
 </body>
 </html>

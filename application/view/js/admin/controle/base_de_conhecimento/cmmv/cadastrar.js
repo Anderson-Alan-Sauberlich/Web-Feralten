@@ -1,6 +1,4 @@
-$(document).ready(function() {
-	$('.ui.dropdown').dropdown();
-});
+$('.ui.dropdown').dropdown();
 $(document).ready(function( ) {
 	$("#categoria").change(function() {
 		if ($("#categoria").val() != 0 && $("#categoria").val() != null) {
