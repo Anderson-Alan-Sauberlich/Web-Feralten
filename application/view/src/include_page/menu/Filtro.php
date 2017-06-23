@@ -52,9 +52,21 @@ namespace application\view\src\include_page\menu;
 				
 			foreach ($satus_pecas as $status_peca) {
 				if (isset(self::$form_filtro['status']) AND self::$form_filtro['status'] == $status_peca->get_id()) {
-					echo "<option selected value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
+					echo "<option selected value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
 				} else {
-					echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
+					echo "<option value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
+				}
+			}
+		}
+		
+		public static function Mostrar_Preferencia_Entrega() : void {
+			$preferencias_entrega = Controller_Filtro::Buscar_Preferencia_Entrega();
+			
+			foreach ($preferencias_entrega as $preferencia_entrega) {
+				if (isset(self::$form_filtro['preferencia_entrega']) AND self::$form_filtro['preferencia_entrega'] == $preferencia_entrega->get_id()) {
+					echo "<option selected value=\"".$preferencia_entrega->get_url()."\">".$preferencia_entrega->get_nome()."</option>";
+				} else {
+					echo "<option value=\"".$preferencia_entrega->get_url()."\">".$preferencia_entrega->get_nome()."</option>";
 				}
 			}
 		}

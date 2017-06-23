@@ -79,6 +79,17 @@
 			</div>
 		</div>
 		<div class="item">
+			<div class="header"><h4>Preferência de Entrega</h4></div>
+			<div class="menu">
+				<div class="ui container fluid">
+					<select id="preferencia_entrega" name="preferencia_entrega" class="ui fluid search dropdown">
+						<option value="0">Preferência de Entrega</option>
+						<?php View_Filtro::Mostrar_Preferencia_Entrega(); ?>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="item">
 			<button onClick="Pesquisar()" class="ui fluid inverted large icon button"><i class="refresh icon"></i> Atualizar</button>
 		</div>
 	</nav>

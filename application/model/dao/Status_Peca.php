@@ -15,13 +15,14 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Status_Peca $object_status_peca) : bool {
             try {
-                $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome) 
-                        VALUES (:id, :nome);";
+                $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_url) 
+                        VALUES (:id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_status_peca->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,12 +32,13 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Status_Peca $object_status_peca) : bool {
             try {
-                $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome WHERE status_peca_id = :id";
+                $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome, status_peca_url = :url WHERE status_peca_id = :id";
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(":url", $object_status_peca->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -57,9 +59,23 @@ namespace application\model\dao;
             }
         }
 		
+        public static function Buscar_Id_Por_Url(string $url) {
+        	try {
+        		$sql = "SELECT status_peca_id FROM tb_status_peca WHERE status_peca_url = :url";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT status_peca_id, status_peca_nome FROM tb_status_peca WHERE status_peca_id = :id";
+                $sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca WHERE status_peca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
@@ -73,7 +89,7 @@ namespace application\model\dao;
         
         public static function BuscarTodos() {
             try {
-                $sql = "SELECT status_peca_id, status_peca_nome FROM tb_status_peca";
+                $sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
@@ -86,7 +102,7 @@ namespace application\model\dao;
         
         public static function Buscar_Lista_Todos() {
         	try {
-        		$sql = "SELECT status_peca_id, status_peca_nome FROM tb_status_peca";
+        		$sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->execute();
@@ -108,6 +124,10 @@ namespace application\model\dao;
             	$object_status_peca->set_nome($row['status_peca_nome']);
             }
             
+            if (isset($row['status_peca_url'])) {
+            	$object_status_peca->set_url($row['status_peca_url']);
+            }
+            
             return $object_status_peca;
         }
 		
@@ -123,6 +143,10 @@ namespace application\model\dao;
 	            
 	            if (isset($row['status_peca_nome'])) {
 	            	$object_status_peca->set_nome($row['status_peca_nome']);
+	            }
+	            
+	            if (isset($row['status_peca_url'])) {
+	            	$object_status_peca->set_url($row['status_peca_url']);
 	            }
 	            
 	            $status_pecas[] = $object_status_peca;

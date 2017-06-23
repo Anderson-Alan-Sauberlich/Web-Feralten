@@ -66,8 +66,12 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->controller_filtro->set_ordem_data($ordem_data);
         }
         
-        public function set_status($status) : void {
-        	$this->controller_filtro->set_status($status);
+        public function set_status_url($status) : void {
+        	$this->controller_filtro->set_status_url($status);
+        }
+        
+        public function set_preferencia_entrega_url($preferencia_entrega) : void {
+        	$this->controller_filtro->set_preferencia_entrega_url($preferencia_entrega);
         }
         
         public function Carregar_Pagina() {

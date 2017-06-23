@@ -137,7 +137,41 @@ namespace application\model\common\util;
 			}
 		}
 		
-        public function Arquivar_Imagem_Peca($nomes_tmp, $id_peca) {
+		public function Atualizar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca) : ?array {
+			$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
+			$this->diretorio = $this->pasta_usuario.'tmp/';
+			$this->caminho = $this->pasta_usuario.$id_peca.'/';
+			
+			if (file_exists($this->diretorio)) {
+				$this->Gerenciar_Temporarios();
+				
+				$imagens_peca = array();
+				
+				$iterator = new DirectoryIterator($this->diretorio);
+				
+				foreach ($nomes_tmp as $key => $nome_img) {
+					foreach ($iterator as $entry) {
+						if (strpos($entry->getFilename(), $nome_img) !== false) {
+							$this->destino = $this->caminho.$entry->getFilename();
+							$this->tipo = $entry->getExtension();
+							rename($entry->getPathname(), $this->destino);
+						}
+					}
+					
+					if (!empty($this->tipo)) {
+						if (!empty($key)) {
+							$imagens_peca[$key] = '/imagens/'.$this->usuario.'/'.$id_peca.'/'.$nome_img.'-@.'.$this->tipo;
+						}
+					}
+				}
+				
+				return $imagens_peca;
+			} else {
+				return null;
+			}
+		}
+		
+        public function Arquivar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca) : ?array {
         	$this->pasta_usuario = RAIZ.'/imagens/'.$this->usuario.'/';
         	$this->diretorio = $this->pasta_usuario.'tmp/';
 			$this->caminho = $this->pasta_usuario.$id_peca.'/';
@@ -152,7 +186,7 @@ namespace application\model\common\util;
 				
 				$iterator = new DirectoryIterator($this->diretorio);
 				
-				foreach ($nomes_tmp as $nome_img) {
+				foreach ($nomes_tmp as $key => $nome_img) {
 					foreach ($iterator as $entry) {
 						if (strpos($entry->getFilename(), $nome_img) !== false) {
 							$this->destino = $this->caminho.$entry->getFilename();
@@ -162,11 +196,15 @@ namespace application\model\common\util;
 					}
 					
 					if (!empty($this->tipo)) {
-						$imagens_peca[] = '/imagens/'.$this->usuario.'/'.$id_peca.'/'.$nome_img.'-@.'.$this->tipo;
+						if (!empty($key)) {
+							$imagens_peca[$key] = '/imagens/'.$this->usuario.'/'.$id_peca.'/'.$nome_img.'-@.'.$this->tipo;
+						}
 					}
 				}
 				
 				return $imagens_peca;
+			} else {
+				return null;
 			}
         }
 		
@@ -188,6 +226,49 @@ namespace application\model\common\util;
 					}
 				}
 			}
+		}
+		
+		public function Deletar_Imagem_Peca(string $endereco) : bool {
+			$resposta = true;
+			$endereco = RAIZ.$endereco;
+			
+			$imagem1 = str_replace('@', '100x75', $endereco);
+			$imagem2 = str_replace('@', '200x150', $endereco);
+			$imagem3 = str_replace('@', '320x240', $endereco);
+			$imagem4 = str_replace('@', '400x300', $endereco);
+			$imagem5 = str_replace('@', '800x600', $endereco);
+			
+			if (file_exists($imagem1)) {
+				if (unlink($imagem1) !== true) {
+					$resposta = false;
+				}
+			}
+			
+			if (file_exists($imagem2)) {
+				if (unlink($imagem2) !== true) {
+					$resposta = false;
+				}
+			}
+			
+			if (file_exists($imagem3)) {
+				if (unlink($imagem3) !== true) {
+					$resposta = false;
+				}
+			}
+			
+			if (file_exists($imagem4)) {
+				if (unlink($imagem4) !== true) {
+					$resposta = false;
+				}
+			}
+			
+			if (file_exists($imagem5)) {
+				if (unlink($imagem5) !== true) {
+					$resposta = false;
+				}
+			}
+			
+			return $resposta;
 		}
         
 		public function Deletar_Imagem_Temporaria($nome_imagem) {

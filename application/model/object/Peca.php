@@ -143,7 +143,7 @@ namespace application\model\object;
 		}
 		
 		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void {
-			$this->preferencia_entrega= $preferencia_entrega;
+			$this->preferencia_entrega = $preferencia_entrega;
 		}
 		
 		public function get_preferencia_entrega() : ?int {

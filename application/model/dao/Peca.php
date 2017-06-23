@@ -239,6 +239,13 @@ namespace application\model\dao;
         		$pesquisa .= "peca_numero_serie = :numero_serie";
         	}
         	
+        	if (!empty($object_peca->get_preferencia_entrega())) {
+        		if (!empty($pesquisa)) {
+        			$pesquisa .= " AND ";
+        		}
+        		$pesquisa .= "peca_prf_ntr_id = :prf_ntr";
+        	}
+        	
         	if (!empty($object_peca->get_prioridade())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
@@ -332,6 +339,10 @@ namespace application\model\dao;
         	
         	if (!empty($object_peca->get_serie())) {
         		$p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
+        	}
+        	
+        	if (!empty($object_peca->get_preferencia_entrega())) {
+        		$p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_peca->get_prioridade())) {

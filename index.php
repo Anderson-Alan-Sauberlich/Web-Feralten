@@ -300,7 +300,11 @@
 				}
 				
 				if (isset($_GET['status'])) {
-					$visualizar->set_status($_GET['status']);
+					$visualizar->set_status_url($_GET['status']);
+				}
+				
+				if (isset($_GET['preferencia_entrega'])) {
+					$visualizar->set_preferencia_entrega_url($_GET['preferencia_entrega']);
 				}
 				
 				$resposta = $visualizar->Carregar_Pagina();
@@ -362,7 +366,11 @@
 				}
 				
 				if (isset($_GET['status'])) {
-					$visualizar->set_status($_GET['status']);
+					$visualizar->set_status_url($_GET['status']);
+				}
+				
+				if (isset($_GET['preferencia_entrega'])) {
+					$visualizar->set_preferencia_entrega_url($_GET['preferencia_entrega']);
 				}
 				
 				$resposta = $visualizar->Carregar_Pagina();

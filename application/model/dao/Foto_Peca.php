@@ -96,7 +96,13 @@ namespace application\model\dao;
 				$p_sql->bindValue(":num", $num_peca, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaFotoPeca($p_sql->fetch(PDO::FETCH_ASSOC));
+                $foto = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($foto) AND $foto !== false) {
+                	return self::PopulaFotoPeca($foto);
+                } else {
+                	return null;
+                }
             } catch (PDOException | Exception $e) {
 				return false;
             }

@@ -248,17 +248,19 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		        						$_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_versao_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
 		        					}
 		        				}
-		        				
-		        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
-		        				
-		        				if (!empty($fotos)) {
-		        					foreach ($fotos as $foto) {
-		        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
-		        					}
-		        				}
 		        			} else {
 		        				return 'erro';
 		        			}
+	        			}
+	        			
+	        			if (!isset($_SESSION['imagens_tmp']) AND empty($_SESSION['imagens_tmp'])) {
+	        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+	        				
+	        				if (!empty($fotos)) {
+	        					foreach ($fotos as $foto) {
+	        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
+	        					}
+	        				}
 	        			}
 	        			
 	        			$view = new View_Atualizar($status);
@@ -674,27 +676,40 @@ namespace application\controller\usuario\meu_perfil\pecas;
         				$this->atualizar_campos['erro_peca'] = "";
         			}
         			
-        			if (!empty($_SESSION['imagens_tmp'])) {
+        			if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
         				$imagens = new Gerenciar_Imagens();
         				$diretorios_imagens = array();
         				
-        				$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $this->peca_id);
+        				$diretorios_imagens = $imagens->Atualizar_Imagem_Peca($_SESSION['imagens_tmp'], $this->peca_id);
         				
         				if (!empty($diretorios_imagens)) {
-        					$indice = 0;
-        					
-        					foreach ($diretorios_imagens as $diretorio) {
+        					foreach ($diretorios_imagens as $key => $diretorio) {
         						$foto_peca = new Object_Foto_Peca();
-        						$indice++;
         						
-        						$foto_peca->set_peca_id($id_peca);
+        						$foto_peca->set_peca_id($this->peca_id);
         						$foto_peca->set_endereco($diretorio);
-        						$foto_peca->set_numero($indice);
+        						$foto_peca->set_numero($key);
         						
-        						if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-        							$this->atualizar_erros[] = "Erro ao tentar adicionar Foto $indice para a Peça";
-        							$this->atualizar_campos['erro_peca'] = "";
+        						$del_foto = DAO_Foto_Peca::Buscar_Foto($this->peca_id, $key);
+        						
+        						if (!empty($del_foto) AND $del_foto !== false) {
+        							if ($imagens->Deletar_Imagem_Peca($del_foto)) {
+        								$this->atualizar_erros[] = "Erro ao tentar Deletar Foto $key";
+        								$this->atualizar_campos['erro_peca'] = "";
+        							} else {
+        								if (DAO_Foto_Peca::Atualizar($foto_peca) === false) {
+        									$this->atualizar_erros[] = "Erro ao tentar Atualizar Foto $key para a Peça";
+        									$this->atualizar_campos['erro_peca'] = "";
+        								}
+        							}
+        						} else {
+        							if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
+        								$this->atualizar_erros[] = "Erro ao tentar Adicionar Foto $key para a Peça";
+        								$this->atualizar_campos['erro_peca'] = "";
+        							}
         						}
+        						
+        						unset($_SESSION['imagens_tmp']);
         					}
         				}
         			}

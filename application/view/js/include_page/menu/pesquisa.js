@@ -86,6 +86,7 @@ function Pesquisar() {
 	var ordem_preco = $("#ordem_preco").val();
 	var ordem_data = $("#ordem_data").val();
 	var status = $("#status").val();
+	var preferencia_entrega = $("#preferencia_entrega").val();
 	var estado = $("#estado").find("option:selected").data('url');
 	var cidade = $("#cidade").find("option:selected").data('url');
 	
@@ -158,6 +159,11 @@ function Pesquisar() {
 	if (status == 0 || status == "" || status == undefined) {
 		$("#status").prop('disabled', true);
 		$("#status").prop('readonly', true);
+	}
+	
+	if (preferencia_entrega == 0 || preferencia_entrega == "" || preferencia_entrega == undefined) {
+		$("#preferencia_entrega").prop('disabled', true);
+		$("#preferencia_entrega").prop('readonly', true);
 	}
 	
 	$("#searschform").attr("action", base_url);
