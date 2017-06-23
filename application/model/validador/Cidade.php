@@ -38,10 +38,10 @@ namespace application\model\validador;
 					
 					return strtolower($url);
 				} else {
-					throw new Exception('URL, Não pode conter Tags de Programação');
+					throw new Exception('URL da Cidade, Não pode conter Tags de Programação');
 				}
 			} else {
-				throw new Exception('URL, Não Informada');
+				throw new Exception('URL da Cidade, Não Informada');
 			}
 		}
 		

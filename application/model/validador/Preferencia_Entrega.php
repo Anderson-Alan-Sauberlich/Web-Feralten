@@ -18,7 +18,19 @@ namespace application\model\validador;
 		}
 		
 		public function validar_url($url = null) : ?string {
-			return $url;
+			if (!empty($url)) {
+				$valor = strip_tags($url);
+				
+				if ($valor === $url) {
+					$url = trim($url);
+					
+					return strtolower($url);
+				} else {
+					throw new Exception('URL da Preferência Entrega, Não pode conter Tags de Programação');
+				}
+			} else {
+				throw new Exception('URL da Preferência Entrega, Não Informada');
+			}
 		}
 		
 		public function filtrar_id($id = null) : void {
