@@ -693,14 +693,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
         						$del_foto = DAO_Foto_Peca::Buscar_Foto($this->peca_id, $key);
         						
         						if (!empty($del_foto) AND $del_foto !== false) {
-        							if ($imagens->Deletar_Imagem_Peca($del_foto)) {
-        								$this->atualizar_erros[] = "Erro ao tentar Deletar Foto $key";
-        								$this->atualizar_campos['erro_peca'] = "";
-        							} else {
+        							if ($imagens->Deletar_Imagem_Peca($del_foto->get_endereco())) {
         								if (DAO_Foto_Peca::Atualizar($foto_peca) === false) {
         									$this->atualizar_erros[] = "Erro ao tentar Atualizar Foto $key para a Peça";
         									$this->atualizar_campos['erro_peca'] = "";
         								}
+        							} else {
+        								$this->atualizar_erros[] = "Erro ao tentar Deletar Foto $key";
+        								$this->atualizar_campos['erro_peca'] = "";
         							}
         						} else {
         							if (DAO_Foto_Peca::Inserir($foto_peca) === false) {

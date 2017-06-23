@@ -2,21 +2,22 @@ $('.ui.dropdown').dropdown();
 $('.ui.checkbox').checkbox();
 $('.ui.radio.checkbox').checkbox({uncheckable: true});
 function Controlar_Classes() {
-	var scre = $("body").width();
+	var scren = $("body").width();
 	
-	if (scre <= 767) {
+	if (scren <= 767) {
 		$("#menu_filtro").addClass("sidebar");
 		$("#menu_filtro").removeClass("fluid sombra_painel");
+		$('#menu_filtro').sidebar('attach events', '.toggle.button');
 	}
-	if (scre >= 768 && scre <= 991) {
+	if (scren >= 768 && scren <= 991) {
 		$("#menu_filtro").removeClass("sidebar");
 		$("#menu_filtro").addClass("fluid sombra_painel");
 	}
-	if (scre >= 992 && scre <= 1199) {
+	if (scren >= 992 && scren <= 1199) {
 		$("#menu_filtro").removeClass("sidebar");
 		$("#menu_filtro").addClass("fluid sombra_painel");
 	}
-	if (scre >= 1200) {
+	if (scren >= 1200) {
 		$("#menu_filtro").removeClass("sidebar");
 		$("#menu_filtro").addClass("fluid sombra_painel");
 	}
@@ -37,6 +38,3 @@ $(document).ready(function() {
         });
    });
 });
-function abrirFiltro() {
-	$('#menu_filtro').sidebar('toggle');
-}

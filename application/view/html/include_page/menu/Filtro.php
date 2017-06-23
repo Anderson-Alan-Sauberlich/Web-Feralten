@@ -1,6 +1,6 @@
 <?php use application\view\src\include_page\menu\Filtro as View_Filtro; ?>
 <aside class="row redutorMenuLateral">
-	<nav id="menu_filtro" class="ui vertical inverted blue fluid sombra_painel menu">
+	<nav id="menu_filtro" class="ui vertical inverted left demo blue fluid sombra_painel menu">
 		<div class="active item">
 			<div class="ui grid">
 				<div class="eleven wide column">
@@ -95,7 +95,7 @@
 	</nav>
 </aside>
 <div class="visible-xs">
-	<button onclick="abrirFiltro()" class="fluid ui secondary labeled icon open button"><i class="left arrow icon"></i>Abrir Filtro de Busca</button>
+	<div class="fluid ui secondary labeled icon toggle button"><i class="left arrow icon"></i>Abrir Filtro de Busca</div>
 	<div class="ui horizontal divider"></div>
 </div>
 <script type="text/javascript" src="/application/view/js/include_page/menu/filtro.js"></script>
