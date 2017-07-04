@@ -198,6 +198,9 @@ function limparCampoFile(img) {
 $(document).ready(function() {
 	function handleFileSelect(evt) {
 		if (evt.target.files.length <= 3) {
+			var imagem1 = null;
+			var imagem2 = null;
+			var imagem3 = null;
 			
 			if (document.getElementById('foto1').src.indexOf("/application/view/resources/img/imagem_indisponivel.png") != -1) {
 				var imagem1 = evt.target.files[0];

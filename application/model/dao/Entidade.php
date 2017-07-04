@@ -18,7 +18,7 @@ namespace application\model\dao;
             try {
                 $sql = "INSERT INTO tb_entidade (entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                         entidade_imagem, entidade_site, entidade_data_cadastro) 
-                		VALUES (:us_id, :su_id, :cpf_cnpj, :nome, :imagem, :site, :data);";
+                		VALUES (:us_id, :su_id, :cpf_cnpj, :nome, :img, :site, :data);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
@@ -26,7 +26,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":su_id", $object_entidade->get_status_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":cpf_cnpj", $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
                 $p_sql->bindValue(":nome", $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
-                $p_sql->bindValue(":imagem", $object_entidade->get_imagem(), PDO::PARAM_STR);
+                $p_sql->bindValue(":img", $object_entidade->get_imagem(), PDO::PARAM_STR);
 				$p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 $p_sql->bindValue(":data", $object_entidade->get_data(), PDO::PARAM_STR);
                 
@@ -43,7 +43,7 @@ namespace application\model\dao;
                 $sql = "UPDATE tb_entidade SET
                 entidade_cpf_cnpj = :cpf_cnpj,
                 entidade_nome_comercial = :nome,
-                entidade_imagem = :imagem,
+                entidade_imagem = :img,
                 entidade_site = :site 
                 WHERE entidade_usr_id = :us_id";
 
@@ -52,7 +52,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(":us_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":cpf_cnpj", $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
                 $p_sql->bindValue(":nome", $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
-                $p_sql->bindValue(":imagem", $object_entidade->get_imagem(), PDO::PARAM_STR);
+                $p_sql->bindValue(":img", $object_entidade->get_imagem(), PDO::PARAM_STR);
                 $p_sql->bindValue(":site", $object_entidade->get_site(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
@@ -82,14 +82,14 @@ namespace application\model\dao;
             }
         }
         
-        public static function Atualizar_Imagem(string $imagem, int $usuario) : bool {
+        public static function Atualizar_Imagem(string $imagem, int $entidade) : bool {
             try {
-                $sql = "UPDATE tb_entidade SET entidade_imagem = :imagem WHERE entidade_usr_id = :us_id";
+                $sql = "UPDATE tb_entidade SET entidade_imagem = :img WHERE entidade_id = :ent_id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":us_id", $usuario, PDO::PARAM_INT);
-                $p_sql->bindValue(":imagem", $imagem, PDO::PARAM_STR);
+                $p_sql->bindValue(":ent_id", $entidade, PDO::PARAM_INT);
+                $p_sql->bindValue(":img", $imagem, PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -189,6 +189,20 @@ namespace application\model\dao;
             } catch (PDOException | Exception $e) {
 				return false;
             }
+        }
+        
+        public static function Pegar_Imagem_Entidade(int $id) : ?string {
+        	try {
+        		$sql = "SELECT entidade_imagem FROM tb_entidade WHERE entidade_id = :id";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->execute();
+        		
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
+        	} catch (PDOException | Exception $e) {
+        		return null;
+        	}
         }
         
         public static function PopulaUsuario(array $row) : Object_Entidade {

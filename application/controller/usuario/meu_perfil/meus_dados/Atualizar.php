@@ -340,16 +340,38 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		$imagens = new Gerenciar_Imagens();
 				
         		if ($_SESSION['imagem_tmp'] == "del") {
-					$imagens->Deletar_Imagem_Usuario();
+					$imagens->Deletar_Imagem_Entidade();
         			return "del";
         		} else {
-					$img_link = $imagens->Atualizar_Imagem_Usuario($_SESSION['imagem_tmp']);
+        			$img_link = null;
+        			
+        			if (!empty($this->nome_comercial)) {
+        				$img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp'], Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial));
+        			} else {
+        				$img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp']);
+        			}
+        			
 					unset($_SESSION['imagem_tmp']);
 					return $img_link;
 				}
 			} else {
-				return null;
-			}
+				$img_link = null;
+				$img_descricao = Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial);
+				
+				$imagens = new Gerenciar_Imagens();
+				
+				if (!empty($img_descricao)) {
+					$img_link = $imagens->Atualizar_Nome_Imagem_Entidade($img_descricao);
+				} else {
+					$img_link = $imagens->Atualizar_Nome_Imagem_Entidade();
+				}
+				
+				if (!empty($img_link)) {
+					return $img_link;
+				} else {
+					return null;
+				}
+        	}
         }
     }
 ?>

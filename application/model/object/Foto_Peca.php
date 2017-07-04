@@ -6,6 +6,7 @@ namespace application\model\object;
 		private $peca_id;
 		private $endereco;
 		private $numero;
+		private $nome;
 		
 		function __constructor() {
 			
@@ -33,6 +34,14 @@ namespace application\model\object;
 		
 		public function get_numero() : ?int {
 			return $this->numero;
+		}
+		
+		public function set_nome(string $nome) : void {
+			$this->nome = $nome;
+		}
+		
+		public function get_nome() : ?string {
+			return $this->nome;
 		}
     }
 ?>

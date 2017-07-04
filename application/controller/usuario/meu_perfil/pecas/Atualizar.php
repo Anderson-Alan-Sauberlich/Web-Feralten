@@ -54,6 +54,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $serie;
         private $preco;
         private $prioridade;
+        private $imagens = array();
         private $atualizar_erros = array();
         private $atualizar_sucesso = array();
         private $atualizar_campos = array();
@@ -198,6 +199,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$this->atualizar_erros[] = $e->getMessage();
         		
         		$this->prioridade = Validador::Peca()::filtrar_prioridade($prioridade);
+        	}
+        }
+        
+        public function set_imagem($imagem, $numero) {
+        	try {
+        		$this->imagens[$numero] = Validador::Foto_Peca()::validar_imagem($imagem, $numero);
+        	} catch (Exception $e) {
+        		$this->atualizar_erros[] = $e->getMessage();
         	}
         }
         
@@ -786,31 +795,19 @@ namespace application\controller\usuario\meu_perfil\pecas;
         
         public function Salvar_Imagem_TMP() : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
-        		$arquivo = null;
-        		$numero = null;
-        		
-        		if (isset($_FILES['imagem1']) AND $_FILES['imagem1']['error'] === 0) {
-        			$arquivo = $_FILES['imagem1'];
-        			$numero = 1;
-        		} else if (isset($_FILES['imagem2']) AND $_FILES['imagem2']['error'] === 0) {
-        			$arquivo = $_FILES['imagem2'];
-        			$numero = 2;
-        		} else if (isset($_FILES['imagem3']) AND $_FILES['imagem3']['error'] === 0) {
-        			$arquivo = $_FILES['imagem3'];
-        			$numero = 3;
-        		}
-        		
-        		if (!empty($arquivo)) {
+        		if (!empty($this->imagens)) {
         			$imagens = new Gerenciar_Imagens();
         			
-        			$imagens->Armazenar_Imagem_Temporaria($arquivo);
-        			
-        			if (!isset($_SESSION['imagens_tmp'][$numero])) {
-        				$_SESSION['imagens_tmp'][$numero] = $imagens->get_nome();
-        			}
-        			
-        			echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
-        		} else {
+        			foreach ($this->imagens as $key => $imagem) {
+        				$imagens->Armazenar_Imagem_Temporaria($imagem);
+        				
+        				if (!isset($_SESSION['imagens_tmp'][$key])) {
+        					$_SESSION['imagens_tmp'][$key] = $imagens->get_nome();
+        				}
+        				
+        				echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+	        		}
+        		}  else {
         			echo "/application/view/resources/img/imagem_indisponivel.png";
         		}
         	}

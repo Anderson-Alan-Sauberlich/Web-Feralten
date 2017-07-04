@@ -45,10 +45,10 @@ namespace application\model\validador;
 					$nome = trim($nome);
 					$nome = preg_replace('/\s+/', " ", $nome);
 					
-					if (strlen($nome) <= 50) {
+					if (strlen($nome) <= 100) {
 						return ucwords(strtolower($nome));
 					} else {
-						throw new Exception('Peça Nome, Não pode conter mais de 50 Caracteres');
+						throw new Exception('Peça Nome, Não pode conter mais de 100 Caracteres');
 					}
 				} else {
 					throw new Exception('Peça Nome, Não pode conter Tags de Programação');

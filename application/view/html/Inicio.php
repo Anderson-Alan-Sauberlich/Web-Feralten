@@ -1,4 +1,4 @@
-<?php use application\view\src\Pagina_Inicial as View_Pagina_Inicial; ?>
+<?php use application\view\src\Inicio as View_Inicio; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
@@ -11,7 +11,7 @@
     </header>
     <section class="ui container" role="main">
     	<form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
-        	<?php View_Pagina_Inicial::Incluir_Menu_Pesquisa(); ?>
+        	<?php View_Inicio::Incluir_Menu_Pesquisa(); ?>
         </form>
         
         <div class="container-fluid">

@@ -10,9 +10,9 @@
 	
 	$app->group('/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			$pagina_inicial = new application\controller\Pagina_Inicial();
+			$inicio = new application\controller\Inicio();
 			
-			$pagina_inicial->Carregar_Pagina();
+			$inicio->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -441,6 +441,18 @@
 		
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+			
+			if (isset($_FILES['imagem1'])) {
+				$atualizar->set_imagem($_FILES['imagem1'], 1);
+			}
+			
+			if (isset($_FILES['imagem2'])) {
+				$atualizar->set_imagem($_FILES['imagem2'], 2);
+			}
+			
+			if (isset($_FILES['imagem3'])) {
+				$atualizar->set_imagem($_FILES['imagem3'], 3);
+			}
 			
 			$atualizar->Salvar_Imagem_TMP();
 			

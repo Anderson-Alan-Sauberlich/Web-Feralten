@@ -67,10 +67,10 @@ namespace application\model\validador;
 					$nome_comercial = trim($nome_comercial);
 					$nome_comercial = preg_replace('/\s+/', " ", $nome_comercial);
 					
-					if (strlen($nome_comercial) <= 150) {
+					if (strlen($nome_comercial) <= 50) {
 						return $nome_comercial;
 					} else {
-						throw new Exception('Nome Comercial, Não pode conter mais de 150 Caracteres');
+						throw new Exception('Nome Comercial, Não pode conter mais de 50 Caracteres');
 					}
 				} else {
 					throw new Exception('Nome Comercial, Não pode conter Tags de Programação');
@@ -81,6 +81,10 @@ namespace application\model\validador;
 		}
 		
 		public static function validar_imagem($imagem = null) : void {
+			
+		}
+		
+		public static function validar_descricao_imagem($img_descricao = null) : ?string {
 			
 		}
 		
@@ -151,6 +155,21 @@ namespace application\model\validador;
         
         public static function filtrar_imagem($imagem = null) : void {
             
+        }
+        
+        public static function filtrar_descricao_imagem($img_descricao = null) : ?string {
+        	$valor = null;
+        	
+        	if (!empty($img_descricao)) {
+        		$img_descricao = iconv("UTF-8", "ASCII//TRANSLIT//IGNORE", $img_descricao);
+        		$img_descricao = trim($img_descricao);
+        		$img_descricao = preg_replace('/\s+/', '-', $img_descricao);
+        		$img_descricao = preg_replace(array('/[ ]/', '/[^A-Za-z0-9\-]/'), array('', ''), $img_descricao);
+        		
+        		$valor = $img_descricao;
+        	}
+        	
+        	return $valor;
         }
 		
         public static function filtrar_site($site = null) : ?string {

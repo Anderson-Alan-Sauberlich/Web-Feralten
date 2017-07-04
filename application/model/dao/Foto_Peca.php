@@ -15,14 +15,15 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Foto_Peca $object_foto_peca) : bool {
             try {
-                $sql = "INSERT INTO tb_foto_peca (foto_peca_pec_id, foto_peca_endereco, foto_peca_numero) 
-                        VALUES (:pc_id, :endereco, :num);";
+                $sql = "INSERT INTO tb_foto_peca (foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome) 
+                        VALUES (:pc_id, :endereco, :num, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":pc_id", $object_foto_peca->get_peca_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":endereco", $object_foto_peca->get_endereco(), PDO::PARAM_STR);
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_foto_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -32,13 +33,14 @@ namespace application\model\dao;
         
         public static function Atualizar(Object_Foto_Peca $object_foto_peca) : bool {
             try {
-                $sql = "UPDATE tb_foto_peca SET foto_peca_pec_id = :pc_id, foto_peca_endereco = :endereco, foto_peca_numero = :num WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
+                $sql = "UPDATE tb_foto_peca SET foto_peca_pec_id = :pc_id, foto_peca_endereco = :endereco, foto_peca_numero = :num, foto_peca_nome = :nome WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(":pc_id", $object_foto_peca->get_peca_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(":endereco", $object_foto_peca->get_endereco(), PDO::PARAM_STR);
                 $p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
+                $p_sql->bindValue(":nome", $object_foto_peca->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -75,7 +77,7 @@ namespace application\model\dao;
 		
         public static function Buscar_Fotos(int $id_peca) {
             try {
-                $sql = "SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id";
+                $sql = "SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":pc_id", $id_peca, PDO::PARAM_INT);
@@ -89,7 +91,7 @@ namespace application\model\dao;
         
         public static function Buscar_Foto(int $id_peca, int $num_peca) {
             try {
-                $sql = "SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
+                $sql = "SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(":pc_id", $id_peca, PDO::PARAM_INT);
@@ -123,6 +125,10 @@ namespace application\model\dao;
             	$object_foto_peca->set_numero($row['foto_peca_numero']);
             }
             
+            if (isset($row['foto_peca_nome'])) {
+            	$object_foto_peca->set_nome($row['foto_peca_nome']);
+            }
+            
             return $object_foto_peca;
         }
         
@@ -143,6 +149,10 @@ namespace application\model\dao;
 	                
 	                if (isset($row['foto_peca_numero'])) {
 	                	$object_foto_peca->set_numero($row['foto_peca_numero']);
+	                }
+	                
+	                if (isset($row['foto_peca_nome'])) {
+	                	$object_foto_peca->set_nome($row['foto_peca_nome']);
 	                }
 	                
 	                $fotos_pecas[] = $object_foto_peca;

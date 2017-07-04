@@ -220,43 +220,47 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         		if ($status == 0) {
 		            if (empty($this->concluir_erros)) {
 		            	$usuario = new Object_Usuario();
-		            	$entidade = new Object_Entidade();
-		            	$endereco = new Object_Endereco();
-		            	$object_cidade = new Object_Cidade();
-		            	$object_estado = new Object_Estado();
-		            	
-		            	$object_estado->set_id($this->estado);
-		            	
-		            	$object_cidade->set_id($this->cidade);
-		            	
 		            	$usuario->set_fone1($this->fone1);
 		            	$usuario->set_fone2($this->fone2);
 		            	$usuario->set_email_alternativo($this->email_alternativo);
 		            	$usuario->set_id(Login_Session::get_usuario_id());
 		            	
-		            	$endereco->set_cidade($object_cidade);
-		            	$endereco->set_estado($object_estado);
-		            	$endereco->set_numero($this->numero);
-		            	$endereco->set_cep($this->cep);
-		            	$endereco->set_bairro($this->bairro);
-		            	$endereco->set_rua($this->rua);
-		            	$endereco->set_complemento($this->complemento);
-		            	
-		            	$entidade->set_cpf_cnpj($this->cpf_cnpj);
-		            	$entidade->set_site($this->site);
-		            	$entidade->set_nome_comercial($this->nome_comercial);
-		            	
 		            	if (DAO_Usuario::Atualizar_Contato($usuario) !== false) {
+		            		$entidade = new Object_Entidade();
 		            		$entidade->set_usuario_id(Login_Session::get_usuario_id());
 		            		$entidade->set_status_id(1);
 		            		$entidade->set_data(date('Y-m-d H:i:s'));
-		            		$entidade->set_imagem($this->Salvar_Imagem());
+		            		$entidade->set_cpf_cnpj($this->cpf_cnpj);
+		            		$entidade->set_site($this->site);
+		            		$entidade->set_nome_comercial($this->nome_comercial);
 		            		
-		            		$retorno = DAO_Entidade::Inserir($entidade);
+		            		$id_entidade = DAO_Entidade::Inserir($entidade);
 		            		
-			                if ($retorno != false) {
+		            		if ($id_entidade != false) {
+		            			Login_Session::set_entidade_id($id_entidade);
+			                	
+			                	$imagem = $this->Salvar_Imagem();
+			                	
+			                	if (!empty($imagem)) {
+			                		DAO_Entidade::Atualizar_Imagem($imagem, $id_entidade);
+			                	}
+			                	
+			                	$object_estado = new Object_Estado();
+			                	$object_estado->set_id($this->estado);
+			                	
+			                	$object_cidade = new Object_Cidade();
+			                	$object_cidade->set_id($this->cidade);
+			                	
+			                	$endereco = new Object_Endereco();
 			                	$endereco->set_id(0);
-			                	$endereco->set_entidade_id($retorno);
+			                	$endereco->set_entidade_id($id_entidade);
+			                	$endereco->set_cidade($object_cidade);
+			                	$endereco->set_estado($object_estado);
+			                	$endereco->set_numero($this->numero);
+			                	$endereco->set_cep($this->cep);
+			                	$endereco->set_bairro($this->bairro);
+			                	$endereco->set_rua($this->rua);
+			                	$endereco->set_complemento($this->complemento);
 			                	
 			                	if (DAO_Endereco::Inserir($endereco) === false) {
 			                		$this->concluir_erros[] = "Erro ao tentar Inserir Endereço do Usuario";
@@ -349,16 +353,19 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 		}
 
         private function Salvar_Imagem() : ?string {
-        	if (isset($_SESSION['imagem_tmp'])) {
+        	if (isset($_SESSION['imagem_tmp']) AND !empty($_SESSION['imagem_tmp'])) {
+        		$img_nome = null;
         		$imagens = new Gerenciar_Imagens();
-			
-        		$imagem_tmp = $_SESSION['imagem_tmp'];
+        		
+        		if (!empty($this->nome_comercial)) {
+        			$img_nome = $imagens->Arquivar_Imagem_Entidade($_SESSION['imagem_tmp'], Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial));
+        		} else {
+        			$img_nome = $imagens->Arquivar_Imagem_Entidade($_SESSION['imagem_tmp']);
+        		}
         		
         		unset($_SESSION['imagem_tmp']);
         		
-        		$img_nome = $imagens->Arquivar_Imagem_Usuario($imagem_tmp);
-        		
-        		if (!empty($img_nome) AND $img_nome != false) {
+        		if (!empty($img_nome)) {
         			return $img_nome;
         		} else {
         			return null;
@@ -367,7 +374,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 				return null;
 			}
         }
-
+        
 		public static function Buscar_Todos_Estados() : array {
 			return DAO_Estado::BuscarTodos();
 		}
