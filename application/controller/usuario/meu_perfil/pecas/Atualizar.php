@@ -59,7 +59,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $atualizar_sucesso = array();
         private $atualizar_campos = array();
         private $atualizar_form = array();
-        private $atualizar_imagens = array();
         
         public function set_peca_id($peca_id) {
         	try {
@@ -262,14 +261,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		        			}
 	        			}
 	        			
-	        			if (!isset($_SESSION['imagens_tmp']) AND empty($_SESSION['imagens_tmp'])) {
-	        				$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
-	        				
-	        				if (!empty($fotos)) {
-	        					foreach ($fotos as $foto) {
-	        						$this->atualizar_imagens[$foto->get_numero()] = str_replace('@', '400x300', $foto->get_endereco());
-	        					}
-	        				}
+	        			if (!isset($_SESSION['imagens_cnst']) OR empty($_SESSION['imagens_cnst'])) {
+		        			$fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+		        			
+		        			if (!empty($fotos)) {
+		        				foreach ($fotos as $foto) {
+		        					$_SESSION['imagens_cnst'][$foto->get_numero()] = $foto->get_nome();
+		        				}
+		        			}
 	        			}
 	        			
 	        			$view = new View_Atualizar($status);
@@ -278,7 +277,6 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	        			$view->set_atualizar_erros($this->atualizar_erros);
 	        			$view->set_atualizar_form($this->atualizar_form);
 	        			$view->set_atualizar_sucesso($this->atualizar_sucesso);
-	        			$view->set_atualizar_imagens($this->atualizar_imagens);
 	        			
 	        			$view->Executar();
         			} else {
@@ -685,11 +683,34 @@ namespace application\controller\usuario\meu_perfil\pecas;
         				$this->atualizar_campos['erro_peca'] = "";
         			}
         			
-        			if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
-        				$imagens = new Gerenciar_Imagens();
-        				$diretorios_imagens = array();
+        			$gerenciar_imagens = new Gerenciar_Imagens();
+        			
+        			if (isset($_SESSION['imagens_cnst'])) {
+        				$imagens = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+						
+        				foreach ($imagens as $imagem) {
+        					if (in_array($imagem->get_nome(), $_SESSION['imagens_cnst'])) {
+        						$novo_numero = array_search($imagem->get_nome(), $_SESSION['imagens_cnst']);
+        						
+        						if (!DAO_Foto_Peca::Atualizar_Por_Num($novo_numero, $imagem)) {
+        							$this->atualizar_erros[] = "Erro ao tentar Atualizar Foto para a Peça";
+        							$this->atualizar_campos['erro_peca'] = "";
+        						}
+        					} else {
+        						if ($gerenciar_imagens->Deletar_Imagem_Peca($imagem->get_endereco())) {
+        							if (!DAO_Foto_Peca::Deletar_Foto($imagem->get_peca_id(), $imagem->get_numero())) {
+        								$this->atualizar_erros[] = "Erro ao tentar Atualizar Foto para a Peça";
+        								$this->atualizar_campos['erro_peca'] = "";
+        							}
+        						}
+        					}
+        				}
         				
-        				$diretorios_imagens = $imagens->Atualizar_Imagem_Peca($_SESSION['imagens_tmp'], $this->peca_id);
+        				unset($_SESSION['imagens_cnst']);
+        			}
+        			
+        			if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
+        				$diretorios_imagens = $gerenciar_imagens->Atualizar_Imagem_Peca($_SESSION['imagens_tmp'], $this->peca_id);
         				
         				if (!empty($diretorios_imagens)) {
         					foreach ($diretorios_imagens as $key => $diretorio) {
@@ -698,11 +719,12 @@ namespace application\controller\usuario\meu_perfil\pecas;
         						$foto_peca->set_peca_id($this->peca_id);
         						$foto_peca->set_endereco($diretorio);
         						$foto_peca->set_numero($key);
+        						$foto_peca->set_nome($_SESSION['imagens_tmp'][$key]);
         						
         						$del_foto = DAO_Foto_Peca::Buscar_Foto($this->peca_id, $key);
         						
         						if (!empty($del_foto) AND $del_foto !== false) {
-        							if ($imagens->Deletar_Imagem_Peca($del_foto->get_endereco())) {
+        							if ($gerenciar_imagens->Deletar_Imagem_Peca($del_foto->get_endereco())) {
         								if (DAO_Foto_Peca::Atualizar($foto_peca) === false) {
         									$this->atualizar_erros[] = "Erro ao tentar Atualizar Foto $key para a Peça";
         									$this->atualizar_campos['erro_peca'] = "";
@@ -717,11 +739,27 @@ namespace application\controller\usuario\meu_perfil\pecas;
         								$this->atualizar_campos['erro_peca'] = "";
         							}
         						}
-        						
-        						unset($_SESSION['imagens_tmp']);
         					}
+        					
+        					unset($_SESSION['imagens_tmp']);
+        				} else {
+        					$this->atualizar_erros[] = "Erro ao tentar Atualizar Fotos da Peça";
+        					$this->atualizar_campos['erro_peca'] = "";
         				}
         			}
+        			
+        			$img_descricao = Validador::Foto_Peca()::filtrar_descricao_nome($this->peca);
+        			$imagens = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+        			
+        			$gerenciar_imagens->Atualizar_Nome_Imagem_Peca($this->peca_id, $img_descricao);
+        			
+        			foreach ($imagens as $imagem) {
+        				$imagem->set_nome(preg_replace('/_(.*?)_/', '_'.$img_descricao.'_', $imagem->get_nome()));
+        				$imagem->set_endereco(preg_replace('/_(.*?)_/', '_'.$img_descricao.'_', $imagem->get_endereco()));
+        				
+        				DAO_Foto_Peca::Atualizar($imagem);
+        			}
+        			
         		} else {
         			$this->atualizar_erros[] = "Erro ao tentar Atualizar Peça";
         			$this->atualizar_campos['erro_peca'] = "";
@@ -805,10 +843,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
         					$_SESSION['imagens_tmp'][$key] = $imagens->get_nome();
         				}
         				
-        				echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+        				echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho().'-400x300.'.$imagens->get_extensao());
 	        		}
         		}  else {
-        			echo "/application/view/resources/img/imagem_indisponivel.png";
+        			echo '/application/view/resources/img/imagem_indisponivel.png';
         		}
         	}
         }
@@ -816,77 +854,116 @@ namespace application\controller\usuario\meu_perfil\pecas;
         public function Deletar_Imagem(int $num_img) : void {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		if (isset($_SESSION['imagens_tmp'])) {
-        			if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
-        				$imagens_tmp = $_SESSION['imagens_tmp'];
-        				$imagens = new Gerenciar_Imagens();
-        				
-        				if ($num_img == 123) {
-        					if (isset($imagens_tmp[1])) {
-        						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
-        					}
-        					if (isset($imagens_tmp[2])) {
-        						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
-        					}
-        					if (isset($imagens_tmp[3])) {
-        						$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
-        					}
-        					
-        					unset($imagens_tmp);
-        				} else if ($num_img == 1) {
-        					$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
-        					
-        					if (isset($imagens_tmp[2])) {
-        						$imagens_tmp[1] = $imagens_tmp[2];
-        						
-        						if (isset($imagens_tmp[3])) {
-        							$imagens_tmp[2] = $imagens_tmp[3];
-        							unset($imagens_tmp[3]);
-        						} else {
-        							unset($imagens_tmp[2]);
-        						}
-        					} else {
-        						unset($imagens_tmp[1]);
-        					}
-        				} else if ($num_img == 2) {
-        					$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
-        					
-        					if (isset($imagens_tmp[3])) {
-        						$imagens_tmp[2] = $imagens_tmp[3];
-        						unset($imagens_tmp[3]);
-        					} else {
-        						unset($imagens_tmp[2]);
-        					}
-        				} else if ($num_img == 3) {
-        					$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
-        					
-        					unset($imagens_tmp[3]);
-        				} else {
-        					$imagens->Deletar_Imagem_Temporaria($num_img);
-        					
-        					unset($imagens_tmp[$num_img]);
+        			$imagens = new Gerenciar_Imagens();
+        			
+        			if ($num_img === 123) {
+        				if (isset($_SESSION['imagens_tmp'][1])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][1]);
+        				}
+        				if (isset($_SESSION['imagens_tmp'][2])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][2]);
+        				}
+        				if (isset($_SESSION['imagens_tmp'][3])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][3]);
         				}
         				
-        				if (isset($imagens_tmp)) {
-        					if (count($imagens_tmp) > 0) {
-        						$_SESSION['imagens_tmp'] = $imagens_tmp;
+        				unset($_SESSION['imagens_tmp']);
+        			} else if ($num_img === 1) {
+        				if (isset($_SESSION['imagens_tmp'][1])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][1]);
+        				}
+        				
+        				if (isset($_SESSION['imagens_tmp'][2])) {
+        					$_SESSION['imagens_tmp'][1] = $_SESSION['imagens_tmp'][2];
+        					
+        					if (isset($_SESSION['imagens_tmp'][3])) {
+        						$_SESSION['imagens_tmp'][2] = $_SESSION['imagens_tmp'][3];
+        						unset($_SESSION['imagens_tmp'][3]);
         					} else {
-        						unset($_SESSION['imagens_tmp']);
+        						unset($_SESSION['imagens_tmp'][2]);
         					}
         				} else {
+        					unset($_SESSION['imagens_tmp'][1]);
+        				}
+        			} else if ($num_img === 2) {
+        				if (isset($_SESSION['imagens_tmp'][2])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][2]);
+        				}
+        				
+        				if (isset($_SESSION['imagens_tmp'][3])) {
+        					$_SESSION['imagens_tmp'][2] = $_SESSION['imagens_tmp'][3];
+        					unset($_SESSION['imagens_tmp'][3]);
+        				} else {
+        					unset($_SESSION['imagens_tmp'][2]);
+        				}
+        			} else if ($num_img === 3) {
+        				if (isset($_SESSION['imagens_tmp'][3])) {
+        					$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][3]);
+        				}
+        				
+        				unset($_SESSION['imagens_tmp'][3]);
+        			}
+        			
+        			if (isset($_SESSION['imagens_tmp'])) {
+        				if (empty($_SESSION['imagens_tmp'])) {
         					unset($_SESSION['imagens_tmp']);
+        				}
+        			}
+        		}
+        		
+        		if (isset($_SESSION['imagens_cnst'])) {
+        			if (isset($_SESSION['imagens_cnst'][$num_img]) OR $num_img === 123) {
+        				if ($num_img === 123) {
+        					unset($_SESSION['imagens_cnst'][1]);
+        					unset($_SESSION['imagens_cnst'][2]);
+        					unset($_SESSION['imagens_cnst'][3]);
+        				} else if ($num_img === 1) {
+        					if (isset($_SESSION['imagens_cnst'][2])) {
+        						$_SESSION['imagens_cnst'][1] = $_SESSION['imagens_cnst'][2];
+        						
+        						if (isset($_SESSION['imagens_cnst'][3])) {
+        							$_SESSION['imagens_cnst'][2] = $_SESSION['imagens_cnst'][3];
+        							unset($_SESSION['imagens_cnst'][3]);
+        						} else {
+        							unset($_SESSION['imagens_cnst'][2]);
+        						}
+        					} else {
+        						unset($_SESSION['imagens_cnst'][1]);
+        					}
+        				} else if ($num_img === 2) {
+        					if (isset($_SESSION['imagens_cnst'][3])) {
+        						$_SESSION['imagens_cnst'][2] = $_SESSION['imagens_cnst'][3];
+        						unset($_SESSION['imagens_cnst'][3]);
+        					} else {
+        						unset($_SESSION['imagens_cnst'][2]);
+        					}
+        				} else if ($num_img === 3) {
+        					unset($_SESSION['imagens_cnst'][3]);
         				}
         			}
         		}
         	}
         }
         
-        public static function Pegar_Imagem_URL(string $nome_imagem) : string {
+        public static function Pegar_Imagem_TMP_URL(string $nome_imagem) : string {
         	$imagens = new Gerenciar_Imagens();
         	
-        	$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-400x300");
+        	$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-400x300");
         	
-        	if (isset($caminho_imagem)) {
-        		return $imagens::Gerar_Data_URL($caminho_imagem);
+        	if (!empty($caminho_imagem)) {
+        		return Gerenciar_Imagens::Gerar_Data_URL($caminho_imagem);
+        	} else {
+        		return "/application/view/resources/img/imagem_indisponivel.png";
+        	}
+        }
+        
+        public static function Pegar_Imagem_CNST_URL(string $nome_imagem, int $peca) : string {
+        	$imagens = new Gerenciar_Imagens();
+        	
+        	$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_CNST($nome_imagem.'-400x300', $peca);
+        	
+        	if (!empty($caminho_imagem)) {
+        		return Gerenciar_Imagens::Gerar_Data_URL($caminho_imagem);
         	} else {
         		return "/application/view/resources/img/imagem_indisponivel.png";
         	}

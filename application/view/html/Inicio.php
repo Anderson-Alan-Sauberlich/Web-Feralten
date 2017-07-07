@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/application/view/html/include_page/head/Default.php'; ?>
-    <title>Pagina-Inicial | Feralten</title>
+    <title>Início | Feralten</title>
 </head>
 <body>
     <header>

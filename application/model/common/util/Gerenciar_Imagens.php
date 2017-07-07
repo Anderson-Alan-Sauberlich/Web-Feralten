@@ -167,14 +167,14 @@ namespace application\model\common\util;
 				
 				foreach ($iterator as $entry) {
 					if (strpos($entry->getFilename(), $nome_tmp) !== false) {
-						$this->destino = $this->pasta_entidade.str_replace('img-tmp-', "img-$descricao-", $entry->getFilename());
+						$this->destino = $this->pasta_entidade.str_replace('img_tmp_', 'img_'.$descricao.'_', $entry->getFilename());
 						$this->tipo = $entry->getExtension();
 						rename($entry->getPathname(), $this->destino);
 					}
 				}
 				
 				if (!empty($this->tipo)) {
-					$nome_tmp = str_replace('img-tmp-', "img-$descricao-", $nome_tmp);
+					$nome_tmp = str_replace('img_tmp_', 'img_'.$descricao.'_', $nome_tmp);
 					return '/imagens/'.$this->entidade.'/'.$nome_tmp.'-@.'.$this->tipo;
 				} else {
 					return null;
@@ -218,7 +218,32 @@ namespace application\model\common\util;
 			}
 		}
 		
-        public function Arquivar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca) : ?array {
+		public function Atualizar_Nome_Imagem_Peca(int $peca, ?string $descricao = 'tmp') : bool {
+			$this->diretorio = RAIZ.'/imagens/'.$this->entidade.'/'.$peca.'/';
+			
+			if (file_exists($this->diretorio)) {
+				$iterator = new DirectoryIterator($this->diretorio);
+				
+				foreach ($iterator as $entry) {
+					$this->nome = preg_replace('/_(.*?)_/', '_'.$descricao.'_', $entry->getFilename());
+					$this->destino = $this->diretorio.$this->nome;
+					
+					if ($entry->getExtension() == 'jpg' OR $entry->getExtension() == 'jpeg' OR $entry->getExtension() == 'png') {
+						rename($entry->getPathname(), $this->destino);
+					}
+				}
+				
+				if (!empty($this->nome)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		
+        public function Arquivar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca, ?string $descricao = 'tmp') : ?array {
         	$this->pasta_entidade = RAIZ.'/imagens/'.$this->entidade.'/';
         	$this->diretorio = $this->pasta_entidade.'tmp/';
 			$this->caminho = $this->pasta_entidade.$id_peca.'/';
@@ -228,15 +253,17 @@ namespace application\model\common\util;
 				
 				$imagens_peca = array();
 				
-	            mkdir($this->caminho, 0777, true);
-	            chmod($this->caminho, 0777);
+				if (!file_exists($this->caminho)) {
+	            	mkdir($this->caminho, 0777, true);
+	            	chmod($this->caminho, 0777);
+				}
 				
 				$iterator = new DirectoryIterator($this->diretorio);
 				
-				foreach ($nomes_tmp as $key => $nome_img) {
+				foreach ($nomes_tmp as $key => $nome_tmp) {
 					foreach ($iterator as $entry) {
-						if (strpos($entry->getFilename(), $nome_img) !== false) {
-							$this->destino = $this->caminho.$entry->getFilename();
+						if (strpos($entry->getFilename(), $nome_tmp) !== false) {
+							$this->destino = $this->caminho.str_replace('img_tmp_', 'img_'.$descricao.'_', $entry->getFilename());
 							$this->tipo = $entry->getExtension();
 							rename($entry->getPathname(), $this->destino);
 						}
@@ -244,7 +271,8 @@ namespace application\model\common\util;
 					
 					if (!empty($this->tipo)) {
 						if (!empty($key)) {
-							$imagens_peca[$key] = '/imagens/'.$this->entidade.'/'.$id_peca.'/'.$nome_img.'-@.'.$this->tipo;
+							$nome_tmp = str_replace('img_tmp_', 'img_'.$descricao.'_', $nome_tmp);
+							$imagens_peca[$key] = '/imagens/'.$this->entidade.'/'.$id_peca.'/'.$nome_tmp.'-@.'.$this->tipo;
 						}
 					}
 				}
@@ -344,19 +372,44 @@ namespace application\model\common\util;
 			}
         }
 		
-		public function Pegar_Caminho_Por_Nome_Imagem($nome) {
+		public function Pegar_Caminho_Por_Nome_Imagem_TMP(string $nome) : ?string {
 			$this->diretorio = RAIZ.'/imagens/'.$this->entidade.'/tmp/';
 		    
 			if (file_exists($this->diretorio)) {
 				$this->Gerenciar_Temporarios();
 				
+				$imagem = null;
+				
 			    $iterator = new DirectoryIterator($this->diretorio);
 			    
 			    foreach ($iterator as $entry) {
 					if (strpos($entry->getFilename(), $nome) !== false) {
-						return $entry->getPathname();
+						$imagem = $entry->getPathname();
 					}
 			    }
+			    
+			    return $imagem;
+			} else {
+				return null;
+			}
+		}
+		
+		public function Pegar_Caminho_Por_Nome_Imagem_CNST(string $nome, int $peca) : ?string {
+			$this->diretorio = RAIZ.'/imagens/'.$this->entidade.'/'.$peca;
+			
+			if (file_exists($this->diretorio)) {				
+				$imagem = null;
+				$iterator = new DirectoryIterator($this->diretorio);
+				
+				foreach ($iterator as $entry) {
+					if (strpos($entry->getFilename(), $nome) !== false) {
+						$imagem = $entry->getPathname();
+					}
+				}
+				
+				return $imagem;
+			} else {
+				return null;
 			}
 		}
 		

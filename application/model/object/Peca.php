@@ -138,8 +138,12 @@ namespace application\model\object;
 			return $this->fotos;
 		}
 		
-		public function get_foto($numero) : ?Object_Foto_Peca {
-			return $this->fotos[$numero];
+		public function get_foto(int $numero) : ?Object_Foto_Peca {
+			if (isset($this->fotos[$numero])) {
+				return $this->fotos[$numero];
+			} else {
+				return null;
+			}
 		}
 		
 		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void {

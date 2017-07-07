@@ -53,6 +53,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $serie;
         private $preco;
         private $prioridade;
+        private $imagens = array();
         private $cadastrar_erros = array();
         private $cadastrar_sucesso = array();
         private $cadastrar_campos = array();
@@ -186,6 +187,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$this->cadastrar_erros[] = $e->getMessage();
         		
         		$this->prioridade = Validador::Peca()::filtrar_prioridade($prioridade);
+        	}
+        }
+        
+        public function set_imagem($imagem, $numero) {
+        	try {
+        		$this->imagens[$numero] = Validador::Foto_Peca()::validar_imagem($imagem, $numero);
+        	} catch (Exception $e) {
+        		$this->cadastrar_erros[] = $e->getMessage();
         	}
         }
         
@@ -574,28 +583,31 @@ namespace application\controller\usuario\meu_perfil\pecas;
 						$this->cadastrar_campos['erro_peca'] = "";
 					}
 					
-					if (!empty($_SESSION['imagens_tmp'])) {
+					if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
 						$imagens = new Gerenciar_Imagens();
-						$diretorios_imagens = array();
+						$img_descricao = Validador::Foto_Peca()::filtrar_descricao_nome($this->peca);
 						
-						$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca);
+						$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca, $img_descricao);
 						
-						if (isset($diretorios_imagens)) {
-							$indice = 0;
-							
-							foreach ($diretorios_imagens as $diretorio) {
+						if (!empty($diretorios_imagens)) {
+							foreach ($diretorios_imagens as $key => $diretorio) {
 								$foto_peca = new Object_Foto_Peca();
-								$indice++;
 								
 								$foto_peca->set_peca_id($id_peca);
 								$foto_peca->set_endereco($diretorio);
-								$foto_peca->set_numero($indice);
+								$foto_peca->set_numero($key);
+								$foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$img_descricao.'_', $_SESSION['imagens_tmp'][$key]));
 								
 								if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-									$this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $indice para a Peça";
+									$this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $key para a Peça";
 									$this->cadastrar_campos['erro_peca'] = "";
 								}
 							}
+							
+							unset($_SESSION['imagens_tmp']);
+						} else {
+							$this->atualizar_erros[] = "Erro ao tentar Cadastrar Fotos da Peça";
+							$this->atualizar_campos['erro_peca'] = "";
 						}
 					}
 				} else {
@@ -666,31 +678,19 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		
 		public function Salvar_Imagem_TMP() : void {
 			if (Controller_Usuario::Verificar_Autenticacao()) {
-				$arquivo = null;
-				
-				if (isset($_FILES['imagem1']) AND $_FILES['imagem1']['error'] === 0) {
-					$arquivo = $_FILES['imagem1'];
-				} else if (isset($_FILES['imagem2']) AND $_FILES['imagem2']['error'] === 0) {
-					$arquivo = $_FILES['imagem2'];
-				} else if (isset($_FILES['imagem3']) AND $_FILES['imagem3']['error'] === 0) {
-					$arquivo = $_FILES['imagem3'];
-				}
-				
-				if (!empty($arquivo)) {
+				if (!empty($this->imagens)) {
 					$imagens = new Gerenciar_Imagens();
 					
-					$imagens->Armazenar_Imagem_Temporaria($arquivo);
-					
-					if (empty($_SESSION['imagens_tmp'][1])) {
-						$_SESSION['imagens_tmp'][1] = $imagens->get_nome();
-					} else if (empty($_SESSION['imagens_tmp'][2])) {
-						$_SESSION['imagens_tmp'][2] = $imagens->get_nome();
-					} else if (empty($_SESSION['imagens_tmp'][3])) {
-						$_SESSION['imagens_tmp'][3] = $imagens->get_nome();
+					foreach ($this->imagens as $key => $imagem) {
+						$imagens->Armazenar_Imagem_Temporaria($imagem);
+						
+						if (!isset($_SESSION['imagens_tmp'][$key])) {
+							$_SESSION['imagens_tmp'][$key] = $imagens->get_nome();
+						}
+						
+						echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
 					}
-					
-					echo $imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
-				} else {
+				}  else {
 					echo "/application/view/resources/img/imagem_indisponivel.png";
 				}
 			}
@@ -700,63 +700,54 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagens_tmp'])) {
 					if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
-						$imagens_tmp = $_SESSION['imagens_tmp'];
 						$imagens = new Gerenciar_Imagens();
 						
-						if ($num_img == 123) {
-							if (isset($imagens_tmp[1])) {
-								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
+						if ($num_img === 123) {
+							if (isset($_SESSION['imagens_tmp'][1])) {
+								$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][1]);
 							}
-							if (isset($imagens_tmp[2])) {
-								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
+							if (isset($_SESSION['imagens_tmp'][2])) {
+								$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][2]);
 							}
-							if (isset($imagens_tmp[3])) {
-								$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
+							if (isset($_SESSION['imagens_tmp'][3])) {
+								$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][3]);
 							}
 							
-							unset($imagens_tmp);
-						} else if ($num_img == 1) {
-							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[1]);
+							unset($_SESSION['imagens_tmp']);
+						} else if ($num_img === 1) {
+							$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][1]);
 							
-							if (isset($imagens_tmp[2])) {
-								$imagens_tmp[1] = $imagens_tmp[2];
+							if (isset($_SESSION['imagens_tmp'][2])) {
+								$_SESSION['imagens_tmp'][1] = $_SESSION['imagens_tmp'][2];
 								
-								if (isset($imagens_tmp[3])) {
-									$imagens_tmp[2] = $imagens_tmp[3];
-									unset($imagens_tmp[3]);
+								if (isset($_SESSION['imagens_tmp'][3])) {
+									$_SESSION['imagens_tmp'][2] = $_SESSION['imagens_tmp'][3];
+									unset($_SESSION['imagens_tmp'][3]);
 								} else {
-									unset($imagens_tmp[2]);
+									unset($_SESSION['imagens_tmp'][2]);
 								}
 							} else {
-								unset($imagens_tmp[1]);
+								unset($_SESSION['imagens_tmp'][1]);
 							}
-						} else if ($num_img == 2) {
-							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[2]);
+						} else if ($num_img === 2) {
+							$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][2]);
 							
-							if (isset($imagens_tmp[3])) {
-								$imagens_tmp[2] = $imagens_tmp[3];
-								unset($imagens_tmp[3]);
+							if (isset($_SESSION['imagens_tmp'][3])) {
+								$_SESSION['imagens_tmp'][2] = $_SESSION['imagens_tmp'][3];
+								unset($_SESSION['imagens_tmp'][3]);
 							} else {
-								unset($imagens_tmp[2]);
+								unset($_SESSION['imagens_tmp'][2]);
 							}
-						} else if ($num_img == 3) {
-							$imagens->Deletar_Imagem_Temporaria($imagens_tmp[3]);
+						} else if ($num_img === 3) {
+							$imagens->Deletar_Imagem_Temporaria($_SESSION['imagens_tmp'][3]);
 							
-							unset($imagens_tmp[3]);
-						} else {
-							$imagens->Deletar_Imagem_Temporaria($num_img);
-							
-							unset($imagens_tmp[$num_img]);
+							unset($_SESSION['imagens_tmp'][3]);
 						}
 						
-						if (isset($imagens_tmp)) {
-							if (count($imagens_tmp) > 0) {
-								$_SESSION['imagens_tmp'] = $imagens_tmp;
-							} else {
+						if (isset($_SESSION['imagens_tmp'])) {
+							if (empty($_SESSION['imagens_tmp'])) {
 								unset($_SESSION['imagens_tmp']);
 							}
-						} else {
-							unset($_SESSION['imagens_tmp']);
 						}
 					}
 				}
@@ -766,10 +757,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 		public static function Pegar_Imagem_URL(string $nome_imagem) : string {
 			$imagens = new Gerenciar_Imagens();
 			
-			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-400x300");
+			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-400x300");
 			
-			if (isset($caminho_imagem)) {
-				return $imagens::Gerar_Data_URL($caminho_imagem);
+			if (!empty($caminho_imagem)) {
+				return Gerenciar_Imagens::Gerar_Data_URL($caminho_imagem);
 			} else {
 				return "/application/view/resources/img/imagem_indisponivel.png";
 			}

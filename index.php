@@ -231,7 +231,19 @@
 		
 		$app->post('imagem/', function(Request $request, Response $response, $args) use ($app) {
 			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
-				
+			
+			if (isset($_FILES['imagem1'])) {
+				$cadastrar->set_imagem($_FILES['imagem1'], 1);
+			}
+			
+			if (isset($_FILES['imagem2'])) {
+				$cadastrar->set_imagem($_FILES['imagem2'], 2);
+			}
+			
+			if (isset($_FILES['imagem3'])) {
+				$cadastrar->set_imagem($_FILES['imagem3'], 3);
+			}
+			
 			$cadastrar->Salvar_Imagem_TMP();
 			
 			return $response;

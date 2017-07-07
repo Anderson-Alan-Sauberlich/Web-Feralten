@@ -15,7 +15,6 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         private static $atualizar_campos;
         private static $atualizar_form;
         private static $atualizar_sucesso;
-        private static $atualizar_imagens;
         
         public function set_atualizar_erros(?array $atualizar_erros = null) : void {
         	self::$atualizar_erros = $atualizar_erros;
@@ -31,10 +30,6 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         
         public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void {
         	self::$atualizar_sucesso = $atualizar_sucesso;
-        }
-        
-        public function set_atualizar_imagens(?array $atualizar_imagens= null) : void {
-        	self::$atualizar_imagens = $atualizar_imagens;
         }
         
         public function Executar() {
@@ -142,30 +137,30 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         public static function Manter_Imagens(string $imagem) : void {
         	switch ($imagem) {
         		case "foto1":
-        			if (!empty(self::$atualizar_imagens[1])) {
-        				echo self::$atualizar_imagens[1];
+        			if (isset($_SESSION['imagens_cnst'][1])) {
+        				echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][1], self::$atualizar_form['peca_id']);
         			} else if (isset($_SESSION['imagens_tmp'][1])) {
-        				echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][1]);
+        				echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][1]);
         			} else {
         				echo "/application/view/resources/img/imagem_indisponivel.png";
         			}
         			break;
         			
         		case "foto2":
-        			if (!empty(self::$atualizar_imagens[2])) {
-        				echo self::$atualizar_imagens[2];
+        			if (isset($_SESSION['imagens_cnst'][2])) {
+        				echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][2], self::$atualizar_form['peca_id']);
         			} else if (isset($_SESSION['imagens_tmp'][2])) {
-        				echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][2]);
+        				echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][2]);
         			} else {
         				echo "/application/view/resources/img/imagem_indisponivel.png";
         			}
         			break;
         			
         		case "foto3":
-        			if (!empty(self::$atualizar_imagens[3])) {
-        				echo self::$atualizar_imagens[3];
+        			if (isset($_SESSION['imagens_cnst'][3])) {
+        				echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][3], self::$atualizar_form['peca_id']);
         			} else if (isset($_SESSION['imagens_tmp'][3])) {
-        				echo Controller_Atualizar::Pegar_Imagem_URL($_SESSION['imagens_tmp'][3]);
+        				echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][3]);
         			} else {
         				echo "/application/view/resources/img/imagem_indisponivel.png";
         			}

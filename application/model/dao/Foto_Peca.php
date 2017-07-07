@@ -48,6 +48,24 @@ namespace application\model\dao;
             }
         }
         
+        public static function Atualizar_Por_Num(int $numero, Object_Foto_Peca $object_foto_peca) : bool {
+        	try {
+        		$sql = "UPDATE tb_foto_peca SET foto_peca_endereco = :endereco, foto_peca_numero = :numero, foto_peca_nome = :nome WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
+        		
+        		$p_sql = Conexao::Conectar()->prepare($sql);
+        		
+        		$p_sql->bindValue(":pc_id", $object_foto_peca->get_peca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":endereco", $object_foto_peca->get_endereco(), PDO::PARAM_STR);
+        		$p_sql->bindValue(":num", $object_foto_peca->get_numero(), PDO::PARAM_INT);
+        		$p_sql->bindValue(":numero", $numero, PDO::PARAM_INT);
+        		$p_sql->bindValue(":nome", $object_foto_peca->get_nome(), PDO::PARAM_STR);
+        		
+        		return $p_sql->execute();
+        	} catch (PDOException | Exception $e) {
+        		return false;
+        	}
+        }
+        
         public static function Deletar_Fotos(int $id_peca) : bool {
             try {
                 $sql = "DELETE FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id";
