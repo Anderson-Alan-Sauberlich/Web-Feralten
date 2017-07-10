@@ -20,9 +20,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -36,10 +36,10 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_modelo->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_modelo->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -49,10 +49,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_modelo WHERE modelo_id = :id";
+                $sql = 'DELETE FROM tb_modelo WHERE modelo_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -62,10 +62,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id";
+                $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -76,10 +76,10 @@ namespace application\model\dao;
         
         public static function Buscar_Nome_URL_Por_ID(int $id) {
         	try {
-        		$sql = "SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id";
+        		$sql = 'SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
         		$p_sql->execute();
         
         		return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -90,15 +90,13 @@ namespace application\model\dao;
         
         public static function Buscar_Marca_Id(int $id) {
             try {
-                $sql = "SELECT modelo_mrc_id FROM tb_modelo WHERE modelo_id = :id";
+                $sql = 'SELECT modelo_mrc_id FROM tb_modelo WHERE modelo_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
-				
-                return $row['modelo_mrc_id'];
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
 				return false;
             }
@@ -106,10 +104,10 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Marca(int $id) {
             try {
-                $sql = "SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_mrc_id = :id ORDER BY modelo_nome";
+                $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_mrc_id = :id ORDER BY modelo_nome';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
@@ -120,10 +118,10 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Marca(int $id) {
         	try {
-        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :id";
+        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
         		$p_sql->execute();
         		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
         		$id_modelos = array();
@@ -140,15 +138,14 @@ namespace application\model\dao;
         
         public static function Buscar_ID_Por_URL(int $marca_id, string $url) {
         	try {
-        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND modelo_url = :url";
+        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND modelo_url = :url';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":ma_id", $marca_id, PDO::PARAM_INT);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->bindValue(':ma_id', $marca_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
-        		return $row['modelo_id'];
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
@@ -156,16 +153,17 @@ namespace application\model\dao;
         
         public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool {
         	try {
-        		$sql = "SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)";
+        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":ma_id", $object_modelo->get_marca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":nome", $object_modelo->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":url", $object_modelo->get_url(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		$modelo_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-        		if (!empty($row['modelo_id']) AND $row['modelo_id'] != $object_modelo->get_id()) {
+        		if (!empty($modelo_id) AND $modelo_id != $object_modelo->get_id()) {
         			return false;
         		} else {
         			return true;

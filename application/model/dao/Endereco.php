@@ -23,15 +23,15 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_endereco->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
-                $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
-                $p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
-                $p_sql->bindValue(":complemento", $object_endereco->get_complemento(), PDO::PARAM_STR);
-                $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_endereco->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ci_id', $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $object_endereco->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':numero', $object_endereco->get_numero(), PDO::PARAM_STR);
+                $p_sql->bindValue(':cep', $object_endereco->get_cep(), PDO::PARAM_STR);
+                $p_sql->bindValue(':rua', $object_endereco->get_rua(), PDO::PARAM_STR);
+                $p_sql->bindValue(':complemento', $object_endereco->get_complemento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':bairro', $object_endereco->get_bairro(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -54,14 +54,14 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(":ci_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_STR);
-                $p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
-                $p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
-                $p_sql->bindValue(":complemento", $object_endereco->get_complemento(), PDO::PARAM_STR);
-                $p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
+                $p_sql->bindValue(':ci_id', $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $object_endereco->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':numero', $object_endereco->get_numero(), PDO::PARAM_STR);
+                $p_sql->bindValue(':cep', $object_endereco->get_cep(), PDO::PARAM_STR);
+                $p_sql->bindValue(':rua', $object_endereco->get_rua(), PDO::PARAM_STR);
+                $p_sql->bindValue(':complemento', $object_endereco->get_complemento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':bairro', $object_endereco->get_bairro(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -71,10 +71,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_endereco WHERE endereco_id = :id";
+                $sql = 'DELETE FROM tb_endereco WHERE endereco_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -84,10 +84,10 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Endereco(int $endereco_id) {
         	try {
-        		$sql = "SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_id = :id";
+        		$sql = 'SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_id = :id';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $endereco_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $endereco_id, PDO::PARAM_INT);
         		$p_sql->execute();
         		
         		$endereco = $p_sql->fetch(PDO::FETCH_ASSOC);
@@ -104,10 +104,10 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Entidade(int $entidade_id) {
             try {
-                $sql = "SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_ent_id = :id";
+                $sql = 'SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_ent_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $entidade_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 $endereco = $p_sql->fetch(PDO::FETCH_ASSOC);
@@ -124,14 +124,13 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Entidade(int $entidade_id) {
         	try {
-        		$sql = "SELECT endereco_id FROM tb_endereco WHERE endereco_ent_id = :id";
+        		$sql = 'SELECT endereco_id FROM tb_endereco WHERE endereco_ent_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $entidade_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $entidade_id, PDO::PARAM_INT);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         		
-        		return $row['endereco_id'];
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
@@ -198,31 +197,31 @@ namespace application\model\dao;
         
         public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Endereco $object_endereco) : PDOStatement {
         	if (!empty($object_endereco->get_id())) {
-        		$p_sql->bindValue(":end_id", $object_endereco->get_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':end_id', $object_endereco->get_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_entidade_id())) {
-        		$p_sql->bindValue(":ent_id", $object_endereco->get_entidade_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':ent_id', $object_endereco->get_entidade_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_cidade())) {
-        		$p_sql->bindValue(":cid_id", $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':cid_id', $object_endereco->get_cidade()->get_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_estado())) {
-        		$p_sql->bindValue(":est_id", $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':est_id', $object_endereco->get_estado()->get_id(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_numero())) {
-        		$p_sql->bindValue(":numero", $object_endereco->get_numero(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':numero', $object_endereco->get_numero(), PDO::PARAM_INT);
         	}
         	if (!empty($object_endereco->get_cep())) {
-        		$p_sql->bindValue(":cep", $object_endereco->get_cep(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':cep', $object_endereco->get_cep(), PDO::PARAM_STR);
         	}
         	if (!empty($object_endereco->get_rua())) {
-        		$p_sql->bindValue(":rua", $object_endereco->get_rua(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':rua', $object_endereco->get_rua(), PDO::PARAM_STR);
         	}
         	if (!empty($object_endereco->get_complemento())) {
-        		$p_sql->bindValue(":complemento", $object_endereco->get_complemento(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':complemento', $object_endereco->get_complemento(), PDO::PARAM_STR);
         	}
         	if (!empty($object_endereco->get_bairro())) {
-        		$p_sql->bindValue(":bairro", $object_endereco->get_bairro(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':bairro', $object_endereco->get_bairro(), PDO::PARAM_STR);
         	}
         	
         	return $p_sql;

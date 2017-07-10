@@ -1,7 +1,7 @@
 <?php
 namespace application\model\validador;
 	
-	use application\model\filter\Categoria_Pativel;
+	use application\model\validador\Categoria_Pativel;
 	use \Exception;
 	
     class Versao_Pativel {

@@ -14,11 +14,13 @@
         	<?php View_Inicio::Incluir_Menu_Pesquisa(); ?>
         </form>
         
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <img src="/application/view/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
-            </div>
-        </div>
+        
+            
+                <img src="/application/view/resources/img/fundo_feralten_s.jpeg" position="center" class="img-responsive centerIMG " />
+            	<BR/>
+            	<BR/>
+            	<BR/>
+        
         
     </section>
     <footer>

@@ -20,8 +20,8 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_status_entidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_status_entidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -38,8 +38,8 @@ namespace application\model\dao;
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_status_entidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_status_entidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -49,10 +49,10 @@ namespace application\model\dao;
  		
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_status_entidade WHERE status_entidade_id = :id";
+                $sql = 'DELETE FROM tb_status_entidade WHERE status_entidade_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -62,10 +62,10 @@ namespace application\model\dao;
 		
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT status_entidade_id, status_entidade_nome FROM tb_status_entidade WHERE status_entidade_id = :id";
+                $sql = 'SELECT status_entidade_id, status_entidade_nome FROM tb_status_entidade WHERE status_entidade_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaStatus($p_sql->fetch(PDO::FETCH_ASSOC));

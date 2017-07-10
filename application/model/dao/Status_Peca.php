@@ -20,9 +20,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_status_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_status_peca->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -36,9 +36,9 @@ namespace application\model\dao;
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_status_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_status_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_status_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_status_peca->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -48,10 +48,10 @@ namespace application\model\dao;
  		
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_status_peca WHERE status_peca_id = :id";
+                $sql = 'DELETE FROM tb_status_peca WHERE status_peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -61,10 +61,10 @@ namespace application\model\dao;
 		
         public static function Buscar_Id_Por_Url(string $url) {
         	try {
-        		$sql = "SELECT status_peca_id FROM tb_status_peca WHERE status_peca_url = :url";
+        		$sql = 'SELECT status_peca_id FROM tb_status_peca WHERE status_peca_url = :url';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
         		$p_sql->execute();
         		
         		return $p_sql->fetch(PDO::FETCH_COLUMN);
@@ -75,10 +75,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca WHERE status_peca_id = :id";
+                $sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca WHERE status_peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::Popular_Status_Peca($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -89,7 +89,7 @@ namespace application\model\dao;
         
         public static function BuscarTodos() {
             try {
-                $sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca";
+                $sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
@@ -102,7 +102,7 @@ namespace application\model\dao;
         
         public static function Buscar_Lista_Todos() {
         	try {
-        		$sql = "SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca";
+        		$sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->execute();

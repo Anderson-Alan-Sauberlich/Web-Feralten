@@ -20,9 +20,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -36,9 +36,9 @@ namespace application\model\dao;
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -48,10 +48,10 @@ namespace application\model\dao;
  		
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id";
+                $sql = 'DELETE FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -61,10 +61,10 @@ namespace application\model\dao;
 		
         public static function Buscar_Id_Por_Url(string $url) : ?int {
         	try {
-        		$sql = "SELECT preferencia_entrega_id FROM tb_preferencia_entrega WHERE preferencia_entrega_url = :url";
+        		$sql = 'SELECT preferencia_entrega_id FROM tb_preferencia_entrega WHERE preferencia_entrega_url = :url';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
         		$p_sql->execute();
         		
         		return $p_sql->fetch(PDO::FETCH_COLUMN);
@@ -75,10 +75,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id";
+                $sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::Popular_Preferencia_Entrega($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -89,7 +89,7 @@ namespace application\model\dao;
         
         public static function BuscarTodos() {
             try {
-                $sql = "SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega";
+                $sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
@@ -123,7 +123,7 @@ namespace application\model\dao;
         
         public static function Buscar_Lista_Todos() {
         	try {
-        		$sql = "SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega";
+        		$sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		$p_sql->execute();

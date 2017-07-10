@@ -20,9 +20,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_estado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":uf", $object_estado->get_uf(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_estado->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_estado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':uf', $object_estado->get_uf(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_estado->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,9 +37,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_estado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":uf", $object_estado->get_uf(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_estado->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_estado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':uf', $object_estado->get_uf(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_estado->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -49,10 +49,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_estado WHERE estado_id = :id";
+                $sql = 'DELETE FROM tb_estado WHERE estado_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -62,10 +62,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT estado_id, estado_uf, estado_nome FROM tb_estado WHERE estado_id = :id";
+                $sql = 'SELECT estado_id, estado_uf, estado_nome FROM tb_estado WHERE estado_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::Popular_Estado($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -76,10 +76,10 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Uf(string $uf) {
         	try {
-        		$sql = "SELECT estado_id FROM tb_estado WHERE estado_uf = :uf";
+        		$sql = 'SELECT estado_id FROM tb_estado WHERE estado_uf = :uf';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":uf", $uf, PDO::PARAM_STR);
+        		$p_sql->bindValue(':uf', $uf, PDO::PARAM_STR);
         		$p_sql->execute();
         		
         		return $p_sql->fetch(PDO::FETCH_COLUMN);
@@ -90,7 +90,7 @@ namespace application\model\dao;
         
         public static function BuscarTodos() {
             try {
-                $sql = "SELECT estado_id, estado_uf, estado_nome FROM tb_estado";
+                $sql = 'SELECT estado_id, estado_uf, estado_nome FROM tb_estado';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();

@@ -20,10 +20,10 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_usuario_admin->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":usuario", $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
-                $p_sql->bindValue(":senha", $object_usuario_admin->get_senha(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_usuario_admin->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_usuario_admin->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usuario', $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
+                $p_sql->bindValue(':senha', $object_usuario_admin->get_senha(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,9 +37,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_usuario_admin->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":usuario", $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_usuario_admin->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_usuario_admin->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usuario', $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -53,8 +53,8 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
-                $p_sql->bindValue(":ps", $senha, PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':ps', $senha, PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -64,10 +64,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_usuario_admin WHERE usuario_admin_id = :id";
+                $sql = 'DELETE FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -77,18 +77,18 @@ namespace application\model\dao;
         
         public static function Verificar_Usuario(string $usuario) {
             try {
-                $sql = "SELECT usuario_admin_id FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario";
+                $sql = 'SELECT usuario_admin_id FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":usuario", $usuario, PDO::PARAM_STR);
+                $p_sql->bindValue(':usuario', $usuario, PDO::PARAM_STR);
                 $p_sql->execute();
                 
-                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
+                $usuario_admin_id = $p_sql->fetch(PDO::FETCH_COLUMN);
                 
                 $select = 0;
                 
-                if (isset($row['usuario_admin_id'])) {
-                	$select = $row['usuario_admin_id'];
+                if (!empty($usuario_admin_id)) {
+                    $select = $usuario_admin_id;
                 }
                 
                 return $select;
@@ -99,10 +99,10 @@ namespace application\model\dao;
         
         public static function Buscar_Usuario(int $id) {
             try {
-                $sql = "SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_id = :id";
+                $sql = 'SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -113,10 +113,10 @@ namespace application\model\dao;
 		
         public static function Buscar_Senha_Usuario(int $id) {
             try {
-                $sql = "SELECT usuario_admin_senha FROM tb_usuario_admin WHERE usuario_admin_id = :id";
+                $sql = 'SELECT usuario_admin_senha FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
 				
 				$row = $p_sql->fetch(PDO::FETCH_ASSOC);
@@ -129,10 +129,10 @@ namespace application\model\dao;
         
         public static function Autenticar(string $usuario) {
             try {
-                $sql = "SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario";
+                $sql = 'SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":usuario", $usuario, PDO::PARAM_STR);
+                $p_sql->bindValue(':usuario', $usuario, PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 $usuario = $p_sql->fetch(PDO::FETCH_ASSOC);

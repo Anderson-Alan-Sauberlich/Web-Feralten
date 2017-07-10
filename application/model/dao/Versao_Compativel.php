@@ -20,8 +20,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -35,8 +35,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -46,10 +46,10 @@ namespace application\model\dao;
 	
 		public static function Deletar(int $id) : bool {
 			try {
-				$sql = "DELETE FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :id";
+				$sql = 'DELETE FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -59,7 +59,7 @@ namespace application\model\dao;
 	
 		public static function BuscarTodos() {
 			try {
-				$sql = "SELECT versao_compativel_da_id_vrs, versao_compativel_com_id_vrs FROM tb_versao_compativel";
+				$sql = 'SELECT versao_compativel_da_id_vrs, versao_compativel_com_id_vrs FROM tb_versao_compativel';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
@@ -72,10 +72,10 @@ namespace application\model\dao;
 	
 		public static function BuscarPorCOD(int $id) {
 			try {
-				$sql = "SELECT versao_compativel_com_id_vrs FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :da_id";
+				$sql = 'SELECT versao_compativel_com_id_vrs FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :da_id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $id, PDO::PARAM_INT);
 				$p_sql->execute();
 	
 				return self::PopulaVersoesCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));

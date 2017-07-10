@@ -20,9 +20,9 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -36,10 +36,10 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_marca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_marca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -49,10 +49,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_marca WHERE marca_id = :id";
+                $sql = 'DELETE FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -62,10 +62,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id";
+                $sql = 'SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaMarca($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -76,10 +76,10 @@ namespace application\model\dao;
         
         public static function Buscar_Nome_URL_Por_ID(int $id) {
         	try {
-        		$sql = "SELECT marca_nome, marca_url FROM tb_marca WHERE marca_id = :id";
+        		$sql = 'SELECT marca_nome, marca_url FROM tb_marca WHERE marca_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
         		$p_sql->execute();
         
         		return self::PopulaMarca($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -90,15 +90,13 @@ namespace application\model\dao;
         
         public static function Buscar_Categoria_Id(int $id) {
             try {
-                $sql = "SELECT marca_ctg_id FROM tb_marca WHERE marca_id = :id";
+                $sql = 'SELECT marca_ctg_id FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
-				
-                return $row['marca_ctg_id'];
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
 				return false;
             }
@@ -106,10 +104,10 @@ namespace application\model\dao;
         
         public static function Buscar_Por_Id_Categorai(int $id) {
             try {
-                $sql = "SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_ctg_id = :id ORDER BY marca_nome";
+                $sql = 'SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_ctg_id = :id ORDER BY marca_nome';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaMarcas($p_sql->fetchAll(PDO::FETCH_ASSOC));
@@ -120,10 +118,10 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Id_Categorai(int $id) {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :id";
+        		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
         		$p_sql->execute();
         		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
         		$id_marcas = array();
@@ -140,15 +138,14 @@ namespace application\model\dao;
         
         public static function Buscar_ID_Por_URL(int $categoria_id, string $url) {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND marca_url = :url";
+        		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND marca_url = :url';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":ca_id", $categoria_id, PDO::PARAM_INT);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->bindValue(':ca_id', $categoria_id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
-        		return $row['marca_id'];
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
@@ -156,16 +153,17 @@ namespace application\model\dao;
         
         public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
         	try {
-        		$sql = "SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)";
+        		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":ca_id", $object_marca->get_categoria_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(":nome", $object_marca->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":url", $object_marca->get_url(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		$marca_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-        		if (!empty($row['marca_id']) AND $row['marca_id'] != $object_marca->get_id()) {
+        		if (!empty($marca_id) AND $marca_id != $object_marca->get_id()) {
         			return false;
         		} else {
         			return true;

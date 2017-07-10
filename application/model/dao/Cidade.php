@@ -20,10 +20,10 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_cidade->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_cidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_cidade->get_url(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -42,10 +42,10 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":es_id", $object_cidade->get_es_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":nome", $object_cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_cidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -55,10 +55,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_cidade WHERE cidade_id = :id";
+                $sql = 'DELETE FROM tb_cidade WHERE cidade_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -68,10 +68,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_est_id = :id";
+                $sql = 'SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_est_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaCidades($p_sql->fetchAll(PDO::FETCH_ASSOC));
@@ -82,10 +82,10 @@ namespace application\model\dao;
         
         public static function Buscar_Por_ID_Cidade(int $id) {
             try {
-                $sql = "SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_id = :id";
+                $sql = 'SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaCidade($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -96,10 +96,10 @@ namespace application\model\dao;
         
         public static function Buscar_Id_Por_Url(string $url) {
         	try {
-        		$sql = "SELECT cidade_id FROM tb_cidade WHERE cidade_url = :url";
+        		$sql = 'SELECT cidade_id FROM tb_cidade WHERE cidade_url = :url';
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_INT);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_INT);
         		$p_sql->execute();
         		
         		return $p_sql->fetch(PDO::FETCH_COLUMN);

@@ -20,8 +20,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -35,8 +35,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -46,10 +46,10 @@ namespace application\model\dao;
 	
 		public static function Deletar(int $id) : bool {
 			try {
-				$sql = "DELETE FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :id";
+				$sql = 'DELETE FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -59,7 +59,7 @@ namespace application\model\dao;
 	
 		public static function BuscarTodos() {
 			try {
-				$sql = "SELECT marca_compativel_da_id_mrc, marca_compativel_com_id_mrc FROM tb_marca_compativel";
+				$sql = 'SELECT marca_compativel_da_id_mrc, marca_compativel_com_id_mrc FROM tb_marca_compativel';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
@@ -72,10 +72,10 @@ namespace application\model\dao;
 	
 		public static function BuscarPorCOD(int $id) {
 			try {
-				$sql = "SELECT marca_compativel_com_id_mrc FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :da_id";
+				$sql = 'SELECT marca_compativel_com_id_mrc FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :da_id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $id, PDO::PARAM_INT);
 				$p_sql->execute();
 	
 				return self::PopulaMarcasCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));

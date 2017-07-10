@@ -193,6 +193,18 @@ namespace application\model\validador;
 			}
 		}
 		
+		public static function validar_estado($estado = null) : ?int {
+		    if (!empty($estado)) {
+		        if (filter_var($estado, FILTER_VALIDATE_INT)) {
+		            return $estado;
+		        } else {
+		            throw new Exception('Selecione um Estado de Uso Valido.');
+		        }
+		    } else {
+		        return null;
+		    }
+		}
+		
 		public static function validar_fotos($fotos = null) : void {
 			
 		}
@@ -357,6 +369,16 @@ namespace application\model\validador;
 			}
 			
 			return $valor;
+		}
+		
+		public static function filtrar_estado($estado = null) : ?int {
+		    $valor = null;
+		    
+		    if (!empty($estado) AND filter_var($estado, FILTER_VALIDATE_INT)) {
+		        $valor = trim($estado);
+		    }
+		    
+		    return $valor;
 		}
 		
 		public static function filtrar_fotos($fotos = null) : void {

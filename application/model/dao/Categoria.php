@@ -20,8 +20,8 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -36,9 +36,9 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":id", $object_categoria->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(":url", $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $object_categoria->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -48,10 +48,10 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_categoria WHERE categoria_id = :id";
+                $sql = 'DELETE FROM tb_categoria WHERE categoria_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -61,7 +61,7 @@ namespace application\model\dao;
         
         public static function BuscarTodos() {
             try {
-                $sql = "SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria";
+                $sql = 'SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
@@ -74,10 +74,10 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = "SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id";
+                $sql = 'SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -88,10 +88,10 @@ namespace application\model\dao;
         
         public static function Buscar_Nome_URL_Por_ID(int $id) {
         	try {
-        		$sql = "SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id";
+        		$sql = 'SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
         		$p_sql->execute();
         
         		return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
@@ -102,14 +102,13 @@ namespace application\model\dao;
         
         public static function Buscar_ID_Por_URL(string $url) {
         	try {
-        		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url";
+        		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":url", $url, PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
         
-        		return $row['categoria_id'];
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
@@ -117,15 +116,16 @@ namespace application\model\dao;
         
         public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool {
         	try {
-        		$sql = "SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url";
+        		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url';
         
         		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(":nome", $object_categoria->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(":url", $object_categoria->get_url(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
         		$p_sql->execute();
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+        		
+        		$categoria_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-        		if (!empty($row['categoria_id']) AND $row['categoria_id'] != $object_categoria->get_id()) {
+        		if (!empty($categoria_id) AND $categoria_id != $object_categoria->get_id()) {
         			return false;
         		} else {
         			return true;

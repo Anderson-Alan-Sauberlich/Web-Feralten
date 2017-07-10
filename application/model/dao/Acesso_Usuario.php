@@ -20,10 +20,10 @@ namespace application\model\dao;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":usr_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":fnc_id", $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":pms_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fnc_id', $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pms_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -42,10 +42,10 @@ namespace application\model\dao;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(":usr_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":fnc_id", $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(":pms_id", $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fnc_id', $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pms_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -55,10 +55,10 @@ namespace application\model\dao;
  
          public static function Deletar(int $id) : bool {
             try {
-                $sql = "DELETE FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :id";
+                $sql = 'DELETE FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -68,11 +68,11 @@ namespace application\model\dao;
 
         public static function BuscarPorCOD(int $usuario_id, int $entidade_id) {
             try {
-                $sql = "SELECT acesso_usuario_fnc, acesso_usuario_pms_id FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :usr_id AND acesso_usuario_ent_id = :ent_id";
+                $sql = 'SELECT acesso_usuario_fnc, acesso_usuario_pms_id FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :usr_id AND acesso_usuario_ent_id = :ent_id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(":usr_id", $usuario_id, PDO::PARAM_INT);
-                $p_sql->bindValue(":ent_id", $entidade_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $usuario_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaArrayAcessos($p_sql->fetchAll(PDO::FETCH_ASSOC));

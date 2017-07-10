@@ -20,8 +20,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_modelo_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_modelo_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_modelo_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_modelo_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 	
@@ -36,8 +36,8 @@ namespace application\model\dao;
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				
-				$p_sql->bindValue(":da_id", $object_modelo_compativel->get_da_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(":com_id", $object_modelo_compativel->get_com_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $object_modelo_compativel->get_da_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':com_id', $object_modelo_compativel->get_com_id(), PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -47,10 +47,10 @@ namespace application\model\dao;
 	
 		public static function Deletar(int $id) : bool {
 			try {
-				$sql = "DELETE FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :id";
+				$sql = 'DELETE FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 	
 				return $p_sql->execute();
 			} catch (PDOException | Exception $e) {
@@ -60,7 +60,7 @@ namespace application\model\dao;
 	
 		public static function BuscarTodos() {
 			try {
-				$sql = "SELECT modelo_compativel_da_id_mdl, modelo_compativel_com_id_mdl FROM tb_modelo_compativel";
+				$sql = 'SELECT modelo_compativel_da_id_mdl, modelo_compativel_com_id_mdl FROM tb_modelo_compativel';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
@@ -73,10 +73,10 @@ namespace application\model\dao;
 	
 		public static function BuscarPorCOD(int $id) {
 			try {
-				$sql = "SELECT modelo_compativel_com_id_mdl FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :da_id";
+				$sql = 'SELECT modelo_compativel_com_id_mdl FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :da_id';
 	
 				$p_sql = Conexao::Conectar()->prepare($sql);
-				$p_sql->bindValue(":da_id", $id, PDO::PARAM_INT);
+				$p_sql->bindValue(':da_id', $id, PDO::PARAM_INT);
 				$p_sql->execute();
 	
 				return self::PopulaModelosCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
