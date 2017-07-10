@@ -874,11 +874,11 @@
 		});
 	});
 	
-	$app->group('/contato/', function() use ($app) {
+	$app->group('/fale-conosco/', function() use ($app) {
 		$app->get('', function(Request $request, Response $response, $args) use ($app) {
-			$contato = new application\controller\Contato();
+			$fale_conosco = new application\controller\Fale_Conosco();
 			
-			$contato->Carregar_Pagina();
+			$fale_conosco->Carregar_Pagina();
 			
 			return $response;
 		});

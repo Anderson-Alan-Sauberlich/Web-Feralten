@@ -18,7 +18,7 @@
                         <li><a href="/perguntas-frequentes/" class="linkFooter">Perguntas Freguentes</a></li>
                         <li><a href="/dicas-de-venda/apresentacao/" class="linkFooter">Apresentação</a></li>
                         <li><a href="/dicas-de-venda/principais/" class="linkFooter">Principais</a></li>
-                        <li><a href="/contato/" class="linkFooter">Contato</a></li>
+                        <li><a href="/fale-conosco/" class="linkFooter">Fale Conosco</a></li>
                     </ul>
                 </div>
             </div>
