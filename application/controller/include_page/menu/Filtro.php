@@ -8,7 +8,9 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Cidade as Object_Cidade;
 	use application\model\object\Estado as Object_Estado;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
+	use application\model\dao\Estado_Peca as DAO_Estado_Peca;
 	use application\model\object\Status_Peca as Object_Status_Peca;
+	use application\model\object\Estado_Peca as Object_Estado_Peca;
 	use application\model\object\Preferencia_Entrega as Object_Preferencia_Entrega;
 	use application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
 	use \Exception;
@@ -78,7 +80,7 @@ namespace application\controller\include_page\menu;
 		
 		public function set_status($status) : void {
 			try {
-				$this->status = Validador::Peca()::validar_status($status);
+				$this->status = Validador::Peca()::validar_estado($status);
 			} catch (Exception $e) {
 				$this->status = null;
 			}
@@ -86,7 +88,7 @@ namespace application\controller\include_page\menu;
 		
 		public function set_status_url($status) : void {
 			try {
-				$this->status = DAO_Status_Peca::Buscar_Id_Por_Url(Validador::Status_Peca()::validar_url($status));
+				$this->status = DAO_Estado_Peca::Buscar_Id_Por_Url(Validador::Estado_Peca()::validar_url($status));
 			} catch (Exception $e) {
 				$this->status = null;
 			}
@@ -140,13 +142,13 @@ namespace application\controller\include_page\menu;
 			}
 		}
 		
-		public function get_object_status() : ?Object_Status_Peca {
+		public function get_object_status() : ?Object_Estado_Peca {
 			if (!empty($this->status)) {
-				$object_status_peca = new Object_Status_Peca();
+				$object_estado_peca = new Object_Estado_Peca();
 				
-				$object_status_peca->set_id($this->status);
+				$object_estado_peca->set_id($this->status);
 				
-				return $object_status_peca;
+				return $object_estado_peca;
 			} else {
 				return null;
 			}
@@ -192,7 +194,7 @@ namespace application\controller\include_page\menu;
 		}
 		
 		public static function Buscar_Status_Pecas() {
-			return DAO_Status_Peca::BuscarTodos();
+			return DAO_Estado_Peca::BuscarTodos();
 		}
 		
 		public static function Buscar_Preferencia_Entrega() {

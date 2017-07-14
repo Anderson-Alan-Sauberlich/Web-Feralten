@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div class="item">
-			<div class="header"><h4>Status da Peça</h4></div>
+			<div class="header"><h4>Estado de Conservação</h4></div>
 			<div class="menu">
 				<div class="ui container fluid">
 					<select id="status" name="status" class="ui fluid search dropdown">

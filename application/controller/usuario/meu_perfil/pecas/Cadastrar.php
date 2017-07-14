@@ -7,6 +7,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
+	use application\model\object\Estado_Peca as Object_Estado_Peca;
 	use application\model\object\Categoria_Pativel as Object_Categoria_Pativel;
 	use application\model\object\Marca_Pativel as Object_Marca_Pativel;
 	use application\model\object\Modelo_Pativel as Object_Modelo_Pativel;
@@ -24,6 +25,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
     use application\model\dao\Modelo_Compativel as DAO_Modelo_Compativel;
     use application\model\dao\Versao_Compativel as DAO_Versao_Compativel;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
+	use application\model\dao\Estado_Peca as DAO_Estado_Peca;
 	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
 	use application\model\dao\Marca_Pativel as DAO_Marca_Pativel;
 	use application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
@@ -46,7 +48,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         private $modelo;
         private $versao;
         private $descricao;
-        private $status;
+        private $estado;
         private $preferencia_entrega;
         private $fabricante;
         private $peca;
@@ -114,14 +116,14 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_status($status) {
+        public function set_estado($estado) {
         	try {
-        		$this->status = Validador::Peca()::validar_status($status);
+        		$this->estado = Validador::Peca()::validar_estado($estado);
         	} catch (Exception $e) {
         		$this->cadastrar_erros[] = $e->getMessage();
-        		$this->cadastrar_campos['erro_status'] = 'erro';
+        		$this->cadastrar_campos['erro_estado'] = 'erro';
         		
-        		$this->status = Validador::Peca()::filtrar_status($status);
+        		$this->estado = Validador::Peca()::filtrar_estado($estado);
         	}
         }
         
@@ -499,13 +501,17 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			
 			if (empty($this->cadastrar_erros)) {
 				$object_peca = new Object_Peca();
+				$object_estado = new Object_Estado_Peca();
 				$object_status = new Object_Status_Peca();
 				$entidade = new Object_Entidade();
 				
-				if ($this->status > 0) {
-					$object_status->set_id($this->status);
+				if ($this->estado > 0) {
+					$object_estado->set_id($this->estado);
 				}
 				
+				$object_status->set_id(1);
+				
+				$object_peca->set_estado($object_estado);
 				$object_peca->set_status($object_status);
 				$object_peca->set_descricao($this->descricao);
 				$object_peca->set_preferencia_entrega($this->preferencia_entrega);
@@ -626,7 +632,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$this->cadastrar_form['fabricante'] = $this->fabricante;
 				$this->cadastrar_form['serie'] = $this->serie;
 				$this->cadastrar_form['preco'] = $this->preco;
-				$this->cadastrar_form['status'] = $this->status;
+				$this->cadastrar_form['estado'] = $this->estado;
 				$this->cadastrar_form['descricao'] = $this->descricao;
 				$this->cadastrar_form['prioridade'] = $this->prioridade;
 				$this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
@@ -810,8 +816,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 			return DAO_Versao::BuscarPorCOD($id_versao);
 		}
 		
-		public static function Buscar_Status_Pecas() {
-			return DAO_Status_Peca::BuscarTodos();
+		public static function Buscar_Estado_Pecas() {
+			return DAO_Estado_Peca::BuscarTodos();
 		}
 		
 		public static function Buscar_Categoria_Id_Por_Marca(int $id_marca) {

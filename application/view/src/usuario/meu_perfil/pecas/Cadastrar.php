@@ -83,11 +83,11 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 	                	}
 	                	break;
 	                	
-	                case "status":
-	                	if (isset(self::$cadastrar_campos['erro_status'])) {
-	                		if (self::$cadastrar_campos['erro_status'] == "erro") {
+	                case "estado":
+	                	if (isset(self::$cadastrar_campos['erro_estado'])) {
+	                		if (self::$cadastrar_campos['erro_estado'] == "erro") {
 	                			echo "has-error has-feedback";
-	                		} else if (self::$cadastrar_campos['erro_status'] == "certo") {
+	                		} else if (self::$cadastrar_campos['erro_estado'] == "certo") {
 	                			echo "has-success has-feedback";
 	                		}
 	                	}
@@ -501,18 +501,18 @@ namespace application\view\src\usuario\meu_perfil\pecas;
 			echo "</div>";//container-fluid
 		}
 
-		public static function Mostrar_Status() : void {
-			$satus_pecas = Controller_Cadastrar::Buscar_Status_Pecas();
+		public static function Mostrar_Estado() : void {
+			$estado_pecas = Controller_Cadastrar::Buscar_Estado_Pecas();
 			
-			foreach ($satus_pecas as $status_peca) {
-				if (isset(self::$cadastrar_form['status'])) {
-					if (self::$cadastrar_form['status'] == $status_peca->get_id()) {
-						echo "<option selected value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
+			foreach ($estado_pecas as $estado_peca) {
+				if (isset(self::$cadastrar_form['estado'])) {
+					if (self::$cadastrar_form['estado'] == $estado_peca->get_id()) {
+						echo "<option selected value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
 					} else {
-						echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
+						echo "<option value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
 					}
 				} else {
-					echo "<option value=\"".$status_peca->get_id()."\">".$status_peca->get_nome()."</option>";
+					echo "<option value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
 				}
 			}
 		}

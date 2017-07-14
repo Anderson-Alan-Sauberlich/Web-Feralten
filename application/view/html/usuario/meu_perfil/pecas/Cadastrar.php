@@ -103,12 +103,12 @@
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3">
-		                            <label for="status" class="lbPanel">Selecione o Estado da Peça:</label>
-		                            <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("status"); ?>">
+		                            <label for="estado" class="lbPanel">Selecione o Estado da Peça:</label>
+		                            <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("estado"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty"></i></span>
-		                                <select id="status" name="status" class="form-control form_select">
+		                                <select id="estado" name="estado" class="form-control form_select">
 		                                    <option value="0">Selecione</option>
-		                                    <?php View_Cadastrar::Mostrar_Status(); ?>
+		                                    <?php View_Cadastrar::Mostrar_Estado(); ?>
 		                                </select>
 		                                <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
                                    	</div>

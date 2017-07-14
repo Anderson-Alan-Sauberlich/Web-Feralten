@@ -204,7 +204,7 @@
 			
 			$cadastrar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
 			
-			$cadastrar->set_status(isset($_POST['status']) ? $_POST['status'] : null);
+			$cadastrar->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
 			
 			$cadastrar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
 			
@@ -484,7 +484,7 @@
 			
 			$atualizar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
 			
-			$atualizar->set_status(isset($_POST['status']) ? $_POST['status'] : null);
+			$atualizar->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
 			
 			$atualizar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
 			

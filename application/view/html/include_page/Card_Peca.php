@@ -10,17 +10,17 @@
 		<?php } ?>
 	</a>
 	<a href="/" class="content">
-		<?php if (!empty($peca->get_preco()) AND !empty($peca->get_status())) { ?>
+		<?php if (!empty($peca->get_preco()) AND !empty($peca->get_estado())) { ?>
 			<div class="right floated header">R$: <?php echo $peca->get_preco(); ?></div>
 			<div class="meta">
-				<span class="date"><?php echo $peca->get_status()->get_nome(); ?></span>
+				<span class="date"><?php echo $peca->get_estado()->get_nome(); ?></span>
 			</div>
-		<?php } else if (!empty($peca->get_preco()) AND empty($peca->get_status())) { ?>
+		<?php } else if (!empty($peca->get_preco()) AND empty($peca->get_estado())) { ?>
 			<div class="header">R$: <?php echo $peca->get_preco(); ?></div>
-		<?php } else if (empty($peca->get_preco()) AND !empty($peca->get_status())) { ?>
+		<?php } else if (empty($peca->get_preco()) AND !empty($peca->get_estado())) { ?>
 			<div class="header">R$: A Negociar</div>
 			<div class="meta">
-			<span class="date"><?php echo $peca->get_status()->get_nome(); ?></span>
+			<span class="date"><?php echo $peca->get_estado()->get_nome(); ?></span>
 			</div>
 		<?php } else if (empty($peca->get_preco())) { ?>
 			<div class="header">R$: A Negociar</div>
@@ -37,8 +37,43 @@
 		<div class="extra content">
 			<div class="ui two buttons">
 				<a id="atualizar" href="/usuario/meu-perfil/pecas/atualizar/<?php echo $peca->get_id(); ?>/" class="ui inverted green button">Atualizar</a>
-				<a id="excluir" href="/usuario/meu-perfil/pecas/excluir/<?php echo $peca->get_id(); ?>/" class="ui inverted red button">Excluir</a>
+				<a id="opcoes" onclick="Mostrar_Modal(<?php echo $peca->get_id(); ?>);" class="ui inverted red button">Opções</a>
 			</div>
 		</div>
+        <div id="modal_<?php echo $peca->get_id(); ?>" class="ui tiny modal">
+        	<div class="header"><?php echo $peca->get_nome(); ?></div>
+            <div class="content">
+            	<div class="ui container fluid">
+                    <div class="grouped fields">
+                    	<label>Deseja Deletar a Peça?</label>
+                    	<label class="ui red basic label">Cuidado, Irreversível!</label>
+                    	<div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" onchange="Change_Checkbox(<?php echo $peca->get_id(); ?>)" id="deletar_<?php echo $peca->get_id(); ?>" name="deletar_<?php echo $peca->get_id(); ?>">
+                                <label for="deletar_<?php echo $peca->get_id(); ?>">Deletar Peça</label>
+                            </div>
+                        </div>
+                        <div class="ui divider"></div>
+                    	<label>Selecione o Status da Peça:</label>
+                        <div class="field">
+                            <div id="div_visivel_<?php echo $peca->get_id(); ?>" class="ui radio checkbox">
+                            	<input type="radio" id="visivel_<?php echo $peca->get_id(); ?>" name="visivel_<?php echo $peca->get_id(); ?>">
+                            	<label for="visivel_<?php echo $peca->get_id(); ?>">Visivel Para Todos</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div id="div_desativada_<?php echo $peca->get_id(); ?>" class="ui radio checkbox">
+                                <input type="radio" id="desativada_<?php echo $peca->get_id(); ?>" name="desativada_<?php echo $peca->get_id(); ?>">
+                                <label for="desativada_<?php echo $peca->get_id(); ?>">Desativada Temporariamente</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+            	<div class="ui cancel button">Cancelar</div>
+                <div class="ui approve positive right labeled icon button">Salvar <i class="checkmark icon"></i></div>
+            </div>
+        </div>
 	<?php } ?>
 </div>

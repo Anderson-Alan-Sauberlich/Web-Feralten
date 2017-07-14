@@ -192,7 +192,7 @@ namespace application\controller\include_page\menu;
         	}
         	
         	if (!empty($object_controller_filtro->get_status())) {
-        		$this->object_peca->set_status($object_controller_filtro->get_object_status());
+        		$this->object_peca->set_estado($object_controller_filtro->get_object_status());
         	}
         	
         	if (!empty($object_controller_filtro->get_preferencia_entrega())) {
