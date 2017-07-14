@@ -63,8 +63,8 @@ namespace application\controller\pecas;
         	$this->controller_filtro->set_ordem_data($ordem_data);
         }
         
-        public function set_status_url($status) : void {
-        	$this->controller_filtro->set_status_url($status);
+        public function set_estado_uso_url($estado_uso) : void {
+        	$this->controller_filtro->set_estado_uso_url($estado_uso);
         }
         
         public function set_preferencia_entrega_url($preferencia_entrega) : void {

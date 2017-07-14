@@ -204,7 +204,7 @@
 			
 			$cadastrar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
 			
-			$cadastrar->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
+			$cadastrar->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
 			
 			$cadastrar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
 			
@@ -311,8 +311,8 @@
 					$visualizar->set_ordem_data($_GET['ordem_data']);
 				}
 				
-				if (isset($_GET['status'])) {
-					$visualizar->set_status_url($_GET['status']);
+				if (isset($_GET['estado_uso'])) {
+					$visualizar->set_estado_uso_url($_GET['estado_uso']);
 				}
 				
 				if (isset($_GET['preferencia_entrega'])) {
@@ -377,8 +377,8 @@
 					$visualizar->set_ordem_data($_GET['ordem_data']);
 				}
 				
-				if (isset($_GET['status'])) {
-					$visualizar->set_status_url($_GET['status']);
+				if (isset($_GET['estado_uso'])) {
+					$visualizar->set_estado_uso_url($_GET['estado_uso']);
 				}
 				
 				if (isset($_GET['preferencia_entrega'])) {
@@ -484,7 +484,7 @@
 			
 			$atualizar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
 			
-			$atualizar->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
+			$atualizar->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
 			
 			$atualizar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
 			
@@ -977,8 +977,8 @@
 					$resultados->set_ordem_data($_GET['ordem_data']);
 				}
 				
-				if (isset($_GET['status'])) {
-					$resultados->set_status_url($_GET['status']);
+				if (isset($_GET['estado_uso'])) {
+					$resultados->set_estado_uso_url($_GET['estado_uso']);
 				}
 				
 				if (isset($_GET['preferencia_entrega'])) {
@@ -1035,8 +1035,8 @@
 					$resultados->set_ordem_data($_GET['ordem_data']);
 				}
 				
-				if (isset($_GET['status'])) {
-					$resultados->set_status_url($_GET['status']);
+				if (isset($_GET['estado_uso'])) {
+					$resultados->set_estado_uso_url($_GET['estado_uso']);
 				}
 				
 				if (isset($_GET['preferencia_entrega'])) {

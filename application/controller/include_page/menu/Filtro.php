@@ -8,9 +8,9 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Cidade as Object_Cidade;
 	use application\model\object\Estado as Object_Estado;
 	use application\model\dao\Status_Peca as DAO_Status_Peca;
-	use application\model\dao\Estado_Peca as DAO_Estado_Peca;
+	use application\model\dao\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
 	use application\model\object\Status_Peca as Object_Status_Peca;
-	use application\model\object\Estado_Peca as Object_Estado_Peca;
+	use application\model\object\Estado_Uso_Peca as Object_Estado_Uso_Peca;
 	use application\model\object\Preferencia_Entrega as Object_Preferencia_Entrega;
 	use application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
 	use \Exception;
@@ -23,7 +23,7 @@ namespace application\controller\include_page\menu;
 		
 		private $estado;
 		private $cidade;
-		private $status;
+		private $estado_uso;
 		private $ordem_preco;
 		private $ordem_data;
 		private $preferencia_entrega;
@@ -78,19 +78,19 @@ namespace application\controller\include_page\menu;
 			}
 		}
 		
-		public function set_status($status) : void {
+		public function set_estado_uso($estado_uso) : void {
 			try {
-				$this->status = Validador::Peca()::validar_estado($status);
+			    $this->estado_uso = Validador::Peca()::validar_estado_uso($estado_uso);
 			} catch (Exception $e) {
-				$this->status = null;
+			    $this->estado_uso = null;
 			}
 		}
 		
-		public function set_status_url($status) : void {
+		public function set_estado_uso_url($estado_uso) : void {
 			try {
-				$this->status = DAO_Estado_Peca::Buscar_Id_Por_Url(Validador::Estado_Peca()::validar_url($status));
+			    $this->estado_uso = DAO_Estado_Uso_Peca::Buscar_Id_Por_Url(Validador::Estado_Uso_Peca()::validar_url($estado_uso));
 			} catch (Exception $e) {
-				$this->status = null;
+			    $this->estado_uso = null;
 			}
 		}
 		
@@ -110,8 +110,8 @@ namespace application\controller\include_page\menu;
 			return $this->cidade;
 		}
 		
-		public function get_status() : ?int {
-			return $this->status;
+		public function get_estado_uso() : ?int {
+		    return $this->estado_uso;
 		}
 		
 		public function get_preferencia_entrega() : ?int {
@@ -142,13 +142,13 @@ namespace application\controller\include_page\menu;
 			}
 		}
 		
-		public function get_object_status() : ?Object_Estado_Peca {
-			if (!empty($this->status)) {
-				$object_estado_peca = new Object_Estado_Peca();
+		public function get_object_estado_uso() : ?Object_Estado_Uso_Peca {
+		    if (!empty($this->estado_uso)) {
+				$object_estado_uso_peca = new Object_Estado_Uso_Peca();
 				
-				$object_estado_peca->set_id($this->status);
+				$object_estado_uso_peca->set_id($this->estado_uso);
 				
-				return $object_estado_peca;
+				return $object_estado_uso_peca;
 			} else {
 				return null;
 			}
@@ -173,7 +173,7 @@ namespace application\controller\include_page\menu;
 			$form_filtro['cidade'] = $this->cidade;
 			$form_filtro['ordem_preco'] = $this->ordem_preco;
 			$form_filtro['ordem_data'] = $this->ordem_data;
-			$form_filtro['status'] = $this->status;
+			$form_filtro['estado_uso'] = $this->estado_uso;
 			$form_filtro['preferencia_entrega'] = $this->preferencia_entrega;
 			
 			return $form_filtro;
@@ -193,8 +193,8 @@ namespace application\controller\include_page\menu;
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
 		
-		public static function Buscar_Status_Pecas() {
-			return DAO_Estado_Peca::BuscarTodos();
+		public static function Buscar_Estado_Uso_Pecas() {
+			return DAO_Estado_Uso_Peca::BuscarTodos();
 		}
 		
 		public static function Buscar_Preferencia_Entrega() {

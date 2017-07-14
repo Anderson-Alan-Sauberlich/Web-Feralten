@@ -10,17 +10,17 @@
 		<?php } ?>
 	</a>
 	<a href="/" class="content">
-		<?php if (!empty($peca->get_preco()) AND !empty($peca->get_estado())) { ?>
+		<?php if (!empty($peca->get_preco()) AND !empty($peca->get_estado_uso())) { ?>
 			<div class="right floated header">R$: <?php echo $peca->get_preco(); ?></div>
 			<div class="meta">
-				<span class="date"><?php echo $peca->get_estado()->get_nome(); ?></span>
+				<span class="date"><?php echo $peca->get_estado_uso()->get_nome(); ?></span>
 			</div>
-		<?php } else if (!empty($peca->get_preco()) AND empty($peca->get_estado())) { ?>
+		<?php } else if (!empty($peca->get_preco()) AND empty($peca->get_estado_uso())) { ?>
 			<div class="header">R$: <?php echo $peca->get_preco(); ?></div>
-		<?php } else if (empty($peca->get_preco()) AND !empty($peca->get_estado())) { ?>
+		<?php } else if (empty($peca->get_preco()) AND !empty($peca->get_estado_uso())) { ?>
 			<div class="header">R$: A Negociar</div>
 			<div class="meta">
-			<span class="date"><?php echo $peca->get_estado()->get_nome(); ?></span>
+			<span class="date"><?php echo $peca->get_estado_uso()->get_nome(); ?></span>
 			</div>
 		<?php } else if (empty($peca->get_preco())) { ?>
 			<div class="header">R$: A Negociar</div>

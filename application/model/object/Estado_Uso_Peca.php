@@ -1,7 +1,7 @@
 <?php
 namespace application\model\object;
 	
-    class Estado_Peca {
+    class Estado_Uso_Peca {
     	
     	private $id;
 		private $nome;

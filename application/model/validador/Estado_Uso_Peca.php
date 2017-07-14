@@ -3,7 +3,7 @@ namespace application\model\validador;
 	
 	use \Exception;
 	
-    class Estado_Peca {
+    class Estado_Uso_Peca {
     	
 		function __constructor() {
 			

@@ -47,14 +47,14 @@ namespace application\view\src\include_page\menu;
 			}
 		}
 		
-		public static function Mostrar_Status() : void {
-			$satus_pecas = Controller_Filtro::Buscar_Status_Pecas();
+		public static function Mostrar_Estado_Uso() : void {
+			$estado_uso_pecas = Controller_Filtro::Buscar_Estado_Uso_Pecas();
 				
-			foreach ($satus_pecas as $status_peca) {
-				if (isset(self::$form_filtro['status']) AND self::$form_filtro['status'] == $status_peca->get_id()) {
-					echo "<option selected value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
+			foreach ($estado_uso_pecas as $estado_uso_peca) {
+				if (isset(self::$form_filtro['estado_uso']) AND self::$form_filtro['estado_uso'] == $estado_uso_peca->get_id()) {
+					echo "<option selected value=\"".$estado_uso_peca->get_url()."\">".$estado_uso_peca->get_nome()."</option>";
 				} else {
-					echo "<option value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
+					echo "<option value=\"".$estado_uso_peca->get_url()."\">".$estado_uso_peca->get_nome()."</option>";
 				}
 			}
 		}

@@ -52,9 +52,9 @@
 			<div class="header"><h4>Estado de Conservação</h4></div>
 			<div class="menu">
 				<div class="ui container fluid">
-					<select id="status" name="status" class="ui fluid search dropdown">
+					<select id="estado_uso" name="estado_uso" class="ui fluid search dropdown">
 						<option value="0">Selecione o Status</option>
-						<?php View_Filtro::Mostrar_Status(); ?>
+						<?php View_Filtro::Mostrar_Estado_Uso(); ?>
 					</select>
 				</div>
 			</div>

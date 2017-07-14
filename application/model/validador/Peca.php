@@ -193,10 +193,10 @@ namespace application\model\validador;
 			}
 		}
 		
-		public static function validar_estado($estado = null) : ?int {
-		    if (!empty($estado)) {
-		        if (filter_var($estado, FILTER_VALIDATE_INT)) {
-		            return $estado;
+		public static function validar_estado_uso($estado_uso = null) : ?int {
+		    if (!empty($estado_uso)) {
+		        if (filter_var($estado_uso, FILTER_VALIDATE_INT)) {
+		            return $estado_uso;
 		        } else {
 		            throw new Exception('Selecione um Estado de Uso Valido.');
 		        }

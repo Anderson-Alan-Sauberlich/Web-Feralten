@@ -191,8 +191,8 @@ namespace application\controller\include_page\menu;
         		$this->object_peca->set_endereco($object_endereco);
         	}
         	
-        	if (!empty($object_controller_filtro->get_status())) {
-        		$this->object_peca->set_estado($object_controller_filtro->get_object_status());
+        	if (!empty($object_controller_filtro->get_estado_uso())) {
+        	    $this->object_peca->set_estado_uso($object_controller_filtro->get_object_estado_uso());
         	}
         	
         	if (!empty($object_controller_filtro->get_preferencia_entrega())) {

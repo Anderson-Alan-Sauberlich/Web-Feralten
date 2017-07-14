@@ -83,11 +83,11 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         				}
         				break;
         				
-        			case "estado":
-        				if (isset(self::$atualizar_campos['erro_estado'])) {
-        					if (self::$atualizar_campos['erro_estado'] == "erro") {
+        			case "estado_uso":
+        				if (isset(self::$atualizar_campos['erro_estado_uso'])) {
+        					if (self::$atualizar_campos['erro_estado_uso'] == "erro") {
         						echo "has-error has-feedback";
-        					} else if (self::$atualizar_campos['erro_estado'] == "certo") {
+        					} else if (self::$atualizar_campos['erro_estado_uso'] == "certo") {
         						echo "has-success has-feedback";
         					}
         				}
@@ -507,18 +507,18 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         	echo "</div>";//container-fluid
         }
         
-        public static function Mostrar_Estado() : void {
-        	$estado_pecas = Controller_Atualizar::Buscar_Estado_Pecas();
+        public static function Mostrar_Estado_Uso() : void {
+        	$estado_uso_pecas = Controller_Atualizar::Buscar_Estado_Uso_Pecas();
         	
-        	foreach ($estado_pecas as $estado_peca) {
-        		if (isset(self::$atualizar_form['estado'])) {
-        			if (self::$atualizar_form['estado'] == $estado_peca->get_id()) {
-        				echo "<option selected value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
+        	foreach ($estado_uso_pecas as $estado_uso_peca) {
+        		if (isset(self::$atualizar_form['estado_uso'])) {
+        			if (self::$atualizar_form['estado_uso'] == $estado_uso_peca->get_id()) {
+        				echo "<option selected value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
         			} else {
-        				echo "<option value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
+        				echo "<option value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
         			}
         		} else {
-        			echo "<option value=\"".$estado_peca->get_id()."\">".$estado_peca->get_nome()."</option>";
+        			echo "<option value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
         		}
         	}
         }

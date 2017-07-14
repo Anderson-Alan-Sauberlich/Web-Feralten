@@ -3,7 +3,7 @@ namespace application\model\object;
 	
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Status_Peca as Object_Status_Peca;
-	use application\model\object\Estado_Peca as Object_Estado_Peca;
+	use application\model\object\Estado_Uso_Peca as Object_Estado_Uso_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Entidade as Object_Entidade;
 	use application\model\object\Usuario as Object_Usuario;
@@ -22,7 +22,7 @@ namespace application\model\object;
 		private $serie;
 		private $prioridade;
 		private $status;
-		private $estado;
+		private $estado_uso;
 		private $fotos = array();
 		private $preferencia_entrega;
 		
@@ -126,12 +126,12 @@ namespace application\model\object;
 			return $this->status;
 		}
 		
-		public function set_estado(?Object_Estado_Peca $estado = null) : void {
-		    $this->estado = $estado;
+		public function set_estado_uso(?Object_Estado_Uso_Peca $estado_uso = null) : void {
+		    $this->estado_uso = $estado_uso;
 		}
 		
-		public function get_estado() : ?Object_estado_Peca {
-		    return $this->estado;
+		public function get_estado_uso() : ?Object_Estado_Uso_Peca {
+		    return $this->estado_uso;
 		}
 		
 		public function set_fotos(?array $fotos = array()) : void {

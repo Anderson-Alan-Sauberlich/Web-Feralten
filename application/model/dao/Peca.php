@@ -4,7 +4,7 @@ namespace application\model\dao;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Foto_Peca as DAO_Foto_Peca;
     use application\model\dao\Status_Peca as DAO_Status_Peca;
-    use application\model\dao\Estado_Peca as DAO_Estado_Peca;
+    use application\model\dao\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
     use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Entidade as DAO_Entidade;
     use application\model\dao\Usuario as DAO_Usuario;
@@ -22,8 +22,8 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Peca $object_peca) {
             
-                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_pec_id) 
-                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_id);";
+                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id) 
+                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_uso_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -40,7 +40,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
 				$p_sql->bindValue(':prioridade', $object_peca->get_prioridade(), PDO::PARAM_BOOL);
 				$p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
-				$p_sql->bindValue(':std_id', $object_peca->get_estado()->get_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
 				
                 $p_sql->execute();
 				
@@ -64,7 +64,7 @@ namespace application\model\dao;
                 		peca_numero_serie = :serie, 
                 		peca_prioridade = :prioridade, 
                 		peca_prf_ntr_id = :prf_ntr,
-                        peca_std_pec_id = :std_id 
+                        peca_std_uso_pec_id = :std_uso_id 
                 		WHERE peca_id = :id";
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -82,7 +82,7 @@ namespace application\model\dao;
 				$p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
 				$p_sql->bindValue(':prioridade', $object_peca->get_prioridade(), PDO::PARAM_BOOL);
 				$p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
-				$p_sql->bindValue(':std_id', $object_peca->get_estado()->get_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
 				
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -105,7 +105,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_pec_id FROM tb_peca WHERE peca_id = :id';
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id FROM tb_peca WHERE peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
@@ -159,7 +159,7 @@ namespace application\model\dao;
         	}
         	
         	try {
-        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_std_pec_id
+        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_std_uso_pec_id
         		FROM vw_peca $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
@@ -201,11 +201,11 @@ namespace application\model\dao;
         		$pesquisa .= "peca_sts_pec_id = :sp_id";
         	}
         	
-        	if (!empty($object_peca->get_estado())) {
+        	if (!empty($object_peca->get_estado_uso())) {
         	    if (!empty($pesquisa)) {
         	        $pesquisa .= " AND ";
         	    }
-        	    $pesquisa .= "peca_std_pec_id = :std_id";
+        	    $pesquisa .= "peca_std_uso_pec_id = :std_uso_id";
         	}
         	
         	if (!empty($object_peca->get_nome())) {
@@ -328,8 +328,8 @@ namespace application\model\dao;
         		$p_sql->bindValue(":sp_id", $object_peca->get_status()->get_id(), PDO::PARAM_INT);
         	}
         	
-        	if (!empty($object_peca->get_estado())) {
-        	    $p_sql->bindValue(":std_id", $object_peca->get_estado()->get_id(), PDO::PARAM_INT);
+        	if (!empty($object_peca->get_estado_uso())) {
+        	    $p_sql->bindValue(":std_uso_id", $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_peca->get_nome())) {
@@ -437,8 +437,8 @@ namespace application\model\dao;
             	$object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
             }
             
-            if (isset($row['peca_std_pec_id'])) {
-                $object_peca->set_estado(DAO_Estado_Peca::BuscarPorCOD($row['peca_std_pec_id']));
+            if (isset($row['peca_std_uso_pec_id'])) {
+                $object_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
             }
             
             return $object_peca;
@@ -508,8 +508,8 @@ namespace application\model\dao;
 	        		$object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
 	        	}
 	        	
-	        	if (isset($row['peca_std_pec_id'])) {
-	        	    $object_peca->set_estado(DAO_Estado_Peca::BuscarPorCOD($row['peca_std_pec_id']));
+	        	if (isset($row['peca_std_uso_pec_id'])) {
+	        	    $object_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
 	        	}
 	        	
 	        	$object_pecas[] = $object_peca;

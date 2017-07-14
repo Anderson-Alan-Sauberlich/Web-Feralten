@@ -85,7 +85,7 @@ function Pesquisar() {
 	var peca = $("#peca").val();
 	var ordem_preco = $("#ordem_preco").val();
 	var ordem_data = $("#ordem_data").val();
-	var status = $("#status").val();
+	var estado_uso = $("#estado_uso").val();
 	var preferencia_entrega = $("#preferencia_entrega").val();
 	var estado = $("#estado").find("option:selected").data('url');
 	var cidade = $("#cidade").find("option:selected").data('url');
@@ -156,9 +156,9 @@ function Pesquisar() {
 		$("#ordem_data").prop('readonly', true);
 	}
 	
-	if (status == 0 || status == "" || status == undefined) {
-		$("#status").prop('disabled', true);
-		$("#status").prop('readonly', true);
+	if (estado_uso == 0 || estado_uso == "" || estado_uso == undefined) {
+		$("#estado_uso").prop('disabled', true);
+		$("#estado_uso").prop('readonly', true);
 	}
 	
 	if (preferencia_entrega == 0 || preferencia_entrega == "" || preferencia_entrega == undefined) {

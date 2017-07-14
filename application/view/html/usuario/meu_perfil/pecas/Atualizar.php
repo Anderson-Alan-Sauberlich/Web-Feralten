@@ -104,12 +104,12 @@
 		                            </div>
 		                        </div>
 		                        <div class="col-sm-3">
-		                            <label for="estado" class="lbPanel">Selecione o Estado da Peça:</label>
-		                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("estado"); ?>">
+		                            <label for="estado_uso" class="lbPanel">Selecione o Estado de Uso da Peça:</label>
+		                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("estado_uso"); ?>">
 		                                <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty"></i></span>
-		                                <select id="estado" name="estado" class="form-control form_select">
+		                                <select id="estado_uso" name="estado_uso" class="form-control form_select">
 		                                    <option value="0">Selecione</option>
-		                                    <?php View_Atualizar::Mostrar_Estado(); ?>
+		                                    <?php View_Atualizar::Mostrar_Estado_Uso(); ?>
 		                                </select>
 		                                <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
                                    	</div>

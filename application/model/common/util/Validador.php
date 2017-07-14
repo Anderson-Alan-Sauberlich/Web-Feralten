@@ -22,7 +22,7 @@ namespace application\model\common\util;
 	use application\model\validador\Preferencia_Entrega;
 	use application\model\validador\Status_Entidade;
 	use application\model\validador\Status_Peca;
-	use application\model\validador\Estado_Peca;
+	use application\model\validador\Estado_Uso_Peca;
 	use application\model\validador\Status_Usuario;
 	use application\model\validador\Usuario;
 	use application\model\validador\Usuario_Admin;
@@ -78,7 +78,7 @@ namespace application\model\common\util;
 		
 		public static function Status_Peca() : Status_Peca { return new Status_Peca(); }
 		
-		public static function Estado_Peca() : Estado_Peca { return new Estado_Peca(); }
+		public static function Estado_Uso_Peca() : Estado_Uso_Peca { return new Estado_Uso_Peca(); }
 		
 		public static function Status_Usuario() : Status_Usuario { return new Status_Usuario(); }
 		
