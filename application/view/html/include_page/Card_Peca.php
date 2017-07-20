@@ -49,7 +49,7 @@
                     	<label class="ui red basic label">Cuidado, Irreversível!</label>
                     	<div class="field">
                             <div class="ui checkbox">
-                                <input type="checkbox" onchange="Change_Checkbox(<?php echo $peca->get_id(); ?>)" id="deletar_<?php echo $peca->get_id(); ?>" name="deletar_<?php echo $peca->get_id(); ?>">
+                                <input type="checkbox" onchange="Change_Checkbox(<?php echo $peca->get_id(); ?>)" id="deletar_<?php echo $peca->get_id(); ?>" value="<?php echo $peca->get_id(); ?>" name="deletar">
                                 <label for="deletar_<?php echo $peca->get_id(); ?>">Deletar Peça</label>
                             </div>
                         </div>
@@ -57,13 +57,13 @@
                     	<label>Selecione o Status da Peça:</label>
                         <div class="field">
                             <div id="div_visivel_<?php echo $peca->get_id(); ?>" class="ui radio checkbox">
-                            	<input type="radio" id="visivel_<?php echo $peca->get_id(); ?>" name="visivel_<?php echo $peca->get_id(); ?>">
+                            	<input type="radio" id="visivel_<?php echo $peca->get_id(); ?>" value="<?php echo $peca->get_id(); ?>" <?php if ($peca->get_status()->get_id() === 1) { echo 'checked="checked"'; } ?> name="status">
                             	<label for="visivel_<?php echo $peca->get_id(); ?>">Visivel Para Todos</label>
                             </div>
                         </div>
                         <div class="field">
                             <div id="div_desativada_<?php echo $peca->get_id(); ?>" class="ui radio checkbox">
-                                <input type="radio" id="desativada_<?php echo $peca->get_id(); ?>" name="desativada_<?php echo $peca->get_id(); ?>">
+                                <input type="radio" id="desativada_<?php echo $peca->get_id(); ?>" value="<?php echo $peca->get_id(); ?>" <?php if ($peca->get_status()->get_id() === 2) { echo 'checked="checked"'; } ?> name="status">
                                 <label for="desativada_<?php echo $peca->get_id(); ?>">Desativada Temporariamente</label>
                             </div>
                         </div>

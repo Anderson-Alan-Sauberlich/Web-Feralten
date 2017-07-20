@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
 	$('.ui.dropdown').dropdown();
-	$('.ui.radio.checkbox').checkbox({uncheckable: true});
+	$('.ui.radio.checkbox').checkbox();
 });
 function Mostrar_Modal($id_peca) {
 	$('#modal_'+$id_peca).modal('show');
