@@ -14,6 +14,9 @@ function Change_Checkbox($id_peca) {
 		$('#desativada_'+$id_peca).addClass('disabled');
 		$('#desativada_'+$id_peca).attr('disabled="disabled"');
 		$('#div_desativada_'+$id_peca).addClass('disabled');
+		$('#invisivel_'+$id_peca).addClass('disabled');
+		$('#invisivel_'+$id_peca).attr('disabled="disabled"');
+		$('#div_invisivel_'+$id_peca).addClass('disabled');
 	} else {
 		$('#visivel_'+$id_peca).removeClass('disabled');
 		$('#visivel_'+$id_peca).removeAttr('disabled="disabled"');
@@ -21,5 +24,8 @@ function Change_Checkbox($id_peca) {
 		$('#desativada_'+$id_peca).removeClass('disabled');
 		$('#desativada_'+$id_peca).removeAttr('disabled="disabled"');
 		$('#div_desativada_'+$id_peca).removeClass('disabled');
+		$('#invisivel_'+$id_peca).removeClass('disabled');
+		$('#invisivel_'+$id_peca).removeAttr('disabled="disabled"');
+		$('#div_invisivel_'+$id_peca).removeClass('disabled');
 	}
 }
