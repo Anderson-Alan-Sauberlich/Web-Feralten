@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
 	$('.ui.dropdown').dropdown();
-	$('.ui.radio.checkbox').checkbox({uncheckable: true});
+	$('.ui.radio.checkbox').checkbox();
 });
 function Mostrar_Modal($id_peca) {
 	$('#modal_'+$id_peca).modal('show');
@@ -14,6 +14,9 @@ function Change_Checkbox($id_peca) {
 		$('#desativada_'+$id_peca).addClass('disabled');
 		$('#desativada_'+$id_peca).attr('disabled="disabled"');
 		$('#div_desativada_'+$id_peca).addClass('disabled');
+		$('#invisivel_'+$id_peca).addClass('disabled');
+		$('#invisivel_'+$id_peca).attr('disabled="disabled"');
+		$('#div_invisivel_'+$id_peca).addClass('disabled');
 	} else {
 		$('#visivel_'+$id_peca).removeClass('disabled');
 		$('#visivel_'+$id_peca).removeAttr('disabled="disabled"');
@@ -21,5 +24,8 @@ function Change_Checkbox($id_peca) {
 		$('#desativada_'+$id_peca).removeClass('disabled');
 		$('#desativada_'+$id_peca).removeAttr('disabled="disabled"');
 		$('#div_desativada_'+$id_peca).removeClass('disabled');
+		$('#invisivel_'+$id_peca).removeClass('disabled');
+		$('#invisivel_'+$id_peca).removeAttr('disabled="disabled"');
+		$('#div_invisivel_'+$id_peca).removeClass('disabled');
 	}
 }

@@ -829,10 +829,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->fabricante = $object_peca->get_fabricante();
         	$this->serie = $object_peca->get_serie();
         	$this->preco = $object_peca->get_preco();
-        	$this->estado_uso = $object_peca->get_estado_uso()->get_id();
         	$this->descricao = $object_peca->get_descricao();
         	$this->prioridade = $object_peca->get_prioridade();
         	$this->preferencia_entrega = $object_peca->get_preferencia_entrega();
+        	
+        	if (!empty($object_peca->get_estado_uso())) {
+        	    $this->estado_uso = $object_peca->get_estado_uso()->get_id();
+        	}
         	
         	return $this->get_form();
         }
