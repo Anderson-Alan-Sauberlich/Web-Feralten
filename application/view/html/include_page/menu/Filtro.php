@@ -89,6 +89,19 @@
 				</div>
 			</div>
 		</div>
+		<?php if (View_Filtro::Verificar_Login()) { ?>
+    		<div class="item">
+    			<div class="header"><h4>Status da Peça</h4></div>
+    			<div class="menu">
+    				<div class="ui container fluid">
+    					<select id="status_peca" name="status_peca" class="ui fluid search dropdown">
+    						<option value="0">Status da Peça</option>
+    						<?php View_Filtro::Mostrar_Status_Peca(); ?>
+    					</select>
+    				</div>
+    			</div>
+    		</div>
+		<?php } ?>
 		<div class="item">
 			<button onClick="Pesquisar()" class="ui fluid inverted large icon button"><i class="refresh icon"></i> Atualizar</button>
 		</div>

@@ -23,6 +23,18 @@ namespace application\model\common\util;
 			
 		}
 		
+		/**
+		 * Function Verificar_Login
+		 * @return bool
+		 */
+		public static function Verificar_Login() : bool {
+		    if (empty(self::get_usuario_id())) {
+		        return false;
+		    } else {
+		        return true;
+		    }
+		}
+		
 		/** 
 		 * Function Set_Usuario_Id
 		 * @param int $usuario_id 'Id do usuario'

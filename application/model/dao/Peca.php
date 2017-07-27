@@ -90,6 +90,21 @@ namespace application\model\dao;
             }
         }
         
+        public static function Atualizar_Status(int $id_peca, int $id_status) : bool {
+            try {
+                $sql = "UPDATE tb_peca SET peca_sts_pec_id = :st_id WHERE peca_id = :id";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':id', $id_peca, PDO::PARAM_INT);
+                $p_sql->bindValue(':st_id', $id_status, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function Deletar(int $id) : bool {
             try {
                 $sql = 'DELETE FROM tb_peca WHERE peca_id = :id';

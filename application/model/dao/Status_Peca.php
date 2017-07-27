@@ -87,7 +87,7 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function Buscar_Todos() {
             try {
                 $sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca';
                 

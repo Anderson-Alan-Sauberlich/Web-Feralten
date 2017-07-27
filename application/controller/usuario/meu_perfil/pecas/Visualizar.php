@@ -74,6 +74,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
         	$this->controller_filtro->set_preferencia_entrega_url($preferencia_entrega);
         }
         
+        public function set_status_peca_url($status_peca) : void {
+            $this->controller_filtro->set_status_peca_url($status_peca);
+        }
+        
         public function Carregar_Pagina() {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();

@@ -29,3 +29,27 @@ function Change_Checkbox($id_peca) {
 		$('#div_invisivel_'+$id_peca).removeClass('disabled');
 	}
 }
+function Salvar_Opcoes_Peca($peca) {
+	var $deletar = null;
+	var $status = null;
+	if ($('#deletar_'+$peca).is(':checked')) {
+		$deletar = 'deletar';
+	}
+	if ($('#visivel_'+$peca).is(':checked')) {
+		$status = 'visivel';
+	} else if ($('#desativada_'+$peca).is(':checked')) {
+		$status = 'desativada';
+	} else if ($('#invisivel_'+$peca).is(':checked')) {
+		$status = 'invisivel';
+	}
+	$.post('/card-peca/opcoes/',
+	{deletar:$deletar,
+	 status:$status,
+	 peca:$peca},
+	function(valor){
+		Pesquisar();
+	});
+}
+function Cancelar_Opcoes_Peca() {
+	
+}

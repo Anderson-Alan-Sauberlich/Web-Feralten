@@ -9,8 +9,16 @@ namespace application\model\validador;
 			
 		}
 		
-		public function validar_id($id = null) : void {
-			
+		public function validar_id($id = null) : ?int {
+		    if (!empty($id)) {
+		        if (filter_var($id, FILTER_VALIDATE_INT)) {
+		            return $id;
+		        } else {
+		            throw new Exception('Selecione um Status para Peça Válido.');
+		        }
+		    } else {
+		        return null;
+		    }
 		}
 		
 		public function validar_nome($nome = null) : void {

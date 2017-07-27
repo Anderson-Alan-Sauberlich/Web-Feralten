@@ -31,7 +31,29 @@
 			return $response;
 		});
 	});
-		
+	
+	$app->group('/card-peca/', function() use ($app) {
+	    $app->post('opcoes/', function(Request $request, Response $response, $args) use ($app) {
+	        $card_peca = new application\controller\include_page\Card_Peca();
+	        
+	        if (isset($_POST['peca'])) {
+	            $card_peca->set_peca($_POST['peca']);
+	        }
+	        
+	        if (isset($_POST['deletar'])) {
+	            $card_peca->set_deletar($_POST['deletar']);
+	        }
+	        
+	        if (isset($_POST['status'])) {
+	            $card_peca->set_status($_POST['status']);
+	        }
+	        
+	        $card_peca->Salvar_Alteracoes_Peca();
+	        
+	        return $response;
+	    });
+	});
+	    
 	$app->group('/menu-pesquisa/', function() use ($app) {
 		$app->get('marca/', function(Request $request, Response $response, $args) use ($app) {
 			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
@@ -319,6 +341,10 @@
 					$visualizar->set_preferencia_entrega_url($_GET['preferencia_entrega']);
 				}
 				
+				if (isset($_GET['status_peca'])) {
+				    $visualizar->set_status_peca_url($_GET['status_peca']);
+				}
+				
 				$resposta = $visualizar->Carregar_Pagina();
 				
 				if ($resposta === false) {
@@ -383,6 +409,10 @@
 				
 				if (isset($_GET['preferencia_entrega'])) {
 					$visualizar->set_preferencia_entrega_url($_GET['preferencia_entrega']);
+				}
+				
+				if (isset($_GET['status_peca'])) {
+				    $visualizar->set_status_peca_url($_GET['status_peca']);
 				}
 				
 				$resposta = $visualizar->Carregar_Pagina();
@@ -985,6 +1015,10 @@
 					$resultados->set_preferencia_entrega_url($_GET['preferencia_entrega']);
 				}
 				
+				if (isset($_GET['status_peca'])) {
+				    $resultados->set_status_peca_url($_GET['status_peca']);
+				}
+				
 				$resultados->Carregar_Pagina();
 				
 				return $response;
@@ -1041,6 +1075,10 @@
 				
 				if (isset($_GET['preferencia_entrega'])) {
 					$resultados->set_preferencia_entrega_url($_GET['preferencia_entrega']);
+				}
+				
+				if (isset($_GET['status_peca'])) {
+				    $resultados->set_status_peca_url($_GET['status_peca']);
 				}
 				
 				$resultados->Carregar_Pagina();

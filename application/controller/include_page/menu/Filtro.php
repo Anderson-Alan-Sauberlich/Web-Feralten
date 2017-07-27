@@ -1,6 +1,7 @@
 <?php
 namespace application\controller\include_page\menu;
 	
+    use application\model\common\util\Login_Session;
 	use application\model\common\util\Validador;
 	use application\view\src\include_page\menu\Filtro as View_Filtro;
 	use application\model\dao\Cidade as DAO_Cidade;
@@ -27,6 +28,7 @@ namespace application\controller\include_page\menu;
 		private $ordem_preco;
 		private $ordem_data;
 		private $preferencia_entrega;
+		private $status_peca;
 		
 		public function set_estado($estado) : void {
 			try {
@@ -94,12 +96,36 @@ namespace application\controller\include_page\menu;
 			}
 		}
 		
+		public function set_preferencia_entrega($preferencia_entrega) : void {
+		    try {
+		        $this->preferencia_entrega = Validador::Preferencia_Entrega()::validar_id($preferencia_entrega);
+		    } catch (Exception $e) {
+		        $this->preferencia_entrega = null;
+		    }
+		}
+		
 		public function set_preferencia_entrega_url($preferencia_entrega) : void {
 			try {
 				$this->preferencia_entrega = DAO_Preferencia_Entrega::Buscar_Id_Por_Url(Validador::Preferencia_Entrega()::validar_url($preferencia_entrega));
 			} catch (Exception $e) {
 				$this->preferencia_entrega = null;
 			}
+		}
+		
+		public function set_status_peca($status_peca) : void {
+		    try {
+		        $this->status_peca = Validador::Status_Peca()::validar_id($status_peca);
+		    } catch (Exception $e) {
+		        $this->status_peca = null;
+		    }
+		}
+		
+		public function set_status_peca_url($status_peca) : void {
+		    try {
+		        $this->status_peca = DAO_Status_Peca::Buscar_Id_Por_Url(Validador::Status_Peca()::validar_url($status_peca));
+		    } catch (Exception $e) {
+		        $this->status_peca = null;
+		    }
 		}
 		
 		public function get_estado() : ?int {
@@ -116,6 +142,10 @@ namespace application\controller\include_page\menu;
 		
 		public function get_preferencia_entrega() : ?int {
 			return $this->preferencia_entrega;
+		}
+		
+		public function get_status_peca() : ?int {
+		    return $this->status_peca;
 		}
 		
 		public function get_object_estado() : ?Object_Estado {
@@ -166,6 +196,18 @@ namespace application\controller\include_page\menu;
 			}
 		}
 		
+		public function get_object_status_peca() : ?Object_Status_Peca {
+		    if (!empty($this->status_peca)) {
+		        $object_status_peca = new Object_Status_Peca();
+		        
+		        $object_status_peca->set_id($this->status_peca);
+		        
+		        return $object_status_peca;
+		    } else {
+		        return null;
+		    }
+		}
+		
 		public function get_form() : ?array {
 			$form_filtro = array();
 			
@@ -175,6 +217,7 @@ namespace application\controller\include_page\menu;
 			$form_filtro['ordem_data'] = $this->ordem_data;
 			$form_filtro['estado_uso'] = $this->estado_uso;
 			$form_filtro['preferencia_entrega'] = $this->preferencia_entrega;
+			$form_filtro['status_peca'] = $this->status_peca;
 			
 			return $form_filtro;
 		}
@@ -183,6 +226,10 @@ namespace application\controller\include_page\menu;
 			if (!empty($this->estado)) {
 				View_Filtro::Mostrar_Cidades($this->estado);
 			}
+		}
+		
+		public static function Verificar_Login() : bool {
+		    return Login_Session::Verificar_Login();
 		}
 		
 		public static function Buscar_Estados() {
@@ -199,6 +246,10 @@ namespace application\controller\include_page\menu;
 		
 		public static function Buscar_Preferencia_Entrega() {
 			return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();
+		}
+		
+		public static function Buscar_Status_Peca() {
+		    return DAO_Status_Peca::Buscar_Todos();
 		}
 	}
 ?>

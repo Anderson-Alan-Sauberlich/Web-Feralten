@@ -71,6 +71,10 @@ namespace application\controller\pecas;
         	$this->controller_filtro->set_preferencia_entrega_url($preferencia_entrega);
         }
         
+        public function set_status_peca_url($status_peca) : void {
+            $this->controller_filtro->set_status_peca_url($status_peca);
+        }
+        
         public function Carregar_Pagina() {
         	$this->controller_pesquisa->set_object_controller_filtro($this->controller_filtro);
         	

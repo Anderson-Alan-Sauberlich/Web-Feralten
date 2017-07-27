@@ -86,6 +86,7 @@ function Pesquisar() {
 	var ordem_preco = $("#ordem_preco").val();
 	var ordem_data = $("#ordem_data").val();
 	var estado_uso = $("#estado_uso").val();
+	var status_peca = $("#status_peca").val();
 	var preferencia_entrega = $("#preferencia_entrega").val();
 	var estado = $("#estado").find("option:selected").data('url');
 	var cidade = $("#cidade").find("option:selected").data('url');
@@ -161,10 +162,21 @@ function Pesquisar() {
 		$("#estado_uso").prop('readonly', true);
 	}
 	
+	if (status_peca == 0 || status_peca == "" || status_peca == undefined) {
+		$("#status_peca").prop('disabled', true);
+		$("#status_peca").prop('readonly', true);
+	}
+	
 	if (preferencia_entrega == 0 || preferencia_entrega == "" || preferencia_entrega == undefined) {
 		$("#preferencia_entrega").prop('disabled', true);
 		$("#preferencia_entrega").prop('readonly', true);
 	}
+	
+	$('input[name*=status]').prop('disabled', true);
+	$('input[name*=status]').prop('readonly', true);
+	
+	$('input[name*=deletar]').prop('disabled', true);
+	$('input[name*=deletar]').prop('readonly', true);
 	
 	$("#searschform").attr("action", base_url);
 	

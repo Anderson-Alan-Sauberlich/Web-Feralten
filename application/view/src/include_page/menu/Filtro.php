@@ -71,6 +71,18 @@ namespace application\view\src\include_page\menu;
 			}
 		}
 		
+		public static function Mostrar_Status_Peca() : void {
+		    $status_pecas = Controller_Filtro::Buscar_Status_Peca();
+		    
+		    foreach ($status_pecas as $status_peca) {
+		        if (isset(self::$form_filtro['status_peca']) AND self::$form_filtro['status_peca'] == $status_peca->get_id()) {
+		            echo "<option selected value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
+		        } else {
+		            echo "<option value=\"".$status_peca->get_url()."\">".$status_peca->get_nome()."</option>";
+		        }
+		    }
+		}
+		
 		public static function Manter_Valor(string $ordem, string $campo) : void {
 			switch ($ordem) {
 				case 'ordem_preco':
@@ -85,6 +97,10 @@ namespace application\view\src\include_page\menu;
 					}
 					break;
 			}
+		}
+		
+		public static function Verificar_Login() : bool {
+		    return Controller_Filtro::Verificar_Login();
 		}
 		
 		public static function Mostrar_Data_Dia() : void {
