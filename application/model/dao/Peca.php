@@ -214,6 +214,11 @@ namespace application\model\dao;
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_sts_pec_id = :sp_id";
+        	} else {
+        	    if (!empty($pesquisa)) {
+        	        $pesquisa .= " AND ";
+        	    }
+        	    $pesquisa .= "peca_sts_pec_id != 3";
         	}
         	
         	if (!empty($object_peca->get_estado_uso())) {

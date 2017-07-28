@@ -114,7 +114,9 @@ namespace application\controller\include_page\menu;
 		
 		public function set_status_peca($status_peca) : void {
 		    try {
-		        $this->status_peca = Validador::Status_Peca()::validar_id($status_peca);
+		        if (self::Verificar_Login()) {
+		          $this->status_peca = Validador::Status_Peca()::validar_id($status_peca);
+		        }
 		    } catch (Exception $e) {
 		        $this->status_peca = null;
 		    }
@@ -122,7 +124,9 @@ namespace application\controller\include_page\menu;
 		
 		public function set_status_peca_url($status_peca) : void {
 		    try {
-		        $this->status_peca = DAO_Status_Peca::Buscar_Id_Por_Url(Validador::Status_Peca()::validar_url($status_peca));
+		        if (self::Verificar_Login()) {
+		          $this->status_peca = DAO_Status_Peca::Buscar_Id_Por_Url(Validador::Status_Peca()::validar_url($status_peca));
+		        }
 		    } catch (Exception $e) {
 		        $this->status_peca = null;
 		    }
