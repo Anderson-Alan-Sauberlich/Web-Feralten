@@ -77,7 +77,7 @@ $(document).ready(function() {
 		}
    });
 });
-function Pesquisar() {
+function Pesquisar($bool_p) {
 	var base_url = $("#searschform").attr("action");
 	var categoria = $("input[name='categoria']:checked").data('url');
 	var ano_de = $("#ano_de").val();
@@ -170,6 +170,16 @@ function Pesquisar() {
 	if (preferencia_entrega == 0 || preferencia_entrega == "" || preferencia_entrega == undefined) {
 		$("#preferencia_entrega").prop('disabled', true);
 		$("#preferencia_entrega").prop('readonly', true);
+	}
+	
+	if ($bool_p) {
+		var url_p = window.location.search;
+		
+		if (url_p.indexOf("pagina=") != -1) {
+			var p = url_p.split("pagina=")[1];
+			
+			$("#searschform").append("<input type='hidden' name='pagina' value='"+p+"' />");
+		}
 	}
 	
 	$('input[name*=status]').prop('disabled', true);

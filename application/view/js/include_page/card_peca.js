@@ -47,7 +47,7 @@ function Salvar_Opcoes_Peca($peca) {
 	 status:$status,
 	 peca:$peca},
 	function(valor){
-		Pesquisar();
+		Pesquisar(true);
 	});
 }
 function Cancelar_Opcoes_Peca() {
