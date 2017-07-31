@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/application/view/html/include_page/head/Default.php'; ?>
-	<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.10.min.js"></script>
+	<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
 	<script type="text/javascript" src="/application/view/js/usuario/meu_perfil/meus_dados/concluir.js"></script>
 	<title>Concluir Cadastro | Feralten</title>
 </head>
