@@ -2,6 +2,8 @@
 namespace application\model\dao;
 	
     use application\model\object\Modelo as Object_Modelo;
+    use application\model\object\Modelo_Compativel as Object_Modelo_Compativel;
+    use application\model\dao\Modelo_Compativel as DAO_Modelo_Compativel;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -13,20 +15,34 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Modelo $object_modelo) : bool {
+        public static function Inserir(Object_Modelo $object_modelo) : ?int {
             try {
+                if (empty($object_modelo->get_id())) {
+                    $object_modelo->set_id(self::Achar_ID_Livre($object_modelo->get_marca_id()));
+                }
+                
                 $sql = "INSERT INTO tb_modelo (modelo_id, modelo_mrc_id, modelo_nome, modelo_url) 
-                        VALUES (fc_achar_id_livre_modelo(:ma_id), :ma_id, :nome, :url);";
+                        VALUES (:id, :ma_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-
+                
+                $p_sql->bindValue(':id', $object_modelo->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
 
-                return $p_sql->execute();
+                if ($p_sql->execute()) {
+                    $object_modelo_compativel = new Object_Modelo_Compativel();
+                    
+                    $object_modelo_compativel->set_com_id($object_modelo->get_id());
+                    $object_modelo_compativel->set_da_id($object_modelo->get_id());
+                    
+                    DAO_Modelo_Compativel::Inserir($object_modelo_compativel);
+                } else {
+                    return null;
+                }
             } catch (PDOException | Exception $e) {
-				return false;
+				return null;
             }
         }
         
@@ -49,6 +65,8 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
+                DAO_Modelo_Compativel::Deletar($id);
+                
                 $sql = 'DELETE FROM tb_modelo WHERE modelo_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -57,6 +75,22 @@ namespace application\model\dao;
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
+            }
+        }
+        
+        public static function Achar_ID_Livre(int $marca_id) : ?int {
+            try {
+                $sql = 'SELECT fc_achar_id_livre_modelo(:ma_id)';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':ma_id', $marca_id, PDO::PARAM_INT);
+                
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return null;
             }
         }
         

@@ -16,7 +16,7 @@ namespace application\model\dao;
 		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) : bool {
 			try {
 				$sql = "INSERT INTO tb_versao_compativel (versao_compativel_da_id_vrs, versao_compativel_com_id_vrs)
-	                    VALUES (:id, :da_id, :com_id);";
+	                    VALUES (:da_id, :com_id);";
 				
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				

@@ -25,7 +25,7 @@ namespace application\model\dao;
         }
         
         public static function Inserir(Object_Peca $object_peca) {
-            
+            try {
                 $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id) 
                         VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_uso_id);";
                 
@@ -46,10 +46,14 @@ namespace application\model\dao;
 				$p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
 				$p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
 				
-                $p_sql->execute();
-				
-				return Conexao::Conectar()->lastInsertId();
-            
+                if ($p_sql->execute()) {
+				    return Conexao::Conectar()->lastInsertId();
+                } else {
+                    return false;
+                }
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Atualizar(Object_Peca $object_peca) : bool {

@@ -2,6 +2,8 @@
 namespace application\model\dao;
 	
     use application\model\object\Marca as Object_Marca;
+    use application\model\object\Marca_Compativel as Object_Marca_Compativel;
+    use application\model\dao\Marca_Compativel as DAO_Marca_Compativel;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -13,20 +15,34 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Marca $object_marca) : bool {
+        public static function Inserir(Object_Marca $object_marca) : ?int {
             try {
+                if (empty($object_marca->get_id())) {
+                    $object_marca->set_id(self::Achar_ID_Livre($object_marca->get_categoria_id()));
+                }
+                
                 $sql = "INSERT INTO tb_marca (marca_id, marca_ctg_id, marca_nome, marca_url) 
-                        VALUES (fc_achar_id_livre_marca(:ca_id), :ca_id, :nome, :url);";
+                        VALUES (:id, :ca_id, :nome, :url);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-
+                
+                $p_sql->bindValue(':id', $object_marca->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
 
-                return $p_sql->execute();
+                if ($p_sql->execute()) {
+                    $object_marca_compativel = new Object_Marca_Compativel();
+                    
+                    $object_marca_compativel->set_com_id($object_marca->get_id());
+                    $object_marca_compativel->set_da_id($object_marca->get_id());
+                    
+                    DAO_Marca_Compativel::Inserir($object_marca_compativel);
+                } else {
+                    return null;
+                }
             } catch (PDOException | Exception $e) {
-				return false;
+				return null;
             }
         }
         
@@ -49,6 +65,8 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
+                DAO_Marca_Compativel::Deletar($id);
+                
                 $sql = 'DELETE FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -57,6 +75,22 @@ namespace application\model\dao;
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
+            }
+        }
+        
+        public static function Achar_ID_Livre(int $categoria_id) : ?int {
+            try {
+                $sql = 'SELECT fc_achar_id_livre_marca(:ca_id)';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':ca_id', $categoria_id, PDO::PARAM_INT);
+                
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return null;
             }
         }
         

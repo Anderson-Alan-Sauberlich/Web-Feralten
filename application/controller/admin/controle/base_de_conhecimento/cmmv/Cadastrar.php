@@ -90,7 +90,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         		$object_versao->set_url($this->url);
         		
         		if (DAO_Versao::Verificar_Versao_Repetida($object_versao)) {
-        			DAO_Versao::Inserir($object_versao);
+        		    DAO_Versao::Inserir($object_versao);
         		} else {
         			echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Versão Nome/URL Já Estão Cadastrados Para Este Modelo</b></div>";
         		}
@@ -106,7 +106,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         		$object_modelo->set_url($this->url);
         		
         		if (DAO_Modelo::Verificar_Modelo_Repetido($object_modelo)) {
-        			DAO_Modelo::Inserir($object_modelo);
+        		    DAO_Modelo::Inserir($object_modelo);
         		} else {
         			echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Modelo Nome/URL Já Estão Cadastrados Para Está Marca</b></div>";
         		}
@@ -122,7 +122,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         		$object_marca->set_url($this->url);
         		
         		if (DAO_Marca::Verificar_Marca_Repetida($object_marca)) {
-        			DAO_Marca::Inserir($object_marca);
+        		    DAO_Marca::Inserir($object_marca);
         		} else {
         			echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Marca Nome/URL Já Estão Cadastrados Para Está Categoria</b></div>";
         		}
@@ -137,7 +137,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
         		$object_categoria->set_url($this->url);
         		
         		if (DAO_Categoria::Verificar_Categoria_Repetida($object_categoria)) {
-        			DAO_Categoria::Inserir($object_categoria);
+        		    DAO_Categoria::Inserir($object_categoria);
         		} else {
         			echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Categoria Nome/URL Já Estão Cadastrados</b></div>";
         		}
