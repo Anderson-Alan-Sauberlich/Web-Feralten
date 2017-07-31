@@ -303,6 +303,16 @@ namespace application\model\common\util;
 			}
 		}
 		
+		public function Deletar_Imagens_Peca(int $peca_id, int $entidade_id) : bool {
+		    $endereco = RAIZ."/imagens/$entidade_id/$peca_id/";
+		    
+		    if (is_dir($endereco)) {
+		        return self::delTree($endereco);
+		    } else {
+		        return false;
+		    }
+		}
+		
 		public function Deletar_Imagem_Peca(string $endereco) : bool {
 			$resposta = true;
 			$endereco = RAIZ.$endereco;
@@ -482,6 +492,14 @@ namespace application\model\common\util;
 					}
 				}
 		    }
+		}
+		
+		private static function delTree(string $dir) : bool {
+		    $files = array_diff(scandir($dir), array('.','..'));
+		    foreach ($files as $file) {
+		        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+		    }
+		    return rmdir($dir);
 		}
 	}
 ?>

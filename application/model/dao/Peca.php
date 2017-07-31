@@ -8,6 +8,10 @@ namespace application\model\dao;
     use application\model\dao\Endereco as DAO_Endereco;
     use application\model\dao\Entidade as DAO_Entidade;
     use application\model\dao\Usuario as DAO_Usuario;
+    use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
+    use application\model\dao\Marca_Pativel as DAO_Marca_Pativel;
+    use application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
+    use application\model\dao\Versao_Pativel as DAO_Versao_Pativel;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -107,14 +111,43 @@ namespace application\model\dao;
         
         public static function Deletar(int $id) : bool {
             try {
+                DAO_Categoria_Pativel::Deletar($id);
+                DAO_Marca_Pativel::Deletar($id);
+                DAO_Modelo_Pativel::Deletar($id);
+                DAO_Versao_Pativel::Deletar($id);
+                DAO_Foto_Peca::Deletar_Fotos($id);
+                
                 $sql = 'DELETE FROM tb_peca WHERE peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
-                return $p_sql->execute();
+                if ($p_sql->execute()) {
+                    if (self::Salvar_Id_Peca($id)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             } catch (PDOException | Exception $e) {
 				return false;
+            }
+        }
+        
+        private static function Salvar_Id_Peca(int $id) : bool {
+            try {
+                $sql = "INSERT INTO tb_id_livre_peca (id_livre_peca)
+                        VALUES (:id);";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
             }
         }
         

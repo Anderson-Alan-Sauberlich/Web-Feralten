@@ -3,6 +3,7 @@ namespace application\controller\include_page;
     
     use application\model\common\util\Login_Session;
     use application\model\common\util\Validador;
+    use application\model\common\util\Gerenciar_Imagens;
     use application\model\dao\Peca as DAO_Peca;
 	use application\view\src\include_page\Card_Peca as View_Card_Peca;
 	use \Exception;
@@ -40,7 +41,9 @@ namespace application\controller\include_page;
         public function Salvar_Alteracoes_Peca() : void {
             if (Login_Session::Verificar_Login() AND !empty($this->peca)) {
                 if (!empty($this->deletar) AND $this->deletar === 'deletar') {
-                    DAO_Peca::Deletar($this->peca);
+                    if (DAO_Peca::Deletar($this->peca)) {
+                        Gerenciar_Imagens::Deletar_Imagens_Peca($this->peca, Login_Session::get_entidade_id());
+                    }
                 } else if (!empty($this->status)) {
                     DAO_Peca::Atualizar_Status($this->peca, $this->status);
                 }
