@@ -26,8 +26,18 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Peca $object_peca) {
             try {
-                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id) 
-                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_uso_id);";
+                if (empty($object_peca->get_id())) {
+                    $id_peca = self::Achar_ID_Livre();
+                    
+                    if (empty($id_peca)) {
+                        $object_peca->set_id(0);
+                    } else {
+                        $object_peca->set_id($id_peca);
+                    }
+                }
+                
+                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id) 
+                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :url, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_uso_id);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
@@ -37,6 +47,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(':end_id', $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(':st_id', $object_peca->get_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_peca->get_url(), PDO::PARAM_STR);
 				$p_sql->bindValue(':fabricante', $object_peca->get_fabricante(), PDO::PARAM_STR);
                 $p_sql->bindValue(':preco', $object_peca->get_preco(), PDO::PARAM_INT);
                 $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
@@ -65,6 +76,7 @@ namespace application\model\dao;
                 		peca_end_id = :end_id, 
                 		peca_sts_pec_id = :st_id, 
                 		peca_nome = :nome, 
+                        peca_url = :url, 
                 		peca_fabricante = :fabricante, 
                 		peca_preco = :preco, 
                 		peca_descricao = :descricao, 
@@ -83,6 +95,7 @@ namespace application\model\dao;
                 $p_sql->bindValue(':end_id', $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
 				$p_sql->bindValue(':st_id', $object_peca->get_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_peca->get_url(), PDO::PARAM_STR);
 				$p_sql->bindValue(':fabricante', $object_peca->get_fabricante(), PDO::PARAM_STR);
                 $p_sql->bindValue(':preco', $object_peca->get_preco(), PDO::PARAM_INT);
                 $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
@@ -106,6 +119,21 @@ namespace application\model\dao;
                 
                 $p_sql->bindValue(':id', $id_peca, PDO::PARAM_INT);
                 $p_sql->bindValue(':st_id', $id_status, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Atualizar_URL(int $id_peca, int $url) : bool {
+            try {
+                $sql = "UPDATE tb_peca SET peca_url = :url WHERE peca_id = :id";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':id', $id_peca, PDO::PARAM_INT);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -140,6 +168,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function Achar_ID_Livre() : ?int {
+            try {
+                $sql = 'SELECT fc_achar_id_livre_peca()';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return null;
+            }
+        }
+        
         private static function Salvar_Id_Peca(int $id) : bool {
             try {
                 $sql = "INSERT INTO tb_id_livre_peca (id_livre_peca)
@@ -157,7 +199,7 @@ namespace application\model\dao;
         
         public static function BuscarPorCOD(int $id) {
             try {
-                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id FROM tb_peca WHERE peca_id = :id';
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id FROM tb_peca WHERE peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
@@ -211,7 +253,7 @@ namespace application\model\dao;
         	}
         	
         	try {
-        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_std_uso_pec_id
+        		$sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_std_uso_pec_id
         		FROM vw_peca $pesquisa LIMIT :inicio, :limite";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
@@ -270,6 +312,13 @@ namespace application\model\dao;
         			$pesquisa .= " AND ";
         		}
         		$pesquisa .= "peca_nome LIKE '%' :nome '%'";
+        	}
+        	
+        	if (!empty($object_peca->get_url())) {
+        	    if (!empty($pesquisa)) {
+        	        $pesquisa .= " AND ";
+        	    }
+        	    $pesquisa .= "peca_url = :url";
         	}
         	
         	if (!empty($object_peca->get_fabricante())) {
@@ -393,6 +442,10 @@ namespace application\model\dao;
         		$p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
         	}
         	
+        	if (!empty($object_peca->get_url())) {
+        	    $p_sql->bindValue(":url", $object_peca->get_url(), PDO::PARAM_STR);
+        	}
+        	
         	if (!empty($object_peca->get_fabricante())) {
         		$p_sql->bindValue(":fabricante", $object_peca->get_fabricante(), PDO::PARAM_STR);
         	}
@@ -424,7 +477,7 @@ namespace application\model\dao;
         	return $p_sql;
         }
         
-        public static function Retornar_Dono_Peca($id) {
+        public static function Retornar_Dono_Peca(int $id) {
         	try {
         		$sql = 'SELECT peca_responsavel_usr_id FROM tb_peca WHERE peca_id = :id';
         		
@@ -436,6 +489,20 @@ namespace application\model\dao;
         	} catch (PDOException | Exception $e) {
         		return false;
         	}
+        }
+        
+        public static function Retornar_Id_Por_URL(string $url) {
+            try {
+                $sql = 'SELECT peca_id FROM tb_peca WHERE peca_url = :url';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function PopulaPeca(array $row) : Object_Peca {
@@ -464,6 +531,10 @@ namespace application\model\dao;
             
             if (isset($row['peca_nome'])) {
             	$object_peca->set_nome($row['peca_nome']);
+            }
+            
+            if (isset($row['peca_url'])) {
+                $object_peca->set_url($row['peca_url']);
             }
             
             if (isset($row['peca_fabricante'])) {
@@ -535,6 +606,10 @@ namespace application\model\dao;
 	        	
 	        	if (isset($row['peca_nome'])) {
 	        		$object_peca->set_nome($row['peca_nome']);
+	        	}
+	        	
+	        	if (isset($row['peca_url'])) {
+	        	    $object_peca->set_url($row['peca_url']);
 	        	}
 	        	
 	        	if (isset($row['peca_fabricante'])) {

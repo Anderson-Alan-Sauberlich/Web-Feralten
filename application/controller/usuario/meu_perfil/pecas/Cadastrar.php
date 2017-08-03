@@ -4,6 +4,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\common\util\Validador;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\Gerenciar_Imagens;
+	use application\controller\common\util\Peca as Util_Peca;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
@@ -504,6 +505,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$object_estado_uso = new Object_Estado_Uso_Peca();
 				$object_status = new Object_Status_Peca();
 				$entidade = new Object_Entidade();
+				$peca_url = Util_Peca::Gerar_URL_Peca($this->peca);
+				$id_peca_tmp = DAO_Peca::Achar_ID_Livre();
 				
 				if ($this->estado_uso > 0) {
 					$object_estado_uso->set_id($this->estado_uso);
@@ -537,8 +540,15 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 					$endereco->set_id($id_endereco);
 					
-					$object_peca->set_id(0);
 					$object_peca->set_endereco($endereco);
+					
+					if (empty($id_peca_tmp)) {
+					    $object_peca->set_id(0);
+				    	$object_peca->set_url($peca_url.'_'.Login_Session::get_usuario_id().rand(100, 999));
+					} else {
+					    $object_peca->set_url($peca_url.'_'.$id_peca_tmp);
+					    $object_peca->set_id($id_peca_tmp);
+					}
 					
 					$usuario_responsavel = new Object_Usuario();
 					
@@ -550,6 +560,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				$id_peca = DAO_Peca::Inserir($object_peca);
 				
 				if (!empty($id_peca) AND $id_peca !== false) {
+				    if (empty($id_peca_tmp)) {
+				        DAO_Peca::Atualizar_URL($id_peca, $peca_url.'_'.$id_peca);
+				    }
+				    
 					$retorno = null;
 						
 					foreach ($categorias_pativeis as $pativel) {
@@ -591,9 +605,8 @@ namespace application\controller\usuario\meu_perfil\pecas;
 					
 					if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
 						$imagens = new Gerenciar_Imagens();
-						$img_descricao = Validador::Foto_Peca()::filtrar_descricao_nome($this->peca);
 						
-						$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca, $img_descricao);
+						$diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca, $peca_url);
 						
 						if (!empty($diretorios_imagens)) {
 							foreach ($diretorios_imagens as $key => $diretorio) {
@@ -602,7 +615,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 								$foto_peca->set_peca_id($id_peca);
 								$foto_peca->set_endereco($diretorio);
 								$foto_peca->set_numero($key);
-								$foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$img_descricao.'_', $_SESSION['imagens_tmp'][$key]));
+								$foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$peca_url.'_', $_SESSION['imagens_tmp'][$key]));
 								
 								if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
 									$this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $key para a Peça";

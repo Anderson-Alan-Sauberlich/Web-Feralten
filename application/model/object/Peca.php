@@ -14,6 +14,7 @@ namespace application\model\object;
 		private $entidade;
 		private $usuario_responsavel;
 		private $nome;
+		private $url;
 		private $fabricante;
 		private $endereco;
 		private $preco;
@@ -60,6 +61,14 @@ namespace application\model\object;
 		
 		public function get_nome() : ?string {
 			return $this->nome;
+		}
+		
+		public function set_url(string $url) : void {
+		    $this->url = $url;
+		}
+		
+		public function get_url() : ?string {
+		    return $this->url;
 		}
 		
 		public function set_fabricante(?string $fabricante = null) : void {

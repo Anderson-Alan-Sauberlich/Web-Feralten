@@ -36,7 +36,7 @@
 	<?php if (isset($_SESSION['login']['usuario']['id']) AND $peca->get_entidade()->get_usuario_id() === $_SESSION['login']['usuario']['id']) { ?>
 		<div class="extra content">
 			<div class="ui two buttons">
-				<a id="atualizar" href="/usuario/meu-perfil/pecas/atualizar/<?php echo $peca->get_id(); ?>/" class="ui inverted green button">Atualizar</a>
+				<a id="atualizar" href="/usuario/meu-perfil/pecas/atualizar/<?php echo $peca->get_url(); ?>/" class="ui inverted green button">Atualizar</a>
 				<a id="opcoes" onclick="Mostrar_Modal(<?php echo $peca->get_id(); ?>);" class="ui inverted red button">Opções</a>
 			</div>
 		</div>

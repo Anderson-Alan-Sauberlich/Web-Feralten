@@ -67,21 +67,6 @@ namespace application\model\validador;
 			
 		}
 		
-		public function filtrar_descricao_nome($img_descricao = null) : ?string {
-			$valor = null;
-			
-			if (!empty($img_descricao)) {
-				$img_descricao = iconv("UTF-8", "ASCII//TRANSLIT//IGNORE", $img_descricao);
-				$img_descricao = trim($img_descricao);
-				$img_descricao = preg_replace('/\s+/', '-', $img_descricao);
-				$img_descricao = preg_replace(array('/[ ]/', '/[^A-Za-z0-9\-]/'), array('', ''), $img_descricao);
-				
-				$valor = $img_descricao;
-			}
-			
-			return $valor;
-		}
-		
 		public function filtrar_imagem($imagem = null) : void {
 			
 		}

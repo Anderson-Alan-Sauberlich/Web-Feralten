@@ -4,6 +4,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\common\util\Validador;
 	use application\model\common\util\Login_Session;
 	use application\model\common\util\Gerenciar_Imagens;
+	use application\controller\common\util\Peca as Util_Peca;
 	use application\model\object\Peca as Object_Peca;
 	use application\model\object\Endereco as Object_Endereco;
 	use application\model\object\Status_Peca as Object_Status_Peca;
@@ -44,6 +45,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         }
         
         private $peca_id;
+        private $peca_url;
         private $categoria;
         private $marca;
         private $modelo;
@@ -70,6 +72,18 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		
         		$this->peca_id = Validador::Peca()::filtrar_id($peca_id);
         	}
+        }
+        
+        public function set_peca_url($peca_url) {
+            try {
+                $this->peca_url = Validador::Peca()::validar_url($peca_url);
+                
+                $this->set_peca_id(DAO_Peca::Retornar_Id_Por_URL($this->peca_url));
+            } catch (Exception $e) {
+                $this->atualizar_erros[] = $e->getMessage();
+                
+                $this->peca_url = Validador::Peca()::filtrar_url($peca_url);
+            }
         }
         
         public function set_categoria($categoria) {
@@ -582,6 +596,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$object_estado_uso = new Object_Estado_Uso_Peca();
         		$object_status = new Object_Status_Peca();
         		$entidade = new Object_Entidade();
+        		$peca_url = Util_Peca::Gerar_URL_Peca($this->peca);
         		
         		if ($this->estado_uso > 0) {
         			$object_estado_uso->set_id($this->estado_uso);
@@ -590,6 +605,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		$object_status->set_id(1);
         		
         		$object_peca->set_id($this->peca_id);
+        		$object_peca->set_url($peca_url.'_'.$this->peca_id);
         		$object_peca->set_estado_uso($object_estado_uso);
         		$object_peca->set_status($object_status);
         		$object_peca->set_descricao($this->descricao);
@@ -754,14 +770,13 @@ namespace application\controller\usuario\meu_perfil\pecas;
         				}
         			}
         			
-        			$img_descricao = Validador::Foto_Peca()::filtrar_descricao_nome($this->peca);
         			$imagens = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
         			
-        			$gerenciar_imagens->Atualizar_Nome_Imagem_Peca($this->peca_id, $img_descricao);
+        			$gerenciar_imagens->Atualizar_Nome_Imagem_Peca($this->peca_id, $peca_url);
         			
         			foreach ($imagens as $imagem) {
-        				$imagem->set_nome(preg_replace('/_(.*?)_/', '_'.$img_descricao.'_', $imagem->get_nome()));
-        				$imagem->set_endereco(preg_replace('/_(.*?)_/', '_'.$img_descricao.'_', $imagem->get_endereco()));
+        				$imagem->set_nome(preg_replace('/_(.*?)_/', '_'.$peca_url.'_', $imagem->get_nome()));
+        				$imagem->set_endereco(preg_replace('/_(.*?)_/', '_'.$peca_url.'_', $imagem->get_endereco()));
         				
         				DAO_Foto_Peca::Atualizar($imagem);
         			}
@@ -772,7 +787,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         		}
         	}
         	
-        	$this->get_form();
+        	$this->set_form($object_peca);
         	
         	$anos = array();
         	
@@ -812,6 +827,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         
         public function get_form() : ?array {
         	$this->atualizar_form['peca_id'] = $this->peca_id;
+        	$this->atualizar_form['peca_url'] = $this->peca_url;
         	$this->atualizar_form['peca'] = $this->peca;
         	$this->atualizar_form['fabricante'] = $this->fabricante;
         	$this->atualizar_form['serie'] = $this->serie;
@@ -826,6 +842,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
         
         public function set_form(Object_Peca $object_peca) : ?array {
         	$this->peca = $object_peca->get_nome();
+        	$this->peca_url = $object_peca->get_url();
         	$this->fabricante = $object_peca->get_fabricante();
         	$this->serie = $object_peca->get_serie();
         	$this->preco = $object_peca->get_preco();

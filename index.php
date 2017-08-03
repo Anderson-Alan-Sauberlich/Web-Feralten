@@ -458,7 +458,7 @@
 		$app->get('[{peca}/]', function(Request $request, Response $response, $args) use ($app) {
 			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
 			
-			$atualizar->set_peca_id(isset($args['peca']) ? $args['peca'] : null);
+			$atualizar->set_peca_url(isset($args['peca']) ? $args['peca'] : null);
 			
 			$resposta = $atualizar->Carregar_Pagina();
 			
@@ -528,7 +528,7 @@
 			
 			$atualizar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
 			
-			$atualizar->set_peca_id(isset($args['peca']) ? $args['peca'] : null);
+			$atualizar->set_peca_url(isset($args['peca']) ? $args['peca'] : null);
 			
 			$resposta = $atualizar->Verificar_Evento();
 			

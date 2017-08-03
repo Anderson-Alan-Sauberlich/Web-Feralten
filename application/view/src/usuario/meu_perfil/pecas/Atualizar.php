@@ -539,9 +539,9 @@ namespace application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Mostrar_Id_Peca() : void {
-        	if (isset(self::$atualizar_form['peca_id'])) {
-        		echo self::$atualizar_form['peca_id'];
+        public static function Mostrar_URL_Peca() : void {
+        	if (isset(self::$atualizar_form['peca_url'])) {
+        		echo self::$atualizar_form['peca_url'];
         	}
         }
         

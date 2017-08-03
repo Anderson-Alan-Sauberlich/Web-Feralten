@@ -52,7 +52,7 @@
 			<div class="header"><h4>Estado de Conservação</h4></div>
 			<div class="menu">
 				<div class="ui container fluid">
-					<select id="estado_uso" name="estado_uso" class="ui fluid search dropdown">
+					<select id="estado_uso" name="estado_uso" class="ui fluid dropdown">
 						<option value="0">Selecione o Status</option>
 						<?php View_Filtro::Mostrar_Estado_Uso(); ?>
 					</select>
@@ -82,7 +82,7 @@
 			<div class="header"><h4>Preferência de Entrega</h4></div>
 			<div class="menu">
 				<div class="ui container fluid">
-					<select id="preferencia_entrega" name="preferencia_entrega" class="ui fluid search dropdown">
+					<select id="preferencia_entrega" name="preferencia_entrega" class="ui fluid dropdown">
 						<option value="0">Preferência de Entrega</option>
 						<?php View_Filtro::Mostrar_Preferencia_Entrega(); ?>
 					</select>
@@ -94,7 +94,7 @@
     			<div class="header"><h4>Status da Peça</h4></div>
     			<div class="menu">
     				<div class="ui container fluid">
-    					<select id="status_peca" name="status_peca" class="ui fluid search dropdown">
+    					<select id="status_peca" name="status_peca" class="ui fluid dropdown">
     						<option value="0">Status da Peça</option>
     						<?php View_Filtro::Mostrar_Status_Peca(); ?>
     					</select>

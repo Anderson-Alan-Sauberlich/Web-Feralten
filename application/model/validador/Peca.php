@@ -58,6 +58,27 @@ namespace application\model\validador;
 			}
 		}
 		
+		public static function validar_url($url = null) : string {
+		    if (!empty($url)) {
+		        $valor = strip_tags($url);
+		        
+		        if ($valor === $url) {
+		            $url = trim($url);
+		            $url = preg_replace('/\s+/', " ", $url);
+		            
+		            if (strlen($url) <= 150) {
+		                return ucwords(strtolower($url));
+		            } else {
+		                throw new Exception('Peça URL, Não pode conter mais de 150 Caracteres');
+		            }
+		        } else {
+		            throw new Exception('Peça URL, Não pode conter Tags de Programação');
+		        }
+		    } else {
+		        throw new Exception('Informa a URL da Peça');
+		    }
+		}
+		
 		public static function validar_fabricante($fabricante = null) : ?string {
 			if (!empty($fabricante)) {
 				$valor = strip_tags($fabricante);
@@ -293,6 +314,16 @@ namespace application\model\validador;
 			}
 			
 			return $valor;
+		}
+		
+		public static function filtrar_url($url = null) : string {
+		    $valor = "";
+		    
+		    if (!empty($url)) {
+		        $valor = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($url)))));
+		    }
+		    
+		    return $valor;
 		}
 		
 		public static function filtrar_fabricante($fabricante = null) : ?string {
