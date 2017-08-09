@@ -1,4 +1,4 @@
-<?php use application\view\src\pecas\Descricao as View_Descricao; ?>
+<?php use application\view\src\pecas\Detalhes as View_Detalhes; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
