@@ -894,24 +894,36 @@
 		});
 	});
 	
-	$app->group('/dicas-de-venda/apresentacao', function() use ($app) {
-		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$apresentacao = new application\controller\dicas_de_venda\Apresentacao();
-			
-			$apresentacao->Carregar_Pagina();
-			
-			return $response;
-		});
-	});
-	
-	$app->group('/dicas-de-venda/principais', function() use ($app) {
-		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$principais = new application\controller\dicas_de_venda\Principais();
-			
-			$principais->Carregar_Pagina();
-			
-			return $response;
-		});
+	$app->group('/dicas-de-venda', function() use ($app) {
+    	$app->group('/apresentacao', function() use ($app) {
+    		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    			$apresentacao = new application\controller\dicas_de_venda\Apresentacao();
+    			
+    			$apresentacao->Carregar_Pagina();
+    			
+    			return $response;
+    		});
+    	});
+    	
+    	$app->group('/venda-segura', function() use ($app) {
+    		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    			$venda_segura = new application\controller\dicas_de_venda\Venda_Segura();
+    			
+    			$venda_segura->Carregar_Pagina();
+    			
+    			return $response;
+    		});
+    	});
+    	
+    	$app->group('/principais', function() use ($app) {
+    		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    			$principais = new application\controller\dicas_de_venda\Principais();
+    			
+    			$principais->Carregar_Pagina();
+    			
+    			return $response;
+    		});
+    	});
 	});
 	
 	$app->group('/fale-conosco', function() use ($app) {
@@ -929,16 +941,6 @@
 			$pesquisa_avancada = new application\controller\Pesquisa_Avancada();
 			
 			$pesquisa_avancada->Carregar_Pagina();
-			
-			return $response;
-		});
-	});
-	
-	$app->group('/dicas-de-venda/venda-segura', function() use ($app) {
-		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$venda_segura = new application\controller\dicas_de_venda\Venda_Segura();
-			
-			$venda_segura->Carregar_Pagina();
 			
 			return $response;
 		});
@@ -1100,14 +1102,16 @@
     	});
 	});
 	
-	$app->group('/publicidade/experimentar-formatos', function() use ($app) {
-		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$experimentar_formatos = new application\controller\publicidade\Experimentar_Formatos();
-			
-			$experimentar_formatos->Carregar_Pagina();
-			
-			return $response;
-		});
+	$app->group('/publicidade', function() use ($app) {
+    	$app->group('/experimentar-formatos', function() use ($app) {
+    		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    			$experimentar_formatos = new application\controller\publicidade\Experimentar_Formatos();
+    			
+    			$experimentar_formatos->Carregar_Pagina();
+    			
+    			return $response;
+    		});
+    	});
 	});
 	
 	$app->group('/admin', function() use ($app) {
