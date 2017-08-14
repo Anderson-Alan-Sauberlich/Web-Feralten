@@ -1100,6 +1100,20 @@
     			});
     		});
     	});
+    	
+    	$app->group('/detalhes/{peca}', function() use ($app) {
+    	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    	        $detalhes = new application\controller\pecas\Detalhes();
+    	        
+    	        if (isset($args['peca'])) {
+    	            $detalhes->set_peca_url($args['peca']);
+    	        }
+    	        
+    	        $detalhes->Carregar_Pagina();
+    	        
+    	        return $response;
+    	    });
+    	});
 	});
 	
 	$app->group('/publicidade', function() use ($app) {

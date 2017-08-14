@@ -211,6 +211,20 @@ namespace application\model\dao;
             }
         }
         
+        public static function BuscarPorURL(string $url) {
+            try {
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id FROM tb_peca WHERE peca_url = :url';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return self::PopulaPeca($p_sql->fetch(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function Buscar_Numero_Paginas(Object_Peca $object_peca, array $form_filtro) {
         	$pesquisa = '';
         	

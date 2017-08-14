@@ -1,15 +1,15 @@
 <div class="ui card">
-	<a href="/" class="content">
+	<a href="/pecas/detalhes/<?php echo $peca->get_url(); ?>/" class="content">
 		<div class="meta"><?php echo $peca->get_nome(); ?></div>
 	</a>
-	<a href="/" class="ui medium bordered image">
+	<a href="/pecas/detalhes/<?php echo $peca->get_url(); ?>/" class="ui medium bordered image">
 		<?php if (!empty($peca->get_foto(1))) { ?>
 			<img width="200" height="150" <?php if ($peca->get_status()->get_id() !== 1) { echo 'class="ui disabled image"'; } ?> onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'" src="<?php echo str_replace("@", "200x150", $peca->get_foto(1)->get_endereco()); ?>">
 		<?php } else { ?>
 			<img width="200" height="150" <?php if ($peca->get_status()->get_id() !== 1) { echo 'class="ui disabled image"'; } ?> onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'" src="/application/view/resources/img/imagem_indisponivel.png">
 		<?php } ?>
 	</a>
-	<a href="/" class="content">
+	<a href="/pecas/detalhes/<?php echo $peca->get_url(); ?>/" class="content">
 		<?php if (!empty($peca->get_preco()) AND !empty($peca->get_estado_uso())) { ?>
 			<div class="right floated header">R$: <?php echo $peca->get_preco(); ?></div>
 			<div class="meta">
@@ -29,7 +29,7 @@
 			<div class="description"><?php echo $peca->get_fabricante(); ?></div>
 		<?php } ?>
 	</a>
-	<a href="/" class="extra content">
+	<a href="/pecas/detalhes/<?php echo $peca->get_url(); ?>/" class="extra content">
 		<span class="right floated"><?php echo date('d/m/Y', strtotime($peca->get_data_anuncio())); ?></span>
 		<span><i class="user icon"></i>livre</span>
 	</a>
