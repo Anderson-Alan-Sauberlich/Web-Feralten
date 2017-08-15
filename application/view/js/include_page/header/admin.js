@@ -3,11 +3,11 @@ function abrir_menu() {
 }
 $(document).ready(function() {
 	var url = window.location.pathname;
-	if (url.indexOf('/cmmv/cadastrar/') !== -1) {
-		$('#nome_pagina').html('CADASTRAR - CMMV');
-	} else if (url.indexOf('/cmmv/alterar/') !== -1) {
-		$('#nome_pagina').html('ALTERAR - CMMV');
-	} else if (url.indexOf('/cmmv/deletar/') !== -1) {
-		$('#nome_pagina').html('DELETAR - CMMV');
+	if (url.indexOf('/cmmv/') !== -1) {
+		$('#nome_pagina').html('GERENCIAR - CMMV');
+	} else if (url.indexOf('/compatibilidade/') !== -1) {
+		$('#nome_pagina').html('GERENCIAR - COMPATIBILIDADES');
+	} else if (url.indexOf('/anos/') !== -1) {
+		$('#nome_pagina').html('GERENCIAR - ANOS DE FABRICAÇÃO');
 	}
 });

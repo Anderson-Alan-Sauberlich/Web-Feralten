@@ -3,12 +3,9 @@
 <aside class="row">
 	<nav id="menu_admin" class="ui left inline inverted blue sidebar vertical menu">
 		<div class="active item header"><h3>Admin - Menu</h3></div>
-		<a href="/admin/controle/base-de-conhecimento/cmmv/cadastrar/" class="item">Cadastrar Sequência CMMV</a>
-		<a href="/admin/controle/base-de-conhecimento/cmmv/alterar/" class="item">Alterar Sequência CMMV</a>
-		<a href="/admin/controle/base-de-conhecimento/cmmv/deletar/" class="item">Deletar Sequência CMMV</a>
-		<a href="/admin/controle/base-de-conhecimento/compatibilidade/cadastrar/" class="item">Cadastrar Compatibilidade</a>
-		<a href="/admin/controle/base-de-conhecimento/compatibilidade/alterar/" class="item">Alterar Compatibilidade</a>
-		<a href="/admin/controle/base-de-conhecimento/compatibilidade/deletar/" class="item">Deletar Compatibilidade</a>
-		<a href="/admin/controle/usuario/alterar-senha/" class="item">Alterar Senha</a>
+		<a href="/admin/controle/base-de-conhecimento/cmmv/" class="item">GERENCIAR - CMMV</a>
+		<a href="/admin/controle/base-de-conhecimento/compatibilidade/" class="item">GERENCIAR - COMPATIBILIDADE</a>
+		<a href="/admin/controle/base-de-conhecimento/anos/" class="item">GERENCIAR - ANOS FABRICAÇÃO</a>
+		<a href="/admin/controle/usuario/alterar-senha/" class="item">Alterar Minha Senha</a>
 	</nav>
 </aside>

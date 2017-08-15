@@ -1,7 +1,7 @@
 <?php
-namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade;
+namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade\gerenciar;
 	
-	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\Deletar as View_Deletar;
+	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\gerenciar\Deletar as View_Deletar;
 	
     class Deletar {
 

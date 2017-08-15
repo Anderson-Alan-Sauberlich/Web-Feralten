@@ -1,5 +1,5 @@
 <?php
-namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
+namespace application\view\src\admin\controle\base_de_conhecimento\cmmv\gerenciar;
 	
 	use application\view\src\include_page\menu\Admin as View_Admin;
 
@@ -16,7 +16,7 @@ namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
 		}
 		
 		public function Executar() : void {
-			require_once RAIZ.'/application/view/html/admin/controle/base_de_conhecimento/cmmv/Cadastrar.php';
+			require_once RAIZ.'/application/view/html/admin/controle/base_de_conhecimento/cmmv/gerenciar/Cadastrar.php';
 		}
 		
 		public static function Incluir_Menu_Admin() : void {

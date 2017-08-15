@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Categoria $object_categoria) : ?int {
+        public static function Inserir(Object_Categoria $object_categoria) : bool {
             try {
                 if (empty($object_categoria->get_id())) {
                     $object_categoria->set_id(self::Achar_ID_Livre());
@@ -36,12 +36,12 @@ namespace application\model\dao;
                     $object_categoria_compativel->set_com_id($object_categoria->get_id());
                     $object_categoria_compativel->set_da_id($object_categoria->get_id());
                     
-                    DAO_Categoria_Compativel::Inserir($object_categoria_compativel);
+                    return DAO_Categoria_Compativel::Inserir($object_categoria_compativel);
                 } else {
-                    return null;
+                    return false;
                 }
             } catch (PDOException | Exception $e) {
-				return null;
+				return false;
             }
         }
         

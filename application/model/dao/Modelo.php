@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Modelo $object_modelo) : ?int {
+        public static function Inserir(Object_Modelo $object_modelo) : bool {
             try {
                 if (empty($object_modelo->get_id())) {
                     $object_modelo->set_id(self::Achar_ID_Livre($object_modelo->get_marca_id()));
@@ -37,12 +37,12 @@ namespace application\model\dao;
                     $object_modelo_compativel->set_com_id($object_modelo->get_id());
                     $object_modelo_compativel->set_da_id($object_modelo->get_id());
                     
-                    DAO_Modelo_Compativel::Inserir($object_modelo_compativel);
+                    return DAO_Modelo_Compativel::Inserir($object_modelo_compativel);
                 } else {
-                    return null;
+                    return false;
                 }
             } catch (PDOException | Exception $e) {
-				return null;
+				return false;
             }
         }
         

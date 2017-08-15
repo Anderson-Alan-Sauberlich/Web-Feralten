@@ -1148,7 +1148,7 @@
     			$resposta = $login->Login();
     			
     			if ($resposta) {
-    				return $response->withRedirect('/admin/controle/base-de-conhecimento/cmmv/cadastrar/');
+    				return $response->withRedirect('/admin/controle/base-de-conhecimento/cmmv/');
     			} else {
     				return $response;
     			}
@@ -1170,21 +1170,23 @@
     	$app->group('/controle', function() use ($app) {
     	    $app->group('/base-de-conhecimento', function() use ($app) {
     	        $app->group('/cmmv', function() use ($app) {
-        	        $app->group('/cadastrar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
-                			
-                			$resposta = $cadastrar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
-                		
+    	            $app->group('', function() use ($app) {
+    	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    	                    $gerenciar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar();
+    	                    
+    	                    $resposta = $gerenciar->Carregar_Pagina();
+    	                    
+    	                    if ($resposta === false) {
+    	                        return $response->withRedirect('/admin/login/');
+    	                    } else {
+    	                        return $response;
+    	                    }
+    	                });
+    	            });
+    	            
+    	            $app->group('/cadastrar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			$cadastrar->Retornar_Categorias();
                 			
@@ -1192,7 +1194,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$cadastrar->set_categoria($_GET['categoria']);
@@ -1204,7 +1206,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$cadastrar->set_marca($_GET['marca']);
@@ -1216,7 +1218,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$cadastrar->set_modelo($_GET['modelo']);
@@ -1228,7 +1230,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Cadastrar();
+                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$cadastrar->set_categoria($_POST['categoria']);
@@ -1261,20 +1263,8 @@
                 	});
                 	
                 	$app->group('/alterar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
-                			
-                			$resposta = $alterar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
-                		
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			$alterar->Retornar_Categorias();
                 			
@@ -1282,7 +1272,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1294,7 +1284,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1306,7 +1296,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1318,7 +1308,7 @@
                 		});
                 		
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1330,7 +1320,7 @@
                 		});
                 		
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1342,7 +1332,7 @@
                 		});
                 		
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1354,7 +1344,7 @@
                 		});
                 		
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$alterar->set_versao($_GET['versao']);
@@ -1366,7 +1356,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Alterar();
+                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$alterar->set_categoria($_POST['categoria']);
@@ -1399,20 +1389,8 @@
                 	});
                 	
                 	$app->group('/deletar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
-                			
-                			$resposta = $deletar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
-                		
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			$deletar->Retornar_Categorias();
                 			
@@ -1420,7 +1398,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1432,7 +1410,7 @@
                 		});
                 			
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1444,7 +1422,7 @@
                 		});
                 			
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1456,7 +1434,7 @@
                 		});
                 			
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1468,7 +1446,7 @@
                 		});
                 			
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1480,7 +1458,7 @@
                 		});
                 			
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1492,7 +1470,7 @@
                 		});
                 			
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$deletar->set_versao($_GET['versao']);
@@ -1504,7 +1482,7 @@
                 		});
                 			
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Deletar();
+                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$deletar->set_categoria($_POST['categoria']);
@@ -1538,46 +1516,30 @@
     	        });
     	        
     	        $app->group('/compatibilidade', function() use ($app) {
+    	            $app->group('', function() use ($app) {
+    	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    	                    $gerenciar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Gerenciar();
+    	                    
+    	                    $resposta = $gerenciar->Carregar_Pagina();
+    	                    
+    	                    if ($resposta === false) {
+    	                        return $response->withRedirect('/admin/login/');
+    	                    } else {
+    	                        return $response;
+    	                    }
+    	                });
+    	            });
+    	            
                 	$app->group('/cadastrar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$cadastrar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Cadastrar();
-                			
-                			$resposta = $cadastrar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
+                		
                 	});
                 	
                 	$app->group('/alterar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$alterar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Alterar();
-                			
-                			$resposta = $alterar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
+                		
                 	});
                 	
                 	$app->group('/deletar', function() use ($app) {
-                		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                			$deletar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Deletar();
-                			
-                			$resposta = $deletar->Carregar_Pagina();
-                			
-                			if ($resposta === false) {
-                				return $response->withRedirect('/admin/login/');
-                			} else {
-                				return $response;
-                			}
-                		});
+                		
                 	});
     	        });
     	    });

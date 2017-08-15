@@ -1,7 +1,7 @@
 <?php
-namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade;
+namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade\gerenciar;
 	
-	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\Cadastrar as View_Cadastrar;
+	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\gerenciar\Cadastrar as View_Cadastrar;
 	
     class Cadastrar {
 

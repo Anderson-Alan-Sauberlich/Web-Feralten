@@ -1,7 +1,7 @@
 <?php
-namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade;
+namespace application\controller\admin\controle\base_de_conhecimento\compatibilidade\gerenciar;
 	
-	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\Alterar as View_Alterar;
+	use application\view\src\admin\controle\base_de_conhecimento\compatibilidade\gerenciar\Alterar as View_Alterar;
 	
     class Alterar {
 

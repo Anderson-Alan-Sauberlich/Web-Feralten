@@ -15,7 +15,7 @@ namespace application\model\dao;
             
         }
         
-        public static function Inserir(Object_Marca $object_marca) : ?int {
+        public static function Inserir(Object_Marca $object_marca) : bool {
             try {
                 if (empty($object_marca->get_id())) {
                     $object_marca->set_id(self::Achar_ID_Livre($object_marca->get_categoria_id()));
@@ -37,12 +37,12 @@ namespace application\model\dao;
                     $object_marca_compativel->set_com_id($object_marca->get_id());
                     $object_marca_compativel->set_da_id($object_marca->get_id());
                     
-                    DAO_Marca_Compativel::Inserir($object_marca_compativel);
+                    return DAO_Marca_Compativel::Inserir($object_marca_compativel);
                 } else {
-                    return null;
+                    return false;
                 }
             } catch (PDOException | Exception $e) {
-				return null;
+				return false;
             }
         }
         

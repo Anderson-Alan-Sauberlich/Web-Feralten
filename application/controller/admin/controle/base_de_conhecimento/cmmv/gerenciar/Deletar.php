@@ -1,5 +1,5 @@
 <?php
-namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
+namespace application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar;
 	
 	use application\model\dao\Categoria as DAO_Categoria;
 	use application\model\dao\Marca as DAO_Marca;
@@ -10,7 +10,7 @@ namespace application\controller\admin\controle\base_de_conhecimento\cmmv;
 	use application\model\object\Marca as Object_Marca;
 	use application\model\object\Categoria as Object_Categoria;
 	use application\controller\include_page\menu\Admin as Controller_Admin;
-	use application\view\src\admin\controle\base_de_conhecimento\cmmv\Deletar as View_Deletar;
+	use application\view\src\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar as View_Deletar;
 	
     class Deletar {
 
