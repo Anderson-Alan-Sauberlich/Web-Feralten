@@ -79,6 +79,7 @@ namespace application\model\common\util;
                 move_uploaded_file($arquivo['tmp_name'], $imagem_tmp);
                 
 				$this->Redimencionar_Imagem(800, 600, $imagem_tmp);
+				$this->Redimencionar_Imagem(600, 450, $imagem_tmp);
 				$this->Redimencionar_Imagem(400, 300, $imagem_tmp);
 				$this->Redimencionar_Imagem(320, 240, $imagem_tmp);
 				$this->Redimencionar_Imagem(200, 150, $imagem_tmp);
@@ -137,6 +138,7 @@ namespace application\model\common\util;
 				
 				if (!empty($this->nome)) {
 					$this->nome = str_replace('800x600', '@', $this->nome);
+					$this->nome = str_replace('600x450', '@', $this->nome);
 					$this->nome = str_replace('400x300', '@', $this->nome);
 					$this->nome = str_replace('320x240', '@', $this->nome);
 					$this->nome = str_replace('200x150', '@', $this->nome);
@@ -296,6 +298,7 @@ namespace application\model\common\util;
 					OR strpos($entry->getFilename(), '200x150') !== false
 					OR strpos($entry->getFilename(), '320x240') !== false
 					OR strpos($entry->getFilename(), '400x300') !== false
+					OR strpos($entry->getFilename(), '600x450') !== false
 					OR strpos($entry->getFilename(), '800x600') !== false) {
 						unlink($entry->getPathname());
 					}
@@ -321,7 +324,8 @@ namespace application\model\common\util;
 			$imagem2 = str_replace('@', '200x150', $endereco);
 			$imagem3 = str_replace('@', '320x240', $endereco);
 			$imagem4 = str_replace('@', '400x300', $endereco);
-			$imagem5 = str_replace('@', '800x600', $endereco);
+			$imagem5 = str_replace('@', '600x450', $endereco);
+			$imagem6 = str_replace('@', '800x600', $endereco);
 			
 			if (file_exists($imagem1)) {
 				if (unlink($imagem1) !== true) {
@@ -351,6 +355,12 @@ namespace application\model\common\util;
 				if (unlink($imagem5) !== true) {
 					$resposta = false;
 				}
+			}
+			
+			if (file_exists($imagem6)) {
+			    if (unlink($imagem6) !== true) {
+			        $resposta = false;
+			    }
 			}
 			
 			return $resposta;

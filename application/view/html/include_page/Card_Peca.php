@@ -4,7 +4,7 @@
 	</a>
 	<a href="/pecas/detalhes/<?php echo $peca->get_url(); ?>/" class="ui medium bordered image">
 		<?php if (!empty($peca->get_foto(1))) { ?>
-			<img width="200" height="150" <?php if ($peca->get_status()->get_id() !== 1) { echo 'class="ui disabled image"'; } ?> onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'" src="<?php echo str_replace("@", "200x150", $peca->get_foto(1)->get_endereco()); ?>">
+			<img width="200" height="150" <?php if ($peca->get_status()->get_id() !== 1) { echo 'class="ui disabled image"'; } ?> onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'" src="<?php echo str_replace("@", "400x300", $peca->get_foto(1)->get_endereco()); ?>">
 		<?php } else { ?>
 			<img width="200" height="150" <?php if ($peca->get_status()->get_id() !== 1) { echo 'class="ui disabled image"'; } ?> onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'" src="/application/view/resources/img/imagem_indisponivel.png">
 		<?php } ?>

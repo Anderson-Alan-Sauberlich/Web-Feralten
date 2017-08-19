@@ -62,5 +62,13 @@ namespace application\view\src\pecas;
                 echo self::$object_peca->get_descricao();
             }
         }
+        
+        public static function Mostrar_Foto(int $numero, string $tamanho) : void {
+            if (empty(self::$object_peca->get_foto($numero)) OR self::$object_peca->get_foto($numero) == false) {
+                echo '/application/view/resources/img/imagem_indisponivel.png';
+            } else {
+                echo str_replace('@', $tamanho, self::$object_peca->get_foto($numero)->get_endereco());
+            }
+        }
     }
 ?>
