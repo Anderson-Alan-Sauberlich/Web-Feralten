@@ -4,6 +4,7 @@ namespace application\model\dao;
     use application\model\object\Marca_Pativel as Object_Marca_Pativel;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
+    use application\model\dao\Marca as DAO_Marca;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -24,7 +25,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(':pec_id', $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_object_marca()->get_id(), PDO::PARAM_INT);
 				
 				$proximo_id_ano = null;
 				
@@ -72,7 +73,7 @@ namespace application\model\dao;
         	try {
         		if (empty($object_marca_pativel->get_ano_id())) {
         			$object_marca_pativel->set_ano_id(self::Pegar_Id_Ano($object_marca_pativel->get_peca_id(),
-        																 $object_marca_pativel->get_marca_id()));
+        																 $object_marca_pativel->get_object_marca()->get_id()));
         		}
         		
         		if (self::Deletar_Por_Objeto($object_marca_pativel)) {
@@ -100,7 +101,7 @@ namespace application\model\dao;
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
         		$p_sql->bindValue(':pec_id', $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_object_marca()->get_id(), PDO::PARAM_INT);
         		
         		return $p_sql->execute();
         	} catch (Exception $e) {
@@ -335,7 +336,7 @@ namespace application\model\dao;
         		$pesquisa .= "marca_pativel_pec_id = :pec_id";
         	}
         	
-        	if (!empty($object_marca_pativel->get_marca_id())) {
+        	if (!empty($object_marca_pativel->get_object_marca()->get_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
@@ -418,8 +419,8 @@ namespace application\model\dao;
         		$p_sql->bindValue(':pec_id', $object_marca_pativel->get_peca_id(), PDO::PARAM_INT);
         	}
         	
-        	if (!empty($object_marca_pativel->get_marca_id())) {
-        		$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_marca_id(), PDO::PARAM_INT);
+        	if (!empty($object_marca_pativel->get_object_marca()->get_id())) {
+        		$p_sql->bindValue(':mrc_id', $object_marca_pativel->get_object_marca()->get_id(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_marca_pativel->get_ano_de())) {
@@ -445,7 +446,7 @@ namespace application\model\dao;
 	            }
 	            
 	            if (isset($row['marca_pativel_mrc_id'])) {
-	            	$object_marca_pativel->set_marca_id($row['marca_pativel_mrc_id']);
+	            	$object_marca_pativel->set_object_marca(DAO_Marca::BuscarPorCOD($row['marca_pativel_mrc_id']));
 	            }
 	            
 	            if (isset($row['marca_pativel_ano_id'])) {

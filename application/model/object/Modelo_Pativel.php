@@ -1,10 +1,12 @@
 <?php
 namespace application\model\object;
-
+    
+    use application\model\object\Modelo as Object_Modelo;
+    
     class Modelo_Pativel {
     	
     	private $peca_id;
-		private $modelo_id;
+    	private $object_modelo;
 		private $ano_de;
 		private $ano_ate;
 		private $anos = array();
@@ -22,12 +24,12 @@ namespace application\model\object;
 			return $this->peca_id;
 		}
 		
-		public function set_modelo_id(int $modelo_id) : void {
-			$this->modelo_id = $modelo_id;
+		public function set_object_modelo(Object_Modelo $object_modelo) : void {
+		    $this->object_modelo = $object_modelo;
 		}
 		
-		public function get_modelo_id() : ?int {
-			return $this->modelo_id;
+		public function get_object_modelo() : ?Object_Modelo {
+		    return $this->object_modelo;
 		}
 		
 		public function set_ano(?int $ano = null) : void {

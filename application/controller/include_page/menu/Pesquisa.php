@@ -19,6 +19,10 @@ namespace application\controller\include_page\menu;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Entidade as Object_Entidade;
 	use application\model\object\Endereco as Object_Endereco;
+	use application\model\object\Categoria as Object_Categoria;
+	use application\model\object\Marca as Object_Marca;
+	use application\model\object\Modelo as Object_Modelo;
+	use application\model\object\Versao as Object_Versao;
 	use application\controller\include_page\menu\Filtro as Controller_Filtro;
 	use \Exception;
 	
@@ -297,7 +301,10 @@ namespace application\controller\include_page\menu;
         private function Buscar_Por_Categoria() {
         	$object_categoria_pativel = new Object_Categoria_Pativel();
         	
-        	$object_categoria_pativel->set_categoria_id($this->categoria);
+        	$object_categoria = new Object_Categoria();
+        	$object_categoria->set_id($this->categoria);
+        	
+        	$object_categoria_pativel->set_object_categoria($object_categoria);
         	$object_categoria_pativel->set_ano_de($this->ano_de);
         	$object_categoria_pativel->set_ano_ate($this->ano_ate);
         	
@@ -309,7 +316,10 @@ namespace application\controller\include_page\menu;
         private function Buscar_Por_Marca() {
         	$object_marca_pativel = new Object_Marca_Pativel();
         	
-        	$object_marca_pativel->set_marca_id($this->marca);
+        	$object_marca = new Object_Marca();
+        	$object_marca->set_id($this->marca);
+        	
+        	$object_marca_pativel->set_object_marca($object_marca);
         	$object_marca_pativel->set_ano_de($this->ano_de);
         	$object_marca_pativel->set_ano_ate($this->ano_ate);
         	
@@ -321,7 +331,10 @@ namespace application\controller\include_page\menu;
         private function Buscar_Por_Modelo() {
         	$object_modelo_pativel = new Object_Modelo_Pativel();
         	
-        	$object_modelo_pativel->set_modelo_id($this->modelo);
+        	$object_modelo = new Object_Modelo();
+        	$object_modelo->get_id($this->modelo);
+        	
+        	$object_modelo_pativel->set_object_modelo($object_modelo);
         	$object_modelo_pativel->set_ano_de($this->ano_de);
         	$object_modelo_pativel->set_ano_ate($this->ano_ate);
         	
@@ -333,7 +346,10 @@ namespace application\controller\include_page\menu;
         private function Buscar_Por_Versao() {
         	$object_versao_pativel = new Object_Versao_Pativel();
         	
-        	$object_versao_pativel->set_versao_id($this->versao);
+        	$object_versao = new Object_Versao();
+        	$object_versao->set_id($this->versao);
+        	
+        	$object_versao_pativel->set_object_versao($object_versao);
         	$object_versao_pativel->set_ano_de($this->ano_de);
         	$object_versao_pativel->set_ano_ate($this->ano_ate);
         	

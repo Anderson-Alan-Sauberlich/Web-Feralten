@@ -1,10 +1,12 @@
 <?php
 namespace application\model\object;
-
+    
+    use application\model\object\Categoria as Object_Categoria;
+    
     class Categoria_Pativel {
     	
     	private $peca_id;
-		private $categoria_id;
+		private $object_categoria;
 		private $ano_de;
 		private $ano_ate;
 		private $anos = array();
@@ -22,12 +24,12 @@ namespace application\model\object;
 			return $this->peca_id;
 		}
 		
-		public function set_categoria_id(int $categoria_id) : void {
-			$this->categoria_id = $categoria_id;
+		public function set_object_categoria(Object_Categoria $object_categoria) : void {
+		    $this->object_categoria = $object_categoria;
 		}
 		
-		public function get_categoria_id() : ?int {
-			return $this->categoria_id;
+		public function get_object_categoria() : ?Object_Categoria {
+		    return $this->object_categoria;
 		}
 		
 		public function set_ano(?int $ano = null) : void {

@@ -4,6 +4,7 @@ namespace application\model\dao;
     use application\model\object\Versao_Pativel as Object_Versao_Pativel;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
+    use application\model\dao\Versao as DAO_Versao;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -24,7 +25,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
 				
 				$proximo_id_ano = null;
 				
@@ -72,7 +73,7 @@ namespace application\model\dao;
         	try {
         		if (empty($object_versao_pativel->get_ano_id())) {
         			$object_versao_pativel->set_ano_id(self::Pegar_Id_Ano($object_versao_pativel->get_peca_id(),
-        																  $object_versao_pativel->get_versao_id()));
+        																  $object_versao_pativel->get_object_versao()->get_id()));
         		}
         		
         		if (self::Deletar_Por_Objeto($object_versao_pativel)) {
@@ -100,7 +101,7 @@ namespace application\model\dao;
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
         		$p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
         		
         		return $p_sql->execute();
         	} catch (Exception $e) {
@@ -335,7 +336,7 @@ namespace application\model\dao;
         		$pesquisa .= "versao_pativel_pec_id = :pec_id";
         	}
         	
-        	if (!empty($object_versao_pativel->get_versao_id())) {
+        	if (!empty($object_versao_pativel->get_object_versao()->get_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
@@ -374,8 +375,8 @@ namespace application\model\dao;
         		$p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
         	}
         	
-        	if (!empty($object_versao_pativel->get_versao_id())) {
-        		$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_versao_id(), PDO::PARAM_INT);
+        	if (!empty($object_versao_pativel->get_object_versao()->get_id())) {
+        		$p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_versao_pativel->get_ano_de())) {
@@ -400,7 +401,7 @@ namespace application\model\dao;
 	            }
 	            
 	            if (isset($row['versao_pativel_vrs_id'])) {
-	            	$object_versao_pativel->set_versao_id($row['versao_pativel_vrs_id']);
+	            	$object_versao_pativel->set_object_versao(DAO_Versao::BuscarPorCOD($row['versao_pativel_vrs_id']));
 	            }
 	            
 	            if (isset($row['versao_pativel_ano_id'])) {

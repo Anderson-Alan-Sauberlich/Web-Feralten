@@ -1,10 +1,12 @@
 <?php
 namespace application\model\object;
-
+    
+    use application\model\object\Versao as Object_Versao;
+    
     class Versao_Pativel {
     	
     	private $peca_id;
-		private $versao_id;
+		private $object_versao;
 		private $ano_de;
 		private $ano_ate;
 		private $anos = array();
@@ -22,12 +24,12 @@ namespace application\model\object;
 			return $this->peca_id;
 		}
 		
-		public function set_versao_id(int $versao_id) : void {
-			$this->versao_id = $versao_id;
+		public function set_object_versao(Object_Versao $object_versao) : void {
+		    $this->object_versao = $object_versao;
 		}
 		
-		public function get_versao_id() : ?int {
-			return $this->versao_id;
+		public function get_object_versao() : ?Object_Versao {
+		    return $this->object_versao;
 		}
 		
 		public function set_ano(?int $ano = null) : void {

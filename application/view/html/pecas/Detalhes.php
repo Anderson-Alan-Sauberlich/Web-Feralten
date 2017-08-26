@@ -74,7 +74,11 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui row">
+           	<?php View_Detalhes::Mostrar_Pativeis(); ?>
+        </div>
     </section>
     <footer>
         <?php include_once RAIZ.'/application/view/html/include_page/footer/Rodape.php'; ?>

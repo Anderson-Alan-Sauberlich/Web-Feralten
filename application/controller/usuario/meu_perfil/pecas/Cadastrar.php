@@ -15,6 +15,10 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\object\Versao_Pativel as Object_Versao_Pativel;
 	use application\model\object\Foto_Peca as Object_Foto_Peca;
 	use application\model\object\Entidade as Object_Entidade;
+	use application\model\object\Categoria as Object_Categoria;
+	use application\model\object\Marca as Object_Marca;
+	use application\model\object\Modelo as Object_Modelo;
+	use application\model\object\Versao as Object_Versao;
 	use application\model\object\Usuario as Object_Usuario;
 	use application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use application\model\dao\Categoria as DAO_Categoria;
@@ -442,7 +446,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 				foreach ($this->categoria as $categoria_selecionada) {
 					if (in_array($categoria_selecionada, $categorias_compativeis)) {
 						$categoria_pativel = new Object_Categoria_Pativel();
-						$categoria_pativel->set_categoria_id($categoria_selecionada);
+						$object_categoria = new object_Categoria();
+						$object_categoria->set_id($categoria_selecionada);
+						$categoria_pativel->set_object_categoria($object_categoria);
 						
 						$categorias_pativeis[] = $categoria_pativel;
 						
@@ -451,7 +457,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 								if (in_array($marca_selecionada, $marcas_compativeis)) {
 									if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
 										$marca_pativel = new Object_Marca_Pativel();
-										$marca_pativel->set_marca_id($marca_selecionada);
+										$object_marca = new Object_Marca();
+										$object_marca->set_id($marca_selecionada);
+										$marca_pativel->set_object_marca($object_marca);
 										
 										if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
 											$marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
@@ -464,7 +472,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 												if (in_array($modelo_selecionado, $modelos_compativeis)) {
 													if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
 														$modelo_pativel = new Object_Modelo_Pativel();
-														$modelo_pativel->set_modelo_id($modelo_selecionado);
+														$object_modelo = new Object_Modelo();
+														$object_modelo->set_id($modelo_selecionado);
+														$modelo_pativel->set_object_modelo($object_modelo);
 														
 														if (isset($_POST['ano_mdl_'.$modelo_selecionado]) AND !empty($_POST['ano_mdl_'.$modelo_selecionado])) {
 															$modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
@@ -477,7 +487,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 																if (in_array($versao_selecionada, $versoes_compativeis)) {
 																	if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
 																		$versao_pativel = new Object_Versao_Pativel();
-																		$versao_pativel->set_versao_id($versao_selecionada);
+																		$object_versao = new Object_versao();
+																		$object_versao->set_id($versao_selecionada);
+																		$versao_pativel->set_object_versao($object_versao);
 			
 																		if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
 																			$versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);

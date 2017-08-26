@@ -4,6 +4,7 @@ namespace application\model\dao;
     use application\model\object\Categoria_Pativel as Object_Categoria_Pativel;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
+    use application\model\dao\Categoria as DAO_Categoria;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -24,7 +25,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(':pec_id', $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+				$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_object_categoria()->get_id(), PDO::PARAM_INT);
 				
 				$proximo_id_ano = null;
 				
@@ -72,7 +73,7 @@ namespace application\model\dao;
             try {
             	if (empty($object_categoria_pativel->get_ano_id())) {
             		$object_categoria_pativel->set_ano_id(self::Pegar_Id_Ano($object_categoria_pativel->get_peca_id(), 
-            																 $object_categoria_pativel->get_categoria_id()));
+            																 $object_categoria_pativel->get_object_categoria()->get_id()));
             	}
             	
             	if (self::Deletar_Por_Objeto($object_categoria_pativel)) {
@@ -100,7 +101,7 @@ namespace application\model\dao;
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
         		$p_sql->bindValue(':pec_id', $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        		$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_object_categoria()->get_id(), PDO::PARAM_INT);
         		
         		return $p_sql->execute();
         	} catch (Exception $e) {
@@ -335,7 +336,7 @@ namespace application\model\dao;
         		$pesquisa .= "categoria_pativel_pec_id = :pec_id";
         	}
         	
-        	if (!empty($object_categoria_pativel->get_categoria_id())) {
+        	if (!empty($object_categoria_pativel->get_object_categoria()->get_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
         		}
@@ -440,8 +441,8 @@ namespace application\model\dao;
         		$p_sql->bindValue(':pec_id', $object_categoria_pativel->get_peca_id(), PDO::PARAM_INT);
         	}
         	
-        	if (!empty($object_categoria_pativel->get_categoria_id())) {
-        		$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_categoria_id(), PDO::PARAM_INT);
+        	if (!empty($object_categoria_pativel->get_object_categoria()->get_id())) {
+        		$p_sql->bindValue(':ctg_id', $object_categoria_pativel->get_object_categoria()->get_id(), PDO::PARAM_INT);
         	}
         	
         	if (!empty($object_categoria_pativel->get_ano_de())) {
@@ -466,7 +467,7 @@ namespace application\model\dao;
 	            }
 	            
 	            if (isset($row['categoria_pativel_ctg_id'])) {
-	            	$object_categoria_pativel->set_categoria_id($row['categoria_pativel_ctg_id']);
+	                $object_categoria_pativel->set_object_categoria(DAO_Categoria::BuscarPorCOD($row['categoria_pativel_ctg_id']));
 	            }
 	            
 	            if (isset($row['categoria_pativel_ano_id'])) {
