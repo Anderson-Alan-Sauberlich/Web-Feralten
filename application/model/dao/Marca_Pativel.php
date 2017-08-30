@@ -5,6 +5,7 @@ namespace application\model\dao;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
     use application\model\dao\Marca as DAO_Marca;
+    use application\model\dao\Marca_Pativel_Ano as DAO_Marca_Pativel_Ano;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -451,6 +452,8 @@ namespace application\model\dao;
 	            
 	            if (isset($row['marca_pativel_ano_id'])) {
 	            	$object_marca_pativel->set_ano_id($row['marca_pativel_ano_id']);
+	            	
+	            	$object_marca_pativel->set_anos(DAO_Marca_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['marca_pativel_ano_id']));
 	            }
 	            
 				$pativeis[] = $object_marca_pativel;

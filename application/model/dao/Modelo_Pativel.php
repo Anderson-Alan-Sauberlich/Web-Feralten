@@ -5,6 +5,7 @@ namespace application\model\dao;
     use application\model\object\Peca as Object_Peca;
     use application\model\dao\Peca as DAO_Peca;
     use application\model\dao\Modelo as DAO_Modelo;
+    use application\model\dao\Modelo_Pativel_Ano as DAO_Modelo_Pativel_Ano;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -428,6 +429,8 @@ namespace application\model\dao;
 	            
 	            if (isset($row['modelo_pativel_ano_id'])) {
 	            	$object_modelo_pativel->set_ano_id($row['modelo_pativel_ano_id']);
+	            	
+	            	$object_modelo_pativel->set_anos(DAO_Modelo_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['modelo_pativel_ano_id']));
 	            }
 	            
 				$pativeis[] = $object_modelo_pativel;

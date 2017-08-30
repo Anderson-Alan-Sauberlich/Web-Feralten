@@ -93,26 +93,60 @@ namespace application\view\src\pecas;
         
         public static function Mostrar_Pativeis() : void {
             if (!empty(self::$categorias_pativeis) AND self::$categorias_pativeis != false) {
+                echo '<div class="ui divider"></div>';
+                
                 foreach (self::$categorias_pativeis as $categoria_pativel) {
-                    echo $categoria_pativel->get_object_categoria()->get_nome().'/';
+                    echo '<label>'.$categoria_pativel->get_object_categoria()->get_nome().' </label>';
+                    
+                    if (!empty($categoria_pativel->get_anos())) {
+                        foreach ($categoria_pativel->get_anos() as $ano) {
+                            echo ' - '.$ano;
+                        }
+                    }
                     
                     if (!empty(self::$marcas_pativeis) AND self::$marcas_pativeis != false) {
                         foreach (self::$marcas_pativeis as $marca_pativel) {
-                            echo $marca_pativel->get_object_marca()->get_nome().'/';
-                            
-                            if (!empty(self::$modelos_pativeis) AND self::$modelos_pativeis != false) {
-                                foreach (self::$modelos_pativeis as $modelo_pativel) {
-                                    echo $modelo_pativel->get_object_modelo()->get_nome().'/';
-                                    
-                                    if (!empty(self::$versoes_pativeis) AND self::$versoes_pativeis != false) {
-                                        foreach (self::$versoes_pativeis as $versao_pativel) {
-                                            echo $versao_pativel->get_object_versao()->get_nome();
+                            if ($categoria_pativel->get_object_categoria()->get_id() == $marca_pativel->get_object_marca()->get_categoria_id()) {
+                                echo ' <label> <i class="lbPanel glyphicon glyphicon-hand-right"></i> '.$marca_pativel->get_object_marca()->get_nome().' </label>';
+                                
+                                if (!empty($marca_pativel->get_anos())) {
+                                    foreach ($marca_pativel->get_anos() as $ano) {
+                                        echo ' - '.$ano;
+                                    }
+                                }
+                                
+                                if (!empty(self::$modelos_pativeis) AND self::$modelos_pativeis != false) {
+                                    foreach (self::$modelos_pativeis as $modelo_pativel) {
+                                        if ($marca_pativel->get_object_marca()->get_id() == $modelo_pativel->get_object_modelo()->get_marca_id()) {
+                                            echo ' <label> <i class="lbPanel glyphicon glyphicon-hand-right"></i> '.$modelo_pativel->get_object_modelo()->get_nome().' </label>';
+                                            
+                                            if (!empty($modelo_pativel->get_anos())) {
+                                                foreach ($modelo_pativel->get_anos() as $ano) {
+                                                    echo ' - '.$ano;
+                                                }
+                                            }
+                                            
+                                            if (!empty(self::$versoes_pativeis) AND self::$versoes_pativeis != false) {
+                                                foreach (self::$versoes_pativeis as $versao_pativel) {
+                                                    if ($modelo_pativel->get_object_modelo()->get_id() == $versao_pativel->get_object_versao()->get_modelo_id()) {
+                                                        echo ' <label> <i class="lbPanel glyphicon glyphicon-hand-right"></i> '.$versao_pativel->get_object_versao()->get_nome().'</label>';
+                                                        
+                                                        if (!empty($versao_pativel->get_anos())) {
+                                                            foreach ($versao_pativel->get_anos() as $ano) {
+                                                                echo ' - '.$ano;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    
+                    echo '<div class="ui divider"></div>';
                 }
             }
         }
