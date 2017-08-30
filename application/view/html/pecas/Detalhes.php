@@ -29,13 +29,13 @@
                     	</ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img width="600" height="450" onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto(1, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                <img width="600" height="450" onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img width="600" height="450" onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto(2, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                <img width="600" height="450" onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img width="600" height="450" onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto(3, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                <img width="600" height="450" onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '600x450'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -58,13 +58,13 @@
                             	</ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div id="item_indice0" class="item active">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto(1, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice1" class="item">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto(2, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice2" class="item">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto(3, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                 </div>
                                 <a class="left carousel-control" href="#carousel-modal" role="button" data-slide="prev">
@@ -89,6 +89,27 @@
            			<p>Mensagem</p>
         		</div>
             </div>
+        </div>
+        <div class="ui doubling stackable three column segment grid">
+        	<div class="column">
+               	<p><?php View_Detalhes::Mostrar_Estado(); ?> - <?php View_Detalhes::Mostrar_Cidade(); ?></p>
+               	<p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
+              	<p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
+               	<p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
+               	<p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
+               	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+        	</div>
+        	<div class="column">
+                 <p>Nome Comerciar: <?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
+                 <p>Site: <?php View_Detalhes::Mostrar_Site(); ?></p>
+                 <img width="100" height="75" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+        	</div>
+        	<div class="column">
+        		<p>Telefone: <?php View_Detalhes::Mostrar_Fone1_Responsavel(); ?></p>
+        		<p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
+        		<p>Telefone alternativo: <?php View_Detalhes::Mostrar_Fone2_Responsavel(); ?></p>
+        		<p>E-mail alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
+        	</div>
         </div>
         <div class="ui segment">
            	<?php View_Detalhes::Mostrar_Pativeis(); ?>

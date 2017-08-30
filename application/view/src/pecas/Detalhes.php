@@ -83,11 +83,127 @@ namespace application\view\src\pecas;
             }
         }
         
-        public static function Mostrar_Foto(int $numero, string $tamanho) : void {
+        public static function Mostrar_Foto_Peca(int $numero, string $tamanho) : void {
             if (empty(self::$object_peca->get_foto($numero)) OR self::$object_peca->get_foto($numero) == false) {
                 echo '/application/view/resources/img/imagem_indisponivel.png';
             } else {
                 echo str_replace('@', $tamanho, self::$object_peca->get_foto($numero)->get_endereco());
+            }
+        }
+        
+        public static function Mostrar_Estado() : void {
+            if (empty(self::$object_peca->get_endereco()->get_estado()->get_nome()) OR self::$object_peca->get_endereco()->get_estado()->get_nome() == false) {
+                echo 'erro, estado';
+            } else {
+                echo self::$object_peca->get_endereco()->get_estado()->get_nome();
+            }
+        }
+        
+        public static function Mostrar_Cidade() : void {
+            if (empty(self::$object_peca->get_endereco()->get_cidade()->get_nome()) OR self::$object_peca->get_endereco()->get_cidade()->get_nome() == false) {
+                echo 'erro, cidade';
+            } else {
+                echo self::$object_peca->get_endereco()->get_cidade()->get_nome();
+            }
+        }
+        
+        public static function Mostrar_Bairro() : void {
+            if (empty(self::$object_peca->get_endereco()->get_bairro()) OR self::$object_peca->get_endereco()->get_bairro() == false) {
+                echo 'erro, bairro';
+            } else {
+                echo self::$object_peca->get_endereco()->get_bairro();
+            }
+        }
+        
+        public static function Mostrar_Rua() : void {
+            if (empty(self::$object_peca->get_endereco()->get_rua()) OR self::$object_peca->get_endereco()->get_rua() == false) {
+                echo 'erro, rua';
+            } else {
+                echo self::$object_peca->get_endereco()->get_rua();
+            }
+        }
+        
+        public static function Mostrar_Numero() : void {
+            if (empty(self::$object_peca->get_endereco()->get_numero()) OR self::$object_peca->get_endereco()->get_numero() == false) {
+                echo 'não informado';
+            } else {
+                echo self::$object_peca->get_endereco()->get_numero();
+            }
+        }
+        
+        public static function Mostrar_Cep() : void {
+            if (empty(self::$object_peca->get_endereco()->get_cep()) OR self::$object_peca->get_endereco()->get_cep() == false) {
+                echo 'erro, cep';
+            } else {
+                echo self::$object_peca->get_endereco()->get_cep();
+            }
+        }
+        
+        public static function Mostrar_Complemento() : void {
+            if (empty(self::$object_peca->get_endereco()->get_complemento()) OR self::$object_peca->get_endereco()->get_complemento() == false) {
+                echo 'não informado';
+            } else {
+                echo self::$object_peca->get_endereco()->get_complemento();
+            }
+        }
+        
+        public static function Mostrar_Nome_Comercial() : void {
+            if (empty(self::$object_peca->get_entidade()->get_nome_comercial()) OR self::$object_peca->get_entidade()->get_nome_comercial() == false) {
+                if (empty(self::$object_peca->get_responsavel()->get_nome()) OR self::$object_peca->get_responsavel()->get_nome() == false) {
+                    echo 'erro, nome usuario';
+                } else {
+                    echo self::$object_peca->get_responsavel()->get_nome();
+                }
+            } else {
+                echo self::$object_peca->get_entidade()->get_nome_comercial();
+            }
+        }
+        
+        public static function Mostrar_Site() : void {
+            if (empty(self::$object_peca->get_entidade()->get_site()) OR self::$object_peca->get_entidade()->get_site() == false) {
+                echo 'não informado';
+            } else {
+                echo self::$object_peca->get_entidade()->get_site();
+            }
+        }
+        
+        public static function Mostrar_Foto_Entidade() : void {
+            if (empty(self::$object_peca->get_entidade()->get_imagem()) OR self::$object_peca->get_entidade()->get_imagem() == false) {
+                echo '/application/view/resources/img/imagem_indisponivel.png';
+            } else {
+                echo str_replace('@', '100x75', self::$object_peca->get_entidade()->get_imagem());
+            }
+        }
+        
+        public static function Mostrar_Email_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_email()) OR self::$object_peca->get_responsavel()->get_email() == false) {
+                echo 'erro, e-mail responsavel';
+            } else {
+                echo self::$object_peca->get_responsavel()->get_email();
+            }
+        }
+        
+        public static function Mostrar_Email_Alternativo_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_email_alternativo()) OR self::$object_peca->get_responsavel()->get_email_alternativo() == false) {
+                echo 'não informado';
+            } else {
+                echo self::$object_peca->get_responsavel()->get_email_alternativo();
+            }
+        }
+        
+        public static function Mostrar_Fone1_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_fone1()) OR self::$object_peca->get_responsavel()->get_fone1() == false) {
+                echo 'erro, telefone 1';
+            } else {
+                echo self::$object_peca->get_responsavel()->get_fone1();
+            }
+        }
+        
+        public static function Mostrar_Fone2_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_fone2()) OR self::$object_peca->get_responsavel()->get_fone2() == false) {
+                echo 'não informado';
+            } else {
+                echo self::$object_peca->get_responsavel()->get_fone2();
             }
         }
         
