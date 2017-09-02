@@ -1,7 +1,9 @@
 <?php
 namespace application\view\src\pecas;
     
+use application\controller\pecas\Detalhes as Controller_Detalhes;
     use application\model\object\Peca as Object_Peca;
+    use application\view\src\include_page\form\Contato_Anunciante as View_Contato_Anunciante;
     
     class Detalhes {
 
@@ -37,6 +39,10 @@ namespace application\view\src\pecas;
         
         public function Executar() {
         	require_once RAIZ.'/application/view/html/pecas/Detalhes.php';
+        }
+        
+        public static function Incluir_Form_Contato_Anunciante() : void {
+            new View_Contato_Anunciante();
         }
         
         public static function Mostrar_Nome() : void {
@@ -80,6 +86,22 @@ namespace application\view\src\pecas;
                 echo 'não informado';
             } else {
                 echo self::$object_peca->get_descricao();
+            }
+        }
+        
+        public static function Mostrar_Preferencia_Entrega() : void {
+            if (empty(self::$object_peca->get_preferencia_entrega()) OR self::$object_peca->get_preferencia_entrega() == false) {
+                echo 'não informado';
+            } else {
+                $preferencias_entrega = Controller_Detalhes::Retornar_Preferencias_Entrega();
+                
+                foreach (self::$object_peca->get_preferencias_entrega(self::$object_peca->get_preferencia_entrega()) as $valor) {
+                    foreach ($preferencias_entrega as $valor2) {
+                        if ($valor2->get_id() == $valor) {
+                            echo ' - <label>'.$valor2->get_nome().'</label>';
+                        }
+                    }
+                }
             }
         }
         

@@ -81,16 +81,15 @@
                 </div>
             </div>
             <div class="six wide column">
-            	<div class="ui center aligned segment">
-           			<label>Contate o Vendedor</label>
-           			<p>Nome</p>
-           			<p>Email</p>
-           			<p>Telefone</p>
-           			<p>Mensagem</p>
+            	<div class="ui secondary segment">
+           			<?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
         		</div>
             </div>
         </div>
-        <div class="ui doubling stackable three column segment grid">
+        <div class="ui secondary segment">
+        	<label>Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?>
+        </div>
+        <div class="ui doubling stackable three column center aligned segment grid">
         	<div class="column">
                	<p><?php View_Detalhes::Mostrar_Estado(); ?> - <?php View_Detalhes::Mostrar_Cidade(); ?></p>
                	<p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
@@ -100,7 +99,7 @@
                	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
         	</div>
         	<div class="column">
-                 <p>Nome Comerciar: <?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
+                 <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
                  <p>Site: <?php View_Detalhes::Mostrar_Site(); ?></p>
                  <img width="100" height="75" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
         	</div>

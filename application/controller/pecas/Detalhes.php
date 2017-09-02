@@ -7,6 +7,7 @@ namespace application\controller\pecas;
 	use application\model\dao\Categoria_Pativel as DAO_Categoria_Pativel;
 	use application\model\dao\Marca_Pativel as DAO_Marca_Pativel;
 	use application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
+	use application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
 	use application\model\dao\Versao_Pativel as DAO_Versao_Pativel;
 	use \Exception;
 	
@@ -71,6 +72,10 @@ namespace application\controller\pecas;
             } else {
                 return 'erro';
             }
+        }
+        
+        public static function Retornar_Preferencias_Entrega() {
+            return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();
         }
     }
 ?>
