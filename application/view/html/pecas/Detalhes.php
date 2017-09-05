@@ -10,13 +10,25 @@
         <?php include_once RAIZ.'/application/view/html/include_page/header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<div class="ui segment">
-    		<h1><?php View_Detalhes::Mostrar_Nome(); ?></h1>
-    		<h3>Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
-    		<h3>Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
-    		<h3>Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
-    		<h3>Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
-    		<h4>Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
+    	<div class="ui doubling stackable segment grid">
+    		<div class="sixteen wide column">
+    			<h1><?php View_Detalhes::Mostrar_Nome(); ?></h1>
+    		</div>
+    		<div class="sixteen wide column">
+    			<h3>Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
+    		</div>
+    		<div class="five wide column">
+    			<h3>Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+    		</div>
+    		<div class="five wide column">
+    			<h3>Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
+    		</div>
+    		<div class="five wide column">
+    			<h3>Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
+    		</div>
+    		<div class="sixteen wide column">
+    			<h4>Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
+    		</div>
 		</div>
 		<div class="ui doubling stackable grid">
 			<div class="ten wide column">

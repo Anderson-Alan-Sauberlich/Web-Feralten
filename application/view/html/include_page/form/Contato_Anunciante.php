@@ -1,4 +1,5 @@
 <?php use application\view\src\include_page\form\Contato_Anunciante as View_Contato_Anunciante; ?>
+<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
 <form class="ui form" role="form">
     <div class="field">
     	<label>Nome</label>
