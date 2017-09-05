@@ -105,6 +105,14 @@ use application\controller\pecas\Detalhes as Controller_Detalhes;
             }
         }
         
+        public static function Verificar_Preferencia_Entrega(int $preferencia) : bool {
+            if (empty(self::$object_peca->get_preferencia_entrega()) OR self::$object_peca->get_preferencia_entrega() == false) {
+                return false;
+            } else {
+                return in_array($preferencia, self::$object_peca->get_preferencias_entrega(self::$object_peca->get_preferencia_entrega()));
+            }
+        }
+        
         public static function Mostrar_Foto_Peca(int $numero, string $tamanho) : void {
             if (empty(self::$object_peca->get_foto($numero)) OR self::$object_peca->get_foto($numero) == false) {
                 echo '/application/view/resources/img/imagem_indisponivel.png';

@@ -6,6 +6,7 @@ namespace application\model\common\util;
 	use application\model\validador\Categoria_Compativel;
 	use application\model\validador\Categoria_Pativel;
 	use application\model\validador\Cidade;
+	use application\model\validador\Contato_Anunciante;
 	use application\model\validador\Endereco;
 	use application\model\validador\Entidade;
 	use application\model\validador\Estado;
@@ -45,6 +46,8 @@ namespace application\model\common\util;
 		public static function Categoria_Pativel() : Categoria_Pativel { return new Categoria_Pativel(); }
 		
 		public static function Cidade() : Cidade { return new Cidade(); }
+		
+		public static function Contato_Anunciante() : Contato_Anunciante { return new Contato_Anunciante(); }
 		
 		public static function Endereco() : Endereco { return new Endereco(); }
 		

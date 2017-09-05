@@ -21,7 +21,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(':id', $object_cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':es_id', $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_cidade->get_estado_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':url', $object_cidade->get_url(), PDO::PARAM_STR);
 				
@@ -43,9 +43,9 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':id', $object_cidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':es_id', $object_cidade->get_es_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':es_id', $object_cidade->get_estado_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':nome', $object_cidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_cidade->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {

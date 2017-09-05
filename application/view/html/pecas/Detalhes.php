@@ -103,12 +103,15 @@
         </div>
         <div class="ui doubling stackable three column center aligned segment grid">
         	<div class="column">
-               	<p><?php View_Detalhes::Mostrar_Estado(); ?> - <?php View_Detalhes::Mostrar_Cidade(); ?></p>
-               	<p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
-              	<p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
-               	<p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
-               	<p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
-               	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+               	<p><?php View_Detalhes::Mostrar_Estado(); ?></p>
+               	<p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
+               	<?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
+                   	<p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
+                  	<p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
+                   	<p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
+                   	<p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
+                   	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+               	<?php } ?>
         	</div>
         	<div class="column">
                  <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
