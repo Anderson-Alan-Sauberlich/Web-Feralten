@@ -32,6 +32,26 @@
 		});
 	});
 	
+	$app->group('/contato-anunciante', function() use ($app) {
+	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
+	        $contato_anunciante = new application\controller\include_page\form\Contato_Anunciante();
+	        
+	        $contato_anunciante->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+	        
+	        $contato_anunciante->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+	        
+	        $contato_anunciante->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
+	        
+	        $contato_anunciante->set_whatsapp(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : null);
+	        
+	        $contato_anunciante->set_mensagem(isset($_POST['mensagem']) ? $_POST['mensagem'] : null);
+	        
+	        $contato_anunciante->Enviar_Email();
+	        
+	        return $response;
+	    });
+	});
+	
 	$app->group('/card-peca', function() use ($app) {
 	    $app->post('/opcoes/', function(Request $request, Response $response, $args) use ($app) {
 	        $card_peca = new application\controller\include_page\Card_Peca();

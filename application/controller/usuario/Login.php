@@ -23,7 +23,7 @@ namespace application\controller\usuario;
         private $login_erros = array();
         private $login_form = array();
         
-        public function set_email($email) {
+        public function set_email($email) : void {
         	try {
         		$this->email = Validador::Usuario()::validar_email_login($email);
         		$this->login_campos['erro_email'] = "certo";
@@ -35,7 +35,7 @@ namespace application\controller\usuario;
         	}
         }
         
-        public function set_senha($senha) {
+        public function set_senha($senha) : void {
         	try {
         		$this->senha = Validador::Usuario()::validar_senha_login($senha);
         	} catch (Exception $e) {
@@ -46,7 +46,7 @@ namespace application\controller\usuario;
         	}
         }
         
-        public function set_manter_login($manter_login = null) {
+        public function set_manter_login($manter_login = null) : void {
         	try {
         		$this->manter_login = Validador::Usuario()::validar_manter_login($manter_login);
         	} catch (Exception $e) {
@@ -54,7 +54,7 @@ namespace application\controller\usuario;
         	}
         }
         
-        public function set_logout($logout) {
+        public function set_logout($logout) : void {
         	$this->logout = $logout;
         }
         

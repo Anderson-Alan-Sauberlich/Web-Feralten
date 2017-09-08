@@ -74,7 +74,7 @@ namespace application\model\object;
 		    return $this->telefone;
 		}
 		
-		public function set_whatsapp(bool $whatsapp) : void {
+		public function set_whatsapp(?bool $whatsapp) : void {
 		    $this->whatsapp = $whatsapp;
 		}
 		

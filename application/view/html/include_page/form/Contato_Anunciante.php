@@ -7,7 +7,7 @@
     </div>
     <div class="field">
         <label>E-Mail</label>
-        <input type="text" id="email" name="email" placeholder="E-Mail">
+        <input type="email" id="email" name="email" placeholder="E-Mail">
     </div>
     <div class="field">
         <label>Telefone</label>
@@ -21,8 +21,8 @@
     </div>
     <div class="field">
         <label>Mensagem</label>
-        <textarea rows="4" name="mensagem" placeholder="Mensagem"></textarea>
+        <textarea rows="4" id="mensagem" name="mensagem" placeholder="Mensagem"></textarea>
     </div>
-	<button class="ui button fluid inverted red" type="submit">Enviar ao Anunciante</button>
+	<div id="btn_submit" class="ui button fluid inverted red" onclick="Submit();">Enviar ao Anunciante</div>
 </form>
 <script type="text/javascript" src="/application/view/js/include_page/form/contato_anunciante.js"></script>

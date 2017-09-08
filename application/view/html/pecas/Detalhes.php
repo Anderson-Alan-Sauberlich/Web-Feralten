@@ -70,13 +70,13 @@
                             	</ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div id="item_indice0" class="item active">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice1" class="item">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice2" class="item">
-                                        <img width="800" height="600" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
+                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
                                     </div>
                                 </div>
                                 <a class="left carousel-control" href="#carousel-modal" role="button" data-slide="prev">
@@ -93,9 +93,13 @@
                 </div>
             </div>
             <div class="six wide column">
-            	<div class="ui secondary segment">
+            	<div id="div_cnt_anc" class="ui secondary segment">
            			<?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
         		</div>
+        		<div id="msg_cnt_anc" class="ui hidden message">
+                	<i class="close icon"></i>
+                	<ul id="ul_cnt_anc"></ul>
+                </div>
             </div>
         </div>
         <div class="ui secondary segment">
