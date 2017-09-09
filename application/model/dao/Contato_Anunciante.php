@@ -2,6 +2,7 @@
 namespace application\model\dao;
 	
     use application\model\object\Contato_Anunciante as Object_Contato_Anunciante;
+    use application\model\dao\Peca as DAO_Peca;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -21,7 +22,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
                 $p_sql->bindValue(':id', $object_contato_anunciante->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_object_peca()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_contato_anunciante->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':email', $object_contato_anunciante->get_email(), PDO::PARAM_STR);
                 $p_sql->bindValue(':aprovacao', $object_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
@@ -55,7 +56,7 @@ namespace application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':id', $object_contato_anunciante->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_object_peca()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_contato_anunciante->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':email', $object_contato_anunciante->get_email(), PDO::PARAM_STR);
                 $p_sql->bindValue(':aprovacao', $object_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
@@ -109,7 +110,7 @@ namespace application\model\dao;
                 }
                 
                 if (isset($row['contato_anunciante_pec_id'])) {
-                	$object_contato_anunciante->set_peca_id($row['contato_anunciante_pec_id']);
+                    $object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
                 }
                 
                 if (isset($row['contato_anunciante_nome'])) {
@@ -158,7 +159,7 @@ namespace application\model\dao;
             }
             
             if (isset($row['contato_anunciante_pec_id'])) {
-            	$object_contato_anunciante->set_peca_id($row['contato_anunciante_pec_id']);
+                $object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
             }
             
             if (isset($row['contato_anunciante_nome'])) {

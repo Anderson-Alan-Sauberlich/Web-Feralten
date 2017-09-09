@@ -42,7 +42,11 @@ use application\controller\pecas\Detalhes as Controller_Detalhes;
         }
         
         public static function Incluir_Form_Contato_Anunciante() : void {
-            new View_Contato_Anunciante();
+            $view_contato_anunciante = new View_Contato_Anunciante();
+            
+            $view_contato_anunciante->set_peca_id(self::$object_peca->get_id());
+            
+            $view_contato_anunciante->Executar();
         }
         
         public static function Mostrar_Nome() : void {

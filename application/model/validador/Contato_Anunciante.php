@@ -14,7 +14,15 @@ namespace application\model\validador;
 		}
 		
 		public static function validar_peca_id($peca_id = null) : int {
-			
+		    if (empty($peca_id)) {
+		        throw new Exception("Codigo da Peça não identificado");
+		    } else {
+		        if (filter_var($peca_id, FILTER_VALIDATE_INT)) {
+		            return $peca_id;
+		        } else {
+		            throw new Exception("Codigo da Peça Invalido");
+		        }
+		    }
 		}
 		
 		public static function validar_nome($nome = null) : string {

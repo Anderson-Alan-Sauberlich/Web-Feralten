@@ -10,9 +10,12 @@ $(document).ready(function() {
 
 	$('#telefone').mask(maskBehavior, options);
 });
-function Submit() {
+function Submit($peca_id) {
 	$('#div_cnt_anc').addClass('loading');
 	$('#btn_submit').addClass('loading');
+	
+	$('#msg_cnt_anc').removeClass('visible');
+	$('#msg_cnt_anc').addClass('hidden');
 	
 	var $nome = $('#nome').val();
 	var $email = $('#email').val();
@@ -37,12 +40,16 @@ function Submit() {
 		$erros += "<li>Digite sua Mensagem</li>";
 	}
 	
+	if ($peca_id == '' || $peca_id == null) {
+		$erros += "<li>Codigo da Peça não identificado</li>";
+	}
+	
 	if ($erros === "") {
 		$.ajax({
 			method: "POST",
 			url: "/contato-anunciante/",
 			async: false,
-			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, mensagem:$mensagem }
+			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, mensagem:$mensagem, peca_id:$peca_id }
 		}).done(function(valor) {
 			var $valor = JSON.parse(valor);
 			
@@ -57,12 +64,14 @@ function Submit() {
 			}
 			
 			$('#msg_cnt_anc').removeClass('hidden');
+			$('#msg_cnt_anc').addClass('visible');
 		});
 	} else {
 		$('#ul_cnt_anc').html($erros);
 		$('#msg_cnt_anc').addClass('error');
 		$('#msg_cnt_anc').removeClass('success');
 		$('#msg_cnt_anc').removeClass('hidden');
+		$('#msg_cnt_anc').addClass('visible');
 	}
 	
 	$('#btn_submit').removeClass('loading');

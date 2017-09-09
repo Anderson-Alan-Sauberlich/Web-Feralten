@@ -1,10 +1,12 @@
 <?php
 namespace application\model\object;
-
+    
+    use application\model\object\Peca as Object_Peca;
+    
     class Contato_Anunciante {
     	
     	private $id;
-		private $peca_id;
+		private $object_peca;
 		private $nome;
 		private $email;
 		private $aprovacao;
@@ -26,12 +28,12 @@ namespace application\model\object;
 			return $this->id;
 		}
 		
-		public function set_peca_id(int $peca_id) : void {
-			$this->peca_id = $peca_id;
+		public function set_object_peca(Object_Peca $object_peca) : void {
+		    $this->object_peca = $object_peca;
 		}
 		
-		public function get_peca_id() : ?int {
-			return $this->peca_id;
+		public function get_object_peca() : ?Object_Peca {
+		    return $this->object_peca;
 		}
 		
 		public function set_nome(string $nome) : void {

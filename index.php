@@ -46,6 +46,8 @@
 	        
 	        $contato_anunciante->set_mensagem(isset($_POST['mensagem']) ? $_POST['mensagem'] : null);
 	        
+	        $contato_anunciante->set_peca_id(isset($_POST['peca_id']) ? $_POST['peca_id'] : null);
+	        
 	        $contato_anunciante->Enviar_Email();
 	        
 	        return $response;
