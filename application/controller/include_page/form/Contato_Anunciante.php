@@ -24,7 +24,7 @@ namespace application\controller\include_page\form;
                 $this->object_contato_anunciante->set_nome(Validador::Contato_Anunciante()::validar_nome($nome));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
-                $this->campos['erro_nome'] = "erro";
+                $this->campos['nome'] = "erro";
             }
         }
         
@@ -33,7 +33,7 @@ namespace application\controller\include_page\form;
                 $this->object_contato_anunciante->set_email(Validador::Contato_Anunciante()::validar_email($email));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
-                $this->campos['erro_email'] = "erro";
+                $this->campos['email'] = "erro";
             }
         }
         
@@ -42,7 +42,7 @@ namespace application\controller\include_page\form;
                 $this->object_contato_anunciante->set_telefone(Validador::Contato_Anunciante()::validar_telefone($telefone));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
-                $this->campos['erro_telefone'] = "erro";
+                $this->campos['telefone'] = "erro";
             }
         }
         
@@ -51,7 +51,7 @@ namespace application\controller\include_page\form;
                 $this->object_contato_anunciante->set_whatsapp(Validador::Contato_Anunciante()::validar_whatsapp($whatsapp));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
-                $this->campos['erro_whatsapp'] = "erro";
+                $this->campos['whatsapp'] = "erro";
             }
         }
         
@@ -60,7 +60,7 @@ namespace application\controller\include_page\form;
                 $this->object_contato_anunciante->set_mensagem(Validador::Contato_Anunciante()::validar_mensagem($mensagem));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
-                $this->campos['erro_mensagem'] = "erro";
+                $this->campos['mensagem'] = "erro";
             }
         }
         
@@ -84,6 +84,7 @@ namespace application\controller\include_page\form;
             $valor = array();
             $valor['status'] = '';
             $valor['html'] = '';
+            $valor['campos'] = $this->campos;
             
             if (empty($this->erros)) {
                 if (Email::Enviar_Email_Contato_Anunciante($this->object_contato_anunciante)) {

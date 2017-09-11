@@ -17,6 +17,11 @@ function Submit($peca_id) {
 	$('#msg_cnt_anc').removeClass('visible');
 	$('#msg_cnt_anc').addClass('hidden');
 	
+	$('#div_nome').removeClass('error');
+	$('#div_email').removeClass('error');
+	$('#div_telefone').removeClass('error');
+	$('#div_whatsapp').removeClass('error');
+	
 	var $nome = $('#nome').val();
 	var $email = $('#email').val();
 	var $telefone = $('#telefone').val();
@@ -26,22 +31,27 @@ function Submit($peca_id) {
 	
 	if ($nome == '' || $nome == null) {
 		$erros += "<li>Informe seu Nome</li>";
+		$('#div_nome').addClass('error');
 	}
 	
 	if ($email == '' || $email == null) {
 		$erros += "<li>Informe seu E-Mail</li>";
+		$('#div_email').addClass('error');
 	}
 	
 	if ($telefone == '' || $telefone == null) {
 		$erros += "<li>Informe seu Telefone</li>";
+		$('#div_telefone').addClass('error');
 	}
 	
 	if ($mensagem == '' || $mensagem == null) {
 		$erros += "<li>Digite sua Mensagem</li>";
+		$('#div_mensagem').addClass('error');
 	}
 	
 	if ($peca_id == '' || $peca_id == null) {
 		$erros += "<li>Codigo da Peça não identificado</li>";
+		$('div_').addClass('error');
 	}
 	
 	if ($erros === "") {
@@ -61,6 +71,28 @@ function Submit($peca_id) {
 			} else if ($valor.status === 'erro') {
 				$('#msg_cnt_anc').addClass('error');
 				$('#msg_cnt_anc').removeClass('success');
+			}
+			
+			if ($valor.campos.nome === 'erro') {
+				$('#div_nome').addClass('error');
+			}
+			
+			if ($valor.campos.email === 'erro') {
+				$('#div_email').addClass('error');
+			}
+			
+			if ($valor.campos.telefone === 'erro') {
+				$('#div_telefone').addClass('error');
+			}
+			
+			if ($valor.campos.whatsapp === 'erro') {
+				$('#div_whatsapp').addClass('error');
+			}
+			
+			if ($valor.campos.mensagem === 'erro') {
+				$('#div_mensagem').addClass('error');
+			} else {
+				$('#mensagem').val('');
 			}
 			
 			$('#msg_cnt_anc').removeClass('hidden');
