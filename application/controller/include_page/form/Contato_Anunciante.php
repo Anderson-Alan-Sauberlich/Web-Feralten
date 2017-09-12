@@ -89,6 +89,7 @@ namespace application\controller\include_page\form;
             if (empty($this->erros)) {
                 if (Email::Enviar_Email_Contato_Anunciante($this->object_contato_anunciante)) {
                     $this->object_contato_anunciante->set_datahora_envio(date('Y-m-d H:i:s'));
+                    $this->object_contato_anunciante->set_lido(false);
                     
                     DAO_Contato_Anunciante::Inserir($this->object_contato_anunciante);
                     

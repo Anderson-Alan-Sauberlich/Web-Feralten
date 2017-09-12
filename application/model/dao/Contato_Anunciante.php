@@ -16,6 +16,8 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Contato_Anunciante $object_contato_anunciante) : bool {
             try {
+                $object_contato_anunciante->set_id(self::Achar_ID_Livre($object_contato_anunciante->get_object_peca()->get_id()));
+                
                 $sql = "INSERT INTO tb_contato_anunciante (contato_anunciante_id, contato_anunciante_pec_id, contato_anunciante_nome, contato_anunciante_email, contato_anunciante_aprovacao, contato_anunciante_lido, contato_anunciante_telefone, contato_anunciante_whatsapp, contato_anunciante_mensagem, contato_anunciante_datahora_envio) 
                         VALUES (:id, :pec_id, :nome, :email, :aprovacao, :lido, :telefone, :whatsapp, :mensagem, :datahora_envio);";
                 
@@ -82,6 +84,22 @@ namespace application\model\dao;
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
 				return false;
+            }
+        }
+        
+        public static function Achar_ID_Livre(int $peca_id) : ?int {
+            try {
+                $sql = 'SELECT fc_achar_id_livre_contato_anunciante(:pec_id)';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':pec_id', $peca_id, PDO::PARAM_INT);
+                
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return null;
             }
         }
         
