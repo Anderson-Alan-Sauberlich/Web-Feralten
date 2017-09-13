@@ -4,6 +4,7 @@ namespace application\controller\usuario;
     use application\model\common\util\Validador;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\object\Usuario as Object_Usuario;
+    use application\controller\common\util\Email;
     use application\controller\usuario\Login;
     use application\view\src\usuario\Cadastro as View_Cadastro;
     use \Exception;
@@ -96,6 +97,8 @@ namespace application\controller\usuario;
                 $retorno = DAO_Usuario::Inserir($usuario);
 				
                 if ($retorno !== false) {
+                    Email::Enviar_Boas_Vindas($usuario);
+                    
                 	$retorno = Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
                 	
                 	if ($retorno === false) {
