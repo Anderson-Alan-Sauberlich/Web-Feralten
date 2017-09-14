@@ -21,6 +21,7 @@ namespace application\model\common\util;
 	use application\model\validador\Peca;
 	use application\model\validador\Permissao;
 	use application\model\validador\Preferencia_Entrega;
+	use application\model\validador\Recuperar_senha;
 	use application\model\validador\Status_Entidade;
 	use application\model\validador\Status_Peca;
 	use application\model\validador\Estado_Uso_Peca;
@@ -76,6 +77,8 @@ namespace application\model\common\util;
 		public static function Permissao() : Permissao { return new Permissao(); }
 		
 		public static function Preferencia_Entrega() : Preferencia_Entrega { return new Preferencia_Entrega(); }
+		
+		public static function Recuperar_Senha() : Recuperar_Senha { return new Recuperar_Senha(); }
 		
 		public static function Status_Entidade() : Status_Entidade { return new Status_Entidade(); }
 		
