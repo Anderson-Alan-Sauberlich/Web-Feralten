@@ -1,9 +1,11 @@
 <?php
 namespace application\model\object;
-
+    
+    use application\model\object\Usuario as Object_Usuario;
+    
     class Recuperar_Senha {
     	
-    	private $usuario_id;
+    	private $object_usuario;
 		private $data_hora;
 		private $codigo;
 		
@@ -11,12 +13,12 @@ namespace application\model\object;
 			
 		}
 		
-		public function set_usuario_id(int $usuario_id) : void {
-			$this->usuario_id = $usuario_id;
+		public function set_object_usuario(Object_Usuario $object_usuario) : void {
+			$this->object_usuario = $object_usuario;
 		}
 		
-		public function get_usuario_id() : ?int {
-			return $this->usuario_id;
+		public function get_object_usuario() : ?Object_Usuario {
+			return $this->object_usuario;
 		}
 		
 		public function set_data_hora(string $data_hora) : void {

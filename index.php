@@ -191,6 +191,16 @@
     	        
     	        return $response;
     	    });
+    	    
+    	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
+    	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+    	        
+    	        $recuperar_senha->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+    	        
+    	        $recuperar_senha->Enviar_Link_Email();
+    	        
+    	        return $response;
+    	    });
     	});    	
     	
     	$app->group('/meu-perfil', function() use ($app) {

@@ -2,6 +2,7 @@
 namespace application\model\dao;
 	
     use application\model\object\Recuperar_Senha as Object_Recuperar_Senha;
+    use application\model\dao\Usuario as DAO_Usuario;
     use application\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
@@ -15,12 +16,14 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Recuperar_Senha $object_recuperar_senha) : bool {
             try {
+                self::Deletar($object_recuperar_senha->get_object_usuario()->get_id());
+                
                 $sql = "INSERT INTO tb_recuperar_senha (recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo) 
                         VALUES (:usr_id, :data_hora, :codigo);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(':usr_id', $object_recuperar_senha->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $object_recuperar_senha->get_object_usuario()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_hora', $object_recuperar_senha->get_data_hora(), PDO::PARAM_STR);
                 $p_sql->bindValue(':codigo', $object_recuperar_senha->get_codigo(), PDO::PARAM_STR);
 				
@@ -36,7 +39,7 @@ namespace application\model\dao;
 				
                 $p_sql = Conexao::Conectar()->prepare($sql);
 				
-                $p_sql->bindValue(':usr_id', $object_recuperar_senha->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $object_recuperar_senha->get_object_usuario()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_hora', $object_recuperar_senha->get_data_hora(), PDO::PARAM_STR);
                 $p_sql->bindValue(':codigo', $object_recuperar_senha->get_codigo(), PDO::PARAM_STR);
                 
@@ -90,7 +93,7 @@ namespace application\model\dao;
             $object_recuperar_senha = new Object_Recuperar_Senha();
             
             if (isset($row['recuperar_senha_usr_id'])) {
-            	$object_recuperar_senha->set_usuario_id($row['recuperar_senha_usr_id']);
+                $object_recuperar_senha->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['recuperar_senha_usr_id']));
             }
             
             if (isset($row['recuperar_senha_data_hora'])) {
@@ -111,7 +114,7 @@ namespace application\model\dao;
 	            $object_recuperar_senha = new Object_Recuperar_Senha();
 	            
 	            if (isset($row['recuperar_senha_usr_id'])) {
-	            	$object_recuperar_senha->set_usuario_id($row['recuperar_senha_usr_id']);
+	                $object_recuperar_senha->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['recuperar_senha_usr_id']));
 	            }
 	            
 	            if (isset($row['recuperar_senha_data_hora'])) {
