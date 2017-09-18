@@ -21,7 +21,7 @@ namespace application\model\common\util;
 	use application\model\validador\Peca;
 	use application\model\validador\Permissao;
 	use application\model\validador\Preferencia_Entrega;
-	use application\model\validador\Recuperar_senha;
+	use application\model\validador\Recuperar_Senha;
 	use application\model\validador\Status_Entidade;
 	use application\model\validador\Status_Peca;
 	use application\model\validador\Estado_Uso_Peca;

@@ -77,7 +77,7 @@ namespace application\controller\common\util;
             }
         }
         
-        public static function Enviar_Recuperar_Senha(Object_Recuperar_Senha $object_Object_recuperar_senha) : bool {
+        public static function Enviar_Recuperar_Senha(Object_Recuperar_Senha $object_recuperar_senha) : bool {
             $mail = new PHPMailer(true);
             
             try {
@@ -93,14 +93,14 @@ namespace application\controller\common\util;
                 
                 //Recipients
                 $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
-                $mail->addAddress($object_Object_recuperar_senha->get_object_usuario()->get_email());
+                $mail->addAddress($object_recuperar_senha->get_object_usuario()->get_email());
                 $mail->addReplyTo('contato.feralten@gmail.com', 'Feralten');
                 $mail->addCC('contato.feralten@gmail.com');
                 
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Criar Nova Senha';
-                $mail->Body    = 'Abra o Link e crie uma nova senha: <a>https://www.feralten.com.br/usuario/recuperar-senha/?codigo='.hash_hmac('sha512', $object_Object_recuperar_senha->get_codigo(), hash('sha512', $object_Object_recuperar_senha->get_codigo())).'</a>';
+                $mail->Body    = 'Abra o Link e crie uma nova senha: <a>https://www.feralten.com.br/usuario/recuperar-senha/?codigo='.hash_hmac('sha512', $object_recuperar_senha->get_codigo(), hash('sha512', $object_recuperar_senha->get_codigo())).'</a>';
                 $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();

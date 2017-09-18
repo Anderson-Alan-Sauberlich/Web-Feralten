@@ -18,7 +18,7 @@ namespace application\model\validador;
 		}
 		
 		public function validar_codigo($codigo = null) : ?string {
-			
+			return $codigo;
 		}
 		
 		public function filtrar_usuario_id($usuario_id = null) : void {

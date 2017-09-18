@@ -62,7 +62,21 @@ namespace application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCodigo(string $codigo) {
+            try {
+                $sql = 'SELECT recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo FROM tb_recuperar_senha WHERE recuperar_senha_codigo = :codigo';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':codigo', $codigo, PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                return self::Popular_Recuperar_Senha($p_sql->fetch(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+				return false;
+            }
+        }
+        
+        public static function BuscarPorId(int $id) {
             try {
                 $sql = 'SELECT recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo FROM tb_recuperar_senha WHERE recuperar_senha_usr_id = :usr_id';
                 
@@ -72,7 +86,7 @@ namespace application\model\dao;
                 
                 return self::Popular_Recuperar_Senha($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         

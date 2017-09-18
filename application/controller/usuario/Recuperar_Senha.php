@@ -2,6 +2,7 @@
 namespace application\controller\usuario;
 	
 	use application\view\src\usuario\Recuperar_Senha as View_Recuperar_Senha;
+	use application\controller\usuario\Login as Controller_Login;
 	use application\model\object\Recuperar_Senha as Object_Recuperar_Senha;
 	use application\model\dao\Recuperar_Senha as DAO_Recuperar_Senha;
 	use application\model\dao\Usuario as DAO_Usuario;
@@ -16,6 +17,8 @@ namespace application\controller\usuario;
         }
         
         private $object_recuperar_senha;
+        private $senha_nova;
+        private $senha_confnova;
         private $campos = array();
         private $erros = array();
         
@@ -28,8 +31,52 @@ namespace application\controller\usuario;
             }
         }
         
+        public function set_codigo($codigo) : void {
+            try {
+                $codigo = Validador::Recuperar_Senha()::validar_codigo($codigo);
+                
+                $recuperar_senhas = DAO_Recuperar_Senha::BuscarTodos();
+                
+                foreach ($recuperar_senhas as $recuperar_senha) {
+                    if (hash_hmac('sha512', $recuperar_senha->get_codigo(), hash('sha512', $recuperar_senha->get_codigo())) === $codigo) {
+                        $this->object_recuperar_senha = $recuperar_senha;
+                        break;
+                    }
+                }
+            } catch (Exception $e) {
+                $this->erros[] = $e->getMessage();
+                $this->campos['codigo'] = "erro";
+            }
+        }
+        
+        public function set_senha_nova($senha_nova) {
+            try {
+                $this->senha_nova = Validador::Usuario()::validar_senha_nova($senha_nova);
+                $this->campos['senha_nova'] = 'certo';
+            } catch (Exception $e) {
+                $this->erros[] = $e->getMessage();
+                $this->campos['senha_nova'] = 'erro';
+                
+                $this->senha_nova = Validador::Usuario()::filtrar_senha_nova($senha_nova);
+            }
+        }
+        
+        public function set_senha_confnova($senha_confnova) {
+            try {
+                $this->senha_confnova = Validador::Usuario()::validar_senha_confnova($senha_confnova, $this->senha_nova);
+                $this->campos['enha_confnova'] = 'certo';
+            } catch (Exception $e) {
+                $this->erros[] = $e->getMessage();
+                $this->campos['senha_confnova'] = 'erro';
+                
+                $this->senha_confnova = Validador::Usuario()::filtrar_senha_confnova($senha_confnova);
+            }
+        }
+        
         public function Carregar_Pagina() : void {
         	$view = new View_Recuperar_Senha();
+        	
+        	$view->set_object_recuperar_senha($this->object_recuperar_senha);
         	
         	$view->Executar();
         }
@@ -65,6 +112,47 @@ namespace application\controller\usuario;
             } else {
                 $valor['status'] = 'erro';
                 $valor['header'] = '<h3>Erro ao tentar enviar e-mail</h3>';
+                
+                foreach ($this->erros as $erro) {
+                    $valor['content'] .= "<p>$erro</p>";
+                }
+            }
+            
+            echo json_encode($valor);
+        }
+        
+        public function Salvar_Senha() : void {
+            $valor = array();
+            $valor['status'] = '';
+            $valor['header'] = '';
+            $valor['content'] = '';
+            $valor['campos'] = $this->campos;
+            
+            if (empty($this->erros)) {
+                if (!empty($this->object_recuperar_senha->get_object_usuario())) {
+                    $this->senha_nova = password_hash($this->senha_nova, PASSWORD_DEFAULT);
+                    
+                    if (DAO_Usuario::Atualizar_Senha($this->senha_nova, $this->object_recuperar_senha->get_object_usuario()->get_id()) === false) {
+                        $valor['status'] = 'erro';
+                        $valor['header'] = '<h3>Erro Salvar Nova Senha</h3>';
+                        $valor['content'] = '<p>Desculpe, não foi possível salvar a nova senha</p>';
+                    } else {
+                        DAO_Recuperar_Senha::Deletar($this->object_recuperar_senha->get_object_usuario()->get_id());
+                        
+                        Controller_Login::ReAutenticar_Usuario_Logado($this->object_recuperar_senha->get_object_usuario()->get_id());
+                        
+                        $valor['status'] = 'certo';
+                        $valor['header'] = '<h3>Senha Alterada com Sucesso</h3>';
+                        $valor['content'] = '<p>Clique no Link para Entrar com sua Nova Senha: <a>/usuario/login/</a></p>';
+                    }
+                } else {
+                    $valor['status'] = 'erro';
+                    $valor['header'] = '<h3>Erro Codigo Usuario</h3>';
+                    $valor['content'] = '<p>Desculpe, código de usuario invalido</p>';
+                }
+            } else {
+                $valor['status'] = 'erro';
+                $valor['header'] = '<h3>Erro ao tentar salvar nova senha</h3>';
                 
                 foreach ($this->erros as $erro) {
                     $valor['content'] .= "<p>$erro</p>";

@@ -187,17 +187,35 @@
     	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
     	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
     	        
+    	        if (isset($_GET['codigo'])) {
+    	            $recuperar_senha->set_codigo($_GET['codigo']);
+    	        }
+    	        
     	        $recuperar_senha->Carregar_Pagina();
     	        
     	        return $response;
     	    });
     	    
-    	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
+    	    $app->post('/enviar/', function(Request $request, Response $response, $args) use ($app) {
     	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
     	        
     	        $recuperar_senha->set_email(isset($_POST['email']) ? $_POST['email'] : null);
     	        
     	        $recuperar_senha->Enviar_Link_Email();
+    	        
+    	        return $response;
+    	    });
+    	    
+    	    $app->post('/salvar/', function(Request $request, Response $response, $args) use ($app) {
+    	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+    	        
+    	        $recuperar_senha->set_codigo(isset($_POST['codigo']) ? $_POST['codigo'] : null);
+    	        
+    	        $recuperar_senha->set_senha_nova(isset($_POST['senha_nova']) ? $_POST['senha_nova'] : null);
+    	        
+    	        $recuperar_senha->set_senha_confnova(isset($_POST['senha_confnova']) ? $_POST['senha_confnova'] : null);
+    	        
+    	        $recuperar_senha->Salvar_Senha();
     	        
     	        return $response;
     	    });
