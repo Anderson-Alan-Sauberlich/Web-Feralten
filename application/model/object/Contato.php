@@ -46,11 +46,11 @@ namespace application\model\object;
 		    return $this->whatsapp;
 		}
 		
-		public function set_assunto(?bool $assunto) : void {
+		public function set_assunto(?string $assunto) : void {
 		    $this->assunto = $assunto;
 		}
 		
-		public function get_assunto() : ?bool {
+		public function get_assunto() : ?string {
 		    return $this->assunto;
 		}
 		
