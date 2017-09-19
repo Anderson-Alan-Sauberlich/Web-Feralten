@@ -32,6 +32,28 @@
 		});
 	});
 	
+	$app->group('/contato', function() use ($app) {
+	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
+	        $contato = new application\controller\include_page\form\Contato();
+	        
+	        $contato->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+	        
+	        $contato->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+	        
+	        $contato->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
+	        
+	        $contato->set_whatsapp(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : null);
+	        
+	        $contato->set_assunto(isset($_POST['assunto']) ? $_POST['assunto'] : null);
+	        
+	        $contato->set_mensagem(isset($_POST['mensagem']) ? $_POST['mensagem'] : null);
+	        
+	        $contato->Enviar_Email();
+	        
+	        return $response;
+	    });
+	});
+	
 	$app->group('/contato-anunciante', function() use ($app) {
 	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
 	        $contato_anunciante = new application\controller\include_page\form\Contato_Anunciante();

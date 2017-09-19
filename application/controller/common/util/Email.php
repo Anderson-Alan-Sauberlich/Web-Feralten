@@ -1,11 +1,12 @@
 <?php
 namespace application\controller\common\util;
-
+    
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception as Mail_Exception;
     use application\model\object\Contato_Anunciante as Object_Contato_Anunciante;
     use application\model\object\Usuario as Object_Usuario;
     use application\model\object\Recuperar_Senha as Object_Recuperar_Senha;
+    use application\model\object\Contato as Object_Contato;
     
     class Email {
         
@@ -37,6 +38,42 @@ namespace application\controller\common\util;
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Nova mensagem de '.$object_contato_anunciante->get_nome();
                 $mail->Body    = $object_contato_anunciante->get_mensagem();
+                $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
+                
+                return $mail->send();
+            } catch (Mail_Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Enviar_Contato(Object_Contato $object_contato) : bool {
+            $mail = new PHPMailer(true);
+            
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'contato.feralten@gmail.com';
+                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                
+                //Recipients
+                $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
+                $mail->addAddress('contato.feralten@gmail.com', 'Feralten');
+                $mail->addReplyTo($object_contato->get_email(), $object_contato->get_nome());
+                
+                //Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Contato - '.$object_contato->get_assunto().' - '.$object_contato->get_nome();
+                $mail->Body    = '<p>Nome: '.$object_contato->get_nome().'</p>';
+                $mail->Body   .= '<p>Email: '.$object_contato->get_email().'</p>';
+                $mail->Body   .= '<p>Telefone: '.$object_contato->get_telefone().'</p>';
+                $mail->Body   .= '<p>Whatsapp: '.$object_contato->get_whatsapp().'</p>';
+                $mail->Body   .= '<p>Assunto: '.$object_contato->get_assunto().'</p>';
+                $mail->Body   .= '<p>Mensagem: '.$object_contato->get_mensagem().'</p>';
                 $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();

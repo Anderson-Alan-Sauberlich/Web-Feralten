@@ -32,7 +32,13 @@
                 </div>
             </div>
             <div class="five wide column">
-                <?php View_Perguntas_Frequentes::Incluir_Form_Contato(); ?>
+            	<div id="div_contato" class="ui secondary segment">
+                	<?php View_Perguntas_Frequentes::Incluir_Form_Contato(); ?>
+                </div>
+    			<div id="msg_contato" class="ui hidden message">
+                	<i class="close icon"></i>
+                	<ul id="ul_contato"></ul>
+                </div>
             </div>
         </div>
     </section>

@@ -15,8 +15,8 @@
     </div>
     <div id="div_whatsapp" class="field">
     	<div class="ui checkbox">
-            <input type="checkbox" id="whats" name="whats">
-            <label for="whats">Contato Pelo WhatsApp?</label>
+            <input type="checkbox" id="whatsapp" name="whatsapp">
+            <label for="whatsapp">Contato Pelo WhatsApp?</label>
         </div>
     </div>
     <div id="div_mensagem" class="field">
