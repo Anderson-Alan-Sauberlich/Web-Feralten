@@ -55,8 +55,8 @@ $(document).ready(function() {
 		    }
 		};
 
-	$('#fone1').mask(maskBehavior, options);
-	$('#fone2').mask(maskBehavior, options);
+	$('#fone').mask(maskBehavior, options);
+	$('#fone_alternativo').mask(maskBehavior, options);
 	$('#cep').mask('00.000-000');
 	$('[data-toggle="popover"]').popover();
 });

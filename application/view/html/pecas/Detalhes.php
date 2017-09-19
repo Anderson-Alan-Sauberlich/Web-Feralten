@@ -123,10 +123,10 @@
                  <img width="100" height="75" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/application/view/resources/img/imagem_indisponivel.png'">
         	</div>
         	<div class="column">
-        		<p>Telefone: <?php View_Detalhes::Mostrar_Fone1_Responsavel(); ?></p>
+        		<p>Telefone: <?php View_Detalhes::Mostrar_Fone_Responsavel(); ?></p>
         		<p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
-        		<p>Telefone alternativo: <?php View_Detalhes::Mostrar_Fone2_Responsavel(); ?></p>
-        		<p>E-mail alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
+        		<p>Telefone Alternativo: <?php View_Detalhes::Mostrar_Fone_Alternativo_Responsavel(); ?></p>
+        		<p>E-mail Alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
         	</div>
         </div>
         <div class="ui segment">

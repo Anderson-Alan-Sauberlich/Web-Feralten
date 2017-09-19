@@ -225,19 +225,19 @@ use application\controller\pecas\Detalhes as Controller_Detalhes;
             }
         }
         
-        public static function Mostrar_Fone1_Responsavel() : void {
-            if (empty(self::$object_peca->get_responsavel()->get_fone1()) OR self::$object_peca->get_responsavel()->get_fone1() == false) {
+        public static function Mostrar_Fone_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_fone()) OR self::$object_peca->get_responsavel()->get_fone() == false) {
                 echo 'erro, telefone 1';
             } else {
-                echo self::$object_peca->get_responsavel()->get_fone1();
+                echo self::$object_peca->get_responsavel()->get_fone();
             }
         }
         
-        public static function Mostrar_Fone2_Responsavel() : void {
-            if (empty(self::$object_peca->get_responsavel()->get_fone2()) OR self::$object_peca->get_responsavel()->get_fone2() == false) {
+        public static function Mostrar_Fone_Alternativo_Responsavel() : void {
+            if (empty(self::$object_peca->get_responsavel()->get_fone_alternativo()) OR self::$object_peca->get_responsavel()->get_fone_alternativo() == false) {
                 echo 'não informado';
             } else {
-                echo self::$object_peca->get_responsavel()->get_fone2();
+                echo self::$object_peca->get_responsavel()->get_fone_alternativo();
             }
         }
         

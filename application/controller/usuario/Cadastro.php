@@ -87,7 +87,7 @@ namespace application\controller\usuario;
             	$usuario->set_id(0);
             	$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
             	$usuario->set_status_id(2);
-            	$usuario->set_fone1('00000000');
+            	$usuario->set_fone('00000000');
             	$usuario->set_nome($this->nome);
             	$usuario->set_email($this->email);
             	$usuario->set_senha($this->senha);

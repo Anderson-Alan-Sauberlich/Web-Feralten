@@ -10,8 +10,8 @@ namespace application\model\object;
 		private $ultimo_login;
 		private $token;
 		private $status_id;
-		private $fone1;
-		private $fone2;
+		private $fone;
+		private $fone_alternativo;
 		private $email_alternativo;
 		
 		function __constructor() {
@@ -74,20 +74,20 @@ namespace application\model\object;
 			return $this->status_id;
 		}
 		
-		public function set_fone1(string $fone1) : void {
-			$this->fone1 = $fone1;
+		public function set_fone(string $fone) : void {
+			$this->fone = $fone;
 		}
 		
-		public function get_fone1() : ?string {
-			return $this->fone1;
+		public function get_fone() : ?string {
+			return $this->fone;
 		}
 		
-		public function set_fone2(?string $fone2) : void {
-			$this->fone2 = $fone2;
+		public function set_fone_alternativo(?string $fone_alternativo) : void {
+			$this->fone_alternativo = $fone_alternativo;
 		}
 		
-		public function get_fone2() : ?string {
-			return $this->fone2;
+		public function get_fone_alternativo() : ?string {
+			return $this->fone_alternativo;
 		}
 		
 		public function set_email_alternativo(?string $email_alternativo) : void {

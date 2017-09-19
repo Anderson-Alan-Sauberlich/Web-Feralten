@@ -40,15 +40,15 @@
 	                        </div>
                         </div>
                         <div class="col-sm-6">
-                        	<label for="fone1" class="lbPanel">Digite Seu Numero de Telefone-1:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "fone1"); ?>">
+                        	<label for="fone" class="lbPanel">Digite Seu Numero de Telefone:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "fone"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input id="fone1" name="fone1" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone1") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-1. (Campo Obrigatório)" />
+                                <input id="fone" name="fone" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone. (Campo Obrigatório)" />
                             </div>
-                            <label for="fone2" class="lbPanel">Digite Seu Numero de Telefone-2:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "fone2"); ?>">
+                            <label for="fone_alternativo" class="lbPanel">Digite Seu Numero de Telefone Alternativo:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "fone_alternativo"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                                <input id="fone2" name="fone2" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone2") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone-2. (Campo Opcional)" />
+                                <input id="fone_alternativo" name="fone_alternativo" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone_alternativo") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone alternativo. (Campo Opcional)" />
                             </div>
                             <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">

@@ -120,21 +120,21 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         public static function Incluir_Classe_Erros(string $campo) : void {
         	if (!empty(self::$concluir_campos)) {
 	            switch ($campo) {
-	                case "fone1":
-	                	if (isset(self::$concluir_campos['erro_fone1'])) {
-		                    if (self::$concluir_campos['erro_fone1'] === "erro") {
+	                case "fone":
+	                	if (isset(self::$concluir_campos['erro_fone'])) {
+		                    if (self::$concluir_campos['erro_fone'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_fone1'] === "certo") {
+		                    } else if (self::$concluir_campos['erro_fone'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}
 	                    break;
 	                    
-	                case "fone2":
-	                	if (isset(self::$concluir_campos['erro_fone2'])) {
-		                    if (self::$concluir_campos['erro_fone2'] === "erro") {
+	                case "fone_alternativo":
+	                	if (isset(self::$concluir_campos['erro_fone_alternativo'])) {
+		                    if (self::$concluir_campos['erro_fone_alternativo'] === "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_fone2'] === "certo") {
+		                    } else if (self::$concluir_campos['erro_fone_alternativo'] === "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}

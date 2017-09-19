@@ -301,38 +301,38 @@ namespace application\model\validador;
 			
 		}
 		
-		public static function validar_fone1($fone1 = null) : string {
-			if (empty($fone1)) {
-				throw new Exception('Informe um Nº de Telefone para Telefone-1');
+		public static function validar_fone($fone = null) : string {
+			if (empty($fone)) {
+				throw new Exception('Informe um Nº de Telefone');
 			} else {
-				$fone1 = trim($fone1);
-				$fone1 = preg_replace('/[^a-zA-Z0-9]/', "", $fone1);
+				$fone = trim($fone);
+				$fone = preg_replace('/[^a-zA-Z0-9]/', "", $fone);
 				
-				if (strlen($fone1) === 11 OR strlen($fone1) === 10) {
-					if (filter_var($fone1, FILTER_VALIDATE_INT)) {
-						return $fone1;
+				if (strlen($fone) === 11 OR strlen($fone) === 10) {
+					if (filter_var($fone, FILTER_VALIDATE_INT)) {
+						return $fone;
 					} else {
-						throw new Exception('Telefone-1, Digite Apenas Numeros');
+						throw new Exception('Telefone, Digite Apenas Numeros');
 					}
 				} else {
-					throw new Exception('Telefone-1 deve conter 10 ou 11 Dígitos');
+					throw new Exception('Telefone deve conter 10 ou 11 Dígitos');
 				}
 			}
 		}
 		
-		public static function validar_fone2($fone2 = null) : ?string {
-			if (!empty($fone2)) {
-				$fone2 = trim($fone2);
-				$fone2 = preg_replace('/[^a-zA-Z0-9]/', "", $fone2);
+		public static function validar_fone_alternativo($fone_alternativo = null) : ?string {
+			if (!empty($fone_alternativo)) {
+				$fone_alternativo = trim($fone_alternativo);
+				$fone_alternativo = preg_replace('/[^a-zA-Z0-9]/', "", $fone_alternativo);
 				
-				if (strlen($fone2) === 11 OR strlen($fone2) === 10) {
-					if (filter_var($fone2, FILTER_VALIDATE_INT)) {
-						return $fone2;
+				if (strlen($fone_alternativo) === 11 OR strlen($fone_alternativo) === 10) {
+					if (filter_var($fone_alternativo, FILTER_VALIDATE_INT)) {
+						return $fone_alternativo;
 					} else {
-						throw new Exception('Telefone-2, Digite Apenas Numeros');
+						throw new Exception('Telefone Alternativo, Digite Apenas Numeros');
 					}
 				} else {
-					throw new Exception('Telefone-2 deve conter 10 ou 11 Dígitos');
+					throw new Exception('Telefone Alternativo deve conter 10 ou 11 Dígitos');
 				}
 			} else {
 				return null;
@@ -369,21 +369,21 @@ namespace application\model\validador;
 			
 		}
 		
-		public static function filtrar_fone1($fone1 = null) : string {
+		public static function filtrar_fone($fone = null) : string {
 			$valor = "";
 			
-			if (!empty($fone1)) {
-				$valor = trim(strip_tags($fone1));
+			if (!empty($fone)) {
+				$valor = trim(strip_tags($fone));
 			}
 			
 			return $valor;
 		}
 		
-		public static function filtrar_fone2($fone2 = null) : ?string {
+		public static function filtrar_fone_alternativo($fone_alternativo = null) : ?string {
 			$valor = null;
 			
-			if (!empty($fone2)) {
-				$valor = trim(strip_tags($fone2));
+			if (!empty($fone_alternativo)) {
+				$valor = trim(strip_tags($fone_alternativo));
 			}
 			
 			return $valor;

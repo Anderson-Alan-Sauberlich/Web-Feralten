@@ -48,8 +48,8 @@ $(document).ready(function() {
 		    }
 		};
 
-	$('#fone1').mask(maskBehavior, options);
-	$('#fone2').mask(maskBehavior, options);
+	$('#fone').mask(maskBehavior, options);
+	$('#fone_alternativo').mask(maskBehavior, options);
 	$('[data-toggle="popover"]').popover();
 });
 $(document).ready(function() {

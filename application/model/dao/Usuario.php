@@ -15,8 +15,8 @@ namespace application\model\dao;
         
         public static function Inserir(Object_Usuario $object_usuario) : bool {
             try {
-                $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone1, usuario_fone2, usuario_email_alternativo) 
-                        VALUES (:id, :email, :nome, :senha, :login, :sts_id, :fone1, :fone2, :email_alt);";
+                $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo) 
+                        VALUES (:id, :email, :nome, :senha, :login, :sts_id, :fone, :fone_alt, :email_alt);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -26,8 +26,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(':senha', $object_usuario->get_senha(), PDO::PARAM_STR);
 				$p_sql->bindValue(':login', $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
 				$p_sql->bindValue(':sts_id', $object_usuario->get_status_id(), PDO::PARAM_INT);
-				$p_sql->bindValue(':fone1', $object_usuario->get_fone1(), PDO::PARAM_STR);
-				$p_sql->bindValue(':fone2', $object_usuario->get_fone2(), PDO::PARAM_STR);
+				$p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
+				$p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
 				$p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
 				
                 return $p_sql->execute();
@@ -41,8 +41,8 @@ namespace application\model\dao;
                 $sql = "UPDATE tb_usuario SET
                 usuario_nome = :nome,
                 usuario_email = :email,
-                usuario_fone1 = :fone1, 
-                usuario_fone2 = :fone2, 
+                usuario_fone = :fone, 
+                usuario_fone_alternativo = :fone_alt, 
                 usuario_email_alternativo = :email_alt 
                 WHERE usuario_id = :id";
 
@@ -51,8 +51,8 @@ namespace application\model\dao;
                 $p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_usuario->get_nome(), PDO::PARAM_STR);
                 $p_sql->bindValue(':email', $object_usuario->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone1', $object_usuario->get_fone1(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone2', $object_usuario->get_fone2(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
                 $p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
@@ -64,16 +64,16 @@ namespace application\model\dao;
         public static function Atualizar_Contato(Object_Usuario $object_usuario) : bool {
         	try {
         		$sql = "UPDATE tb_usuario SET
-                usuario_fone1 = :fone1,
-                usuario_fone2 = :fone2,
+                usuario_fone = :fone,
+                usuario_fone_alternativo = :fone_alt,
                 usuario_email_alternativo = :email_alt
                 WHERE usuario_id = :id";
         		
         		$p_sql = Conexao::Conectar()->prepare($sql);
         		
         		$p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':fone1', $object_usuario->get_fone1(), PDO::PARAM_STR);
-        		$p_sql->bindValue(':fone2', $object_usuario->get_fone2(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
+        		$p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
         		$p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
         		
         		return $p_sql->execute();
@@ -195,7 +195,7 @@ namespace application\model\dao;
         
         public static function Buscar_Usuario(int $usuario_id) {
             try {
-                $sql = 'SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_token_login, usuario_sts_usr_id, usuario_fone1, usuario_fone2, usuario_email_alternativo FROM tb_usuario WHERE usuario_id = :id';
+                $sql = 'SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_token_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo FROM tb_usuario WHERE usuario_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $usuario_id, PDO::PARAM_INT);
@@ -229,7 +229,7 @@ namespace application\model\dao;
         
         public static function Autenticar(string $email) {
             try {
-                $sql = 'SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone1, usuario_fone2, usuario_email_alternativo FROM tb_usuario WHERE usuario_email = :email';
+                $sql = 'SELECT usuario_id, usuario_nome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo FROM tb_usuario WHERE usuario_email = :email';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':email', $email, PDO::PARAM_STR);
@@ -272,12 +272,12 @@ namespace application\model\dao;
             	$object_usuario->set_status_id($row['usuario_sts_usr_id']);
             }
             
-            if (isset($row['usuario_fone1'])) {
-            	$object_usuario->set_fone1($row['usuario_fone1']);
+            if (isset($row['usuario_fone'])) {
+            	$object_usuario->set_fone($row['usuario_fone']);
             }
             
-            if (isset($row['usuario_fone2'])) {
-            	$object_usuario->set_fone2($row['usuario_fone2']);
+            if (isset($row['usuario_fone_alternativo'])) {
+            	$object_usuario->set_fone_alternativo($row['usuario_fone_alternativo']);
             }
             
             if (isset($row['usuario_email_alternativo'])) {

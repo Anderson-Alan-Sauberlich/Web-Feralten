@@ -699,9 +699,9 @@
             			
             			$atualizar->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
             			
-            			$atualizar->set_fone1(isset($_POST['fone1']) ? $_POST['fone1'] : null);
+            			$atualizar->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
             			
-            			$atualizar->set_fone2(isset($_POST['fone2']) ? $_POST['fone2'] : null);
+            			$atualizar->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
             			
             			$atualizar->set_email(isset($_POST['email']) ? $_POST['email'] : null);
             			
@@ -893,9 +893,9 @@
             		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
             			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
             			
-            			$concluir->set_fone1(isset($_POST['fone1']) ? $_POST['fone1'] : null);
+            			$concluir->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
             			
-            			$concluir->set_fone2(isset($_POST['fone2']) ? $_POST['fone2'] : null);
+            			$concluir->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
             			
             			$concluir->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
             			

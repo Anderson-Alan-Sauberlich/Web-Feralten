@@ -117,21 +117,21 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         private function Incluir_Classe_Erros_Usuario(?string $campo = null) : void {
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
-	            	case "fone1":
-	            		if (isset(self::$atualizar_campos['erro_fone1'])) {
-	            			if (self::$atualizar_campos['erro_fone1'] == "erro") {
+	            	case "fone":
+	            		if (isset(self::$atualizar_campos['erro_fone'])) {
+	            			if (self::$atualizar_campos['erro_fone'] == "erro") {
 	            				echo "has-error has-feedback";
-	            			} else if (self::$atualizar_campos['erro_fone1'] == "certo") {
+	            			} else if (self::$atualizar_campos['erro_fone'] == "certo") {
 	            				echo "has-success has-feedback";
 	            			}
 	            		}
 	            		break;
 	            	
-	            	case "fone2":
-	            		if (isset(self::$atualizar_campos['erro_fone2'])) {
-	            			if (self::$atualizar_campos['erro_fone2'] == "erro") {
+	            	case "fone_alternativo":
+	            		if (isset(self::$atualizar_campos['erro_fone_alternativo'])) {
+	            			if (self::$atualizar_campos['erro_fone_alternativo'] == "erro") {
 	            				echo "has-error has-feedback";
-	            			} else if (self::$atualizar_campos['erro_fone2'] == "certo") {
+	            			} else if (self::$atualizar_campos['erro_fone_alternativo'] == "certo") {
 	            				echo "has-success has-feedback";
 	            			}
 	            		}
@@ -226,10 +226,10 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
         				echo self::$usuario_form->get_email();
         			} else if ($campo == "confemail") {
         				echo self::$usuario_form->get_email();
-        			} else if ($campo == "fone1") {
-        				echo self::$usuario_form->get_fone1();
-        			} else if ($campo == "fone2") {
-        				echo self::$usuario_form->get_fone2();
+        			} else if ($campo == "fone") {
+        				echo self::$usuario_form->get_fone();
+        			} else if ($campo == "fone_alternativo") {
+        				echo self::$usuario_form->get_fone_alternativo();
         			} else if ($campo == "email_alternativo") {
         				echo self::$usuario_form->get_email_alternativo();
         			}

@@ -20,8 +20,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         }
         
         private $nome;
-        private $fone1;
-        private $fone2;
+        private $fone;
+        private $fone_alternativo;
         private $email;
         private $confemail;
         private $email_alternativo;
@@ -47,26 +47,26 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	}
         } 
         
-        public function set_fone1($fone1) {
+        public function set_fone($fone) {
         	try {
-        		$this->fone1 = Validador::Usuario()::validar_fone1($fone1);
-        		$this->atualizar_campos['erro_fone1'] = 'certo';
+        		$this->fone = Validador::Usuario()::validar_fone($fone);
+        		$this->atualizar_campos['erro_fone'] = 'certo';
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
-        		$this->atualizar_campos['erro_fone1'] = 'erro';
+        		$this->atualizar_campos['erro_fone'] = 'erro';
         		
-        		$this->fone1 = Validador::Usuario()::filtrar_fone1($fone1);
+        		$this->fone = Validador::Usuario()::filtrar_fone($fone);
         	}
         }
         
-        public function set_fone2($fone2 = null) {
+        public function set_fone_alternativo($fone_alternativo = null) {
         	try {
-        		$this->fone2 = Validador::Usuario()::validar_fone2($fone2);
+        		$this->fone_alternativo = Validador::Usuario()::validar_fone_alternativo($fone_alternativo);
         	} catch (Exception $e) {
         		$this->atualizar_erros[] = $e->getMessage();
-        		$this->atualizar_campos['erro_fone2'] = 'erro';
+        		$this->atualizar_campos['erro_fone_alternativo'] = 'erro';
         		
-        		$this->fone2 = Validador::Usuario()::filtrar_fone2($fone2);
+        		$this->fone_alternativo = Validador::Usuario()::filtrar_fone_alternativo($fone_alternativo);
         	}
         }
         
@@ -214,8 +214,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
         	$this->atualizar_form['nome'] = $this->nome;
         	$this->atualizar_form['email'] = $this->email;
         	$this->atualizar_form['confemail'] = $this->confemail;
-        	$this->atualizar_form['fone1'] = $this->fone1;
-        	$this->atualizar_form['fone2'] = $this->fone2;
+        	$this->atualizar_form['fone'] = $this->fone;
+        	$this->atualizar_form['fone_alternativo'] = $this->fone_alternativo;
         	$this->atualizar_form['email_alternativo'] = $this->email_alternativo;
         }
         
@@ -273,8 +273,8 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
             	
             	$usuario->set_nome($this->nome);
             	$usuario->set_email($this->email);
-            	$usuario->set_fone1($this->fone1);
-            	$usuario->set_fone2($this->fone2);
+            	$usuario->set_fone($this->fone);
+            	$usuario->set_fone_alternativo($this->fone_alternativo);
             	$usuario->set_email_alternativo($this->email_alternativo);
             	$usuario->set_id(Login_Session::get_usuario_id());
             	
