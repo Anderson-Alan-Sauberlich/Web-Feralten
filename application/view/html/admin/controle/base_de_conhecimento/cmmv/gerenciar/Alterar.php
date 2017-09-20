@@ -41,4 +41,4 @@
 	<h4 class="ui dividing header">A Alterar: <label class="ui big label" id="alt_lb_item">Nada</label></h4>
    	<button id="alt_salvar" name="alt_salvar" onclick="SalvarAlterar()" class="ui fluid inverted yellow button ">Salvar e Alterar</button>
 </div>
-<script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\alterar.js"></script>
+<script type="text/javascript" src="/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\alterar.js"></script>

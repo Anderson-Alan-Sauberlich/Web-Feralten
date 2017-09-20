@@ -16,7 +16,7 @@
         
         
             
-                <img src="/application/view/resources/img/fundo_feralten_s.jpeg" position="center" class="img-responsive centerIMG " />
+                <img src="/resources/img/fundo_feralten_s.jpeg" position="center" class="img-responsive centerIMG " />
             	<BR/>
             	<BR/>
             	<BR/>

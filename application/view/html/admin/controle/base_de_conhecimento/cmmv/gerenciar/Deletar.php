@@ -41,4 +41,4 @@
 	<h4 class="ui dividing header">A Deletar: <label class="ui big label" id="del_lb_item">Nada</label></h4>
    	<button id="del_salvar" name="del_salvar" onclick="SalvarDeletar()" class="ui fluid inverted red button ">Salvar e Deletar</button>
 </div>
-<script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\deletar.js"></script>
+<script type="text/javascript" src="/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\deletar.js"></script>

@@ -1,5 +1,5 @@
 <?php use application\view\src\layout\menu\Usuario as View_Usuario; ?>
-<script type="text/javascript" src="/application/view/js/layout/menu/usuario.js"></script>
+<script type="text/javascript" src="/js/layout/menu/usuario.js"></script>
 <section class="sombra_painel">
     <div class="panel panel-default borderPainel sombra_painel">
         <div class="menu_usuario_header">

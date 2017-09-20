@@ -41,4 +41,4 @@
 	<h4 class="ui dividing header">A Cadastrar: <label class="ui big label" id="cad_lb_item">Categoria</label></h4>
    	<button id="cad_salvar" name="cad_salvar" onclick="SalvarCadastrar()" class="ui fluid inverted green button ">Salvar e Cadastrar</button>
 </div>
-<script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\cadastrar.js"></script>
+<script type="text/javascript" src="/js/admin/controle\base_de_conhecimento\cmmv\gerenciar\cadastrar.js"></script>

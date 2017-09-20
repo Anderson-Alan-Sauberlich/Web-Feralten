@@ -1,5 +1,5 @@
 <?php use application\view\src\layout\form\Contato as View_Contato; ?>
-<script type="text/javascript" src="/application/view/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
+<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
 <form id="frm_contato" class="ui form" role="form">
     <div id="div_nome" class="field">
     	<label>Nome</label>
@@ -29,4 +29,4 @@
     </div>
 	<div id="btn_submit" onclick="Enviar();" class="ui button fluid inverted red">Enviar</div>
 </form>
-<script type="text/javascript" src="/application/view/js/layout/form/contato.js"></script>
+<script type="text/javascript" src="/js/layout/form/contato.js"></script>

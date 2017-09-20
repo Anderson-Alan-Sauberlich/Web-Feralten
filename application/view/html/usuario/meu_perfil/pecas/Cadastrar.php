@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/application/view/html/layout/head/Default.php'; ?>
-    <script type="text/javascript" src="/application/view/js/usuario/meu_perfil/pecas/cadastrar.js"></script>
+    <script type="text/javascript" src="/js/usuario/meu_perfil/pecas/cadastrar.js"></script>
 	<title>Cadastrar | Feralten</title>
 </head>
 <body>

@@ -70,4 +70,4 @@
 		</div>
 	</div>
 </section>
-<script type="text/javascript" src="/application/view/js/layout/menu/pesquisa.js"></script>
+<script type="text/javascript" src="/js/layout/menu/pesquisa.js"></script>

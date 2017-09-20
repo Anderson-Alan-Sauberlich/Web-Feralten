@@ -22,4 +22,4 @@
     	</a>
 	</div>
 </div>
-<script type="text/javascript" src="/application/view/js/layout/mensagens/cadastro_incompleto.js"></script>
+<script type="text/javascript" src="/js/layout/mensagens/cadastro_incompleto.js"></script>

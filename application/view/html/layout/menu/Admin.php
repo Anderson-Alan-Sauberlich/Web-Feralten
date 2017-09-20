@@ -1,5 +1,5 @@
 <?php use application\view\src\layout\menu\Admin as View_Admin; ?>
-<script type="text/javascript" src="/application/view/js/layout/menu/admin.js"></script>
+<script type="text/javascript" src="/js/layout/menu/admin.js"></script>
 <aside class="row">
 	<nav id="menu_admin" class="ui left inline inverted blue sidebar vertical menu">
 		<div class="active item header"><h3>Admin - Menu</h3></div>

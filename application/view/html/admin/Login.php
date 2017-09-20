@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/application/view/html/layout/head/Admin.php'; ?>
-	<script type="text/javascript" src="/application/view/js/admin/login.js"></script>
+	<script type="text/javascript" src="/js/admin/login.js"></script>
 	<title>Administração | Feralten</title>
 </head>
 <body>

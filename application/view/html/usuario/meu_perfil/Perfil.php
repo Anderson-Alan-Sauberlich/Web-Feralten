@@ -14,7 +14,7 @@
         
 		<div class="container-fluid">
             <div class="row-fluid">
-                <img src="/application/view/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
+                <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
             </div>
         </div>
         

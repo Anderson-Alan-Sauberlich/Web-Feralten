@@ -1,5 +1,5 @@
 <?php use application\view\src\layout\header\Admin as View_Admin; ?>
-<script type="text/javascript" src="/application/view/js/include_page/header/admin.js"></script>
+<script type="text/javascript" src="/js/include_page/header/admin.js"></script>
 <div class="row">
 	<div class="ui inverted blue top attached segment">
 		<div class="ui container stackable inverted blue menu">
