@@ -39,7 +39,7 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	use application\model\dao\Endereco as DAO_Endereco;
 	use application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use application\view\src\usuario\meu_perfil\pecas\Atualizar as View_Atualizar;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
 	use \Exception;
 	
     class Atualizar {

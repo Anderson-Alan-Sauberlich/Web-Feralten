@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-    <?php include_once RAIZ.'/application/view/html/include_page/head/Default.php'; ?>
+    <?php include_once RAIZ.'/application/view/html/layout/head/Default.php'; ?>
 	<title>Boleto Atual | Feralten</title>
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/application/view/html/include_page/header/Cabecalho.php'; ?>    
+        <?php include_once RAIZ.'/application/view/html/layout/header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
         <?php View_Boleto_Atual::Incluir_Menu_Usuario(); ?>
@@ -20,7 +20,7 @@
         
     </section>
     <footer>
-        <?php include_once RAIZ.'/application/view/html/include_page/footer/Rodape.php'; ?>
+        <?php include_once RAIZ.'/application/view/html/layout/footer/Rodape.php'; ?>
     </footer>
 </body>
 </html>

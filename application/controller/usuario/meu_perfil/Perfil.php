@@ -2,7 +2,7 @@
 namespace application\controller\usuario\meu_perfil;
 	
 	use application\view\src\usuario\meu_perfil\Perfil as View_Perfil;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
 	
     class Perfil {
 

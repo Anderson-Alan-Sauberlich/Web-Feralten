@@ -1,11 +1,11 @@
 <?php
 namespace application\view\src\usuario\meu_perfil\pecas;
     
-	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
-	use application\view\src\include_page\menu\Usuario as View_Usuario;
-	use application\view\src\include_page\menu\Filtro as View_Filtro;
-	use application\view\src\include_page\menu\Paginacao as View_Paginacao;
-	use application\view\src\include_page\Card_Peca as View_Card_Peca;
+    use application\view\src\layout\menu\Pesquisa as View_Pesquisa;
+	use application\view\src\layout\menu\Usuario as View_Usuario;
+	use application\view\src\layout\menu\Filtro as View_Filtro;
+	use application\view\src\layout\menu\Paginacao as View_Paginacao;
+	use application\view\src\layout\Card_Peca as View_Card_Peca;
 	use application\controller\usuario\meu_perfil\pecas\Visualizar as Controller_Visualizar;
 	
     class Visualizar {

@@ -2,7 +2,7 @@
 namespace application\view\src\usuario\meu_perfil\meus_dados;
 	
     use application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
-	use application\view\src\include_page\menu\Usuario as View_Usuario;
+    use application\view\src\layout\menu\Usuario as View_Usuario;
     
     class Concluir {
     	

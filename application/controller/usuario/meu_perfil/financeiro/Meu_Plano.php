@@ -2,7 +2,7 @@
 namespace application\controller\usuario\meu_perfil\financeiro;
 	
 	use application\view\src\usuario\meu_perfil\financeiro\Meu_Plano as View_Meu_Plano;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
 	
     class Meu_Plano {
 

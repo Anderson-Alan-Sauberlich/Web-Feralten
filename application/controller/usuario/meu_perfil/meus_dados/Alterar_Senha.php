@@ -5,7 +5,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
 	use application\model\common\util\Login_Session;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\view\src\usuario\meu_perfil\meus_dados\Alterar_Senha as View_Alterar_Senha;
-    use application\controller\include_page\menu\Usuario as Controller_Usuario;
+    use application\controller\layout\menu\Usuario as Controller_Usuario;
 	use \Exception;
     
     class Alterar_Senha {

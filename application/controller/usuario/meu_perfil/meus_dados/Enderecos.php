@@ -10,7 +10,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Cidade as DAO_Cidade;
     use application\model\dao\Estado as DAO_Estado;
     use application\view\src\usuario\meu_perfil\meus_dados\Enderecos as View_Enderecos;
-    use application\controller\include_page\menu\Usuario as Controller_Usuario;
+    use application\controller\layout\menu\Usuario as Controller_Usuario;
     use \Exception;
     
     class Enderecos {

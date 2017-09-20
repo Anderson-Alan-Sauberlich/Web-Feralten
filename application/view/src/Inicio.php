@@ -1,8 +1,8 @@
 <?php
 namespace application\view\src;
 	
-	use application\view\src\include_page\menu\Pesquisa as View_Pesquisa;
-			
+    use application\view\src\layout\menu\Pesquisa as View_Pesquisa;
+	
     class Inicio {
 
         function __construct() {

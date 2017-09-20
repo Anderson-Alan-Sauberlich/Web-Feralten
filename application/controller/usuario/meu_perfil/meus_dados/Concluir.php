@@ -15,7 +15,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Estado as DAO_Estado;
     use application\model\dao\Cidade as DAO_Cidade;
 	use application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
 	use application\controller\usuario\Login as Controller_Login;
     use \Exception;
 	

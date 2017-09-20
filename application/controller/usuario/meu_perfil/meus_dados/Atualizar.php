@@ -10,7 +10,7 @@ namespace application\controller\usuario\meu_perfil\meus_dados;
     use application\model\dao\Usuario as DAO_Usuario;
     use application\model\dao\Entidade as DAO_Entidade;
     use application\view\src\usuario\meu_perfil\meus_dados\Atualizar as View_Atualizar;
-    use application\controller\include_page\menu\Usuario as Controller_Usuario;
+    use application\controller\layout\menu\Usuario as Controller_Usuario;
     use \Exception;
 	
     class Atualizar {

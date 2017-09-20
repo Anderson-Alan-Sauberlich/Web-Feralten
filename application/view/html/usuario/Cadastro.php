@@ -2,13 +2,13 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head/Default.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/layout/head/Default.php'; ?>
 	<script type="text/javascript" src="/application/view/js/usuario/cadastro.js"></script>
 	<title>Cadastro | Feralten</title>
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/application/view/html/include_page/header/Cabecalho.php'; ?>
+        <?php include_once RAIZ.'/application/view/html/layout/header/Cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
         <div class="row margem-superior-pouco margem-inferior-pouco">
@@ -61,7 +61,7 @@
         </div>
     </section>
     <footer>
-        <?php include_once RAIZ.'/application/view/html/include_page/footer/Rodape.php'; ?>
+        <?php include_once RAIZ.'/application/view/html/layout/footer/Rodape.php'; ?>
     </footer>
 </body>
 </html>

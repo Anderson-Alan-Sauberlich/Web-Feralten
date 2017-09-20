@@ -2,7 +2,7 @@
 namespace application\view\src\usuario\meu_perfil\pecas;
 	
 	use application\controller\usuario\meu_perfil\pecas\Cadastrar as Controller_Cadastrar;
-	use application\view\src\include_page\menu\Usuario as View_Usuario;
+	use application\view\src\layout\menu\Usuario as View_Usuario;
 	
     class Cadastrar {
     	

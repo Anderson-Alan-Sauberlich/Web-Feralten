@@ -2,8 +2,8 @@
 namespace application\controller\pecas;
 	
 	use application\view\src\pecas\Resultados as View_Resultados;
-	use application\controller\include_page\menu\Pesquisa as Controller_Pesquisa;
-	use application\controller\include_page\menu\Filtro as Controller_Filtro;
+	use application\controller\layout\menu\Pesquisa as Controller_Pesquisa;
+	use application\controller\layout\menu\Filtro as Controller_Filtro;
 	
     class Resultados {
 

@@ -2,13 +2,13 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head/Admin.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/layout/head/Admin.php'; ?>
 	<script type="text/javascript" src="/application/view/js/admin/login.js"></script>
 	<title>Administração | Feralten</title>
 </head>
 <body>
     <header>
-        <?php //include_once RAIZ.'/application/view/html/include_page/Cabecalho.php'; ?>
+        <?php //include_once RAIZ.'/application/view/html/layout/Cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
     	<div class="margem-superior-medio"></div>
@@ -35,7 +35,7 @@
 		<?php View_Login::Mostrar_Erros(); ?>
     </section>
     <footer>
-        <?php //include_once RAIZ.'/application/view/html/include_page/Rodape.php'; ?>        
+        <?php //include_once RAIZ.'/application/view/html/layout/Rodape.php'; ?>        
     </footer>
 </body>
 </html>

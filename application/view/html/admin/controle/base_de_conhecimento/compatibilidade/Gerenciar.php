@@ -2,12 +2,12 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/application/view/html/include_page/head/Admin.php'; ?>
+	<?php include_once RAIZ.'/application/view/html/layout/head/Admin.php'; ?>
 	<title>Gerenciar-Compatibilidade | Feralten</title>
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/application/view/html/include_page/header/Admin.php'; ?>    
+        <?php include_once RAIZ.'/application/view/html/layout/header/Admin.php'; ?>    
     </header>
     <section class="ui container" role="main">
 		<?php View_Gerenciar::Incluir_Menu_Admin(); ?>
@@ -27,7 +27,7 @@
         </div>
     </section>
     <footer>
-        <?php //include_once RAIZ.'/application/view/html/include_page/Rodape.php'; ?>
+        <?php //include_once RAIZ.'/application/view/html/layout/Rodape.php'; ?>
         <script type="text/javascript" src="/application/view/js/admin/controle\base_de_conhecimento\compatibilidade\gerenciar.js"></script>
     </footer>
 </body>

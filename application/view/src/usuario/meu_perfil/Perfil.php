@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src\usuario\meu_perfil;
     
-	use application\view\src\include_page\menu\Usuario as View_Usuario;
+    use application\view\src\layout\menu\Usuario as View_Usuario;
 	
     class Perfil {
 

@@ -1,8 +1,8 @@
 <?php
 namespace application\view\src\admin\controle\base_de_conhecimento\cmmv\gerenciar;
 	
-	use application\view\src\include_page\menu\Admin as View_Admin;
-
+    use application\view\src\layout\menu\Admin as View_Admin;
+    
 	class Cadastrar {
 	
 		function __construct() {

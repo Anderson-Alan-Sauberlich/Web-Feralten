@@ -3,7 +3,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
 	
 	use application\model\object\Endereco as Object_Endereco;
 	use application\controller\usuario\meu_perfil\meus_dados\Enderecos as Controller_Enderecos;
-    use application\view\src\include_page\menu\Usuario as View_Usuario;
+	use application\view\src\layout\menu\Usuario as View_Usuario;
 	
     class Enderecos {
 

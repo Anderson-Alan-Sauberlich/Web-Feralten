@@ -2,7 +2,7 @@
 namespace application\view\src\usuario\meu_perfil\pecas;
 	
 	use application\controller\usuario\meu_perfil\pecas\Atualizar as Controller_Atualizar;
-	use application\view\src\include_page\menu\Usuario as View_Usuario;
+	use application\view\src\layout\menu\Usuario as View_Usuario;
 	
     class Atualizar {
     	

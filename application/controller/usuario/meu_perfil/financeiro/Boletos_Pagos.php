@@ -2,7 +2,7 @@
 namespace application\controller\usuario\meu_perfil\financeiro;
 	
 	use application\view\src\usuario\meu_perfil\financeiro\Boletos_Pagos as View_Boletos_Pagos;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
 	
     class Boletos_Pagos {
 

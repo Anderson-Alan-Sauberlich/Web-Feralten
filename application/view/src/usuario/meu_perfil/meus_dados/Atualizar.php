@@ -4,7 +4,7 @@ namespace application\view\src\usuario\meu_perfil\meus_dados;
     use application\model\object\Entidade as Object_Entidade;
     use application\model\object\Usuario as Object_Usuario;
     use application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
-    use application\view\src\include_page\menu\Usuario as View_Usuario;
+    use application\view\src\layout\menu\Usuario as View_Usuario;
     
     class Atualizar {
     	

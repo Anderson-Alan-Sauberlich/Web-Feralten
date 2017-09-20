@@ -20,7 +20,7 @@
 	
 	$app->group('/menu-filtro', function() use ($app) {
 		$app->get('/cidades/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_filtro = new application\controller\include_page\menu\Filtro();
+			$menu_filtro = new application\controller\layout\menu\Filtro();
 			
 			if (isset($_GET['estado'])) {
 				$menu_filtro->set_estado($_GET['estado']);
@@ -34,7 +34,7 @@
 	
 	$app->group('/contato', function() use ($app) {
 	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
-	        $contato = new application\controller\include_page\form\Contato();
+	        $contato = new application\controller\layout\form\Contato();
 	        
 	        $contato->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 	        
@@ -56,7 +56,7 @@
 	
 	$app->group('/contato-anunciante', function() use ($app) {
 	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
-	        $contato_anunciante = new application\controller\include_page\form\Contato_Anunciante();
+	        $contato_anunciante = new application\controller\layout\form\Contato_Anunciante();
 	        
 	        $contato_anunciante->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 	        
@@ -78,7 +78,7 @@
 	
 	$app->group('/card-peca', function() use ($app) {
 	    $app->post('/opcoes/', function(Request $request, Response $response, $args) use ($app) {
-	        $card_peca = new application\controller\include_page\Card_Peca();
+	        $card_peca = new application\controller\layout\Card_Peca();
 	        
 	        if (isset($_POST['peca'])) {
 	            $card_peca->set_peca($_POST['peca']);
@@ -100,7 +100,7 @@
 	    
 	$app->group('/menu-pesquisa', function() use ($app) {
 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
+			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['categoria'])) {
 				$menu_pesquisa->set_categoria($_GET['categoria']);
@@ -112,7 +112,7 @@
 		});
 		
 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
+			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['marca'])) {
 				$menu_pesquisa->set_marca($_GET['marca']);
@@ -124,7 +124,7 @@
 		});
 		
 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\include_page\menu\Pesquisa();
+			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['modelo'])) {
 				$menu_pesquisa->set_modelo($_GET['modelo']);

@@ -2,7 +2,7 @@
 namespace application\view\src\admin\controle\base_de_conhecimento\cmmv;
     
     use application\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar as Controller_Gerenciar;
-    use application\view\src\include_page\menu\Admin as View_Admin;
+    use application\view\src\layout\menu\Admin as View_Admin;
     
     class Gerenciar {
         

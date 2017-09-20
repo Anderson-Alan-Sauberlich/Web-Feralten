@@ -1,7 +1,7 @@
 <?php
 namespace application\view\src;
     
-    use application\view\src\include_page\form\Contato as View_Contato;
+    use application\view\src\layout\form\Contato as View_Contato;
     
     class Fale_Conosco {
         

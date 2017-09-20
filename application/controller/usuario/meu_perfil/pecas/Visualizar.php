@@ -3,9 +3,9 @@ namespace application\controller\usuario\meu_perfil\pecas;
 	
 	use application\model\common\util\Login_Session;
 	use application\view\src\usuario\meu_perfil\pecas\Visualizar as View_Visualizar;
-	use application\controller\include_page\menu\Usuario as Controller_Usuario;
-	use application\controller\include_page\menu\Pesquisa as Controller_Pesquisa;
-	use application\controller\include_page\menu\Filtro as Controller_Filtro;
+	use application\controller\layout\menu\Usuario as Controller_Usuario;
+	use application\controller\layout\menu\Pesquisa as Controller_Pesquisa;
+	use application\controller\layout\menu\Filtro as Controller_Filtro;
 				
     class Visualizar {
 

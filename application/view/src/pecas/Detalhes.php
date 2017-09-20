@@ -1,9 +1,9 @@
 <?php
 namespace application\view\src\pecas;
     
-use application\controller\pecas\Detalhes as Controller_Detalhes;
+    use application\controller\pecas\Detalhes as Controller_Detalhes;
     use application\model\object\Peca as Object_Peca;
-    use application\view\src\include_page\form\Contato_Anunciante as View_Contato_Anunciante;
+    use application\view\src\layout\form\Contato_Anunciante as View_Contato_Anunciante;
     
     class Detalhes {
 
