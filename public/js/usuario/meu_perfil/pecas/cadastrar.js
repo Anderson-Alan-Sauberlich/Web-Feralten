@@ -155,7 +155,7 @@ function limparCampoFile(img) {
 		}).done(function() {
 			document.getElementById("foto1").src = document.getElementById("foto2").src;
 			document.getElementById("foto2").src = document.getElementById("foto3").src;
-			document.getElementById("foto3").src = "/application/view/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
 			$("#img1").removeClass("active");
 		});
 	} else if (img == 2) {
@@ -165,7 +165,7 @@ function limparCampoFile(img) {
 			url: "/usuario/meu-perfil/pecas/cadastrar/imagem/2",
 		}).done(function() {
 			document.getElementById("foto2").src = document.getElementById("foto3").src;
-			document.getElementById("foto3").src = "/application/view/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
 			$("#img2").removeClass("active");
 		});
 	} else if (img == 3) {
@@ -174,7 +174,7 @@ function limparCampoFile(img) {
 			method: "DELETE",
 			url: "/usuario/meu-perfil/pecas/cadastrar/imagem/3",
 		}).done(function() {
-			document.getElementById("foto3").src = "/application/view/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
 			$("#img3").removeClass("active");
 		});
 	} else if (img == 123) {
@@ -186,9 +186,9 @@ function limparCampoFile(img) {
 			method: "DELETE",
 			url: "/usuario/meu-perfil/pecas/cadastrar/imagem/123",
 		}).done(function() {
-			document.getElementById("foto1").src = "/application/view/resources/img/imagem_indisponivel.png";
-			document.getElementById("foto2").src = "/application/view/resources/img/imagem_indisponivel.png";
-			document.getElementById("foto3").src = "/application/view/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto1").src = "/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto2").src = "/resources/img/imagem_indisponivel.png";
+			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
 			$("#img1").removeClass("active");
 		    $("#img2").removeClass("active");
 			$("#img3").removeClass("active");
@@ -199,14 +199,14 @@ $(document).ready(function() {
 	function handleFileSelect(evt) {
 		if (evt.target.files.length <= 3) {
 			
-			if (document.getElementById('foto1').src.indexOf("/application/view/resources/img/imagem_indisponivel.png") != -1) {
+			if (document.getElementById('foto1').src.indexOf("/resources/img/imagem_indisponivel.png") != -1) {
 				var imagem1 = evt.target.files[0];
 				var imagem2 = evt.target.files[1];
 				var imagem3 = evt.target.files[2];
-			} else if (document.getElementById('foto2').src.indexOf("/application/view/resources/img/imagem_indisponivel.png") != -1) {
+			} else if (document.getElementById('foto2').src.indexOf("/resources/img/imagem_indisponivel.png") != -1) {
 				var imagem2 = evt.target.files[0];
 				var imagem3 = evt.target.files[1];
-			} else if (document.getElementById('foto3').src.indexOf("/application/view/resources/img/imagem_indisponivel.png") != -1) {
+			} else if (document.getElementById('foto3').src.indexOf("/resources/img/imagem_indisponivel.png") != -1) {
 				var imagem3 = evt.target.files[0];
 			}
 			
@@ -279,5 +279,5 @@ $(document).ready(function() {
 	document.getElementById('imagens').addEventListener('change', handleFileSelect, false);
 });
 function MostImgErr($ths) {
-	$ths.src='/application/view/resources/img/imagem_indisponivel.png';
+	$ths.src='/resources/img/imagem_indisponivel.png';
 }

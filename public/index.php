@@ -10,7 +10,7 @@
 	
 	$app->group('', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$inicio = new application\controller\Inicio();
+			$inicio = new module\application\controller\Inicio();
 			
 			$inicio->Carregar_Pagina();
 			
@@ -20,7 +20,7 @@
 	
 	$app->group('/menu-filtro', function() use ($app) {
 		$app->get('/cidades/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_filtro = new application\controller\layout\menu\Filtro();
+			$menu_filtro = new module\application\controller\layout\menu\Filtro();
 			
 			if (isset($_GET['estado'])) {
 				$menu_filtro->set_estado($_GET['estado']);
@@ -34,7 +34,7 @@
 	
 	$app->group('/contato', function() use ($app) {
 	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
-	        $contato = new application\controller\layout\form\Contato();
+	        $contato = new module\application\controller\layout\form\Contato();
 	        
 	        $contato->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 	        
@@ -56,7 +56,7 @@
 	
 	$app->group('/contato-anunciante', function() use ($app) {
 	    $app->post('/', function(Request $request, Response $response, $args) use ($app) {
-	        $contato_anunciante = new application\controller\layout\form\Contato_Anunciante();
+	        $contato_anunciante = new module\application\controller\layout\form\Contato_Anunciante();
 	        
 	        $contato_anunciante->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
 	        
@@ -78,7 +78,7 @@
 	
 	$app->group('/card-peca', function() use ($app) {
 	    $app->post('/opcoes/', function(Request $request, Response $response, $args) use ($app) {
-	        $card_peca = new application\controller\layout\Card_Peca();
+	        $card_peca = new module\application\controller\layout\Card_Peca();
 	        
 	        if (isset($_POST['peca'])) {
 	            $card_peca->set_peca($_POST['peca']);
@@ -100,7 +100,7 @@
 	    
 	$app->group('/menu-pesquisa', function() use ($app) {
 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
+			$menu_pesquisa = new module\application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['categoria'])) {
 				$menu_pesquisa->set_categoria($_GET['categoria']);
@@ -112,7 +112,7 @@
 		});
 		
 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
+			$menu_pesquisa = new module\application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['marca'])) {
 				$menu_pesquisa->set_marca($_GET['marca']);
@@ -124,7 +124,7 @@
 		});
 		
 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-			$menu_pesquisa = new application\controller\layout\menu\Pesquisa();
+			$menu_pesquisa = new module\application\controller\layout\menu\Pesquisa();
 			
 			if (isset($_GET['modelo'])) {
 				$menu_pesquisa->set_modelo($_GET['modelo']);
@@ -139,7 +139,7 @@
 	$app->group('/usuario', function() use ($app) {
     	$app->group('/login', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\usuario\Login();
+    			$login = new module\application\controller\usuario\Login();
     			
     			$login->Carregar_Pagina();
     			
@@ -147,7 +147,7 @@
     		});
     		
     		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\usuario\Login();
+    			$login = new module\application\controller\usuario\Login();
     			
     			$login->set_email(isset($_POST['email']) ? $_POST['email'] : null);
     			
@@ -165,7 +165,7 @@
     		});
     		
     		$app->get('/sair/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\usuario\Login();
+    			$login = new module\application\controller\usuario\Login();
     			
     			$login->set_logout(isset($_GET['logout']) ? $_GET['logout'] : null);
     			
@@ -177,7 +177,7 @@
     	
     	$app->group('/cadastro', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$cadastro = new application\controller\usuario\Cadastro();
+    			$cadastro = new module\application\controller\usuario\Cadastro();
     			
     			$cadastro->Carregar_Pagina();
     			
@@ -185,7 +185,7 @@
     		});
     		
     		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-    			$cadastro = new application\controller\usuario\Cadastro();
+    			$cadastro = new module\application\controller\usuario\Cadastro();
     				
     			$cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
     			
@@ -207,7 +207,7 @@
     	
     	$app->group('/recuperar-senha', function() use ($app) {
     	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+    	        $recuperar_senha = new module\application\controller\usuario\Recuperar_Senha();
     	        
     	        if (isset($_GET['codigo'])) {
     	            $recuperar_senha->set_codigo($_GET['codigo']);
@@ -219,7 +219,7 @@
     	    });
     	    
     	    $app->post('/enviar/', function(Request $request, Response $response, $args) use ($app) {
-    	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+    	        $recuperar_senha = new module\application\controller\usuario\Recuperar_Senha();
     	        
     	        $recuperar_senha->set_email(isset($_POST['email']) ? $_POST['email'] : null);
     	        
@@ -229,7 +229,7 @@
     	    });
     	    
     	    $app->post('/salvar/', function(Request $request, Response $response, $args) use ($app) {
-    	        $recuperar_senha = new application\controller\usuario\Recuperar_Senha();
+    	        $recuperar_senha = new module\application\controller\usuario\Recuperar_Senha();
     	        
     	        $recuperar_senha->set_codigo(isset($_POST['codigo']) ? $_POST['codigo'] : null);
     	        
@@ -245,7 +245,7 @@
     	
     	$app->group('/meu-perfil', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$perfil = new application\controller\usuario\meu_perfil\Perfil();
+    			$perfil = new module\application\controller\usuario\meu_perfil\Perfil();
     			
     			$resposta = $perfil->Carregar_Pagina();
     			
@@ -259,7 +259,7 @@
     		$app->group('/pecas', function() use ($app) {
             	$app->group('/cadastrar', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+            			$cadastrar = new module\application\controller\usuario\meu_perfil\pecas\Cadastrar();
             			
             			$resposta = $cadastrar->Carregar_Pagina();
             			
@@ -273,7 +273,7 @@
             		});
             		
             		$app->get('/compatibilidade/', function(Request $request, Response $response, $args) use ($app) {
-            			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+            			$cadastrar = new module\application\controller\usuario\meu_perfil\pecas\Cadastrar();
             			
             			if (isset($_GET['categoria'])) {
             				$cadastrar->set_categoria($_GET['categoria']);
@@ -297,7 +297,7 @@
             		});
             		
             		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-            			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+            			$cadastrar = new module\application\controller\usuario\meu_perfil\pecas\Cadastrar();
             			
             			$cadastrar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
             			
@@ -335,7 +335,7 @@
             		});
             		
             		$app->post('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+            			$cadastrar = new module\application\controller\usuario\meu_perfil\pecas\Cadastrar();
             			
             			if (isset($_FILES['imagem1'])) {
             				$cadastrar->set_imagem($_FILES['imagem1'], 1);
@@ -355,7 +355,7 @@
             		});
             		
             		$app->delete('/imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
-            			$cadastrar = new application\controller\usuario\meu_perfil\pecas\Cadastrar();
+            			$cadastrar = new module\application\controller\usuario\meu_perfil\pecas\Cadastrar();
             			
             			$cadastrar->Deletar_Imagem($args['img']);
             			
@@ -366,7 +366,7 @@
             	$app->group('/visualizar', function() use ($app) {
             		$app->group('/em', function() use ($app) {
             			$app->get('/{estado}/{cidade}/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-            				$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
+            				$visualizar = new module\application\controller\usuario\meu_perfil\pecas\Visualizar();
             				
             				if (isset($args['estado'])) {
             					$visualizar->set_estado_uf($args['estado']);
@@ -444,7 +444,7 @@
             		
             		$app->group('', function() use ($app) {
             			$app->get('/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-            				$visualizar = new application\controller\usuario\meu_perfil\pecas\Visualizar();
+            				$visualizar = new module\application\controller\usuario\meu_perfil\pecas\Visualizar();
             				
             				if (isset($args['categoria'])) {
             					$visualizar->set_categoria_url($args['categoria']);
@@ -515,7 +515,7 @@
             	
             	$app->group('/atualizar', function() use ($app) {
             		$app->get('/compatibilidade/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\pecas\Atualizar();
             			
             			if (isset($_GET['categoria'])) {
             				$atualizar->set_categoria($_GET['categoria']);
@@ -539,7 +539,7 @@
             		});
             		
             		$app->get('/[{peca}/]', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\pecas\Atualizar();
             			
             			$atualizar->set_peca_url(isset($args['peca']) ? $args['peca'] : null);
             			
@@ -557,7 +557,7 @@
             		});
             		
             		$app->delete('/imagem/{img}', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\pecas\Atualizar();
             			
             			$atualizar->Deletar_Imagem($args['img']);
             			
@@ -565,7 +565,7 @@
             		});
             		
             		$app->post('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\pecas\Atualizar();
             			
             			if (isset($_FILES['imagem1'])) {
             				$atualizar->set_imagem($_FILES['imagem1'], 1);
@@ -585,7 +585,7 @@
             		});
             		
             		$app->post('/[{peca}/]', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\pecas\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\pecas\Atualizar();
             			
             			$atualizar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
             			
@@ -631,7 +631,7 @@
     		$app->group('/financeiro', function() use ($app) {
             	$app->group('/boleto-atual', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$boleto_atual = new application\controller\usuario\meu_perfil\financeiro\Boleto_Atual();
+            			$boleto_atual = new module\application\controller\usuario\meu_perfil\financeiro\Boleto_Atual();
             			
             			$resposta = $boleto_atual->Carregar_Pagina();
             			
@@ -647,7 +647,7 @@
             	
             	$app->group('/boletos-pagos', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$boletos_pagos = new application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos();
+            			$boletos_pagos = new module\application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos();
             			
             			$resposta = $boletos_pagos->Carregar_Pagina();
             			
@@ -663,7 +663,7 @@
             	
             	$app->group('/meu-plano', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$meu_plano = new application\controller\usuario\meu_perfil\financeiro\Meu_Plano();
+            			$meu_plano = new module\application\controller\usuario\meu_perfil\financeiro\Meu_Plano();
             			
             			$resposta = $meu_plano->Carregar_Pagina();
             			
@@ -681,7 +681,7 @@
     		$app->group('/meus-dados', function() use ($app) {
             	$app->group('/atualizar', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             			
             			$resposta = $atualizar->Carregar_Pagina();
             			
@@ -695,7 +695,7 @@
             		});
             		
             		$app->post('/usuario/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             			
             			$atualizar->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
             			
@@ -721,7 +721,7 @@
             		});
             		
             		$app->post('/entidade/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             			
             			$atualizar->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
             			
@@ -741,7 +741,7 @@
             		});
             		
             		$app->post('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             				
             			$atualizar->Salvar_Imagem_TMP();
             			
@@ -749,7 +749,7 @@
             		});
             		
             		$app->delete('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$atualizar = new application\controller\usuario\meu_perfil\meus_dados\Atualizar();
+            			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             				
             			$atualizar->Deletar_Imagem();
             			
@@ -759,7 +759,7 @@
             	
             	$app->group('/alterar-senha', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
+            			$alterar_senha = new module\application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
             			
             			$resposta = $alterar_senha->Carregar_Pagina();
             			
@@ -771,7 +771,7 @@
             		});
             		
             		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-            			$alterar_senha = new application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
+            			$alterar_senha = new module\application\controller\usuario\meu_perfil\meus_dados\Alterar_Senha();
             			
             			$alterar_senha->set_senha_antiga(isset($_POST['senha_antiga']) ? $_POST['senha_antiga'] : null);
             			
@@ -793,7 +793,7 @@
             	
             	$app->group('/enderecos', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+            			$enderecos = new module\application\controller\usuario\meu_perfil\meus_dados\Enderecos();
             			
             			$resposta = $enderecos->Carregar_Pagina();
             			
@@ -807,7 +807,7 @@
             		});
             		
             		$app->get('/cidades/', function(Request $request, Response $response, $args) use ($app) {
-            			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+            			$enderecos = new module\application\controller\usuario\meu_perfil\meus_dados\Enderecos();
             			
             			if (isset($_GET['estado'])) {
             				$enderecos->set_estado($_GET['estado']);
@@ -819,7 +819,7 @@
             		});
             
             		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-            			$enderecos = new application\controller\usuario\meu_perfil\meus_dados\Enderecos();
+            			$enderecos = new module\application\controller\usuario\meu_perfil\meus_dados\Enderecos();
             			
             			$enderecos->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
             			
@@ -849,7 +849,7 @@
             	
             	$app->group('/concluir', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+            			$concluir = new module\application\controller\usuario\meu_perfil\meus_dados\Concluir();
             			
             			$resposta = $concluir->Carregar_Pagina();
             			
@@ -863,7 +863,7 @@
             		});
             		
             		$app->get('/cidades/', function(Request $request, Response $response, $args) use ($app) {
-            			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+            			$concluir = new module\application\controller\usuario\meu_perfil\meus_dados\Concluir();
             			
             			if (isset($_GET['estado'])) {
             				$concluir->set_estado($_GET['estado']);
@@ -875,7 +875,7 @@
             		});
             		
             		$app->delete('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+            			$concluir = new module\application\controller\usuario\meu_perfil\meus_dados\Concluir();
             				
             			$concluir->Deletar_Imagem();
             			
@@ -883,7 +883,7 @@
             		});
             		
             		$app->post('/imagem/', function(Request $request, Response $response, $args) use ($app) {
-            			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+            			$concluir = new module\application\controller\usuario\meu_perfil\meus_dados\Concluir();
             				
             			$concluir->Salvar_Imagem_TMP();
             			
@@ -891,7 +891,7 @@
             		});
             		
             		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-            			$concluir = new application\controller\usuario\meu_perfil\meus_dados\Concluir();
+            			$concluir = new module\application\controller\usuario\meu_perfil\meus_dados\Concluir();
             			
             			$concluir->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
             			
@@ -938,7 +938,7 @@
 	
 	$app->group('/quem-somos', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$quem_somos = new application\controller\Quem_Somos();
+			$quem_somos = new module\application\controller\Quem_Somos();
 			
 			$quem_somos->Carregar_Pagina();
 			
@@ -948,7 +948,7 @@
 	
 	$app->group('/documentacao', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$documentacao = new application\controller\Documentacao();
+			$documentacao = new module\application\controller\Documentacao();
 			
 			$documentacao->Carregar_Pagina();
 			
@@ -958,7 +958,7 @@
 	
 	$app->group('/perguntas-frequentes', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$perguntas_frequentes = new application\controller\Perguntas_Frequentes();
+			$perguntas_frequentes = new module\application\controller\Perguntas_Frequentes();
 			
 			$perguntas_frequentes->Carregar_Pagina();
 			
@@ -969,7 +969,7 @@
 	$app->group('/dicas-de-venda', function() use ($app) {
     	$app->group('/apresentacao', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$apresentacao = new application\controller\dicas_de_venda\Apresentacao();
+    			$apresentacao = new module\application\controller\dicas_de_venda\Apresentacao();
     			
     			$apresentacao->Carregar_Pagina();
     			
@@ -979,7 +979,7 @@
     	
     	$app->group('/venda-segura', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$venda_segura = new application\controller\dicas_de_venda\Venda_Segura();
+    			$venda_segura = new module\application\controller\dicas_de_venda\Venda_Segura();
     			
     			$venda_segura->Carregar_Pagina();
     			
@@ -989,7 +989,7 @@
     	
     	$app->group('/principais', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$principais = new application\controller\dicas_de_venda\Principais();
+    			$principais = new module\application\controller\dicas_de_venda\Principais();
     			
     			$principais->Carregar_Pagina();
     			
@@ -1000,7 +1000,7 @@
 	
 	$app->group('/fale-conosco', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$fale_conosco = new application\controller\Fale_Conosco();
+			$fale_conosco = new module\application\controller\Fale_Conosco();
 			
 			$fale_conosco->Carregar_Pagina();
 			
@@ -1010,7 +1010,7 @@
 	
 	$app->group('/pesquisa-avancada', function() use ($app) {
 		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-			$pesquisa_avancada = new application\controller\Pesquisa_Avancada();
+			$pesquisa_avancada = new module\application\controller\Pesquisa_Avancada();
 			
 			$pesquisa_avancada->Carregar_Pagina();
 			
@@ -1021,7 +1021,7 @@
 	$app->group('/pecas', function() use ($app) {
     	$app->group('/busca-programada', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$busca_programada = new application\controller\pecas\Busca_Programada();
+    			$busca_programada = new module\application\controller\pecas\Busca_Programada();
     			
     			$busca_programada->Carregar_Pagina();
     			
@@ -1031,7 +1031,7 @@
     	
     	$app->group('/mais-visualizados', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$mais_visualizados = new application\controller\pecas\Mais_Visualizados();
+    			$mais_visualizados = new module\application\controller\pecas\Mais_Visualizados();
     			
     			$mais_visualizados->Carregar_Pagina();
     			
@@ -1042,7 +1042,7 @@
     	$app->group('/resultados', function() use ($app) {
     		$app->group('/em', function() use ($app) {
     			$app->get('/{estado}/{cidade}/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-    				$resultados = new application\controller\pecas\Resultados();
+    				$resultados = new module\application\controller\pecas\Resultados();
     				
     				if (isset($args['estado'])) {
     					$resultados->set_estado_uf($args['estado']);
@@ -1112,7 +1112,7 @@
     		
     		$app->group('', function() use ($app) {
     			$app->get('/[{categoria}/[{marca}/[{modelo}/[{versao}/]]]]', function(Request $request, Response $response, $args) use ($app) {
-    				$resultados = new application\controller\pecas\Resultados();
+    				$resultados = new module\application\controller\pecas\Resultados();
     				
     				if (isset($args['categoria'])) {
     					$resultados->set_categoria_url($args['categoria']);
@@ -1175,7 +1175,7 @@
     	
     	$app->group('/detalhes/{peca}', function() use ($app) {
     	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	        $detalhes = new application\controller\pecas\Detalhes();
+    	        $detalhes = new module\application\controller\pecas\Detalhes();
     	        
     	        if (isset($args['peca'])) {
     	            $detalhes->set_peca_url($args['peca']);
@@ -1191,7 +1191,7 @@
 	$app->group('/publicidade', function() use ($app) {
     	$app->group('/experimentar-formatos', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$experimentar_formatos = new application\controller\publicidade\Experimentar_Formatos();
+    			$experimentar_formatos = new module\application\controller\publicidade\Experimentar_Formatos();
     			
     			$experimentar_formatos->Carregar_Pagina();
     			
@@ -1203,7 +1203,7 @@
 	$app->group('/admin', function() use ($app) {
     	$app->group('/login', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\admin\Login();
+    			$login = new module\application\controller\admin\Login();
     		
     			$login->Carregar_Pagina();
     		
@@ -1211,7 +1211,7 @@
     		});
     		
     		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\admin\Login();
+    			$login = new module\application\controller\admin\Login();
     			
     			$login->set_usuario(isset($_POST['usuario']) ? $_POST['usuario'] : null);
     			
@@ -1227,7 +1227,7 @@
     		});
     		
     		$app->get('/sair/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new application\controller\admin\Login();
+    			$login = new module\application\controller\admin\Login();
     			
     			if (isset($_GET['logout'])) {
     				$login->set_logout($_GET['logout']);
@@ -1244,7 +1244,7 @@
     	        $app->group('/cmmv', function() use ($app) {
     	            $app->group('', function() use ($app) {
     	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	                    $gerenciar = new application\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar();
+    	                    $gerenciar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar();
     	                    
     	                    $resposta = $gerenciar->Carregar_Pagina();
     	                    
@@ -1258,7 +1258,7 @@
     	            
     	            $app->group('/cadastrar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			$cadastrar->Retornar_Categorias();
                 			
@@ -1266,7 +1266,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$cadastrar->set_categoria($_GET['categoria']);
@@ -1278,7 +1278,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$cadastrar->set_marca($_GET['marca']);
@@ -1290,7 +1290,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$cadastrar->set_modelo($_GET['modelo']);
@@ -1302,7 +1302,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$cadastrar->set_categoria($_POST['categoria']);
@@ -1336,7 +1336,7 @@
                 	
                 	$app->group('/alterar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			$alterar->Retornar_Categorias();
                 			
@@ -1344,7 +1344,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1356,7 +1356,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1368,7 +1368,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1380,7 +1380,7 @@
                 		});
                 		
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1392,7 +1392,7 @@
                 		});
                 		
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1404,7 +1404,7 @@
                 		});
                 		
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1416,7 +1416,7 @@
                 		});
                 		
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$alterar->set_versao($_GET['versao']);
@@ -1428,7 +1428,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$alterar->set_categoria($_POST['categoria']);
@@ -1462,7 +1462,7 @@
                 	
                 	$app->group('/deletar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			$deletar->Retornar_Categorias();
                 			
@@ -1470,7 +1470,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1482,7 +1482,7 @@
                 		});
                 			
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1494,7 +1494,7 @@
                 		});
                 			
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1506,7 +1506,7 @@
                 		});
                 			
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1518,7 +1518,7 @@
                 		});
                 			
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1530,7 +1530,7 @@
                 		});
                 			
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1542,7 +1542,7 @@
                 		});
                 			
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$deletar->set_versao($_GET['versao']);
@@ -1554,7 +1554,7 @@
                 		});
                 			
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$deletar->set_categoria($_POST['categoria']);
@@ -1590,7 +1590,7 @@
     	        $app->group('/compatibilidade', function() use ($app) {
     	            $app->group('', function() use ($app) {
     	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	                    $gerenciar = new application\controller\admin\controle\base_de_conhecimento\compatibilidade\Gerenciar();
+    	                    $gerenciar = new module\application\controller\admin\controle\base_de_conhecimento\compatibilidade\Gerenciar();
     	                    
     	                    $resposta = $gerenciar->Carregar_Pagina();
     	                    

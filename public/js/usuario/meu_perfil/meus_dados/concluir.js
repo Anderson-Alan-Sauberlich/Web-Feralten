@@ -42,7 +42,7 @@ function limparCampoFile() {
 		url: "/usuario/meu-perfil/meus-dados/concluir/imagem/",
 	}).done(function() {
 		document.getElementById("imagem").value = "";
-		document.getElementById("foto").src = "/application/view/resources/img/imagem_indisponivel.png";
+		document.getElementById("foto").src = "/resources/img/imagem_indisponivel.png";
 		$("#div_img").removeClass("active");
 	});
 }
@@ -72,5 +72,5 @@ $(document).ready(function() {
 		$('#cpf_cnpj').mask(maskBehavior, options);
 });
 function MostImgErr($this) {
-	$this.src='/application/view/resources/img/imagem_indisponivel.png';
+	$this.src='/resources/img/imagem_indisponivel.png';
 }
