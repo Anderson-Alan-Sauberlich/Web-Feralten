@@ -25,4 +25,4 @@
     </div>
 	<div id="btn_submit" class="ui button fluid inverted red" onclick="Submit(<?php View_Contato_Anunciante::Mostrar_Peca_Id(); ?>);">Enviar ao Anunciante</div>
 </form>
-<script type="text/javascript" src="/js/layout/form/contato_anunciante.js"></script>
+<script type="text/javascript" src="/application/js/layout/form/contato_anunciante.js"></script>

@@ -8,7 +8,7 @@
 <body>
     <header>
         <?php include_once RAIZ.'/module/application/view/html/layout/header/Cabecalho.php'; ?>
-        <script type="text/javascript" src="/js/usuario/recuperar_senha.js"></script>
+        <script type="text/javascript" src="/application/js/usuario/recuperar_senha.js"></script>
     </header>
     <section class="ui container" role="main">
     	<div class="ui two column stackable grid">

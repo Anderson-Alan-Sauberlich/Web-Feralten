@@ -1203,7 +1203,7 @@
 	$app->group('/admin', function() use ($app) {
     	$app->group('/login', function() use ($app) {
     		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new module\application\controller\admin\Login();
+    			$login = new module\administration\controller\admin\Login();
     		
     			$login->Carregar_Pagina();
     		
@@ -1211,7 +1211,7 @@
     		});
     		
     		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new module\application\controller\admin\Login();
+    			$login = new module\administration\controller\admin\Login();
     			
     			$login->set_usuario(isset($_POST['usuario']) ? $_POST['usuario'] : null);
     			
@@ -1227,7 +1227,7 @@
     		});
     		
     		$app->get('/sair/', function(Request $request, Response $response, $args) use ($app) {
-    			$login = new module\application\controller\admin\Login();
+    			$login = new module\administration\controller\admin\Login();
     			
     			if (isset($_GET['logout'])) {
     				$login->set_logout($_GET['logout']);
@@ -1244,7 +1244,7 @@
     	        $app->group('/cmmv', function() use ($app) {
     	            $app->group('', function() use ($app) {
     	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	                    $gerenciar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar();
+    	                    $gerenciar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\Gerenciar();
     	                    
     	                    $resposta = $gerenciar->Carregar_Pagina();
     	                    
@@ -1258,7 +1258,7 @@
     	            
     	            $app->group('/cadastrar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			$cadastrar->Retornar_Categorias();
                 			
@@ -1266,7 +1266,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$cadastrar->set_categoria($_GET['categoria']);
@@ -1278,7 +1278,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$cadastrar->set_marca($_GET['marca']);
@@ -1290,7 +1290,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$cadastrar->set_modelo($_GET['modelo']);
@@ -1302,7 +1302,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $cadastrar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
+                		    $cadastrar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$cadastrar->set_categoria($_POST['categoria']);
@@ -1336,7 +1336,7 @@
                 	
                 	$app->group('/alterar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			$alterar->Retornar_Categorias();
                 			
@@ -1344,7 +1344,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1356,7 +1356,7 @@
                 		});
                 		
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1368,7 +1368,7 @@
                 		});
                 		
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1380,7 +1380,7 @@
                 		});
                 		
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$alterar->set_categoria($_GET['categoria']);
@@ -1392,7 +1392,7 @@
                 		});
                 		
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$alterar->set_marca($_GET['marca']);
@@ -1404,7 +1404,7 @@
                 		});
                 		
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$alterar->set_modelo($_GET['modelo']);
@@ -1416,7 +1416,7 @@
                 		});
                 		
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$alterar->set_versao($_GET['versao']);
@@ -1428,7 +1428,7 @@
                 		});
                 		
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $alterar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
+                		    $alterar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$alterar->set_categoria($_POST['categoria']);
@@ -1462,7 +1462,7 @@
                 	
                 	$app->group('/deletar', function() use ($app) {
                 		$app->get('/categorias/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			$deletar->Retornar_Categorias();
                 			
@@ -1470,7 +1470,7 @@
                 		});
                 		
                 		$app->get('/marcas/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1482,7 +1482,7 @@
                 		});
                 			
                 		$app->get('/modelos/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1494,7 +1494,7 @@
                 		});
                 			
                 		$app->get('/versoes/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1506,7 +1506,7 @@
                 		});
                 			
                 		$app->get('/categoria/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['categoria'])) {
                 				$deletar->set_categoria($_GET['categoria']);
@@ -1518,7 +1518,7 @@
                 		});
                 			
                 		$app->get('/marca/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['marca'])) {
                 				$deletar->set_marca($_GET['marca']);
@@ -1530,7 +1530,7 @@
                 		});
                 			
                 		$app->get('/modelo/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['modelo'])) {
                 				$deletar->set_modelo($_GET['modelo']);
@@ -1542,7 +1542,7 @@
                 		});
                 			
                 		$app->get('/versao/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_GET['versao'])) {
                 				$deletar->set_versao($_GET['versao']);
@@ -1554,7 +1554,7 @@
                 		});
                 			
                 		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
-                		    $deletar = new module\application\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
+                		    $deletar = new module\administration\controller\admin\controle\base_de_conhecimento\cmmv\gerenciar\Deletar();
                 			
                 			if (isset($_POST['categoria'])) {
                 				$deletar->set_categoria($_POST['categoria']);
@@ -1590,7 +1590,7 @@
     	        $app->group('/compatibilidade', function() use ($app) {
     	            $app->group('', function() use ($app) {
     	                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    	                    $gerenciar = new module\application\controller\admin\controle\base_de_conhecimento\compatibilidade\Gerenciar();
+    	                    $gerenciar = new module\administration\controller\admin\controle\base_de_conhecimento\compatibilidade\Gerenciar();
     	                    
     	                    $resposta = $gerenciar->Carregar_Pagina();
     	                    

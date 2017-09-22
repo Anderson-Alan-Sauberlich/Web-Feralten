@@ -136,7 +136,7 @@
     </section>
     <footer>
         <?php include_once RAIZ.'/module/application/view/html/layout/footer/Rodape.php'; ?>
-        <script type="text/javascript" src="/js/pecas/detalhes.js"></script>
+        <script type="text/javascript" src="/application/js/pecas/detalhes.js"></script>
     </footer>
 </body>
 </html>

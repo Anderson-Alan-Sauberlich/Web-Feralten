@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
-	<script type="text/javascript" src="/js/layout/card_peca.js"></script>
+	<script type="text/javascript" src="/application/js/layout/card_peca.js"></script>
 	<title>Resultados | Feralten</title>
 </head>
 <body>

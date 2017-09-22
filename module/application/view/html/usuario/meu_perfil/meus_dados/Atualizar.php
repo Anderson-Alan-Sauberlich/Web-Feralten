@@ -4,7 +4,7 @@
 <head>
 	<?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
 	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-	<script type="text/javascript" src="/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
+	<script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
 	<title>Atualizar | Feralten</title>
 </head>
 <body>

@@ -29,4 +29,4 @@
     </div>
 	<div id="btn_submit" onclick="Enviar();" class="ui button fluid inverted red">Enviar</div>
 </form>
-<script type="text/javascript" src="/js/layout/form/contato.js"></script>
+<script type="text/javascript" src="/application/js/layout/form/contato.js"></script>

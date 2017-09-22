@@ -1,6 +1,6 @@
 <?php use module\application\view\src\layout\header\Cabecalho as View_Cabecalho; ?>
 <section class="margem-inferior-pouco">
-<script type="text/javascript" src="/js/layout/header/cabecalho.js"></script>
+<script type="text/javascript" src="/application/js/layout/header/cabecalho.js"></script>
 	<nav class="navbar navbar-default navbar-fixed-top navbar-titulo" role="navigation">
 		<div class="ui container">
  			<div class="navbar-header">

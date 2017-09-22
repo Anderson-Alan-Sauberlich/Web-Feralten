@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
 	<?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
-	<script type="text/javascript" src="/js/perguntas_frequentes.js"></script>
+	<script type="text/javascript" src="/application/js/perguntas_frequentes.js"></script>
 	<title>Perguntas Frequentes | Feralten</title>
 </head>
 <body>

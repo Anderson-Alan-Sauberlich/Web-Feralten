@@ -28,7 +28,6 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Estado_Uso_Peca;
 	use module\application\model\validador\Status_Usuario;
 	use module\application\model\validador\Usuario;
-	use module\application\model\validador\Usuario_Admin;
 	use module\application\model\validador\Versao;
 	use module\application\model\validador\Versao_Compativel;
 	use module\application\model\validador\Versao_Pativel;
@@ -92,8 +91,6 @@ namespace module\application\model\common\util;
 		public static function Status_Usuario() : Status_Usuario { return new Status_Usuario(); }
 		
 		public static function Usuario() : Usuario { return new Usuario(); }
-		
-		public static function Usuario_Admin() : Usuario_Admin { return new Usuario_Admin(); }
 		
 		public static function Versao() : Versao { return new Versao(); }
 		
