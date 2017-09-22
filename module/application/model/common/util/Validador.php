@@ -6,6 +6,7 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Categoria_Compativel;
 	use module\application\model\validador\Categoria_Pativel;
 	use module\application\model\validador\Cidade;
+	use module\application\model\validador\Contador_Clique;
 	use module\application\model\validador\Contato_Anunciante;
 	use module\application\model\validador\Contato;
 	use module\application\model\validador\Endereco;
@@ -47,6 +48,8 @@ namespace module\application\model\common\util;
 		public static function Categoria_Pativel() : Categoria_Pativel { return new Categoria_Pativel(); }
 		
 		public static function Cidade() : Cidade { return new Cidade(); }
+		
+		public static function Contador_Clique() : Contador_Clique { return new Contador_Clique(); }
 		
 		public static function Contato_Anunciante() : Contato_Anunciante { return new Contato_Anunciante(); }
 		
