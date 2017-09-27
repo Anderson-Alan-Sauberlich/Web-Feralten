@@ -96,6 +96,20 @@ namespace module\application\model\dao;
             }
         }
         
+        public static function BuscarPorCOD_Usuario(int $id) {
+            try {
+                $sql = 'SELECT contador_clique_id, contador_clique_pec_id, contador_clique_datahora FROM vw_pec_cnt_clq WHERE peca_responsavel_usr_id = :id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return self::PopulaContatosAnunciante($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function PopulaContatosAnunciante(array $rows) : array {
             $contador_cliques = array();
             

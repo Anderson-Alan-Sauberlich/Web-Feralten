@@ -244,16 +244,24 @@
     	});    	
     	
     	$app->group('/meu-perfil', function() use ($app) {
-    		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    	        $perfil = new module\application\controller\usuario\meu_perfil\Perfil();
+    	        
+    	        $resposta = $perfil->Carregar_Pagina();
+    	        
+    	        if ($resposta === false) {
+    	            return $response->withRedirect('/usuario/login/');
+    	        } else {
+    	            return $response;
+    	        }
+    	    });
+    	    
+    		$app->get('/perfil/', function(Request $request, Response $response, $args) use ($app) {
     			$perfil = new module\application\controller\usuario\meu_perfil\Perfil();
     			
-    			$resposta = $perfil->Carregar_Pagina();
+    			$perfil->Retornar_Valores_Visualizacoes();
     			
-    			if ($resposta === false) {
-    				return $response->withRedirect('/usuario/login/');
-    			} else {
-    				return $response;
-    			}
+    			return $response;
     		});
     		
     		$app->group('/pecas', function() use ($app) {

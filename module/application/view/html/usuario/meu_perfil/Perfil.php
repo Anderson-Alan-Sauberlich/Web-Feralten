@@ -11,16 +11,14 @@
     </header>
     <section class="ui container" role="main">
         <?php View_Perfil::Incluir_Menu_Usuario(); ?>
-        
-		<div class="container-fluid">
-            <div class="row-fluid">
-                <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
-            </div>
+        <div id="div_visualizacoes" class="ui loading segment">
+        	<canvas id="crt_visualizacoes" width="400" height="125"></canvas>
         </div>
-        
     </section>
     <footer>
         <?php include_once RAIZ.'/module/application/view/html/layout/footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/resources/packages/chart/chart.bundle.2.7.0.min.js"></script>
+        <script type="text/javascript" src="/application/js/usuario/meu_perfil/perfil.js"></script>
     </footer>
 </body>
 </html>
