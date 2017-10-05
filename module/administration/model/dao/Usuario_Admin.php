@@ -2,7 +2,7 @@
 namespace module\administration\model\dao;
     
     use module\administration\model\object\Usuario_Admin as Object_Usuario_Admin;
-    use module\application\model\common\util\Conexao;
+    use module\administration\model\common\util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;

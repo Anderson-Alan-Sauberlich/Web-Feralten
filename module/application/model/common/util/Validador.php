@@ -2,11 +2,11 @@
 namespace module\application\model\common\util;
 	
 	use module\application\model\validador\Acesso_Usuario;
+	use module\application\model\validador\Adicionado;
 	use module\application\model\validador\Categoria;
 	use module\application\model\validador\Categoria_Compativel;
 	use module\application\model\validador\Categoria_Pativel;
 	use module\application\model\validador\Cidade;
-	use module\application\model\validador\Contador_Clique;
 	use module\application\model\validador\Contato_Anunciante;
 	use module\application\model\validador\Contato;
 	use module\application\model\validador\Endereco;
@@ -24,6 +24,7 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Permissao;
 	use module\application\model\validador\Preferencia_Entrega;
 	use module\application\model\validador\Recuperar_Senha;
+	use module\application\model\validador\Removido;
 	use module\application\model\validador\Status_Entidade;
 	use module\application\model\validador\Status_Peca;
 	use module\application\model\validador\Estado_Uso_Peca;
@@ -32,6 +33,7 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Versao;
 	use module\application\model\validador\Versao_Compativel;
 	use module\application\model\validador\Versao_Pativel;
+	use module\application\model\validador\Visualizado;
 	
 	class Validador {
 		
@@ -41,6 +43,8 @@ namespace module\application\model\common\util;
 		
 		public static function Acesso_Usuario() : Acesso_Usuario { return new Acesso_Usuario(); }
 		
+		public static function Adicionado() : Adicionado { return new Adicionado(); }
+		
 		public static function Categoria() : Categoria { return new Categoria(); }
 		
 		public static function Categoria_Compativel() : Categoria_Compativel { return new Categoria_Compativel(); }
@@ -48,8 +52,6 @@ namespace module\application\model\common\util;
 		public static function Categoria_Pativel() : Categoria_Pativel { return new Categoria_Pativel(); }
 		
 		public static function Cidade() : Cidade { return new Cidade(); }
-		
-		public static function Contador_Clique() : Contador_Clique { return new Contador_Clique(); }
 		
 		public static function Contato_Anunciante() : Contato_Anunciante { return new Contato_Anunciante(); }
 		
@@ -85,6 +87,8 @@ namespace module\application\model\common\util;
 		
 		public static function Recuperar_Senha() : Recuperar_Senha { return new Recuperar_Senha(); }
 		
+		public static function Removido() : Removido { return new Removido(); }
+		
 		public static function Status_Entidade() : Status_Entidade { return new Status_Entidade(); }
 		
 		public static function Status_Peca() : Status_Peca { return new Status_Peca(); }
@@ -100,5 +104,7 @@ namespace module\application\model\common\util;
 		public static function Versao_Compativel() : Versao_Compativel { return new Versao_Compativel(); }
 		
 		public static function Versao_Pativel() : Versao_Pativel { return new Versao_Pativel(); }
+		
+		public static function Visualizado() : Visualizado { return new Visualizado(); }
 	}
 ?>

@@ -234,6 +234,18 @@ namespace module\application\model\validador;
 			
 		}
 		
+		public static function validar_num_visualizado($num_visualizado = null) : ?int {
+		    if (!empty($num_visualizado)) {
+		        if (filter_var($num_visualizado, FILTER_VALIDATE_INT)) {
+		            return $num_visualizado;
+		        } else {
+		            throw new Exception('Numero de Visualizações Invalido.');
+		        }
+		    } else {
+		        return null;
+		    }
+		}
+		
 		public static function validar_preferencia_entrega($preferencia_entrega = null) : ?int {
 			if (!empty($preferencia_entrega)) {
 				$valor = 0;
@@ -418,6 +430,16 @@ namespace module\application\model\validador;
 		
 		public static function filtrar_foto($foto = null) : void {
 			
+		}
+		
+		public static function filtrar_num_visualizado($num_visualizado = null) : ?int {
+		    $valor = null;
+		    
+		    if (!empty($num_visualizado) AND filter_var($num_visualizado, FILTER_VALIDATE_INT)) {
+		        $valor = trim($num_visualizado);
+		    }
+		    
+		    return $valor;
 		}
 		
 		public static function filtrar_preferencia_entrega($preferencia_entrega = null) : void {

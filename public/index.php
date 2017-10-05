@@ -256,13 +256,31 @@
     	        }
     	    });
     	    
-    		$app->get('/perfil/', function(Request $request, Response $response, $args) use ($app) {
-    			$perfil = new module\application\controller\usuario\meu_perfil\Perfil();
-    			
-    			$perfil->Retornar_Valores_Visualizacoes();
-    			
-    			return $response;
-    		});
+    	    $app->group('/perfil', function() use ($app) {
+    	        $app->get('/visualizado/', function(Request $request, Response $response, $args) use ($app) {
+    	            $perfil = new module\application\controller\usuario\meu_perfil\Perfil();
+    	            
+    	            $perfil->Retornar_Valores_Visualizados();
+    	            
+    	            return $response;
+    	        });
+    	        
+    	        $app->get('/adicionado/', function(Request $request, Response $response, $args) use ($app) {
+    	            $perfil = new module\application\controller\usuario\meu_perfil\Perfil();
+    	            
+    	            $perfil->Retornar_Valores_Adicionados();
+    	            
+    	            return $response;
+    	        });
+    	        
+        		$app->get('/removido/', function(Request $request, Response $response, $args) use ($app) {
+        			$perfil = new module\application\controller\usuario\meu_perfil\Perfil();
+        			
+        			$perfil->Retornar_Valores_Removidos();
+        			
+        			return $response;
+        		});
+            });
     		
     		$app->group('/pecas', function() use ($app) {
             	$app->group('/cadastrar', function() use ($app) {

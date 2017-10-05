@@ -25,6 +25,7 @@ namespace module\application\model\object;
 		private $status;
 		private $estado_uso;
 		private $fotos = array();
+		private $num_visualizado;
 		private $preferencia_entrega;
 		
 		function __constructor() {
@@ -163,6 +164,14 @@ namespace module\application\model\object;
 			} else {
 				return null;
 			}
+		}
+		
+		public function set_num_visualizado(?int $num_visualizado = null) : void {
+		    $this->num_visualizado = $num_visualizado;
+		}
+		
+		public function get_num_visualizado() : ?int {
+		    return $this->num_visualizado;
 		}
 		
 		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void {

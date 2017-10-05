@@ -40,6 +40,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
 	use module\application\model\dao\Foto_Peca as DAO_Foto_Peca;
 	use module\application\view\src\usuario\meu_perfil\pecas\Cadastrar as View_Cadastrar;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
+	use module\application\model\dao\Adicionado as DAO_Adicionado;
+	use module\application\model\object\Adicionado as Object_Adicionado;
 	use \Exception;
 	
     class Cadastrar {
@@ -526,6 +528,7 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
 				
 				$object_status->set_id(1);
 				
+				$object_peca->set_num_visualizado(0);
 				$object_peca->set_estado_uso($object_estado_uso);
 				$object_peca->set_status($object_status);
 				$object_peca->set_descricao($this->descricao);
@@ -648,6 +651,19 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
 			}
 			
 			if (empty($this->cadastrar_erros)) {
+			    $entidade = new Object_Entidade();
+			    $entidade->set_id(Login_Session::get_entidade_id());
+			    
+			    $usuario_responsavel = new Object_Usuario();
+			    $usuario_responsavel->set_id(Login_Session::get_usuario_id());
+			    
+			    $object_adicionado = new Object_Adicionado();
+			    $object_adicionado->set_object_entidade($entidade);
+			    $object_adicionado->set_object_usuario($usuario_responsavel);
+			    $object_adicionado->set_datahora(date('Y-m-d H:i:s'));
+			    
+			    DAO_Adicionado::Inserir($object_adicionado);
+			    
 				$this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
 				$this->cadastrar_campos['erro_peca'] = "";
 				

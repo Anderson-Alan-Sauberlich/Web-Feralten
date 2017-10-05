@@ -1,5 +1,5 @@
 <?php
-namespace module\application\model\common\util;
+namespace module\administration\model\common\util;
 
     use \PDO;
     use \PDOException;
@@ -24,7 +24,7 @@ namespace module\application\model\common\util;
         private static $DB_PORT = '3306';
         private static $DB_USER = 'web-feralten';
         private static $DB_PASS = '$My?Fer!Vel@Bank#1024';
-        private static $DB_NAME = 'FERALTEN_BD';
+        private static $DB_NAME = 'FERALTEN_ADMIN';
         private static $DB_CHRS = 'utf8';
 
         public static function Conectar() : PDO {

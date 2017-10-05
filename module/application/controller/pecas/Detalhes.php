@@ -9,8 +9,8 @@ namespace module\application\controller\pecas;
 	use module\application\model\dao\Modelo_Pativel as DAO_Modelo_Pativel;
 	use module\application\model\dao\Preferencia_Entrega as DAO_Preferencia_Entrega;
 	use module\application\model\dao\Versao_Pativel as DAO_Versao_Pativel;
-	use module\application\model\dao\Contador_Clique as DAO_Contador_Clique;
-	use module\application\model\object\Contador_Clique as Object_Contador_Clique;
+	use module\application\model\dao\Visualizado as DAO_Visualizado;
+	use module\application\model\object\Visualizado as Object_Visualizado;
 	use \Exception;
 	
     class Detalhes {
@@ -45,11 +45,12 @@ namespace module\application\controller\pecas;
         
         public function Carregar_Pagina() {
             if (!empty($this->object_peca) AND $this->object_peca != false) {
-                $object_contador_clique = new Object_Contador_Clique();
-                $object_contador_clique->set_object_peca($this->object_peca);
-                $object_contador_clique->set_datahora(date('Y-m-d H:i:s'));
+                $object_visualizado = new Object_Visualizado();
+                $object_visualizado->set_object_entidade($this->object_peca->get_entidade());
+                $object_visualizado->set_object_usuario($this->object_peca->get_responsavel());
+                $object_visualizado->set_datahora(date('Y-m-d H:i:s'));
                 
-                DAO_Contador_Clique::Inserir($object_contador_clique);
+                DAO_Visualizado::Inserir($object_visualizado);
                 
                 $categorias_pativeis = DAO_Categoria_Pativel::BuscarPorCOD($this->object_peca->get_id());
                 $marcas_pativeis = DAO_Marca_Pativel::BuscarPorCOD($this->object_peca->get_id());

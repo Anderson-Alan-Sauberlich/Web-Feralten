@@ -616,6 +616,7 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         		
         		$object_status->set_id(1);
         		
+        		$object_peca->set_num_visualizado(0);
         		$object_peca->set_id($this->peca_id);
         		$object_peca->set_url($peca_url.'_'.$this->peca_id);
         		$object_peca->set_estado_uso($object_estado_uso);
