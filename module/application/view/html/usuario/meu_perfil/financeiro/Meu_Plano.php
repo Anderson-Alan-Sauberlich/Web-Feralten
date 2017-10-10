@@ -11,13 +11,156 @@
     </header>
     <section class="ui container" role="main">
         <?php View_Meu_Plano::Incluir_Menu_Usuario(); ?>
-            
-		<div class="container-fluid">
-            <div class="row-fluid">
-                <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
-            </div>
-        </div>
         
+        <div class="ui doubling raised inverted grey stackable link five cards">
+        	<div class="card">
+        		<div class="content">
+        			<div class="center aligned header">
+        				<h1>Até 10</h1>
+        			</div>
+        			<div class="center aligned meta">
+        				<h3>Peças</h3>
+        			</div>
+        			<div class="description">
+        				<p>Cadastros exedentes acresentarão o valor de R$: 1,00 por peça.</p>
+        			</div>
+        		</div>
+                <div class="center aligned content">
+                    <div class="ui orange statistic">
+                    	<div class="label">
+                    		<h3>R$:</h3>
+                    	</div>
+                    	<div class="value">
+                    		5,00
+                    	</div>
+                    	<div class="label meta">
+                    		<span>/mês</span>
+                    	</div>
+                    </div>
+                </div>
+        		<div class="extra content">
+                   	<button class="ui fluid massive button">Contratar</button>
+                </div>
+        	</div>
+        	<div class="card">
+        		<div class="content">
+        			<div class="center aligned header">
+        				<h1>Até 100</h1>
+        			</div>
+        			<div class="center aligned meta">
+        				<h3>Peças</h3>
+        			</div>
+        			<div class="description">
+        				<p>Cadastros exedentes acresentarão o valor de R$: 1,00 por peça.</p>
+        			</div>
+        		</div>
+        		<div class="center aligned content">
+                    <div class="ui orange statistic">
+                    	<div class="label">
+                    		<h3>R$:</h3>
+                    	</div>
+                    	<div class="value">
+                    		14,50
+                    	</div>
+                    	<div class="label meta">
+                    		<span>/mês</span>
+                    	</div>
+                    </div>
+                </div>
+        		<div class="extra content">
+                   	<button class="ui fluid massive inverted green active button">Ativo</button>
+                </div>
+        	</div>
+        	<div class="card">
+        		<div class="content">
+        			<div class="center aligned header">
+        				<h1>Até 1000</h1>
+        			</div>
+        			<div class="center aligned meta">
+        				<h3>Peças</h3>
+        			</div>
+        			<div class="description">
+        				<p>Cadastros exedentes acresentarão o valor de R$: 1,00 por peça.</p>
+        			</div>
+        		</div>
+        		<div class="center aligned content">
+                    <div class="ui orange statistic">
+                    	<div class="label">
+                    		<h3>R$:</h3>
+                    	</div>
+                    	<div class="value">
+                    		26,90
+                    	</div>
+                    	<div class="label meta">
+                    		<span>/mês</span>
+                    	</div>
+                    </div>
+                </div>
+        		<div class="extra content">
+                   	<button class="ui fluid massive button">Contratar</button>
+                </div>
+        	</div>
+        	<div class="card">
+        		<div class="content">
+        			<div class="center aligned header">
+        				<h1>Até 5000</h1>
+        			</div>
+        			<div class="center aligned meta">
+        				<h3>Peças</h3>
+        			</div>
+        			<div class="description">
+        				<p>Cadastros exedentes acresentarão o valor de R$: 1,00 por peça.</p>
+        			</div>
+        		</div>
+        		<div class="center aligned content">
+                    <div class="ui orange statistic">
+                    	<div class="label">
+                    		<h3>R$:</h3>
+                    	</div>
+                    	<div class="value">
+                    		38,90
+                    	</div>
+                    	<div class="label meta">
+                    		<span>/mês</span>
+                    	</div>
+                    </div>
+                </div>
+        		<div class="extra content">
+                   	<button class="ui fluid massive button">Contratar</button>
+                </div>
+        	</div>
+        	<div class="card">
+        		<div class="content">
+        			<div class="center aligned header">
+        				<h1>Até 10000</h1>
+        			</div>
+        			<div class="center aligned meta">
+        				<h3>Peças</h3>
+        			</div>
+        			<div class="description">
+        				<p>Cadastros exedentes acresentarão o valor de R$: 1,00 por peça.</p>
+        			</div>
+        		</div>
+        		<div class="center aligned content">
+                    <div class="ui orange statistic">
+                    	<div class="label">
+                    		<h3>R$:</h3>
+                    	</div>
+                    	<div class="value">
+                    		56,50
+                    	</div>
+                    	<div class="label meta">
+                    		<span>/mês</span>
+                    	</div>
+                    </div>
+                </div>
+        		<div class="extra content">
+                   	<button class="ui fluid massive button">Contratar</button>
+                </div>
+        	</div>
+        </div>        
+        
+        <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/module/application/view/html/layout/footer/Rodape.php'; ?>

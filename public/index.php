@@ -655,11 +655,27 @@
     		});
     		
     		$app->group('/financeiro', function() use ($app) {
-            	$app->group('/boleto-atual', function() use ($app) {
+    		    $app->group('/dados-de-pagamento', function() use ($app) {
+    		        $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+    		            $dados_de_pagamento = new module\application\controller\usuario\meu_perfil\financeiro\Dados_De_Pagamento();
+    		            
+    		            $resposta = $dados_de_pagamento->Carregar_Pagina();
+    		            
+    		            if ($resposta === false) {
+    		                return $response->withRedirect('/usuario/login/');
+    		            } else if ($resposta != 1) {
+    		                return $response->withRedirect('/usuario/meu-perfil/');
+    		            } else {
+    		                return $response;
+    		            }
+    		        });
+    		    });
+    		    
+            	$app->group('/fatura', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$boleto_atual = new module\application\controller\usuario\meu_perfil\financeiro\Boleto_Atual();
+            			$fatura = new module\application\controller\usuario\meu_perfil\financeiro\Fatura();
             			
-            			$resposta = $boleto_atual->Carregar_Pagina();
+            			$resposta = $fatura->Carregar_Pagina();
             			
             			if ($resposta === false) {
             				return $response->withRedirect('/usuario/login/');
@@ -671,11 +687,11 @@
             		});
             	});
             	
-            	$app->group('/boletos-pagos', function() use ($app) {
+            	$app->group('/historico', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
-            			$boletos_pagos = new module\application\controller\usuario\meu_perfil\financeiro\Boletos_Pagos();
+            			$historico = new module\application\controller\usuario\meu_perfil\financeiro\Historico();
             			
-            			$resposta = $boletos_pagos->Carregar_Pagina();
+            			$resposta = $historico->Carregar_Pagina();
             			
             			if ($resposta === false) {
             				return $response->withRedirect('/usuario/login/');
@@ -958,8 +974,6 @@
         	    });
         	});
     	});
-    	
-
 	});
 	
 	$app->group('/quem-somos', function() use ($app) {

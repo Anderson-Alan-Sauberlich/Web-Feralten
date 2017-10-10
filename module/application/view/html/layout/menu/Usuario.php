@@ -57,8 +57,9 @@
 							<div class="content <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>">
 				            	<ul class="nav nav-pills">
 				            		<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'meu-lano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
-				                	<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Boleto Atual</a></li>
-				                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Boletos Pagos</a></li>
+				            		<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'dados-de-pagamento'); ?>"><a href="/usuario/meu-perfil/financeiro/dados-de-pagamento/">Dados de Pagamento</a></li>
+				                	<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'fatura'); ?>"><a href="/usuario/meu-perfil/financeiro/fatura/">Fatura</a></li>
+				                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'historico'); ?>"><a href="/usuario/meu-perfil/financeiro/historico/">Historico</a></li>
 				                </ul>
 							</div>
 						</div>
@@ -93,8 +94,9 @@
 				<div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>" data-tab="financeiro">
 	            	<ul class="nav nav-pills">
 	            		<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'meu-plano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
-	                	<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'boleto-atual'); ?>"><a href="/usuario/meu-perfil/financeiro/boleto-atual/">Boleto Atual</a></li>
-	                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'boletos-pagos'); ?>"><a href="/usuario/meu-perfil/financeiro/boletos-pagos/">Boletos Pagos</a></li>
+	                	<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'dados-de-pagamento'); ?>"><a href="/usuario/meu-perfil/financeiro/dados-de-pagamento/">Dados de Pagamento</a></li>
+	                	<li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'fatura'); ?>"><a href="/usuario/meu-perfil/financeiro/fatura/">Fatura</a></li>
+	                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'historico'); ?>"><a href="/usuario/meu-perfil/financeiro/historico/">Historico</a></li>
 	                </ul>
 				</div>
             </div>

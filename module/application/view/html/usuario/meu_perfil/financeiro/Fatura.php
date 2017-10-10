@@ -1,16 +1,16 @@
-<?php use module\application\view\src\usuario\meu_perfil\financeiro\Boletos_Pagos as View_Boletos_Pagos; ?>
+<?php use module\application\view\src\usuario\meu_perfil\financeiro\Fatura as View_Fatura; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
-	<title>Boletos Pagos | Feralten</title>
+	<title>Fatura | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/module/application/view/html/layout/header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-        <?php View_Boletos_Pagos::Incluir_Menu_Usuario(); ?>
+        <?php View_Fatura::Incluir_Menu_Usuario(); ?>
             
 		<div class="container-fluid">
             <div class="row-fluid">

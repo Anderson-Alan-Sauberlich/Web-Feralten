@@ -1,16 +1,16 @@
-<?php use module\application\view\src\usuario\meu_perfil\financeiro\Boleto_Atual as View_Boleto_Atual; ?>
+<?php use module\application\view\src\usuario\meu_perfil\financeiro\Historico as View_Historico; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
-	<title>Boleto Atual | Feralten</title>
+	<title>Historico | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/module/application/view/html/layout/header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-        <?php View_Boleto_Atual::Incluir_Menu_Usuario(); ?>
+        <?php View_Historico::Incluir_Menu_Usuario(); ?>
             
 		<div class="container-fluid">
             <div class="row-fluid">
