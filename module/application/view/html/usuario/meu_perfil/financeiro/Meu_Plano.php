@@ -161,6 +161,7 @@
         </div>        
         
         <div class="margem-inferior-pouco"></div>
+        <img src="/resources/img/formaspagamento.png" width="712" height="69" />
     </section>
     <footer>
         <?php include_once RAIZ.'/module/application/view/html/layout/footer/Rodape.php'; ?>

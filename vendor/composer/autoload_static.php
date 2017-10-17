@@ -8,6 +8,7 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
 {
     public static $files = array (
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        '7785487378a7be19e13559cd0ddda925' => __DIR__ . '/..' . '/moip/moip-sdk-php/src/Helper/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -20,6 +21,10 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'M' => 
+        array (
+            'Moip\\' => 5,
         ),
         'I' => 
         array (
@@ -48,6 +53,10 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Moip\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/moip/moip-sdk-php/src',
+        ),
         'Interop\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
@@ -63,6 +72,13 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
     );
 
     public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 
