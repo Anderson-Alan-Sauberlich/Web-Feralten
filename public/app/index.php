@@ -8,54 +8,6 @@
 	$app = new \Slim\App();
 	
 	$app->group('/cmmv', function() use ($app) {
-	    $app->get('/categoria/{categoria}[/]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
-	        
-	        if (isset($args['categoria'])) {
-	            $cmmv->set_categoria($args['categoria']);
-	        }
-	        
-	        $cmmv->Retornar_Categoria();
-	        
-	        return $response;
-	    });
-	    
-	    $app->get('/marca/{marca}[/]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
-	        
-	        if (isset($args['marca'])) {
-	            $cmmv->set_marca($args['marca']);
-	        }
-	        
-	        $cmmv->Retornar_Marca();
-	        
-	        return $response;
-	    });
-	    
-	    $app->get('/modelo/{modelo}[/]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
-	        
-	        if (isset($args['modelo'])) {
-	            $cmmv->set_modelo($args['modelo']);
-	        }
-	        
-	        $cmmv->Retornar_Modelo();
-	        
-	        return $response;
-	    });
-	    
-	    $app->get('/versao/{versao}[/]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
-	        
-	        if (isset($args['versao'])) {
-	            $cmmv->set_versao($args['versao']);
-	        }
-	        
-	        $cmmv->Retornar_Versao();
-	        
-	        return $response;
-	    });
-	    
 	    $app->get('/categorias[/]', function(Request $request, Response $response, $args) use ($app) {
 	        $cmmv = new module\app\controller\CMMV();
 	        
@@ -64,38 +16,26 @@
 	        return $response;
 	    });
 	    
-	    $app->get('/marcas/{categoria}[/]', function(Request $request, Response $response, $args) use ($app) {
+	    $app->get('/marcas[/]', function(Request $request, Response $response, $args) use ($app) {
 	        $cmmv = new module\app\controller\CMMV();
 	        
-	        if (isset($args['categoria'])) {
-	            $cmmv->set_categoria($args['categoria']);
-	        }
-	        
-	        $cmmv->Retornar_Marcas_Por_Categoria();
+	        $cmmv->Retornar_Marcas();
 	        
 	        return $response;
 	    });
 	    
-	    $app->get('/modelos/{marca}[/]', function(Request $request, Response $response, $args) use ($app) {
+	    $app->get('/modelos[/]', function(Request $request, Response $response, $args) use ($app) {
 	        $cmmv = new module\app\controller\CMMV();
 	        
-	        if (isset($args['marca'])) {
-	            $cmmv->set_marca($args['marca']);
-	        }
-	        
-	        $cmmv->Retornar_Modelos_Por_Marca();
+	        $cmmv->Retornar_Modelos();
 	        
 	        return $response;
 	    });
 	    
-		$app->get('/versoes/{modelo}[/]', function(Request $request, Response $response, $args) use ($app) {
+		$app->get('/versoes[/]', function(Request $request, Response $response, $args) use ($app) {
 		    $cmmv = new module\app\controller\CMMV();
 		    
-		    if (isset($args['modelo'])) {
-		        $cmmv->set_modelo($args['modelo']);
-		    }
-		    
-		    $cmmv->Retornar_Versoes_Por_Modelo();
+		    $cmmv->Retornar_Versoes();
 			
 			return $response;
 		});

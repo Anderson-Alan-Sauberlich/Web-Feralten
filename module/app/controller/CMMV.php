@@ -121,9 +121,9 @@ namespace module\app\controller;
             echo json_encode($categorias);
         }
         
-        public function Retornar_Marcas_Por_Categoria() : void {
+        public function Retornar_Marcas() : void {
             $marcas = array();
-            $object_marcas = DAO_Marca::Buscar_Por_ID_Categorai($this->categoria);
+            $object_marcas = DAO_Marca::BuscarTodos();
             
             foreach ($object_marcas as $object_marca) {
                 $marca = array();
@@ -139,9 +139,9 @@ namespace module\app\controller;
             echo json_encode($marcas);
         }
         
-        public function Retornar_Modelos_Por_Marca() : void {
+        public function Retornar_Modelos() : void {
             $modelos = array();
-            $object_modelos = DAO_Modelo::Buscar_Por_ID_Marca($this->marca);
+            $object_modelos = DAO_Modelo::BuscarTodos();
             
             foreach ($object_modelos as $object_modelo) {
                 $modelo = array();
@@ -157,9 +157,9 @@ namespace module\app\controller;
             echo json_encode($modelos);
         }
         
-        public function Retornar_Versoes_Por_Modelo() : void {
+        public function Retornar_Versoes() : void {
             $versoes = array();
-            $object_versoes = DAO_Versao::Buscar_Por_ID_Modelo($this->modelo);
+            $object_versoes = DAO_Versao::BuscarTodos();
             
             foreach ($object_versoes as $object_versao) {
                 $versao = array();

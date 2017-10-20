@@ -94,6 +94,19 @@ namespace module\application\model\dao;
             }
         }
         
+        public static function BuscarTodos() {
+            try {
+                $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->execute();
+                
+                return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function BuscarPorCOD(int $id) {
             try {
                 $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';

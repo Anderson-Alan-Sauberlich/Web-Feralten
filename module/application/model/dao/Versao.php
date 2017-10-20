@@ -94,6 +94,19 @@ namespace module\application\model\dao;
             }
         }
         
+        public static function BuscarTodos() {
+            try {
+                $sql = 'SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->execute();
+                
+                return self::PopulaVersoes($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function BuscarPorCOD(int $id) {
             try {
                 $sql = 'SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao WHERE versao_id = :id';
