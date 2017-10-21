@@ -64,7 +64,7 @@ namespace module\application\model\dao;
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
 	
-				return self::PopulaMarcasCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
+				return self::PopulaMarcasCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
 			} catch (PDOException | Exception $e) {
 				return false;
 			}
@@ -96,6 +96,26 @@ namespace module\application\model\dao;
 			}
 			
 			return $object_marca_compativel;
+		}
+		
+		public static function PopulaMarcasCompativeisObject(array $rows) : array {
+		    $marcas_compativeis = array();
+		    
+		    foreach ($rows as $row) {
+    		    $object_marca_compativel = new Object_Marca_Compativel();
+    		    
+    		    if (isset($row['marca_compativel_da_id_mrc'])) {
+    		        $object_marca_compativel->set_da_id($row['marca_compativel_da_id_mrc']);
+    		    }
+    		    
+    		    if (isset($row['marca_compativel_com_id_mrc'])) {
+    		        $object_marca_compativel->set_com_id($row['marca_compativel_com_id_mrc']);
+    		    }
+    		    
+    		    $marcas_compativeis[] = $object_marca_compativel;
+		    }
+		    
+		    return $marcas_compativeis;
 		}
 	
 		public static function PopulaMarcasCompativeis(array $rows) : array {

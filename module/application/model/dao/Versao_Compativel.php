@@ -64,7 +64,7 @@ namespace module\application\model\dao;
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
 	
-				return self::PopulaVersoesCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
+				return self::PopulaVersoesCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
 			} catch (PDOException | Exception $e) {
 				return false;
 			}
@@ -96,6 +96,26 @@ namespace module\application\model\dao;
 			}
 			
 			return $object_versao_compativel;
+		}
+		
+		public static function PopulaVersoesCompativeisObject(array $rows) : array {
+		    $versoes_compativeis = array();
+		    
+		    foreach ($rows as $row) {
+    		    $object_versao_compativel = new Object_Versao_Compativel();
+    		    
+    		    if (isset($row['versao_compativel_da_id_vrs'])) {
+    		        $object_versao_compativel->set_da_id($row['versao_compativel_da_id_vrs']);
+    		    }
+    		    
+    		    if (isset($row['versao_compativel_com_id_vrs'])) {
+    		        $object_versao_compativel->set_com_id($row['versao_compativel_com_id_vrs']);
+    		    }
+    		    
+    		    $versoes_compativeis[] = $object_versao_compativel;
+		    }
+		    
+		    return $versoes_compativeis;
 		}
 	
 		public static function PopulaVersoesCompativeis(array $rows) : array {

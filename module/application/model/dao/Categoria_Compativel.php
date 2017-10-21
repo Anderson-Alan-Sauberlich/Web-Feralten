@@ -65,7 +65,7 @@ namespace module\application\model\dao;
 				$p_sql = Conexao::Conectar()->prepare($sql);
 				$p_sql->execute();
 	
-				return self::PopulaCategoriasCompativeis($p_sql->fetchAll(PDO::FETCH_ASSOC));
+				return self::PopulaCategoriasCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
 			} catch (PDOException | Exception $e) {
 				return false;
 			}
@@ -97,6 +97,26 @@ namespace module\application\model\dao;
 			}
 			
 			return $object_categoria_compativel;
+		}
+		
+		public static function PopulaCategoriasCompativeisObject(array $rows) : array {
+		    $categorias_compativeis = array();
+		    
+		    foreach ($rows as $row) {
+    		    $object_categoria_compativel = new Object_Categoria_Compativel();
+    		    
+    		    if (isset($row['categoria_compativel_da_id_ctg'])) {
+    		        $object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ctg']);
+    		    }
+    		    
+    		    if (isset($row['categoria_compativel_com_id_ctg'])) {
+    		        $object_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ctg']);
+    		    }
+    		    
+    		    $categorias_compativeis[] = $object_categoria_compativel;
+		    }
+		    
+		    return $categorias_compativeis;
 		}
 	
 		public static function PopulaCategoriasCompativeis(array $rows) : array {
