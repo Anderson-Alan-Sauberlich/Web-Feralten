@@ -2,6 +2,7 @@
 namespace module\application\view\src\usuario\meu_perfil\financeiro;
     
     use module\application\view\src\layout\menu\Usuario as View_Usuario;
+    use module\application\view\src\layout\Cards_Planos as View_Cards_Planos;
     
     class Meu_Plano {
     	
@@ -17,6 +18,10 @@ namespace module\application\view\src\usuario\meu_perfil\financeiro;
         
         public static function Incluir_Menu_Usuario() {
         	new View_Usuario(self::$status_usuario, array('financeiro', 'meu-plano'));
+        }
+        
+        public static function Incluir_Cards_planos() {
+            new View_Cards_Planos();
         }
     }
 ?>

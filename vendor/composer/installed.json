@@ -357,77 +357,6 @@
         ]
     },
     {
-        "name": "moip/moip-sdk-php",
-        "version": "v2.0.0",
-        "version_normalized": "2.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/moip/moip-sdk-php.git",
-            "reference": "1f0278fb4f4365f399812f892c3a97c196adf6d8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/1f0278fb4f4365f399812f892c3a97c196adf6d8",
-            "reference": "1f0278fb4f4365f399812f892c3a97c196adf6d8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5",
-            "rmccue/requests": ">=1.0"
-        },
-        "require-dev": {
-            "codacy/coverage": "dev-master",
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2017-09-29T20:29:13+00:00",
-        "type": "libraries",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Moip\\": "src/"
-            },
-            "files": [
-                "src/Helper/helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jean Cesar Garcia",
-                "email": "jeancesargarcia@gmail.com"
-            },
-            {
-                "name": "Joao Batista Neto",
-                "email": "neto.joaobatista@gmail.com"
-            },
-            {
-                "name": "Caio Gaspar",
-                "email": "caio.gaspar@moip.com.br"
-            },
-            {
-                "name": "João Lucas Lucchetta",
-                "email": "joao.lucchetta@moip.com.br"
-            }
-        ],
-        "description": "Cliente em PHP para integração server-side com APIs Moip v2",
-        "homepage": "http://dev.moip.com.br",
-        "keywords": [
-            "checkout",
-            "intermediary",
-            "libraries",
-            "marketplace",
-            "moip"
-        ]
-    },
-    {
         "name": "phpmailer/phpmailer",
         "version": "v6.0.1",
         "version_normalized": "6.0.1.0",
@@ -493,5 +422,76 @@
             }
         ],
         "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "moip/moip-sdk-php",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/moip/moip-sdk-php.git",
+            "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
+            "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5",
+            "rmccue/requests": ">=1.0"
+        },
+        "require-dev": {
+            "codacy/coverage": "dev-master",
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2017-10-19T10:57:26+00:00",
+        "type": "libraries",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Moip\\": "src/"
+            },
+            "files": [
+                "src/Helper/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jean Cesar Garcia",
+                "email": "jeancesargarcia@gmail.com"
+            },
+            {
+                "name": "Joao Batista Neto",
+                "email": "neto.joaobatista@gmail.com"
+            },
+            {
+                "name": "Caio Gaspar",
+                "email": "caio.gaspar@moip.com.br"
+            },
+            {
+                "name": "João Lucas Lucchetta",
+                "email": "joao.lucchetta@moip.com.br"
+            }
+        ],
+        "description": "Cliente em PHP para integração server-side com APIs Moip v2",
+        "homepage": "http://dev.moip.com.br",
+        "keywords": [
+            "checkout",
+            "intermediary",
+            "libraries",
+            "marketplace",
+            "moip"
+        ]
     }
 ]

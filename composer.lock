@@ -39,16 +39,16 @@
         },
         {
             "name": "moip/moip-sdk-php",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moip/moip-sdk-php.git",
-                "reference": "1f0278fb4f4365f399812f892c3a97c196adf6d8"
+                "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/1f0278fb4f4365f399812f892c3a97c196adf6d8",
-                "reference": "1f0278fb4f4365f399812f892c3a97c196adf6d8",
+                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
+                "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "marketplace",
                 "moip"
             ],
-            "time": "2017-09-29T20:29:13+00:00"
+            "time": "2017-10-19T10:57:26+00:00"
         },
         {
             "name": "nikic/fast-route",
