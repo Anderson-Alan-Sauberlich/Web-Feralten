@@ -5,7 +5,7 @@ namespace module\application\controller\usuario;
     use module\application\model\dao\Usuario as DAO_Usuario;
     use module\application\model\object\Usuario as Object_Usuario;
     use module\application\controller\common\util\Email;
-    use module\application\controller\usuario\Login;
+    use module\application\controller\usuario\Login as Controller_Login;
     use module\application\view\src\usuario\Cadastro as View_Cadastro;
     use \Exception;
     
@@ -17,7 +17,6 @@ namespace module\application\controller\usuario;
         
         private $nome;
         private $email;
-        private $confemail;
         private $senha;
         private $cadastro_erros = array();
         private $cadastro_campos = array();
@@ -44,18 +43,6 @@ namespace module\application\controller\usuario;
         		$this->cadastro_campos['erro_email'] = "erro";
         		
         		$this->email = Validador::Usuario()::filtrar_email($email);
-        	}
-        }
-        
-        public function set_confemail($confemail) {
-        	try {
-        		$this->confemail= Validador::Usuario()::validar_confemail($confemail, $this->email);
-        		$this->cadastro_campos['erro_confemail'] = "certo";
-        	} catch (Exception $e) {
-        		$this->cadastro_erros[] = $e->getMessage();
-        		$this->cadastro_campos['erro_confemail'] = "erro";
-        		
-        		$this->confemail = Validador::Usuario()::filtrar_confemail($confemail);
         	}
         }
         
@@ -99,7 +86,7 @@ namespace module\application\controller\usuario;
                 if ($retorno !== false) {
                     Email::Enviar_Boas_Vindas($usuario);
                     
-                	$retorno = Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
+                    $retorno = Controller_Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
                 	
                 	if ($retorno === false) {
                 		$this->cadastro_erros[] = "Usuario Cadastrado com Sucesso, porem Autenticação Falhou";
@@ -114,7 +101,6 @@ namespace module\application\controller\usuario;
             } else {
                 $this->cadastro_form['nome'] = $this->nome;
                 $this->cadastro_form['email'] = $this->email;
-                $this->cadastro_form['confemail'] = $this->confemail;
                 $this->cadastro_form['senha'] = $this->senha;
                 
                 $this->Carregar_Pagina();

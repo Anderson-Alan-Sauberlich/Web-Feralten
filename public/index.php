@@ -190,8 +190,6 @@
     			
     			$cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
     			
-    			$cadastro->set_confemail(isset($_POST['confemail']) ? $_POST['confemail'] : null);
-    			
     			$cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
     			
     			$resposta = $cadastro->Cadastrar_Usuario();
@@ -745,8 +743,6 @@
             			$atualizar->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
             			
             			$atualizar->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-            			
-            			$atualizar->set_confemail(isset($_POST['confemail']) ? $_POST['confemail'] : null);
             			
             			$atualizar->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
             			

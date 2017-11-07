@@ -33,11 +33,11 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este e-mail sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
-	                        <label for="confemail" class="lbPanel">Digite Novamente Seu E-Mail:</label>
-	                        <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "confemail"); ?>">
-	                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                            <input id="confemail" name="confemail" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "confemail") ?>" placeholder="Repetir E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu e-mail novamente da mesma forma para Confirma-lo. (Campo Obrigatório)" />
-	                        </div>
+	                        <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
+                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="email_alternativo" name="email_alternativo" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email_alternativo") ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
+                            </div>
                         </div>
                         <div class="col-sm-6">
                         	<label for="fone" class="lbPanel">Digite Seu Numero de Telefone:</label>
@@ -49,11 +49,6 @@
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "fone_alternativo"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                                 <input id="fone_alternativo" name="fone_alternativo" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone_alternativo") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone alternativo. (Campo Opcional)" />
-                            </div>
-                            <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email_alternativo" name="email_alternativo" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email_alternativo") ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
                             </div>
 	                        <div class="ui buttons linha_inteira btnAtualizar">
 								<button id="salvar_usuario" name="salvar_usuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
@@ -95,7 +90,7 @@
                             <label for="cpf_cnpj" class="lbPanel">Digite Seu CPF ou CNPJ:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "cpf_cnpj"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("entidade", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
+                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control disabled" value="<?php View_Atualizar::Manter_Valor("entidade", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
                             </div>
                             <label for="nome_comercial" class="lbPanel">Digite um Nome Comercial:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "nome_comercial"); ?>">

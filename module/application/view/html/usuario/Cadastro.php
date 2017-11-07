@@ -30,11 +30,6 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Este email sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
-                            <label for="confemail" class="lbPanel">Digite Novamente Seu E-Mail:</label>
-                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("confemail");  ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="confemail" name="confemail" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("confemail") ?>" placeholder="Repetir E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu e-mail novamente da mesma forma para Comfirmilo. (Campo Obrigatório)" />
-                            </div>
                             <label for="senha" class="lbPanel">Digite Uma Senha:</label>
                             <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("senha");  ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -54,6 +49,7 @@
 								<input type="checkbox" checked="checked" id="email_marketing" name="email_marketing" value="1">
 								<label for="email_marketing">Desejo receber promoções e oportunidades exclusivas do Feralten e de seus parceiros</label>
 							</div>
+							<p>Ao me cadastrar, eu concordo com os Termos de Uso e a Política de Privacidade do Feralten.</p>
                         </div>
                     </form>
                 </div>

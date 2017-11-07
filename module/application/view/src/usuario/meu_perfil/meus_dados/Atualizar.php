@@ -166,16 +166,6 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
 		                    }
 	                	}
 	                    break;
-					
-	                case "confemail":
-	                	if (isset(self::$atualizar_campos['erro_confemail'])) {
-		                    if (self::$atualizar_campos['erro_confemail'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$atualizar_campos['erro_confemail'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
 	            }
             }
         }
@@ -223,8 +213,6 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         			if ($campo == "nome") {
         				echo self::$usuario_form->get_nome();
         			} else if ($campo == "email") {
-        				echo self::$usuario_form->get_email();
-        			} else if ($campo == "confemail") {
         				echo self::$usuario_form->get_email();
         			} else if ($campo == "fone") {
         				echo self::$usuario_form->get_fone();

@@ -75,16 +75,6 @@ namespace module\application\view\src\usuario;
 		                    }
 	                	}
 	                    break;
-	                    
-	                case "confemail":
-	                	if (isset(self::$cadastro_campos['erro_confemail'])) {
-		                    if (self::$cadastro_campos['erro_confemail'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$cadastro_campos['erro_confemail'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
 	            }
 	        }
         }

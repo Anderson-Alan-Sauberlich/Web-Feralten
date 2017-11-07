@@ -20,6 +20,7 @@
         <div id="div_removido" class="ui loading center aligned red segment">
         	<canvas id="crt_removido" width="400" height="125"></canvas>
         </div>
+        <div class="ui divider"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/module/application/view/html/layout/footer/Rodape.php'; ?>

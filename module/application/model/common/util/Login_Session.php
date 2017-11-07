@@ -35,6 +35,18 @@ namespace module\application\model\common\util;
 		    }
 		}
 		
+		/**
+		 * Function Verificar_Entidade
+		 * @return bool
+		 */
+		public static function Verificar_Entidade() : bool {
+		    if (empty(self::get_entidade_id())) {
+		        return false;
+		    } else {
+		        return true;
+		    }
+		}
+		
 		/** 
 		 * Function Set_Usuario_Id
 		 * @param int $usuario_id 'Id do usuario'

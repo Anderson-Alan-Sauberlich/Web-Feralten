@@ -2,7 +2,6 @@
 namespace module\application\controller\usuario\meu_perfil\meus_dados;
 	
 	use module\application\model\common\util\Login_Session;
-	use module\application\model\common\util\CPF_CNPJ;
 	use module\application\model\common\util\Gerenciar_Imagens;
 	use module\application\model\common\util\Validador;
     use module\application\model\object\Usuario as Object_Usuario;
@@ -23,7 +22,6 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private $fone;
         private $fone_alternativo;
         private $email;
-        private $confemail;
         private $email_alternativo;
         private $cpf_cnpj;
         private $site;
@@ -79,18 +77,6 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         		$this->atualizar_campos['erro_email'] = 'erro';
         		
         		$this->email = Validador::Usuario()::filtrar_email($email);
-        	}
-        }
-        
-        public function set_confemail($confemail) {
-        	try {
-        		$this->confemail = Validador::Usuario()::validar_confemail($confemail, $this->email);
-        		$this->atualizar_campos['erro_confemail'] = 'certo';
-        	} catch (Exception $e) {
-        		$this->atualizar_erros[] = $e->getMessage();
-        		$this->atualizar_campos['erro_confemail'] = 'erro';
-        		
-        		$this->confemail = Validador::Usuario()::filtrar_confemail($confemail);
         	}
         }
         
@@ -213,7 +199,6 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private function Salvar_Usuario() : void {
         	$this->atualizar_form['nome'] = $this->nome;
         	$this->atualizar_form['email'] = $this->email;
-        	$this->atualizar_form['confemail'] = $this->confemail;
         	$this->atualizar_form['fone'] = $this->fone;
         	$this->atualizar_form['fone_alternativo'] = $this->fone_alternativo;
         	$this->atualizar_form['email_alternativo'] = $this->email_alternativo;
@@ -282,7 +267,6 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
                 	$this->atualizar_erros[] = "Erro ao tentar Atualizar Usuario";
                 	$this->atualizar_campos['erro_nome'] = "";
                 	$this->atualizar_campos['erro_email'] = "";
-                	$this->atualizar_campos['erro_confemail'] = "";
                 } else {
                 	Login_Session::set_usuario_nome($usuario->get_nome());
                 	
