@@ -62,7 +62,7 @@
             <form id="form_atualizar_entidade" name="form_atualizar_entidade" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/entidade/" method="post" role="form">
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Atualizar Dados Da Entidade</label>
+                        <label class="lbPanel">Atualizar Dados da Entidade</label>
                     </div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
@@ -90,7 +90,7 @@
                             <label for="cpf_cnpj" class="lbPanel">Digite Seu CPF ou CNPJ:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "cpf_cnpj"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control disabled" value="<?php View_Atualizar::Manter_Valor("entidade", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
+                                <input id="cpf_cnpj" name="cpf_cnpj" type="text" class="form-control disabled" disabled="disabled" value="<?php View_Atualizar::Manter_Valor("entidade", "cpf_cnpj"); ?>" placeholder="CPF / CNPJ" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros do seu CPF ou CNPJ. (Campo Obrigatório)" />
                             </div>
                             <label for="nome_comercial" class="lbPanel">Digite um Nome Comercial:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("entidade", "nome_comercial"); ?>">

@@ -36,17 +36,7 @@ namespace module\application\model\validador;
 						$class_cpf_cnpj = new CPF_CNPJ($cpf_cnpj);
 						
 						if ($class_cpf_cnpj->valida()) {
-							$retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
-							
-							if ($retorno !== false) {
-								if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
-									return $cpf_cnpj;
-								} else {
-									throw new Exception('Este CPF/CNPJ já esta Cadastrado');
-								}
-							} else {
-								throw new Exception('Erro ao tentar Encontrar CPF/CNPJ');
-							}
+						    return $cpf_cnpj;
 						} else {
 							throw new Exception('CPF/CNPJ Inválido');
 						}
@@ -57,6 +47,41 @@ namespace module\application\model\validador;
 					throw new Exception('CPF/CNPJ, Digite Apenas Numeros');
 				}
 			}
+		}
+		
+		public static function validar_cpf_cnpj_unico($cpf_cnpj = null) : string {
+		    if (empty($cpf_cnpj)) {
+		        throw new Exception('Informe seu CPF ou CNPJ');
+		    } else {
+		        $cpf_cnpj = trim($cpf_cnpj);
+		        $cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
+		        
+		        if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
+		            if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
+		                $class_cpf_cnpj = new CPF_CNPJ($cpf_cnpj);
+		                
+		                if ($class_cpf_cnpj->valida()) {
+		                    $retorno = DAO_Entidade::Verificar_CPF_CNPJ($cpf_cnpj);
+		                    
+		                    if ($retorno !== false) {
+		                        if ($retorno === 0 OR $retorno == Login_Session::get_entidade_id()) {
+		                            return $cpf_cnpj;
+		                        } else {
+		                            throw new Exception('Este CPF/CNPJ já esta Cadastrado');
+		                        }
+		                    } else {
+		                        throw new Exception('Erro ao tentar Encontrar CPF/CNPJ');
+		                    }
+		                } else {
+		                    throw new Exception('CPF/CNPJ Inválido');
+		                }
+		            } else {
+		                throw new Exception('CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres');
+		            }
+		        } else {
+		            throw new Exception('CPF/CNPJ, Digite Apenas Numeros');
+		        }
+		    }
 		}
 		
 		public static function validar_nome_comercial($nome_comercial = null) : ?string {

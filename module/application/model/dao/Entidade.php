@@ -41,7 +41,6 @@ namespace module\application\model\dao;
         public static function Atualizar(Object_Entidade $object_entidade) : bool {
             try {
                 $sql = "UPDATE tb_entidade SET
-                entidade_cpf_cnpj = :cpf_cnpj,
                 entidade_nome_comercial = :nome,
                 entidade_imagem = :img,
                 entidade_site = :site 
@@ -50,7 +49,6 @@ namespace module\application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':us_id', $object_entidade->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':cpf_cnpj', $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
                 $p_sql->bindValue(':nome', $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
                 $p_sql->bindValue(':img', $object_entidade->get_imagem(), PDO::PARAM_STR);
                 $p_sql->bindValue(':site', $object_entidade->get_site(), PDO::PARAM_STR);
@@ -64,7 +62,6 @@ namespace module\application\model\dao;
         public static function Atualizar_Dados(Object_Entidade $object_entidade) : bool {
             try {
                 $sql = "UPDATE tb_entidade SET
-                entidade_cpf_cnpj = :cpf_cnpj,
                 entidade_nome_comercial = :nome,
                 entidade_site = :site 
                 WHERE entidade_usr_id = :us_id";
@@ -72,7 +69,6 @@ namespace module\application\model\dao;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':us_id', $object_entidade->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':cpf_cnpj', $object_entidade->get_cpf_cnpj(), PDO::PARAM_STR);
                 $p_sql->bindValue(':nome', $object_entidade->get_nome_comercial(), PDO::PARAM_STR);
 				$p_sql->bindValue(':site', $object_entidade->get_site(), PDO::PARAM_STR);
                 
@@ -118,15 +114,7 @@ namespace module\application\model\dao;
         		$p_sql->bindValue(':cpf_cnpj', $cpf_cnpj, PDO::PARAM_STR);
         		$p_sql->execute();
         		
-        		$row = $p_sql->fetch(PDO::FETCH_ASSOC);
-        		
-        		$select = 0;
-        		
-        		if (isset($row['entidade_id'])) {
-        			$select = $row['entidade_id'];
-        		}
-        		
-        		return $select;
+        		return $p_sql->fetch(PDO::FETCH_COLUMN);
         	} catch (PDOException | Exception $e) {
         		return false;
         	}

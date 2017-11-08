@@ -206,7 +206,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         
         private function Salvar_Entidade() : void {
         	$this->atualizar_form['nome_comercial'] = $this->nome_comercial;
-        	$this->atualizar_form['cpf_cnpj'] = $this->cpf_cnpj;
+        	$this->atualizar_form['cpf_cnpj'] = null;
         	$this->atualizar_form['site'] = $this->site;
         }
         
@@ -214,7 +214,6 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
             if (empty($this->atualizar_erros)) {
             	$entidade = new Object_Entidade();
             	
-            	$entidade->set_cpf_cnpj($this->cpf_cnpj);
             	$entidade->set_site($this->site);
             	$entidade->set_nome_comercial($this->nome_comercial);
             	$entidade->set_usuario_id(Login_Session::get_usuario_id());

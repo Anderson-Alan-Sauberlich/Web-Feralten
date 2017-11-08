@@ -760,8 +760,6 @@
             		$app->post('/entidade/', function(Request $request, Response $response, $args) use ($app) {
             			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             			
-            			$atualizar->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
-            			
             			$atualizar->set_site(isset($_POST['site']) ? $_POST['site'] : null);
             			
             			$atualizar->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
