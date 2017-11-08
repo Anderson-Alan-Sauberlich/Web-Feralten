@@ -7,6 +7,7 @@ namespace module\application\controller\usuario;
     use module\application\controller\common\util\Email;
     use module\application\controller\usuario\Login as Controller_Login;
     use module\application\view\src\usuario\Cadastro as View_Cadastro;
+    use \ReCaptcha\ReCaptcha;
     use \Exception;
     
     class Cadastro {
@@ -18,6 +19,7 @@ namespace module\application\controller\usuario;
         private $nome;
         private $email;
         private $senha;
+        private $recaptcha_response;
         private $cadastro_erros = array();
         private $cadastro_campos = array();
         private $cadastro_form = array();
@@ -58,6 +60,18 @@ namespace module\application\controller\usuario;
         	}
         }
         
+        public function set_recaptcha_response($recaptcha_response) {
+            try {
+                $this->recaptcha_response = Validador::Usuario()::validar_recaptcha_response($recaptcha_response);
+                $this->cadastro_campos['erro_recaptcha_response'] = "certo";
+            } catch (Exception $e) {
+                $this->cadastro_erros[] = $e->getMessage();
+                $this->cadastro_campos['erro_recaptcha_response'] = "erro";
+                
+                $this->recaptcha_response = Validador::Usuario()::filtrar_recaptcha_response($recaptcha_response);
+            }
+        }
+        
         public function Carregar_Pagina() : void {
         	$view = new View_Cadastro();
         	
@@ -70,29 +84,37 @@ namespace module\application\controller\usuario;
 
         public function Cadastrar_Usuario() {
             if (empty($this->cadastro_erros)) {
-            	$usuario = new Object_Usuario();
-            	$usuario->set_id(0);
-            	$usuario->set_ultimo_login(date("Y-m-d H:i:s"));
-            	$usuario->set_status_id(2);
-            	$usuario->set_fone('00000000');
-            	$usuario->set_nome($this->nome);
-            	$usuario->set_email($this->email);
-            	$usuario->set_senha($this->senha);
-            	
-            	$usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
-            	
-                $retorno = DAO_Usuario::Inserir($usuario);
-				
-                if ($retorno !== false) {
-                    Email::Enviar_Boas_Vindas($usuario);
+                $recaptcha = new ReCaptcha('6LeGszcUAAAAAG-JTTMkvm1BNiYEo3gKLWDKEQRY');
+                
+                $resp = $recaptcha->verify($this->recaptcha_response, $_SERVER["REMOTE_ADDR"]);
+                
+                if ($resp->isSuccess()) {
+                    $usuario = new Object_Usuario();
+                    $usuario->set_id(0);
+                    $usuario->set_ultimo_login(date("Y-m-d H:i:s"));
+                    $usuario->set_status_id(2);
+                    $usuario->set_fone('00000000');
+                    $usuario->set_nome($this->nome);
+                    $usuario->set_email($this->email);
+                    $usuario->set_senha($this->senha);
                     
-                    $retorno = Controller_Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
-                	
-                	if ($retorno === false) {
-                		$this->cadastro_erros[] = "Usuario Cadastrado com Sucesso, porem Autenticação Falhou";
-                	}
+                    $usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
+                    
+                    $retorno = DAO_Usuario::Inserir($usuario);
+                    
+                    if ($retorno !== false) {
+                        Email::Enviar_Boas_Vindas($usuario);
+                        
+                        $retorno = Controller_Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
+                        
+                        if ($retorno === false) {
+                            $this->cadastro_erros[] = "Usuario Cadastrado com Sucesso, porem Autenticação Falhou";
+                        }
+                    } else {
+                        $this->cadastro_erros[] = "Erro ao tentar Cadastrar Usuario";
+                    }
                 } else {
-                	$this->cadastro_erros[] = "Erro ao tentar Cadastrar Usuario";
+                    $this->cadastro_erros[] = $resp->getErrorCodes();
                 }
             }
             

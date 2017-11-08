@@ -16,6 +16,10 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
         array (
             'Slim\\' => 5,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -40,6 +44,10 @@ class ComposerStaticInit4cc4e71a2ccd698bb05573d0c172d953
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Psr\\Http\\Message\\' => 
         array (

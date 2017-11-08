@@ -4,6 +4,7 @@
 <head>
 	<?php include_once RAIZ.'/module/application/view/html/layout/head/Default.php'; ?>
 	<script type="text/javascript" src="/application/js/usuario/cadastro.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=pt" async defer></script>
 	<title>Cadastro | Feralten</title>
 </head>
 <body>
@@ -21,17 +22,17 @@
                         </div>
                         <div class="panel-body cadPanel">
                             <label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
-                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome");  ?>">
+                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu nome Completo. (Campo Obrigatório)" />
                             </div>
                             <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
-                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("email");  ?>">
+                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Este email sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
                             <label for="senha" class="lbPanel">Digite Uma Senha:</label>
-                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("senha");  ?>">
+                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("senha"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="senha" name="senha" autocomplete="off" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("senha") ?>" placeholder="Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no maximo 20. (Campo Obrigatório)" />
 			          			<span class="input-group-addon">
@@ -41,6 +42,9 @@
 									</div>
 			          			</span>
                             </div>
+                            <div class="lbPanel">
+                            	<div id="recaptcha" class="g-recaptcha" data-sitekey="6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ"></div>
+                        	</div>
                         </div>
                         <div class="panel-footer sombra_painel">
                         	<button type="submit" class="big ui green button"><i class="add user icon"></i>Criar Conta</button>

@@ -192,6 +192,8 @@
     			
     			$cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
     			
+    			$cadastro->set_recaptcha_response(isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null);
+    			
     			$resposta = $cadastro->Cadastrar_Usuario();
     			
     			if ($resposta) {

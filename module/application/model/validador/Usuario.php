@@ -388,5 +388,29 @@ namespace module\application\model\validador;
 			
 			return $valor;
 		}
+		
+		public static function validar_recaptcha_response($recaptcha_response = null) : string {
+		    if (empty($recaptcha_response)) {
+		        throw new Exception('Recaptcha Response Não Informado');
+		    } else {
+		        $valor = strip_tags($recaptcha_response);
+		        
+		        if ($valor === $recaptcha_response) {
+		            return $recaptcha_response;
+		        } else {
+		            throw new Exception('Recaptcha Response Não pode conter Tags de Programação');
+		        }
+		    }
+		}
+		
+		public static function filtrar_recaptcha_response($recaptcha_response = null) : ?string {
+		    $valor = null;
+		    
+		    if (!empty($recaptcha_response)) {
+		        $valor = trim(strip_tags($recaptcha_response));
+		    }
+		    
+		    return $valor;
+		}
     }
 ?>
