@@ -357,6 +357,13 @@
     float: none;
 }
 
+.headIMG {
+	margin: 0 auto;
+    float: none;
+    margin-top: -30px;
+    margin-bottom: -20px;
+}
+
 .colunaFooterH {
 	height: 200px;
 	margin-bottom: 40px;
