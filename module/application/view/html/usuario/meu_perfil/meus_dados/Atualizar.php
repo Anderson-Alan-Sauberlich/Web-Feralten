@@ -23,15 +23,27 @@
                 	</div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
-                        	<label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
-                            <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "nome"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome Completo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu nome Completo. (Campo Obrigatório)" />
+                        	<div class="row">
+                        		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                	<label for="nome" class="lbPanel">Digite Seu Nome:</label>
+                                    <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "nome"); ?>">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu Nome. (Campo Obrigatório)" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label for="sobrenome" class="lbPanel">Digite Seu Sobrenome:</label>
+                                    <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "sobrenome"); ?>">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "sobrenome") ?>" placeholder="Sobrenome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
+                                    </div>
+                                </div>
                             </div>
+                            
                             <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este e-mail sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
+                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este e-mail sera usado para gerenciar seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
 	                        <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">

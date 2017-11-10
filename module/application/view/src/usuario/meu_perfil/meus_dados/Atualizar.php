@@ -157,6 +157,16 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
 	                	}
 	                    break;
 	                
+	                case "sobrenome":
+	                    if (isset(self::$atualizar_campos['erro_sobrenome'])) {
+	                        if (self::$atualizar_campos['erro_sobrenome'] == "erro") {
+	                            echo "has-error has-feedback";
+	                        } else if (self::$atualizar_campos['erro_sobrenome'] == "certo") {
+	                            echo "has-success has-feedback";
+	                        }
+	                    }
+	                    break;
+	                
 	                case "email":
 	                	if (isset(self::$atualizar_campos['erro_email'])) {
 		                    if (self::$atualizar_campos['erro_email'] == "erro") {
@@ -212,6 +222,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         		case "usuario":
         			if ($campo == "nome") {
         				echo self::$usuario_form->get_nome();
+        			} else if ($campo == "sobrenome") {
+        			    echo self::$usuario_form->get_sobrenome();
         			} else if ($campo == "email") {
         				echo self::$usuario_form->get_email();
         			} else if ($campo == "fone") {

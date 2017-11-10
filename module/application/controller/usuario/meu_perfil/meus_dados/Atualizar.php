@@ -19,6 +19,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         }
         
         private $nome;
+        private $sobrenome;
         private $fone;
         private $fone_alternativo;
         private $email;
@@ -43,7 +44,19 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         		
         		$this->nome = Validador::Usuario()::filtrar_nome($nome);
         	}
-        } 
+        }
+        
+        public function set_sobrenome($sobrenome) {
+            try {
+                $this->sobrenome = Validador::Usuario()::validar_sobrenome($sobrenome);
+                $this->atualizar_campos['erro_sobrenome'] = 'certo';
+            } catch (Exception $e) {
+                $this->atualizar_erros[] = $e->getMessage();
+                $this->atualizar_campos['erro_sobrenome'] = 'erro';
+                
+                $this->sobrenome = Validador::Usuario()::filtrar_sobrenome($sobrenome);
+            }
+        }
         
         public function set_fone($fone) {
         	try {
@@ -198,6 +211,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         
         private function Salvar_Usuario() : void {
         	$this->atualizar_form['nome'] = $this->nome;
+        	$this->atualizar_form['sobrenome'] = $this->sobrenome;
         	$this->atualizar_form['email'] = $this->email;
         	$this->atualizar_form['fone'] = $this->fone;
         	$this->atualizar_form['fone_alternativo'] = $this->fone_alternativo;
@@ -256,6 +270,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
             	$usuario = new Object_Usuario();
             	
             	$usuario->set_nome($this->nome);
+            	$usuario->set_sobrenome($this->sobrenome);
             	$usuario->set_email($this->email);
             	$usuario->set_fone($this->fone);
             	$usuario->set_fone_alternativo($this->fone_alternativo);
@@ -265,6 +280,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
                 if (DAO_Usuario::Atualizar($usuario) === false) {
                 	$this->atualizar_erros[] = "Erro ao tentar Atualizar Usuario";
                 	$this->atualizar_campos['erro_nome'] = "";
+                	$this->atualizar_campos['erro_sobrenome'] = "";
                 	$this->atualizar_campos['erro_email'] = "";
                 } else {
                 	Login_Session::set_usuario_nome($usuario->get_nome());

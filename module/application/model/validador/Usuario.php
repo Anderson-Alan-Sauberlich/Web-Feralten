@@ -17,7 +17,7 @@ namespace module\application\model\validador;
 		
 		public static function validar_nome($nome = null) : string {
 			if (empty($nome)) {
-				throw new Exception('Digite Seu Nome Completo');
+				throw new Exception('Digite Seu Nome');
 			} else {
 				$valor = strip_tags($nome);
 				
@@ -25,19 +25,44 @@ namespace module\application\model\validador;
 					$nome = trim($nome);
 					$nome = preg_replace('/\s+/', " ", $nome);
 					
-					if (strlen($nome) <= 150) {
+					if (strlen($nome) <= 100) {
 						if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $nome)) {
 							return ucwords(strtolower($nome));
 						} else {
 							throw new Exception('O Nome Não Pode Conter Caracteres Especiais');
 						}
 					} else {
-						throw new Exception('O Nome pode ter no maximo 150 Caracteres');
+						throw new Exception('O Nome pode ter no maximo 100 Caracteres');
 					}
 				} else {
 					throw new Exception('O Nome Não pode conter Tags de Programação');
 				}
 			}
+		}
+		
+		public static function validar_sobrenome($sobrenome = null) : string {
+		    if (empty($sobrenome)) {
+		        throw new Exception('Digite Seu Sobrenome');
+		    } else {
+		        $valor = strip_tags($sobrenome);
+		        
+		        if ($valor === $sobrenome) {
+		            $sobrenome = trim($sobrenome);
+		            $sobrenome = preg_replace('/\s+/', " ", $sobrenome);
+		            
+		            if (strlen($sobrenome) <= 100) {
+		                if (preg_match("/^([A-zÀ-ú0-9çÇ ,'-]+)$/", $sobrenome)) {
+		                    return ucwords(strtolower($sobrenome));
+		                } else {
+		                    throw new Exception('O Sobrenome Não Pode Conter Caracteres Especiais');
+		                }
+		            } else {
+		                throw new Exception('O Sobrenome pode ter no maximo 100 Caracteres');
+		            }
+		        } else {
+		            throw new Exception('O Sobrenome Não pode conter Tags de Programação');
+		        }
+		    }
 		}
 		
 		public static function filtrar_nome($nome = null) : string {
@@ -48,6 +73,16 @@ namespace module\application\model\validador;
 			}
 			
 			return $valor;
+		}
+		
+		public static function filtrar_sobrenome($sobrenome = null) : string {
+		    $valor = '';
+		    
+		    if (!empty($sobrenome)) {
+		        $valor = ucwords(strtolower(preg_replace('/\s+/', " ", trim(strip_tags($sobrenome)))));
+		    }
+		    
+		    return $valor;
 		}
 		
 		public static function validar_email($email = null) : string {

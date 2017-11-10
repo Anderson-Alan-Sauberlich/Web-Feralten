@@ -17,6 +17,7 @@ namespace module\application\controller\usuario;
         }
         
         private $nome;
+        private $sobrenome;
         private $email;
         private $senha;
         private $recaptcha_response;
@@ -34,6 +35,18 @@ namespace module\application\controller\usuario;
         		
         		$this->nome = Validador::Usuario()::filtrar_nome($nome);
         	}
+        }
+        
+        public function set_sobrenome($sobrenome) {
+            try {
+                $this->sobrenome = Validador::Usuario()::validar_sobrenome($sobrenome);
+                $this->cadastro_campos['erro_sobrenome'] = "certo";
+            } catch (Exception $e) {
+                $this->cadastro_erros[] = $e->getMessage();
+                $this->cadastro_campos['erro_sobrenome'] = "erro";
+                
+                $this->sobrenome = Validador::Usuario()::filtrar_sobrenome($sobrenome);
+            }
         }
         
         public function set_email($email) {
@@ -95,6 +108,7 @@ namespace module\application\controller\usuario;
                     $usuario->set_status_id(2);
                     $usuario->set_fone('00000000');
                     $usuario->set_nome($this->nome);
+                    $usuario->set_sobrenome($this->sobrenome);
                     $usuario->set_email($this->email);
                     $usuario->set_senha($this->senha);
                     
@@ -122,6 +136,7 @@ namespace module\application\controller\usuario;
             	return true;
             } else {
                 $this->cadastro_form['nome'] = $this->nome;
+                $this->cadastro_form['sobrenome'] = $this->sobrenome;
                 $this->cadastro_form['email'] = $this->email;
                 $this->cadastro_form['senha'] = $this->senha;
                 

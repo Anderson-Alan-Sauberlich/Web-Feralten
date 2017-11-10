@@ -21,20 +21,31 @@
                            	<label>Crie uma conta</label>
                         </div>
                         <div class="panel-body cadPanel">
-                            <label for="nome" class="lbPanel">Digite Seu Nome Completo:</label>
-                            <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome"); ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu nome Completo. (Campo Obrigatório)" />
-                            </div>
+                        	<div class="row">
+                        		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            		<label for="nome" class="lbPanel">Digite Seu Nome:</label>
+                                    <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome"); ?>">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Nome. (Campo Obrigatório)" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label for="sobrenome" class="lbPanel">Digite Seu Sobrenome:</label>
+                                    <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("sobrenome"); ?>">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("sobrenome") ?>" placeholder="Sobrenome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
+                                    </div>
+                                </div>
+                        	</div>
                             <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
                             <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Este email sera usado para realizar a confirmação de seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
+                                <input id="email" name="email" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Este e-mail sera usado para gerenciar seu Cadastro e acessar o Sistema. (Campo Obrigatório)" />
                             </div>
-                            <label for="senha" class="lbPanel">Digite Uma Senha:</label>
+                            <label for="senha" class="lbPanel">Crie Uma Senha:</label>
                             <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("senha"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="senha" name="senha" autocomplete="off" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("senha") ?>" placeholder="Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no maximo 20. (Campo Obrigatório)" />
+                                <input id="senha" name="senha" autocomplete="off" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("senha") ?>" placeholder="Senha" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="A Senha deve ter no minimo 6 caracteres e no máximo 20. (Campo Obrigatório)" />
 			          			<span class="input-group-addon">
 			          				<div class="ui checkbox passCheck">
 										<input type="checkbox" id="mostrar" name="mostrar" onchange="MostrarSenha()">

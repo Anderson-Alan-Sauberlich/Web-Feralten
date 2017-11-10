@@ -5,6 +5,7 @@ namespace module\application\model\object;
     	
     	private $id;
         private $nome;
+        private $sobrenome;
         private $email;
         private $senha;
 		private $ultimo_login;
@@ -32,6 +33,14 @@ namespace module\application\model\object;
 		
 		public function get_nome() : ?string {
 			return $this->nome;
+		}
+		
+		public function set_sobrenome(string $sobrenome) : void {
+		    $this->sobrenome = $sobrenome;
+		}
+		
+		public function get_sobrenome() : ?string {
+		    return $this->sobrenome;
 		}
 		
 		public function set_email(string $email) : void {

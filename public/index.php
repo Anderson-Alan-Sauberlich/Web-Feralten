@@ -188,6 +188,8 @@
     				
     			$cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
     			
+    			$cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+    			
     			$cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
     			
     			$cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
@@ -739,6 +741,8 @@
             			$atualizar = new module\application\controller\usuario\meu_perfil\meus_dados\Atualizar();
             			
             			$atualizar->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+            			
+            			$atualizar->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
             			
             			$atualizar->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
             			

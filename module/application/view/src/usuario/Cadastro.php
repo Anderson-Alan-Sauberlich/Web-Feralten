@@ -47,10 +47,20 @@ namespace module\application\view\src\usuario;
         	if (!empty(self::$cadastro_campos)) {
 	            switch ($campo) {
 	                case "nome":
-	                	if (isset(self::$cadastro_campos['erro_nome'])) {
-		                    if (self::$cadastro_campos['erro_nome'] == "erro") {
+	                    if (isset(self::$cadastro_campos['erro_nome'])) {
+	                        if (self::$cadastro_campos['erro_nome'] == "erro") {
+	                            echo "has-error has-feedback";
+	                        } else if (self::$cadastro_campos['erro_nome'] == "certo") {
+	                            echo "has-success has-feedback";
+	                        }
+	                    }
+	                    break;
+	                    
+	                case "sobrenome":
+	                	if (isset(self::$cadastro_campos['erro_sobrenome'])) {
+		                    if (self::$cadastro_campos['erro_sobrenome'] == "erro") {
 		                        echo "has-error has-feedback";
-		                    } else if (self::$cadastro_campos['erro_nome'] == "certo") {
+		                    } else if (self::$cadastro_campos['erro_sobrenome'] == "certo") {
 		                        echo "has-success has-feedback";
 		                    }
 	                	}
