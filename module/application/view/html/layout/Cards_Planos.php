@@ -7,7 +7,7 @@
     				<h1>Orçamentos</h1>
     			</div>
     			<div class="center aligned meta">
-    				<h3>0 Peças</h3>
+    				<h3>1 Peças</h3>
     			</div>
     		</div>
     		<div class="content">
@@ -54,7 +54,7 @@
                 		<h3>R$:</h3>
                 	</div>
                 	<div class="value">
-                		5,00
+                		5,77
                 	</div>
                 	<div class="label meta">
                 		<span>/mês</span>
@@ -86,7 +86,7 @@
                 		<h3>R$:</h3>
                 	</div>
                 	<div class="value">
-                		14,50
+                		14,57
                 	</div>
                 	<div class="label meta">
                 		<span>/mês</span>
@@ -100,7 +100,7 @@
     	<div onclick="bnt_radio(4);" class="card">
     		<div class="content">
     			<div class="center aligned header">
-    				<h1>Até 1000</h1>
+    				<h1>Até 1.000</h1>
     			</div>
     			<div class="center aligned meta">
     				<h3>Peças</h3>
@@ -118,7 +118,7 @@
                 		<h3>R$:</h3>
                 	</div>
                 	<div class="value">
-                		26,90
+                		26,97
                 	</div>
                 	<div class="label meta">
                 		<span>/mês</span>
@@ -132,7 +132,7 @@
     	<div onclick="bnt_radio(5);" class="card">
     		<div class="content">
     			<div class="center aligned header">
-    				<h1>Até 5000</h1>
+    				<h1>Até 5.000</h1>
     			</div>
     			<div class="center aligned meta">
     				<h3>Peças</h3>
@@ -150,7 +150,7 @@
                 		<h3>R$:</h3>
                 	</div>
                 	<div class="value">
-                		38,90
+                		38,97
                 	</div>
                 	<div class="label meta">
                 		<span>/mês</span>
@@ -164,7 +164,7 @@
     	<div onclick="bnt_radio(6);" class="card">
     		<div class="content">
     			<div class="center aligned header">
-    				<h1>Até 10000</h1>
+    				<h1>Até 10.000</h1>
     			</div>
     			<div class="center aligned meta">
     				<h3>Peças</h3>
@@ -182,7 +182,7 @@
                 		<h3>R$:</h3>
                 	</div>
                 	<div class="value">
-                		56,50
+                		56,57
                 	</div>
                 	<div class="label meta">
                 		<span>/mês</span>

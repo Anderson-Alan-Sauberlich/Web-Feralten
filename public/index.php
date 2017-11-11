@@ -655,23 +655,7 @@
             	});
     		});
     		
-    		$app->group('/financeiro', function() use ($app) {
-    		    $app->group('/dados-de-pagamento', function() use ($app) {
-    		        $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-    		            $dados_de_pagamento = new module\application\controller\usuario\meu_perfil\financeiro\Dados_De_Pagamento();
-    		            
-    		            $resposta = $dados_de_pagamento->Carregar_Pagina();
-    		            
-    		            if ($resposta === false) {
-    		                return $response->withRedirect('/usuario/login/');
-    		            } else if ($resposta != 1) {
-    		                return $response->withRedirect('/usuario/meu-perfil/');
-    		            } else {
-    		                return $response;
-    		            }
-    		        });
-    		    });
-    		    
+    		$app->group('/financeiro', function() use ($app) {    		    
             	$app->group('/fatura', function() use ($app) {
             		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
             			$fatura = new module\application\controller\usuario\meu_perfil\financeiro\Fatura();
