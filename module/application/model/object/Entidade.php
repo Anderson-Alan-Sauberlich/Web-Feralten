@@ -14,6 +14,9 @@ namespace module\application\model\object;
 		private $site;
         private $data;
         private $enderecos = array();
+        private $plano_id;
+        private $intervalo_pagamento_id;
+        private $data_contratacao_plano;
 		
 		function __constructor() {
 			
@@ -95,6 +98,30 @@ namespace module\application\model\object;
         
         public function get_enderecos() : ?array {
         	return $this->enderecos;
+        }
+        
+        public function set_data_contratacao_plano(string $data_contratacao_plano) : void {
+            $this->data_contratacao_plano = $data_contratacao_plano;
+        }
+        
+        public function get_data_contratacao_plano() : ?string {
+            return $this->data_contratacao_plano;
+        }
+        
+        public function set_plano_id(int $plano_id) : void {
+            $this->plano_id = $plano_id;
+        }
+        
+        public function get_plano_id() : ?int {
+            return $this->plano_id;
+        }
+        
+        public function set_intervalo_pagamento_id(int $intervalo_pagamento_id) : void {
+            $this->intervalo_pagamento_id = $intervalo_pagamento_id;
+        }
+        
+        public function get_intervalo_pagamento_id() : ?int {
+            return $this->intervalo_pagamento_id;
         }
 	}
 ?>
