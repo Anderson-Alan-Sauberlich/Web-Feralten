@@ -18,7 +18,7 @@ namespace module\application\model\dao;
             try {
                 $sql = "INSERT INTO tb_entidade (entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                         entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano) 
-                		VALUES (:us_id, :su_id, :cpf_cnpj, :nome, :img, :site, :data, :pln_id, int_pag_id, data_cnt_pln);";
+                		VALUES (:us_id, :su_id, :cpf_cnpj, :nome, :img, :site, :data, :pln_id, :int_pag_id, :data_cnt_pln);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
@@ -31,13 +31,13 @@ namespace module\application\model\dao;
                 $p_sql->bindValue(':data', $object_entidade->get_data(), PDO::PARAM_STR);
                 $p_sql->bindValue(':pln_id', $object_entidade->get_plano_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':int_pag_id', $object_entidade->get_intervalo_pagamento_id(), PDO::PARAM_INT);
-                $p_sql->bindalue('data_cnt_pln', $object_entidade->get_data_contratacao_plano(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_cnt_pln', $object_entidade->get_data_contratacao_plano(), PDO::PARAM_STR);
                 
                 $p_sql->execute();
                 
                 return Conexao::Conectar()->lastInsertId();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -109,7 +109,7 @@ namespace module\application\model\dao;
                 $p_sql->bindValue(':us_id', $object_entidade->get_usuario_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':pln_id', $object_entidade->get_plano_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':int_pag_id', $object_entidade->get_intervalo_pagamento_id(), PDO::PARAM_INT);
-                $p_sql->bindalue('data_cnt_pln', $object_entidade->get_data_contratacao_plano(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_cnt_pln', $object_entidade->get_data_contratacao_plano(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
