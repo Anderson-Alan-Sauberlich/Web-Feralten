@@ -146,6 +146,18 @@ namespace module\application\model\validador;
 			
 		}
 		
+		public static function validar_plano_id($plano_id = null) : void {
+		    
+		}
+		
+		public static function validar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void {
+		    
+		}
+		
+		public static function validar_data_contratacao_plano($data_contratacao_plano = null) : void {
+		    
+		}
+		
 		public static function filtrar_id($id = null) : void {
 			
 		}
@@ -217,6 +229,18 @@ namespace module\application\model\validador;
         
         public static function filtrar_endereco($endereco = null) : void {
         	
+        }
+        
+        public static function filtrar_plano_id($plano_id = null) : void {
+            
+        }
+        
+        public static function filtrar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void {
+            
+        }
+        
+        public static function filtrar_data_contratacao_plano($data_contratacao_plano = null) : void {
+            
         }
 	}
 ?>

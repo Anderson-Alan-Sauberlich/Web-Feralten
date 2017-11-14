@@ -32,6 +32,14 @@ namespace module\application\model\object;
 		    return $this->entidade_id;
 		}
 		
+		public function set_valor_total(float $valor_total) : void {
+		    $this->valor_total = $valor_total;
+		}
+		
+		public function get_valor_total() : ?float {
+		    return $this->valor_total;
+		}
+		
 		public function set_object_status(Object_Status_Fatura $object_status) : void {
 			$this->object_status = $object_status;
 		}

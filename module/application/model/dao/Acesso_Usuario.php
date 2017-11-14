@@ -31,7 +31,7 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Acesso_Usuario $status) : bool {
+        public static function Atualizar(Object_Acesso_Usuario $object_acesso_usuario) : bool {
             try {
                 $sql = "UPDATE tb_acesso_usuario SET
                 		acesso_usuario_usr_id = :usr_id,

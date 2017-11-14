@@ -1,7 +1,7 @@
 <?php
 namespace module\application\model\object;
     
-    class Fatura_Servico {
+    class Transacao {
     	
     	private $id;
 		private $fatura_id;

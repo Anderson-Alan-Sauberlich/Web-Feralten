@@ -12,8 +12,11 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Endereco;
 	use module\application\model\validador\Entidade;
 	use module\application\model\validador\Estado;
+	use module\application\model\validador\Fatura_Servico;
+	use module\application\model\validador\Fatura;
 	use module\application\model\validador\Foto_Peca;
 	use module\application\model\validador\Funcionalidade;
+	use module\application\model\validador\Intervalo_Pagamento;
 	use module\application\model\validador\Marca;
 	use module\application\model\validador\Marca_Compativel;
 	use module\application\model\validador\Marca_Pativel;
@@ -22,13 +25,16 @@ namespace module\application\model\common\util;
 	use module\application\model\validador\Modelo_Pativel;
 	use module\application\model\validador\Peca;
 	use module\application\model\validador\Permissao;
+	use module\application\model\validador\Plano;
 	use module\application\model\validador\Preferencia_Entrega;
 	use module\application\model\validador\Recuperar_Senha;
 	use module\application\model\validador\Removido;
 	use module\application\model\validador\Status_Entidade;
+	use module\application\model\validador\Status_Fatura;
 	use module\application\model\validador\Status_Peca;
 	use module\application\model\validador\Estado_Uso_Peca;
 	use module\application\model\validador\Status_Usuario;
+	use module\application\model\validador\Transacao;
 	use module\application\model\validador\Usuario;
 	use module\application\model\validador\Versao;
 	use module\application\model\validador\Versao_Compativel;
@@ -63,9 +69,15 @@ namespace module\application\model\common\util;
 		
 		public static function Estado() : Estado { return new Estado(); }
 		
+		public static function Fatura_Servico() : Fatura_Servico { return new Fatura_Servico(); }
+		
+		public static function Fatura() : Fatura { return new Fatura(); }
+		
 		public static function Foto_Peca() : Foto_Peca { return new Foto_Peca(); }
 		
 		public static function Funcionalidade() : Funcionalidade { return new Funcionalidade(); }
+		
+		public static function Intervalo_Pagamento() : Intervalo_Pagamento { return new Intervalo_Pagamento(); }
 		
 		public static function Marca() : Marca { return new Marca(); }
 		
@@ -83,6 +95,8 @@ namespace module\application\model\common\util;
 		
 		public static function Permissao() : Permissao { return new Permissao(); }
 		
+		public static function Plano() : Plano{ return new Plano(); }
+		
 		public static function Preferencia_Entrega() : Preferencia_Entrega { return new Preferencia_Entrega(); }
 		
 		public static function Recuperar_Senha() : Recuperar_Senha { return new Recuperar_Senha(); }
@@ -91,11 +105,15 @@ namespace module\application\model\common\util;
 		
 		public static function Status_Entidade() : Status_Entidade { return new Status_Entidade(); }
 		
+		public static function Status_Fatura() : Status_Fatura { return new Status_Fatura(); }
+		
 		public static function Status_Peca() : Status_Peca { return new Status_Peca(); }
 		
 		public static function Estado_Uso_Peca() : Estado_Uso_Peca { return new Estado_Uso_Peca(); }
 		
 		public static function Status_Usuario() : Status_Usuario { return new Status_Usuario(); }
+		
+		public static function Transacao() : Transacao { return new Transacao(); }
 		
 		public static function Usuario() : Usuario { return new Usuario(); }
 		
