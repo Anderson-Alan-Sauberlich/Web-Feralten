@@ -68,7 +68,20 @@ namespace module\application\model\dao;
 				return false;
             }
         }
-
+        
+        public static function BuscarTodos() {
+            try {
+                $sql = 'SELECT plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao FROM tb_plano';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->execute();
+                
+                return self::PopulaArrayPlanos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function BuscarPorCOD(int $id) {
             try {
                 $sql = 'SELECT plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao FROM tb_plano WHERE plano_id = :id';
@@ -77,7 +90,7 @@ namespace module\application\model\dao;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaArrayPlanos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaPlano($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
 				return false;
             }
@@ -88,28 +101,41 @@ namespace module\application\model\dao;
         	
         	foreach ($rows as $row) {
 	        	$object_plano = new Object_Plano();
+	        	$bool = true;
 	        	
 	        	if (isset($row['plano_id'])) {
 	        		$object_plano->set_id($row['plano_id']);
+	        	} else {
+	        	    $bool = false;
 	        	}
 	        	
 	        	if (isset($row['plano_valor_mensal'])) {
 	        		$object_plano->set_valor_mensal($row['plano_valor_mensal']);
+	        	} else {
+	        	    $bool = false;
 	        	}
 	        	
 	        	if (isset($row['plano_valor_anual'])) {
 	        		$object_plano->set_valor_anual($row['plano_valor_anual']);
+	        	} else {
+	        	    $bool = false;
 	        	}
 	        	
 	        	if (isset($row['plano_limite_pecas'])) {
 	        		$object_plano->set_limite_pecas($row['plano_limite_pecas']);
+	        	} else {
+	        	    $bool = false;
 	        	}
 	        	
 	        	if (isset($row['plano_descricao'])) {
 	        	    $object_plano->set_descricao($row['plano_descricao']);
+	        	} else {
+	        	    $bool = false;
 	        	}
 	        	
-	        	$planos[] = $object_plano;
+	        	if ($bool) {
+	        	    $planos[$row['plano_id']] = $object_plano;
+                }
         	}
         	
         	return $planos;

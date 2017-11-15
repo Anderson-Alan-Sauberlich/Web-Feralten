@@ -84,16 +84,16 @@
         },
         {
             "name": "moip/moip-sdk-php",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moip/moip-sdk-php.git",
-                "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db"
+                "reference": "dc88cad3a240f16426526697a057c47b2320aebd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
-                "reference": "22c246851499ae9294a7dcfc0e7b4a1a64dc39db",
+                "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/dc88cad3a240f16426526697a057c47b2320aebd",
+                "reference": "dc88cad3a240f16426526697a057c47b2320aebd",
                 "shasum": ""
             },
             "require": {
@@ -138,6 +138,10 @@
                 {
                     "name": "João Lucas Lucchetta",
                     "email": "joao.lucchetta@moip.com.br"
+                },
+                {
+                    "name": "Matheus Nakaya",
+                    "email": "matheus.nakaya@moip.com.br"
                 }
             ],
             "description": "Cliente em PHP para integração server-side com APIs Moip v2",
@@ -149,7 +153,7 @@
                 "marketplace",
                 "moip"
             ],
-            "time": "2017-10-19T10:57:26+00:00"
+            "time": "2017-11-06T11:19:46+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -459,16 +463,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.8.1",
+            "version": "3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "5385302707530b2bccee1769613ad769859b826d"
+                "reference": "575a8b53a0a489447915029c69680156cd355304"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/5385302707530b2bccee1769613ad769859b826d",
-                "reference": "5385302707530b2bccee1769613ad769859b826d",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/575a8b53a0a489447915029c69680156cd355304",
+                "reference": "575a8b53a0a489447915029c69680156cd355304",
                 "shasum": ""
             },
             "require": {
@@ -526,7 +530,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-03-19T17:55:20+00:00"
+            "time": "2017-11-04T08:46:46+00:00"
         }
     ],
     "packages-dev": [],

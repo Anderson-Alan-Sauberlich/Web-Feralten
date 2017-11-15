@@ -180,7 +180,7 @@ namespace module\application\model\common\util;
 		}
 		
 		/** 
-		 * Function Set_Permissao
+		 * Function Set_Permissão
 		 * @param int $funcionalidade_id const Login_Session::PERFIL = 1 'Id da funcionalidade'
 		 * @param int $funcionalidade_id const Login_Session::MEUS_DADOS = 2 'Id da funcionalidade'
 		 * @param int $funcionalidade_id const Login_Session::PECAS = 3 'Id da funcionalidade'
@@ -193,7 +193,7 @@ namespace module\application\model\common\util;
 		}
 		
 		/**
-		 * Function Get_Entidade_Id
+		 * Function Get_Permissão
 		 * @param int $funcionalidade_id const Login_Session::PERFIL = 1 'Id da funcionalidade'
 		 * @param int $funcionalidade_id const Login_Session::MEUS_DADOS = 2 'Id da funcionalidade'
 		 * @param int $funcionalidade_id const Login_Session::PECAS = 3 'Id da funcionalidade'
@@ -206,6 +206,28 @@ namespace module\application\model\common\util;
 			} else {
 				return null;
 			}
+		}
+		
+		/**
+		 * Function Set_Entidade_Plano
+		 * @param int $entidade_plano 'Plano da entidade'
+		 * @return void
+		 */
+		public static function set_entidade_plano(int $entidade_plano) : void {
+		    $_SESSION['login']['entidade']['plano'] = $entidade_plano;
+		}
+		
+		/**
+		 * Function Get_Entidade_Plano
+		 * @param none
+		 * @return ?int 'Plano da entidade'
+		 */
+		public static function get_entidade_plano() : ?int {
+		    if (isset($_SESSION['login']['entidade']['plano'])) {
+		        return $_SESSION['login']['entidade']['plano'];
+		    } else {
+		        return null;
+		    }
 		}
 		
 		public static function Finalizar_Login_Session() : void {

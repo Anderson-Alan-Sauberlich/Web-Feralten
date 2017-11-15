@@ -5,7 +5,7 @@
 			<div class="ui accordion field">
 				<div id="title_categoria" class="title ui horizontal divider header"><i class="icon dropdown"></i>Categorias</div>
 				<div id="content_categoria" class="content field">
-					<div class="well well-sm">
+					<div class="well well-sm wellBranco">
 				    	<div class="row">
 				        	<?php View_Pesquisa::Carregar_Categorias(); ?>
 				        </div>

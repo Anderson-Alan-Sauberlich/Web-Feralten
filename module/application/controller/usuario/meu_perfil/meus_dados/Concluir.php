@@ -241,6 +241,7 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 		            		
 		            		if ($id_entidade != false) {
 		            			Login_Session::set_entidade_id($id_entidade);
+		            			Login_Session::set_entidade_plano(1);
 			                	
 			                	$imagem = $this->Salvar_Imagem();
 			                	

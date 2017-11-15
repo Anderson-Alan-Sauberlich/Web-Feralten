@@ -106,6 +106,7 @@ namespace module\application\controller\usuario;
 						Login_Session::set_entidade_id($entidade_login->get_id());
 						Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
 						Login_Session::set_entidade_status($entidade_login->get_status_id());
+						Login_Session::set_entidade_plano($entidade_login->get_plano_id());
 						 
 						$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
 						 
@@ -154,6 +155,7 @@ namespace module\application\controller\usuario;
 					Login_Session::set_entidade_id($entidade_login->get_id());
 					Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
 					Login_Session::set_entidade_status($entidade_login->get_status_id());
+					Login_Session::set_entidade_plano($entidade_login->get_plano_id());
 					
 					$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
 					
@@ -188,6 +190,7 @@ namespace module\application\controller\usuario;
             			Login_Session::set_entidade_id($entidade_login->get_id());
             			Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
             			Login_Session::set_entidade_status($entidade_login->get_status_id());
+            			Login_Session::set_entidade_plano($entidade_login->get_plano_id());
             			
             			$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
             			
@@ -227,6 +230,7 @@ namespace module\application\controller\usuario;
 							Login_Session::set_entidade_id($entidade_login->get_id());
 							Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
 							Login_Session::set_entidade_status($entidade_login->get_status_id());
+							Login_Session::set_entidade_plano($entidade_login->get_plano_id());
 							
 							$acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
 							

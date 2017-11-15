@@ -3,6 +3,8 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
 	
 	use module\application\view\src\usuario\meu_perfil\financeiro\Meu_Plano as View_Meu_Plano;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
+	use module\application\model\dao\Plano as DAO_Plano;
+	use module\application\model\common\util\Login_Session;
 	
     class Meu_Plano {
 
@@ -15,7 +17,7 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
         		if ($status != 0) {
-        			$view = new View_Meu_Plano($status);
+        		    $view = new View_Meu_Plano($status, DAO_Plano::BuscarTodos(), Login_Session::get_entidade_plano());
         			
         			$view->Executar();
         		}

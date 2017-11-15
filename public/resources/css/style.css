@@ -142,6 +142,10 @@
 	margin-bottom: 25px;
 }
 
+.wellBranco {
+	background-color: white;
+}
+
 .sombra_painel {
 	position: relative;
 	border-radius: 5px;
