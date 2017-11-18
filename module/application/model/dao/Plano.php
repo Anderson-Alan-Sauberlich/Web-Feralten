@@ -96,6 +96,20 @@ namespace module\application\model\dao;
             }
         }
         
+        public static function Buscar_Limite_Por_Id(int $id) {
+            try {
+                $sql = 'SELECT plano_limite_pecas FROM tb_plano WHERE plano_id = :id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function PopulaArrayPlanos(array $rows) : array {
         	$planos = array();
         	

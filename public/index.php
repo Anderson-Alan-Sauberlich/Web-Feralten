@@ -689,10 +689,26 @@
             	});
             	
             	$app->group('/meu-plano', function() use ($app) {
-            		$app->get('/', function(Request $request, Response $response, $args) use ($app) {
+            	    $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+            	        $meu_plano = new module\application\controller\usuario\meu_perfil\financeiro\Meu_Plano();
+            	        
+            	        $resposta = $meu_plano->Carregar_Pagina();
+            	        
+            	        if ($resposta === false) {
+            	            return $response->withRedirect('/usuario/login/');
+            	        } else if ($resposta != 1) {
+            	            return $response->withRedirect('/usuario/meu-perfil/');
+            	        } else {
+            	            return $response;
+            	        }
+            	    });
+            	    
+            		$app->post('/', function(Request $request, Response $response, $args) use ($app) {
             			$meu_plano = new module\application\controller\usuario\meu_perfil\financeiro\Meu_Plano();
             			
-            			$resposta = $meu_plano->Carregar_Pagina();
+            			$meu_plano->set_plano_id(isset($_POST['plano']) ? $_POST['plano'] : null);
+            			
+            			$resposta = $meu_plano->Salvar_Novo_Plano();
             			
             			if ($resposta === false) {
             				return $response->withRedirect('/usuario/login/');

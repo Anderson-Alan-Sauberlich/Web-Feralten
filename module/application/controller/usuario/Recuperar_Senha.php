@@ -82,11 +82,11 @@ namespace module\application\controller\usuario;
         }
         
         public function Enviar_Link_Email() : void {
-            $valor = array();
-            $valor['status'] = '';
-            $valor['header'] = '';
-            $valor['content'] = '';
-            $valor['campos'] = $this->campos;
+            $retorno = array();
+            $retorno['status'] = '';
+            $retorno['header'] = '';
+            $retorno['content'] = '';
+            $retorno['campos'] = $this->campos;
             
             if (empty($this->erros)) {
                 $this->object_recuperar_senha->set_codigo(bin2hex(random_bytes(40)));
@@ -95,71 +95,71 @@ namespace module\application\controller\usuario;
                     $this->object_recuperar_senha->set_data_hora(date('Y-m-d H:i:s'));
                     
                     if (DAO_Recuperar_Senha::Inserir($this->object_recuperar_senha)) {
-                        $valor['status'] = 'certo';
-                        $valor['header'] = '<h3>Enviado com Sucesso</h3>';
-                        $valor['content'] = '<p>Link enviado com sucesso para sua conta de E-Mail!</p>
+                        $retorno['status'] = 'certo';
+                        $retorno['header'] = '<h3>Enviado com Sucesso</h3>';
+                        $retorno['content'] = '<p>Link enviado com sucesso para sua conta de E-Mail!</p>
                                              <p>Verifique seus e-mails e siga os passos sugeridos para criar uma nova senha.</p>';
                     } else {
-                        $valor['status'] = 'erro';
-                        $valor['header'] = '<h3>Erro ao tentar salvar código</h3>';
-                        $valor['content'] = '<p>Desculpe, servidor de Banco de Dados Offline</p>';
+                        $retorno['status'] = 'erro';
+                        $retorno['header'] = '<h3>Erro ao tentar salvar código</h3>';
+                        $retorno['content'] = '<p>Desculpe, servidor de Banco de Dados Offline</p>';
                     }
                 } else {
-                    $valor['status'] = 'erro';
-                    $valor['header'] = '<h3>Erro ao tentar enviar e-mail</h3>';
-                    $valor['content'] = '<p>Desculpe, servidor de e-mail Offline</p>';
+                    $retorno['status'] = 'erro';
+                    $retorno['header'] = '<h3>Erro ao tentar enviar e-mail</h3>';
+                    $retorno['content'] = '<p>Desculpe, servidor de e-mail Offline</p>';
                 }
             } else {
-                $valor['status'] = 'erro';
-                $valor['header'] = '<h3>Erro ao tentar enviar e-mail</h3>';
+                $retorno['status'] = 'erro';
+                $retorno['header'] = '<h3>Erro ao tentar enviar e-mail</h3>';
                 
                 foreach ($this->erros as $erro) {
-                    $valor['content'] .= "<p>$erro</p>";
+                    $retorno['content'] .= "<p>$erro</p>";
                 }
             }
             
-            echo json_encode($valor);
+            echo json_encode($retorno);
         }
         
         public function Salvar_Senha() : void {
-            $valor = array();
-            $valor['status'] = '';
-            $valor['header'] = '';
-            $valor['content'] = '';
-            $valor['campos'] = $this->campos;
+            $retorno = array();
+            $retorno['status'] = '';
+            $retorno['header'] = '';
+            $retorno['content'] = '';
+            $retorno['campos'] = $this->campos;
             
             if (empty($this->erros)) {
                 if (!empty($this->object_recuperar_senha->get_object_usuario())) {
                     $this->senha_nova = password_hash($this->senha_nova, PASSWORD_DEFAULT);
                     
                     if (DAO_Usuario::Atualizar_Senha($this->senha_nova, $this->object_recuperar_senha->get_object_usuario()->get_id()) === false) {
-                        $valor['status'] = 'erro';
-                        $valor['header'] = '<h3>Erro Salvar Nova Senha</h3>';
-                        $valor['content'] = '<p>Desculpe, não foi possível salvar a nova senha</p>';
+                        $retorno['status'] = 'erro';
+                        $retorno['header'] = '<h3>Erro Salvar Nova Senha</h3>';
+                        $retorno['content'] = '<p>Desculpe, não foi possível salvar a nova senha</p>';
                     } else {
                         DAO_Recuperar_Senha::Deletar($this->object_recuperar_senha->get_object_usuario()->get_id());
                         
                         Controller_Login::ReAutenticar_Usuario_Logado($this->object_recuperar_senha->get_object_usuario()->get_id());
                         
-                        $valor['status'] = 'certo';
-                        $valor['header'] = '<h3>Senha Alterada com Sucesso</h3>';
-                        $valor['content'] = '<p>Clique no Link para Entrar com sua Nova Senha: <a>/usuario/login/</a></p>';
+                        $retorno['status'] = 'certo';
+                        $retorno['header'] = '<h3>Senha Alterada com Sucesso</h3>';
+                        $retorno['content'] = '<p>Clique no Link para Entrar com sua Nova Senha: <a>/usuario/login/</a></p>';
                     }
                 } else {
-                    $valor['status'] = 'erro';
-                    $valor['header'] = '<h3>Erro Codigo Usuario</h3>';
-                    $valor['content'] = '<p>Desculpe, código de usuario invalido</p>';
+                    $retorno['status'] = 'erro';
+                    $retorno['header'] = '<h3>Erro Codigo Usuario</h3>';
+                    $retorno['content'] = '<p>Desculpe, código de usuario invalido</p>';
                 }
             } else {
-                $valor['status'] = 'erro';
-                $valor['header'] = '<h3>Erro ao tentar salvar nova senha</h3>';
+                $retorno['status'] = 'erro';
+                $retorno['header'] = '<h3>Erro ao tentar salvar nova senha</h3>';
                 
                 foreach ($this->erros as $erro) {
-                    $valor['content'] .= "<p>$erro</p>";
+                    $retorno['content'] .= "<p>$erro</p>";
                 }
             }
             
-            echo json_encode($valor);
+            echo json_encode($retorno);
         }
     }
 ?>

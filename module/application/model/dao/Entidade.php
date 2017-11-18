@@ -102,11 +102,11 @@ namespace module\application\model\dao;
                 entidade_pln_id = :pln_id,
                 entidade_int_pag_id = :int_pag_id,
                 entidade_data_contratacao_plano = :data_cnt_pln 
-                WHERE entidade_usr_id = :us_id";
+                WHERE entidade_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':us_id', $object_entidade->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $object_entidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':pln_id', $object_entidade->get_plano_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':int_pag_id', $object_entidade->get_intervalo_pagamento_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_cnt_pln', $object_entidade->get_data_contratacao_plano(), PDO::PARAM_STR);
