@@ -14,9 +14,15 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 	use module\application\model\dao\Endereco as DAO_Endereco;
     use module\application\model\dao\Estado as DAO_Estado;
     use module\application\model\dao\Cidade as DAO_Cidade;
+    use module\application\model\dao\Plano as DAO_Plano;
+    use module\application\model\dao\Fatura as DAO_Fatura;
+    use module\application\model\object\Fatura as Object_Fatura;
+    use module\application\model\object\Status_Fatura as Object_Status_Fatura;
 	use module\application\view\src\usuario\meu_perfil\meus_dados\Concluir as View_Concluir;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
 	use module\application\controller\usuario\Login as Controller_Login;
+	use \DateTime;
+	use \DateInterval;
     use \Exception;
 	
     class Concluir {
@@ -242,6 +248,25 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 		            		if ($id_entidade != false) {
 		            			Login_Session::set_entidade_id($id_entidade);
 		            			Login_Session::set_entidade_plano(1);
+		            			
+		            			$object_fatura = new Object_Fatura();
+		            			
+		            			$object_fatura->set_id(0);
+		            			$object_fatura->set_entidade_id(Login_Session::get_entidade_id());
+		            			$object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD(1));
+		            			
+		            			$datetime = new DateTime();
+		            			$object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
+		            			$datetime->add(new DateInterval('P30D'));
+		            			$object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
+		            			
+		            			$object_status = new Object_Status_Fatura();
+		            			$object_status->set_id(1);
+		            			$object_fatura->set_object_status($object_status);
+		            			
+		            			if (!DAO_Fatura::Inserir($object_fatura)) {
+		            			    $this->concluir_erros[] = 'Erro ao tentar gerar Fatura';
+		            			}
 			                	
 			                	$imagem = $this->Salvar_Imagem();
 			                	

@@ -4,10 +4,15 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
 	use module\application\view\src\usuario\meu_perfil\financeiro\Meu_Plano as View_Meu_Plano;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
 	use module\application\model\dao\Plano as DAO_Plano;
+	use module\application\model\dao\Fatura as DAO_Fatura;
+	use module\application\model\object\Fatura as Object_Fatura;
+	use module\application\model\object\Status_Fatura as Object_Status_Fatura;
 	use module\application\model\dao\Entidade as DAO_Entidade;
 	use module\application\model\object\Entidade as Object_Entidade;
 	use module\application\model\common\util\Login_Session;
 	use module\application\model\common\util\Validador;
+	use \DateTime;
+	use \DateInterval;
 	use \Exception;
 	
     class Meu_Plano {
@@ -61,8 +66,24 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
                         
                         if (DAO_Entidade::Atualizar_Financeiro($object_entidade)) {
                             Login_Session::set_entidade_plano($this->plano_id);
+                            
+                            $object_fatura = new Object_Fatura();
+                            
+                            $object_fatura->set_id(0);
+                            $object_fatura->set_entidade_id(Login_Session::get_entidade_id());
+                            $object_fatura->set_data_emissao(date('Y-m-d H:i:s'));
+                            $object_fatura->set_data_vencimento(date('Y-m-d H:i:s'));
+                            $object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD($this->plano_id));
+                            
+                            $object_status = new Object_Status_Fatura();
+                            $object_status->set_id(2);
+                            $object_fatura->set_object_status($object_status);
+                            
+                            if (!DAO_Fatura::Inserir($object_fatura)) {
+                                $this->erros[] = 'Erro ao tentar gerar Fatura';
+                            }
                         } else {
-                            $this->erros[] = 'Erro ao tentar Ativar o novo plano';
+                            $this->erros[] = 'Erro ao tentar Ativar novo plano';
                         }
                         
                     }

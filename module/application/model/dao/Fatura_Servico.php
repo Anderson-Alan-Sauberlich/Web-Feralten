@@ -7,7 +7,7 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Fatura {
+    class Fatura_Servico {
         
         function __construct() {
             

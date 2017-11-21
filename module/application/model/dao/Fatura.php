@@ -23,7 +23,7 @@ namespace module\application\model\dao;
 
                 $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
@@ -39,7 +39,7 @@ namespace module\application\model\dao;
                 $sql = "UPDATE tb_fatura SET
                 		fatura_id = :id,
                 		fatura_ent_id = :ent_id,
-               			fatura_valor_total = :vrl_ttl,
+               			fatura_valor_total = :vlr_ttl,
                 		fatura_sts_ftr_id = :sts_ftr_id,
                         fatura_data_emissao = :data_ems,
                         fatura_data_vencimento = :data_vcm 
@@ -49,7 +49,7 @@ namespace module\application\model\dao;
 
                 $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
