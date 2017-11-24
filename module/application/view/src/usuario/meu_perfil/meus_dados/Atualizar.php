@@ -6,9 +6,11 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
     use module\application\controller\usuario\meu_perfil\meus_dados\Atualizar as Controller_Atualizar;
     use module\application\view\src\layout\menu\Usuario as View_Usuario;
     
-    class Atualizar {
+    class Atualizar
+    {
     	
-        function __construct(?int $status = null) {
+        function __construct(?int $status = null)
+        {
         	self::$status_usuario = $status;
         }
         
@@ -20,39 +22,48 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         private static $entidade_form;
         private static $usuario_form;
         
-        public function set_atualizar_erros(?array $atualizar_erros = null) : void {
+        public function set_atualizar_erros(?array $atualizar_erros = null) : void
+        {
         	self::$atualizar_erros = $atualizar_erros;
         }
         
-        public function set_atualizar_campos(?array $atualizar_campos = null) : void {
+        public function set_atualizar_campos(?array $atualizar_campos = null) : void
+        {
         	self::$atualizar_campos = $atualizar_campos;
         }
         
-        public function set_atualizar_form(?array $atualizar_form = null) : void {
+        public function set_atualizar_form(?array $atualizar_form = null) : void
+        {
         	self::$atualizar_form = $atualizar_form;
         }
         
-        public function set_entidade_form(?Object_Entidade $entidade_form = null) : void {
+        public function set_entidade_form(?Object_Entidade $entidade_form = null) : void
+        {
         	self::$entidade_form = $entidade_form;
         }
         
-        public function set_usuario_form(?Object_Usuario $usuario_form = null) : void {
+        public function set_usuario_form(?Object_Usuario $usuario_form = null) : void
+        {
         	self::$usuario_form = $usuario_form;
         }
         
-        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void {
+        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void
+        {
         	self::$atualizar_sucesso = $atualizar_sucesso;
         }
         
-        public function Executar() : void {
+        public function Executar() : void
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/meus_dados/Atualizar.php';
         }
         
-        public static function Incluir_Menu_Usuario() : void {
+        public static function Incluir_Menu_Usuario() : void
+        {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'atualizar'));
         }
         
-        public static function Manter_Valor(?string $quadro = null, ?string $campo = null) : void {
+        public static function Manter_Valor(?string $quadro = null, ?string $campo = null) : void
+        {
             if (!empty(self::$atualizar_form)) {
                 if (isset(self::$atualizar_form[$campo])) {
                     echo self::$atualizar_form[$campo];
@@ -64,7 +75,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 		
-		public static function Manter_Imagem() : void {
+		public static function Manter_Imagem() : void
+		{
 			if (isset($_SESSION['imagem_tmp'])) {
 				if ($_SESSION['imagem_tmp'] == "del") {
 					echo "/resources/img/imagem_indisponivel.png";
@@ -80,7 +92,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        public static function Mostrar_Erros() : void {
+        public static function Mostrar_Erros() : void
+        {
             if (!empty(self::$atualizar_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$atualizar_erros as $value) {
@@ -90,7 +103,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Sucesso() : void {
+        public static function Mostrar_Sucesso() : void
+        {
             if (!empty(self::$atualizar_sucesso)) {
 				echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$atualizar_sucesso as $value) {
@@ -100,7 +114,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Incluir_Classe_Erros(?string $quadro = null, ?string $campo = null) : void {
+        public static function Incluir_Classe_Erros(?string $quadro = null, ?string $campo = null) : void
+        {
             switch ($quadro) {
                 
                 case "usuario":
@@ -114,7 +129,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }            
         }
         
-        private function Incluir_Classe_Erros_Usuario(?string $campo = null) : void {
+        private function Incluir_Classe_Erros_Usuario(?string $campo = null) : void
+        {
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
 	            	case "fone":
@@ -180,7 +196,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        private function Incluir_Classe_Erros_Entidade(?string $campo = null) : void {
+        private function Incluir_Classe_Erros_Entidade(?string $campo = null) : void
+        {
         	if (!empty(self::$atualizar_campos)) {
 	            switch ($campo) {
 	            	
@@ -217,7 +234,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        private static function Pegar_Valor(?string $quadro = null, ?string $campo = null) : void {
+        private static function Pegar_Valor(?string $quadro = null, ?string $campo = null) : void
+        {
         	switch ($quadro) {
         		case "usuario":
         			if ($campo == "nome") {
@@ -247,4 +265,3 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         	}
         }
     }
-?>

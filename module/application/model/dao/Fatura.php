@@ -8,13 +8,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Fatura {
+    class Fatura
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Fatura $object_fatura) : bool {
+        public static function Inserir(Object_Fatura $object_fatura) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_fatura (fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento) 
                         VALUES (:id, :ent_id, :vlr_ttl, :sts_ftr_id, :data_ems, :data_vcm);";
@@ -34,7 +37,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Fatura $object_fatura) : bool {
+        public static function Atualizar(Object_Fatura $object_fatura) : bool
+        {
             try {
                 $sql = "UPDATE tb_fatura SET
                 		fatura_id = :id,
@@ -60,7 +64,8 @@ namespace module\application\model\dao;
             }
         }
  
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_fatura WHERE fatura_id = :id';
                 
@@ -73,7 +78,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento FROM tb_fatura WHERE fatura_id = :id';
                 
@@ -87,7 +93,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayFaturas(array $rows) : array {
+        public static function PopulaArrayFaturas(array $rows) : array
+        {
         	$faturas = array();
         	
         	foreach ($rows as $row) {
@@ -123,7 +130,8 @@ namespace module\application\model\dao;
         	return $faturas;
         }
         
-        public static function PopulaFatura(array $row) : Object_Fatura {
+        public static function PopulaFatura(array $row) : Object_Fatura
+        {
             $object_fatura = new Object_Fatura();
             
             if (isset($row['fatura_id'])) {
@@ -153,4 +161,3 @@ namespace module\application\model\dao;
             return $object_fatura;
         }
     }
-?>

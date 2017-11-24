@@ -6,13 +6,16 @@ namespace module\application\model\validador;
     use module\application\model\dao\Peca as DAO_Peca;
 	use \Exception;
 	
-    class Plano {
+    class Plano
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 		    if (empty($id)) {
 		        throw new Exception("Selecione um Plano");
 		    } else {
@@ -38,23 +41,28 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_valor_mensal($valor_mensal = null) : void {
+		public static function validar_valor_mensal($valor_mensal = null) : void
+		{
 			
 		}
 		
-		public static function validar_valor_anual($valor_anual = null) : void {
+		public static function validar_valor_anual($valor_anual = null) : void
+		{
 			
 		}
 		
-		public static function validar_limite_pecas($limite_pecas = null) : void {
+		public static function validar_limite_pecas($limite_pecas = null) : void
+		{
 			
 		}
 		
-		public static function validar_descricao($descricao = null) : void {
+		public static function validar_descricao($descricao = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 		    $valor = 0;
 		    
 		    if (!empty($id) AND filter_var($id, FILTER_VALIDATE_FLOAT)) {
@@ -64,20 +72,23 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
 		
-		public static function filtrar_valor_mensal($valor_mensal = null) : void {
+		public static function filtrar_valor_mensal($valor_mensal = null) : void
+		{
 		    
 		}
 		
-		public static function filtrar_valor_anual($valor_anual = null) : void {
+		public static function filtrar_valor_anual($valor_anual = null) : void
+		{
 		    
 		}
 		
-		public static function filtrar_limite_pecas($limite_pecas = null) : void {
+		public static function filtrar_limite_pecas($limite_pecas = null) : void
+		{
 		    
 		}
 		
-		public static function filtrar_descricao($descricao = null) : void {
+		public static function filtrar_descricao($descricao = null) : void
+		{
 		    
 		}
     }
-?>

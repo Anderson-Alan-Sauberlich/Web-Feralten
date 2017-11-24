@@ -1,10 +1,11 @@
 <?php
 namespace module\administration\controller\layout\head;
 
-    class Admin {
+    class Admin
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
     }
-?>

@@ -125,4 +125,3 @@ namespace module\application\model\common\util;
 		
 		public static function Visualizado() : Visualizado { return new Visualizado(); }
 	}
-?>

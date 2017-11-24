@@ -3,13 +3,16 @@ namespace module\application\controller\layout\menu;
     
     use module\application\model\common\util\Login_Session;
     
-    class Usuario {
+    class Usuario
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Verificar_Autenticacao() : bool {
+        public static function Verificar_Autenticacao() : bool
+        {
             if (empty($_SESSION['login'])) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
@@ -21,7 +24,8 @@ namespace module\application\controller\layout\menu;
             }
         }
         
-        public static function Verificar_Status_Usuario() {
+        public static function Verificar_Status_Usuario()
+        {
         	$status = Login_Session::get_entidade_status();
         	
         	if ($status == null) {
@@ -37,8 +41,8 @@ namespace module\application\controller\layout\menu;
         	}
         }
         
-        public static function Mostrar_Nome() {
+        public static function Mostrar_Nome()
+        {
         	return Login_Session::get_usuario_nome();
         }
     }
-?>

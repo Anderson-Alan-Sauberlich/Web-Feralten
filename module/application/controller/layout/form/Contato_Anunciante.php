@@ -9,9 +9,11 @@ namespace module\application\controller\layout\form;
     use module\application\view\src\layout\form\Contato_Anunciante as View_Contato_Anunciante;
 	use \Exception;
 	
-    class Contato_Anunciante {
+    class Contato_Anunciante
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             $this->object_contato_anunciante = new Object_Contato_Anunciante();
         }
         
@@ -19,7 +21,8 @@ namespace module\application\controller\layout\form;
         private $campos = array();
         private $erros = array();
         
-        public function set_nome($nome) : void {
+        public function set_nome($nome) : void
+        {
             try {
                 $this->object_contato_anunciante->set_nome(Validador::Contato_Anunciante()::validar_nome($nome));
             } catch (Exception $e) {
@@ -28,7 +31,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_email($email) : void {
+        public function set_email($email) : void
+        {
             try {
                 $this->object_contato_anunciante->set_email(Validador::Contato_Anunciante()::validar_email($email));
             } catch (Exception $e) {
@@ -37,7 +41,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_telefone($telefone) : void {
+        public function set_telefone($telefone) : void
+        {
             try {
                 $this->object_contato_anunciante->set_telefone(Validador::Contato_Anunciante()::validar_telefone($telefone));
             } catch (Exception $e) {
@@ -46,7 +51,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_whatsapp($whatsapp) : void {
+        public function set_whatsapp($whatsapp) : void
+        {
             try {
                 $this->object_contato_anunciante->set_whatsapp(Validador::Contato_Anunciante()::validar_whatsapp($whatsapp));
             } catch (Exception $e) {
@@ -55,7 +61,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_mensagem($mensagem) : void {
+        public function set_mensagem($mensagem) : void
+        {
             try {
                 $this->object_contato_anunciante->set_mensagem(Validador::Contato_Anunciante()::validar_mensagem($mensagem));
             } catch (Exception $e) {
@@ -64,7 +71,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_peca_id($peca_id) : void {
+        public function set_peca_id($peca_id) : void
+        {
             try {
                 $this->object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD(Validador::Contato_Anunciante()::validar_peca_id($peca_id)));
             } catch (Exception $e) {
@@ -72,7 +80,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function Carregar_Pagina() : void {
+        public function Carregar_Pagina() : void
+        {
             $view = new View_Contato_Anunciante();
             
             $view->set_peca_id($this->object_contato_anunciante->get_object_peca()->get_id());
@@ -80,7 +89,8 @@ namespace module\application\controller\layout\form;
             $view->Executar();
         }
         
-        public function Enviar_Email() : void {
+        public function Enviar_Email() : void
+        {
             $valor = array();
             $valor['status'] = '';
             $valor['html'] = '';
@@ -110,4 +120,3 @@ namespace module\application\controller\layout\form;
             echo json_encode($valor);
         }
     }
-?>

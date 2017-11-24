@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Plano {
+    class Plano
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Plano $object_plano) : bool {
+        public static function Inserir(Object_Plano $object_plano) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_plano (plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao) 
                         VALUES (:id, :vlr_msl, :vlr_anl, :lmt_pcs, :dsc);";
@@ -32,7 +35,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Plano $object_plano) : bool {
+        public static function Atualizar(Object_Plano $object_plano) : bool
+        {
             try {
                 $sql = "UPDATE tb_plano SET
                 		plano_id = :id,
@@ -56,7 +60,8 @@ namespace module\application\model\dao;
             }
         }
  
-         public static function Deletar(int $id) : bool {
+         public static function Deletar(int $id) : bool
+         {
             try {
                 $sql = 'DELETE FROM tb_plano WHERE plano_id = :id';
                 
@@ -69,7 +74,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao FROM tb_plano';
                 
@@ -82,7 +88,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao FROM tb_plano WHERE plano_id = :id';
                 
@@ -96,7 +103,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarValorMensalPorCOD(int $id) {
+        public static function BuscarValorMensalPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT plano_valor_mensal FROM tb_plano WHERE plano_id = :id';
                 
@@ -110,7 +118,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Limite_Por_Id(int $id) {
+        public static function Buscar_Limite_Por_Id(int $id)
+        {
             try {
                 $sql = 'SELECT plano_limite_pecas FROM tb_plano WHERE plano_id = :id';
                 
@@ -124,7 +133,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayPlanos(array $rows) : array {
+        public static function PopulaArrayPlanos(array $rows) : array
+        {
         	$planos = array();
         	
         	foreach ($rows as $row) {
@@ -169,7 +179,8 @@ namespace module\application\model\dao;
         	return $planos;
         }
         
-        public static function PopulaPlano(array $row) : Object_Plano {
+        public static function PopulaPlano(array $row) : Object_Plano
+        {
             $object_plano = new Object_Plano();
             
             if (isset($row['plano_id'])) {
@@ -195,4 +206,3 @@ namespace module\application\model\dao;
             return $object_plano;
         }
     }
-?>

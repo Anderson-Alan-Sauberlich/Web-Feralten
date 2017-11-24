@@ -1,23 +1,28 @@
 <?php
 namespace module\administration\view\src\admin;
 
-	class Login {
+	class Login
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 			
 		}
 		
 		private static $login_admin_erros;
 		
-		public function set_login_admin_erros(?array $login_admin_erros = null) : void {
+		public function set_login_admin_erros(?array $login_admin_erros = null) : void
+		{
 			self::$login_admin_erros = $login_admin_erros;
 		}
 		
-		public function Executar() : void {
+		public function Executar() : void
+		{
 			require_once RAIZ.'/module/administration/view/html/admin/Login.php';
 		}
 		
-		public static function Mostrar_Erros() : void {
+		public static function Mostrar_Erros() : void
+		{
 			$login_admin_erros = null;
 			 
 			if (!empty(self::$login_admin_erros)) {
@@ -34,4 +39,3 @@ namespace module\administration\view\src\admin;
 			}
 		}
 	}
-?>

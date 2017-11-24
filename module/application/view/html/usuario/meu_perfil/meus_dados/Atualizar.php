@@ -28,7 +28,7 @@
                                 	<label for="nome" class="lbPanel">Digite Seu Nome:</label>
                                     <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "nome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite seu Nome. (Campo Obrigatório)" />
+                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite Apenas seu Nome. (Campo Obrigatório)" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

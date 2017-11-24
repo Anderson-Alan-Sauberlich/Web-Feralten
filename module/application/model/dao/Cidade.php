@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Cidade {
+    class Cidade
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Cidade $object_cidade) : bool {
+        public static function Inserir(Object_Cidade $object_cidade) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_cidade (cidade_id, cidade_est_id, cidade_nome, cidade_url) 
                         VALUES (:id, :es_id, :nome, :url);";
@@ -31,7 +34,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Cidade $object_cidade) : bool {
+        public static function Atualizar(Object_Cidade $object_cidade) : bool
+        {
             try {
                 $sql = "UPDATE tb_cidade SET
                 cidade_id = :id,
@@ -53,7 +57,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_cidade WHERE cidade_id = :id';
                 
@@ -66,7 +71,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_est_id = :id';
                 
@@ -80,7 +86,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_ID_Cidade(int $id) {
+        public static function Buscar_Por_ID_Cidade(int $id)
+        {
             try {
                 $sql = 'SELECT cidade_id, cidade_est_id, cidade_nome, cidade_url FROM tb_cidade WHERE cidade_id = :id';
                 
@@ -94,7 +101,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Url(string $url) {
+        public static function Buscar_Id_Por_Url(string $url)
+        {
         	try {
         		$sql = 'SELECT cidade_id FROM tb_cidade WHERE cidade_url = :url';
         		
@@ -108,7 +116,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaCidades(array $rows) : array {
+        public static function PopulaCidades(array $rows) : array
+        {
             $cidades = array();
             
             foreach ($rows as $row) {
@@ -136,7 +145,8 @@ namespace module\application\model\dao;
             return $cidades;
         }
         
-        public static function PopulaCidade(array $row) : Object_Cidade {
+        public static function PopulaCidade(array $row) : Object_Cidade
+        {
             $object_cidade = new Object_Cidade();
             
             if (isset($row['cidade_id'])) {
@@ -158,4 +168,3 @@ namespace module\application\model\dao;
             return $object_cidade;
         }
     }
-?>

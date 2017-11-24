@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Peca {
+    class Peca
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 			if (!empty($id)) {
 				if (filter_var($id, FILTER_VALIDATE_INT) !== false) {
 					return $id;
@@ -21,11 +24,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_entidade($entidade = null) : void {
+		public static function validar_entidade($entidade = null) : void
+		{
 			
 		}
 		
-		public static function validar_responsavel($usuario_responsavel = null) : int {
+		public static function validar_responsavel($usuario_responsavel = null) : int
+		{
 			if (!empty($usuario_responsavel)) {
 				if (filter_var($usuario_responsavel, FILTER_VALIDATE_INT) !== false) {
 					return $usuario_responsavel;
@@ -37,7 +42,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_nome($nome = null) : string {
+		public static function validar_nome($nome = null) : string
+		{
 			if (!empty($nome)) {
 				$valor = strip_tags($nome);
 				
@@ -58,7 +64,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_url($url = null) : string {
+		public static function validar_url($url = null) : string
+		{
 		    if (!empty($url)) {
 		        $valor = strip_tags($url);
 		        
@@ -79,7 +86,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_fabricante($fabricante = null) : ?string {
+		public static function validar_fabricante($fabricante = null) : ?string
+		{
 			if (!empty($fabricante)) {
 				$valor = strip_tags($fabricante);
 				
@@ -100,7 +108,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_serie($serie = null) : ?string {
+		public static function validar_serie($serie = null) : ?string
+		{
 			if (!empty($serie)) {
 				$valor = strip_tags($serie);
 				
@@ -121,11 +130,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_endereco($endereco = null) : void {
+		public static function validar_endereco($endereco = null) : void
+		{
 			
 		}
 		
-		public static function validar_preco($preco = null) : ?float {
+		public static function validar_preco($preco = null) : ?float
+		{
 			if (!empty($preco)) {
 				if (filter_var($preco, FILTER_VALIDATE_FLOAT)) {
 					return $preco;
@@ -137,7 +148,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_ordem_preco($ordem_preco = null) : ?string {
+		public static function validar_ordem_preco($ordem_preco = null) : ?string
+		{
 			if (!empty($ordem_preco)) {
 				$valor = strip_tags($ordem_preco);
 				
@@ -153,11 +165,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_data_anuncio($data_anuncio = null) : void {
+		public static function validar_data_anuncio($data_anuncio = null) : void
+		{
 			
 		}
 		
-		public static function validar_ordem_data($ordem_data) {
+		public static function validar_ordem_data($ordem_data)
+		{
 			if (!empty($ordem_data)) {
 				$valor = strip_tags($ordem_data);
 				
@@ -173,7 +187,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_descricao($descricao = null) : ?string {
+		public static function validar_descricao($descricao = null) : ?string
+		{
 			if (!empty($descricao)) {
 				$valor = strip_tags($descricao);
 				
@@ -194,7 +209,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_prioridade($prioridade = null) : ?bool {
+		public static function validar_prioridade($prioridade = null) : ?bool
+		{
 			if (!empty($prioridade)) {
 				return true;
 			} else {
@@ -202,7 +218,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_status($status = null) : ?int {
+		public static function validar_status($status = null) : ?int
+		{
 			if (!empty($status)) {
 				if (filter_var($status, FILTER_VALIDATE_INT)) {
 					return $status;
@@ -214,7 +231,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_estado_uso($estado_uso = null) : ?int {
+		public static function validar_estado_uso($estado_uso = null) : ?int
+		{
 		    if (!empty($estado_uso)) {
 		        if (filter_var($estado_uso, FILTER_VALIDATE_INT)) {
 		            return $estado_uso;
@@ -226,15 +244,18 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_fotos($fotos = null) : void {
+		public static function validar_fotos($fotos = null) : void
+		{
 			
 		}
 		
-		public static function validar_foto($foto = null) : void {
+		public static function validar_foto($foto = null) : void
+		{
 			
 		}
 		
-		public static function validar_num_visualizado($num_visualizado = null) : ?int {
+		public static function validar_num_visualizado($num_visualizado = null) : ?int
+		{
 		    if (!empty($num_visualizado)) {
 		        if (filter_var($num_visualizado, FILTER_VALIDATE_INT)) {
 		            return $num_visualizado;
@@ -246,7 +267,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_preferencia_entrega($preferencia_entrega = null) : ?int {
+		public static function validar_preferencia_entrega($preferencia_entrega = null) : ?int
+		{
 			if (!empty($preferencia_entrega)) {
 				$valor = 0;
 				
@@ -270,7 +292,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_pesquisa($pesquisa = null) : ?string {
+		public static function validar_pesquisa($pesquisa = null) : ?string
+		{
 			if (!empty($pesquisa)) {
 				$pesquisa = trim($pesquisa);
 				
@@ -284,7 +307,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_pesquisa($pesquisa = null) : ?string {
+		public static function filtrar_pesquisa($pesquisa = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($pesquisa)) {
@@ -294,7 +318,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_id($id = null) : ?int {
+		public static function filtrar_id($id = null) : ?int
+		{
 			$valor = null;
 			
 			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_INT)) {
@@ -304,11 +329,13 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_entidade($entidade = null) : void {
+		public static function filtrar_entidade($entidade = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_responsavel($usuario_responsavel = null) : ?int {
+		public static function filtrar_responsavel($usuario_responsavel = null) : ?int
+		{
 			$valor = null;
 			
 			if (!empty($usuario_responsavel) AND filter_var($usuario_responsavel, FILTER_VALIDATE_INT)) {
@@ -318,7 +345,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_nome($nome = null) : string {
+		public static function filtrar_nome($nome = null) : string
+		{
 			$valor = "";
 			
 			if (!empty($nome)) {
@@ -328,7 +356,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_url($url = null) : string {
+		public static function filtrar_url($url = null) : string
+		{
 		    $valor = "";
 		    
 		    if (!empty($url)) {
@@ -338,7 +367,8 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
 		
-		public static function filtrar_fabricante($fabricante = null) : ?string {
+		public static function filtrar_fabricante($fabricante = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($fabricante)) {
@@ -348,7 +378,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_serie($serie = null) : ?string {
+		public static function filtrar_serie($serie = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($serie)) {
@@ -358,11 +389,13 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_endereco($endereco = null) : void {
+		public static function filtrar_endereco($endereco = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_preco($preco = null) : ?float {
+		public static function filtrar_preco($preco = null) : ?float
+		{
 			$valor = null;
 			
 			if (!empty($preco) AND filter_var($preco, FILTER_VALIDATE_FLOAT)) {
@@ -372,19 +405,23 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_ordem_preco($ordem_preco = null) : ?string {
+		public static function filtrar_ordem_preco($ordem_preco = null) : ?string
+		{
 			
 		}
 		
-		public static function filtrar_data_anuncio($data_anuncio = null) : void {
+		public static function filtrar_data_anuncio($data_anuncio = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_ordem_data($ordem_data) {
+		public static function filtrar_ordem_data($ordem_data)
+		{
 			
 		}
 		
-		public static function filtrar_descricao($descricao = null) : ?string {
+		public static function filtrar_descricao($descricao = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($descricao)) {
@@ -394,7 +431,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_prioridade($prioridade = null) : ?bool {
+		public static function filtrar_prioridade($prioridade = null) : ?bool
+		{
 			$valor = null;
 			
 			if (!empty($prioridade)) {
@@ -404,7 +442,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_status($status = null) : ?int {
+		public static function filtrar_status($status = null) : ?int
+		{
 			$valor = null;
 			
 			if (!empty($status) AND filter_var($status, FILTER_VALIDATE_INT)) {
@@ -414,7 +453,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_estado($estado = null) : ?int {
+		public static function filtrar_estado($estado = null) : ?int
+		{
 		    $valor = null;
 		    
 		    if (!empty($estado) AND filter_var($estado, FILTER_VALIDATE_INT)) {
@@ -424,15 +464,18 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
 		
-		public static function filtrar_fotos($fotos = null) : void {
+		public static function filtrar_fotos($fotos = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_foto($foto = null) : void {
+		public static function filtrar_foto($foto = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_num_visualizado($num_visualizado = null) : ?int {
+		public static function filtrar_num_visualizado($num_visualizado = null) : ?int
+		{
 		    $valor = null;
 		    
 		    if (!empty($num_visualizado) AND filter_var($num_visualizado, FILTER_VALIDATE_INT)) {
@@ -442,8 +485,8 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
 		
-		public static function filtrar_preferencia_entrega($preferencia_entrega = null) : void {
+		public static function filtrar_preferencia_entrega($preferencia_entrega = null) : void
+		{
 			
 		}
     }
-?>

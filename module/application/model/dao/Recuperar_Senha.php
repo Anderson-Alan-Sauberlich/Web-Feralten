@@ -8,13 +8,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Recuperar_Senha {
+    class Recuperar_Senha
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Recuperar_Senha $object_recuperar_senha) : bool {
+        public static function Inserir(Object_Recuperar_Senha $object_recuperar_senha) : bool
+        {
             try {
                 self::Deletar($object_recuperar_senha->get_object_usuario()->get_id());
                 
@@ -33,7 +36,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Recuperar_Senha $object_recuperar_senha) : bool {
+        public static function Atualizar(Object_Recuperar_Senha $object_recuperar_senha) : bool
+        {
             try {
                 $sql = "UPDATE tb_recuperar_senha SET recuperar_senha_usuario_id = :usr_id, recuperar_senha_data_hora = :data_hora, recuperar_senha_codigo = :codigo WHERE recuperar_senha_usr_id = :usr_id";
 				
@@ -49,7 +53,8 @@ namespace module\application\model\dao;
             }
         }
  		
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_recuperar_senha WHERE recuperar_senha_usr_id = :usr_id';
                 
@@ -62,7 +67,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCodigo(string $codigo) {
+        public static function BuscarPorCodigo(string $codigo)
+        {
             try {
                 $sql = 'SELECT recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo FROM tb_recuperar_senha WHERE recuperar_senha_codigo = :codigo';
                 
@@ -76,7 +82,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorId(int $id) {
+        public static function BuscarPorId(int $id)
+        {
             try {
                 $sql = 'SELECT recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo FROM tb_recuperar_senha WHERE recuperar_senha_usr_id = :usr_id';
                 
@@ -90,7 +97,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT recuperar_senha_usr_id, recuperar_senha_data_hora, recuperar_senha_codigo FROM tb_recuperar_senha';
                 
@@ -103,7 +111,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Popular_Recuperar_Senha(array $row) : Object_Recuperar_Senha {
+        public static function Popular_Recuperar_Senha(array $row) : Object_Recuperar_Senha
+        {
             $object_recuperar_senha = new Object_Recuperar_Senha();
             
             if (isset($row['recuperar_senha_usr_id'])) {
@@ -121,7 +130,8 @@ namespace module\application\model\dao;
             return $object_recuperar_senha;
         }
 		
-        public static function Popular_Recuperar_Senhas(array $rows) : array {
+        public static function Popular_Recuperar_Senhas(array $rows) : array
+        {
 			$recuperar_senhas = array();
 			
 			foreach ($rows as $row) {
@@ -145,4 +155,3 @@ namespace module\application\model\dao;
 			return $recuperar_senhas;
 		}
     }
-?>

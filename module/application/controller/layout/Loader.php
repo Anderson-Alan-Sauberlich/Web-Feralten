@@ -1,11 +1,12 @@
 <?php
 namespace module\application\controller\layout;
 	
-    class Loader {
+    class Loader
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
     }
-?>

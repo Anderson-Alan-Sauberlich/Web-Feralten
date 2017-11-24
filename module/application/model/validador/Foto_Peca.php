@@ -3,29 +3,36 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Foto_Peca {
+    class Foto_Peca
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public function validar_peca_id($peca_id = null) : void {
+		public function validar_peca_id($peca_id = null) : void
+		{
 			
 		}
 		
-		public function validar_endereco($endereco = null) : void {
+		public function validar_endereco($endereco = null) : void
+		{
 			
 		}
 		
-		public function validar_numero($numero = null) : void {
+		public function validar_numero($numero = null) : void
+		{
 			
 		}
 		
-		public function validar_descricao_nome($img_descricao = null) : ?string {
+		public function validar_descricao_nome($img_descricao = null) : ?string
+		{
 			
 		}
 		
-		public function validar_imagem($imagem = null, $numero = null) : ?array {
+		public function validar_imagem($imagem = null, $numero = null) : ?array
+		{
 			if (isset($numero) AND !empty($numero) AND filter_var($numero, FILTER_VALIDATE_INT)) {
 				if (isset($imagem['name']) AND !empty($imagem['name'])) {
 					if (isset($imagem['error']) AND $imagem['error'] === 0) {
@@ -55,20 +62,23 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public function filtrar_peca_id($peca_id = null) : void {
+		public function filtrar_peca_id($peca_id = null) : void
+		{
 			
 		}
 		
-		public function filtrar_endereco($endereco = null) : void {
+		public function filtrar_endereco($endereco = null) : void
+		{
 			
 		}
 		
-		public function filtrar_numero($numero = null) : void {
+		public function filtrar_numero($numero = null) : void
+		{
 			
 		}
 		
-		public function filtrar_imagem($imagem = null) : void {
+		public function filtrar_imagem($imagem = null) : void
+		{
 			
 		}
     }
-?>

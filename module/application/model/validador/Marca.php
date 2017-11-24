@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Marca {
+    class Marca
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 			if (empty($id)) {
 				throw new Exception("Selecione a Marca");
 			} else {
@@ -21,15 +24,18 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_categoria_id($categoria_id = null) : void {
+		public static function validar_categoria_id($categoria_id = null) : void
+		{
 			
 		}
 		
-		public static function validar_nome($nome = null) : void {
+		public static function validar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function validar_url($url_marca = null) : string {
+		public static function validar_url($url_marca = null) : string
+		{
 			if (empty($url_marca)) {
 				throw new Exception('URL da Marca não Informado');
 			} else {
@@ -43,7 +49,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 			$valor = 0;
 			
 			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_INT)) {
@@ -53,15 +60,18 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_categoria_id($categoria_id = null) : void {
+		public static function filtrar_categoria_id($categoria_id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_nome($nome = null) : void {
+		public static function filtrar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_url($url_marca = null) : string {
+		public static function filtrar_url($url_marca = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($url_marca) AND filter_var($url_marca, FILTER_VALIDATE_URL)) {
@@ -71,4 +81,3 @@ namespace module\application\model\validador;
 			return $valor;
 		}
     }
-?>

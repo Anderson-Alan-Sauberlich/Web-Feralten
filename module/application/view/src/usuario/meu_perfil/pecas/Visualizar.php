@@ -8,9 +8,11 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 	use module\application\view\src\layout\Card_Peca as View_Card_Peca;
 	use module\application\controller\usuario\meu_perfil\pecas\Visualizar as Controller_Visualizar;
 	
-    class Visualizar {
+    class Visualizar
+    {
     	
-        function __construct($status) {
+        function __construct($status)
+        {
         	self::$status_usuario = $status;
         }
         
@@ -21,47 +23,58 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         private static $pagina;
         private static $paginas;
         
-        public function set_pecas($pecas) : void {
+        public function set_pecas($pecas) : void
+        {
         	self::$pecas = $pecas;
         }
         
-        public function set_pagina($pagina) : void {
+        public function set_pagina($pagina) : void
+        {
         	self::$pagina = $pagina;
         }
         
-        public function set_paginas($paginas) : void {
+        public function set_paginas($paginas) : void
+        {
         	self::$paginas = $paginas;
         }
         
-        public function set_form_pesquisa($form_pesquisa) : void {
+        public function set_form_pesquisa($form_pesquisa) : void
+        {
         	self::$form_pesquisa = $form_pesquisa;
         }
         
-        public function set_form_filtro($form_filtro) : void {
+        public function set_form_filtro($form_filtro) : void
+        {
         	self::$form_filtro = $form_filtro;
         }
         
-        public function Executar() {
+        public function Executar()
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/pecas/Visualizar.php';
         }
         
-        public static function Incluir_Menu_Pesquisa() {
+        public static function Incluir_Menu_Pesquisa()
+        {
         	new View_Pesquisa(self::$form_pesquisa);
         }
         
-        public static function Incluir_Menu_Usuario() {
+        public static function Incluir_Menu_Usuario()
+        {
         	new View_Usuario(self::$status_usuario, array('pecas', 'visualizar'));
         }
         
-        public static function Incluir_Menu_Filtro() {
+        public static function Incluir_Menu_Filtro()
+        {
         	new View_Filtro(self::$form_filtro);
         }
         
-        public static function Incluir_Menu_Paginacao() {
+        public static function Incluir_Menu_Paginacao()
+        {
         	new View_Paginacao(self::$pagina, self::$paginas);
         }
         
-        public static function Mostrar_Cards_Pecas() {
+        public static function Mostrar_Cards_Pecas()
+        {
         	if (!empty(self::$pecas)) {
 	        	foreach (self::$pecas as $peca) {
 	        		$card_peca = new View_Card_Peca();
@@ -74,4 +87,3 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
     }
-?>

@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Modelo {
+    class Modelo
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Modelo $object_modelo) : bool {
+        public static function Inserir(Object_Modelo $object_modelo) : bool
+        {
             try {
                 if (empty($object_modelo->get_id())) {
                     $object_modelo->set_id(self::Achar_ID_Livre($object_modelo->get_marca_id()));
@@ -46,7 +49,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Modelo $object_modelo) : bool {
+        public static function Atualizar(Object_Modelo $object_modelo) : bool
+        {
             try {
                 $sql = "UPDATE tb_modelo SET modelo_mrc_id = :ma_id, modelo_nome = :nome, modelo_url = :url WHERE modelo_id = :id";
 
@@ -63,7 +67,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 DAO_Modelo_Compativel::Deletar($id);
                 
@@ -78,7 +83,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $marca_id) : ?int {
+        public static function Achar_ID_Livre(int $marca_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_modelo(:ma_id)';
                 
@@ -94,7 +100,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo';
                 
@@ -107,7 +114,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
                 
@@ -121,7 +129,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        public static function Buscar_Nome_URL_Por_ID(int $id)
+        {
         	try {
         		$sql = 'SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
         
@@ -135,7 +144,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Marca_Id(int $id) {
+        public static function Buscar_Marca_Id(int $id)
+        {
             try {
                 $sql = 'SELECT modelo_mrc_id FROM tb_modelo WHERE modelo_id = :id';
                 
@@ -149,7 +159,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Marca(int $id) {
+        public static function Buscar_Por_Id_Marca(int $id)
+        {
             try {
                 $sql = 'SELECT modelo_id, modelo_mrc_id, modelo_nome, modelo_url FROM tb_modelo WHERE modelo_mrc_id = :id ORDER BY modelo_nome';
                 
@@ -163,7 +174,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Marca(int $id) {
+        public static function Buscar_Id_Por_Id_Marca(int $id)
+        {
         	try {
         		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :id';
         
@@ -183,7 +195,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_ID_Por_URL(int $marca_id, string $url) {
+        public static function Buscar_ID_Por_URL(int $marca_id, string $url)
+        {
         	try {
         		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND modelo_url = :url';
         
@@ -198,7 +211,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool {
+        public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool
+        {
         	try {
         		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)';
         
@@ -220,7 +234,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaModelo(array $row) : Object_Modelo {
+        public static function PopulaModelo(array $row) : Object_Modelo
+        {
             $object_modelo = new Object_Modelo();
             
             if (isset($row['modelo_id'])) {
@@ -242,7 +257,8 @@ namespace module\application\model\dao;
             return $object_modelo;
         }
         
-        public function PopulaModelos(array $rows) : array {
+        public function PopulaModelos(array $rows) : array
+        {
             $modelos = array();
             
             foreach ($rows as $row) {
@@ -270,4 +286,3 @@ namespace module\application\model\dao;
             return $modelos;
         }
     }
-?>

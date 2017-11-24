@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Adicionado {
+    class Adicionado
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Adicionado $object_adicionado) : bool {
+        public static function Inserir(Object_Adicionado $object_adicionado) : bool
+        {
             try {
                 $object_adicionado->set_id(self::Achar_ID_Livre($object_adicionado->get_object_entidade()->get_id()));
                 
@@ -35,7 +38,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Adicionado $object_adicionado) : bool {
+        public static function Atualizar(Object_Adicionado $object_adicionado) : bool
+        {
             try {
                 $sql = "UPDATE tb_adicionado SET
                 adicionado_id = :id,
@@ -57,7 +61,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_adicionado WHERE adicionado_id = :id';
                 
@@ -70,7 +75,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $entidade_id) : ?int {
+        public static function Achar_ID_Livre(int $entidade_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_adicionado(:ent_id)';
                 
@@ -86,7 +92,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT adicionado_id, adicionado_ent_id, adicionado_usr_id, adicionado_datahora FROM tb_adicionado WHERE adicionado_id = :id';
                 
@@ -100,7 +107,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD_Entidade(int $id) {
+        public static function BuscarPorCOD_Entidade(int $id)
+        {
             try {
                 $sql = 'SELECT adicionado_id, adicionado_ent_id, adicionado_usr_id, adicionado_datahora FROM tb_adicionado WHERE adicionado_ent_id = :id';
                 
@@ -114,7 +122,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Popula_Adicionados(array $rows) : array {
+        public static function Popula_Adicionados(array $rows) : array
+        {
             $adicionados = array();
             
             foreach ($rows as $row) {
@@ -142,7 +151,8 @@ namespace module\application\model\dao;
             return $adicionados;
         }
         
-        public static function Popula_Adicionado(array $row) : Object_Adicionado {
+        public static function Popula_Adicionado(array $row) : Object_Adicionado
+        {
             $object_adicionado = new Object_Adicionado();
             
             if (isset($row['adicionado_id'])) {
@@ -164,4 +174,3 @@ namespace module\application\model\dao;
             return $object_adicionado;
         }
     }
-?>

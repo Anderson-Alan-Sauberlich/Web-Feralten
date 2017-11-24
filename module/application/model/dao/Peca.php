@@ -18,13 +18,16 @@ namespace module\application\model\dao;
     use \Exception;
     use \PDOStatement;
 	
-    class Peca {
+    class Peca
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Peca $object_peca) {
+        public static function Inserir(Object_Peca $object_peca)
+        {
             try {
                 if (empty($object_peca->get_id())) {
                     $id_peca = self::Achar_ID_Livre();
@@ -68,7 +71,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Peca $object_peca) : bool {
+        public static function Atualizar(Object_Peca $object_peca) : bool
+        {
             try {
                 $sql = "UPDATE tb_peca SET 
                 		peca_id = :id, 
@@ -114,7 +118,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Status(int $id_peca, int $id_status) : bool {
+        public static function Atualizar_Status(int $id_peca, int $id_status) : bool
+        {
             try {
                 $sql = "UPDATE tb_peca SET peca_sts_pec_id = :st_id WHERE peca_id = :id";
                 
@@ -129,7 +134,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_URL(int $id_peca, int $url) : bool {
+        public static function Atualizar_URL(int $id_peca, int $url) : bool
+        {
             try {
                 $sql = "UPDATE tb_peca SET peca_url = :url WHERE peca_id = :id";
                 
@@ -144,7 +150,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 DAO_Categoria_Pativel::Deletar($id);
                 DAO_Marca_Pativel::Deletar($id);
@@ -171,7 +178,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre() : ?int {
+        public static function Achar_ID_Livre() : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_peca()';
                 
@@ -185,7 +193,8 @@ namespace module\application\model\dao;
             }
         }
         
-        private static function Salvar_Id_Peca(int $id) : bool {
+        private static function Salvar_Id_Peca(int $id) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_id_livre_peca (id_livre_peca)
                         VALUES (:id);";
@@ -200,7 +209,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_id = :id';
                 
@@ -214,7 +224,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Quantidade_Pecas_Por_Entidade(int $id) {
+        public static function Buscar_Quantidade_Pecas_Por_Entidade(int $id)
+        {
             try {
                 $sql = 'SELECT COUNT(peca_id) FROM tb_peca WHERE peca_ent_id = :id';
                 
@@ -228,7 +239,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorURL(string $url) {
+        public static function BuscarPorURL(string $url)
+        {
             try {
                 $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_url = :url';
                 
@@ -242,7 +254,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Numero_Paginas(Object_Peca $object_peca, array $form_filtro) {
+        public static function Buscar_Numero_Paginas(Object_Peca $object_peca, array $form_filtro)
+        {
         	$pesquisa = '';
         	
         	$pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
@@ -270,7 +283,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Pecas(Object_Peca $object_peca, array $form_filtro, int $pg) {
+        public static function Buscar_Pecas(Object_Peca $object_peca, array $form_filtro, int $pg)
+        {
         	$limite = 9;
         	$inicio = ($pg * $limite) - $limite;
         	$pesquisa = "";
@@ -301,7 +315,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Peca $object_peca, array $form_filtro) : string {
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Peca $object_peca, array $form_filtro) : string
+        {
         	if (!empty($object_peca->get_entidade())) {
         		$object_entidade = $object_peca->get_entidade();
         		
@@ -415,7 +430,8 @@ namespace module\application\model\dao;
         	return $pesquisa;
         }
         
-        public static function Gerar_String_Order_By(array $form_filtro) : string {
+        public static function Gerar_String_Order_By(array $form_filtro) : string
+        {
         	$order_by = "";
         	
         	if (!empty($form_filtro['ordem_preco'])) {
@@ -453,7 +469,8 @@ namespace module\application\model\dao;
         	return $order_by;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Peca $object_peca, array $form_filtro) : PDOStatement {
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Peca $object_peca, array $form_filtro) : PDOStatement
+        {
         	if (!empty($object_peca->get_entidade())) {
         		$object_entidade = $object_peca->get_entidade();
         		
@@ -519,7 +536,8 @@ namespace module\application\model\dao;
         	return $p_sql;
         }
         
-        public static function Retornar_Dono_Peca(int $id) {
+        public static function Retornar_Dono_Peca(int $id)
+        {
         	try {
         		$sql = 'SELECT peca_responsavel_usr_id FROM tb_peca WHERE peca_id = :id';
         		
@@ -533,7 +551,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Retornar_Id_Por_URL(string $url) {
+        public static function Retornar_Id_Por_URL(string $url)
+        {
             try {
                 $sql = 'SELECT peca_id FROM tb_peca WHERE peca_url = :url';
                 
@@ -547,7 +566,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaPeca(array $row) : Object_Peca {
+        public static function PopulaPeca(array $row) : Object_Peca
+        {
             $object_peca = new Object_Peca();
             
             if (isset($row['peca_id'])) {
@@ -618,7 +638,8 @@ namespace module\application\model\dao;
             return $object_peca;
         }
         
-        public static function PopulaPecas(array $rows) : array {
+        public static function PopulaPecas(array $rows) : array
+        {
         	$object_pecas = array();
         	
         	foreach ($rows as $row) {
@@ -700,4 +721,3 @@ namespace module\application\model\dao;
         	return $object_pecas;
         }
     }
-?>

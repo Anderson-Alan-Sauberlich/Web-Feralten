@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Estado_Uso_Peca {
+    class Estado_Uso_Peca
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Estado_Uso_Peca $object_estado_uso_peca) : bool {
+        public static function Inserir(Object_Estado_Uso_Peca $object_estado_uso_peca) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_estado_uso_peca (estado_uso_peca_id, estado_uso_peca_nome, estado_uso_peca_url) 
                         VALUES (:id, :nome, :url);";
@@ -30,7 +33,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Estado_Uso_Peca $object_estado_uso_peca) : bool {
+        public static function Atualizar(Object_Estado_Uso_Peca $object_estado_uso_peca) : bool
+        {
             try {
                 $sql = "UPDATE tb_estado_uso_peca SET estado_uso_peca_id = :id, estado_uso_peca_nome = :nome, estado_uso_peca_url = :url WHERE estado_uso_peca_id = :id";
 				
@@ -46,7 +50,8 @@ namespace module\application\model\dao;
             }
         }
  		
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_estado_uso_peca WHERE estado_uso_peca_id = :id';
                 
@@ -59,7 +64,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Buscar_Id_Por_Url(string $url) {
+        public static function Buscar_Id_Por_Url(string $url)
+        {
         	try {
         		$sql = 'SELECT estado_uso_peca_id FROM tb_estado_uso_peca WHERE estado_uso_peca_url = :url';
         		
@@ -73,7 +79,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT estado_uso_peca_id, estado_uso_peca_nome, estado_uso_peca_url FROM tb_estado_uso_peca WHERE estado_uso_peca_id = :id';
                 
@@ -87,7 +94,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT estado_uso_peca_id, estado_uso_peca_nome, estado_uso_peca_url FROM tb_estado_uso_peca';
                 
@@ -100,7 +108,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Lista_Todos() {
+        public static function Buscar_Lista_Todos()
+        {
         	try {
         		$sql = 'SELECT estado_uso_peca_id, estado_uso_peca_nome, estado_uso_peca_url FROM tb_estado_uso_peca';
         		
@@ -113,7 +122,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Popular_Estado_Uso_Peca(array $row) : Object_Estado_Uso_Peca {
+        public static function Popular_Estado_Uso_Peca(array $row) : Object_Estado_Uso_Peca
+        {
             $object_estado_uso_peca = new Object_Estado_Uso_Peca();
             
             if (isset($row['estado_uso_peca_id'])) {
@@ -131,7 +141,8 @@ namespace module\application\model\dao;
             return $object_estado_uso_peca;
         }
 		
-        public static function Popular_Estado_Uso_Pecas(array $rows) : array {
+        public static function Popular_Estado_Uso_Pecas(array $rows) : array
+        {
 			$estado_uso_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -155,7 +166,8 @@ namespace module\application\model\dao;
 			return $estado_uso_pecas;
 		}
 		
-		public static function Popular_Lista_Estado_Uso_Pecas(array $rows) : array {
+		public static function Popular_Lista_Estado_Uso_Pecas(array $rows) : array
+		{
 			$estado_uso_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -167,4 +179,3 @@ namespace module\application\model\dao;
 			return $estado_uso_pecas;
 		}
     }
-?>

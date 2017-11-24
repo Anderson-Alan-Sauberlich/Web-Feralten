@@ -1,10 +1,11 @@
 <?php
 namespace module\application\controller\layout\mensagens;
 
-    class Conta_Desativada {
+    class Conta_Desativada
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
     }
-?>

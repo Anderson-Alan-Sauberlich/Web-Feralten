@@ -9,7 +9,8 @@ namespace module\application\model\common\util;
 	 * $formatado = $cpf_cnpj->formata(); // 71.569.042/0001-96
 	 * $valida    = $cpf_cnpj->valida(); // True -> Válido
 	 */
-	class CPF_CNPJ {
+	class CPF_CNPJ
+	{
 		/** 
 		 * Configura o valor (Construtor)
 		 * 
@@ -17,7 +18,8 @@ namespace module\application\model\common\util;
 		 * 
 		 * @param string $valor - O CPF ou CNPJ
 		 */
-		function __construct ($valor = null) {
+		function __construct($valor = null)
+		{
 			// Deixa apenas números no valor
 			$this->valor = preg_replace('/[^0-9]/', '', $valor);
 			
@@ -33,7 +35,8 @@ namespace module\application\model\common\util;
 		 * @access protected
 		 * @return string CPF, CNPJ ou false
 		 */
-		protected function verifica_cpf_cnpj () {
+		protected function verifica_cpf_cnpj()
+		{
 			// Verifica CPF
 			if (strlen($this->valor) === 11) {
 				return 'CPF';
@@ -54,7 +57,8 @@ namespace module\application\model\common\util;
 		 * @access protected
 		 * @return bool true para todos iguais, false para números que podem ser válidos
 		 */
-	    protected function verifica_igualdade() {
+	    protected function verifica_igualdade()
+	    {
 	        // Todos os caracteres em um array
 	        $caracteres = str_split($this->valor);
 	        
@@ -90,7 +94,8 @@ namespace module\application\model\common\util;
 		 * @param  int       $soma_digitos A soma das multiplicações entre posições e dígitos
 		 * @return int                     Os dígitos enviados concatenados com o último dígito
 		 */
-		protected function calc_digitos_posicoes($digitos, $posicoes = 10, $soma_digitos = 0) {
+		protected function calc_digitos_posicoes($digitos, $posicoes = 10, $soma_digitos = 0)
+		{
 			// Faz a soma dos dígitos com a posição
 			// Ex. para 10 posições:
 			//   0    2    5    4    6    2    8    8   4
@@ -141,7 +146,8 @@ namespace module\application\model\common\util;
 		 * @param  string    $cpf O CPF com ou sem pontos e traço
 		 * @return bool           True para CPF correto - False para CPF incorreto
 		 */
-		protected function valida_cpf() {
+		protected function valida_cpf()
+		{
 			// Captura os 9 primeiros dígitos do CPF
 			// Ex.: 02546288423 = 025462884
 			$digitos = substr($this->valor, 0, 9);
@@ -174,7 +180,8 @@ namespace module\application\model\common\util;
 		 * @param  string     $cnpj
 		 * @return bool             true para CNPJ correto
 		 */
-		protected function valida_cnpj () {
+		protected function valida_cnpj()
+		{
 			// O valor original
 			$cnpj_original = $this->valor;
 	 
@@ -209,7 +216,8 @@ namespace module\application\model\common\util;
 		 * @access public
 		 * @return bool      True para válido, false para inválido
 		 */
-		public function valida () {
+		public function valida()
+		{
 			// Valida CPF
 			if ($this->verifica_cpf_cnpj() === 'CPF') {
 				// Retorna true para cpf válido
@@ -232,7 +240,8 @@ namespace module\application\model\common\util;
 		 * @access public
 		 * @return string  CPF ou CNPJ formatado
 		 */
-		public function formata() {
+		public function formata()
+		{
 			// O valor formatado
 			$formatado = false;
 	 
@@ -264,4 +273,3 @@ namespace module\application\model\common\util;
 			return $formatado;
 		}
 	}
-?>

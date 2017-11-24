@@ -5,9 +5,11 @@ namespace module\administration\model\common\util;
 		session_start();
 	}
 	
-	class Login_Session {
+	class Login_Session
+	{
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
@@ -15,7 +17,8 @@ namespace module\administration\model\common\util;
 		 * Function Verificar_Login
 		 * @return bool
 		 */
-		public static function Verificar_Login() : bool {
+		public static function Verificar_Login() : bool
+		{
 		    if (empty(self::get_usuario_id())) {
 		        return false;
 		    } else {
@@ -28,7 +31,8 @@ namespace module\administration\model\common\util;
 		 * @param int $usuario_id 'Id do usuario'
 		 * @return void
 		 */
-		public static function set_usuario_id(int $usuario_id) : void {
+		public static function set_usuario_id(int $usuario_id) : void
+		{
 			$_SESSION['login']['usuario']['id'] = $usuario_id;
 		}
 		
@@ -37,7 +41,8 @@ namespace module\administration\model\common\util;
 		 * @param none
 		 * @return ?int 'Id do usuario'
 		 */
-		public static function get_usuario_id() : ?int {
+		public static function get_usuario_id() : ?int
+		{
 			if (isset($_SESSION['login']['usuario']['id'])) {
 				return $_SESSION['login']['usuario']['id'];
 			} else {
@@ -50,7 +55,8 @@ namespace module\administration\model\common\util;
 		 * @param string $usuario_nome 'Nome do usuario'
 		 * @return void
 		 */
-		public static function set_usuario_nome(string $usuario_nome) : void {
+		public static function set_usuario_nome(string $usuario_nome) : void
+		{
 			$_SESSION['login']['usuario']['nome'] = $usuario_nome;
 		}
 		
@@ -59,7 +65,8 @@ namespace module\administration\model\common\util;
 		 * @param none
 		 * @return ?string 'Nome do usuario'
 		 */
-		public static function get_usuario_nome() : ?string {
+		public static function get_usuario_nome() : ?string
+		{
 			if (isset($_SESSION['login']['usuario']['nome'])) {
 				return $_SESSION['login']['usuario']['nome'];
 			} else {
@@ -72,7 +79,8 @@ namespace module\administration\model\common\util;
 		 * @param int $usuario_status 'Status do usuario'
 		 * @return void
 		 */
-		public static function set_usuario_status(int $usuario_status) : void {
+		public static function set_usuario_status(int $usuario_status) : void
+		{
 			$_SESSION['login']['usuario']['status'] = $usuario_status;
 		}
 		
@@ -81,7 +89,8 @@ namespace module\administration\model\common\util;
 		 * @param none
 		 * @return ?int 'Status do usuario'
 		 */
-		public static function get_usuario_status() : ?int {
+		public static function get_usuario_status() : ?int
+		{
 			if (isset($_SESSION['login']['usuario']['status'])) {
 				return $_SESSION['login']['usuario']['status'];
 			} else {
@@ -89,8 +98,8 @@ namespace module\administration\model\common\util;
 			}
 		}
 		
-		public static function Finalizar_Login_Session() : void {
+		public static function Finalizar_Login_Session() : void
+		{
 			unset($_SESSION['login']);
 		}
 	}
-?>

@@ -5,17 +5,21 @@ namespace module\application\model\validador;
 	use module\application\model\object\Estado as Object_Estado;
 	use \Exception;
 	
-    class Endereco {
+    class Endereco
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : void {
+		public static function validar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function validar_cidade($cidade = null) : Object_Cidade {
+		public static function validar_cidade($cidade = null) : Object_Cidade
+		{
 			if (empty($cidade)) {
 				throw new Exception('Selecione sua Cidade');
 			} else {
@@ -31,7 +35,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_estado($estado = null) : Object_Estado {
+		public static function validar_estado($estado = null) : Object_Estado
+		{
 			if (empty($estado)) {
 				throw new Exception('Selecione seu Estado');
 			} else {
@@ -47,11 +52,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_entidade_id($entidade_id = null) : int {
+		public static function validar_entidade_id($entidade_id = null) : int
+		{
 			
 		}
 		
-		public static function validar_numero($numero = null) : string {
+		public static function validar_numero($numero = null) : string
+		{
 			if (empty($numero)) {
 				throw new Exception('Informe o Numero do seu Endereço');
 			} else {
@@ -71,7 +78,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_cep($cep = null) : string {
+		public static function validar_cep($cep = null) : string
+		{
 			if (empty($cep)) {
 				throw new Exception('Informe seu CEP');
 			} else {
@@ -90,7 +98,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_rua($rua = null) : string {
+		public static function validar_rua($rua = null) : string
+		{
 			if (empty($rua)) {
 				throw new Exception('Informe sua Rua');
 			} else {
@@ -111,7 +120,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_complemento($complemento = null) : ?string {
+		public static function validar_complemento($complemento = null) : ?string
+		{
 			if (!empty($complemento)) {
 				$valor = strip_tags($complemento);
 				
@@ -132,7 +142,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_bairro($bairro = null) : string {
+		public static function validar_bairro($bairro = null) : string
+		{
 			if (empty($bairro)) {
 				throw new Exception('Informe seu Bairro');
 			} else {
@@ -153,11 +164,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 			
 		}
 		
-		public static function filtrar_cidade($cidade = null) : Object_Cidade {
+		public static function filtrar_cidade($cidade = null) : Object_Cidade
+		{
 			$valor = new Object_Cidade();
 			
 			if (!empty($cidade) AND filter_var($cidade, FILTER_VALIDATE_INT)) {
@@ -167,7 +180,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
         
-		public static function filtrar_estado($estado = null) : Object_Estado {
+		public static function filtrar_estado($estado = null) : Object_Estado
+		{
 			$valor = new Object_Estado();
 			
 			if (!empty($estado) AND filter_var($estado, FILTER_VALIDATE_INT)) {
@@ -177,11 +191,13 @@ namespace module\application\model\validador;
 			return $valor;
         }
 		
-        public static function filtrar_entidade_id($entidade_id = null) : int {
+        public static function filtrar_entidade_id($entidade_id = null) : int
+        {
             
         }
         
-        public static function filtrar_numero($numero = null) : string {
+        public static function filtrar_numero($numero = null) : string
+        {
         	$valor = '';
         	
         	if (!empty($numero)) {
@@ -191,7 +207,8 @@ namespace module\application\model\validador;
         	return $valor;
 		}
 		
-		public static function filtrar_cep($cep = null) : string {
+		public static function filtrar_cep($cep = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($cep)) {
@@ -201,7 +218,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_rua($rua = null) : string {
+		public static function filtrar_rua($rua = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($rua)) {
@@ -211,7 +229,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_complemento($complemento = null) : ?string {
+		public static function filtrar_complemento($complemento = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($complemento)) {
@@ -221,7 +240,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_bairro($bairro = null) : string {
+		public static function filtrar_bairro($bairro = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($bairro)) {
@@ -231,4 +251,3 @@ namespace module\application\model\validador;
 			return $valor;
 		}
     }
-?>

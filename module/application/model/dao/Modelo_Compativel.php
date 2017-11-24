@@ -7,13 +7,16 @@ namespace module\application\model\dao;
 	use \PDOException;
 	use \Exception;
 	
-	class Modelo_Compativel {
+	class Modelo_Compativel
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 	
 		}
 	
-		public static function Inserir(Object_Modelo_Compativel $object_modelo_compativel) : bool {
+		public static function Inserir(Object_Modelo_Compativel $object_modelo_compativel) : bool
+		{
 			try {
 				$sql = "INSERT INTO tb_modelo_compativel (modelo_compativel_da_id_mdl, modelo_compativel_com_id_mdl)
 	                    VALUES (:da_id, :com_id);";
@@ -30,7 +33,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Modelo_Compativel $object_modelo_compativel) : bool {
+		public static function Atualizar(Object_Modelo_Compativel $object_modelo_compativel) : bool
+		{
 			try {
 				$sql = "UPDATE tb_modelo_compativel SET modelo_compativel_da_id_mdl = :da_id, modelo_compativel_com_id_mdl = :com_id WHERE modelo_compativel_da_id_mdl = :da_id";
 				
@@ -45,7 +49,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Deletar(int $id) : bool {
+		public static function Deletar(int $id) : bool
+		{
 			try {
 				$sql = 'DELETE FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :id';
 	
@@ -58,7 +63,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarTodos() {
+		public static function BuscarTodos()
+		{
 			try {
 				$sql = 'SELECT modelo_compativel_da_id_mdl, modelo_compativel_com_id_mdl FROM tb_modelo_compativel';
 	
@@ -71,7 +77,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD(int $id) {
+		public static function BuscarPorCOD(int $id)
+		{
 			try {
 				$sql = 'SELECT modelo_compativel_com_id_mdl FROM tb_modelo_compativel WHERE modelo_compativel_da_id_mdl = :da_id';
 	
@@ -85,7 +92,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function PopulaModeloCompativel(array $row) : Object_Modelo_Compativel {
+		public static function PopulaModeloCompativel(array $row) : Object_Modelo_Compativel
+		{
 			$object_modelo_compativel = new Object_Modelo_Compativel();
 			
 			if (isset($row['modelo_compativel_da_id_mdl'])) {
@@ -99,7 +107,8 @@ namespace module\application\model\dao;
 			return $object_modelo_compativel;
 		}
 		
-		public static function PopulaModelosCompativeisObject(array $rows) : array {
+		public static function PopulaModelosCompativeisObject(array $rows) : array
+		{
 		    $modelos_compativeis = array();
 		    
 		    foreach ($rows as $row) {
@@ -119,7 +128,8 @@ namespace module\application\model\dao;
 		    return $modelos_compativeis;
 		}
 	
-		public static function PopulaModelosCompativeis(array $rows) : array {
+		public static function PopulaModelosCompativeis(array $rows) : array
+		{
 			$modelos_compativeis = array();
 	
 			foreach ($rows as $row) {
@@ -131,4 +141,3 @@ namespace module\application\model\dao;
 			return $modelos_compativeis;
 		}
 	}
-?>

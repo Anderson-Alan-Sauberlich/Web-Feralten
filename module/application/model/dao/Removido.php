@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Removido {
+    class Removido
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Removido $object_removido) : bool {
+        public static function Inserir(Object_Removido $object_removido) : bool
+        {
             try {
                 $object_removido->set_id(self::Achar_ID_Livre($object_removido->get_object_entidade()->get_id()));
                 
@@ -35,7 +38,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Removido $object_removido) : bool {
+        public static function Atualizar(Object_Removido $object_removido) : bool
+        {
             try {
                 $sql = "UPDATE tb_removido SET
                 removido_id = :id,
@@ -57,7 +61,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_removido WHERE removido_id = :id';
                 
@@ -70,7 +75,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $entidade_id) : ?int {
+        public static function Achar_ID_Livre(int $entidade_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_removido(:ent_id)';
                 
@@ -86,7 +92,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT removido_id, removido_ent_id, removido_usr_id, removido_datahora FROM tb_removido WHERE removido_id = :id';
                 
@@ -100,7 +107,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD_Entidade(int $id) {
+        public static function BuscarPorCOD_Entidade(int $id)
+        {
             try {
                 $sql = 'SELECT removido_id, removido_ent_id, removido_usr_id, removido_datahora FROM tb_removido WHERE removido_ent_id = :id';
                 
@@ -114,7 +122,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Popula_Removidos(array $rows) : array {
+        public static function Popula_Removidos(array $rows) : array
+        {
             $removidos = array();
             
             foreach ($rows as $row) {
@@ -142,7 +151,8 @@ namespace module\application\model\dao;
             return $removidos;
         }
         
-        public static function Popula_Removido(array $row) : Object_Removido {
+        public static function Popula_Removido(array $row) : Object_Removido
+        {
             $object_removido = new Object_Removido();
             
             if (isset($row['removido_id'])) {
@@ -164,4 +174,3 @@ namespace module\application\model\dao;
             return $object_removido;
         }
     }
-?>

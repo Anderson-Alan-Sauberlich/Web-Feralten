@@ -10,9 +10,11 @@ namespace module\application\controller\usuario;
 	use module\application\model\common\util\Validador;
 	use \Exception;
 	
-    class Recuperar_Senha {
+    class Recuperar_Senha
+    {
 
-        function __construct() {
+        function __construct()
+        {
             $this->object_recuperar_senha = new Object_Recuperar_Senha();
         }
         
@@ -22,7 +24,8 @@ namespace module\application\controller\usuario;
         private $campos = array();
         private $erros = array();
         
-        public function set_email($email) : void {
+        public function set_email($email) : void
+        {
             try {
                 $this->object_recuperar_senha->set_object_usuario(DAO_Usuario::Autenticar(Validador::Usuario()::validar_email_login($email)));
             } catch (Exception $e) {
@@ -31,7 +34,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function set_codigo($codigo) : void {
+        public function set_codigo($codigo) : void
+        {
             try {
                 $codigo = Validador::Recuperar_Senha()::validar_codigo($codigo);
                 
@@ -49,7 +53,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function set_senha_nova($senha_nova) {
+        public function set_senha_nova($senha_nova) : void
+        {
             try {
                 $this->senha_nova = Validador::Usuario()::validar_senha_nova($senha_nova);
                 $this->campos['senha_nova'] = 'certo';
@@ -61,7 +66,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function set_senha_confnova($senha_confnova) {
+        public function set_senha_confnova($senha_confnova) : void
+        {
             try {
                 $this->senha_confnova = Validador::Usuario()::validar_senha_confnova($senha_confnova, $this->senha_nova);
                 $this->campos['enha_confnova'] = 'certo';
@@ -73,7 +79,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function Carregar_Pagina() : void {
+        public function Carregar_Pagina() : void
+        {
         	$view = new View_Recuperar_Senha();
         	
         	$view->set_object_recuperar_senha($this->object_recuperar_senha);
@@ -81,7 +88,8 @@ namespace module\application\controller\usuario;
         	$view->Executar();
         }
         
-        public function Enviar_Link_Email() : void {
+        public function Enviar_Link_Email() : void
+        {
             $retorno = array();
             $retorno['status'] = '';
             $retorno['header'] = '';
@@ -121,7 +129,8 @@ namespace module\application\controller\usuario;
             echo json_encode($retorno);
         }
         
-        public function Salvar_Senha() : void {
+        public function Salvar_Senha() : void
+        {
             $retorno = array();
             $retorno['status'] = '';
             $retorno['header'] = '';
@@ -162,4 +171,3 @@ namespace module\application\controller\usuario;
             echo json_encode($retorno);
         }
     }
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Permissao {
+    class Permissao
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Permissao $object_permissao) : bool {
+        public static function Inserir(Object_Permissao $object_permissao) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_permissao (permissao_id, permissao_nome) 
                         VALUES (:id, :nome);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Permissao $permissao) : bool {
+        public static function Atualizar(Object_Permissao $permissao) : bool
+        {
             try {
                 $sql = "UPDATE tb_permissao SET
                 permissao_id = :id,
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
  
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_permissao WHERE permissao_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT permissao_id, permissao_nome FROM tb_permissao WHERE permissao_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaPermissao(array $row) : Object_Permissao {
+        public static function PopulaPermissao(array $row) : Object_Permissao
+        {
             $object_permissao = new Object_Permissao();
             
             if (isset($row['permissao_id'])) {
@@ -88,4 +95,3 @@ namespace module\application\model\dao;
             return $object_permissao;
         }                
     }
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
 	use \PDOException;
 	use \Exception;
 	
-	class Categoria_Compativel {
+	class Categoria_Compativel
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 			
 		}
 	
-		public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) : bool {
+		public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) : bool
+		{
 			try {
 				$sql = "INSERT INTO tb_categoria_compativel (categoria_compativel_da_id_ctg, categoria_compativel_com_id_ctg)
 	                    VALUES (:da_id, :com_id);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) : bool {
+		public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) : bool
+		{
 			try {
 				$sql = "UPDATE tb_categoria_compativel SET categoria_compativel_da_id_ctg = :da_id, categoria_compativel_com_id_ctg = :com_id 
 						WHERE categoria_compativel_da_id_ctg = :da_id";
@@ -45,7 +49,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Deletar(int $id) : bool {
+		public static function Deletar(int $id) : bool
+		{
 			try {
 				$sql = 'DELETE FROM tb_categoria_compativel WHERE categoria_compativel_da_id_ctg = :da_id';
 	
@@ -58,7 +63,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarTodos() {
+		public static function BuscarTodos()
+		{
 			try {
 				$sql = 'SELECT categoria_compativel_da_id_ctg, categoria_compativel_com_id_ctg FROM tb_categoria_compativel';
 	
@@ -71,7 +77,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD(int $id) {
+		public static function BuscarPorCOD(int $id)
+		{
 			try {
 				$sql = 'SELECT categoria_compativel_com_id_ctg FROM tb_categoria_compativel WHERE categoria_compativel_da_id_ctg = :da_id';
 	
@@ -85,7 +92,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel {
+		public static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel
+		{
 			$object_categoria_compativel = new Object_Categoria_Compativel();
 			
 			if (isset($row['categoria_compativel_da_id_ctg'])) {
@@ -99,7 +107,8 @@ namespace module\application\model\dao;
 			return $object_categoria_compativel;
 		}
 		
-		public static function PopulaCategoriasCompativeisObject(array $rows) : array {
+		public static function PopulaCategoriasCompativeisObject(array $rows) : array
+		{
 		    $categorias_compativeis = array();
 		    
 		    foreach ($rows as $row) {
@@ -119,7 +128,8 @@ namespace module\application\model\dao;
 		    return $categorias_compativeis;
 		}
 	
-		public static function PopulaCategoriasCompativeis(array $rows) : array {
+		public static function PopulaCategoriasCompativeis(array $rows) : array
+		{
 			$categorias_compativeis = array();
 	
 			foreach ($rows as $row) {
@@ -131,4 +141,3 @@ namespace module\application\model\dao;
 			return $categorias_compativeis;
 		}
 	}
-?>

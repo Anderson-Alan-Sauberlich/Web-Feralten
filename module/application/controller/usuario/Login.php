@@ -9,9 +9,11 @@ namespace module\application\controller\usuario;
     use module\application\view\src\usuario\Login as View_Login;
     use \Exception;
 
-    class Login {
+    class Login
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -23,7 +25,8 @@ namespace module\application\controller\usuario;
         private $login_erros = array();
         private $login_form = array();
         
-        public function set_email($email) : void {
+        public function set_email($email) : void
+        {
         	try {
         		$this->email = Validador::Usuario()::validar_email_login($email);
         		$this->login_campos['erro_email'] = "certo";
@@ -35,7 +38,8 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_senha($senha) : void {
+        public function set_senha($senha) : void
+        {
         	try {
         		$this->senha = Validador::Usuario()::validar_senha_login($senha);
         	} catch (Exception $e) {
@@ -46,7 +50,8 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_manter_login($manter_login = null) : void {
+        public function set_manter_login($manter_login = null) : void
+        {
         	try {
         		$this->manter_login = Validador::Usuario()::validar_manter_login($manter_login);
         	} catch (Exception $e) {
@@ -54,11 +59,13 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_logout($logout) : void {
+        public function set_logout($logout) : void
+        {
         	$this->logout = $logout;
         }
         
-        public function Carregar_Pagina() : void {
+        public function Carregar_Pagina() : void
+        {
         	$view = new View_Login();
         	
         	$view->set_login_campos($this->login_campos);
@@ -68,7 +75,8 @@ namespace module\application\controller\usuario;
         	$view->Executar();
         }
         
-        public function LogOut() : void {
+        public function LogOut() : void
+        {
         	if (!empty($this->logout)) {
         		if(hash_equals($this->logout, hash_hmac('sha1', session_id(), sha1(session_id())))) {
 	        		if (isset($_COOKIE['f_m_l'])) {
@@ -86,7 +94,8 @@ namespace module\application\controller\usuario;
         	}
         }
 		
-		public static function Autenticar_Usuario_Cookie(int $id_usuario, string $token) : bool {
+		public static function Autenticar_Usuario_Cookie(int $id_usuario, string $token) : bool
+		{
 			$usuario_login = DAO_Usuario::Buscar_Usuario($id_usuario);
 			
 			if ($usuario_login !== false) {
@@ -141,7 +150,8 @@ namespace module\application\controller\usuario;
 			}
 		}
 		
-		public static function ReAutenticar_Usuario_Logado(int $usuario_id) : bool {
+		public static function ReAutenticar_Usuario_Logado(int $usuario_id) : bool
+		{
 			$usuario_login = DAO_Usuario::Buscar_Usuario($usuario_id);
 			
 			if (!empty($usuario_login) AND $usuario_login !== false) {
@@ -172,7 +182,8 @@ namespace module\application\controller\usuario;
 			}
 		}
 		
-        public static function Autenticar_Usuario_Logado(string $email, string $senha) : bool {
+        public static function Autenticar_Usuario_Logado(string $email, string $senha) : bool
+        {
         	$usuario_login = DAO_Usuario::Autenticar($email);
             
             if (!empty($usuario_login) AND $usuario_login !== false) {
@@ -210,7 +221,8 @@ namespace module\application\controller\usuario;
             }
         }
 
-        public function Autenticar_Usuario_Login() : ?bool {
+        public function Autenticar_Usuario_Login() : ?bool
+        {
             if (empty($this->login_erros)) {
             	$usuario_login = DAO_Usuario::Autenticar($this->email);
                 
@@ -286,4 +298,3 @@ namespace module\application\controller\usuario;
             }
         }
     }
-?>

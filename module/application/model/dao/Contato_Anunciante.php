@@ -8,13 +8,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Contato_Anunciante {
+    class Contato_Anunciante
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Contato_Anunciante $object_contato_anunciante) : bool {
+        public static function Inserir(Object_Contato_Anunciante $object_contato_anunciante) : bool
+        {
             try {
                 $object_contato_anunciante->set_id(self::Achar_ID_Livre($object_contato_anunciante->get_object_peca()->get_id()));
                 
@@ -40,7 +43,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Contato_Anunciante $object_contato_anunciante) : bool {
+        public static function Atualizar(Object_Contato_Anunciante $object_contato_anunciante) : bool
+        {
             try {
                 $sql = "UPDATE tb_contato_anunciante SET
                 contato_anunciante_id = :id,
@@ -74,7 +78,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_contato_anunciante WHERE contato_anunciante_id = :id';
                 
@@ -87,7 +92,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $peca_id) : ?int {
+        public static function Achar_ID_Livre(int $peca_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_contato_anunciante(:pec_id)';
                 
@@ -103,7 +109,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT contato_anunciante_id, contato_anunciante_pec_id, contato_anunciante_nome, contato_anunciante_email, contato_anunciante_aprovacao, contato_anunciante_lido, contato_anunciante_telefone, contato_anunciante_whatsapp, contato_anunciante_mensagem, contato_anunciante_datahora_envio FROM tb_contato_anunciante WHERE contato_anunciante_id = :id';
                 
@@ -117,7 +124,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaContatosAnunciante(array $rows) : array {
+        public static function PopulaContatosAnunciante(array $rows) : array
+        {
             $contato_anunciantes = array();
             
             foreach ($rows as $row) {
@@ -169,7 +177,8 @@ namespace module\application\model\dao;
             return $contato_anunciantes;
         }
         
-        public static function PopulaContatoAnunciante(array $row) : Object_Contato_Anunciante {
+        public static function PopulaContatoAnunciante(array $row) : Object_Contato_Anunciante
+        {
             $object_contato_anunciante = new Object_Contato_Anunciante();
             
             if (isset($row['contato_anunciante_id'])) {
@@ -215,4 +224,3 @@ namespace module\application\model\dao;
             return $object_contato_anunciante;
         }
     }
-?>

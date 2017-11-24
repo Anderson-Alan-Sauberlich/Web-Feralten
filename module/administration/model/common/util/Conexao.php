@@ -4,13 +4,16 @@ namespace module\administration\model\common\util;
     use \PDO;
     use \PDOException;
 
-    class Conexao {
+    class Conexao
+    {
 
-        function __construct() {
+        function __construct()
+        {
             $this->Conectar();
         }
 
-        function __destruct() {
+        function __destruct()
+        {
             $this->Disconnect();
             foreach ($this as $key => $value) {
                 unset($this->$key);
@@ -27,7 +30,8 @@ namespace module\administration\model\common\util;
         private static $DB_NAME = 'FERALTEN_ADMIN';
         private static $DB_CHRS = 'utf8';
 
-        public static function Conectar() : PDO {
+        public static function Conectar() : PDO
+        {
             if (!isset(self::$conection)) {
                 self::$conection = new PDO(
                 		
@@ -39,8 +43,8 @@ namespace module\administration\model\common\util;
             return self::$conection;
         }
 
-        public function Disconnect() : void {
+        public function Disconnect() : void
+        {
             self::$conection = null;
         }
     }
-?>

@@ -1,13 +1,16 @@
 <?php
 namespace module\application\controller\common\util;
     
-    class Peca {
+    class Peca
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Gerar_URL_Peca(string $nome) : ?string {
+        public static function Gerar_URL_Peca(string $nome) : ?string
+        {
             $valor = null;
             
             if (!empty($nome)) {
@@ -22,6 +25,4 @@ namespace module\application\controller\common\util;
             return $valor;
         }
         
-        
     }
-?>

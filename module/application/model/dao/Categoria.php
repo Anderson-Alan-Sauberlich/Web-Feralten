@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Categoria {
+    class Categoria
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Categoria $object_categoria) : bool {
+        public static function Inserir(Object_Categoria $object_categoria) : bool
+        {
             try {
                 if (empty($object_categoria->get_id())) {
                     $object_categoria->set_id(self::Achar_ID_Livre());
@@ -45,7 +48,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Categoria $object_categoria) : bool {
+        public static function Atualizar(Object_Categoria $object_categoria) : bool
+        {
             try {
                 $sql = "UPDATE tb_categoria SET categoria_id = :id, categoria_nome = :nome, categoria_url = :url 
                 		WHERE categoria_id = :id";
@@ -62,7 +66,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 DAO_Categoria_Compativel::Deletar($id);
                 
@@ -77,7 +82,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre() : ?int {
+        public static function Achar_ID_Livre() : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_categoria()';
                 
@@ -91,7 +97,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria';
                 
@@ -104,7 +111,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT categoria_id, categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
                 
@@ -118,7 +126,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        public static function Buscar_Nome_URL_Por_ID(int $id)
+        {
         	try {
         		$sql = 'SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
         
@@ -132,7 +141,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_ID_Por_URL(string $url) {
+        public static function Buscar_ID_Por_URL(string $url)
+        {
         	try {
         		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url';
         
@@ -146,7 +156,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool {
+        public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool
+        {
         	try {
         		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url';
         
@@ -167,7 +178,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaCategoria(array $row) : Object_Categoria {
+        public static function PopulaCategoria(array $row) : Object_Categoria
+        {
             $object_categoria = new Object_Categoria();
             
             if (isset($row['categoria_id'])) {
@@ -185,7 +197,8 @@ namespace module\application\model\dao;
             return $object_categoria;
         }
         
-        public static function PopulaCategorias(array $rows) : array {
+        public static function PopulaCategorias(array $rows) : array
+        {
             $categorias = array();
             
             foreach ($rows as $row) {
@@ -209,4 +222,3 @@ namespace module\application\model\dao;
             return $categorias;
         }
     }
-?>

@@ -3,9 +3,11 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
     
     use module\application\view\src\layout\menu\Usuario as View_Usuario;
     
-    class Alterar_Senha {
+    class Alterar_Senha
+    {
     	
-        function __construct(?int $status = null) {
+        function __construct(?int $status = null)
+        {
         	self::$status_usuario = $status;
         }
         
@@ -14,27 +16,33 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         private static $alterar_senha_campos;
         private static $alterar_senha_form;
         
-        public function set_alterar_senha_erros(?array $alterar_senha_erros = null) : void {
+        public function set_alterar_senha_erros(?array $alterar_senha_erros = null) : void
+        {
         	self::$alterar_senha_erros = $alterar_senha_erros;
         }
         
-        public function set_alterar_senha_campos(?array $alterar_senha_campos = null) : void {
+        public function set_alterar_senha_campos(?array $alterar_senha_campos = null) : void
+        {
         	self::$alterar_senha_campos = $alterar_senha_campos;
         }
         
-        public function set_alterar_senha_form(?array $alterar_senha_form = null) : void {
+        public function set_alterar_senha_form(?array $alterar_senha_form = null) : void
+        {
         	self::$alterar_senha_form = $alterar_senha_form;
         }
         
-        public function Executar() : void {
+        public function Executar() : void
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/meus_dados/Alterar_Senha.php';
         }
 		
-        public static function Incluir_Menu_Usuario() : void {
+        public static function Incluir_Menu_Usuario() : void
+        {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'alterar-senha'));
         }
         
-        public static function Manter_Valor(string $campo) : void {
+        public static function Manter_Valor(string $campo) : void
+        {
             if (!empty(self::$alterar_senha_form)) {
                 if (isset(self::$alterar_senha_form[$campo])) {
                     echo self::$alterar_senha_form[$campo];
@@ -42,7 +50,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Erros() : void {
+        public static function Mostrar_Erros() : void
+        {
             if (!empty(self::$alterar_senha_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$alterar_senha_erros as $value) {
@@ -52,7 +61,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public function Incluir_Classe_Erros(string $campo) : void {
+        public function Incluir_Classe_Erros(string $campo) : void
+        {
         	if (!empty(self::$alterar_senha_campos)) {
 	            switch ($campo) {
 	                case "senha_antiga":
@@ -88,4 +98,3 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
     }
-?>

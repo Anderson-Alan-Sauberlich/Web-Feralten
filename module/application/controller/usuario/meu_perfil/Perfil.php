@@ -9,13 +9,16 @@ namespace module\application\controller\usuario\meu_perfil;
 	use module\application\model\dao\Removido as DAO_Removido;
 	use \DateTime;
 	
-    class Perfil {
+    class Perfil
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -27,7 +30,8 @@ namespace module\application\controller\usuario\meu_perfil;
         	}
         }
         
-        public function Retornar_Valores_Visualizados() {
+        public function Retornar_Valores_Visualizados()
+        {
             if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
@@ -72,7 +76,8 @@ namespace module\application\controller\usuario\meu_perfil;
             }
         }
         
-        public function Retornar_Valores_Adicionados() {
+        public function Retornar_Valores_Adicionados()
+        {
             if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
@@ -117,7 +122,8 @@ namespace module\application\controller\usuario\meu_perfil;
             }
         }
         
-        public function Retornar_Valores_Removidos() {
+        public function Retornar_Valores_Removidos()
+        {
             if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
@@ -162,4 +168,3 @@ namespace module\application\controller\usuario\meu_perfil;
             }
         }
     }
-?>

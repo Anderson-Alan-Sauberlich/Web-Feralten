@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Cidade {
+    class Cidade
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 			if (empty($id)) {
 				throw new Exception("Selecione sua Cidade");
 			} else {
@@ -21,15 +24,18 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_estado_id($estado_id = null) : int {
+		public static function validar_estado_id($estado_id = null) : int
+		{
 			
 		}
 		
-		public static function validar_nome($nome = null) : string {
+		public static function validar_nome($nome = null) : string
+		{
 			
 		}
 		
-		public static function validar_url($url = null) : string {
+		public static function validar_url($url = null) : string
+		{
 			if (!empty($url)) {
 				$valor = strip_tags($url);
 				
@@ -45,7 +51,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 			$valor = 0;
 			
 			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_FLOAT)) {
@@ -55,12 +62,13 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_estado_id($estado_id = null) : int {
+		public static function filtrar_estado_id($estado_id = null) : int
+		{
 			
 		}
 		
-		public static function filtrar_nome($nome = null) : string {
+		public static function filtrar_nome($nome = null) : string
+		{
 			
 		}
     }
-?>

@@ -6,9 +6,11 @@ namespace module\app\controller;
 	use module\application\model\dao\Modelo as DAO_Modelo;
 	use module\application\model\dao\Versao as DAO_Versao;
 	
-    class CMMV {
+    class CMMV
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -17,35 +19,41 @@ namespace module\app\controller;
         private $modelo;
         private $versao;
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void
+        {
         	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
         		$this->categoria = $categoria;
         	}
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void
+        {
         	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
         		$this->marca = $marca;
         	}
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void
+        {
         	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
         		$this->modelo = $modelo;
         	}
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void
+        {
         	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
         		$this->versao = $versao;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	
         }
         
-        public function Retornar_Categoria() : void {
+        public function Retornar_Categoria() : void
+        {
             $object_categoria = DAO_Categoria::BuscarPorCOD($this->categoria);
         	
         	if (!empty($object_categoria)) {
@@ -59,7 +67,8 @@ namespace module\app\controller;
         	}
         }
         
-        public function Retornar_Marca() : void {
+        public function Retornar_Marca() : void
+        {
             $object_marca = DAO_Marca::BuscarPorCOD($this->marca);
         	 
         	if (!empty($object_marca)) {
@@ -74,7 +83,8 @@ namespace module\app\controller;
         	}
         }
         
-        public function Retornar_Modelo() : void {
+        public function Retornar_Modelo() : void
+        {
             $object_modelo = DAO_Modelo::BuscarPorCOD($this->modelo);
         
         	if (!empty($object_modelo)) {
@@ -89,7 +99,8 @@ namespace module\app\controller;
         	}
         }
         
-        public function Retornar_Versao() : void {
+        public function Retornar_Versao() : void
+        {
             $object_versao = DAO_Versao::BuscarPorCOD($this->versao);
         
         	if (!empty($object_versao)) {
@@ -104,7 +115,8 @@ namespace module\app\controller;
         	}
         }
         
-        public function Retornar_Categorias() : void {
+        public function Retornar_Categorias() : void
+        {
             $categorias = array();
             $object_categorias = DAO_Categoria::BuscarTodos();
             
@@ -121,7 +133,8 @@ namespace module\app\controller;
             echo json_encode($categorias);
         }
         
-        public function Retornar_Marcas() : void {
+        public function Retornar_Marcas() : void
+        {
             $marcas = array();
             $object_marcas = DAO_Marca::BuscarTodos();
             
@@ -139,7 +152,8 @@ namespace module\app\controller;
             echo json_encode($marcas);
         }
         
-        public function Retornar_Modelos() : void {
+        public function Retornar_Modelos() : void
+        {
             $modelos = array();
             $object_modelos = DAO_Modelo::BuscarTodos();
             
@@ -157,7 +171,8 @@ namespace module\app\controller;
             echo json_encode($modelos);
         }
         
-        public function Retornar_Versoes() : void {
+        public function Retornar_Versoes() : void
+        {
             $versoes = array();
             $object_versoes = DAO_Versao::BuscarTodos();
             
@@ -175,4 +190,3 @@ namespace module\app\controller;
             echo json_encode($versoes);
         }
     }
-?>

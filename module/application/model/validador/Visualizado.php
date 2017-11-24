@@ -3,17 +3,21 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Visualizado {
+    class Visualizado
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 		    
 		}
 		
-		public static function validar_entidade_id($entidade_id = null) : int {
+		public static function validar_entidade_id($entidade_id = null) : int
+		{
 		    if (empty($entidade_id)) {
 		        throw new Exception("Codigo da Entidade não identificado");
 		    } else {
@@ -25,7 +29,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_usuario_id($usuario_id = null) : int {
+		public static function validar_usuario_id($usuario_id = null) : int
+		{
 		    if (empty($usuario_id)) {
 		        throw new Exception("Codigo do Usuario não identificado");
 		    } else {
@@ -37,24 +42,28 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_datahora($datahora = null) : string {
+		public static function validar_datahora($datahora = null) : string
+		{
 		    
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 			
 		}
 		
-		public static function filtrar_entidade_id($entidade_id = null) : int {
+		public static function filtrar_entidade_id($entidade_id = null) : int
+		{
 			
 		}
 		
-		public static function filtrar_usuario_id($usuario_id = null) : int {
+		public static function filtrar_usuario_id($usuario_id = null) : int
+		{
 		    
 		}
 		
-		public static function filtrar_datahora_envio($datahora_envio = null) : string {
+		public static function filtrar_datahora_envio($datahora_envio = null) : string
+		{
 		    
 		}
     }
-?>

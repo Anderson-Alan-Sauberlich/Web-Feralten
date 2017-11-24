@@ -12,9 +12,11 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
 	use module\administration\controller\layout\menu\Admin as Controller_Admin;
 	use module\administration\view\src\admin\controle\base_de_conhecimento\cmmv\gerenciar\Cadastrar as View_Cadastrar;
 	
-    class Cadastrar {
+    class Cadastrar
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -25,39 +27,46 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         private $nome;
         private $url;
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void
+        {
         	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
         		$this->categoria = $categoria;
         	}
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void
+        {
         	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
         		$this->marca = $marca;
         	}
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void
+        {
         	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
         		$this->modelo = $modelo;
         	}
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void
+        {
         	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
         		$this->versao = $versao;
         	}
         }
         
-        public function set_nome($nome) {
+        public function set_nome($nome) : void
+        {
         	$this->nome = $nome;
         }
         
-        public function set_url($url) {
+        public function set_url($url) : void
+        {
         	$this->url = $url;
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Admin::Verificar_Autenticacao()) {
 	        	$view = new View_Cadastrar();
 	        	
@@ -69,7 +78,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
 	        }
         }
         
-        public function Cadastrar_CMMV() : void {
+        public function Cadastrar_CMMV() : void
+        {
         	if (!empty($this->modelo)) {
         		$this->Cadastrar_Versao();
         	} else if (!empty($this->marca)) {
@@ -81,7 +91,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Cadastrar_Versao() : void {
+        private function Cadastrar_Versao() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_versao = new Object_Versao();
         		
@@ -97,7 +108,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Cadastrar_Modelo() : void {
+        private function Cadastrar_Modelo() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_modelo = new Object_Modelo();
         		
@@ -113,7 +125,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Cadastrar_Marca() : void {
+        private function Cadastrar_Marca() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_marca = new Object_Marca();
         		
@@ -129,7 +142,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Cadastrar_Categoria() : void {
+        private function Cadastrar_Categoria() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_categoria = new Object_Categoria();
         		
@@ -144,7 +158,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Validar_Nome_URL() : bool {
+        private function Validar_Nome_URL() : bool
+        {
         	if (!empty($this->nome) AND !empty($this->url)) {
         		return true;
         	} else {
@@ -154,23 +169,28 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Categorias() : void {
+        public function Retornar_Categorias() : void
+        {
         	View_Cadastrar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
-        public function Retornar_Marcas_Por_Categoria() : void {
+        public function Retornar_Marcas_Por_Categoria() : void
+        {
         	View_Cadastrar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($this->categoria));
         }
         
-        public function Retornar_Modelos_Por_Marca() : void {
+        public function Retornar_Modelos_Por_Marca() : void
+        {
         	View_Cadastrar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($this->marca));
         }
         
-        public function Retornar_Versoes_Por_Modelo() : void {
+        public function Retornar_Versoes_Por_Modelo() : void
+        {
         	View_Cadastrar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($this->modelo));
         }
         
-        private function Buscar_Marca_Por_Id_Categoria(?int $categoria) {
+        private function Buscar_Marca_Por_Id_Categoria(?int $categoria)
+        {
         	if (!empty($categoria)) {
         		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
         	} else {
@@ -178,7 +198,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Modelo_Por_Id_Marca(?int $marca) {
+        private function Buscar_Modelo_Por_Id_Marca(?int $marca)
+        {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
         	} else {
@@ -186,7 +207,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo) {
+        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo)
+        {
         	if (!empty($modelo)) {
         		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {
@@ -194,4 +216,3 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
     }
-?>

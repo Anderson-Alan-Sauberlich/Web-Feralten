@@ -1,16 +1,19 @@
 <?php
 namespace module\application\controller\usuario\meu_perfil\financeiro;
 	
-use module\application\view\src\usuario\meu_perfil\financeiro\Historico as View_Historico;
+    use module\application\view\src\usuario\meu_perfil\financeiro\Historico as View_Historico;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
 	
-    class Historico {
+    class Historico
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         
@@ -26,4 +29,3 @@ use module\application\view\src\usuario\meu_perfil\financeiro\Historico as View_
         	}
         }
     }
-?>

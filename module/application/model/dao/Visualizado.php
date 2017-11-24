@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Visualizado {
+    class Visualizado
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Visualizado $object_visualizado) : bool {
+        public static function Inserir(Object_Visualizado $object_visualizado) : bool
+        {
             try {
                 $object_visualizado->set_id(self::Achar_ID_Livre($object_visualizado->get_object_entidade()->get_id()));
                 
@@ -35,7 +38,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Visualizado $object_visualizado) : bool {
+        public static function Atualizar(Object_Visualizado $object_visualizado) : bool
+        {
             try {
                 $sql = "UPDATE tb_visualizado SET
                 visualizado_id = :id,
@@ -57,7 +61,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_visualizado WHERE visualizado_id = :id';
                 
@@ -70,7 +75,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $entidade_id) : ?int {
+        public static function Achar_ID_Livre(int $entidade_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_visualizado(:ent_id)';
                 
@@ -86,7 +92,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT visualizado_id, visualizado_ent_id, visualizado_usr_id, visualizado_datahora FROM tb_visualizado WHERE visualizado_id = :id';
                 
@@ -100,7 +107,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD_Entidade(int $id) {
+        public static function BuscarPorCOD_Entidade(int $id)
+        {
             try {
                 $sql = 'SELECT visualizado_id, visualizado_ent_id, visualizado_usr_id, visualizado_datahora FROM tb_visualizado WHERE visualizado_ent_id = :id';
                 
@@ -114,7 +122,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Popula_Visualizados(array $rows) : array {
+        public static function Popula_Visualizados(array $rows) : array
+        {
             $visualizados = array();
             
             foreach ($rows as $row) {
@@ -142,7 +151,8 @@ namespace module\application\model\dao;
             return $visualizados;
         }
         
-        public static function Popula_Visualizado(array $row) : Object_Visualizado {
+        public static function Popula_Visualizado(array $row) : Object_Visualizado
+        {
             $object_visualizado = new Object_Visualizado();
             
             if (isset($row['visualizado_id'])) {
@@ -164,4 +174,3 @@ namespace module\application\model\dao;
             return $object_visualizado;
         }
     }
-?>

@@ -12,9 +12,11 @@ namespace module\application\controller\layout;
     use module\application\model\object\Removido as Object_Removido;
 	use \Exception;
 
-    class Card_Peca {
+    class Card_Peca
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -22,7 +24,8 @@ namespace module\application\controller\layout;
         private $deletar;
         private $status;
         
-        public function set_peca($peca) : void {
+        public function set_peca($peca) : void
+        {
             try {
                 $this->peca = Validador::Peca()::validar_id($peca);
             } catch (Exception $e) {
@@ -30,11 +33,13 @@ namespace module\application\controller\layout;
             }
         }
         
-        public function set_deletar($deletar) : void {
+        public function set_deletar($deletar) : void
+        {
             $this->deletar = $deletar;
         }
         
-        public function set_status($status) : void {
+        public function set_status($status) : void
+        {
             try {
                 $this->status = Validador::Status_Peca()::validar_status_url($status);
             } catch (Exception $e) {
@@ -42,7 +47,8 @@ namespace module\application\controller\layout;
             }
         }
         
-        public function Salvar_Alteracoes_Peca() : void {
+        public function Salvar_Alteracoes_Peca() : void
+        {
             if (Login_Session::Verificar_Login() AND !empty($this->peca)) {
                 if (!empty($this->deletar) AND $this->deletar === 'deletar') {
                     if (DAO_Peca::Deletar($this->peca)) {
@@ -67,4 +73,3 @@ namespace module\application\controller\layout;
             }
         }
     }
-?>

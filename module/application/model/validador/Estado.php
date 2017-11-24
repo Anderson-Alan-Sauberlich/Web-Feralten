@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Estado {
+    class Estado
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 			if (empty($id)) {
 				throw new Exception('Selecione seu Estado');
 			} else {
@@ -21,7 +24,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_uf($uf = null) : string {
+		public static function validar_uf($uf = null) : string
+		{
 			if (!empty($uf)) {
 				$valor = strip_tags($uf);
 				
@@ -37,11 +41,13 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_nome($nome = null) : string {
+		public static function validar_nome($nome = null) : string
+		{
 			
 		}
 		
-		public static function filtrar_id($id = null) : int {
+		public static function filtrar_id($id = null) : int
+		{
 			$valor = 0;
 			
 			if (!empty($id) AND filter_var($id, FILTER_VALIDATE_FLOAT)) {
@@ -51,12 +57,13 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_uf($uf = null) : string {
+		public static function filtrar_uf($uf = null) : string
+		{
 			
 		}
 		
-		public static function filtrar_nome($nome = null) : string {
+		public static function filtrar_nome($nome = null) : string
+		{
 			
 		}
     }
-?>

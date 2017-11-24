@@ -3,38 +3,45 @@ namespace module\application\model\object;
     
     use module\application\model\object\Usuario as Object_Usuario;
     
-    class Recuperar_Senha {
+    class Recuperar_Senha
+    {
     	
     	private $object_usuario;
 		private $data_hora;
 		private $codigo;
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public function set_object_usuario(Object_Usuario $object_usuario) : void {
+		public function set_object_usuario(Object_Usuario $object_usuario) : void
+		{
 			$this->object_usuario = $object_usuario;
 		}
 		
-		public function get_object_usuario() : ?Object_Usuario {
+		public function get_object_usuario() : ?Object_Usuario
+		{
 			return $this->object_usuario;
 		}
 		
-		public function set_data_hora(string $data_hora) : void {
+		public function set_data_hora(string $data_hora) : void
+		{
 			$this->data_hora = $data_hora;
 		}
 		
-		public function get_data_hora() : ?string {
+		public function get_data_hora() : ?string
+		{
 			return $this->data_hora;
 		}
 		
-		public function set_codigo(string $codigo) : void {
+		public function set_codigo(string $codigo) : void
+		{
 			$this->codigo = $codigo;
 		}
 		
-		public function get_codigo() : ?string {
+		public function get_codigo() : ?string
+		{
 			return $this->codigo;
 		}
     }
-?>

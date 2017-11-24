@@ -42,9 +42,11 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
 	use module\application\controller\layout\menu\Usuario as Controller_Usuario;
 	use \Exception;
 	
-    class Atualizar {
+    class Atualizar
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -68,7 +70,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         private $atualizar_campos = array();
         private $atualizar_form = array();
         
-        public function set_peca_id($peca_id) {
+        public function set_peca_id($peca_id) : void
+        {
         	try {
         		$this->peca_id = Validador::Peca()::validar_id($peca_id);
         	} catch (Exception $e) {
@@ -78,7 +81,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_peca_url($peca_url) {
+        public function set_peca_url($peca_url) : void
+        {
             try {
                 $this->peca_url = Validador::Peca()::validar_url($peca_url);
                 
@@ -90,7 +94,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
             }
         }
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void
+        {
         	try {
         		//$this->categoria = Validador::Categoria()::validar_id($categoria);
         		$this->categoria = $categoria;
@@ -101,7 +106,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void
+        {
         	try {
         		//$this->marca = Validador::Marca()::validar_id($marca);
         		$this->marca = $marca;
@@ -112,7 +118,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void
+        {
         	try {
         		//$this->modelo = Validador::Modelo()::validar_id($modelo);
         		$this->modelo = $modelo;
@@ -123,7 +130,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void
+        {
         	try {
         		//$this->versao = Validador::Versao()::validar_id($versao);
         		$this->versao = $versao;
@@ -134,7 +142,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_descricao($descricao) {
+        public function set_descricao($descricao) : void
+        {
         	try {
         		$this->descricao = Validador::Peca()::validar_descricao($descricao);
         	} catch (Exception $e) {
@@ -145,7 +154,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_estado_uso($estado_uso) {
+        public function set_estado_uso($estado_uso) : void
+        {
         	try {
         		$this->estado_uso = Validador::Peca()::validar_estado_uso($estado_uso);
         	} catch (Exception $e) {
@@ -156,7 +166,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_preferencia_entrega($preferencia_entrega) {
+        public function set_preferencia_entrega($preferencia_entrega) : void
+        {
         	try {
         		$this->preferencia_entrega = Validador::Peca()::validar_preferencia_entrega($preferencia_entrega);
         	} catch (Exception $e) {
@@ -166,7 +177,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_fabricante($fabricante) {
+        public function set_fabricante($fabricante) : void
+        {
         	try {
         		$this->fabricante = Validador::Peca()::validar_fabricante($fabricante);
         	} catch (Exception $e) {
@@ -177,7 +189,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_peca($peca) {
+        public function set_peca($peca) : void
+        {
         	try {
         		$this->peca = Validador::Peca()::validar_nome($peca);
         		$this->atualizar_campos['erro_peca'] = 'certo';
@@ -189,7 +202,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_serie($serie) {
+        public function set_serie($serie) : void
+        {
         	try {
         		$this->serie = Validador::Peca()::validar_serie($serie);
         	} catch (Exception $e) {
@@ -200,7 +214,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_preco($preco) {
+        public function set_preco($preco) : void
+        {
         	try {
         		$this->preco = Validador::Peca()::validar_preco($preco);
         	} catch (Exception $e) {
@@ -211,7 +226,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_prioridade($prioridade) {
+        public function set_prioridade($prioridade) : void
+        {
         	try {
         		$this->prioridade = Validador::Peca()::validar_prioridade($prioridade);
         	} catch (Exception $e) {
@@ -221,7 +237,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function set_imagem($imagem, $numero) {
+        public function set_imagem($imagem, $numero) : void
+        {
         	try {
         		$this->imagens[$numero] = Validador::Foto_Peca()::validar_imagem($imagem, $numero);
         	} catch (Exception $e) {
@@ -229,7 +246,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -310,7 +328,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        private function Verificar_Dono_Peca($peca) : bool {
+        private function Verificar_Dono_Peca($peca) : bool
+        {
         	if (DAO_Peca::Retornar_Dono_Peca($peca) == Login_Session::get_usuario_id()) {
         		return true;
         	} else {
@@ -318,7 +337,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function Verificar_Evento() {
+        public function Verificar_Evento()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -342,7 +362,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function Carregar_Compatibilidade() : void {
+        public function Carregar_Compatibilidade() : void
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		if (!empty($this->categoria)) {
         			if ($this->categoria == "verificar") {
@@ -382,7 +403,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        private function Salvar_Session_Compatibilidade() : void {
+        private function Salvar_Session_Compatibilidade() : void
+        {
         	$compatibilidade = array();
         	
         	$compatibilidade['categoria'] = array();
@@ -506,7 +528,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	$_SESSION['compatibilidade'] = $compatibilidade;
         }
         
-        private function Atualizar_Peca() : void {
+        private function Atualizar_Peca() : void
+        {
         	$categorias_compativeis = null;
         	$marcas_compativeis = null;
         	$modelos_compativeis = null;
@@ -838,7 +861,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	$this->Carregar_Pagina();
         }
         
-        public function get_form() : ?array {
+        public function get_form() : ?array
+        {
         	$this->atualizar_form['peca_id'] = $this->peca_id;
         	$this->atualizar_form['peca_url'] = $this->peca_url;
         	$this->atualizar_form['peca'] = $this->peca;
@@ -853,7 +877,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	return $this->atualizar_form;
         }
         
-        public function set_form(Object_Peca $object_peca) : ?array {
+        public function set_form(Object_Peca $object_peca) : ?array
+        {
         	$this->peca = $object_peca->get_nome();
         	$this->peca_url = $object_peca->get_url();
         	$this->fabricante = $object_peca->get_fabricante();
@@ -870,7 +895,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	return $this->get_form();
         }
         
-        public function Salvar_Imagem_TMP() : void {
+        public function Salvar_Imagem_TMP() : void
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		if (!empty($this->imagens)) {
         			$imagens = new Gerenciar_Imagens();
@@ -890,7 +916,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public function Deletar_Imagem(int $num_img) : void {
+        public function Deletar_Imagem(int $num_img) : void
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		if (isset($_SESSION['imagens_tmp'])) {
         			$imagens = new Gerenciar_Imagens();
@@ -984,7 +1011,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Pegar_Imagem_TMP_URL(string $nome_imagem) : string {
+        public static function Pegar_Imagem_TMP_URL(string $nome_imagem) : string
+        {
         	$imagens = new Gerenciar_Imagens();
         	
         	$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-400x300");
@@ -996,7 +1024,8 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Pegar_Imagem_CNST_URL(string $nome_imagem, int $peca) : string {
+        public static function Pegar_Imagem_CNST_URL(string $nome_imagem, int $peca) : string
+        {
         	$imagens = new Gerenciar_Imagens();
         	
         	$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_CNST($nome_imagem.'-400x300', $peca);
@@ -1008,84 +1037,103 @@ namespace module\application\controller\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Buscar_Categorias() {
+        public static function Buscar_Categorias()
+        {
         	return DAO_Categoria::BuscarTodos();
         }
         
-        public static function Buscar_Id_Marcas_Por_Id_Categoria(int $id_categoria) {
+        public static function Buscar_Id_Marcas_Por_Id_Categoria(int $id_categoria)
+        {
         	return DAO_Marca::Buscar_Id_Por_Id_Categorai($id_categoria);
         }
         
-        public static function Buscar_Id_Modelos_Por_Id_Marca(int $id_marca) {
+        public static function Buscar_Id_Modelos_Por_Id_Marca(int $id_marca)
+        {
         	return DAO_Modelo::Buscar_Id_Por_Id_Marca($id_marca);
         }
         
-        public static function Buscar_Id_Versoes_Por_Id_Modelo(int $id_modelo) {
+        public static function Buscar_Id_Versoes_Por_Id_Modelo(int $id_modelo)
+        {
         	return DAO_Versao::Buscar_Id_Por_Id_Modelo($id_modelo);
         }
         
-        public static function Buscar_Marcas_Por_Categoria(int $id_categoria) {
+        public static function Buscar_Marcas_Por_Categoria(int $id_categoria)
+        {
         	return DAO_Marca::Buscar_Por_Id_Categorai($id_categoria);
         }
         
-        public static function Buscar_Modelos_Por_Marca(int $id_marca) {
+        public static function Buscar_Modelos_Por_Marca(int $id_marca)
+        {
         	return DAO_Modelo::Buscar_Por_Id_Marca($id_marca);
         }
         
-        public static function Buscar_Versoes_Por_Modelo(int $id_modelo) {
+        public static function Buscar_Versoes_Por_Modelo(int $id_modelo)
+        {
         	return DAO_Versao::Buscar_Por_Id_Modelo($id_modelo);
         }
         
-        public static function Buscar_Categoria_Por_Id(int $id_categoria) {
+        public static function Buscar_Categoria_Por_Id(int $id_categoria)
+        {
         	return DAO_Categoria::BuscarPorCOD($id_categoria);
         }
         
-        public static function Buscar_Marca_Por_Id(int $id_marca) {
+        public static function Buscar_Marca_Por_Id(int $id_marca)
+        {
         	return DAO_Marca::BuscarPorCOD($id_marca);
         }
         
-        public static function Buscar_Modelo_Por_Id(int $id_modelo) {
+        public static function Buscar_Modelo_Por_Id(int $id_modelo)
+        {
         	return DAO_Modelo::BuscarPorCOD($id_modelo);
         }
         
-        public static function Buscar_Versao_Por_Id(int $id_versao) {
+        public static function Buscar_Versao_Por_Id(int $id_versao)
+        {
         	return DAO_Versao::BuscarPorCOD($id_versao);
         }
         
-        public static function Buscar_Estado_Uso_Pecas() {
+        public static function Buscar_Estado_Uso_Pecas()
+        {
         	return DAO_Estado_Uso_Peca::BuscarTodos();
         }
         
-        public static function Buscar_Categoria_Id_Por_Marca(int $id_marca) {
+        public static function Buscar_Categoria_Id_Por_Marca(int $id_marca)
+        {
         	return DAO_Marca::Buscar_Categoria_Id($id_marca);
         }
         
-        public static function Buscar_Marca_Id_Por_Modelo(int $id_modelo) {
+        public static function Buscar_Marca_Id_Por_Modelo(int $id_modelo)
+        {
         	return DAO_Modelo::Buscar_Marca_Id($id_modelo);
         }
         
-        public static function Buscar_Modelo_Id_Por_Versao(int $id_versao) {
+        public static function Buscar_Modelo_Id_Por_Versao(int $id_versao)
+        {
         	return DAO_Versao::Buscar_Modelo_Id($id_versao);
         }
         
-        public static function Buscar_Categorias_Compativeis(int $id_categoria) {
+        public static function Buscar_Categorias_Compativeis(int $id_categoria)
+        {
         	return DAO_Categoria_Compativel::BuscarPorCOD($id_categoria);
         }
         
-        public static function Buscar_Marcas_Compativeis(int $id_marca) {
+        public static function Buscar_Marcas_Compativeis(int $id_marca)
+        {
         	return DAO_Marca_Compativel::BuscarPorCOD($id_marca);
         }
         
-        public static function Buscar_Modelos_Compativeis(int $id_modelo) {
+        public static function Buscar_Modelos_Compativeis(int $id_modelo)
+        {
         	return DAO_Modelo_Compativel::BuscarPorCOD($id_modelo);
         }
         
-        public static function Buscar_Versoes_Compativeis(int $id_versao) {
+        public static function Buscar_Versoes_Compativeis(int $id_versao)
+        {
         	return DAO_Versao_Compativel::BuscarPorCOD($id_versao);
         }
         
-        public static function Buscar_Preferencia_Entrega() {
+        public static function Buscar_Preferencia_Entrega()
+        {
         	return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();
         }
     }
-?>

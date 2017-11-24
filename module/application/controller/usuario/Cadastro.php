@@ -10,9 +10,11 @@ namespace module\application\controller\usuario;
     use \ReCaptcha\ReCaptcha;
     use \Exception;
     
-    class Cadastro {
+    class Cadastro
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -25,7 +27,8 @@ namespace module\application\controller\usuario;
         private $cadastro_campos = array();
         private $cadastro_form = array();
         
-        public function set_nome($nome) {
+        public function set_nome($nome) : void
+        {
         	try {
         		$this->nome = Validador::Usuario()::validar_nome($nome);
         		$this->cadastro_campos['erro_nome'] = "certo";
@@ -37,7 +40,8 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_sobrenome($sobrenome) {
+        public function set_sobrenome($sobrenome) : void
+        {
             try {
                 $this->sobrenome = Validador::Usuario()::validar_sobrenome($sobrenome);
                 $this->cadastro_campos['erro_sobrenome'] = "certo";
@@ -49,7 +53,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function set_email($email) {
+        public function set_email($email) : void
+        {
         	try {
         		$this->email = Validador::Usuario()::validar_email($email);
         		$this->cadastro_campos['erro_email'] = "certo";
@@ -61,7 +66,8 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_senha($senha) {
+        public function set_senha($senha) : void
+        {
         	try {
         		$this->senha = Validador::Usuario()::validar_senha($senha);
         		$this->cadastro_campos['erro_senha'] = "certo";
@@ -73,7 +79,8 @@ namespace module\application\controller\usuario;
         	}
         }
         
-        public function set_recaptcha_response($recaptcha_response) {
+        public function set_recaptcha_response($recaptcha_response) : void
+        {
             try {
                 $this->recaptcha_response = Validador::Usuario()::validar_recaptcha_response($recaptcha_response);
                 $this->cadastro_campos['erro_recaptcha_response'] = "certo";
@@ -85,7 +92,8 @@ namespace module\application\controller\usuario;
             }
         }
         
-        public function Carregar_Pagina() : void {
+        public function Carregar_Pagina() : void
+        {
         	$view = new View_Cadastro();
         	
         	$view->set_cadastro_campos($this->cadastro_campos);
@@ -95,7 +103,8 @@ namespace module\application\controller\usuario;
         	$view->Executar();
         }
 
-        public function Cadastrar_Usuario() {
+        public function Cadastrar_Usuario()
+        {
             if (empty($this->cadastro_erros)) {
                 $recaptcha = new ReCaptcha('6LeGszcUAAAAAG-JTTMkvm1BNiYEo3gKLWDKEQRY');
                 
@@ -144,4 +153,3 @@ namespace module\application\controller\usuario;
             }
         }
     }
-?>

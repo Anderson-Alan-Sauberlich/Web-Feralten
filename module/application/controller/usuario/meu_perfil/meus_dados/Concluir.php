@@ -25,9 +25,11 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 	use \DateInterval;
     use \Exception;
 	
-    class Concluir {
+    class Concluir
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -48,7 +50,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private $concluir_campos = array();
         private $concluir_form = array();
         
-        public function set_fone($fone) {
+        public function set_fone($fone) : void
+        {
         	try {
         		$this->fone = Validador::Usuario()::validar_fone($fone);
         		$this->concluir_campos['erro_fone'] = 'certo';
@@ -60,7 +63,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_fone_alternativo($fone_alternativo = null) {
+        public function set_fone_alternativo($fone_alternativo = null) : void
+        {
         	try {
         		$this->fone_alternativo = Validador::Usuario()::validar_fone_alternativo($fone_alternativo);
         	} catch (Exception $e) {
@@ -71,7 +75,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_email_alternativo($email_alternativo = null) {
+        public function set_email_alternativo($email_alternativo = null) : void
+        {
         	try {
         		$this->email_alternativo = Validador::Usuario()::validar_email_alternativo($email_alternativo);
         	} catch (Exception $e) {
@@ -82,7 +87,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_estado($estado) {
+        public function set_estado($estado) : void
+        {
         	try {
         		$this->estado = Validador::Estado()::validar_id($estado);
         		$this->concluir_campos['erro_estado'] = 'certo';
@@ -94,7 +100,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cidade($cidade) {
+        public function set_cidade($cidade) : void
+        {
         	try {
         		$this->cidade = Validador::Cidade()::validar_id($cidade);
         		$this->concluir_campos['erro_cidade'] = 'certo';
@@ -106,7 +113,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_numero($numero) {
+        public function set_numero($numero) : void
+        {
         	try {
         		$this->numero = Validador::Endereco()::validar_numero($numero);
         		$this->concluir_campos['erro_numero'] = 'certo';
@@ -118,7 +126,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cep($cep) {
+        public function set_cep($cep) : void
+        {
         	try {
         		$this->cep = Validador::Endereco()::validar_cep($cep);
         		$this->concluir_campos['erro_cep'] = 'certo';
@@ -130,7 +139,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_bairro($bairro) {
+        public function set_bairro($bairro) : void
+        {
         	try {
         		$this->bairro = Validador::Endereco()::validar_bairro($bairro);
         		$this->concluir_campos['erro_bairro'] = 'certo';
@@ -142,7 +152,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_rua($rua) {
+        public function set_rua($rua) : void
+        {
         	try {
         		$this->rua = Validador::Endereco()::validar_rua($rua);
         		$this->concluir_campos['erro_rua'] = 'certo';
@@ -154,7 +165,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_complemento($complemento = null) {
+        public function set_complemento($complemento = null) : void
+        {
         	try {
         		$this->complemento = Validador::Endereco()::validar_complemento($complemento);
         	} catch (Exception $e) {
@@ -165,7 +177,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cpf_cnpj($cpf_cnpj) {
+        public function set_cpf_cnpj($cpf_cnpj) : void
+        {
         	try {
         		$this->cpf_cnpj = Validador::Entidade()::validar_cpf_cnpj($cpf_cnpj);
         		$this->concluir_campos['erro_cpf_cnpj'] = 'certo';
@@ -177,7 +190,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_site($site = null) {
+        public function set_site($site = null) : void
+        {
         	try {
         		$this->site = Validador::Entidade()::validar_site($site);
         	} catch (Exception $e) {
@@ -188,7 +202,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_nome_comercial($nome_comercial = null) {
+        public function set_nome_comercial($nome_comercial = null) : void
+        {
         	try {
         		$this->nome_comercial = Validador::Entidade()::validar_nome_comercial($nome_comercial);
         	} catch (Exception $e) {
@@ -199,7 +214,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -219,7 +235,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Concluir_Cadastro() {
+        public function Concluir_Cadastro()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -249,25 +266,25 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 		            			Login_Session::set_entidade_id($id_entidade);
 		            			Login_Session::set_entidade_plano(1);
 		            			
-		            			$object_fatura = new Object_Fatura();
+        		            	$object_fatura = new Object_Fatura();
+        		            	
+        		            	$object_fatura->set_id(0);
+        		            	$object_fatura->set_entidade_id(Login_Session::get_entidade_id());
+        		            	$object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD(1));
+        		            	
+        		            	$datetime = new DateTime();
+        		            	$object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
+        		            	$datetime->add(new DateInterval('P30D'));
+        		            	$object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
+        		            	
+        		            	$object_status = new Object_Status_Fatura();
+        		            	$object_status->set_id(1);
+        		            	$object_fatura->set_object_status($object_status);
+        		            	
+        		            	if (!DAO_Fatura::Inserir($object_fatura)) {
+        		            	    $this->concluir_erros[] = 'Erro ao tentar gerar Fatura';
+        		            	}
 		            			
-		            			$object_fatura->set_id(0);
-		            			$object_fatura->set_entidade_id(Login_Session::get_entidade_id());
-		            			$object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD(1));
-		            			
-		            			$datetime = new DateTime();
-		            			$object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
-		            			$datetime->add(new DateInterval('P30D'));
-		            			$object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
-		            			
-		            			$object_status = new Object_Status_Fatura();
-		            			$object_status->set_id(1);
-		            			$object_fatura->set_object_status($object_status);
-		            			
-		            			if (!DAO_Fatura::Inserir($object_fatura)) {
-		            			    $this->concluir_erros[] = 'Erro ao tentar gerar Fatura';
-		            			}
-			                	
 			                	$imagem = $this->Salvar_Imagem();
 			                	
 			                	if (!empty($imagem)) {
@@ -331,7 +348,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Retornar_Cidades_Por_Estado() : void {
+        public function Retornar_Cidades_Por_Estado() : void
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
 	        	if (!empty($this->estado)) {
 	        		if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
@@ -341,7 +359,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-		public function Salvar_Imagem_TMP() : void {
+		public function Salvar_Imagem_TMP() : void
+		{
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
@@ -357,7 +376,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public function Deletar_Imagem() : void {
+		public function Deletar_Imagem() : void
+		{
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					$imagens = new Gerenciar_Imagens();
@@ -369,7 +389,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string {
+		public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string
+		{
 			$imagens = new Gerenciar_Imagens();
 			
 			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-200x150");
@@ -381,7 +402,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 
-        private function Salvar_Imagem() : ?string {
+        private function Salvar_Imagem() : ?string
+        {
         	if (isset($_SESSION['imagem_tmp']) AND !empty($_SESSION['imagem_tmp'])) {
         		$img_nome = null;
         		$imagens = new Gerenciar_Imagens();
@@ -404,12 +426,13 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
         }
         
-		public static function Buscar_Todos_Estados() : array {
+		public static function Buscar_Todos_Estados() : array
+		{
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array {
+		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array
+		{
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
     }
-?>

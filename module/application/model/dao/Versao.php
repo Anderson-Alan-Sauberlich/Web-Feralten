@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Versao {
+    class Versao
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Versao $object_versao) : bool {
+        public static function Inserir(Object_Versao $object_versao) : bool
+        {
             try {
                 if (empty($object_versao->get_id())) {
                     $object_versao->set_id(self::Achar_ID_Livre($object_versao->get_modelo_id()));
@@ -46,7 +49,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Versao $object_versao) : bool {
+        public static function Atualizar(Object_Versao $object_versao) : bool
+        {
             try {
                 $sql = "UPDATE tb_versao SET versao_mdl_id = :mo_id, versao_nome = :nome, versao_url = :url WHERE versao_id = :id";
 
@@ -63,7 +67,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 DAO_Versao_Compativel::Deletar($id);
                 
@@ -78,7 +83,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $modelo_id) : ?int {
+        public static function Achar_ID_Livre(int $modelo_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_versao(:mo_id)';
                 
@@ -94,7 +100,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao';
                 
@@ -107,7 +114,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao WHERE versao_id = :id';
                 
@@ -121,7 +129,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        public static function Buscar_Nome_URL_Por_ID(int $id)
+        {
         	try {
         		$sql = 'SELECT versao_nome, versao_url FROM tb_versao WHERE versao_id = :id';
         
@@ -135,7 +144,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Modelo_Id(int $id) {
+        public static function Buscar_Modelo_Id(int $id)
+        {
             try {
                 $sql = 'SELECT versao_mdl_id FROM tb_versao WHERE versao_id = :id';
                 
@@ -149,7 +159,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Modelo(int $id) {
+        public static function Buscar_Por_Id_Modelo(int $id)
+        {
             try {
                 $sql = 'SELECT versao_id, versao_mdl_id, versao_nome, versao_url FROM tb_versao WHERE versao_mdl_id = :id ORDER BY versao_nome';
                 
@@ -163,7 +174,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Modelo(int $id) {
+        public static function Buscar_Id_Por_Id_Modelo(int $id)
+        {
         	try {
         		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :id';
         
@@ -185,7 +197,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_ID_Por_URL(int $modelo_id, string $url) {
+        public static function Buscar_ID_Por_URL(int $modelo_id, string $url)
+        {
         	try {
         		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND versao_url = :url';
         
@@ -200,7 +213,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool {
+        public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool
+        {
         	try {
         		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)';
         		
@@ -222,7 +236,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaVersao(array $row) : Object_Versao {
+        public static function PopulaVersao(array $row) : Object_Versao
+        {
             $object_versao = new Object_Versao();
             
             if (isset($row['versao_id'])) {
@@ -244,7 +259,8 @@ namespace module\application\model\dao;
             return $object_versao;
         }
         
-        public static function PopulaVersoes(array $rows) : array {
+        public static function PopulaVersoes(array $rows) : array
+        {
             $versoes = array();
             
             foreach ($rows as $row) {
@@ -272,4 +288,3 @@ namespace module\application\model\dao;
             return $versoes;
         }
     }
-?>

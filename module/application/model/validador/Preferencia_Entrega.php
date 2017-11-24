@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Preferencia_Entrega {
+    class Preferencia_Entrega
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public function validar_id($id = null) : ?int {
+		public function validar_id($id = null) : ?int
+		{
 		    if (!empty($id)) {
 		        if (filter_var($id, FILTER_VALIDATE_INT)) {
 		            return $id;
@@ -21,11 +24,13 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public function validar_nome($nome = null) : void {
+		public function validar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public function validar_url($url = null) : ?string {
+		public function validar_url($url = null) : ?string
+		{
 			if (!empty($url)) {
 				$valor = strip_tags($url);
 				
@@ -41,16 +46,18 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public function filtrar_id($id = null) : void {
+		public function filtrar_id($id = null) : void
+		{
 			
 		}
 		
-		public function filtrar_nome($nome = null) : void {
+		public function filtrar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public function filtrar_url($url = null) : void {
+		public function filtrar_url($url = null) : void
+		{
 			
 		}
     }
-?>

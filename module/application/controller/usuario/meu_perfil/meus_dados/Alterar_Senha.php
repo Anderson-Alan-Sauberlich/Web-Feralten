@@ -8,9 +8,11 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
     use module\application\controller\layout\menu\Usuario as Controller_Usuario;
 	use \Exception;
     
-    class Alterar_Senha {
+    class Alterar_Senha
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -21,7 +23,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private $alterar_senha_erros = array();
         private $alterar_senha_campos = array();
         
-        public function set_senha_antiga($senha_antiga){
+        public function set_senha_antiga($senha_antiga) : void
+        {
         	try {
         		$this->senha_antiga = Validador::Usuario()::validar_senha_antiga($senha_antiga);
         		$this->alterar_senha_campos['erro_senha_antiga'] = "certo";
@@ -33,7 +36,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_senha_nova($senha_nova) {
+        public function set_senha_nova($senha_nova) : void
+        {
         	try {
         		$this->senha_nova = Validador::Usuario()::validar_senha_nova($senha_nova);
         		$this->alterar_senha_campos['erro_senha_nova'] = 'certo';
@@ -45,7 +49,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_senha_confnova($senha_confnova) {
+        public function set_senha_confnova($senha_confnova) : void
+        {
         	try {
         		$this->senha_confnova = Validador::Usuario()::validar_senha_confnova($senha_confnova, $this->senha_nova);
         		$this->alterar_senha_campos['erro_senha_confnova'] = 'certo';
@@ -57,7 +62,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -73,7 +79,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Atualizar_Senha_Usuario() {
+        public function Atualizar_Senha_Usuario()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
 	            if (empty($this->alterar_senha_erros)) {
 	            	$this->senha_nova = password_hash($this->senha_nova, PASSWORD_DEFAULT);
@@ -100,4 +107,3 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
     }
-?>

@@ -8,13 +8,16 @@ namespace module\application\controller\common\util;
     use module\application\model\object\Recuperar_Senha as Object_Recuperar_Senha;
     use module\application\model\object\Contato as Object_Contato;
     
-    class Email {
+    class Email
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Enviar_Contato_Anunciante(Object_Contato_Anunciante $object_contato_anunciante) : bool {
+        public static function Enviar_Contato_Anunciante(Object_Contato_Anunciante $object_contato_anunciante) : bool
+        {
             $mail = new PHPMailer(true);
             
             try {
@@ -46,7 +49,8 @@ namespace module\application\controller\common\util;
             }
         }
         
-        public static function Enviar_Contato(Object_Contato $object_contato) : bool {
+        public static function Enviar_Contato(Object_Contato $object_contato) : bool
+        {
             $mail = new PHPMailer(true);
             
             try {
@@ -82,7 +86,8 @@ namespace module\application\controller\common\util;
             }
         }
         
-        public static function Enviar_Boas_Vindas(Object_Usuario $object_usuario) : bool {
+        public static function Enviar_Boas_Vindas(Object_Usuario $object_usuario) : bool
+        {
             $mail = new PHPMailer(true);
             
             try {
@@ -114,7 +119,8 @@ namespace module\application\controller\common\util;
             }
         }
         
-        public static function Enviar_Recuperar_Senha(Object_Recuperar_Senha $object_recuperar_senha) : bool {
+        public static function Enviar_Recuperar_Senha(Object_Recuperar_Senha $object_recuperar_senha) : bool
+        {
             $mail = new PHPMailer(true);
             
             try {
@@ -146,4 +152,3 @@ namespace module\application\controller\common\util;
             }
         }
     }
-?>

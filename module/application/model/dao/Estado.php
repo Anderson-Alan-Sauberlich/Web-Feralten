@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Estado {
+    class Estado
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Estado $object_estado) : bool {
+        public static function Inserir(Object_Estado $object_estado) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_estado (estado_id, estado_uf, estado_nome) 
                         VALUES (:id, :uf, :nome);";
@@ -30,7 +33,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Estado $object_estado) : bool {
+        public static function Atualizar(Object_Estado $object_estado) : bool
+        {
             try {
                 $sql = "UPDATE tb_estado SET estado_id = :id, estado_uf = :uf, estado_nome = :nome 
                 		WHERE estado_id = :id";
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_estado WHERE estado_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT estado_id, estado_uf, estado_nome FROM tb_estado WHERE estado_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Uf(string $uf) {
+        public static function Buscar_Id_Por_Uf(string $uf)
+        {
         	try {
         		$sql = 'SELECT estado_id FROM tb_estado WHERE estado_uf = :uf';
         		
@@ -88,7 +95,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT estado_id, estado_uf, estado_nome FROM tb_estado';
                 
@@ -101,7 +109,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Popular_Estado(array $row) : Object_Estado {
+        public static function Popular_Estado(array $row) : Object_Estado
+        {
         	$object_estado = new Object_Estado();
         	
         	if (isset($row['estado_id'])) {
@@ -119,7 +128,8 @@ namespace module\application\model\dao;
         	return $object_estado;
         }
         
-        public static function Popular_Estados(array $rows) : array {
+        public static function Popular_Estados(array $rows) : array
+        {
             $estados = array();
             
             foreach ($rows as $row) {
@@ -143,4 +153,3 @@ namespace module\application\model\dao;
             return $estados;
         }
     }
-?>

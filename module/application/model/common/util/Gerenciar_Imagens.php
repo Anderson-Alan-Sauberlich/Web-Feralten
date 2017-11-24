@@ -4,9 +4,11 @@ namespace module\application\model\common\util;
 	use module\application\model\common\util\Login_Session;
 	use DirectoryIterator;
 	
-	class Gerenciar_Imagens {
+	class Gerenciar_Imagens
+	{
 		
-		function __construct() {
+		function __construct()
+		{
 			$this->usuario = Login_Session::get_usuario_id();
 			$this->entidade = Login_Session::get_entidade_id();
 		}
@@ -22,31 +24,38 @@ namespace module\application\model\common\util;
 		private $pasta_entidade;
 		private $pasta_usuario;
 		
-		public function get_nome() {
+		public function get_nome()
+		{
 			return $this->nome;
 		}
 		
-		public function get_caminho() {
+		public function get_caminho()
+		{
 			return $this->caminho;
 		}
 		
-		public function get_extensao() {
+		public function get_extensao()
+		{
 			return $this->extensao;
 		}
 		
-		public function get_diretorio() {
+		public function get_diretorio()
+		{
 			return $this->diretorio;
 		}
 		
-		public function get_destino() {
+		public function get_destino()
+		{
 			return $this->destino;
 		}
 		
-		public function get_tipo() {
+		public function get_tipo()
+		{
 			return $this->tipo;
 		}
 		
-		public function Armazenar_Imagem_Temporaria($arquivo) {
+		public function Armazenar_Imagem_Temporaria($arquivo)
+		{
             $info = explode('/', $arquivo['type']);
             
             $this->tipo = $info[0];
@@ -91,7 +100,8 @@ namespace module\application\model\common\util;
             }
 		}
 
-		public function Atualizar_Imagem_Entidade($nome_tmp, ?string $descricao = 'tmp') : ?string {
+		public function Atualizar_Imagem_Entidade($nome_tmp, ?string $descricao = 'tmp') : ?string
+		{
         	$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
         	$this->diretorio = $this->pasta_entidade.'tmp/';
 
@@ -121,7 +131,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Atualizar_Nome_Imagem_Entidade(?string $descricao = 'tmp') : ?string {
+		public function Atualizar_Nome_Imagem_Entidade(?string $descricao = 'tmp') : ?string
+		{
 			$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
 			
 			if (file_exists($this->pasta_entidade)) {
@@ -153,7 +164,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Arquivar_Imagem_Entidade($nome_tmp, ?string $descricao = 'tmp') : ?string {
+		public function Arquivar_Imagem_Entidade($nome_tmp, ?string $descricao = 'tmp') : ?string
+		{
         	$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
         	$this->diretorio = RAIZ.'/public/imagens/tmp/';
 			
@@ -186,7 +198,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Atualizar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca) : ?array {
+		public function Atualizar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca) : ?array
+		{
 			$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
 			$this->diretorio = $this->pasta_entidade.'tmp/';
 			$this->caminho = $this->pasta_entidade.$id_peca.'/';
@@ -220,7 +233,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Atualizar_Nome_Imagem_Peca(int $peca, ?string $descricao = 'tmp') : bool {
+		public function Atualizar_Nome_Imagem_Peca(int $peca, ?string $descricao = 'tmp') : bool
+		{
 			$this->diretorio = RAIZ.'/public/imagens/'.$this->entidade.'/'.$peca.'/';
 			
 			if (file_exists($this->diretorio)) {
@@ -245,7 +259,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-        public function Arquivar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca, ?string $descricao = 'tmp') : ?array {
+        public function Arquivar_Imagem_Peca(?array $nomes_tmp, ?int $id_peca, ?string $descricao = 'tmp') : ?array
+        {
         	$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
         	$this->diretorio = $this->pasta_entidade.'tmp/';
 			$this->caminho = $this->pasta_entidade.$id_peca.'/';
@@ -285,7 +300,8 @@ namespace module\application\model\common\util;
 			}
         }
 		
-		public function Deletar_Imagem_Entidade() {
+		public function Deletar_Imagem_Entidade()
+		{
 			if (empty($this->pasta_entidade)) {
 				$this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade."/";
 			}
@@ -306,7 +322,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Deletar_Imagens_Peca(int $peca_id, int $entidade_id) : bool {
+		public function Deletar_Imagens_Peca(int $peca_id, int $entidade_id) : bool
+		{
 		    $endereco = RAIZ."/public/imagens/$entidade_id/$peca_id/";
 		    
 		    if (is_dir($endereco)) {
@@ -316,7 +333,8 @@ namespace module\application\model\common\util;
 		    }
 		}
 		
-		public function Deletar_Imagem_Peca(string $endereco) : bool {
+		public function Deletar_Imagem_Peca(string $endereco) : bool
+		{
 			$resposta = true;
 			$endereco = RAIZ.$endereco;
 			
@@ -366,7 +384,8 @@ namespace module\application\model\common\util;
 			return $resposta;
 		}
         
-		public function Deletar_Imagem_Temporaria($nome_imagem) {
+		public function Deletar_Imagem_Temporaria($nome_imagem)
+		{
 			$this->diretorio = RAIZ.'/public/imagens/'.$this->entidade.'/tmp/';
 			
 			if (file_exists($this->diretorio)) {
@@ -382,7 +401,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-        public static function Gerar_Data_URL($imagem) {
+        public static function Gerar_Data_URL($imagem)
+        {
 			$tipo = pathinfo($imagem, PATHINFO_EXTENSION);
 			
 			if ($tipo == 'jpg' OR $tipo == 'jpeg' OR $tipo == 'png') {
@@ -392,7 +412,8 @@ namespace module\application\model\common\util;
 			}
         }
 		
-		public function Pegar_Caminho_Por_Nome_Imagem_TMP(string $nome) : ?string {
+		public function Pegar_Caminho_Por_Nome_Imagem_TMP(string $nome) : ?string
+		{
 			$this->diretorio = RAIZ.'/public/imagens/'.$this->entidade.'/tmp/';
 		    
 			if (file_exists($this->diretorio)) {
@@ -414,7 +435,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		public function Pegar_Caminho_Por_Nome_Imagem_CNST(string $nome, int $peca) : ?string {
+		public function Pegar_Caminho_Por_Nome_Imagem_CNST(string $nome, int $peca) : ?string
+		{
 			$this->diretorio = RAIZ.'/public/imagens/'.$this->entidade.'/'.$peca;
 			
 			if (file_exists($this->diretorio)) {				
@@ -433,7 +455,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		private function Validar_Imagem() {
+		private function Validar_Imagem()
+		{
 			if ($this->tipo == 'image' AND ($this->extensao == 'jpg' OR $this->extensao == 'jpeg' OR $this->extensao == 'png')) {
 				return true;
 			} else {
@@ -441,7 +464,8 @@ namespace module\application\model\common\util;
 			}
 		}
 		
-		private function Redimencionar_Imagem($largura_padrao, $altura_padrao, $imagem_tmp) {
+		private function Redimencionar_Imagem($largura_padrao, $altura_padrao, $imagem_tmp)
+		{
             $nova_largura;
             $nova_altura;
 			
@@ -487,7 +511,8 @@ namespace module\application\model\common\util;
             }
 		}
 		
-		private function Gerenciar_Temporarios() {
+		private function Gerenciar_Temporarios()
+		{
 		    $iterator = new DirectoryIterator($this->diretorio);
 		    
 		    foreach ($iterator as $entry) {
@@ -504,7 +529,8 @@ namespace module\application\model\common\util;
 		    }
 		}
 		
-		private static function delTree(string $dir) : bool {
+		private static function delTree(string $dir) : bool
+		{
 		    $files = array_diff(scandir($dir), array('.','..'));
 		    foreach ($files as $file) {
 		        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
@@ -512,4 +538,3 @@ namespace module\application\model\common\util;
 		    return rmdir($dir);
 		}
 	}
-?>

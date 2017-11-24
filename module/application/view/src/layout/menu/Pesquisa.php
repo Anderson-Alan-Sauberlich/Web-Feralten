@@ -3,9 +3,11 @@ namespace module\application\view\src\layout\menu;
 	
     use module\application\controller\layout\menu\Pesquisa as Controller_Pesquisa;
     
-    class Pesquisa {
+    class Pesquisa
+    {
 		
-    	function __construct(?array $form_pesquisa = null) {
+    	function __construct(?array $form_pesquisa = null)
+    	{
         	self::$form_pesquisa = $form_pesquisa;
         	
         	require_once RAIZ.'/module/application/view/html/layout/menu/Pesquisa.php';
@@ -13,7 +15,8 @@ namespace module\application\view\src\layout\menu;
         
         private static $form_pesquisa;
         
-        public static function Carregar_Ano_De() : void {
+        public static function Carregar_Ano_De() : void
+        {
             for ($i=2017; $i >= 1900; $i--) {
             	if (self::$form_pesquisa['ano_de'] == $i) {
                 	echo "<option selected value=\"".$i."\">".$i."</option>";
@@ -23,7 +26,8 @@ namespace module\application\view\src\layout\menu;
             }
         }
         
-        public static function Carregar_Ano_Ate() : void {
+        public static function Carregar_Ano_Ate() : void
+        {
         	for ($i=2017; $i >= 1900; $i--) {
         		if (self::$form_pesquisa['ano_ate'] == $i) {
         			echo "<option selected value=\"".$i."\">".$i."</option>";
@@ -33,7 +37,8 @@ namespace module\application\view\src\layout\menu;
         	}
         }
         
-        public static function Carregar_Categorias() : void {
+        public static function Carregar_Categorias() : void
+        {
         	$categorias = Controller_Pesquisa::Buscar_Todas_Categorias();
         	
         	if (!empty($categorias) AND $categorias !== false) {
@@ -53,7 +58,8 @@ namespace module\application\view\src\layout\menu;
         	}
         }
         
-        public static function Carregar_Marcas(?int $categoria = null) : void {
+        public static function Carregar_Marcas(?int $categoria = null) : void
+        {
         	$marcas = null;
         	
         	if (!empty($categoria)) {
@@ -85,7 +91,8 @@ namespace module\application\view\src\layout\menu;
             }
         }
         
-        public static function Carregar_Modelos(?int $marca = null) : void {
+        public static function Carregar_Modelos(?int $marca = null) : void
+        {
         	$modelos = null;
         	
         	if (!empty(!empty($marca))) {
@@ -117,7 +124,8 @@ namespace module\application\view\src\layout\menu;
             }
         }
         
-        public static function Carregar_Versoes(?int $modelo = null) : void {
+        public static function Carregar_Versoes(?int $modelo = null) : void
+        {
         	$versoes = null;
         	
         	if (!empty($modelo)) {
@@ -149,10 +157,10 @@ namespace module\application\view\src\layout\menu;
         	}
         }
         
-        public static function Manter_Valor_Pesquisa() : void {
+        public static function Manter_Valor_Pesquisa() : void
+        {
         	if (isset(self::$form_pesquisa['peca_nome'])) {
         		echo self::$form_pesquisa['peca_nome'];
         	}
         }
     }
-?>

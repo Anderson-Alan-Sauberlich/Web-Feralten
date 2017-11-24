@@ -3,9 +3,11 @@ namespace module\application\view\src\layout\menu;
 	
     use module\application\controller\layout\menu\Paginacao as Controller_Paginacao;
 	
-	class Paginacao {
+	class Paginacao
+	{
 		
-		function __construct(int $pagina, int $paginas) {
+		function __construct(int $pagina, int $paginas)
+		{
 			if ($paginas > 1) {
 				self::$pagina = $pagina;
 				self::$paginas = $paginas;
@@ -18,7 +20,8 @@ namespace module\application\view\src\layout\menu;
 		private static $paginas;
 		private static $get_pagina;
 		
-		public static function Mostrar_Indices_Paginas() : void {
+		public static function Mostrar_Indices_Paginas() : void
+		{
 			$inicio = 1;
 			$fim = self::$paginas;
 			
@@ -64,7 +67,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Item_Anterior() : void {
+		public static function Mostrar_Item_Anterior() : void
+		{
 			if (self::$pagina != 1) {
 				$pagina_anterior = self::$pagina - 1;
 				if (empty($_GET) AND strripos($_SERVER['REQUEST_URI'], '/?') === false) {
@@ -93,7 +97,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Item_Proximo() : void {
+		public static function Mostrar_Item_Proximo() : void
+		{
 			if (self::$pagina != self::$paginas) {
 				$pagina_seguinte = self::$pagina + 1;
 				if (empty($_GET) AND strripos($_SERVER['REQUEST_URI'], '/?') === false) {
@@ -122,4 +127,3 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 	}
-?>

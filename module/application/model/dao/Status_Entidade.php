@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Status_Entidade {
+    class Status_Entidade
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Status_Entidade $object_status_entidade) : bool {
+        public static function Inserir(Object_Status_Entidade $object_status_entidade) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_status_entidade (status_entidade_id, status_entidade_nome) 
                         VALUES (:id, :nome);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Status_Entidade $status) : bool {
+        public static function Atualizar(Object_Status_Entidade $status) : bool
+        {
             try {
                 $sql = "UPDATE tb_status_entidade SET
                 status_entidade_id = :id,
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
  		
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_status_entidade WHERE status_entidade_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT status_entidade_id, status_entidade_nome FROM tb_status_entidade WHERE status_entidade_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaStatus(array $row) : Object_Status_Entidade {
+        public static function PopulaStatus(array $row) : Object_Status_Entidade
+        {
             $object_status_entidade = new Object_Status_Entidade();
             
             if (isset($row['status_entidade_id'])) {
@@ -88,4 +95,3 @@ namespace module\application\model\dao;
             return $object_status_entidade;
         }                
     }
-?>

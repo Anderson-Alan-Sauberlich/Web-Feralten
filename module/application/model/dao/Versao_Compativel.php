@@ -7,13 +7,16 @@ namespace module\application\model\dao;
 	use \PDOException;
 	use \Exception;
 	
-	class Versao_Compativel {
+	class Versao_Compativel
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 	
 		}
 	
-		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) : bool {
+		public static function Inserir(Object_Versao_Compativel $object_versao_compativel) : bool
+		{
 			try {
 				$sql = "INSERT INTO tb_versao_compativel (versao_compativel_da_id_vrs, versao_compativel_com_id_vrs)
 	                    VALUES (:da_id, :com_id);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) : bool {
+		public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) : bool
+		{
 			try {
 				$sql = "UPDATE tb_versao_compativel SET versao_compativel_da_id_vrs = :da_id, versao_compativel_com_id_vrs = :com_id WHERE versao_compativel_da_id_vrs = :da_id";
 				
@@ -44,7 +48,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Deletar(int $id) : bool {
+		public static function Deletar(int $id) : bool
+		{
 			try {
 				$sql = 'DELETE FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :id';
 	
@@ -57,7 +62,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarTodos() {
+		public static function BuscarTodos()
+		{
 			try {
 				$sql = 'SELECT versao_compativel_da_id_vrs, versao_compativel_com_id_vrs FROM tb_versao_compativel';
 	
@@ -70,7 +76,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD(int $id) {
+		public static function BuscarPorCOD(int $id)
+		{
 			try {
 				$sql = 'SELECT versao_compativel_com_id_vrs FROM tb_versao_compativel WHERE versao_compativel_da_id_vrs = :da_id';
 	
@@ -84,7 +91,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel {
+		public static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel
+		{
 			$object_versao_compativel = new Object_Versao_Compativel();
 			
 			if (isset($row['versao_compativel_da_id_vrs'])) {
@@ -98,7 +106,8 @@ namespace module\application\model\dao;
 			return $object_versao_compativel;
 		}
 		
-		public static function PopulaVersoesCompativeisObject(array $rows) : array {
+		public static function PopulaVersoesCompativeisObject(array $rows) : array
+		{
 		    $versoes_compativeis = array();
 		    
 		    foreach ($rows as $row) {
@@ -118,7 +127,8 @@ namespace module\application\model\dao;
 		    return $versoes_compativeis;
 		}
 	
-		public static function PopulaVersoesCompativeis(array $rows) : array {
+		public static function PopulaVersoesCompativeis(array $rows) : array
+		{
 			$versoes_compativeis = array();
 	
 			foreach ($rows as $row) {
@@ -130,4 +140,3 @@ namespace module\application\model\dao;
 			return $versoes_compativeis;
 		}
 	}
-?>

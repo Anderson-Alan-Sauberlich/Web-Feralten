@@ -3,13 +3,16 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Contato {
+    class Contato
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_nome($nome = null) : string {
+		public static function validar_nome($nome = null) : string
+		{
 		    if (empty($nome)) {
 		        throw new Exception('Informe seu Nome');
 		    } else {
@@ -29,7 +32,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_email($email = null) : string {
+		public static function validar_email($email = null) : string
+		{
 		    if (empty($email)) {
 		        throw new Exception('Informe seu E-Mail');
 		    } else {
@@ -49,7 +53,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_telefone($telefone = null) : string {
+		public static function validar_telefone($telefone = null) : string
+		{
 		    if (empty($telefone)) {
 		        throw new Exception('Informe um Nº de Telefone');
 		    } else {
@@ -68,7 +73,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_whatsapp($whatsapp = null) : bool {
+		public static function validar_whatsapp($whatsapp = null) : bool
+		{
 		    if (empty($whatsapp)) {
 		        return false;
 		    } else {
@@ -76,7 +82,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_assunto($assunto = null) : string {
+		public static function validar_assunto($assunto = null) : string
+		{
 		    if (empty($assunto)) {
 		        throw new Exception('Informe um Assunto');
 		    } else {
@@ -91,7 +98,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_mensagem($mensagem = null) : string {
+		public static function validar_mensagem($mensagem = null) : string
+		{
 		    if (empty($mensagem)) {
 		        throw new Exception('Digite uma Mensagem');
 		    } else {
@@ -106,28 +114,33 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function filtrar_nome($nome = null) : string {
+		public static function filtrar_nome($nome = null) : string
+		{
 			
 		}
 		
-		public static function filtrar_email($email = null) : string {
+		public static function filtrar_email($email = null) : string
+		{
 		    
 		}
 		
-		public static function filtrar_telefone($telefone = null) : string {
+		public static function filtrar_telefone($telefone = null) : string
+		{
 		    
 		}
 		
-		public static function filtrar_whatsapp($whatsapp = null) : string {
+		public static function filtrar_whatsapp($whatsapp = null) : string
+		{
 		    
 		}
 		
-		public static function filtrar_assunto($assunto = null) : string {
+		public static function filtrar_assunto($assunto = null) : string
+		{
 		    
 		}
 		
-		public static function filtrar_mensagem($mensagem = null) : string {
+		public static function filtrar_mensagem($mensagem = null) : string
+		{
 		    
 		}
     }
-?>

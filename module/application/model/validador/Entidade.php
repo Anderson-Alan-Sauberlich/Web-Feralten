@@ -6,25 +6,31 @@ namespace module\application\model\validador;
 	use module\application\model\dao\Entidade as DAO_Entidade;
 	use \Exception;
 	
-	class Entidade {
+	class Entidade
+	{
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : int {
+		public static function validar_id($id = null) : int
+		{
 			
 		}
 		
-		public static function validar_usuario_id($usuario_id = null) : int {
+		public static function validar_usuario_id($usuario_id = null) : int
+		{
 			
 		}
 		
-		public static function validar_status_id($status_id = null) : int {
+		public static function validar_status_id($status_id = null) : int
+		{
 			
 		}
 		
-		public static function validar_cpf_cnpj($cpf_cnpj = null) : string {
+		public static function validar_cpf_cnpj($cpf_cnpj = null) : string
+		{
 			if (empty($cpf_cnpj)) {
 				throw new Exception('Informe seu CPF ou CNPJ');
 			} else {
@@ -49,7 +55,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_cpf_cnpj_unico($cpf_cnpj = null) : string {
+		public static function validar_cpf_cnpj_unico($cpf_cnpj = null) : string
+		{
 		    if (empty($cpf_cnpj)) {
 		        throw new Exception('Informe seu CPF ou CNPJ');
 		    } else {
@@ -84,7 +91,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function validar_nome_comercial($nome_comercial = null) : ?string {
+		public static function validar_nome_comercial($nome_comercial = null) : ?string
+		{
 			if (!empty($nome_comercial)) {
 				$valor = strip_tags($nome_comercial);
 				
@@ -105,15 +113,18 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_imagem($imagem = null) : void {
+		public static function validar_imagem($imagem = null) : void
+		{
 			
 		}
 		
-		public static function validar_descricao_imagem($img_descricao = null) : ?string {
+		public static function validar_descricao_imagem($img_descricao = null) : ?string
+		{
 			
 		}
 		
-		public static function validar_site($site = null) : ?string {
+		public static function validar_site($site = null) : ?string
+		{
 			if (!empty($site)) {
 				$valor = strip_tags($site);
 				
@@ -134,43 +145,53 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_data($data = null) : void {
+		public static function validar_data($data = null) : void
+		{
 			
 		}
 		
-		public static function validar_enderecos($enderecos = null) : void {
+		public static function validar_enderecos($enderecos = null) : void
+		{
 			
 		}
 		
-		public static function validar_endereco($endereco = null) : void {
+		public static function validar_endereco($endereco = null) : void
+		{
 			
 		}
 		
-		public static function validar_plano_id($plano_id = null) : void {
+		public static function validar_plano_id($plano_id = null) : void
+		{
 		    
 		}
 		
-		public static function validar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void {
+		public static function validar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void
+		{
 		    
 		}
 		
-		public static function validar_data_contratacao_plano($data_contratacao_plano = null) : void {
+		public static function validar_data_contratacao_plano($data_contratacao_plano = null) : void
+		{
 		    
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_usuario_id($usuario_id = null) : void {
+		public static function filtrar_usuario_id($usuario_id = null) : void
+		{
 			
 		}
         
-		public static function filtrar_status_id($status_id = null) : void {
+		public static function filtrar_status_id($status_id = null) : void
+		{
             
         }
         
-        public static function filtrar_cpf_cnpj($cpf_cnpj = null) : string {
+        public static function filtrar_cpf_cnpj($cpf_cnpj = null) : string
+        {
         	$valor = "";
         	
         	if (!empty($cpf_cnpj)) {
@@ -180,7 +201,8 @@ namespace module\application\model\validador;
         	return $valor;
         }
         
-        public static function filtrar_nome_comercial($nome_comercial = null) : ?string {
+        public static function filtrar_nome_comercial($nome_comercial = null) : ?string
+        {
         	$valor = null;
         	
         	if (!empty($nome_comercial)) {
@@ -190,11 +212,13 @@ namespace module\application\model\validador;
         	return $valor;
         }
         
-        public static function filtrar_imagem($imagem = null) : void {
+        public static function filtrar_imagem($imagem = null) : void
+        {
             
         }
         
-        public static function filtrar_descricao_imagem($img_descricao = null) : ?string {
+        public static function filtrar_descricao_imagem($img_descricao = null) : ?string
+        {
         	$valor = null;
         	
         	if (!empty($img_descricao)) {
@@ -209,7 +233,8 @@ namespace module\application\model\validador;
         	return $valor;
         }
 		
-        public static function filtrar_site($site = null) : ?string {
+        public static function filtrar_site($site = null) : ?string
+        {
         	$valor = null;
         	
         	if (!empty($site)) {
@@ -219,28 +244,33 @@ namespace module\application\model\validador;
         	return $valor;
         }
         
-        public static function filtrar_data($data = null) : void {
+        public static function filtrar_data($data = null) : void
+        {
             
         }
         
-        public static function filtrar_enderecos($enderecos = null) : void {
+        public static function filtrar_enderecos($enderecos = null) : void
+        {
         	
         }
         
-        public static function filtrar_endereco($endereco = null) : void {
+        public static function filtrar_endereco($endereco = null) : void
+        {
         	
         }
         
-        public static function filtrar_plano_id($plano_id = null) : void {
+        public static function filtrar_plano_id($plano_id = null) : void
+        {
             
         }
         
-        public static function filtrar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void {
+        public static function filtrar_intervalo_pagamento_id($intervalo_pagamento_id = null) : void
+        {
             
         }
         
-        public static function filtrar_data_contratacao_plano($data_contratacao_plano = null) : void {
+        public static function filtrar_data_contratacao_plano($data_contratacao_plano = null) : void
+        {
             
         }
 	}
-?>

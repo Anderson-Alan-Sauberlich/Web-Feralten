@@ -3,27 +3,33 @@ namespace module\administration\view\src\admin\controle\base_de_conhecimento\cmm
 	
     use module\administration\view\src\layout\menu\Admin as View_Admin;
     
-	class Alterar {
+	class Alterar
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 			
 		}
 		
 		private static $categorias;
 		
-		public function set_categorias(array $categorias) : void {
+		public function set_categorias(array $categorias) : void
+		{
 			self::$categorias = $categorias;
 		}
 		
-		public function Executar() : void {
+		public function Executar() : void
+		{
 			require_once RAIZ.'/module/administration/view/html/admin/controle/base_de_conhecimento/cmmv/gerenciar/Alterar.php';
 		}
 		
-		public static function Incluir_Menu_Admin() : void {
+		public static function Incluir_Menu_Admin() : void
+		{
 			new View_Admin();
 		}
 		
-		public static function Carregar_Categorias(?array $categorias = null) : void {
+		public static function Carregar_Categorias(?array $categorias = null) : void
+		{
 			echo "<option value=\"0\">Categoria</option>";
 			
 			if (!empty($categorias) AND $categorias !== null) {
@@ -39,7 +45,8 @@ namespace module\administration\view\src\admin\controle\base_de_conhecimento\cmm
 			}
 		}
 		
-		public static function Carregar_Marcas(?array $marcas = null) : void {
+		public static function Carregar_Marcas(?array $marcas = null) : void
+		{
 			echo "<option value=\"0\">Marca</option>";
 		
 			if (!empty($marcas) AND $marcas !== false) {
@@ -51,7 +58,8 @@ namespace module\administration\view\src\admin\controle\base_de_conhecimento\cmm
 			}
 		}
 		
-		public static function Carregar_Modelos(?array $modelos = null) : void {
+		public static function Carregar_Modelos(?array $modelos = null) : void
+		{
 			echo "<option value=\"0\">Modelo</option>";
 		
 			if (!empty($modelos) AND $modelos !== false) {
@@ -63,7 +71,8 @@ namespace module\administration\view\src\admin\controle\base_de_conhecimento\cmm
 			}
 		}
 		
-		public static function Carregar_Versoes(?array $versoes = null) : void {
+		public static function Carregar_Versoes(?array $versoes = null) : void
+		{
 			echo "<option value=\"0\">Versão</option>";
 		
 			if (!empty($versoes) AND $versoes !== false) {
@@ -75,4 +84,3 @@ namespace module\administration\view\src\admin\controle\base_de_conhecimento\cmm
 			}
 		}
 	}
-?>

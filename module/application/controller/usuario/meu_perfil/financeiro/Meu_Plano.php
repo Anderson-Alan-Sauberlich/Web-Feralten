@@ -15,16 +15,19 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
 	use \DateInterval;
 	use \Exception;
 	
-    class Meu_Plano {
+    class Meu_Plano
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
         private $plano_id;
         private $erros;
         
-        public function set_plano_id($plano_id) : void {
+        public function set_plano_id($plano_id) : void
+        {
             try {
                 $this->plano_id = Validador::Plano()::validar_id($plano_id);
             } catch (Exception $e) {
@@ -34,7 +37,8 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
             }
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		if ($status != 0) {
@@ -48,7 +52,8 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
         	}
         }
         
-        public function Salvar_Novo_Plano() {
+        public function Salvar_Novo_Plano()
+        {
             if (Controller_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
@@ -79,8 +84,27 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
                             $object_status->set_id(2);
                             $object_fatura->set_object_status($object_status);
                             
-                            if (!DAO_Fatura::Inserir($object_fatura)) {
-                                $this->erros[] = 'Erro ao tentar gerar Fatura';
+                            if (DAO_Fatura::Inserir($object_fatura)) {
+                                $object_fatura = new Object_Fatura();
+                                
+                                $object_fatura->set_id(0);
+                                $object_fatura->set_entidade_id(Login_Session::get_entidade_id());
+                                $object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD($this->plano_id));
+                                
+                                $datetime = new DateTime();
+                                $object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
+                                $datetime->add(new DateInterval('P30D'));
+                                $object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
+                                
+                                $object_status = new Object_Status_Fatura();
+                                $object_status->set_id(1);
+                                $object_fatura->set_object_status($object_status);
+                                
+                                if (!DAO_Fatura::Inserir($object_fatura)) {
+                                    $this->erros[] = 'Erro ao tentar gerar Fatura';
+                                }
+                            } else {
+                                $this->erros[] = 'Erro ao tentar fechar Fatura';
                             }
                         } else {
                             $this->erros[] = 'Erro ao tentar Ativar novo plano';
@@ -101,4 +125,3 @@ namespace module\application\controller\usuario\meu_perfil\financeiro;
             }
         }
     }
-?>

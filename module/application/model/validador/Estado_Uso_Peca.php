@@ -3,21 +3,26 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Estado_Uso_Peca {
+    class Estado_Uso_Peca
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : void {
+		public static function validar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function validar_nome($nome = null) : void {
+		public static function validar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function validar_url($url = null) : ?string {
+		public static function validar_url($url = null) : ?string
+		{
 			if (!empty($url)) {
 				$valor = strip_tags($url);
 				
@@ -33,16 +38,18 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_nome($nome = null) : void {
+		public static function filtrar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_url($url = null) : void {
+		public static function filtrar_url($url = null) : void
+		{
 			
 		}
     }
-?>

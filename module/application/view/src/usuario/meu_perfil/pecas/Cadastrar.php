@@ -4,9 +4,11 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 	use module\application\controller\usuario\meu_perfil\pecas\Cadastrar as Controller_Cadastrar;
 	use module\application\view\src\layout\menu\Usuario as View_Usuario;
 	
-    class Cadastrar {
+    class Cadastrar
+    {
     	
-        function __construct(int $status) {
+        function __construct(int $status) 
+        {
         	self::$status_usuario = $status;
         }
         
@@ -16,31 +18,38 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         private static $cadastrar_form;
         private static $cadastrar_sucesso;
         
-        public function set_cadastrar_erros(?array $cadastrar_erros = null) : void {
+        public function set_cadastrar_erros(?array $cadastrar_erros = null) : void
+        {
         	self::$cadastrar_erros = $cadastrar_erros;
         }
         
-        public function set_cadastrar_campos(?array $cadastrar_campos = null) : void {
+        public function set_cadastrar_campos(?array $cadastrar_campos = null) : void
+        {
         	self::$cadastrar_campos = $cadastrar_campos;
         }
         
-        public function set_cadastrar_form(?array $cadastrar_form = null) : void {
+        public function set_cadastrar_form(?array $cadastrar_form = null) : void
+        {
         	self::$cadastrar_form = $cadastrar_form;
         }
         
-        public function set_cadastrar_sucesso(?array $cadastrar_sucesso = null) : void {
+        public function set_cadastrar_sucesso(?array $cadastrar_sucesso = null) : void
+        {
         	self::$cadastrar_sucesso = $cadastrar_sucesso;
         }
         
-        public function Executar() : void {
+        public function Executar() : void
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/pecas/Cadastrar.php';
         }
 
-        public static function Incluir_Menu_Usuario() : void {
+        public static function Incluir_Menu_Usuario() : void
+        {
         	new View_Usuario(self::$status_usuario, array('pecas', 'cadastrar'));
         }
         
-		public static function Mostrar_Sucesso() : void {
+		public static function Mostrar_Sucesso() : void
+		{
             if (!empty(self::$cadastrar_sucesso)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$cadastrar_sucesso as $value) {
@@ -50,7 +59,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
             }
 		}
 
-		public static function Mostrar_Erros() : void {
+		public static function Mostrar_Erros() : void
+		{
             if (!empty(self::$cadastrar_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$cadastrar_erros as $value) {
@@ -60,7 +70,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
             }
 		}
 		
-		public static function Incluir_Classe_Erros(string $campo) : void {
+		public static function Incluir_Classe_Erros(string $campo) : void
+		{
         	if (!empty(self::$cadastrar_campos)) {
 	            switch ($campo) {
 	                case "peca":
@@ -126,7 +137,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
 		}
 		
-		public static function Manter_Valor(string $campo) : void {
+		public static function Manter_Valor(string $campo) : void
+		{
             if (!empty(self::$cadastrar_form)) {
                 if (isset(self::$cadastrar_form[$campo])) {
                     echo self::$cadastrar_form[$campo];
@@ -134,7 +146,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
             }
 		}
 		
-		public static function Manter_Imagens(string $imagem) : void {
+		public static function Manter_Imagens(string $imagem) : void
+		{
 			switch ($imagem) {
 				case "foto1":
 					if (!empty($_SESSION['imagens_tmp'][1])) {
@@ -162,7 +175,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public static function Carregar_Categorias() : void {
+		public static function Carregar_Categorias() : void
+		{
 			ob_start();
 			$categorias = Controller_Cadastrar::Buscar_Categorias();
 			$categorias_selecionadas = array();
@@ -199,7 +213,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			ob_end_flush();
 		}
 		
-		public static function Carregar_Marcas() : void {
+		public static function Carregar_Marcas() : void
+		{
 			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
@@ -257,7 +272,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public static function Carregar_Modelos() : void {
+		public static function Carregar_Modelos() : void
+		{
 			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
@@ -322,7 +338,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 
-		public static function Carregar_Versoes() : void {
+		public static function Carregar_Versoes() : void
+		{
 			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
@@ -394,7 +411,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 
-		public static function Carregar_Anos() : void {
+		public static function Carregar_Anos() : void
+		{
 			if (!empty($_SESSION['compatibilidade']['categoria'])) {
 				$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
 				
@@ -438,7 +456,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 
-		private static function Carregar_Anos_Marca(int $marca, array $anos_selecionados) : void {
+		private static function Carregar_Anos_Marca(int $marca, array $anos_selecionados) : void
+		{
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($marca);
 			$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
 			echo "<div class=\"container-fluid borda_PanelPeca divAno\">";
@@ -458,7 +477,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			echo "</div>";//container-fluid
 		}
 
-		private static function Carregar_Anos_Modelo(int $modelo, array $anos_selecionados) : void {
+		private static function Carregar_Anos_Modelo(int $modelo, array $anos_selecionados) : void
+		{
 			$titulo_modelo = Controller_Cadastrar::Buscar_Modelo_Por_Id($modelo);
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
 			$titulo_categoria = Controller_Cadastrar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
@@ -479,7 +499,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			echo "</div>";//container-fluid
 		}
 
-		private static function Carregar_Anos_Versao(int $versao, array $anos_selecionados) : void {
+		private static function Carregar_Anos_Versao(int $versao, array $anos_selecionados) : void
+		{
 			$titulo_versao = Controller_Cadastrar::Buscar_Versao_Por_Id($versao);
 			$titulo_modelo = Controller_Cadastrar::Buscar_Modelo_Por_Id($titulo_versao->get_modelo_id());
 			$titulo_marca = Controller_Cadastrar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
@@ -501,7 +522,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			echo "</div>";//container-fluid
 		}
 
-		public static function Mostrar_Estado_Uso() : void {
+		public static function Mostrar_Estado_Uso() : void
+		{
 			$estado_uso_pecas = Controller_Cadastrar::Buscar_Estado_Uso_Pecas();
 			
 			foreach ($estado_uso_pecas as $estado_uso_peca) {
@@ -517,7 +539,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 		
-		public static function Mostrar_Preferencia_Entrega() : void {
+		public static function Mostrar_Preferencia_Entrega() : void
+		{
 			$preferencias_entregas = Controller_Cadastrar::Buscar_Preferencia_Entrega();
 			
 			foreach ($preferencias_entregas as $preferencia_entrega) {
@@ -533,7 +556,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 			}
 		}
 		
-        private static function Mostrar_Anos(?array $anos = null) : void {
+        private static function Mostrar_Anos(?array $anos = null) : void
+        {
             if (!empty($anos)) {
 	            for ($i=2017; $i >= 1900; $i--) {
 	            	if (in_array($i, $anos)) {
@@ -549,4 +573,3 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
 		}
     }
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Fatura_Servico {
+    class Fatura_Servico
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Fatura_Servico $object_fatura_servico) : bool {
+        public static function Inserir(Object_Fatura_Servico $object_fatura_servico) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_fatura_servico (fatura_servico_id, fatura_servico_ftr_id, fatura_servico_descricao, fatura_servico_valor) 
                         VALUES (:id, :ftr_id, :dsc, :vlr);";
@@ -31,7 +34,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Fatura_Servico $object_fatura_servico) : bool {
+        public static function Atualizar(Object_Fatura_Servico $object_fatura_servico) : bool
+        {
             try {
                 $sql = "UPDATE tb_fatura_servico SET
                 		fatura_servico_id = :id,
@@ -53,7 +57,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_fatura_servico WHERE fatura_servico_id = :id';
                 
@@ -66,7 +71,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT fatura_servico_id, fatura_servico_ftr_id, fatura_servico_descricao, fatura_servico_valor FROM tb_fatura_servico WHERE fatura_servico_id = :id';
                 
@@ -80,7 +86,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayFaturasServicos(array $rows) : array {
+        public static function PopulaArrayFaturasServicos(array $rows) : array
+        {
         	$faturasServicos = array();
         	
         	foreach ($rows as $row) {
@@ -108,7 +115,8 @@ namespace module\application\model\dao;
         	return $faturasServicos;
         }
         
-        public static function PopulaFaturaServico(array $row) : Object_Fatura_Servico {
+        public static function PopulaFaturaServico(array $row) : Object_Fatura_Servico
+        {
             $object_fatura_servico = new Object_Fatura_Servico();
             
             if (isset($row['fatura_servico_id'])) {
@@ -130,4 +138,3 @@ namespace module\application\model\dao;
             return $object_fatura_servico;
         }
     }
-?>

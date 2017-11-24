@@ -13,9 +13,11 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
     use module\application\controller\layout\menu\Usuario as Controller_Usuario;
     use \Exception;
     
-    class Enderecos {
+    class Enderecos
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -32,7 +34,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private $enderecos_campos = array();
         
         
-        public function set_estado($estado) {
+        public function set_estado($estado) : void
+        {
         	try {
         		$this->estado = Validador::Estado()::validar_id($estado);
         		$this->enderecos_campos['erro_estado'] = "certo";
@@ -44,7 +47,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cidade($cidade) {
+        public function set_cidade($cidade) : void
+        {
         	try {
         		$this->cidade = Validador::Cidade()::validar_id($cidade);
         		$this->enderecos_campos['erro_cidade'] = "certo";
@@ -56,7 +60,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_numero($numero) {
+        public function set_numero($numero) : void
+        {
         	try {
         		$this->numero = Validador::Endereco()::validar_numero($numero);
         		$this->enderecos_campos['erro_numero'] = "certo";
@@ -68,7 +73,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cep($cep) {
+        public function set_cep($cep) : void
+        {
         	try {
         		$this->cep = Validador::Endereco()::validar_cep($cep);
         		$this->enderecos_campos['erro_cep'] = "certo";
@@ -80,7 +86,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_bairro($bairro) {
+        public function set_bairro($bairro) : void
+        {
         	try {
         		$this->bairro = Validador::Endereco()::validar_bairro($bairro);
         		$this->enderecos_campos['erro_bairro'] = "certo";
@@ -92,7 +99,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_rua($rua) {
+        public function set_rua($rua) : void
+        {
         	try {
         		$this->rua = Validador::Endereco()::validar_rua($rua);
         		$this->enderecos_campos['erro_rua'] = "certo";
@@ -104,7 +112,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_complemento($complemento = null) {
+        public function set_complemento($complemento = null) : void
+        {
         	try {
         		$this->complemento = Validador::Endereco()::validar_complemento($complemento);
         	} catch (Exception $e) {
@@ -115,7 +124,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -147,7 +157,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Retornar_Cidades_Por_Estado() : void {
+        public function Retornar_Cidades_Por_Estado() : void
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		if (!empty($this->estado)) {
         			if (filter_var($this->estado, FILTER_VALIDATE_INT)) {
@@ -157,7 +168,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
 		
-        public function Atualizar_Endereco() {
+        public function Atualizar_Endereco()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -197,12 +209,13 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
 		
-		public static function Buscar_Estados() : array {
+		public static function Buscar_Estados() : array
+		{
 			return DAO_Estado::BuscarTodos();
 		}
 		
-		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array {
+		public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array
+		{
 			return DAO_Cidade::BuscarPorCOD($id_estado);
 		}
 	}
-?>

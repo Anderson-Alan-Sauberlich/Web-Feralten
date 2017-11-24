@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Foto_Peca {
+    class Foto_Peca
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Foto_Peca $object_foto_peca) : bool {
+        public static function Inserir(Object_Foto_Peca $object_foto_peca) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_foto_peca (foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome) 
                         VALUES (:pc_id, :endereco, :num, :nome);";
@@ -31,7 +34,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Foto_Peca $object_foto_peca) : bool {
+        public static function Atualizar(Object_Foto_Peca $object_foto_peca) : bool
+        {
             try {
                 $sql = "UPDATE tb_foto_peca SET foto_peca_pec_id = :pc_id, foto_peca_endereco = :endereco, foto_peca_numero = :num, foto_peca_nome = :nome WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
 
@@ -48,7 +52,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Por_Num(int $numero, Object_Foto_Peca $object_foto_peca) : bool {
+        public static function Atualizar_Por_Num(int $numero, Object_Foto_Peca $object_foto_peca) : bool
+        {
         	try {
         		$sql = "UPDATE tb_foto_peca SET foto_peca_endereco = :endereco, foto_peca_numero = :numero, foto_peca_nome = :nome WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num";
         		
@@ -66,7 +71,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar_Fotos(int $id_peca) : bool {
+        public static function Deletar_Fotos(int $id_peca) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id';
                 
@@ -79,7 +85,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar_Foto(int $id_peca, int $num_peca) : bool {
+        public static function Deletar_Foto(int $id_peca, int $num_peca) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num';
                 
@@ -93,7 +100,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Buscar_Fotos(int $id_peca) {
+        public static function Buscar_Fotos(int $id_peca)
+        {
             try {
                 $sql = 'SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id';
                 
@@ -107,7 +115,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Foto(int $id_peca, int $num_peca) {
+        public static function Buscar_Foto(int $id_peca, int $num_peca)
+        {
             try {
                 $sql = 'SELECT foto_peca_pec_id, foto_peca_endereco, foto_peca_numero, foto_peca_nome FROM tb_foto_peca WHERE foto_peca_pec_id = :pc_id AND foto_peca_numero = :num';
                 
@@ -128,7 +137,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function PopulaFotoPeca(array $row) : Object_Foto_Peca {
+        public static function PopulaFotoPeca(array $row) : Object_Foto_Peca
+        {
             $object_foto_peca = new Object_Foto_Peca();
             
             if (isset($row['foto_peca_pec_id'])) {
@@ -150,7 +160,8 @@ namespace module\application\model\dao;
             return $object_foto_peca;
         }
         
-        public static function PopulaFotosPecas(array $rows) : array {
+        public static function PopulaFotosPecas(array $rows) : array
+        {
             $fotos_pecas = array();
             
             if (!empty($rows)) {
@@ -180,4 +191,3 @@ namespace module\application\model\dao;
             return $fotos_pecas;
         }
     }
-?>

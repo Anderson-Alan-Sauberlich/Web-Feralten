@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Preferencia_Entrega {
+    class Preferencia_Entrega
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Preferencia_Entrega $object_preferencia_entrega) : bool {
+        public static function Inserir(Object_Preferencia_Entrega $object_preferencia_entrega) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_preferencia_entrega (preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url) 
                         VALUES (:id, :nome, :url);";
@@ -30,7 +33,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Preferencia_Entrega $object_preferencia_entrega) : bool {
+        public static function Atualizar(Object_Preferencia_Entrega $object_preferencia_entrega) : bool
+        {
             try {
                 $sql = "UPDATE tb_preferencia_entrega SET preferencia_entrega_id = :id, preferencia_entrega_nome = :nome, preferencia_entrega_url = :url WHERE preferencia_entrega_id = :id";
 				
@@ -46,7 +50,8 @@ namespace module\application\model\dao;
             }
         }
  		
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id';
                 
@@ -59,7 +64,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Buscar_Id_Por_Url(string $url) : ?int {
+        public static function Buscar_Id_Por_Url(string $url) : ?int
+        {
         	try {
         		$sql = 'SELECT preferencia_entrega_id FROM tb_preferencia_entrega WHERE preferencia_entrega_url = :url';
         		
@@ -73,7 +79,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega WHERE preferencia_entrega_id = :id';
                 
@@ -87,7 +94,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega';
                 
@@ -100,7 +108,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Todos_Masivos() {
+        public static function Buscar_Todos_Masivos()
+        {
         	try {
         		$sql = "SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega 
 						WHERE preferencia_entrega_id = 1 
@@ -121,7 +130,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Lista_Todos() {
+        public static function Buscar_Lista_Todos()
+        {
         	try {
         		$sql = 'SELECT preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url FROM tb_preferencia_entrega';
         		
@@ -134,7 +144,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Popular_Preferencia_Entrega(array $row) : Object_Preferencia_Entrega {
+        public static function Popular_Preferencia_Entrega(array $row) : Object_Preferencia_Entrega
+        {
             $object_preferencia_entrega = new Object_Preferencia_Entrega();
             
             if (isset($row['preferencia_entrega_id'])) {
@@ -152,7 +163,8 @@ namespace module\application\model\dao;
             return $object_preferencia_entrega;
         }
 		
-        public static function Popular_Preferencia_Entregas(array $rows) : array {
+        public static function Popular_Preferencia_Entregas(array $rows) : array
+        {
 			$preferencia_entregas = array();
 			
 			foreach ($rows as $row) {
@@ -176,7 +188,8 @@ namespace module\application\model\dao;
 			return $preferencia_entregas;
 		}
 		
-		public static function Popular_Lista_Preferencia_Entregas(array $rows) : array {
+		public static function Popular_Lista_Preferencia_Entregas(array $rows) : array
+		{
 			$preferencia_entregas = array();
 			
 			foreach ($rows as $row) {
@@ -188,4 +201,3 @@ namespace module\application\model\dao;
 			return $preferencia_entregas;
 		}
     }
-?>

@@ -3,9 +3,11 @@ namespace module\application\view\src\layout\menu;
 	
     use module\application\controller\layout\menu\Filtro as Controller_Filtro;
     
-	class Filtro {
+	class Filtro
+	{
 		
-		function __construct(?array $form_filtro = null) {
+		function __construct(?array $form_filtro = null)
+		{
 			self::$form_filtro = $form_filtro;
 	    	
 	        require_once RAIZ.'/module/application/view/html/layout/menu/Filtro.php';
@@ -13,7 +15,8 @@ namespace module\application\view\src\layout\menu;
 		
 		private static $form_filtro;
 		
-		public static function Mostrar_Estados() : void {
+		public static function Mostrar_Estados() : void
+		{
 			$estados = Controller_Filtro::Buscar_Estados();
 		
 			foreach ($estados as $estado) {
@@ -25,7 +28,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Cidades(?int $estado = null) : void {
+		public static function Mostrar_Cidades(?int $estado = null) : void
+		{
 			$cidades = array();
 			 
 			if (!empty($estado)) {
@@ -47,7 +51,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Estado_Uso() : void {
+		public static function Mostrar_Estado_Uso() : void
+		{
 			$estado_uso_pecas = Controller_Filtro::Buscar_Estado_Uso_Pecas();
 				
 			foreach ($estado_uso_pecas as $estado_uso_peca) {
@@ -59,7 +64,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Preferencia_Entrega() : void {
+		public static function Mostrar_Preferencia_Entrega() : void
+		{
 			$preferencias_entrega = Controller_Filtro::Buscar_Preferencia_Entrega();
 			
 			foreach ($preferencias_entrega as $preferencia_entrega) {
@@ -71,7 +77,8 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Mostrar_Status_Peca() : void {
+		public static function Mostrar_Status_Peca() : void
+		{
 		    $status_pecas = Controller_Filtro::Buscar_Status_Peca();
 		    
 		    foreach ($status_pecas as $status_peca) {
@@ -83,7 +90,8 @@ namespace module\application\view\src\layout\menu;
 		    }
 		}
 		
-		public static function Manter_Valor(string $ordem, string $campo) : void {
+		public static function Manter_Valor(string $ordem, string $campo) : void
+		{
 			switch ($ordem) {
 				case 'ordem_preco':
 					if (isset(self::$form_filtro['ordem_preco']) AND self::$form_filtro['ordem_preco'] == $campo) {
@@ -99,26 +107,29 @@ namespace module\application\view\src\layout\menu;
 			}
 		}
 		
-		public static function Verificar_Login() : bool {
+		public static function Verificar_Login() : bool
+		{
 		    return Controller_Filtro::Verificar_Login();
 		}
 		
-		public static function Mostrar_Data_Dia() : void {
+		public static function Mostrar_Data_Dia() : void
+		{
 			for ($i = 1; $i <= 31; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 		
-		public static function Mostrar_Data_Mes() : void {
+		public static function Mostrar_Data_Mes() : void
+		{
 			for ($i = 1; $i <= 12; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 		
-		public static function Mostrar_Data_Ano() : void {
+		public static function Mostrar_Data_Ano() : void
+		{
 			for ($i = 2016; $i <= 2017; $i++) {
 				echo "<option value=\"$i\">$i</option>";
 			}
 		}
 	}
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Funcionalidade {
+    class Funcionalidade
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Funcionalidade $object_funcionalidade) : bool {
+        public static function Inserir(Object_Funcionalidade $object_funcionalidade) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_funcionalidade (funcionalidade_id, funcionalidade_nome) 
                         VALUES (:id, :nome);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Funcionalidade $funcionalidade) : bool {
+        public static function Atualizar(Object_Funcionalidade $funcionalidade) : bool
+        {
             try {
                 $sql = "UPDATE tb_funcionalidade SET
                 funcionalidade_id = :id,
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
  
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_funcionalidade WHERE funcionalidade_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT funcionalidade_id, funcionalidade_nome FROM tb_funcionalidade WHERE funcionalidade_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaFuncionalidade(array $row) : Object_Funcionalidade {
+        public static function PopulaFuncionalidade(array $row) : Object_Funcionalidade
+        {
             $object_funcionalidade = new Object_Funcionalidade();
             
             if (isset($row['funcionalidade_id'])) {
@@ -88,4 +95,3 @@ namespace module\application\model\dao;
             return $object_funcionalidade;
         }                
     }
-?>

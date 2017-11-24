@@ -4,9 +4,11 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
 	use module\application\controller\usuario\meu_perfil\pecas\Atualizar as Controller_Atualizar;
 	use module\application\view\src\layout\menu\Usuario as View_Usuario;
 	
-    class Atualizar {
+    class Atualizar
+    {
     	
-        function __construct($status) {
+        function __construct($status)
+        {
         	self::$status_usuario = $status;
         }
         
@@ -16,31 +18,38 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         private static $atualizar_form;
         private static $atualizar_sucesso;
         
-        public function set_atualizar_erros(?array $atualizar_erros = null) : void {
+        public function set_atualizar_erros(?array $atualizar_erros = null) : void
+        {
         	self::$atualizar_erros = $atualizar_erros;
         }
         
-        public function set_atualizar_campos(?array $atualizar_campos = null) : void {
+        public function set_atualizar_campos(?array $atualizar_campos = null) : void
+        {
         	self::$atualizar_campos = $atualizar_campos;
         }
         
-        public function set_atualizar_form(?array $atualizar_form = null) : void {
+        public function set_atualizar_form(?array $atualizar_form = null) : void
+        {
         	self::$atualizar_form = $atualizar_form;
         }
         
-        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void {
+        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void
+        {
         	self::$atualizar_sucesso = $atualizar_sucesso;
         }
         
-        public function Executar() {
+        public function Executar()
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/pecas/Atualizar.php';
         }
         
-        public static function Incluir_Menu_Usuario() {
+        public static function Incluir_Menu_Usuario()
+        {
         	new View_Usuario(self::$status_usuario, array('pecas', 'atualizar'));
         }
         
-        public static function Mostrar_Sucesso() : void {
+        public static function Mostrar_Sucesso() : void
+        {
         	if (!empty(self::$atualizar_sucesso)) {
         		echo "<div class=\"container-fluid\"><div class=\"row\">";
         		foreach (self::$atualizar_sucesso as $value) {
@@ -50,7 +59,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Mostrar_Erros() : void {
+        public static function Mostrar_Erros() : void
+        {
         	if (!empty(self::$atualizar_erros)) {
         		echo "<div class=\"container-fluid\"><div class=\"row\">";
         		foreach (self::$atualizar_erros as $value) {
@@ -60,7 +70,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Incluir_Classe_Erros(string $campo) : void {
+        public static function Incluir_Classe_Erros(string $campo) : void
+        {
         	if (!empty(self::$atualizar_campos)) {
         		switch ($campo) {
         			case "peca":
@@ -126,7 +137,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Manter_Valor(string $campo) : void {
+        public static function Manter_Valor(string $campo) : void
+        {
         	if (!empty(self::$atualizar_form)) {
         		if (isset(self::$atualizar_form[$campo])) {
         			echo self::$atualizar_form[$campo];
@@ -134,7 +146,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Manter_Imagens(string $imagem) : void {
+        public static function Manter_Imagens(string $imagem) : void
+        {
         	switch ($imagem) {
         		case "foto1":
         			if (isset($_SESSION['imagens_cnst'][1])) {
@@ -168,7 +181,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Carregar_Categorias() : void {
+        public static function Carregar_Categorias() : void
+        {
         	ob_start();
         	$categorias = Controller_Atualizar::Buscar_Categorias();
         	$categorias_selecionadas = array();
@@ -205,7 +219,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	ob_end_flush();
         }
         
-        public static function Carregar_Marcas() : void {
+        public static function Carregar_Marcas() : void
+        {
         	if (!empty($_SESSION['compatibilidade']['categoria'])) {
         		$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
         		
@@ -263,7 +278,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Carregar_Modelos() : void {
+        public static function Carregar_Modelos() : void
+        {
         	if (!empty($_SESSION['compatibilidade']['categoria'])) {
         		$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
         		
@@ -328,7 +344,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Carregar_Versoes() : void {
+        public static function Carregar_Versoes() : void
+        {
         	if (!empty($_SESSION['compatibilidade']['categoria'])) {
         		$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
         		
@@ -400,7 +417,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Carregar_Anos() : void {
+        public static function Carregar_Anos() : void
+        {
         	if (!empty($_SESSION['compatibilidade']['categoria'])) {
         		$categorias_selecionadas = $_SESSION['compatibilidade']['categoria'];
         		
@@ -444,7 +462,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        private static function Carregar_Anos_Marca(int $marca, array $anos_selecionados) : void {
+        private static function Carregar_Anos_Marca(int $marca, array $anos_selecionados) : void
+        {
         	$titulo_marca = Controller_Atualizar::Buscar_Marca_Por_Id($marca);
         	$titulo_categoria = Controller_Atualizar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
         	echo "<div class=\"container-fluid borda_PanelPeca divAno\">";
@@ -464,7 +483,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	echo "</div>";//container-fluid
         }
         
-        private static function Carregar_Anos_Modelo(int $modelo, array $anos_selecionados) : void {
+        private static function Carregar_Anos_Modelo(int $modelo, array $anos_selecionados) : void
+        {
         	$titulo_modelo = Controller_Atualizar::Buscar_Modelo_Por_Id($modelo);
         	$titulo_marca = Controller_Atualizar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
         	$titulo_categoria = Controller_Atualizar::Buscar_Categoria_Por_Id($titulo_marca->get_categoria_id());
@@ -485,7 +505,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	echo "</div>";//container-fluid
         }
         
-        private static function Carregar_Anos_Versao(int $versao, array $anos_selecionados) : void {
+        private static function Carregar_Anos_Versao(int $versao, array $anos_selecionados) : void
+        {
         	$titulo_versao = Controller_Atualizar::Buscar_Versao_Por_Id($versao);
         	$titulo_modelo = Controller_Atualizar::Buscar_Modelo_Por_Id($titulo_versao->get_modelo_id());
         	$titulo_marca = Controller_Atualizar::Buscar_Marca_Por_Id($titulo_modelo->get_marca_id());
@@ -507,7 +528,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	echo "</div>";//container-fluid
         }
         
-        public static function Mostrar_Estado_Uso() : void {
+        public static function Mostrar_Estado_Uso() : void
+        {
         	$estado_uso_pecas = Controller_Atualizar::Buscar_Estado_Uso_Pecas();
         	
         	foreach ($estado_uso_pecas as $estado_uso_peca) {
@@ -523,7 +545,8 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Mostrar_Preferencia_Entrega() : void {
+        public static function Mostrar_Preferencia_Entrega() : void
+        {
         	$preferencias_entregas = Controller_Atualizar::Buscar_Preferencia_Entrega();
         	
         	foreach ($preferencias_entregas as $preferencia_entrega) {
@@ -539,13 +562,15 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
         
-        public static function Mostrar_URL_Peca() : void {
+        public static function Mostrar_URL_Peca() : void
+        {
         	if (isset(self::$atualizar_form['peca_url'])) {
         		echo self::$atualizar_form['peca_url'];
         	}
         }
         
-        private static function Mostrar_Anos(?array $anos = null) : void {
+        private static function Mostrar_Anos(?array $anos = null) : void
+        {
         	if (!empty($anos)) {
         		for ($i=2017; $i >= 1900; $i--) {
         			if (in_array($i, $anos)) {
@@ -561,4 +586,3 @@ namespace module\application\view\src\usuario\meu_perfil\pecas;
         	}
         }
     }
-?>

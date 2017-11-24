@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Transacao {
+    class Transacao
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Transacao $object_transacao) : bool {
+        public static function Inserir(Object_Transacao $object_transacao) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_transacao (transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento) 
                         VALUES (:id, :ftr_id, :datahora, :vlr, :sts, :frm_pag);";
@@ -33,7 +36,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Transacao $object_transacao) : bool {
+        public static function Atualizar(Object_Transacao $object_transacao) : bool
+        {
             try {
                 $sql = "UPDATE tb_transacao SET
                 		transacao_id = :id,
@@ -59,7 +63,8 @@ namespace module\application\model\dao;
             }
         }
  
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_transacao WHERE transacao_id = :id';
                 
@@ -72,7 +77,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento FROM tb_transacao WHERE transacao_id = :id';
                 
@@ -86,7 +92,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayTransacaos(array $rows) : array {
+        public static function PopulaArrayTransacaos(array $rows) : array
+        {
         	$transacoes = array();
         	
         	foreach ($rows as $row) {
@@ -122,7 +129,8 @@ namespace module\application\model\dao;
         	return $transacoes;
         }
         
-        public static function PopulaTransacao(array $row) : Object_Transacao {
+        public static function PopulaTransacao(array $row) : Object_Transacao
+        {
             $object_transacao = new Object_Transacao();
             
             if (isset($row['transacao_id'])) {
@@ -152,4 +160,3 @@ namespace module\application\model\dao;
             return $object_transacao;
         }
     }
-?>

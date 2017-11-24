@@ -12,9 +12,11 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
 	use module\administration\controller\layout\menu\Admin as Controller_Admin;
 	use module\administration\view\src\admin\controle\base_de_conhecimento\cmmv\gerenciar\Alterar as View_Alterar;
 	
-    class Alterar {
+    class Alterar
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -25,39 +27,46 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         private $nome;
         private $url;
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void
+        {
         	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
         		$this->categoria = $categoria;
         	}
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void
+        {
         	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
         		$this->marca = $marca;
         	}
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void
+        {
         	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
         		$this->modelo = $modelo;
         	}
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void
+        {
         	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
         		$this->versao = $versao;
         	}
         }
         
-        public function set_nome($nome) {
+        public function set_nome($nome) : void
+        {
         	$this->nome = $nome;
         }
         
-        public function set_url($url) {
+        public function set_url($url) : void
+        {
         	$this->url = $url;
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Admin::Verificar_Autenticacao()) {
 	        	$view = new View_Alterar();
 	        	
@@ -69,7 +78,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Alterar_CMMV() : void {
+        public function Alterar_CMMV() : void
+        {
         	if (!empty($this->versao)) {
         		$this->Alterar_Versao();
         	} else if (!empty($this->modelo)) {
@@ -81,7 +91,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Alterar_Versao() : void {
+        private function Alterar_Versao() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_versao = new Object_Versao();
         		
@@ -98,7 +109,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Alterar_Modelo() : void {
+        private function Alterar_Modelo() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_modelo = new Object_Modelo();
         		
@@ -115,7 +127,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Alterar_Marca() : void {
+        private function Alterar_Marca() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_marca = new Object_Marca();
         		
@@ -132,7 +145,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Alterar_Categoria() : void {
+        private function Alterar_Categoria() : void
+        {
         	if ($this->Validar_Nome_URL()) {
         		$object_categoria = new Object_Categoria();
         
@@ -148,7 +162,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Validar_Nome_URL() : bool {
+        private function Validar_Nome_URL() : bool
+        {
         	if (!empty($this->nome) AND !empty($this->url)) {
         		return true;
         	} else {
@@ -158,7 +173,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Categoria() : void {
+        public function Retornar_Categoria() : void
+        {
         	$object_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
         	
         	if (!empty($object_categoria)) {
@@ -171,7 +187,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Marca() : void {
+        public function Retornar_Marca() : void
+        {
         	$object_marca = $this->Buscar_Marca_Por_Id($this->marca);
         	 
         	if (!empty($object_marca)) {
@@ -184,7 +201,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Modelo() : void {
+        public function Retornar_Modelo() : void
+        {
         	$object_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
         
         	if (!empty($object_modelo)) {
@@ -197,7 +215,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Versao() : void {
+        public function Retornar_Versao() : void
+        {
         	$object_versao = $this->Buscar_Versao_Por_Id($this->versao);
         
         	if (!empty($object_versao)) {
@@ -210,23 +229,28 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        public function Retornar_Categorias() : void {
+        public function Retornar_Categorias() : void
+        {
         	View_Alterar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
-        public function Retornar_Marcas_Por_Categoria() : void {
+        public function Retornar_Marcas_Por_Categoria() : void
+        {
         	View_Alterar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($this->categoria));
         }
         
-        public function Retornar_Modelos_Por_Marca() : void {
+        public function Retornar_Modelos_Por_Marca() : void
+        {
         	View_Alterar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($this->marca));
         }
         
-        public function Retornar_Versoes_Por_Modelo() : void {
+        public function Retornar_Versoes_Por_Modelo() : void
+        {
         	View_Alterar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($this->modelo));
         }
         
-        private function Buscar_Marca_Por_Id_Categoria(?int $categoria) {
+        private function Buscar_Marca_Por_Id_Categoria(?int $categoria)
+        {
         	if (!empty($categoria)) {
         		return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
         	} else {
@@ -234,7 +258,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Modelo_Por_Id_Marca(?int $marca) {
+        private function Buscar_Modelo_Por_Id_Marca(?int $marca)
+        {
         	if (!empty($marca)) {
         		return DAO_Modelo::Buscar_Por_ID_Marca($marca);
         	} else {
@@ -242,7 +267,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo) {
+        private function Buscar_Versoes_Por_Id_Modelo(?int $modelo)
+        {
         	if (!empty($modelo)) {
         		return DAO_Versao::Buscar_Por_ID_Modelo($modelo);
         	} else {
@@ -250,7 +276,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Categoria_Por_Id(?int $categoria) {
+        private function Buscar_Categoria_Por_Id(?int $categoria)
+        {
         	if (!empty($categoria)) {
         		return DAO_Categoria::Buscar_Nome_URL_Por_ID($categoria);
         	} else {
@@ -258,7 +285,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Marca_Por_Id(?int $marca) {
+        private function Buscar_Marca_Por_Id(?int $marca)
+        {
         	if (!empty($marca)) {
         		return DAO_Marca::Buscar_Nome_URL_Por_ID($marca);
         	} else {
@@ -266,7 +294,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Modelo_Por_Id(?int $modelo) {
+        private function Buscar_Modelo_Por_Id(?int $modelo)
+        {
         	if (!empty($modelo)) {
         		return DAO_Modelo::Buscar_Nome_URL_Por_ID($modelo);
         	} else {
@@ -274,7 +303,8 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
         
-        private function Buscar_Versao_Por_Id(?int $versao) {
+        private function Buscar_Versao_Por_Id(?int $versao)
+        {
         	if (!empty($versao)) {
         		return DAO_Versao::Buscar_Nome_URL_Por_ID($versao);
         	} else {
@@ -282,4 +312,3 @@ namespace module\administration\controller\admin\controle\base_de_conhecimento\c
         	}
         }
     }
-?>

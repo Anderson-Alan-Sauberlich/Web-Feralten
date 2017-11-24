@@ -965,7 +965,7 @@
             			if ($resposta === false) {
             				return $response->withRedirect('/usuario/login/');
             			} else if ($resposta === 'certo') {
-            				return $response->withRedirect('/usuario/meu-perfil/');
+            				return $response->withRedirect('/usuario/meu-perfil/financeiro/meu-plano/');
             			} else {
             				return $response;
             			}
@@ -1665,4 +1665,3 @@
 	});
 	
 	$app->run();
-?>

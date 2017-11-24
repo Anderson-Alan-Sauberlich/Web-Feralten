@@ -4,9 +4,11 @@ namespace module\common\util;
     use Moip\Moip;
     use Moip\Auth\BasicAuth;
     
-    class Pagamento {
+    class Pagamento
+    {
         
-        function __construct() {
+        function __construct()
+        {
             $token = 'ABWBTTMMNLCVKP0MHE8KMOQNHM0TUSLK';
             $key = 'PDYLVJKURWK0KV3XV7WB3QCVLIQGZVUH4CYRKVHY';
             
@@ -17,4 +19,3 @@ namespace module\common\util;
         
         
     }
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Status_Fatura {
+    class Status_Fatura
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Status_Fatura $object_status_fatura) : bool {
+        public static function Inserir(Object_Status_Fatura $object_status_fatura) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_status_fatura (status_fatura_id, status_fatura_descricao) 
                         VALUES (:id, :dsc);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Status_Fatura $object_status_fatura) : bool {
+        public static function Atualizar(Object_Status_Fatura $object_status_fatura) : bool
+        {
             try {
                 $sql = "UPDATE tb_status_fatura SET
                 		status_fatura_id = :id,
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
  
-         public static function Deletar(int $id) : bool {
+         public static function Deletar(int $id) : bool
+         {
             try {
                 $sql = 'DELETE FROM tb_status_fatura WHERE status_fatura_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT status_fatura_id, status_fatura_descricao FROM tb_status_fatura WHERE status_fatura_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayStatusFaturas(array $rows) : array {
+        public static function PopulaArrayStatusFaturas(array $rows) : array
+        {
             $intervalos_pagamentos = array();
         	
         	foreach ($rows as $row) {
@@ -94,7 +101,8 @@ namespace module\application\model\dao;
         	return $intervalos_pagamentos;
         }
         
-        public static function PopulaStatusFatura(array $row) : Object_Status_Fatura {
+        public static function PopulaStatusFatura(array $row) : Object_Status_Fatura
+        {
             $object_status_fatura = new Object_Status_Fatura();
             
             if (isset($row['status_fatura_id'])) {
@@ -108,4 +116,3 @@ namespace module\application\model\dao;
             return $object_status_fatura;
         }
     }
-?>

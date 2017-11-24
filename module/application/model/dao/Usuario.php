@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Usuario {
+    class Usuario
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Usuario $object_usuario) : bool {
+        public static function Inserir(Object_Usuario $object_usuario) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_sobrenome, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo) 
                         VALUES (:id, :email, :nome, :sobrenome, :senha, :login, :sts_id, :fone, :fone_alt, :email_alt);";
@@ -37,7 +40,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Usuario $object_usuario) : bool {
+        public static function Atualizar(Object_Usuario $object_usuario) : bool
+        {
             try {
                 $sql = "UPDATE tb_usuario SET
                 usuario_nome = :nome,
@@ -64,7 +68,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Contato(Object_Usuario $object_usuario) : bool {
+        public static function Atualizar_Contato(Object_Usuario $object_usuario) : bool
+        {
         	try {
         		$sql = "UPDATE tb_usuario SET
                 usuario_fone = :fone,
@@ -85,7 +90,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Atualizar_Status(int $status, int $id) : bool {
+        public static function Atualizar_Status(int $status, int $id) : bool
+        {
         	try {
         		$sql = 'UPDATE tb_usuario SET usuario_sts_usr = :sts WHERE usuario_id = :id';
         		
@@ -100,7 +106,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Atualizar_Senha(string $senha, int $id) : bool {
+        public static function Atualizar_Senha(string $senha, int $id) : bool
+        {
             try {
                 $sql = 'UPDATE tb_usuario SET usuario_senha = :ps WHERE usuario_id = :id';
 				
@@ -115,7 +122,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Atualizar_Token_Ultimo_Login(Object_Usuario $object_usuario) : bool {
+        public static function Atualizar_Token_Ultimo_Login(Object_Usuario $object_usuario) : bool
+        {
             try {
                 $sql = 'UPDATE tb_usuario SET usuario_token_login = :tk, usuario_ultimo_login = :ul WHERE usuario_id = :id';
 				
@@ -131,7 +139,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Token(string $token = null, int $id) : bool {
+        public static function Atualizar_Token(string $token = null, int $id) : bool
+        {
             try {
                 $sql = 'UPDATE tb_usuario SET usuario_token_login = :tk WHERE usuario_id = :id';
 				
@@ -146,7 +155,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function Atualizar_Ultimo_Login(string $login, int $id) : bool {
+        public static function Atualizar_Ultimo_Login(string $login, int $id) : bool
+        {
             try {
                 $sql = 'UPDATE tb_usuario SET usuario_ultimo_login = :ul WHERE usuario_id = :id';
 				
@@ -161,7 +171,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_usuario WHERE usuario_id = :id';
                 
@@ -174,7 +185,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Verificar_Email(string $email) {
+        public static function Verificar_Email(string $email)
+        {
             try {
                 $sql = 'SELECT usuario_id FROM tb_usuario WHERE usuario_email = :email';
                 
@@ -196,7 +208,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Usuario(int $usuario_id) {
+        public static function Buscar_Usuario(int $usuario_id)
+        {
             try {
                 $sql = 'SELECT usuario_id, usuario_nome, usuario_sobrenome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_token_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo FROM tb_usuario WHERE usuario_id = :id';
                 
@@ -216,7 +229,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Buscar_Senha_Usuario(int $id) {
+        public static function Buscar_Senha_Usuario(int $id)
+        {
             try {
                 $sql = 'SELECT usuario_senha FROM tb_usuario WHERE usuario_id = :id';
                 
@@ -230,7 +244,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Autenticar(string $email) {
+        public static function Autenticar(string $email)
+        {
             try {
                 $sql = 'SELECT usuario_id, usuario_nome, usuario_sobrenome, usuario_email, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo FROM tb_usuario WHERE usuario_email = :email';
                 
@@ -244,7 +259,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaUsuario(array $row) : Object_Usuario {
+        public static function PopulaUsuario(array $row) : Object_Usuario
+        {
             $object_usuario = new Object_Usuario();
 			
             if (isset($row['usuario_id'])) {
@@ -294,4 +310,3 @@ namespace module\application\model\dao;
             return $object_usuario;
         }
     }
-?>

@@ -1,10 +1,11 @@
 <?php
 namespace module\application\view\src\layout\footer;
 
-    class Rodape {
+    class Rodape
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
     }
-?>

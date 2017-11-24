@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Status_Peca {
+    class Status_Peca
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Status_Peca $object_status_peca) : bool {
+        public static function Inserir(Object_Status_Peca $object_status_peca) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_url) 
                         VALUES (:id, :nome, :url);";
@@ -30,7 +33,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Status_Peca $object_status_peca) : bool {
+        public static function Atualizar(Object_Status_Peca $object_status_peca) : bool
+        {
             try {
                 $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome, status_peca_url = :url WHERE status_peca_id = :id";
 				
@@ -46,7 +50,8 @@ namespace module\application\model\dao;
             }
         }
  		
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_status_peca WHERE status_peca_id = :id';
                 
@@ -59,7 +64,8 @@ namespace module\application\model\dao;
             }
         }
 		
-        public static function Buscar_Id_Por_Url(string $url) {
+        public static function Buscar_Id_Por_Url(string $url)
+        {
         	try {
         		$sql = 'SELECT status_peca_id FROM tb_status_peca WHERE status_peca_url = :url';
         		
@@ -73,7 +79,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca WHERE status_peca_id = :id';
                 
@@ -87,7 +94,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Todos() {
+        public static function Buscar_Todos()
+        {
             try {
                 $sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca';
                 
@@ -100,7 +108,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Lista_Todos() {
+        public static function Buscar_Lista_Todos()
+        {
         	try {
         		$sql = 'SELECT status_peca_id, status_peca_nome, status_peca_url FROM tb_status_peca';
         		
@@ -113,7 +122,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Popular_Status_Peca(array $row) : Object_Status_Peca {
+        public static function Popular_Status_Peca(array $row) : Object_Status_Peca
+        {
             $object_status_peca = new Object_Status_Peca();
             
             if (isset($row['status_peca_id'])) {
@@ -131,7 +141,8 @@ namespace module\application\model\dao;
             return $object_status_peca;
         }
 		
-        public static function Popular_Status_Pecas(array $rows) : array {
+        public static function Popular_Status_Pecas(array $rows) : array
+        {
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -155,7 +166,8 @@ namespace module\application\model\dao;
 			return $status_pecas;
 		}
 		
-		public static function Popular_Lista_Status_Pecas(array $rows) : array {
+		public static function Popular_Lista_Status_Pecas(array $rows) : array
+		{
 			$status_pecas = array();
 			
 			foreach ($rows as $row) {
@@ -167,4 +179,3 @@ namespace module\application\model\dao;
 			return $status_pecas;
 		}
     }
-?>

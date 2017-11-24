@@ -13,9 +13,11 @@ namespace module\application\controller\pecas;
 	use module\application\model\object\Visualizado as Object_Visualizado;
 	use \Exception;
 	
-    class Detalhes {
+    class Detalhes
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
@@ -23,7 +25,8 @@ namespace module\application\controller\pecas;
         private $peca_url;
         private $peca_id;
         
-        public function set_peca_id($peca_id) {
+        public function set_peca_id($peca_id)
+        {
             try {
                 $this->peca_id = Validador::Peca()::validar_id($peca_id);
                 
@@ -33,7 +36,8 @@ namespace module\application\controller\pecas;
             }
         }
         
-        public function set_peca_url($peca_url) {
+        public function set_peca_url($peca_url)
+        {
             try {
                 $this->peca_url = Validador::Peca()::validar_url($peca_url);
                 
@@ -43,7 +47,8 @@ namespace module\application\controller\pecas;
             }
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
             if (!empty($this->object_peca) AND $this->object_peca != false) {
                 $object_visualizado = new Object_Visualizado();
                 $object_visualizado->set_object_entidade($this->object_peca->get_entidade());
@@ -83,8 +88,8 @@ namespace module\application\controller\pecas;
             }
         }
         
-        public static function Retornar_Preferencias_Entrega() {
+        public static function Retornar_Preferencias_Entrega()
+        {
             return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();
         }
     }
-?>

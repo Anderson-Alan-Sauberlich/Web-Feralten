@@ -7,13 +7,16 @@ namespace module\administration\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Usuario_Admin {
+    class Usuario_Admin
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Usuario_Admin $object_usuario_admin) : bool {
+        public static function Inserir(Object_Usuario_Admin $object_usuario_admin) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_usuario_admin (usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome) 
                         VALUES (:id, :usuario, :senha, :nome);";
@@ -31,7 +34,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Usuario_Admin $object_usuario_admin) : bool {
+        public static function Atualizar(Object_Usuario_Admin $object_usuario_admin) : bool
+        {
             try {
                 $sql = "UPDATE tb_usuario_admin SET usuario_admin_nome = :nome, usuario_admin_usuario = :usuario WHERE usuario_admin_id = :id";
 
@@ -47,7 +51,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Atualizar_Senha(string $senha, int $id) : bool {
+        public static function Atualizar_Senha(string $senha, int $id) : bool
+        {
             try {
                 $sql = "UPDATE tb_usuario_admin SET usuario_admin_senha = :ps WHERE usuario_admin_id = :id";
 
@@ -62,7 +67,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
@@ -75,7 +81,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Verificar_Usuario(string $usuario) {
+        public static function Verificar_Usuario(string $usuario)
+        {
             try {
                 $sql = 'SELECT usuario_admin_id FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario';
                 
@@ -97,7 +104,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Buscar_Usuario(int $id) {
+        public static function Buscar_Usuario(int $id)
+        {
             try {
                 $sql = 'SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
@@ -111,7 +119,8 @@ namespace module\administration\model\dao;
             }
         }
 		
-        public static function Buscar_Senha_Usuario(int $id) {
+        public static function Buscar_Senha_Usuario(int $id)
+        {
             try {
                 $sql = 'SELECT usuario_admin_senha FROM tb_usuario_admin WHERE usuario_admin_id = :id';
                 
@@ -127,7 +136,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function Autenticar(string $usuario) {
+        public static function Autenticar(string $usuario)
+        {
             try {
                 $sql = 'SELECT usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome FROM tb_usuario_admin WHERE usuario_admin_usuario = :usuario';
                 
@@ -147,7 +157,8 @@ namespace module\administration\model\dao;
             }
         }
         
-        public static function PopulaUsuario(array $row) : Object_Usuario_Admin {
+        public static function PopulaUsuario(array $row) : Object_Usuario_Admin
+        {
             $object_usuario_admin = new Object_Usuario_Admin();
 			
             if (isset($row['usuario_admin_id'])) {
@@ -169,4 +180,3 @@ namespace module\administration\model\dao;
             return $object_usuario_admin;
         }
     }
-?>

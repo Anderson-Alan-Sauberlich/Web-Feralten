@@ -3,17 +3,21 @@ namespace module\administration\model\validador;
     
 	use \Exception;
 	
-    class Usuario_Admin {
+    class Usuario_Admin
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : void {
+		public static function validar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function validar_usuario($usuario = null) : string {
+		public static function validar_usuario($usuario = null) : string
+		{
 			if (empty($usuario)) {
 				throw new Exception('Digite seu Usuario');
 			} else {
@@ -21,11 +25,13 @@ namespace module\administration\model\validador;
 			}
 		}
 		
-		public static function validar_nome($nome = null) : void {
+		public static function validar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function validar_senha($senha = null) : string {
+		public static function validar_senha($senha = null) : string
+		{
 			if (empty($senha)) {
 				throw new Exception('Digite sua Senha');
 			} else {
@@ -33,7 +39,8 @@ namespace module\administration\model\validador;
 			}
 		}
 		
-		public static function validar_logout($logout = null) : string {
+		public static function validar_logout($logout = null) : string
+		{
 			if (empty($logout)) {
 				throw new Exception('Codigo de Logout não Informado');
 			} else {
@@ -41,11 +48,13 @@ namespace module\administration\model\validador;
 			}
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : void
+		{
             
 		}
 		
-		public static function filtrar_usuario($usuario = null) : string {
+		public static function filtrar_usuario($usuario = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($usuario)) {
@@ -55,11 +64,13 @@ namespace module\administration\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_nome($nome = null) : void {
+		public static function filtrar_nome($nome = null) : void
+		{
             
 		}
 		
-		public static function filtrar_senha($senha = null) : string {
+		public static function filtrar_senha($senha = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($senha)) {
@@ -69,7 +80,8 @@ namespace module\administration\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_logout($logout = null) : string {
+		public static function filtrar_logout($logout = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($logout)) {
@@ -79,4 +91,3 @@ namespace module\administration\model\validador;
 			return $valor;
 		}
     }
-?>

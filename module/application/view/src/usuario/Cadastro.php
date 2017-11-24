@@ -1,9 +1,11 @@
 <?php
 namespace module\application\view\src\usuario;
 
-    class Cadastro {
+    class Cadastro
+    {
 
-        function __construct() {
+        function __construct()
+        {
         	
         }
         
@@ -11,23 +13,28 @@ namespace module\application\view\src\usuario;
         private static $cadastro_campos;
         private static $cadastro_form;
         
-        public function set_cadastro_erros(?array $cadastro_erros = null) : void {
+        public function set_cadastro_erros(?array $cadastro_erros = null) : void
+        {
         	self::$cadastro_erros = $cadastro_erros;
         }
         
-        public function set_cadastro_campos(?array $cadastro_campos = null) : void {
+        public function set_cadastro_campos(?array $cadastro_campos = null) : void
+        {
         	self::$cadastro_campos = $cadastro_campos;
         }
         
-        public function set_cadastro_form(?array $cadastro_form = null) : void {
+        public function set_cadastro_form(?array $cadastro_form = null) : void
+        {
         	self::$cadastro_form = $cadastro_form;
         }
         
-        public static function Executar() : void {
+        public static function Executar() : void
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/Cadastro.php';
         }
         
-        public static function Mostrar_Erros() : void {
+        public static function Mostrar_Erros() : void
+        {
             if (!empty(self::$cadastro_erros)) {
                 foreach (self::$cadastro_erros as $value) {
                     echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>$value</div>";
@@ -35,7 +42,8 @@ namespace module\application\view\src\usuario;
             }
         }
 
-        public static function Manter_Valor(string $campo) : void {
+        public static function Manter_Valor(string $campo) : void
+        {
             if (!empty(self::$cadastro_form)) {
                 if (isset(self::$cadastro_form[$campo])) {
                     echo self::$cadastro_form[$campo];
@@ -43,7 +51,8 @@ namespace module\application\view\src\usuario;
             }
         }
         
-        public static function Incluir_Classe_Erros(string $campo) : void {
+        public static function Incluir_Classe_Erros(string $campo) : void
+        {
         	if (!empty(self::$cadastro_campos)) {
 	            switch ($campo) {
 	                case "nome":
@@ -89,4 +98,3 @@ namespace module\application\view\src\usuario;
 	        }
         }
     }
-?>

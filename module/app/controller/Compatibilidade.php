@@ -6,9 +6,11 @@ namespace module\app\controller;
     use module\application\model\dao\Modelo_Compativel as DAO_Modelo_Compativel;
     use module\application\model\dao\Versao_Compativel as DAO_Versao_Compativel;
 	
-    class Compatibilidade {
-
-        function __construct() {
+    class Compatibilidade
+    {
+        
+        function __construct()
+        {
             
         }
         
@@ -17,31 +19,36 @@ namespace module\app\controller;
         private $modelo;
         private $versao;
         
-        public function set_categoria($categoria) {
+        public function set_categoria($categoria) : void
+        {
         	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
         		$this->categoria = $categoria;
         	}
         }
         
-        public function set_marca($marca) {
+        public function set_marca($marca) : void
+        {
         	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
         		$this->marca = $marca;
         	}
         }
         
-        public function set_modelo($modelo) {
+        public function set_modelo($modelo) : void
+        {
         	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
         		$this->modelo = $modelo;
         	}
         }
         
-        public function set_versao($versao) {
+        public function set_versao($versao) : void
+        {
         	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
         		$this->versao = $versao;
         	}
         }
         
-        public function Retornar_Categorias() : void {
+        public function Retornar_Categorias() : void
+        {
             $categorias = array();
             $object_categorias = DAO_Categoria_Compativel::BuscarTodos();
             
@@ -57,7 +64,8 @@ namespace module\app\controller;
             echo json_encode($categorias);
         }
         
-        public function Retornar_Marcas() : void {
+        public function Retornar_Marcas() : void
+        {
             $marcas = array();
             $object_marcas = DAO_Marca_Compativel::BuscarTodos();
             
@@ -73,7 +81,8 @@ namespace module\app\controller;
             echo json_encode($marcas);
         }
         
-        public function Retornar_Modelos() : void {
+        public function Retornar_Modelos() : void
+        {
             $modelos = array();
             $object_modelos = DAO_Modelo_Compativel::BuscarTodos();
             
@@ -89,7 +98,8 @@ namespace module\app\controller;
             echo json_encode($modelos);
         }
         
-        public function Retornar_Versoes() : void {
+        public function Retornar_Versoes() : void
+        {
             $versoes = array();
             $object_versoes = DAO_Versao_Compativel::BuscarTodos();
             
@@ -105,4 +115,3 @@ namespace module\app\controller;
             echo json_encode($versoes);
         }
     }
-?>

@@ -10,13 +10,16 @@ namespace module\application\model\dao;
     use \Exception;
     use \PDOStatement;
 	
-    class Endereco {
+    class Endereco
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Endereco $object_endereco) : bool {
+        public static function Inserir(Object_Endereco $object_endereco) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_endereco (endereco_id, endereco_cid_id, endereco_ent_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, 
                                                  endereco_bairro) VALUES (:id, :ci_id, :ent_id, :es_id, :numero, :cep, :rua, :complemento, :bairro);";
@@ -39,7 +42,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Endereco $object_endereco) : bool {
+        public static function Atualizar(Object_Endereco $object_endereco) : bool
+        {
             try {
                 $sql = "UPDATE tb_endereco SET
                 endereco_cid_id = :ci_id,
@@ -69,7 +73,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_endereco WHERE endereco_id = :id';
                 
@@ -82,7 +87,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Endereco(int $endereco_id) {
+        public static function Buscar_Por_Id_Endereco(int $endereco_id)
+        {
         	try {
         		$sql = 'SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_id = :id';
         		
@@ -102,7 +108,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Por_Id_Entidade(int $entidade_id) {
+        public static function Buscar_Por_Id_Entidade(int $entidade_id)
+        {
             try {
                 $sql = 'SELECT endereco_id, endereco_ent_id, endereco_cid_id, endereco_est_id, endereco_numero, endereco_cep, endereco_rua, endereco_complemento, endereco_bairro FROM tb_endereco WHERE endereco_ent_id = :id';
                 
@@ -122,7 +129,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Entidade(int $entidade_id) {
+        public static function Buscar_Id_Por_Id_Entidade(int $entidade_id)
+        {
         	try {
         		$sql = 'SELECT endereco_id FROM tb_endereco WHERE endereco_ent_id = :id';
         
@@ -136,7 +144,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Endereco $object_endereco) : string {
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Endereco $object_endereco) : string
+        {
         	if (!empty($object_endereco->get_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
@@ -195,7 +204,8 @@ namespace module\application\model\dao;
         	return $pesquisa;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Endereco $object_endereco) : PDOStatement {
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Endereco $object_endereco) : PDOStatement
+        {
         	if (!empty($object_endereco->get_id())) {
         		$p_sql->bindValue(':end_id', $object_endereco->get_id(), PDO::PARAM_INT);
         	}
@@ -227,7 +237,8 @@ namespace module\application\model\dao;
         	return $p_sql;
         }
         
-        public static function PopulaEndereco(array $row) : Object_Endereco {
+        public static function PopulaEndereco(array $row) : Object_Endereco
+        {
             $object_endereco = new Object_Endereco();
             
             if (isset($row['endereco_id'])) {
@@ -269,4 +280,3 @@ namespace module\application\model\dao;
             return $object_endereco;
         }
     }
-?>

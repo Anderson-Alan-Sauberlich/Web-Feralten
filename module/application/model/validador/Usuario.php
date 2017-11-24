@@ -5,17 +5,21 @@ namespace module\application\model\validador;
 	use module\application\model\dao\Usuario as DAO_Usuario;
 	use \Exception;
 	
-    class Usuario {
+    class Usuario
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : void
+		{
             
 		}
 		
-		public static function validar_nome($nome = null) : string {
+		public static function validar_nome($nome = null) : string
+		{
 			if (empty($nome)) {
 				throw new Exception('Digite Seu Nome');
 			} else {
@@ -40,7 +44,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_sobrenome($sobrenome = null) : string {
+		public static function validar_sobrenome($sobrenome = null) : string
+		{
 		    if (empty($sobrenome)) {
 		        throw new Exception('Digite Seu Sobrenome');
 		    } else {
@@ -65,7 +70,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function filtrar_nome($nome = null) : string {
+		public static function filtrar_nome($nome = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($nome)) {
@@ -75,7 +81,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_sobrenome($sobrenome = null) : string {
+		public static function filtrar_sobrenome($sobrenome = null) : string
+		{
 		    $valor = '';
 		    
 		    if (!empty($sobrenome)) {
@@ -85,7 +92,8 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
 		
-		public static function validar_email($email = null) : string {
+		public static function validar_email($email = null) : string
+		{
 			if (empty($email)) {
 				throw new Exception('Preencha o Campo E-Mail');
 			} else {
@@ -113,7 +121,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_confemail($confemail = null, $email = null) : string {
+		public static function validar_confemail($confemail = null, $email = null) : string
+		{
 			if (empty($confemail)) {
 				throw new Exception('Preencha o Campo Comfirmar E-Mail');
 			} else {
@@ -128,7 +137,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_email_login($email = null) : string {
+		public static function validar_email_login($email = null) : string
+		{
 			if (empty($email)) {
 				throw new Exception('Digite seu Email');
 			} else {
@@ -152,7 +162,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_email($email = null) : string {
+		public static function filtrar_email($email = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($email)) {
@@ -162,7 +173,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_email_alternativo($email = null) : string {
+		public static function filtrar_email_alternativo($email = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($email)) {
@@ -172,7 +184,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_confemail($confemail = null) : string {
+		public static function filtrar_confemail($confemail = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($confemail)) {
@@ -182,7 +195,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_email_login($email = null) : string {
+		public static function filtrar_email_login($email = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($email)) {
@@ -192,7 +206,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function validar_senha_login($senha = null) : string {
+		public static function validar_senha_login($senha = null) : string
+		{
 			if (empty($senha)) {
 				throw new Exception('Digite sua Senha');
 			} else {
@@ -206,7 +221,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_senha($senha = null) : string {
+		public static function validar_senha($senha = null) : string
+		{
 			if (empty($senha)) {
 				throw new Exception('Preencha o Campo Senha');
 			} else {
@@ -224,7 +240,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_senha_antiga($senha_antiga = null) : string {
+		public static function validar_senha_antiga($senha_antiga = null) : string
+		{
 			if (empty($senha_antiga)) {
 				throw new Exception('Digite a Senha Antiga');
 			} else {
@@ -238,7 +255,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_senha_nova($senha_nova = null) : string {
+		public static function validar_senha_nova($senha_nova = null) : string
+		{
 			if (empty($senha_nova)) {
 				throw new Exception('Preencha o Campo Nova Senha');
 			} else {
@@ -256,7 +274,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_senha_confnova($senha_confnova = null, $senha_nova = null) : string {
+		public static function validar_senha_confnova($senha_confnova = null, $senha_nova = null) : string
+		{
 			if (empty($senha_confnova)) {
 				throw new Exception('Preencha o Campo Confirmar Nova Senha');
 			} else {
@@ -268,7 +287,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_senha_nova($senha_nova = null) : string {
+		public static function filtrar_senha_nova($senha_nova = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($senha_nova)) {
@@ -278,7 +298,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_senha_confnova($senha_confnova = null) : string {
+		public static function filtrar_senha_confnova($senha_confnova = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($senha_confnova)) {
@@ -288,7 +309,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_senha_antiga($senha_antiga = null) : string {
+		public static function filtrar_senha_antiga($senha_antiga = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($senha_antiga)) {
@@ -298,7 +320,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_senha($senha = null) : string {
+		public static function filtrar_senha($senha = null) : string
+		{
 			$valor = '';
 			
 			if (!empty($senha)) {
@@ -308,7 +331,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function validar_manter_login($manter_login = null) : bool {
+		public static function validar_manter_login($manter_login = null) : bool
+		{
 			if (!empty($manter_login)) {
 				return true;
 			} else {
@@ -316,7 +340,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_manter_login($manter_login = null) : bool {
+		public static function filtrar_manter_login($manter_login = null) : bool
+		{
 			if (!empty($manter_login)) {
 				return true;
 			} else {
@@ -324,19 +349,23 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_ultimo_login($ultimo_login = null) : void {
+		public static function validar_ultimo_login($ultimo_login = null) : void
+		{
 			
 		}
 		
-		public static function validar_token($token = null) : void {
+		public static function validar_token($token = null) : void
+		{
 			
 		}
 		
-		public static function validar_status_id($status_id = null) : void {
+		public static function validar_status_id($status_id = null) : void
+		{
 			
 		}
 		
-		public static function validar_fone($fone = null) : string {
+		public static function validar_fone($fone = null) : string
+		{
 			if (empty($fone)) {
 				throw new Exception('Informe um Nº de Telefone');
 			} else {
@@ -355,7 +384,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_fone_alternativo($fone_alternativo = null) : ?string {
+		public static function validar_fone_alternativo($fone_alternativo = null) : ?string
+		{
 			if (!empty($fone_alternativo)) {
 				$fone_alternativo = trim($fone_alternativo);
 				$fone_alternativo = preg_replace('/[^a-zA-Z0-9]/', "", $fone_alternativo);
@@ -374,7 +404,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_email_alternativo($email_alternativo = null) : ?string {
+		public static function validar_email_alternativo($email_alternativo = null) : ?string
+		{
 			if (!empty($email_alternativo)) {
 				$email_alternativo = trim($email_alternativo);
 				
@@ -392,19 +423,23 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function filtrar_ultimo_login($ultimo_login = null) : void {
+		public static function filtrar_ultimo_login($ultimo_login = null) : void
+		{
             
 		}
 		
-		public static function filtrar_token($token = null) : void {
+		public static function filtrar_token($token = null) : void
+		{
             
 		}
 		
-		public static function filtrar_status_id($status_id = null) : void {
+		public static function filtrar_status_id($status_id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_fone($fone = null) : string {
+		public static function filtrar_fone($fone = null) : string
+		{
 			$valor = "";
 			
 			if (!empty($fone)) {
@@ -414,7 +449,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_fone_alternativo($fone_alternativo = null) : ?string {
+		public static function filtrar_fone_alternativo($fone_alternativo = null) : ?string
+		{
 			$valor = null;
 			
 			if (!empty($fone_alternativo)) {
@@ -424,7 +460,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function validar_recaptcha_response($recaptcha_response = null) : string {
+		public static function validar_recaptcha_response($recaptcha_response = null) : string
+		{
 		    if (empty($recaptcha_response)) {
 		        throw new Exception('Recaptcha Response Não Informado');
 		    } else {
@@ -438,7 +475,8 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function filtrar_recaptcha_response($recaptcha_response = null) : ?string {
+		public static function filtrar_recaptcha_response($recaptcha_response = null) : ?string
+		{
 		    $valor = null;
 		    
 		    if (!empty($recaptcha_response)) {
@@ -448,4 +486,3 @@ namespace module\application\model\validador;
 		    return $valor;
 		}
     }
-?>

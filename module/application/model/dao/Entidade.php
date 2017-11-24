@@ -8,13 +8,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-	class Entidade {
+	class Entidade
+	{
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Entidade $object_entidade) {
+        public static function Inserir(Object_Entidade $object_entidade)
+        {
             try {
                 $sql = "INSERT INTO tb_entidade (entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                         entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano) 
@@ -41,7 +44,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Entidade $object_entidade) : bool {
+        public static function Atualizar(Object_Entidade $object_entidade) : bool
+        {
             try {
                 $sql = "UPDATE tb_entidade SET
                 entidade_nome_comercial = :nome,
@@ -62,7 +66,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Dados(Object_Entidade $object_entidade) : bool {
+        public static function Atualizar_Dados(Object_Entidade $object_entidade) : bool
+        {
             try {
                 $sql = "UPDATE tb_entidade SET
                 entidade_nome_comercial = :nome,
@@ -81,7 +86,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Imagem(string $imagem, int $entidade) : bool {
+        public static function Atualizar_Imagem(string $imagem, int $entidade) : bool
+        {
             try {
                 $sql = 'UPDATE tb_entidade SET entidade_imagem = :img WHERE entidade_id = :ent_id';
 
@@ -96,7 +102,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar_Financeiro(Object_Entidade $object_entidade) : bool {
+        public static function Atualizar_Financeiro(Object_Entidade $object_entidade) : bool
+        {
             try {
                 $sql = "UPDATE tb_entidade SET
                 entidade_pln_id = :pln_id,
@@ -117,7 +124,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_entidade WHERE entidade_id = :id';
                 
@@ -130,7 +138,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Verificar_CPF_CNPJ(string $cpf_cnpj) {
+        public static function Verificar_CPF_CNPJ(string $cpf_cnpj)
+        {
         	try {
         		$sql = 'SELECT entidade_id FROM tb_entidade WHERE entidade_cpf_cnpj = :cpf_cnpj';
         
@@ -144,7 +153,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Pegar_Status_Entidade(int $id) {
+        public static function Pegar_Status_Entidade(int $id)
+        {
             try {
                 $sql = 'SELECT entidade_sts_ent_id FROM tb_entidade WHERE entidade_usr_id = :id';
                 
@@ -159,7 +169,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Usuario(int $usuario_id) {
+        public static function Buscar_Por_Id_Usuario(int $usuario_id)
+        {
         	try {
         		$sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                 		entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano 
@@ -181,7 +192,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $entidade_id) {
+        public static function BuscarPorCOD(int $entidade_id)
+        {
             try {
                 $sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial, 
                 		entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano 
@@ -203,7 +215,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Pegar_Imagem_Entidade(int $id) : ?string {
+        public static function Pegar_Imagem_Entidade(int $id) : ?string
+        {
         	try {
         		$sql = 'SELECT entidade_imagem FROM tb_entidade WHERE entidade_id = :id';
         		
@@ -217,7 +230,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaUsuario(array $row) : Object_Entidade {
+        public static function PopulaUsuario(array $row) : Object_Entidade
+        {
             $object_entidade = new Object_Entidade();
             
             if (isset($row['entidade_id'])) {
@@ -268,4 +282,3 @@ namespace module\application\model\dao;
             return $object_entidade;
         }
 	}
-?>

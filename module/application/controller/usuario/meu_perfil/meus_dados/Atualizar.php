@@ -12,9 +12,11 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
     use module\application\controller\layout\menu\Usuario as Controller_Usuario;
     use \Exception;
 	
-    class Atualizar {
+    class Atualizar
+    {
 
-        function __construct() {
+        function __construct()
+        {
 			
         }
         
@@ -34,7 +36,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         private $entidade_form;
         private $usuario_form;
         
-        public function set_nome($nome) {
+        public function set_nome($nome) : void
+        {
         	try {
         		$this->nome = Validador::Usuario()::validar_nome($nome);
         		$this->atualizar_campos['erro_nome'] = 'certo';
@@ -46,7 +49,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_sobrenome($sobrenome) {
+        public function set_sobrenome($sobrenome) : void
+        {
             try {
                 $this->sobrenome = Validador::Usuario()::validar_sobrenome($sobrenome);
                 $this->atualizar_campos['erro_sobrenome'] = 'certo';
@@ -58,7 +62,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public function set_fone($fone) {
+        public function set_fone($fone) : void
+        {
         	try {
         		$this->fone = Validador::Usuario()::validar_fone($fone);
         		$this->atualizar_campos['erro_fone'] = 'certo';
@@ -70,7 +75,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_fone_alternativo($fone_alternativo = null) {
+        public function set_fone_alternativo($fone_alternativo = null) : void
+        {
         	try {
         		$this->fone_alternativo = Validador::Usuario()::validar_fone_alternativo($fone_alternativo);
         	} catch (Exception $e) {
@@ -81,7 +87,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_email($email) {
+        public function set_email($email) : void
+        {
         	try {
         		$this->email = Validador::Usuario()::validar_email($email);
         		$this->atualizar_campos['erro_email'] = 'certo';
@@ -93,7 +100,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_email_alternativo($email_alternativo = null) {
+        public function set_email_alternativo($email_alternativo = null) : void
+        {
         	try {
         		$this->email_alternativo = Validador::Usuario()::validar_email_alternativo($email_alternativo);
         	} catch (Exception $e) {
@@ -104,7 +112,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_cpf_cnpj($cpf_cnpj) {
+        public function set_cpf_cnpj($cpf_cnpj) : void
+        {
         	try {
         		$this->cpf_cnpj = Validador::Entidade()::validar_cpf_cnpj($cpf_cnpj);
         		$this->atualizar_campos['erro_cpf_cnpj'] = 'certo';
@@ -116,7 +125,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_site($site = null) {
+        public function set_site($site = null) : void
+        {
         	try {
         		$this->site = Validador::Entidade()::validar_site($site);
         	} catch (Exception $e) {
@@ -127,7 +137,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function set_nome_comercial($nome_comercial = null) {
+        public function set_nome_comercial($nome_comercial = null) : void
+        {
         	try {
         		$this->nome_comercial = Validador::Entidade()::validar_nome_comercial($nome_comercial);
         	} catch (Exception $e) {
@@ -138,7 +149,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Carregar_Pagina() {
+        public function Carregar_Pagina()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -169,7 +181,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        public function Verificar_Evento() {
+        public function Verificar_Evento()
+        {
         	if (Controller_Usuario::Verificar_Autenticacao()) {
         		$status = Controller_Usuario::Verificar_Status_Usuario();
         		
@@ -196,12 +209,14 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
         
-        private function Restaurar_Usuario() : void {
+        private function Restaurar_Usuario() : void
+        {
         	$this->Salvar_Entidade();
         	$this->atualizar_campos = array();
         }
         
-        private function Restaurar_Entidade() : void {
+        private function Restaurar_Entidade() : void
+        {
         	$this->Salvar_Usuario();
         	$this->Deletar_Imagem();
         	
@@ -209,7 +224,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	$this->atualizar_campos = array();
         }
         
-        private function Salvar_Usuario() : void {
+        private function Salvar_Usuario() : void
+        {
         	$this->atualizar_form['nome'] = $this->nome;
         	$this->atualizar_form['sobrenome'] = $this->sobrenome;
         	$this->atualizar_form['email'] = $this->email;
@@ -218,13 +234,15 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	$this->atualizar_form['email_alternativo'] = $this->email_alternativo;
         }
         
-        private function Salvar_Entidade() : void {
+        private function Salvar_Entidade() : void
+        {
         	$this->atualizar_form['nome_comercial'] = $this->nome_comercial;
         	$this->atualizar_form['cpf_cnpj'] = null;
         	$this->atualizar_form['site'] = $this->site;
         }
         
-        private function Atualizar_Entidade() : void {
+        private function Atualizar_Entidade() : void
+        {
             if (empty($this->atualizar_erros)) {
             	$entidade = new Object_Entidade();
             	
@@ -265,7 +283,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
             $this->Salvar_Usuario();
         }
         
-        private function Atualizar_Usuario() : void {
+        private function Atualizar_Usuario() : void
+        {
             if (empty($this->atualizar_erros)) {
             	$usuario = new Object_Usuario();
             	
@@ -292,7 +311,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
             $this->Salvar_Entidade();
         }
 		
-		public function Salvar_Imagem_TMP() : void {
+		public function Salvar_Imagem_TMP() : void
+		{
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
 					$imagens = new Gerenciar_Imagens();
@@ -308,7 +328,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public function Deletar_Imagem() : void {
+		public function Deletar_Imagem() : void
+		{
 			if (Controller_Usuario::Verificar_Autenticacao()) {
 				if (isset($_SESSION['imagem_tmp'])) {
 					if ($_SESSION['imagem_tmp'] != "del") {
@@ -322,7 +343,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
 		
-		public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string {
+		public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string
+		{
 			$imagens = new Gerenciar_Imagens();
 			
 			$caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem($nome_imagem."-200x150");
@@ -334,7 +356,8 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        private function Salvar_Imagem() : ?string {
+        private function Salvar_Imagem() : ?string
+        {
         	if (isset($_SESSION['imagem_tmp'])) {
         		$imagens = new Gerenciar_Imagens();
 				
@@ -373,4 +396,3 @@ namespace module\application\controller\usuario\meu_perfil\meus_dados;
         	}
         }
     }
-?>

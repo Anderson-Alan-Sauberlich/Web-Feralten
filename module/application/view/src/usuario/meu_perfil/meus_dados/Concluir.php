@@ -4,9 +4,11 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
     use module\application\controller\usuario\meu_perfil\meus_dados\Concluir as Controller_Concluir;
     use module\application\view\src\layout\menu\Usuario as View_Usuario;
     
-    class Concluir {
+    class Concluir
+    {
     	
-        function __construct(?int $status = null) {
+        function __construct(?int $status = null)
+        {
         	self::$status_usuario = $status;
         }
         
@@ -15,27 +17,33 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         private static $concluir_campos;
         private static $concluir_form;
         
-        public function set_concluir_erros(?array $concluir_erros = null) : void {
+        public function set_concluir_erros(?array $concluir_erros = null) : void
+        {
         	self::$concluir_erros = $concluir_erros;
         }
         
-        public function set_concluir_campos(?array $concluir_campos = null) : void {
+        public function set_concluir_campos(?array $concluir_campos = null) : void
+        {
         	self::$concluir_campos = $concluir_campos;
         }
         
-        public function set_concluir_form(?array $concluir_form = null) : void {
+        public function set_concluir_form(?array $concluir_form = null) : void
+        {
         	self::$concluir_form = $concluir_form;
         }
         
-        public function Executar() : void {
+        public function Executar() : void
+        {
         	require_once RAIZ.'/module/application/view/html/usuario/meu_perfil/meus_dados/Concluir.php';
         }
         
-        public static function Incluir_Menu_Usuario() : void {
+        public static function Incluir_Menu_Usuario() : void
+        {
         	new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
         }
         
-        public static function Manter_Valor(string $campo) : void {
+        public static function Manter_Valor(string $campo) : void
+        {
             if (!empty(self::$concluir_form)) {
                 if (isset(self::$concluir_form[$campo])) {
                     echo self::$concluir_form[$campo];
@@ -43,7 +51,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
 
-		public static function Manter_Imagem() : void {
+		public static function Manter_Imagem() : void
+		{
 			if (isset($_SESSION['imagem_tmp'])) {
 				echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
 			} else {
@@ -51,7 +60,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
 			}
 		}
         
-        public static function Mostrar_Erros() : void {
+        public static function Mostrar_Erros() : void
+        {
             if (!empty(self::$concluir_erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
                 foreach (self::$concluir_erros as $value) {
@@ -61,7 +71,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Estados() : void {
+        public static function Mostrar_Estados() : void
+        {
             $estados = Controller_Concluir::Buscar_Todos_Estados();
             
             if (!empty($estados) AND $estados !== false) {
@@ -83,7 +94,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Mostrar_Cidades(?int $estado = null) : void {
+        public static function Mostrar_Cidades(?int $estado = null) : void
+        {
 			$id_estado;
 				
 			if (isset($estado)) {
@@ -117,7 +129,8 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
             }
         }
         
-        public static function Incluir_Classe_Erros(string $campo) : void {
+        public static function Incluir_Classe_Erros(string $campo) : void
+        {
         	if (!empty(self::$concluir_campos)) {
 	            switch ($campo) {
 	                case "fone":
@@ -263,4 +276,3 @@ namespace module\application\view\src\usuario\meu_perfil\meus_dados;
         	}
         }
     }
-?>

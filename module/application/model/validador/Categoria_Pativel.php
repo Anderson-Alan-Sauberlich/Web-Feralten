@@ -3,25 +3,31 @@ namespace module\application\model\validador;
 	
 	use \Exception;
 	
-    class Categoria_Pativel {
+    class Categoria_Pativel
+    {
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_peca_id($peca_id = null) : void {
+		public static function validar_peca_id($peca_id = null) : void
+		{
 			
 		}
 		
-		public static function validar_categoria_id($categoria_id = null) : void {
+		public static function validar_categoria_id($categoria_id = null) : void
+		{
 			
 		}
 		
-		public static function validar_ano($ano = null) : void {
+		public static function validar_ano($ano = null) : void
+		{
 			
 		}
 		
-		public static function validar_ano_de($ano_de = null) : ?int {
+		public static function validar_ano_de($ano_de = null) : ?int
+		{
 			if (!empty($ano_de)) {
 				$ano_de = trim($ano_de);
 				
@@ -35,7 +41,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_ano_ate($ano_ate = null) : ?int {
+		public static function validar_ano_ate($ano_ate = null) : ?int
+		{
 			if (!empty($ano_ate)) {
 				$ano_ate = trim($ano_ate);
 				
@@ -49,23 +56,28 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_anos($anos = null) : void {
+		public static function validar_anos($anos = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_peca_id($peca_id = null) : void {
+		public static function filtrar_peca_id($peca_id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_categoria_id($categoria_id = null) : void {
+		public static function filtrar_categoria_id($categoria_id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_ano($ano = null) : void {
+		public static function filtrar_ano($ano = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_ano_de($ano_de = null) : ?int {
+		public static function filtrar_ano_de($ano_de = null) : ?int
+		{
 			$valor = null;
 			
 			if (!empty($ano_de) AND filter_var($ano_de, FILTER_VALIDATE_INT)) {
@@ -75,7 +87,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_ano_ate($ano_ate = null) : ?int {
+		public static function filtrar_ano_ate($ano_ate = null) : ?int
+		{
 			$valor = null;
 			
 			if (!empty($ano_ate) AND filter_var($ano_ate, FILTER_VALIDATE_INT)) {
@@ -85,8 +98,8 @@ namespace module\application\model\validador;
 			return $valor;
 		}
 		
-		public static function filtrar_anos($anos = null) : void {
+		public static function filtrar_anos($anos = null) : void
+		{
 			
 		}
     }
-?>

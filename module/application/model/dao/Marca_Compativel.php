@@ -7,13 +7,16 @@ namespace module\application\model\dao;
 	use \PDOException;
 	use \Exception;
 	
-	class Marca_Compativel {
+	class Marca_Compativel
+	{
 	
-		function __construct() {
+		function __construct()
+		{
 	
 		}
 	
-		public static function Inserir(Object_Marca_Compativel $object_marca_compativel) : bool {
+		public static function Inserir(Object_Marca_Compativel $object_marca_compativel) : bool
+		{
 			try {
 				$sql = "INSERT INTO tb_marca_compativel (marca_compativel_da_id_mrc, marca_compativel_com_id_mrc)
 	                    VALUES (:da_id, :com_id);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) : bool {
+		public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) : bool
+		{
 			try {
 				$sql = "UPDATE tb_marca_compativel SET marca_compativel_da_id_mrc = :da_id, marca_compativel_com_id_mrc = :com_id WHERE marca_compativel_da_id_mrc = :da_id";
 				
@@ -44,7 +48,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function Deletar(int $id) : bool {
+		public static function Deletar(int $id) : bool
+		{
 			try {
 				$sql = 'DELETE FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :id';
 	
@@ -57,7 +62,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarTodos() {
+		public static function BuscarTodos()
+		{
 			try {
 				$sql = 'SELECT marca_compativel_da_id_mrc, marca_compativel_com_id_mrc FROM tb_marca_compativel';
 	
@@ -70,7 +76,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function BuscarPorCOD(int $id) {
+		public static function BuscarPorCOD(int $id)
+		{
 			try {
 				$sql = 'SELECT marca_compativel_com_id_mrc FROM tb_marca_compativel WHERE marca_compativel_da_id_mrc = :da_id';
 	
@@ -84,7 +91,8 @@ namespace module\application\model\dao;
 			}
 		}
 	
-		public static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel {
+		public static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel
+		{
 			$object_marca_compativel = new Object_Marca_Compativel();
 			
 			if (isset($row['marca_compativel_da_id_mrc'])) {
@@ -98,7 +106,8 @@ namespace module\application\model\dao;
 			return $object_marca_compativel;
 		}
 		
-		public static function PopulaMarcasCompativeisObject(array $rows) : array {
+		public static function PopulaMarcasCompativeisObject(array $rows) : array
+		{
 		    $marcas_compativeis = array();
 		    
 		    foreach ($rows as $row) {
@@ -118,7 +127,8 @@ namespace module\application\model\dao;
 		    return $marcas_compativeis;
 		}
 	
-		public static function PopulaMarcasCompativeis(array $rows) : array {
+		public static function PopulaMarcasCompativeis(array $rows) : array
+		{
 			$marcas_compativeis = array();
 	
 			foreach ($rows as $row) {
@@ -130,4 +140,3 @@ namespace module\application\model\dao;
 			return $marcas_compativeis;
 		}
 	}
-?>

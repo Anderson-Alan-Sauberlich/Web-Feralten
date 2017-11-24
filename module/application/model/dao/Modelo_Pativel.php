@@ -12,13 +12,16 @@ namespace module\application\model\dao;
     use \Exception;
     use \PDOStatement;
 	
-    class Modelo_Pativel {
+    class Modelo_Pativel
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Modelo_Pativel $object_modelo_pativel) : bool {
+        public static function Inserir(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_id) 
                         VALUES (:pec_id, :mdl_id, :ano_id);";
@@ -70,7 +73,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Modelo_Pativel $object_modelo_pativel) : bool {
+        public static function Atualizar(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        {
         	try {
         		if (empty($object_modelo_pativel->get_ano_id())) {
         			$object_modelo_pativel->set_ano_id(self::Pegar_Id_Ano($object_modelo_pativel->get_peca_id(),
@@ -91,7 +95,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar_Por_Objeto(Object_Modelo_Pativel $object_modelo_pativel) : bool {
+        public static function Deletar_Por_Objeto(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        {
         	try {
         		if (!empty($object_modelo_pativel->get_ano_id())) {
         			self::Deletar_Anos($object_modelo_pativel->get_ano_id());
@@ -110,7 +115,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar(int $id_peca) : bool {
+        public static function Deletar(int $id_peca) : bool
+        {
         	try {
         		$id_anos = self::Pegar_Id_Anos($id_peca);
         		
@@ -136,7 +142,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar_Anos(int $ano_id) : bool {
+        public static function Deletar_Anos(int $ano_id) : bool
+        {
             try {
                 $sql = 'DELETE FROM tb_modelo_pativel_ano WHERE modelo_pativel_ano_id = :ano_id';
                 
@@ -150,7 +157,8 @@ namespace module\application\model\dao;
             }
         }
         
-        private static function Salvar_Id_Ano(int $id) : bool {
+        private static function Salvar_Id_Ano(int $id) : bool
+        {
         	try {
         		$sql = "INSERT INTO tb_id_livre_ano_mdl (id_livre_ano_mdl)
                         VALUES (:id);";
@@ -165,7 +173,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        private static function Pegar_Proximo_Id_Ano() : ?int {
+        private static function Pegar_Proximo_Id_Ano() : ?int
+        {
         	try {
         		$sql = 'SELECT fc_achar_id_livre_ano_modelo()';
         		
@@ -179,7 +188,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Pegar_Id_Ano(int $peca_id, int $modelo_id) : ?int {
+        public static function Pegar_Id_Ano(int $peca_id, int $modelo_id) : ?int
+        {
         	try {
         		$sql = 'SELECT modelo_pativel_ano_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :pec_id AND modelo_pativel_mdl_id = :mdl_id';
         		
@@ -200,7 +210,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Pegar_Id_Anos(int $peca_id) : ?array {
+        public static function Pegar_Id_Anos(int $peca_id) : ?array
+        {
         	try {
         		$sql = 'SELECT modelo_pativel_ano_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :pec_id';
         		
@@ -220,7 +231,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id';
                 
@@ -234,7 +246,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Peca(int $id_peca) {
+        public static function Buscar_Id_Por_Id_Peca(int $id_peca)
+        {
         	try {
         		$sql = 'SELECT modelo_pativel_mdl_id FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :id';
         		
@@ -248,7 +261,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Ano_Por_Id_Ano(int $id_ano) {
+        public static function Buscar_Ano_Por_Id_Ano(int $id_ano)
+        {
         	try {
         		$sql = 'SELECT modelo_pativel_ano_ano FROM tb_modelo_pativel_ano WHERE modelo_pativel_ano_id = :id';
         		
@@ -262,7 +276,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Numero_Paginas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro) {
+        public static function Buscar_Numero_Paginas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro)
+        {
         	try {
         		$pesquisa = '';
         		
@@ -294,7 +309,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Pecas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro, int $pg) {
+        public static function Buscar_Pecas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro, int $pg)
+        {
         	$limite = 9;
         	$inicio = ($pg * $limite) - $limite;
         	$pesquisa = "";
@@ -329,7 +345,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Modelo_Pativel $object_modelo_pativel) : string {
+        public static function Criar_String_Pesquisa(string $pesquisa, Object_Modelo_Pativel $object_modelo_pativel) : string
+        {
         	if (!empty($object_modelo_pativel->get_peca_id())) {
         		if (!empty($pesquisa)) {
         			$pesquisa .= " AND ";
@@ -393,7 +410,8 @@ namespace module\application\model\dao;
         	return $pesquisa;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Modelo_Pativel $object_modelo_pativel) : PDOStatement {
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Modelo_Pativel $object_modelo_pativel) : PDOStatement
+        {
         	if (!empty($object_modelo_pativel->get_peca_id())) {
         		$p_sql->bindValue(':pec_id', $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
         	}
@@ -413,7 +431,8 @@ namespace module\application\model\dao;
         	return $p_sql;
         }
         
-        public static function Popula_Modelo_Pativeis(array $rows) : array {
+        public static function Popula_Modelo_Pativeis(array $rows) : array
+        {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {
@@ -439,4 +458,3 @@ namespace module\application\model\dao;
             return $pativeis;
         }
     }
-?>

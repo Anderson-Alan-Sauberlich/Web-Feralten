@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Intervalo_Pagamento {
+    class Intervalo_Pagamento
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool {
+        public static function Inserir(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_intervalo_pagamento (intervalo_pagamento_id, intervalo_pagamento_descricao) 
                         VALUES (:id, :dsc);";
@@ -29,7 +32,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool {
+        public static function Atualizar(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool
+        {
             try {
                 $sql = "UPDATE tb_intervalo_pagamento SET
                 		intervalo_pagamento_id = :id,
@@ -47,7 +51,8 @@ namespace module\application\model\dao;
             }
         }
  
-         public static function Deletar(int $id) : bool {
+         public static function Deletar(int $id) : bool
+         {
             try {
                 $sql = 'DELETE FROM tb_intervalo_pagamento WHERE intervalo_pagamento_id = :id';
                 
@@ -60,7 +65,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT intervalo_pagamento_id, intervalo_pagamento_descricao FROM tb_intervalo_pagamento WHERE intervalo_pagamento_id = :id';
                 
@@ -74,7 +80,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayIntervalosPagamentos(array $rows) : array {
+        public static function PopulaArrayIntervalosPagamentos(array $rows) : array
+        {
             $intervalos_pagamentos = array();
         	
         	foreach ($rows as $row) {
@@ -94,7 +101,8 @@ namespace module\application\model\dao;
         	return $intervalos_pagamentos;
         }
         
-        public static function PopulaIntervaloPagamento(array $row) : Object_Intervalo_Pagamento {
+        public static function PopulaIntervaloPagamento(array $row) : Object_Intervalo_Pagamento
+        {
             $object_intervalo_pagamento = new Object_Intervalo_Pagamento();
             
             if (isset($row['intervalo_pagamento_id'])) {
@@ -108,4 +116,3 @@ namespace module\application\model\dao;
             return $object_intervalo_pagamento;
         }
     }
-?>

@@ -9,13 +9,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Marca {
+    class Marca
+    {
 
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Marca $object_marca) : bool {
+        public static function Inserir(Object_Marca $object_marca) : bool
+        {
             try {
                 if (empty($object_marca->get_id())) {
                     $object_marca->set_id(self::Achar_ID_Livre($object_marca->get_categoria_id()));
@@ -46,7 +49,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Marca $object_marca) : bool {
+        public static function Atualizar(Object_Marca $object_marca) : bool
+        {
             try {
                 $sql = "UPDATE tb_marca SET marca_ctg_id = :ca_id, marca_nome = :nome, marca_url = :url WHERE marca_id = :id";
 
@@ -63,7 +67,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar(int $id) : bool {
+        public static function Deletar(int $id) : bool
+        {
             try {
                 DAO_Marca_Compativel::Deletar($id);
                 
@@ -78,7 +83,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Achar_ID_Livre(int $categoria_id) : ?int {
+        public static function Achar_ID_Livre(int $categoria_id) : ?int
+        {
             try {
                 $sql = 'SELECT fc_achar_id_livre_marca(:ca_id)';
                 
@@ -94,7 +100,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarTodos() {
+        public static function BuscarTodos()
+        {
             try {
                 $sql = 'SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca';
                 
@@ -107,7 +114,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_id = :id';
                 
@@ -121,7 +129,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Nome_URL_Por_ID(int $id) {
+        public static function Buscar_Nome_URL_Por_ID(int $id)
+        {
         	try {
         		$sql = 'SELECT marca_nome, marca_url FROM tb_marca WHERE marca_id = :id';
         
@@ -135,7 +144,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_Categoria_Id(int $id) {
+        public static function Buscar_Categoria_Id(int $id)
+        {
             try {
                 $sql = 'SELECT marca_ctg_id FROM tb_marca WHERE marca_id = :id';
                 
@@ -149,7 +159,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Por_Id_Categorai(int $id) {
+        public static function Buscar_Por_Id_Categorai(int $id)
+        {
             try {
                 $sql = 'SELECT marca_id, marca_ctg_id, marca_nome, marca_url FROM tb_marca WHERE marca_ctg_id = :id ORDER BY marca_nome';
                 
@@ -163,7 +174,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Id_Por_Id_Categorai(int $id) {
+        public static function Buscar_Id_Por_Id_Categorai(int $id)
+        {
         	try {
         		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :id';
         
@@ -183,7 +195,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Buscar_ID_Por_URL(int $categoria_id, string $url) {
+        public static function Buscar_ID_Por_URL(int $categoria_id, string $url)
+        {
         	try {
         		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND marca_url = :url';
         
@@ -198,7 +211,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool {
+        public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool
+        {
         	try {
         		$sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)';
         
@@ -220,7 +234,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function PopulaMarca(array $row) : Object_Marca {
+        public static function PopulaMarca(array $row) : Object_Marca
+        {
             $object_marca = new Object_Marca();
             
             if (isset($row['marca_id'])) {
@@ -242,7 +257,8 @@ namespace module\application\model\dao;
             return $object_marca;
         }
         
-        public static function PopulaMarcas(array $rows) : array {
+        public static function PopulaMarcas(array $rows) : array
+        {
             $marcas = array();
             
             foreach ($rows as $row) {
@@ -270,4 +286,3 @@ namespace module\application\model\dao;
             return $marcas;
         }
     }
-?>

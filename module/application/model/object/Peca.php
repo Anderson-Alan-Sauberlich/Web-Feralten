@@ -8,7 +8,8 @@ namespace module\application\model\object;
 	use module\application\model\object\Entidade as Object_Entidade;
 	use module\application\model\object\Usuario as Object_Usuario;
 	
-    class Peca {
+    class Peca
+    {
     	
     	private $id;
 		private $entidade;
@@ -28,67 +29,83 @@ namespace module\application\model\object;
 		private $num_visualizado;
 		private $preferencia_entrega;
 		
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public function set_id(int $id) : void {
+		public function set_id(int $id) : void
+		{
 			$this->id = $id;
 		}
 		
-		public function get_id() : ?int {
+		public function get_id() : ?int
+		{
 			return $this->id;
 		}
 		
-		public function set_entidade(Object_Entidade $entidade) : void {
+		public function set_entidade(Object_Entidade $entidade) : void
+		{
 			$this->entidade = $entidade;
 		}
 		
-		public function get_entidade() : ?Object_Entidade {
+		public function get_entidade() : ?Object_Entidade
+		{
 			return $this->entidade;
 		}
 		
-		public function set_responsavel(Object_Usuario $usuario_responsavel) : void {
+		public function set_responsavel(Object_Usuario $usuario_responsavel) : void
+		{
 			$this->usuario_responsavel = $usuario_responsavel;
 		}
 		
-		public function get_responsavel() : ?Object_Usuario {
+		public function get_responsavel() : ?Object_Usuario
+		{
 			return $this->usuario_responsavel;
 		}
 		
-		public function set_nome(string $nome) : void {
+		public function set_nome(string $nome) : void
+		{
 			$this->nome = $nome;
 		}
 		
-		public function get_nome() : ?string {
+		public function get_nome() : ?string
+		{
 			return $this->nome;
 		}
 		
-		public function set_url(string $url) : void {
+		public function set_url(string $url) : void
+		{
 		    $this->url = $url;
 		}
 		
-		public function get_url() : ?string {
+		public function get_url() : ?string
+		{
 		    return $this->url;
 		}
 		
-		public function set_fabricante(?string $fabricante = null) : void {
+		public function set_fabricante(?string $fabricante = null) : void
+		{
 			$this->fabricante = $fabricante;
 		}
 		
-		public function get_fabricante() : ?string {
+		public function get_fabricante() : ?string
+		{
 			return $this->fabricante;
 		}
 		
-		public function set_serie(?string $serie = null) : void {
+		public function set_serie(?string $serie = null) : void
+		{
 			$this->serie = $serie;
 		}
 		
-		public function get_serie() : ?string {
+		public function get_serie() : ?string
+		{
 			return $this->serie;
 		}
 		
-		public function set_endereco(Object_Endereco $endereco) : void {
+		public function set_endereco(Object_Endereco $endereco) : void
+		{
 			$this->endereco = $endereco;
 		}
 		
@@ -96,69 +113,85 @@ namespace module\application\model\object;
 			return $this->endereco;
 		}
 		
-		public function set_preco(?float $preco = null) : void {
+		public function set_preco(?float $preco = null) : void
+		{
 			$this->preco = $preco;
 		}
 		
-		public function get_preco() : ?float {
+		public function get_preco() : ?float
+		{
 			return $this->preco;
 		}
 		
-		public function set_data_anuncio(string $data_anuncio) : void {
+		public function set_data_anuncio(string $data_anuncio) : void
+		{
 			$this->data_anuncio = $data_anuncio;
 		}
 		
-		public function get_data_anuncio() : ?string {
+		public function get_data_anuncio() : ?string
+		{
 			return $this->data_anuncio;
 		}
 		
-		public function set_descricao(?string $descricao = null) : void {
+		public function set_descricao(?string $descricao = null) : void
+		{
 			$this->descricao = $descricao;
 		}
 		
-		public function get_descricao() : ?string {
+		public function get_descricao() : ?string
+		{
 			return $this->descricao;
 		}
 		
-		public function set_prioridade(?bool $prioridade = null) : void {
+		public function set_prioridade(?bool $prioridade = null) : void
+		{
 			$this->prioridade = $prioridade;
 		}
 		
-		public function get_prioridade() : ?bool {
+		public function get_prioridade() : ?bool
+		{
 			return $this->prioridade;
 		}
 		
-		public function set_status(?Object_Status_Peca $status = null) : void {
+		public function set_status(?Object_Status_Peca $status = null) : void
+		{
 			$this->status = $status;
 		}
 		
-		public function get_status() : ?Object_Status_Peca {
+		public function get_status() : ?Object_Status_Peca
+		{
 			return $this->status;
 		}
 		
-		public function set_estado_uso(?Object_Estado_Uso_Peca $estado_uso = null) : void {
+		public function set_estado_uso(?Object_Estado_Uso_Peca $estado_uso = null) : void
+		{
 		    $this->estado_uso = $estado_uso;
 		}
 		
-		public function get_estado_uso() : ?Object_Estado_Uso_Peca {
+		public function get_estado_uso() : ?Object_Estado_Uso_Peca
+		{
 		    return $this->estado_uso;
 		}
 		
-		public function set_fotos(?array $fotos = array()) : void {
+		public function set_fotos(?array $fotos = array()) : void
+		{
 			foreach ($fotos as $foto) {
 				$this->set_foto($foto);
 			}
 		}
 		
-		public function set_foto(?Object_Foto_Peca $foto = null) : void {
+		public function set_foto(?Object_Foto_Peca $foto = null) : void
+		{
 			$this->fotos[$foto->get_numero()] = $foto;
 		}
 		
-		public function get_fotos() : ?array {
+		public function get_fotos() : ?array
+		{
 			return $this->fotos;
 		}
 		
-		public function get_foto(int $numero) : ?Object_Foto_Peca {
+		public function get_foto(int $numero) : ?Object_Foto_Peca
+		{
 			if (isset($this->fotos[$numero])) {
 				return $this->fotos[$numero];
 			} else {
@@ -166,23 +199,28 @@ namespace module\application\model\object;
 			}
 		}
 		
-		public function set_num_visualizado(?int $num_visualizado = null) : void {
+		public function set_num_visualizado(?int $num_visualizado = null) : void
+		{
 		    $this->num_visualizado = $num_visualizado;
 		}
 		
-		public function get_num_visualizado() : ?int {
+		public function get_num_visualizado() : ?int
+		{
 		    return $this->num_visualizado;
 		}
 		
-		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void {
+		public function set_preferencia_entrega(?int $preferencia_entrega = null) : void
+		{
 			$this->preferencia_entrega = $preferencia_entrega;
 		}
 		
-		public function get_preferencia_entrega() : ?int {
+		public function get_preferencia_entrega() : ?int
+		{
 			return $this->preferencia_entrega;
 		}
 		
-		public function set_preferencias_entrega(?array $preferencais_entrega) : void {
+		public function set_preferencias_entrega(?array $preferencais_entrega) : void
+		{
 			if (!empty($preferencais_entrega)) {
 				$valor = 0;
 				
@@ -198,7 +236,8 @@ namespace module\application\model\object;
 			}
 		}
 		
-		public static function get_preferencias_entrega(?int $preferencia_entrega = null) : ?array {
+		public static function get_preferencias_entrega(?int $preferencia_entrega = null) : ?array
+		{
 			$preferencais_entrega = array();
 			
 			if (!empty($preferencia_entrega)) {
@@ -255,4 +294,3 @@ namespace module\application\model\object;
 			return $preferencais_entrega;
 		}
     }
-?>

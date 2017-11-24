@@ -1,14 +1,16 @@
 <?php
 namespace module\application\view\src;
 	
-    class Documentacao {
+    class Documentacao
+    {
 
-        function __construct() {
+        function __construct()
+        {
         	
         }
         
-        public function Executar() {
+        public function Executar()
+        {
         	require_once RAIZ.'/module/application/view/html/Documentacao.php';
         }
     }
-?>

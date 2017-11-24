@@ -4,21 +4,26 @@ namespace module\application\model\validador;
     use module\application\model\dao\Status_Peca as DAO_Status_Peca;
 	use \Exception;
 	
-    class Status_Peca {
+    class Status_Peca
+    {
     	
-		function __constructor() {
+		function __constructor()
+		{
 			
 		}
 		
-		public static function validar_id($id = null) : void {
+		public static function validar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function validar_nome($nome = null) : void {
+		public static function validar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function validar_url($url = null) : ?string {
+		public static function validar_url($url = null) : ?string
+		{
 			if (!empty($url)) {
 				$valor = strip_tags($url);
 				
@@ -34,7 +39,8 @@ namespace module\application\model\validador;
 			}
 		}
 		
-		public static function validar_status_url($status_url = null) : ?int {
+		public static function validar_status_url($status_url = null) : ?int
+		{
 		    if (!empty($status_url)) {
 		        $valor = strip_tags($status_url);
 		        
@@ -57,16 +63,18 @@ namespace module\application\model\validador;
 		    }
 		}
 		
-		public static function filtrar_id($id = null) : void {
+		public static function filtrar_id($id = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_nome($nome = null) : void {
+		public static function filtrar_nome($nome = null) : void
+		{
 			
 		}
 		
-		public static function filtrar_url($url = null) : void {
+		public static function filtrar_url($url = null) : void
+		{
 			
 		}
     }
-?>

@@ -7,13 +7,16 @@ namespace module\application\model\dao;
     use \PDOException;
     use \Exception;
 	
-    class Acesso_Usuario {
+    class Acesso_Usuario
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Acesso_Usuario $object_acesso_usuario) : bool {
+        public static function Inserir(Object_Acesso_Usuario $object_acesso_usuario) : bool
+        {
             try {
                 $sql = "INSERT INTO tb_acesso_usuario (acesso_usuario_usr_id, acesso_usuario_ent_id, acesso_usuario_fnc, acesso_usuario_pms_id) 
                         VALUES (:usr_id, :ent_id, :fnc_id, :pms_id);";
@@ -31,7 +34,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Acesso_Usuario $object_acesso_usuario) : bool {
+        public static function Atualizar(Object_Acesso_Usuario $object_acesso_usuario) : bool
+        {
             try {
                 $sql = "UPDATE tb_acesso_usuario SET
                 		acesso_usuario_usr_id = :usr_id,
@@ -53,7 +57,8 @@ namespace module\application\model\dao;
             }
         }
  
-         public static function Deletar(int $id) : bool {
+         public static function Deletar(int $id) : bool
+         {
             try {
                 $sql = 'DELETE FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :id';
                 
@@ -66,7 +71,8 @@ namespace module\application\model\dao;
             }
         }
 
-        public static function BuscarPorCOD(int $usuario_id, int $entidade_id) {
+        public static function BuscarPorCOD(int $usuario_id, int $entidade_id)
+        {
             try {
                 $sql = 'SELECT acesso_usuario_fnc, acesso_usuario_pms_id FROM tb_acesso_usuario WHERE acesso_usuario_usr_id = :usr_id AND acesso_usuario_ent_id = :ent_id';
                 
@@ -81,7 +87,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function PopulaArrayAcessos(array $rows) : array {
+        public static function PopulaArrayAcessos(array $rows) : array
+        {
         	$acessos = array();
         	
         	foreach ($rows as $row) {
@@ -109,7 +116,8 @@ namespace module\application\model\dao;
         	return $acessos;
         }
         
-        public static function PopulaAcesso(array $row) : Object_Acesso_Usuario {
+        public static function PopulaAcesso(array $row) : Object_Acesso_Usuario
+        {
             $object_acesso_usuario = new Object_Acesso_Usuario();
             
             if (isset($row['acesso_usuario_usr_id'])) {
@@ -131,4 +139,3 @@ namespace module\application\model\dao;
             return $object_acesso_usuario;
         }
     }
-?>

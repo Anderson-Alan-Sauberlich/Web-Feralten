@@ -26,14 +26,14 @@
                             		<label for="nome" class="lbPanel">Digite Seu Nome:</label>
                                     <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Nome. (Campo Obrigatório)" />
+                                        <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="autofocus" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite Apenas seu Nome. (Campo Obrigatório)" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label for="sobrenome" class="lbPanel">Digite Seu Sobrenome:</label>
                                     <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("sobrenome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("sobrenome") ?>" placeholder="Sobrenome" autofocus="true" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
+                                        <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("sobrenome") ?>" placeholder="Sobrenome" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
                                     </div>
                                 </div>
                         	</div>

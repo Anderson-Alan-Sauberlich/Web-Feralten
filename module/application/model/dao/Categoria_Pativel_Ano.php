@@ -8,13 +8,16 @@ namespace module\application\model\dao;
     use \Exception;
     use \PDOStatement;
 	
-    class Categoria_Pativel_Ano {
+    class Categoria_Pativel_Ano
+    {
         
-        function __construct() {
+        function __construct()
+        {
             
         }
         
-        public static function Inserir(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool {
+        public static function Inserir(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        {
             try {
                 $anos = $object_categoria_pativel_ano->get_anos();
                 
@@ -40,7 +43,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Atualizar(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool {
+        public static function Atualizar(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        {
             try {
             	
             } catch (PDOException | Exception $e) {
@@ -48,7 +52,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool {
+        public static function Deletar_Por_Objeto(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        {
         	try {
         		
         	} catch (Exception $e) {
@@ -56,7 +61,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar(int $id_ano) : bool {
+        public static function Deletar(int $id_ano) : bool
+        {
         	try {
         		
         	} catch (Exception $e) {
@@ -64,7 +70,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Deletar_Anos(int $ano_id) : bool {
+        public static function Deletar_Anos(int $ano_id) : bool
+        {
             try {
                 
             } catch (Exception $e) {
@@ -72,7 +79,8 @@ namespace module\application\model\dao;
             }
         }
         
-        private static function Salvar_Id_Ano(int $id) : bool {
+        private static function Salvar_Id_Ano(int $id) : bool
+        {
         	try {
         		$sql = "INSERT INTO tb_id_livre_ano_ctg (id_livre_ano_ctg)
                         VALUES (:id);";
@@ -87,7 +95,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        private static function Pegar_Proximo_Id_Ano() : ?int {
+        private static function Pegar_Proximo_Id_Ano() : ?int
+        {
         	try {
         		$sql = 'SELECT fc_achar_id_livre_ano_categoria()';
         		
@@ -101,7 +110,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function BuscarPorCOD(int $id) {
+        public static function BuscarPorCOD(int $id)
+        {
             try {
                 $sql = 'SELECT categoria_pativel_ano_id, categoria_pativel_ano_ano FROM tb_categoria_pativel_ano WHERE categoria_pativel_ano_id = :id';
                 
@@ -115,7 +125,8 @@ namespace module\application\model\dao;
             }
         }
         
-        public static function Buscar_Ano_Por_Id_Ano(int $id_ano) {
+        public static function Buscar_Ano_Por_Id_Ano(int $id_ano)
+        {
         	try {
         		$sql = 'SELECT categoria_pativel_ano_ano FROM tb_categoria_pativel_ano WHERE categoria_pativel_ano_id = :id';
         		
@@ -129,7 +140,8 @@ namespace module\application\model\dao;
         	}
         }
         
-        public static function Popula_Categoria_Pativeis(array $rows) : array {
+        public static function Popula_Categoria_Pativeis(array $rows) : array
+        {
         	$pativeis = array();
 			
 			foreach ($rows as $row) {
@@ -149,4 +161,3 @@ namespace module\application\model\dao;
             return $pativeis;
         }
     }
-?>

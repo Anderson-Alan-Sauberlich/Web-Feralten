@@ -7,9 +7,11 @@ namespace module\application\controller\layout\form;
 	use module\application\controller\common\util\Email;
 	use \Exception;
 
-    class Contato {
+    class Contato
+    {
 		
-        function __construct() {
+        function __construct()
+        {
             $this->object_contato = new Object_Contato();
         }
         
@@ -17,7 +19,8 @@ namespace module\application\controller\layout\form;
         private $campos = array();
         private $erros = array();
         
-        public function set_nome($nome) : void {
+        public function set_nome($nome) : void
+        {
             try {
                 $this->object_contato->set_nome(Validador::Contato()::validar_nome($nome));
             } catch (Exception $e) {
@@ -26,7 +29,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_email($email) : void {
+        public function set_email($email) : void
+        {
             try {
                 $this->object_contato->set_email(Validador::Contato()::validar_email($email));
             } catch (Exception $e) {
@@ -35,7 +39,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_telefone($telefone) : void {
+        public function set_telefone($telefone) : void
+        {
             try {
                 $this->object_contato->set_telefone(Validador::Contato()::validar_telefone($telefone));
             } catch (Exception $e) {
@@ -44,7 +49,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_whatsapp($whatsapp) : void {
+        public function set_whatsapp($whatsapp) : void
+        {
             try {
                 $this->object_contato->set_whatsapp(Validador::Contato()::validar_whatsapp($whatsapp));
             } catch (Exception $e) {
@@ -53,7 +59,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_assunto($assunto) : void {
+        public function set_assunto($assunto) : void
+        {
             try {
                 $this->object_contato->set_assunto(Validador::Contato()::validar_assunto($assunto));
             } catch (Exception $e) {
@@ -62,7 +69,8 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function set_mensagem($mensagem) : void {
+        public function set_mensagem($mensagem) : void
+        {
             try {
                 $this->object_contato->set_mensagem(Validador::Contato()::validar_mensagem($mensagem));
             } catch (Exception $e) {
@@ -71,13 +79,15 @@ namespace module\application\controller\layout\form;
             }
         }
         
-        public function Carregar_Pagina() : void {
+        public function Carregar_Pagina() : void
+        {
             $view = new View_Contato();
             
             $view->Executar();
         }
         
-        public function Enviar_Email() : void {
+        public function Enviar_Email() : void
+        {
             $valor = array();
             $valor['status'] = '';
             $valor['html'] = '';
@@ -102,4 +112,3 @@ namespace module\application\controller\layout\form;
             echo json_encode($valor);
         }
     }
-?>
