@@ -210,13 +210,21 @@
         </div>
         <div class="margem-inferior-pouco"></div>
         <img class="ui image" src="/resources/img/formaspagamento.png" width="883" height="39" />
-        <div id="mdl_msg" class="ui mini basic modal">
+        <div id="mdl_msg" class="ui small basic modal">
         	<i class="close icon"></i>
-            <div id="msg_header" class="header">Alerta</div>
+            <div id="msg_header" class="header">Deseja continuar?</div>
             <div id="msg_content" class="content"></div>
             <div class="actions">
-    			<div id="btn_cancelar" onclick="" class="ui cancel button">Cancelar</div>
-                <div id="btn_aceitar" onclick="" class="ui approve positive right labeled icon button">Aceitar <i class="checkmark icon"></i></div>
+    			<div id="btn_cancelar" class="ui cancel button">Cancelar</div>
+                <div id="btn_aceitar" class="ui approve positive right labeled icon button">Aceitar <i class="checkmark icon"></i></div>
+        	</div>
+        </div>
+        <div id="mdl_erro" class="ui small basic modal">
+        	<i class="close icon"></i>
+            <div id="erro_header" class="header">Alerta</div>
+            <div id="erro_content" class="content"></div>
+            <div class="actions">
+    			<div class="ui cancel button">Cancelar</div>
         	</div>
         </div>
     </section>

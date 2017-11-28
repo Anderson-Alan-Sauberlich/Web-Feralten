@@ -93,6 +93,22 @@ namespace module\application\model\dao;
             }
         }
         
+        public static function BuscarPorCodStatus(int $entidade_id, int $status_id)
+        {
+            try {
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_ent_id = :ent_id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':sts_id', $status_id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function PopulaArrayFaturas(array $rows) : array
         {
         	$faturas = array();

@@ -74,7 +74,7 @@ namespace module\application\model\dao;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaArrayStatusFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaStatusFatura($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
 				return false;
             }

@@ -4,6 +4,7 @@ namespace module\application\model\validador;
     use module\application\model\common\util\Login_Session;
     use module\application\model\dao\Plano as DAO_Plano;
     use module\application\model\dao\Peca as DAO_Peca;
+    use module\application\model\dao\Fatura as DAO_Fatura;
 	use \Exception;
 	
     class Plano
@@ -21,22 +22,28 @@ namespace module\application\model\validador;
 		    } else {
 		        if (filter_var($id, FILTER_VALIDATE_INT)) {
 		            if ($id != Login_Session::get_entidade_plano()) {
-		                if ($id < Login_Session::get_entidade_plano()) {
-		                    $limite = DAO_Plano::Buscar_Limite_Por_Id($id);
-		                    $pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
-		                    
-    		                if ($pecas > $limite) {
-    		                    $diferenca = $pecas - $limite;
-    		                    throw new Exception("Você tem $pecas peças cadastradas. Este plano permite no máximo $limite. Você precisa deletar $diferenca peças para ativá-lo.");
-    		                }
-		                }
+		                $faturas_pendentes = DAO_Fatura::BuscarPorCodStatus(Login_session::get_entidade_id(), 2);
 		                
-		                return $id;
+		                if (empty($faturas_pendentes)) {
+    		                if ($id < Login_Session::get_entidade_plano()) {
+    		                    $limite = DAO_Plano::Buscar_Limite_Por_Id($id);
+    		                    $pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
+    		                    
+        		                if ($pecas > $limite) {
+        		                    $diferenca = $pecas - $limite;
+        		                    throw new Exception("Você tem $pecas peças cadastradas. Este plano permite no máximo $limite. Você precisa deletar $diferenca peças para ativá-lo.");
+        		                }
+    		                }
+    		                
+    		                return $id;
+		                } else {
+		                    throw new Exception('O plano não pode ser alterado até ser confirmado o pagamento da fatura pendente no sistema');
+		                }
 		            } else {
 		                throw new Exception('Plano já Ativo');
 		            }
 		        } else {
-		            throw new Exception("Selecione um Plano Válida");
+		            throw new Exception("Selecione um plano válida");
 		        }
 		    }
 		}

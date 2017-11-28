@@ -3,6 +3,7 @@ function bnt_plano($btn) {
 	if ($btn >= 1 && $btn <= 6) {
 		$('#msg_content').html("<p>Deseja mesmo contratar este plano?</p>");
 		$('#mdl_msg').modal({
+			allowMultiple: true,
 			closable  : false,
 			onApprove : function() { alterarPlano($btn); }
 			}).modal('show');
@@ -21,8 +22,8 @@ function alterarPlano($planoID) {
 		if ($valor.status == 'certo') {
 			window.location.replace('/usuario/meu-perfil/financeiro/fatura/');
 		} else if ($valor.status == 'erro') {
-			$('#msg_content').html($valor.erros);
-			$('#mdl_msg').modal('show');
+			$('#erro_content').html($valor.erros);
+			$('#mdl_erro').modal('show');
 		}
 	});
 	$('#bnt_plano_'+$planoID).removeClass('loading');
