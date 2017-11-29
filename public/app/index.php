@@ -6,9 +6,10 @@
 	use \Psr\Http\Message\ResponseInterface as Response;
 	
 	$app = new \Slim\App();
+	
 	$app->group('/cmmv', function() use ($app) {
 	    $app->get('/categorias[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
+	        $cmmv = new Module\App\Controller\CMMV();
 	        
 	        $cmmv->Retornar_Categorias();
 	        
@@ -16,7 +17,7 @@
 	    });
 	    
 	    $app->get('/marcas[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
+	        $cmmv = new Module\App\Controller\CMMV();
 	        
 	        $cmmv->Retornar_Marcas();
 	        
@@ -24,7 +25,7 @@
 	    });
 	    
 	    $app->get('/modelos[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
+	        $cmmv = new Module\App\Controller\CMMV();
 	        
 	        $cmmv->Retornar_Modelos();
 	        
@@ -32,7 +33,7 @@
 	    });
 	    
 	    $app->get('/versoes[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\CMMV();
+	        $cmmv = new Module\App\Controller\CMMV();
 	        
 	        $cmmv->Retornar_Versoes();
 	        
@@ -42,7 +43,7 @@
 	
 	$app->group('/compatibilidade', function() use ($app) {
 	    $app->get('/categorias[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\Compatibilidade();
+	        $cmmv = new Module\App\Controller\Compatibilidade();
 	        
 	        $cmmv->Retornar_Categorias();
 	        
@@ -50,7 +51,7 @@
 	    });
 	    
 	    $app->get('/marcas[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\Compatibilidade();
+	        $cmmv = new Module\App\Controller\Compatibilidade();
 	        
 	        $cmmv->Retornar_Marcas();
 	        
@@ -58,7 +59,7 @@
 	    });
 	    
 	    $app->get('/modelos[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-	        $cmmv = new module\app\controller\Compatibilidade();
+	        $cmmv = new Module\App\Controller\Compatibilidade();
 	        
 	        $cmmv->Retornar_Modelos();
 	        
@@ -66,7 +67,7 @@
 	    });
 	    
 		$app->get('/versoes[/{data}[/]]', function(Request $request, Response $response, $args) use ($app) {
-		    $cmmv = new module\app\controller\Compatibilidade();
+		    $cmmv = new Module\App\Controller\Compatibilidade();
 		    
 		    $cmmv->Retornar_Versoes();
 			
@@ -75,4 +76,3 @@
 	});
 	
 	$app->run();
-?>
