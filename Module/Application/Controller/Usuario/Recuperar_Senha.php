@@ -1,15 +1,15 @@
 <?php
 namespace Module\Application\Controller\Usuario;
-	
-	use Module\Application\View\SRC\Usuario\Recuperar_Senha as View_Recuperar_Senha;
-	use Module\Application\Controller\Usuario\Login as Controller_Login;
-	use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
-	use Module\Application\Model\DAO\Recuperar_Senha as DAO_Recuperar_Senha;
-	use Module\Application\Model\DAO\Usuario as DAO_Usuario;
-	use Module\Application\Controller\Common\Util\Email;
-	use Module\Application\Model\Common\Util\Validador;
-	use \Exception;
-	
+    
+    use Module\Application\View\SRC\Usuario\Recuperar_Senha as View_Recuperar_Senha;
+    use Module\Application\Controller\Usuario\Login as Controller_Login;
+    use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
+    use Module\Application\Model\DAO\Recuperar_Senha as DAO_Recuperar_Senha;
+    use Module\Application\Model\DAO\Usuario as DAO_Usuario;
+    use Module\Application\Controller\Common\Util\Email;
+    use Module\Application\Model\Common\Util\Validador;
+    use \Exception;
+    
     class Recuperar_Senha
     {
 
@@ -81,11 +81,11 @@ namespace Module\Application\Controller\Usuario;
         
         public function Carregar_Pagina() : void
         {
-        	$view = new View_Recuperar_Senha();
-        	
-        	$view->set_object_recuperar_senha($this->object_recuperar_senha);
-        	
-        	$view->Executar();
+            $view = new View_Recuperar_Senha();
+            
+            $view->set_object_recuperar_senha($this->object_recuperar_senha);
+            
+            $view->Executar();
         }
         
         public function Enviar_Link_Email() : void

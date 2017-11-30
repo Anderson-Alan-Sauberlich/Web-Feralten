@@ -1,15 +1,15 @@
 <?php
 namespace Module\Application\Controller\Layout\Form;
-	
+    
     use Module\Application\View\SRC\Layout\Form\Contato as View_Contato;
-	use Module\Application\Model\Object\Contato as Object_Contato;
-	use Module\Application\Model\Common\Util\Validador;
-	use Module\Application\Controller\Common\Util\Email;
-	use \Exception;
+    use Module\Application\Model\Object\Contato as Object_Contato;
+    use Module\Application\Model\Common\Util\Validador;
+    use Module\Application\Controller\Common\Util\Email;
+    use \Exception;
 
     class Contato
     {
-		
+        
         function __construct()
         {
             $this->object_contato = new Object_Contato();

@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Pecas;
-	
-	use Module\Application\View\SRC\Pecas\Busca_Programada as View_Busca_Programada;
-	
+    
+    use Module\Application\View\SRC\Pecas\Busca_Programada as View_Busca_Programada;
+    
     class Busca_Programada
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Pecas;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Busca_Programada();
-        	
-        	$view->Executar();
+            $view = new View_Busca_Programada();
+            
+            $view->Executar();
         }
     }

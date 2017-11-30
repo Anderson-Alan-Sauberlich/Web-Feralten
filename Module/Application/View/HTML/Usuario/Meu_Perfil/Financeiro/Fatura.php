@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<title>Fatura | Feralten</title>
+    <title>Fatura | Feralten</title>
 </head>
 <body>
     <header>
@@ -12,7 +12,7 @@
     <section class="ui container" role="main">
         <?php View_Fatura::Incluir_Menu_Usuario(); ?>
             
-		<div class="container-fluid">
+        <div class="container-fluid">
             <div class="row-fluid">
                 <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
             </div>

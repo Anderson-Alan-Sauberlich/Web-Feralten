@@ -7,11 +7,11 @@ namespace Module\Application\Controller\Layout\Form;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\View\SRC\Layout\Form\Contato_Anunciante as View_Contato_Anunciante;
-	use \Exception;
-	
+    use \Exception;
+    
     class Contato_Anunciante
     {
-		
+        
         function __construct()
         {
             $this->object_contato_anunciante = new Object_Contato_Anunciante();

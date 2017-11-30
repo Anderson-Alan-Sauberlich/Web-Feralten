@@ -21,7 +21,7 @@ namespace Module\Administration\Controller\Layout\Menu;
                 
                 return false;
             } else {
-            	return true;
+                return true;
             }
         }
     }

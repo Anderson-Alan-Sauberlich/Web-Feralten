@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller;
-	
+    
     use Module\Application\View\SRC\Fale_Conosco as View_Fale_Conosco;
-	
+    
     class Fale_Conosco
     {
         
@@ -14,7 +14,7 @@ namespace Module\Application\Controller;
         public function Carregar_Pagina()
         {
             $view = new View_Fale_Conosco();
-        	
-        	$view->Executar();
+            
+            $view->Executar();
         }
     }

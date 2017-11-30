@@ -4,7 +4,7 @@
             <div class="col-sm-6">
                 <div class="col-xs-6 colunaFooterH">
                     <ul class="row">
-				        <p class="titlePFooter"><span class="glyphicon glyphicon-briefcase"></span> EMPRESA</p>
+                        <p class="titlePFooter"><span class="glyphicon glyphicon-briefcase"></span> EMPRESA</p>
                         <li><a href="/quem-somos/" class="linkFooter">Quem Somos</a></li>
                         <li><a href="/usuario/login/" class="linkFooter">Login</a></li>
                         <li><a href="/usuario/cadastro/" class="linkFooter">Cadastro</a></li>
@@ -47,6 +47,6 @@
             <label class="labelFooter">Sauber Sistemas - ©2017
                 <small>Feralten. Todos os direitos reservados. <a href="#" class="link">Termos de uso e Política de privacidade</a> - <a href="#" class="link">Mapa do site</a></small>
             </label>
-    	</div>
+        </div>
     </div>
 </section>

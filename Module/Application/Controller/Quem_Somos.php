@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller;
-	
-	use Module\Application\View\SRC\Quem_Somos as View_Quem_Somos;
-	
+    
+    use Module\Application\View\SRC\Quem_Somos as View_Quem_Somos;
+    
     class Quem_Somos
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Quem_Somos();
-        	
-        	$view->Executar();
+            $view = new View_Quem_Somos();
+            
+            $view->Executar();
         }
     }

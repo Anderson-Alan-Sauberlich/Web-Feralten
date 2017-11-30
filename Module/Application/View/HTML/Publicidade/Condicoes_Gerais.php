@@ -2,16 +2,16 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<title>Condições Gerais | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <title>Condições Gerais | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container">
-		    
-		<div class="container-fluid">
+            
+        <div class="container-fluid">
             <div class="row-fluid">
                 <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
             </div>

@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Dicas_De_Venda;
-	
-	use Module\Application\View\SRC\Dicas_De_Venda\Principais as View_Principais;
-	
+    
+    use Module\Application\View\SRC\Dicas_De_Venda\Principais as View_Principais;
+    
     class Principais
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Dicas_De_Venda;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Principais();
-        	
-        	$view->Executar();
+            $view = new View_Principais();
+            
+            $view->Executar();
         }
     }

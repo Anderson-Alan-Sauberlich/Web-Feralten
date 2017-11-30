@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Publicidade;
-	
-	use Module\Application\View\SRC\Publicidade\Dicas as View_Dicas;
-	
+    
+    use Module\Application\View\SRC\Publicidade\Dicas as View_Dicas;
+    
     class Dicas
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Publicidade;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Dicas();
-        	
-        	$view->Executar();
+            $view = new View_Dicas();
+            
+            $view->Executar();
         }
     }

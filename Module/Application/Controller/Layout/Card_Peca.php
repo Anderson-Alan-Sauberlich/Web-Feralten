@@ -10,11 +10,11 @@ namespace Module\Application\Controller\Layout;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\DAO\Removido as DAO_Removido;
     use Module\Application\Model\Object\Removido as Object_Removido;
-	use \Exception;
+    use \Exception;
 
     class Card_Peca
     {
-		
+        
         function __construct()
         {
             

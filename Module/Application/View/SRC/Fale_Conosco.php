@@ -8,12 +8,12 @@ namespace Module\Application\View\SRC;
         
         function __construct()
         {
-        	
+            
         }
         
         public function Executar()
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Fale_Conosco.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Fale_Conosco.php';
         }
         
         public static function Incluir_Form_Contato() : void

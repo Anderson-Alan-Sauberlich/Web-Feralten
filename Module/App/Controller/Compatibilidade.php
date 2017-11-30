@@ -1,11 +1,11 @@
 <?php
 namespace Module\App\Controller;
-	
+    
     use Module\Application\Model\DAO\Categoria_Compativel as DAO_Categoria_Compativel;
     use Module\Application\Model\DAO\Marca_Compativel as DAO_Marca_Compativel;
     use Module\Application\Model\DAO\Modelo_Compativel as DAO_Modelo_Compativel;
     use Module\Application\Model\DAO\Versao_Compativel as DAO_Versao_Compativel;
-	
+    
     class Compatibilidade
     {
         
@@ -21,30 +21,30 @@ namespace Module\App\Controller;
         
         public function set_categoria($categoria) : void
         {
-        	if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
-        		$this->categoria = $categoria;
-        	}
+            if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
+                $this->categoria = $categoria;
+            }
         }
         
         public function set_marca($marca) : void
         {
-        	if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
-        		$this->marca = $marca;
-        	}
+            if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
+                $this->marca = $marca;
+            }
         }
         
         public function set_modelo($modelo) : void
         {
-        	if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
-        		$this->modelo = $modelo;
-        	}
+            if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
+                $this->modelo = $modelo;
+            }
         }
         
         public function set_versao($versao) : void
         {
-        	if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
-        		$this->versao = $versao;
-        	}
+            if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
+                $this->versao = $versao;
+            }
         }
         
         public function Retornar_Categorias() : void

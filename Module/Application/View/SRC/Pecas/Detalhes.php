@@ -10,7 +10,7 @@ namespace Module\Application\View\SRC\Pecas;
 
         function __construct()
         {
-        	
+            
         }
         
         private static $object_peca;
@@ -46,7 +46,7 @@ namespace Module\Application\View\SRC\Pecas;
         
         public function Executar()
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Pecas/Detalhes.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Pecas/Detalhes.php';
         }
         
         public static function Incluir_Form_Contato_Anunciante() : void

@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Transacao as Object_Transacao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Transacao
     {
         
@@ -32,7 +32,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -40,13 +40,13 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_transacao SET
-                		transacao_id = :id,
-                		transacao_ftr_id = :ftr_id,
-               			transacao_datahora = :datahora,
-                		transacao_valor = :vlr,
+                        transacao_id = :id,
+                        transacao_ftr_id = :ftr_id,
+                           transacao_datahora = :datahora,
+                        transacao_valor = :vlr,
                         transacao_status = :sts,
                         transacao_forma_pagamento = :frm_pag 
-                		WHERE transacao_id = :id";
+                        WHERE transacao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -59,7 +59,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -73,7 +73,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
 
@@ -88,45 +88,45 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaArrayTransacaos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function PopulaArrayTransacaos(array $rows) : array
         {
-        	$transacoes = array();
-        	
-        	foreach ($rows as $row) {
-	        	$object_transacao = new Object_Transacao();
-	        	
-	        	if (isset($row['transacao_id'])) {
-	        		$object_transacao->set_id($row['transacao_id']);
-	        	}
-	        	
-	        	if (isset($row['transacao_ftr_id'])) {
-	        		$object_transacao->set_fatura_id($row['transacao_ftr_id']);
-	        	}
-	        	
-	        	if (isset($row['transacao_datahora'])) {
-	        		$object_transacao->set_datahora($row['transacao_datahora']);
-	        	}
-	        	
-	        	if (isset($row['transacao_valor'])) {
-	        	    $object_transacao->set_valor($row['transacao_valor']);
-	        	}
-	        	
-	        	if (isset($row['transacao_status'])) {
-	        	    $object_transacao->set_status($row['transacao_status']);
-	        	}
-	        	
-	        	if (isset($row['transacao_forma_pagamento'])) {
-	        	    $object_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
-	        	}
-	        	
-	        	$transacoes[] = $object_transacao;
-        	}
-        	
-        	return $transacoes;
+            $transacoes = array();
+            
+            foreach ($rows as $row) {
+                $object_transacao = new Object_Transacao();
+                
+                if (isset($row['transacao_id'])) {
+                    $object_transacao->set_id($row['transacao_id']);
+                }
+                
+                if (isset($row['transacao_ftr_id'])) {
+                    $object_transacao->set_fatura_id($row['transacao_ftr_id']);
+                }
+                
+                if (isset($row['transacao_datahora'])) {
+                    $object_transacao->set_datahora($row['transacao_datahora']);
+                }
+                
+                if (isset($row['transacao_valor'])) {
+                    $object_transacao->set_valor($row['transacao_valor']);
+                }
+                
+                if (isset($row['transacao_status'])) {
+                    $object_transacao->set_status($row['transacao_status']);
+                }
+                
+                if (isset($row['transacao_forma_pagamento'])) {
+                    $object_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
+                }
+                
+                $transacoes[] = $object_transacao;
+            }
+            
+            return $transacoes;
         }
         
         public static function PopulaTransacao(array $row) : Object_Transacao

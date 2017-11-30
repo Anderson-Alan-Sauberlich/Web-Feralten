@@ -1,6 +1,6 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Versao as Object_Versao;
     use Module\Application\Model\Object\Versao_Compativel as Object_Versao_Compativel;
     use Module\Application\Model\DAO\Versao_Compativel as DAO_Versao_Compativel;
@@ -8,7 +8,7 @@ namespace Module\Application\Model\DAO;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Versao
     {
         
@@ -45,7 +45,7 @@ namespace Module\Application\Model\DAO;
                     return false;
                 }
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -63,7 +63,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -79,7 +79,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -125,23 +125,23 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaVersao($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Nome_URL_Por_ID(int $id)
         {
-        	try {
-        		$sql = 'SELECT versao_nome, versao_url FROM tb_versao WHERE versao_id = :id';
+            try {
+                $sql = 'SELECT versao_nome, versao_url FROM tb_versao WHERE versao_id = :id';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
         
-        		return self::PopulaVersao($p_sql->fetch(PDO::FETCH_ASSOC));
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return self::PopulaVersao($p_sql->fetch(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Buscar_Modelo_Id(int $id)
@@ -155,7 +155,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -170,70 +170,70 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaVersoes($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Id_Por_Id_Modelo(int $id)
         {
-        	try {
-        		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :id';
+            try {
+                $sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :id';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-        		$p_sql->execute();
-        		
-        		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
-        		
-        		$id_versao = array();
-        		
-        		foreach ($rows as $row) {
-        			$id_versao[] = $row['versao_id'];
-        		}
-        		
-        		return $id_versao;
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                $rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
+                
+                $id_versao = array();
+                
+                foreach ($rows as $row) {
+                    $id_versao[] = $row['versao_id'];
+                }
+                
+                return $id_versao;
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Buscar_ID_Por_URL(int $modelo_id, string $url)
         {
-        	try {
-        		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND versao_url = :url';
+            try {
+                $sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND versao_url = :url';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':mo_id', $modelo_id, PDO::PARAM_INT);
-        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':mo_id', $modelo_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
+                $p_sql->execute();
         
-        		return $p_sql->fetch(PDO::FETCH_COLUMN);
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool
         {
-        	try {
-        		$sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)';
-        		
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':mo_id', $object_versao->get_modelo_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':nome', $object_versao->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(':url', $object_versao->get_url(), PDO::PARAM_STR);
-        		$p_sql->execute();
-        		
-        		$versao_id = $p_sql->fetch(PDO::FETCH_COLUMN);
-        		
-        		if (!empty($versao_id) AND $versao_id != $object_versao->get_id()) {
-        			return false;
-        		} else {
-        			return true;
-        		}
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+            try {
+                $sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':mo_id', $object_versao->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_versao->get_url(), PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                $versao_id = $p_sql->fetch(PDO::FETCH_COLUMN);
+                
+                if (!empty($versao_id) AND $versao_id != $object_versao->get_id()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function PopulaVersao(array $row) : Object_Versao
@@ -241,19 +241,19 @@ namespace Module\Application\Model\DAO;
             $object_versao = new Object_Versao();
             
             if (isset($row['versao_id'])) {
-            	$object_versao->set_id($row['versao_id']);
+                $object_versao->set_id($row['versao_id']);
             }
             
             if (isset($row['versao_mdl_id'])) {
-            	$object_versao->set_modelo_id($row['versao_mdl_id']);
+                $object_versao->set_modelo_id($row['versao_mdl_id']);
             }
             
             if (isset($row['versao_nome'])) {
-            	$object_versao->set_nome($row['versao_nome']);
+                $object_versao->set_nome($row['versao_nome']);
             }
             
             if (isset($row['versao_url'])) {
-            	$object_versao->set_url($row['versao_url']);
+                $object_versao->set_url($row['versao_url']);
             }
             
             return $object_versao;
@@ -267,24 +267,24 @@ namespace Module\Application\Model\DAO;
                 $object_versao = new Object_Versao();
                 
                 if (isset($row['versao_id'])) {
-                	$object_versao->set_id($row['versao_id']);
+                    $object_versao->set_id($row['versao_id']);
                 }
                 
                 if (isset($row['versao_mdl_id'])) {
-                	$object_versao->set_modelo_id($row['versao_mdl_id']);
+                    $object_versao->set_modelo_id($row['versao_mdl_id']);
                 }
                 
                 if (isset($row['versao_nome'])) {
-                	$object_versao->set_nome($row['versao_nome']);
+                    $object_versao->set_nome($row['versao_nome']);
                 }
                 
                 if (isset($row['versao_url'])) {
-                	$object_versao->set_url($row['versao_url']);
+                    $object_versao->set_url($row['versao_url']);
                 }
                 
                 $versoes[] = $object_versao;
             }
-			
+            
             return $versoes;
         }
     }

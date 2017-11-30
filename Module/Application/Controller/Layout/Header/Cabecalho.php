@@ -10,9 +10,9 @@ namespace Module\Application\Controller\Layout\Header;
         {
             
         }
-		
-		public static function Verificar_Cookie(array $login) : bool
-		{
-			return Login::Autenticar_Usuario_Cookie($login['usuario'], $login['token']);
-		}
+        
+        public static function Verificar_Cookie(array $login) : bool
+        {
+            return Login::Autenticar_Usuario_Cookie($login['usuario'], $login['token']);
+        }
     }

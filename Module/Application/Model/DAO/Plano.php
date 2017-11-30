@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Plano as Object_Plano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Plano
     {
         
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -39,12 +39,12 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_plano SET
-                		plano_id = :id,
-                		plano_valor_mensal = :vrl_msl,
-               			plano_valor_anual = :vrl_anl,
-                		plano_limite_pecas = :lmt_pcs,
+                        plano_id = :id,
+                        plano_valor_mensal = :vrl_msl,
+                           plano_valor_anual = :vrl_anl,
+                        plano_limite_pecas = :lmt_pcs,
                         plano_descricao = :dsc 
-                		WHERE plano_id = :id";
+                        WHERE plano_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -56,7 +56,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -70,7 +70,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -99,7 +99,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaPlano($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -135,48 +135,48 @@ namespace Module\Application\Model\DAO;
         
         public static function PopulaArrayPlanos(array $rows) : array
         {
-        	$planos = array();
-        	
-        	foreach ($rows as $row) {
-	        	$object_plano = new Object_Plano();
-	        	$bool = true;
-	        	
-	        	if (isset($row['plano_id'])) {
-	        		$object_plano->set_id($row['plano_id']);
-	        	} else {
-	        	    $bool = false;
-	        	}
-	        	
-	        	if (isset($row['plano_valor_mensal'])) {
-	        		$object_plano->set_valor_mensal($row['plano_valor_mensal']);
-	        	} else {
-	        	    $bool = false;
-	        	}
-	        	
-	        	if (isset($row['plano_valor_anual'])) {
-	        		$object_plano->set_valor_anual($row['plano_valor_anual']);
-	        	} else {
-	        	    $bool = false;
-	        	}
-	        	
-	        	if (isset($row['plano_limite_pecas'])) {
-	        		$object_plano->set_limite_pecas($row['plano_limite_pecas']);
-	        	} else {
-	        	    $bool = false;
-	        	}
-	        	
-	        	if (isset($row['plano_descricao'])) {
-	        	    $object_plano->set_descricao($row['plano_descricao']);
-	        	} else {
-	        	    $bool = false;
-	        	}
-	        	
-	        	if ($bool) {
-	        	    $planos[$row['plano_id']] = $object_plano;
+            $planos = array();
+            
+            foreach ($rows as $row) {
+                $object_plano = new Object_Plano();
+                $bool = true;
+                
+                if (isset($row['plano_id'])) {
+                    $object_plano->set_id($row['plano_id']);
+                } else {
+                    $bool = false;
                 }
-        	}
-        	
-        	return $planos;
+                
+                if (isset($row['plano_valor_mensal'])) {
+                    $object_plano->set_valor_mensal($row['plano_valor_mensal']);
+                } else {
+                    $bool = false;
+                }
+                
+                if (isset($row['plano_valor_anual'])) {
+                    $object_plano->set_valor_anual($row['plano_valor_anual']);
+                } else {
+                    $bool = false;
+                }
+                
+                if (isset($row['plano_limite_pecas'])) {
+                    $object_plano->set_limite_pecas($row['plano_limite_pecas']);
+                } else {
+                    $bool = false;
+                }
+                
+                if (isset($row['plano_descricao'])) {
+                    $object_plano->set_descricao($row['plano_descricao']);
+                } else {
+                    $bool = false;
+                }
+                
+                if ($bool) {
+                    $planos[$row['plano_id']] = $object_plano;
+                }
+            }
+            
+            return $planos;
         }
         
         public static function PopulaPlano(array $row) : Object_Plano

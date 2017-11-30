@@ -2,43 +2,43 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<title>Detalhes | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <title>Detalhes | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<div class="ui doubling stackable segment grid">
-    		<div class="sixteen wide column">
-    			<h1><?php View_Detalhes::Mostrar_Nome(); ?></h1>
-    		</div>
-    		<div class="sixteen wide column">
-    			<h3>Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
-    		</div>
-    		<div class="five wide column">
-    			<h3>Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
-    		</div>
-    		<div class="five wide column">
-    			<h3>Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
-    		</div>
-    		<div class="five wide column">
-    			<h3>Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
-    		</div>
-    		<div class="sixteen wide column">
-    			<h4>Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
-    		</div>
-		</div>
-		<div class="ui doubling stackable grid">
-			<div class="ten wide column">
+        <div class="ui doubling stackable segment grid">
+            <div class="sixteen wide column">
+                <h1><?php View_Detalhes::Mostrar_Nome(); ?></h1>
+            </div>
+            <div class="sixteen wide column">
+                <h3>Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
+            </div>
+            <div class="five wide column">
+                <h3>Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+            </div>
+            <div class="five wide column">
+                <h3>Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
+            </div>
+            <div class="five wide column">
+                <h3>Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
+            </div>
+            <div class="sixteen wide column">
+                <h4>Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
+            </div>
+        </div>
+        <div class="ui doubling stackable grid">
+            <div class="ten wide column">
                 <div class="ui center aligned segment">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    	<ol class="carousel-indicators">
-                    		<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    		<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    		<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    	</ol>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
                                 <img width="600" height="450" onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
@@ -60,14 +60,14 @@
                         </a>
                     </div>
                     <div class="ui basic modal">
-                    	<i class="close icon"></i>
+                        <i class="close icon"></i>
                         <div class="image content">
                             <div id="carousel-modal" class="carousel slide" data-ride="carousel">
-                            	<ol class="carousel-indicators">
-                            		<li id="ol_indice0" data-target="#carousel-modal" data-slide-to="0" class="active"></li>
-                            		<li id="ol_indice1" data-target="#carousel-modal" data-slide-to="1"></li>
-                            		<li id="ol_indice2" data-target="#carousel-modal" data-slide-to="2"></li>
-                            	</ol>
+                                <ol class="carousel-indicators">
+                                    <li id="ol_indice0" data-target="#carousel-modal" data-slide-to="0" class="active"></li>
+                                    <li id="ol_indice1" data-target="#carousel-modal" data-slide-to="1"></li>
+                                    <li id="ol_indice2" data-target="#carousel-modal" data-slide-to="2"></li>
+                                </ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div id="item_indice0" class="item active">
                                         <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
@@ -93,44 +93,44 @@
                 </div>
             </div>
             <div class="six wide column">
-            	<div id="div_cnt_anc" class="ui secondary segment">
-           			<?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
-        		</div>
-        		<div id="msg_cnt_anc" class="ui hidden message">
-                	<i class="close icon"></i>
-                	<ul id="ul_cnt_anc"></ul>
+                <div id="div_cnt_anc" class="ui secondary segment">
+                       <?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
+                </div>
+                <div id="msg_cnt_anc" class="ui hidden message">
+                    <i class="close icon"></i>
+                    <ul id="ul_cnt_anc"></ul>
                 </div>
             </div>
         </div>
         <div class="ui secondary segment">
-        	<label>Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?>
+            <label>Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?>
         </div>
         <div class="ui doubling stackable three column center aligned segment grid">
-        	<div class="column">
-               	<p><?php View_Detalhes::Mostrar_Estado(); ?></p>
-               	<p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
-               	<?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
-                   	<p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
-                  	<p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
-                   	<p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
-                   	<p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
-                   	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
-               	<?php } ?>
-        	</div>
-        	<div class="column">
+            <div class="column">
+                   <p><?php View_Detalhes::Mostrar_Estado(); ?></p>
+                   <p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
+                   <?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
+                       <p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
+                      <p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
+                       <p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
+                       <p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
+                       <p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+                   <?php } ?>
+            </div>
+            <div class="column">
                  <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
                  <p>Site: <?php View_Detalhes::Mostrar_Site(); ?></p>
                  <img width="100" height="75" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
-        	</div>
-        	<div class="column">
-        		<p>Telefone: <?php View_Detalhes::Mostrar_Fone_Responsavel(); ?></p>
-        		<p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
-        		<p>Telefone Alternativo: <?php View_Detalhes::Mostrar_Fone_Alternativo_Responsavel(); ?></p>
-        		<p>E-mail Alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
-        	</div>
+            </div>
+            <div class="column">
+                <p>Telefone: <?php View_Detalhes::Mostrar_Fone_Responsavel(); ?></p>
+                <p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
+                <p>Telefone Alternativo: <?php View_Detalhes::Mostrar_Fone_Alternativo_Responsavel(); ?></p>
+                <p>E-mail Alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
+            </div>
         </div>
         <div class="ui segment">
-           	<?php View_Detalhes::Mostrar_Pativeis(); ?>
+               <?php View_Detalhes::Mostrar_Pativeis(); ?>
         </div>
         <div class="ui divider"></div>
     </section>

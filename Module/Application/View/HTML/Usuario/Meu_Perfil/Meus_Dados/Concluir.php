@@ -2,20 +2,20 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-	<script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/concluir.js"></script>
-	<title>Concluir Cadastro | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
+    <script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/concluir.js"></script>
+    <title>Concluir Cadastro | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
     </header>
     <section class="ui container" role="main">
-    	<?php View_Concluir::Incluir_Menu_Usuario(); ?>
+        <?php View_Concluir::Incluir_Menu_Usuario(); ?>
         <?php View_Concluir::Mostrar_Erros(); ?>
         <form id="cnclr_form" name="cnclr_form" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/concluir/" method="post" role="form">
-        	<div class="panel panel-default sombra_painel">
+            <div class="panel panel-default sombra_painel">
                 <div class="panel-heading sombra_painel centralizar">
                     <label class="lbPanel">Concluir Cadastro</label>
                 </div>
@@ -93,22 +93,22 @@
                         <div class="panel-body dadosPanel">
                             <div class="col-sm-6">
                                 <label for="imagem" class="lbPanel">Selecione uma Foto, Logo Marca ou Imagem de Capa:</label>
-								<div class="thumbnail">
-									<div class="row">
-										<div class="col-md-7 col-sm-12 col-xs-12">
-											<span id="adicionar_imagem" name="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagens">
-												<i class="glyphicon glyphicon-upload"></i> Adicionar Imagem
-												<input id="imagem" value="" accept="image/*" name="imagem" onchange="loadFile(event);" type="file">
-											</span>
-											<button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile();" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
-										</div>
-										<div class="col-md-5 col-sm-12 col-xs-12">
-											<div class="ui small bordered image imagemPeca">
-												<div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
-												<a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
-												<img id="foto" name="foto" onError="MostImgErr($this);" src="<?php View_Concluir::Manter_Imagem(); ?>">
-											</div>
-										</div>
+                                <div class="thumbnail">
+                                    <div class="row">
+                                        <div class="col-md-7 col-sm-12 col-xs-12">
+                                            <span id="adicionar_imagem" name="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagens">
+                                                <i class="glyphicon glyphicon-upload"></i> Adicionar Imagem
+                                                <input id="imagem" value="" accept="image/*" name="imagem" onchange="loadFile(event);" type="file">
+                                            </span>
+                                            <button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile();" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
+                                        </div>
+                                        <div class="col-md-5 col-sm-12 col-xs-12">
+                                            <div class="ui small bordered image imagemPeca">
+                                                <div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
+                                                <a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
+                                                <img id="foto" name="foto" onError="MostImgErr($this);" src="<?php View_Concluir::Manter_Imagem(); ?>">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

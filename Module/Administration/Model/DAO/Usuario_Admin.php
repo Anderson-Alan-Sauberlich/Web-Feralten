@@ -6,7 +6,7 @@ namespace Module\Administration\Model\DAO;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Usuario_Admin
     {
 
@@ -30,7 +30,7 @@ namespace Module\Administration\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -47,7 +47,7 @@ namespace Module\Administration\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -63,7 +63,7 @@ namespace Module\Administration\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -77,7 +77,7 @@ namespace Module\Administration\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -100,7 +100,7 @@ namespace Module\Administration\Model\DAO;
                 
                 return $select;
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -115,10 +115,10 @@ namespace Module\Administration\Model\DAO;
                 
                 return self::PopulaUsuario($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
-		
+        
         public static function Buscar_Senha_Usuario(int $id)
         {
             try {
@@ -127,12 +127,12 @@ namespace Module\Administration\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
-				
-				$row = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 return $row['usuario_admin_senha'];
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -148,33 +148,33 @@ namespace Module\Administration\Model\DAO;
                 $usuario = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 if (!empty($usuario) AND $usuario !== false) {
-                	return self::PopulaUsuario($usuario);
+                    return self::PopulaUsuario($usuario);
                 } else {
-                	return false;
+                    return false;
                 }
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function PopulaUsuario(array $row) : Object_Usuario_Admin
         {
             $object_usuario_admin = new Object_Usuario_Admin();
-			
+            
             if (isset($row['usuario_admin_id'])) {
-            	$object_usuario_admin->set_id($row['usuario_admin_id']);
+                $object_usuario_admin->set_id($row['usuario_admin_id']);
             }
             
             if (isset($row['usuario_admin_usuario'])) {
-            	$object_usuario_admin->set_usuario($row['usuario_admin_usuario']);
+                $object_usuario_admin->set_usuario($row['usuario_admin_usuario']);
             }
             
             if (isset($row['usuario_admin_senha'])) {
-            	$object_usuario_admin->set_senha($row['usuario_admin_senha']);
+                $object_usuario_admin->set_senha($row['usuario_admin_senha']);
             }
             
             if (isset($row['usuario_admin_nome'])) {
-            	$object_usuario_admin->set_nome($row['usuario_admin_nome']);
+                $object_usuario_admin->set_nome($row['usuario_admin_nome']);
             }
             
             return $object_usuario_admin;

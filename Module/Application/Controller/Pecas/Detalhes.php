@@ -1,18 +1,18 @@
 <?php
 namespace Module\Application\Controller\Pecas;
-	
+    
     use Module\Application\Model\Common\Util\Validador;
-	use Module\Application\View\SRC\Pecas\Detalhes as View_Detalhes;
-	use Module\Application\Model\DAO\Peca as DAO_Peca;
-	use Module\Application\Model\DAO\Categoria_Pativel as DAO_Categoria_Pativel;
-	use Module\Application\Model\DAO\Marca_Pativel as DAO_Marca_Pativel;
-	use Module\Application\Model\DAO\Modelo_Pativel as DAO_Modelo_Pativel;
-	use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
-	use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
-	use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
-	use Module\Application\Model\Object\Visualizado as Object_Visualizado;
-	use \Exception;
-	
+    use Module\Application\View\SRC\Pecas\Detalhes as View_Detalhes;
+    use Module\Application\Model\DAO\Peca as DAO_Peca;
+    use Module\Application\Model\DAO\Categoria_Pativel as DAO_Categoria_Pativel;
+    use Module\Application\Model\DAO\Marca_Pativel as DAO_Marca_Pativel;
+    use Module\Application\Model\DAO\Modelo_Pativel as DAO_Modelo_Pativel;
+    use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
+    use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
+    use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
+    use Module\Application\Model\Object\Visualizado as Object_Visualizado;
+    use \Exception;
+    
     class Detalhes
     {
 
@@ -62,27 +62,27 @@ namespace Module\Application\Controller\Pecas;
                 $modelos_pativeis = DAO_Modelo_Pativel::BuscarPorCOD($this->object_peca->get_id());
                 $versoes_pativeis = DAO_Versao_Pativel::BuscarPorCOD($this->object_peca->get_id());
                 
-            	$view = new View_Detalhes();
-            	
-            	$view->set_object_peca($this->object_peca);
-            	
-            	if (!empty($categorias_pativeis) AND $categorias_pativeis != false) {
-            	    $view->set_categorias_pativeis($categorias_pativeis);
-            	}
-            	
-            	if (!empty($marcas_pativeis) AND $marcas_pativeis != false) {
-            	   $view->set_marcas_pativeis($marcas_pativeis);
-            	}
-            	
-            	if (!empty($modelos_pativeis) AND $modelos_pativeis != false) {
-            	   $view->set_modelos_pativeis($modelos_pativeis);
-            	}
-            	
-            	if (!empty($versoes_pativeis) AND $versoes_pativeis != false) {
-            	   $view->set_versoes_pativeis($versoes_pativeis);
-            	}
-            	
-            	$view->Executar();
+                $view = new View_Detalhes();
+                
+                $view->set_object_peca($this->object_peca);
+                
+                if (!empty($categorias_pativeis) AND $categorias_pativeis != false) {
+                    $view->set_categorias_pativeis($categorias_pativeis);
+                }
+                
+                if (!empty($marcas_pativeis) AND $marcas_pativeis != false) {
+                   $view->set_marcas_pativeis($marcas_pativeis);
+                }
+                
+                if (!empty($modelos_pativeis) AND $modelos_pativeis != false) {
+                   $view->set_modelos_pativeis($modelos_pativeis);
+                }
+                
+                if (!empty($versoes_pativeis) AND $versoes_pativeis != false) {
+                   $view->set_versoes_pativeis($versoes_pativeis);
+                }
+                
+                $view->Executar();
             } else {
                 return 'erro';
             }

@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Dicas_De_Venda;
-	
-	use Module\Application\View\SRC\Dicas_De_Venda\Venda_Segura as View_Venda_Segura;
-	
+    
+    use Module\Application\View\SRC\Dicas_De_Venda\Venda_Segura as View_Venda_Segura;
+    
     class Venda_Segura
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Dicas_De_Venda;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Venda_Segura();
-        	
-        	$view->Executar();
+            $view = new View_Venda_Segura();
+            
+            $view->Executar();
         }
     }

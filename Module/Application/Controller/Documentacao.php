@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller;
-	
-	use Module\Application\View\SRC\Documentacao as View_Documentacao;
-	
+    
+    use Module\Application\View\SRC\Documentacao as View_Documentacao;
+    
     class Documentacao
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Documentacao();
-        	
-        	$view->Executar();
+            $view = new View_Documentacao();
+            
+            $view->Executar();
         }
     }

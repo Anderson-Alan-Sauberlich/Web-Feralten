@@ -1,16 +1,16 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Contato_Anunciante as Object_Contato_Anunciante;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Contato_Anunciante
     {
-		
+        
         function __construct()
         {
             
@@ -25,7 +25,7 @@ namespace Module\Application\Model\DAO;
                         VALUES (:id, :pec_id, :nome, :email, :aprovacao, :lido, :telefone, :whatsapp, :mensagem, :datahora_envio);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_contato_anunciante->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_object_peca()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_contato_anunciante->get_nome(), PDO::PARAM_STR);
@@ -36,10 +36,10 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':whatsapp', $object_contato_anunciante->get_whatsapp(), PDO::PARAM_BOOL);
                 $p_sql->bindValue(':mensagem', $object_contato_anunciante->get_mensagem(), PDO::PARAM_STR);
                 $p_sql->bindValue(':datahora_envio', $object_contato_anunciante->get_datahora_envio(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -50,7 +50,7 @@ namespace Module\Application\Model\DAO;
                 contato_anunciante_id = :id,
                 contato_anunciante_pec_id = :pec_id,
                 contato_anunciante_nome = :nome,
-				contato_anunciante_email = :email,
+                contato_anunciante_email = :email,
                 contato_anunciante_aprovacao = :aprovacao,
                 contato_anunciante_lido = :lido,
                 contato_anunciante_telefone = :telefone,
@@ -74,7 +74,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -85,10 +85,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -120,7 +120,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaContatosAnunciante($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -130,9 +130,9 @@ namespace Module\Application\Model\DAO;
             
             foreach ($rows as $row) {
                 $object_contato_anunciante = new Object_Contato_Anunciante();
-            	
+                
                 if (isset($row['contato_anunciante_id'])) {
-                	$object_contato_anunciante->set_id($row['contato_anunciante_id']);
+                    $object_contato_anunciante->set_id($row['contato_anunciante_id']);
                 }
                 
                 if (isset($row['contato_anunciante_pec_id'])) {
@@ -140,11 +140,11 @@ namespace Module\Application\Model\DAO;
                 }
                 
                 if (isset($row['contato_anunciante_nome'])) {
-                	$object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
+                    $object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
                 }
                 
                 if (isset($row['contato_anunciante_email'])) {
-                	$object_contato_anunciante->set_email($row['contato_anunciante_email']);
+                    $object_contato_anunciante->set_email($row['contato_anunciante_email']);
                 }
                 
                 if (isset($row['contato_anunciante_aprovacao'])) {
@@ -182,7 +182,7 @@ namespace Module\Application\Model\DAO;
             $object_contato_anunciante = new Object_Contato_Anunciante();
             
             if (isset($row['contato_anunciante_id'])) {
-            	$object_contato_anunciante->set_id($row['contato_anunciante_id']);
+                $object_contato_anunciante->set_id($row['contato_anunciante_id']);
             }
             
             if (isset($row['contato_anunciante_pec_id'])) {
@@ -190,11 +190,11 @@ namespace Module\Application\Model\DAO;
             }
             
             if (isset($row['contato_anunciante_nome'])) {
-            	$object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
+                $object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
             }
             
             if (isset($row['contato_anunciante_email'])) {
-            	$object_contato_anunciante->set_email($row['contato_anunciante_email']);
+                $object_contato_anunciante->set_email($row['contato_anunciante_email']);
             }
             
             if (isset($row['contato_anunciante_aprovacao'])) {

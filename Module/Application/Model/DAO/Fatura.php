@@ -1,13 +1,13 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Fatura as Object_Fatura;
     use Module\Application\Model\DAO\Status_Fatura as DAO_Status_Fatura;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Fatura
     {
         
@@ -33,7 +33,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -41,13 +41,13 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_fatura SET
-                		fatura_id = :id,
-                		fatura_ent_id = :ent_id,
-               			fatura_valor_total = :vlr_ttl,
-                		fatura_sts_ftr_id = :sts_ftr_id,
+                        fatura_id = :id,
+                        fatura_ent_id = :ent_id,
+                           fatura_valor_total = :vlr_ttl,
+                        fatura_sts_ftr_id = :sts_ftr_id,
                         fatura_data_emissao = :data_ems,
                         fatura_data_vencimento = :data_vcm 
-                		WHERE fatura_id = :id";
+                        WHERE fatura_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -60,7 +60,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -74,7 +74,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -111,39 +111,39 @@ namespace Module\Application\Model\DAO;
         
         public static function PopulaArrayFaturas(array $rows) : array
         {
-        	$faturas = array();
-        	
-        	foreach ($rows as $row) {
-	        	$object_fatura = new Object_Fatura();
-	        	
-	        	if (isset($row['fatura_id'])) {
-	        		$object_fatura->set_id($row['fatura_id']);
-	        	}
-	        	
-	        	if (isset($row['fatura_ent_id'])) {
-	        		$object_fatura->set_entidade_id($row['fatura_ent_id']);
-	        	}
-	        	
-	        	if (isset($row['fatura_valor_total'])) {
-	        		$object_fatura->set_valor_total($row['fatura_valor_total']);
-	        	}
-	        	
-	        	if (isset($row['fatura_sts_ftr_id'])) {
-	        	    $object_fatura->set_object_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
-	        	}
-	        	
-	        	if (isset($row['fatura_data_emissao'])) {
-	        	    $object_fatura->set_data_emissao($row['fatura_data_emissao']);
-	        	}
-	        	
-	        	if (isset($row['fatura_data_vencimento'])) {
-	        	    $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
-	        	}
-	        	
-	        	$faturas[] = $object_fatura;
-        	}
-        	
-        	return $faturas;
+            $faturas = array();
+            
+            foreach ($rows as $row) {
+                $object_fatura = new Object_Fatura();
+                
+                if (isset($row['fatura_id'])) {
+                    $object_fatura->set_id($row['fatura_id']);
+                }
+                
+                if (isset($row['fatura_ent_id'])) {
+                    $object_fatura->set_entidade_id($row['fatura_ent_id']);
+                }
+                
+                if (isset($row['fatura_valor_total'])) {
+                    $object_fatura->set_valor_total($row['fatura_valor_total']);
+                }
+                
+                if (isset($row['fatura_sts_ftr_id'])) {
+                    $object_fatura->set_object_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
+                }
+                
+                if (isset($row['fatura_data_emissao'])) {
+                    $object_fatura->set_data_emissao($row['fatura_data_emissao']);
+                }
+                
+                if (isset($row['fatura_data_vencimento'])) {
+                    $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
+                }
+                
+                $faturas[] = $object_fatura;
+            }
+            
+            return $faturas;
         }
         
         public static function PopulaFatura(array $row) : Object_Fatura

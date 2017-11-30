@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Dicas_De_Venda;
-	
-	use Module\Application\View\SRC\Dicas_De_Venda\Apresentacao as View_Apresentacao;
-	
+    
+    use Module\Application\View\SRC\Dicas_De_Venda\Apresentacao as View_Apresentacao;
+    
     class Apresentacao
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Dicas_De_Venda;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Apresentacao();
-        	
-        	$view->Executar();
+            $view = new View_Apresentacao();
+            
+            $view->Executar();
         }
     }

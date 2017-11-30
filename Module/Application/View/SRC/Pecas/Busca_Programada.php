@@ -6,11 +6,11 @@ namespace Module\Application\View\SRC\Pecas;
 
         function __construct()
         {
-        	
+            
         }
         
         public function Executar()
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Pecas/Busca_Programada.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Pecas/Busca_Programada.php';
         }
     }

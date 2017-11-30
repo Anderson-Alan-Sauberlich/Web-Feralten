@@ -1,15 +1,15 @@
 <?php
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
-	
+    
     use Module\Application\Controller\Usuario\Meu_perfil\Meus_Dados\Concluir as Controller_Concluir;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
     
     class Concluir
     {
-    	
+        
         function __construct(?int $status = null)
         {
-        	self::$status_usuario = $status;
+            self::$status_usuario = $status;
         }
         
         private static $status_usuario;
@@ -19,27 +19,27 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         
         public function set_concluir_erros(?array $concluir_erros = null) : void
         {
-        	self::$concluir_erros = $concluir_erros;
+            self::$concluir_erros = $concluir_erros;
         }
         
         public function set_concluir_campos(?array $concluir_campos = null) : void
         {
-        	self::$concluir_campos = $concluir_campos;
+            self::$concluir_campos = $concluir_campos;
         }
         
         public function set_concluir_form(?array $concluir_form = null) : void
         {
-        	self::$concluir_form = $concluir_form;
+            self::$concluir_form = $concluir_form;
         }
         
         public function Executar() : void
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Concluir.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Concluir.php';
         }
         
         public static function Incluir_Menu_Usuario() : void
         {
-        	new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
+            new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
         }
         
         public static function Manter_Valor(string $campo) : void
@@ -51,14 +51,14 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
 
-		public static function Manter_Imagem() : void
-		{
-			if (isset($_SESSION['imagem_tmp'])) {
-				echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
-			} else {
-				echo "/resources/img/imagem_indisponivel.png";
-			}
-		}
+        public static function Manter_Imagem() : void
+        {
+            if (isset($_SESSION['imagem_tmp'])) {
+                echo Controller_Concluir::Pegar_Imagem_URL($_SESSION['imagem_tmp']);
+            } else {
+                echo "/resources/img/imagem_indisponivel.png";
+            }
+        }
         
         public static function Mostrar_Erros() : void
         {
@@ -76,203 +76,203 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             $estados = Controller_Concluir::Buscar_Todos_Estados();
             
             if (!empty($estados) AND $estados !== false) {
-	            if (isset(self::$concluir_form['estado'])) {
-			        foreach ($estados as $estado) {
-			            if (self::$concluir_form['estado'] == $estado->get_id()) {
-			                echo "<option selected value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
-			            } else {
-			                echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
-			            }
-			        }
-				} else {
-			        foreach ($estados as $estado) {
-			            echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
-			        }
-				}
+                if (isset(self::$concluir_form['estado'])) {
+                    foreach ($estados as $estado) {
+                        if (self::$concluir_form['estado'] == $estado->get_id()) {
+                            echo "<option selected value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+                        } else {
+                            echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+                        }
+                    }
+                } else {
+                    foreach ($estados as $estado) {
+                        echo "<option value=\"".$estado->get_id()."\">".$estado->get_uf()." - ".$estado->get_nome()."</option>";
+                    }
+                }
             } else {
-            	echo '<option value="">Erro</option>';
+                echo '<option value="">Erro</option>';
             }
         }
         
         public static function Mostrar_Cidades(?int $estado = null) : void
         {
-			$id_estado;
-				
-			if (isset($estado)) {
-				$id_estado = $estado;
-			} else if (isset(self::$concluir_form['estado'])) {
-				$id_estado = self::$concluir_form['estado'];
-			}
-			
-			echo '<option value="0">Selecione sua Cidade</option>';
-			
+            $id_estado;
+                
+            if (isset($estado)) {
+                $id_estado = $estado;
+            } else if (isset(self::$concluir_form['estado'])) {
+                $id_estado = self::$concluir_form['estado'];
+            }
+            
+            echo '<option value="0">Selecione sua Cidade</option>';
+            
             if (isset($id_estado)) {
                 $cidades = Controller_Concluir::Buscar_Cidades_Por_Estado($id_estado);
                 
                 if (!empty($cidades) AND $cidades !== false) {
-					if (isset(self::$concluir_form['cidade'])) {
-		                foreach ($cidades as $cidade) {
-		                    if (self::$concluir_form['cidade'] == $cidade->get_id()) {
-		                        echo "<option selected value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
-		                    } else {
-		                        echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
-		                    }
-		                }
-					} else {
-		                foreach ($cidades as $cidade) {
-		                    echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
-		                }
-					}
+                    if (isset(self::$concluir_form['cidade'])) {
+                        foreach ($cidades as $cidade) {
+                            if (self::$concluir_form['cidade'] == $cidade->get_id()) {
+                                echo "<option selected value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+                            } else {
+                                echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+                            }
+                        }
+                    } else {
+                        foreach ($cidades as $cidade) {
+                            echo "<option value=\"".$cidade->get_id()."\">".$cidade->get_nome()."</option>";
+                        }
+                    }
                 } else {
-                	echo '<option value="">Erro</option>';
+                    echo '<option value="">Erro</option>';
                 }
             }
         }
         
         public static function Incluir_Classe_Erros(string $campo) : void
         {
-        	if (!empty(self::$concluir_campos)) {
-	            switch ($campo) {
-	                case "fone":
-	                	if (isset(self::$concluir_campos['erro_fone'])) {
-		                    if (self::$concluir_campos['erro_fone'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_fone'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "fone_alternativo":
-	                	if (isset(self::$concluir_campos['erro_fone_alternativo'])) {
-		                    if (self::$concluir_campos['erro_fone_alternativo'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_fone_alternativo'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "estado":
-	                	if (isset(self::$concluir_campos['erro_estado'])) {
-		                    if (self::$concluir_campos['erro_estado'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_estado'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "cidade":
-	                	if (isset(self::$concluir_campos['erro_cidade'])) {
-		                    if (self::$concluir_campos['erro_cidade'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_cidade'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "numero":
-	                	if (isset(self::$concluir_campos['erro_numero'])) {
-		                    if (self::$concluir_campos['erro_numero'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_numero'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "cep":
-	                	if (isset(self::$concluir_campos['erro_cep'])) {
-		                    if (self::$concluir_campos['erro_cep'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_cep'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "bairro":
-	                	if (isset(self::$concluir_campos['erro_bairro'])) {
-		                    if (self::$concluir_campos['erro_bairro'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_bairro'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "complemento":
-	                	if (isset(self::$concluir_campos['erro_complemento'])) {
-		                    if (self::$concluir_campos['erro_complemento'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_complemento'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "rua":
-	                	if (isset(self::$concluir_campos['erro_rua'])) {
-		                    if (self::$concluir_campos['erro_rua'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_rua'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "imagem":
-	                	if (isset(self::$concluir_campos['erro_imagem'])) {
-		                    if (self::$concluir_campos['erro_imagem'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_imagem'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "cpf_cnpj":
-	                	if (isset(self::$concluir_campos['erro_cpf_cnpj'])) {
-		                    if (self::$concluir_campos['erro_cpf_cnpj'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_cpf_cnpj'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "nome_comercial":
-	                	if (isset(self::$concluir_campos['erro_nome_comercial'])) {
-		                    if (self::$concluir_campos['erro_nome_comercial'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_nome_comercial'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "email_alternativo":
-	                	if (isset(self::$concluir_campos['erro_email_alternativo'])) {
-		                    if (self::$concluir_campos['erro_email_alternativo'] === "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$concluir_campos['erro_email_alternativo'] === "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	                    
-	                case "site":
-	                   	if (isset(self::$concluir_campos['erro_site'])) {
-	                   		if (self::$concluir_campos['erro_site'] === "erro") {
-	                   			echo "has-error has-feedback";
-	                   		} else if (self::$concluir_campos['erro_site'] === "certo") {
-	                   			echo "has-success has-feedback";
-	                   		}
-	                   	}
-	                   	break;
-	            }
-        	}
+            if (!empty(self::$concluir_campos)) {
+                switch ($campo) {
+                    case "fone":
+                        if (isset(self::$concluir_campos['erro_fone'])) {
+                            if (self::$concluir_campos['erro_fone'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_fone'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "fone_alternativo":
+                        if (isset(self::$concluir_campos['erro_fone_alternativo'])) {
+                            if (self::$concluir_campos['erro_fone_alternativo'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_fone_alternativo'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "estado":
+                        if (isset(self::$concluir_campos['erro_estado'])) {
+                            if (self::$concluir_campos['erro_estado'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_estado'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "cidade":
+                        if (isset(self::$concluir_campos['erro_cidade'])) {
+                            if (self::$concluir_campos['erro_cidade'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_cidade'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "numero":
+                        if (isset(self::$concluir_campos['erro_numero'])) {
+                            if (self::$concluir_campos['erro_numero'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_numero'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "cep":
+                        if (isset(self::$concluir_campos['erro_cep'])) {
+                            if (self::$concluir_campos['erro_cep'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_cep'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "bairro":
+                        if (isset(self::$concluir_campos['erro_bairro'])) {
+                            if (self::$concluir_campos['erro_bairro'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_bairro'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "complemento":
+                        if (isset(self::$concluir_campos['erro_complemento'])) {
+                            if (self::$concluir_campos['erro_complemento'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_complemento'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "rua":
+                        if (isset(self::$concluir_campos['erro_rua'])) {
+                            if (self::$concluir_campos['erro_rua'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_rua'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "imagem":
+                        if (isset(self::$concluir_campos['erro_imagem'])) {
+                            if (self::$concluir_campos['erro_imagem'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_imagem'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "cpf_cnpj":
+                        if (isset(self::$concluir_campos['erro_cpf_cnpj'])) {
+                            if (self::$concluir_campos['erro_cpf_cnpj'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_cpf_cnpj'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "nome_comercial":
+                        if (isset(self::$concluir_campos['erro_nome_comercial'])) {
+                            if (self::$concluir_campos['erro_nome_comercial'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_nome_comercial'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "email_alternativo":
+                        if (isset(self::$concluir_campos['erro_email_alternativo'])) {
+                            if (self::$concluir_campos['erro_email_alternativo'] === "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$concluir_campos['erro_email_alternativo'] === "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "site":
+                           if (isset(self::$concluir_campos['erro_site'])) {
+                               if (self::$concluir_campos['erro_site'] === "erro") {
+                                   echo "has-error has-feedback";
+                               } else if (self::$concluir_campos['erro_site'] === "certo") {
+                                   echo "has-success has-feedback";
+                               }
+                           }
+                           break;
+                }
+            }
         }
     }

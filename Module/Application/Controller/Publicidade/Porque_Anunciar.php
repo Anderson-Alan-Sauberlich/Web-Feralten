@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Controller\Publicidade;
-	
-	use Module\Application\View\SRC\Publicidade\Porque_Anunciar as View_Porque_Anunciar;
-	
+    
+    use Module\Application\View\SRC\Publicidade\Porque_Anunciar as View_Porque_Anunciar;
+    
     class Porque_Anunciar
     {
 
@@ -13,8 +13,8 @@ namespace Module\Application\Controller\Publicidade;
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Porque_Anunciar();
-        	
-        	$view->Executar();
+            $view = new View_Porque_Anunciar();
+            
+            $view->Executar();
         }
     }

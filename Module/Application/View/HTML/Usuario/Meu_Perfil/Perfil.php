@@ -12,13 +12,13 @@
     <section class="ui container" role="main">
         <?php View_Perfil::Incluir_Menu_Usuario(); ?>
         <div id="div_visualizado" class="ui loading center aligned blue segment">
-        	<canvas id="crt_visualizado" width="400" height="125"></canvas>
+            <canvas id="crt_visualizado" width="400" height="125"></canvas>
         </div>
         <div id="div_adicionado" class="ui loading center aligned green segment">
-        	<canvas id="crt_adicionado" width="400" height="125"></canvas>
+            <canvas id="crt_adicionado" width="400" height="125"></canvas>
         </div>
         <div id="div_removido" class="ui loading center aligned red segment">
-        	<canvas id="crt_removido" width="400" height="125"></canvas>
+            <canvas id="crt_removido" width="400" height="125"></canvas>
         </div>
         <div class="ui divider"></div>
     </section>

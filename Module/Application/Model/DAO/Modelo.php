@@ -1,6 +1,6 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Modelo as Object_Modelo;
     use Module\Application\Model\Object\Modelo_Compativel as Object_Modelo_Compativel;
     use Module\Application\Model\DAO\Modelo_Compativel as DAO_Modelo_Compativel;
@@ -8,7 +8,7 @@ namespace Module\Application\Model\DAO;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Modelo
     {
         
@@ -45,7 +45,7 @@ namespace Module\Application\Model\DAO;
                     return false;
                 }
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -63,7 +63,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -79,7 +79,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -125,23 +125,23 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Nome_URL_Por_ID(int $id)
         {
-        	try {
-        		$sql = 'SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
+            try {
+                $sql = 'SELECT modelo_nome, modelo_url FROM tb_modelo WHERE modelo_id = :id';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
         
-        		return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return self::PopulaModelo($p_sql->fetch(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Buscar_Marca_Id(int $id)
@@ -155,7 +155,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -170,68 +170,68 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaModelos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Id_Por_Id_Marca(int $id)
         {
-        	try {
-        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :id';
+            try {
+                $sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :id';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-        		$p_sql->execute();
-        		$rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
-        		$id_modelos = array();
-        		
-        		foreach ($rows as $row) {
-        			$id_modelos[] = $row['modelo_id'];
-        		}
-        		
-        		return $id_modelos;
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                $rows = $p_sql->fetchAll(PDO::FETCH_ASSOC);
+                $id_modelos = array();
+                
+                foreach ($rows as $row) {
+                    $id_modelos[] = $row['modelo_id'];
+                }
+                
+                return $id_modelos;
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Buscar_ID_Por_URL(int $marca_id, string $url)
         {
-        	try {
-        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND modelo_url = :url';
+            try {
+                $sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND modelo_url = :url';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':ma_id', $marca_id, PDO::PARAM_INT);
-        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ma_id', $marca_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
+                $p_sql->execute();
         
-        		return $p_sql->fetch(PDO::FETCH_COLUMN);
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Verificar_Modelo_Repetido(Object_Modelo $object_modelo) : bool
         {
-        	try {
-        		$sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)';
+            try {
+                $sql = 'SELECT modelo_id FROM tb_modelo WHERE modelo_mrc_id = :ma_id AND (modelo_nome = :nome OR modelo_url = :url)';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
-        		$p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
-        		$p_sql->execute();
-        		
-        		$modelo_id = $p_sql->fetch(PDO::FETCH_COLUMN);
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ma_id', $object_modelo->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $object_modelo->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_modelo->get_url(), PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                $modelo_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-        		if (!empty($modelo_id) AND $modelo_id != $object_modelo->get_id()) {
-        			return false;
-        		} else {
-        			return true;
-        		}
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                if (!empty($modelo_id) AND $modelo_id != $object_modelo->get_id()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function PopulaModelo(array $row) : Object_Modelo
@@ -239,19 +239,19 @@ namespace Module\Application\Model\DAO;
             $object_modelo = new Object_Modelo();
             
             if (isset($row['modelo_id'])) {
-            	$object_modelo->set_id($row['modelo_id']);
+                $object_modelo->set_id($row['modelo_id']);
             }
             
             if (isset($row['modelo_mrc_id'])) {
-            	$object_modelo->set_marca_id($row['modelo_mrc_id']);
+                $object_modelo->set_marca_id($row['modelo_mrc_id']);
             }
             
             if (isset($row['modelo_nome'])) {
-            	$object_modelo->set_nome($row['modelo_nome']);
+                $object_modelo->set_nome($row['modelo_nome']);
             }
             
             if (isset($row['modelo_url'])) {
-            	$object_modelo->set_url($row['modelo_url']);
+                $object_modelo->set_url($row['modelo_url']);
             }
             
             return $object_modelo;
@@ -265,19 +265,19 @@ namespace Module\Application\Model\DAO;
                 $object_modelo = new Object_Modelo();
                 
                 if (isset($row['modelo_id'])) {
-                	$object_modelo->set_id($row['modelo_id']);
+                    $object_modelo->set_id($row['modelo_id']);
                 }
                 
                 if (isset($row['modelo_mrc_id'])) {
-                	$object_modelo->set_marca_id($row['modelo_mrc_id']);
+                    $object_modelo->set_marca_id($row['modelo_mrc_id']);
                 }
                 
                 if (isset($row['modelo_nome'])) {
-                	$object_modelo->set_nome($row['modelo_nome']);
+                    $object_modelo->set_nome($row['modelo_nome']);
                 }
                 
                 if (isset($row['modelo_url'])) {
-                	$object_modelo->set_url($row['modelo_url']);
+                    $object_modelo->set_url($row['modelo_url']);
                 }
                 
                 $modelos[] = $object_modelo;

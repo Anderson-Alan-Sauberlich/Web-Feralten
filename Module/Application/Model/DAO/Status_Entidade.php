@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Status_Entidade as Object_Status_Entidade;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Status_Entidade
     {
         
@@ -22,13 +22,13 @@ namespace Module\Application\Model\DAO;
                         VALUES (:id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -39,18 +39,18 @@ namespace Module\Application\Model\DAO;
                 status_entidade_id = :id,
                 status_entidade_nome = :nome 
                 WHERE status_entidade_id = :id";
-				
+                
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
- 		
+         
         public static function Deletar(int $id) : bool
         {
             try {
@@ -58,13 +58,13 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
-		
+        
         public static function BuscarPorCOD(int $id)
         {
             try {
@@ -76,7 +76,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaStatus($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -85,11 +85,11 @@ namespace Module\Application\Model\DAO;
             $object_status_entidade = new Object_Status_Entidade();
             
             if (isset($row['status_entidade_id'])) {
-            	$object_status_entidade->set_id($row['status_entidade_id']);
+                $object_status_entidade->set_id($row['status_entidade_id']);
             }
             
             if (isset($row['status_entidade_nome'])) {
-            	$object_status_entidade->set_nome($row['status_entidade_nome']);
+                $object_status_entidade->set_nome($row['status_entidade_nome']);
             }
             
             return $object_status_entidade;

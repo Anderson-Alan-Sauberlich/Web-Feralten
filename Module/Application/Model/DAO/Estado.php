@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Estado as Object_Estado;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Estado
     {
 
@@ -29,7 +29,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -37,7 +37,7 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_estado SET estado_id = :id, estado_uf = :uf, estado_nome = :nome 
-                		WHERE estado_id = :id";
+                        WHERE estado_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -47,7 +47,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -61,7 +61,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -76,23 +76,23 @@ namespace Module\Application\Model\DAO;
                 
                 return self::Popular_Estado($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Id_Por_Uf(string $uf)
         {
-        	try {
-        		$sql = 'SELECT estado_id FROM tb_estado WHERE estado_uf = :uf';
-        		
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':uf', $uf, PDO::PARAM_STR);
-        		$p_sql->execute();
-        		
-        		return $p_sql->fetch(PDO::FETCH_COLUMN);
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+            try {
+                $sql = 'SELECT estado_id FROM tb_estado WHERE estado_uf = :uf';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':uf', $uf, PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function BuscarTodos()
@@ -105,27 +105,27 @@ namespace Module\Application\Model\DAO;
                 
                 return self::Popular_Estados($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Popular_Estado(array $row) : Object_Estado
         {
-        	$object_estado = new Object_Estado();
-        	
-        	if (isset($row['estado_id'])) {
-        		$object_estado->set_id($row['estado_id']);
-        	}
-        	
-        	if (isset($row['estado_uf'])) {
-        		$object_estado->set_uf($row['estado_uf']);
-        	}
-			
-       		if (isset($row['estado_nome'])) {
-        		$object_estado->set_nome($row['estado_nome']);
-        	}
+            $object_estado = new Object_Estado();
+            
+            if (isset($row['estado_id'])) {
+                $object_estado->set_id($row['estado_id']);
+            }
+            
+            if (isset($row['estado_uf'])) {
+                $object_estado->set_uf($row['estado_uf']);
+            }
+            
+               if (isset($row['estado_nome'])) {
+                $object_estado->set_nome($row['estado_nome']);
+            }
         
-        	return $object_estado;
+            return $object_estado;
         }
         
         public static function Popular_Estados(array $rows) : array
@@ -136,15 +136,15 @@ namespace Module\Application\Model\DAO;
                 $object_estado = new Object_Estado();
                 
                 if (isset($row['estado_id'])) {
-                	$object_estado->set_id($row['estado_id']);
+                    $object_estado->set_id($row['estado_id']);
                 }
                 
                 if (isset($row['estado_uf'])) {
-                	$object_estado->set_uf($row['estado_uf']);
+                    $object_estado->set_uf($row['estado_uf']);
                 }
                 
                 if (isset($row['estado_nome'])) {
-                	$object_estado->set_nome($row['estado_nome']);
+                    $object_estado->set_nome($row['estado_nome']);
                 }
                 
                 $estados[] = $object_estado;

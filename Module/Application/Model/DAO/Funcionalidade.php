@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Funcionalidade as Object_Funcionalidade;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Funcionalidade
     {
         
@@ -22,13 +22,13 @@ namespace Module\Application\Model\DAO;
                         VALUES (:id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_funcionalidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_funcionalidade->get_nome(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -39,15 +39,15 @@ namespace Module\Application\Model\DAO;
                 funcionalidade_id = :id,
                 funcionalidade_nome = :nome 
                 WHERE funcionalidade_id = :id";
-				
+                
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_funcionalidade->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_funcionalidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -58,10 +58,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaFuncionalidade($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -85,11 +85,11 @@ namespace Module\Application\Model\DAO;
             $object_funcionalidade = new Object_Funcionalidade();
             
             if (isset($row['funcionalidade_id'])) {
-            	$object_funcionalidade->set_id($row['funcionalidade_id']);
+                $object_funcionalidade->set_id($row['funcionalidade_id']);
             }
             
             if (isset($row['funcionalidade_nome'])) {
-            	$object_funcionalidade->set_nome($row['funcionalidade_nome']);
+                $object_funcionalidade->set_nome($row['funcionalidade_nome']);
             }
             
             return $object_funcionalidade;

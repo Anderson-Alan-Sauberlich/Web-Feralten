@@ -1,6 +1,6 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Categoria as Object_Categoria;
     use Module\Application\Model\Object\Categoria_Compativel as Object_Categoria_Compativel;
     use Module\Application\Model\DAO\Categoria_Compativel as DAO_Categoria_Compativel;
@@ -8,7 +8,7 @@ namespace Module\Application\Model\DAO;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Categoria
     {
 
@@ -44,7 +44,7 @@ namespace Module\Application\Model\DAO;
                     return false;
                 }
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -52,7 +52,7 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_categoria SET categoria_id = :id, categoria_nome = :nome, categoria_url = :url 
-                		WHERE categoria_id = :id";
+                        WHERE categoria_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -62,7 +62,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -78,7 +78,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -107,7 +107,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaCategorias($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -122,60 +122,60 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function Buscar_Nome_URL_Por_ID(int $id)
         {
-        	try {
-        		$sql = 'SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
+            try {
+                $sql = 'SELECT categoria_nome, categoria_url FROM tb_categoria WHERE categoria_id = :id';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
         
-        		return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return self::PopulaCategoria($p_sql->fetch(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Buscar_ID_Por_URL(string $url)
         {
-        	try {
-        		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url';
+            try {
+                $sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_url = :url';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':url', $url, PDO::PARAM_STR);
-        		$p_sql->execute();
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
+                $p_sql->execute();
         
-        		return $p_sql->fetch(PDO::FETCH_COLUMN);
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool
         {
-        	try {
-        		$sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url';
+            try {
+                $sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url';
         
-        		$p_sql = Conexao::Conectar()->prepare($sql);
-        		$p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
-        		$p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
-        		$p_sql->execute();
-        		
-        		$categoria_id = $p_sql->fetch(PDO::FETCH_COLUMN);
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                $categoria_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-        		if (!empty($categoria_id) AND $categoria_id != $object_categoria->get_id()) {
-        			return false;
-        		} else {
-        			return true;
-        		}
-        	} catch (PDOException | Exception $e) {
-        		return false;
-        	}
+                if (!empty($categoria_id) AND $categoria_id != $object_categoria->get_id()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
         }
         
         public static function PopulaCategoria(array $row) : Object_Categoria
@@ -183,15 +183,15 @@ namespace Module\Application\Model\DAO;
             $object_categoria = new Object_Categoria();
             
             if (isset($row['categoria_id'])) {
-            	$object_categoria->set_id($row['categoria_id']);
+                $object_categoria->set_id($row['categoria_id']);
             }
             
             if (isset($row['categoria_nome'])) {
-            	$object_categoria->set_nome($row['categoria_nome']);
+                $object_categoria->set_nome($row['categoria_nome']);
             }
             
             if (isset($row['categoria_url'])) {
-            	$object_categoria->set_url($row['categoria_url']);
+                $object_categoria->set_url($row['categoria_url']);
             }
             
             return $object_categoria;
@@ -205,15 +205,15 @@ namespace Module\Application\Model\DAO;
                 $object_categoria = new Object_Categoria();
                 
                 if (isset($row['categoria_id'])) {
-                	$object_categoria->set_id($row['categoria_id']);
+                    $object_categoria->set_id($row['categoria_id']);
                 }
                 
                 if (isset($row['categoria_nome'])) {
-                	$object_categoria->set_nome($row['categoria_nome']);
+                    $object_categoria->set_nome($row['categoria_nome']);
                 }
                 
                 if (isset($row['categoria_url'])) {
-                	$object_categoria->set_url($row['categoria_url']);
+                    $object_categoria->set_url($row['categoria_url']);
                 }
                 
                 $categorias[] = $object_categoria;

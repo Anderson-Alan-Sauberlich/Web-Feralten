@@ -1,6 +1,6 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Visualizado as Object_Visualizado;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
@@ -8,10 +8,10 @@ namespace Module\Application\Model\DAO;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Visualizado
     {
-		
+        
         function __construct()
         {
             
@@ -26,15 +26,15 @@ namespace Module\Application\Model\DAO;
                         VALUES (:id, :ent_id, :usr_id, :datahora);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_visualizado->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ent_id', $object_visualizado->get_object_entidade()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':usr_id', $object_visualizado->get_object_usuario()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':datahora', $object_visualizado->get_datahora(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -57,7 +57,7 @@ namespace Module\Application\Model\DAO;
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -68,10 +68,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -103,7 +103,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::Popula_Visualizados($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -128,9 +128,9 @@ namespace Module\Application\Model\DAO;
             
             foreach ($rows as $row) {
                 $object_visualizado = new Object_Visualizado();
-            	
+                
                 if (isset($row['visualizado_id'])) {
-                	$object_visualizado->set_id($row['visualizado_id']);
+                    $object_visualizado->set_id($row['visualizado_id']);
                 }
                 
                 if (isset($row['visualizado_ent_id'])) {
@@ -156,7 +156,7 @@ namespace Module\Application\Model\DAO;
             $object_visualizado = new Object_Visualizado();
             
             if (isset($row['visualizado_id'])) {
-            	$object_visualizado->set_id($row['visualizado_id']);
+                $object_visualizado->set_id($row['visualizado_id']);
             }
             
             if (isset($row['visualizado_ent_id'])) {

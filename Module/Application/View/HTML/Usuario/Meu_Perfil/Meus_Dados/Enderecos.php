@@ -2,10 +2,10 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-	<script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/enderecos.js"></script>
-	<title>Enderecos | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
+    <script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/enderecos.js"></script>
+    <title>Enderecos | Feralten</title>
 </head>
 <body>
     <header>

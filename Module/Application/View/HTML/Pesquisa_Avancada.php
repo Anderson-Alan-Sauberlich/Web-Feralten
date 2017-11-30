@@ -2,8 +2,8 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<title>Pesquisa Avançada | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <title>Pesquisa Avançada | Feralten</title>
 </head>
 <body>
     <header>

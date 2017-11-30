@@ -1,8 +1,8 @@
 <?php
 namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\Compatibilidade\Gerenciar;
-	
+    
     use Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\Compatibilidade\Gerenciar\Deletar as View_Deletar;
-	
+    
     class Deletar
     {
 
@@ -13,8 +13,8 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         public function Carregar_Pagina()
         {
-        	$view = new View_Deletar();
-        	
-        	$view->Executar();
+            $view = new View_Deletar();
+            
+            $view->Executar();
         }
     }

@@ -34,7 +34,7 @@ namespace Module\Application\Model\Common\Util;
         {
             if (!isset(self::$conection)) {
                 self::$conection = new PDO(
-                		
+                        
                 self::$DB_TYPE.":host=".self::$DB_HOST.";port=".self::$DB_PORT.";dbname=".self::$DB_NAME.";charset=".self::$DB_CHRS, self::$DB_USER, self::$DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
                 
                 self::$conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

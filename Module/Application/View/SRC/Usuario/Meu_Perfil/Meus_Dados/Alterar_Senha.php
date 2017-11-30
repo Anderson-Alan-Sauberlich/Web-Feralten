@@ -5,10 +5,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
     
     class Alterar_Senha
     {
-    	
+        
         function __construct(?int $status = null)
         {
-        	self::$status_usuario = $status;
+            self::$status_usuario = $status;
         }
         
         private static $status_usuario;
@@ -18,27 +18,27 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         
         public function set_alterar_senha_erros(?array $alterar_senha_erros = null) : void
         {
-        	self::$alterar_senha_erros = $alterar_senha_erros;
+            self::$alterar_senha_erros = $alterar_senha_erros;
         }
         
         public function set_alterar_senha_campos(?array $alterar_senha_campos = null) : void
         {
-        	self::$alterar_senha_campos = $alterar_senha_campos;
+            self::$alterar_senha_campos = $alterar_senha_campos;
         }
         
         public function set_alterar_senha_form(?array $alterar_senha_form = null) : void
         {
-        	self::$alterar_senha_form = $alterar_senha_form;
+            self::$alterar_senha_form = $alterar_senha_form;
         }
         
         public function Executar() : void
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Alterar_Senha.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Alterar_Senha.php';
         }
-		
+        
         public static function Incluir_Menu_Usuario() : void
         {
-        	new View_Usuario(self::$status_usuario, array('meus-dados', 'alterar-senha'));
+            new View_Usuario(self::$status_usuario, array('meus-dados', 'alterar-senha'));
         }
         
         public static function Manter_Valor(string $campo) : void
@@ -63,38 +63,38 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         
         public function Incluir_Classe_Erros(string $campo) : void
         {
-        	if (!empty(self::$alterar_senha_campos)) {
-	            switch ($campo) {
-	                case "senha_antiga":
-	                	if (isset(self::$alterar_senha_campos['erro_senha_antiga'])) {
-		                    if (self::$alterar_senha_campos['erro_senha_antiga'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$alterar_senha_campos['erro_senha_antiga'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-						
-	                case "senha_nova":
-	                	if (isset(self::$alterar_senha_campos['erro_senha_nova'])) {
-		                    if (self::$alterar_senha_campos['erro_senha_nova'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$alterar_senha_campos['erro_senha_nova'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-						
-	                case "senha_confnova":
-	                	if (isset(self::$alterar_senha_campos['erro_senha_confnova'])) {
-		                    if (self::$alterar_senha_campos['erro_senha_confnova'] == "erro") {
-		                        echo "has-error has-feedback";
-		                    } else if (self::$alterar_senha_campos['erro_senha_confnova'] == "certo") {
-		                        echo "has-success has-feedback";
-		                    }
-	                	}
-	                    break;
-	            }
+            if (!empty(self::$alterar_senha_campos)) {
+                switch ($campo) {
+                    case "senha_antiga":
+                        if (isset(self::$alterar_senha_campos['erro_senha_antiga'])) {
+                            if (self::$alterar_senha_campos['erro_senha_antiga'] == "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$alterar_senha_campos['erro_senha_antiga'] == "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "senha_nova":
+                        if (isset(self::$alterar_senha_campos['erro_senha_nova'])) {
+                            if (self::$alterar_senha_campos['erro_senha_nova'] == "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$alterar_senha_campos['erro_senha_nova'] == "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                        
+                    case "senha_confnova":
+                        if (isset(self::$alterar_senha_campos['erro_senha_confnova'])) {
+                            if (self::$alterar_senha_campos['erro_senha_confnova'] == "erro") {
+                                echo "has-error has-feedback";
+                            } else if (self::$alterar_senha_campos['erro_senha_confnova'] == "certo") {
+                                echo "has-success has-feedback";
+                            }
+                        }
+                        break;
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Module\Application\View\SRC\Usuario;
 
         function __construct()
         {
-        	
+            
         }
         
         private static $object_recuperar_senha;
@@ -20,7 +20,7 @@ namespace Module\Application\View\SRC\Usuario;
         
         public function Executar()
         {
-        	require_once RAIZ.'/Module/Application/View/HTML/Usuario/Recuperar_Senha.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Recuperar_Senha.php';
         }
         
         public static function Verificar_Codigo_Setado() : bool

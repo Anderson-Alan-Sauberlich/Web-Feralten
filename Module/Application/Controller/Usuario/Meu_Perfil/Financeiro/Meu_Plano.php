@@ -1,20 +1,20 @@
 <?php
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
-	
-	use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Meu_Plano as View_Meu_Plano;
-	use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
-	use Module\Application\Model\DAO\Plano as DAO_Plano;
-	use Module\Application\Model\DAO\Fatura as DAO_Fatura;
-	use Module\Application\Model\Object\Fatura as Object_Fatura;
-	use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
-	use Module\Application\Model\DAO\Entidade as DAO_Entidade;
-	use Module\Application\Model\Object\Entidade as Object_Entidade;
-	use Module\Application\Model\Common\Util\Login_Session;
-	use Module\Application\Model\Common\Util\Validador;
-	use \DateTime;
-	use \DateInterval;
-	use \Exception;
-	
+    
+    use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Meu_Plano as View_Meu_Plano;
+    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Model\DAO\Plano as DAO_Plano;
+    use Module\Application\Model\DAO\Fatura as DAO_Fatura;
+    use Module\Application\Model\Object\Fatura as Object_Fatura;
+    use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
+    use Module\Application\Model\DAO\Entidade as DAO_Entidade;
+    use Module\Application\Model\Object\Entidade as Object_Entidade;
+    use Module\Application\Model\Common\Util\Login_Session;
+    use Module\Application\Model\Common\Util\Validador;
+    use \DateTime;
+    use \DateInterval;
+    use \Exception;
+    
     class Meu_Plano
     {
         
@@ -39,17 +39,17 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         
         public function Carregar_Pagina()
         {
-        	if (Controller_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Usuario::Verificar_Status_Usuario();
-        		if ($status != 0) {
-        		    $view = new View_Meu_Plano($status, DAO_Plano::BuscarTodos(), Login_Session::get_entidade_plano());
-        			
-        			$view->Executar();
-        		}
-        		return $status;
-        	} else {
-        		return false;
-        	}
+            if (Controller_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Usuario::Verificar_Status_Usuario();
+                if ($status != 0) {
+                    $view = new View_Meu_Plano($status, DAO_Plano::BuscarTodos(), Login_Session::get_entidade_plano());
+                    
+                    $view->Executar();
+                }
+                return $status;
+            } else {
+                return false;
+            }
         }
         
         public function Salvar_Novo_Plano()

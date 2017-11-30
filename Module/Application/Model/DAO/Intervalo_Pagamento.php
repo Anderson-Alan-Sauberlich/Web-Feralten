@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Intervalo_Pagamento as Object_Intervalo_Pagamento;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Intervalo_Pagamento
     {
         
@@ -28,7 +28,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -36,9 +36,9 @@ namespace Module\Application\Model\DAO;
         {
             try {
                 $sql = "UPDATE tb_intervalo_pagamento SET
-                		intervalo_pagamento_id = :id,
-                		intervalo_pagamento_descricao = :dsc 
-                		WHERE intervalo_pagamento_id = :id";
+                        intervalo_pagamento_id = :id,
+                        intervalo_pagamento_descricao = :dsc 
+                        WHERE intervalo_pagamento_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -47,7 +47,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -61,7 +61,7 @@ namespace Module\Application\Model\DAO;
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
 
@@ -76,29 +76,29 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaArrayIntervalosPagamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
         public static function PopulaArrayIntervalosPagamentos(array $rows) : array
         {
             $intervalos_pagamentos = array();
-        	
-        	foreach ($rows as $row) {
-	        	$object_intervalo_pagamento = new Object_Intervalo_Pagamento();
-	        	
-	        	if (isset($row['intervalo_pagamento_id'])) {
-	        		$object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
-	        	}
-	        	
-	        	if (isset($row['intervalo_pagamento_descricao'])) {
-	        		$object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
-	        	}
-	        	
-	        	$intervalos_pagamentos[] = $object_intervalo_pagamento;
-        	}
-        	
-        	return $intervalos_pagamentos;
+            
+            foreach ($rows as $row) {
+                $object_intervalo_pagamento = new Object_Intervalo_Pagamento();
+                
+                if (isset($row['intervalo_pagamento_id'])) {
+                    $object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
+                }
+                
+                if (isset($row['intervalo_pagamento_descricao'])) {
+                    $object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
+                }
+                
+                $intervalos_pagamentos[] = $object_intervalo_pagamento;
+            }
+            
+            return $intervalos_pagamentos;
         }
         
         public static function PopulaIntervaloPagamento(array $row) : Object_Intervalo_Pagamento
@@ -106,11 +106,11 @@ namespace Module\Application\Model\DAO;
             $object_intervalo_pagamento = new Object_Intervalo_Pagamento();
             
             if (isset($row['intervalo_pagamento_id'])) {
-            	$object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
+                $object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
             }
             
             if (isset($row['intervalo_pagamento_descricao'])) {
-            	$object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
+                $object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
             }
             
             return $object_intervalo_pagamento;

@@ -1,6 +1,6 @@
 <?php
 namespace Module\Application\Controller\Usuario;
-	
+    
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
@@ -12,7 +12,7 @@ namespace Module\Application\Controller\Usuario;
     
     class Cadastro
     {
-		
+        
         function __construct()
         {
             
@@ -29,15 +29,15 @@ namespace Module\Application\Controller\Usuario;
         
         public function set_nome($nome) : void
         {
-        	try {
-        		$this->nome = Validador::Usuario()::validar_nome($nome);
-        		$this->cadastro_campos['erro_nome'] = "certo";
-        	} catch (Exception $e) {
-        		$this->cadastro_erros[] = $e->getMessage();
-        		$this->cadastro_campos['erro_nome'] = "erro";
-        		
-        		$this->nome = Validador::Usuario()::filtrar_nome($nome);
-        	}
+            try {
+                $this->nome = Validador::Usuario()::validar_nome($nome);
+                $this->cadastro_campos['erro_nome'] = "certo";
+            } catch (Exception $e) {
+                $this->cadastro_erros[] = $e->getMessage();
+                $this->cadastro_campos['erro_nome'] = "erro";
+                
+                $this->nome = Validador::Usuario()::filtrar_nome($nome);
+            }
         }
         
         public function set_sobrenome($sobrenome) : void
@@ -55,28 +55,28 @@ namespace Module\Application\Controller\Usuario;
         
         public function set_email($email) : void
         {
-        	try {
-        		$this->email = Validador::Usuario()::validar_email($email);
-        		$this->cadastro_campos['erro_email'] = "certo";
-        	} catch (Exception $e) {
-        		$this->cadastro_erros[] = $e->getMessage();
-        		$this->cadastro_campos['erro_email'] = "erro";
-        		
-        		$this->email = Validador::Usuario()::filtrar_email($email);
-        	}
+            try {
+                $this->email = Validador::Usuario()::validar_email($email);
+                $this->cadastro_campos['erro_email'] = "certo";
+            } catch (Exception $e) {
+                $this->cadastro_erros[] = $e->getMessage();
+                $this->cadastro_campos['erro_email'] = "erro";
+                
+                $this->email = Validador::Usuario()::filtrar_email($email);
+            }
         }
         
         public function set_senha($senha) : void
         {
-        	try {
-        		$this->senha = Validador::Usuario()::validar_senha($senha);
-        		$this->cadastro_campos['erro_senha'] = "certo";
-        	} catch (Exception $e) {
-        		$this->cadastro_erros[] = $e->getMessage();
-        		$this->cadastro_campos['erro_senha'] = "erro";
-        		
-        		$this->senha = Validador::Usuario()::filtrar_senha($senha);
-        	}
+            try {
+                $this->senha = Validador::Usuario()::validar_senha($senha);
+                $this->cadastro_campos['erro_senha'] = "certo";
+            } catch (Exception $e) {
+                $this->cadastro_erros[] = $e->getMessage();
+                $this->cadastro_campos['erro_senha'] = "erro";
+                
+                $this->senha = Validador::Usuario()::filtrar_senha($senha);
+            }
         }
         
         public function set_recaptcha_response($recaptcha_response) : void
@@ -94,13 +94,13 @@ namespace Module\Application\Controller\Usuario;
         
         public function Carregar_Pagina() : void
         {
-        	$view = new View_Cadastro();
-        	
-        	$view->set_cadastro_campos($this->cadastro_campos);
-        	$view->set_cadastro_erros($this->cadastro_erros);
-        	$view->set_cadastro_form($this->cadastro_form);
-        	 
-        	$view->Executar();
+            $view = new View_Cadastro();
+            
+            $view->set_cadastro_campos($this->cadastro_campos);
+            $view->set_cadastro_erros($this->cadastro_erros);
+            $view->set_cadastro_form($this->cadastro_form);
+             
+            $view->Executar();
         }
 
         public function Cadastrar_Usuario()
@@ -142,7 +142,7 @@ namespace Module\Application\Controller\Usuario;
             }
             
             if (empty($this->cadastro_erros)) {
-            	return true;
+                return true;
             } else {
                 $this->cadastro_form['nome'] = $this->nome;
                 $this->cadastro_form['sobrenome'] = $this->sobrenome;

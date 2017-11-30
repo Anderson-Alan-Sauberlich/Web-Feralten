@@ -2,10 +2,10 @@
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
-	<?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-	<script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
-	<title>Atualizar | Feralten</title>
+    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
+    <script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
+    <script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/atualizar.js"></script>
+    <title>Atualizar | Feralten</title>
 </head>
 <body>
     <header>
@@ -17,15 +17,15 @@
             <?php View_Atualizar::Mostrar_Erros(); ?>
             <?php View_Atualizar::Mostrar_Sucesso(); ?>
             <form id="form_atualizar_usuario" name="form_atualizar_usuario" data-toggle="validator" enctype="multipart/form-data" action="/usuario/meu-perfil/meus-dados/atualizar/usuario/" method="post" role="form">
-            	<div class="panel panel-default sombra_painel">
-                	<div class="panel-heading sombra_painel centralizar">
-                    	<label class="lbPanel">Atualizar Dados do Usuario</label>
-                	</div>
+                <div class="panel panel-default sombra_painel">
+                    <div class="panel-heading sombra_painel centralizar">
+                        <label class="lbPanel">Atualizar Dados do Usuario</label>
+                    </div>
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
-                        	<div class="row">
-                        		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                	<label for="nome" class="lbPanel">Digite Seu Nome:</label>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label for="nome" class="lbPanel">Digite Seu Nome:</label>
                                     <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "nome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "nome") ?>" placeholder="Nome" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite Apenas seu Nome. (Campo Obrigatório)" />
@@ -45,14 +45,14 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Este e-mail sera usado para gerenciar seu Cadastro e para acessar o Sistema. (Campo Obrigatório)" />
                             </div>
-	                        <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
+                            <label for="email_alternativo" class="lbPanel">Digite Um E-Mail Alternativo:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "email_alternativo"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email_alternativo" name="email_alternativo" type="email" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "email_alternativo") ?>" placeholder="E-Mail Alternativo" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Ao Informar um Email neste campo o mesmo sera mostrado em seus dados, substituindo seu E-Mail de Usuario. (Campo Opcional)" />
                             </div>
                         </div>
                         <div class="col-sm-6">
-                        	<label for="fone" class="lbPanel">Digite Seu Numero de Telefone:</label>
+                            <label for="fone" class="lbPanel">Digite Seu Numero de Telefone:</label>
                             <div class="input-group <?php View_Atualizar::Incluir_Classe_Erros("usuario", "fone"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                                 <input id="fone" name="fone" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone. (Campo Obrigatório)" />
@@ -62,11 +62,11 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
                                 <input id="fone_alternativo" name="fone_alternativo" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("usuario", "fone_alternativo") ?>" placeholder="Fone Ex: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Digite apenas os Numeros de seu telefone alternativo. (Campo Opcional)" />
                             </div>
-	                        <div class="ui buttons linha_inteira btnAtualizar">
-								<button id="salvar_usuario" name="salvar_usuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
-								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_usuario" name="restaurar_usuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
-							</div>
+                            <div class="ui buttons linha_inteira btnAtualizar">
+                                <button id="salvar_usuario" name="salvar_usuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+                                <div class="or" data-text="Ou"></div>
+                                <button id="restaurar_usuario" name="restaurar_usuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -79,22 +79,22 @@
                     <div class="panel-body dadosPanel">
                         <div class="col-sm-6">
                             <label for="imagem" class="lbPanel">Selecione uma Foto, Logo Marca ou Imagem de Capa:</label>
-							<div class="thumbnail">
-								<div class="row">
-									<div class="col-md-7 col-sm-12 col-xs-12">
-										<span id="adicionar_imagem" name="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagens">
-											<i class="glyphicon glyphicon-upload"></i> Adicionar Imagem
-											<input id="imagem" value="" accept="image/*" name="imagem" onchange="loadFile(event);" type="file">
-										</span>
-										<button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile()" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
-									</div>
-									<div class="col-md-5 col-sm-12 col-xs-12">
-										<div class="ui small bordered image imagemPeca">
-											<div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
-											<a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
-											<img id="foto" name="foto" onError="MostImgErr($this)" src="<?php View_Atualizar::Manter_Imagem() ?>">
-										</div>
-									</div>
+                            <div class="thumbnail">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-12 col-xs-12">
+                                        <span id="adicionar_imagem" name="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagens">
+                                            <i class="glyphicon glyphicon-upload"></i> Adicionar Imagem
+                                            <input id="imagem" value="" accept="image/*" name="imagem" onchange="loadFile(event);" type="file">
+                                        </span>
+                                        <button id="remover_imagem" name="remover_imagem" onclick="limparCampoFile()" type="button" class="btn btn-danger btnImagens"><i class="glyphicon glyphicon-trash"></i> Remover Imagem</button>
+                                    </div>
+                                    <div class="col-md-5 col-sm-12 col-xs-12">
+                                        <div class="ui small bordered image imagemPeca">
+                                            <div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
+                                            <a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
+                                            <img id="foto" name="foto" onError="MostImgErr($this)" src="<?php View_Atualizar::Manter_Imagem() ?>">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,10 +115,10 @@
                                 <input id="site" name="site" type="text" class="form-control" value="<?php View_Atualizar::Manter_Valor("entidade", "site") ?>" placeholder="Ex: www.meusite.com.br" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Informe aqui o Endereço do seu site, caso você tenha. (Campo Opcional)" />
                             </div>
                             <div class="ui buttons linha_inteira btnAtualizar">
-								<button id="salvar_entidade" name="salvar_entidade" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
-								<div class="or" data-text="Ou"></div>
-								<button id="restaurar_entidade" name="restaurar_entidade" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
-							</div>
+                                <button id="salvar_entidade" name="salvar_entidade" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+                                <div class="or" data-text="Ou"></div>
+                                <button id="restaurar_entidade" name="restaurar_entidade" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

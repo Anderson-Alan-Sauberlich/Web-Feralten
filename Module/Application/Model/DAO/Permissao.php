@@ -1,12 +1,12 @@
 <?php
 namespace Module\Application\Model\DAO;
-	
+    
     use Module\Application\Model\Object\Permissao as Object_Permissao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
     use \Exception;
-	
+    
     class Permissao
     {
         
@@ -22,13 +22,13 @@ namespace Module\Application\Model\DAO;
                         VALUES (:id, :nome);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_permissao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_permissao->get_nome(), PDO::PARAM_STR);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -39,15 +39,15 @@ namespace Module\Application\Model\DAO;
                 permissao_id = :id,
                 permissao_nome = :nome 
                 WHERE permissao_id = :id";
-				
+                
                 $p_sql = Conexao::Conectar()->prepare($sql);
-				
+                
                 $p_sql->bindValue(':id', $object_permissao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':nome', $object_permissao->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
  
@@ -58,10 +58,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-				
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Module\Application\Model\DAO;
                 
                 return self::PopulaPermissao($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-				return false;
+                return false;
             }
         }
         
@@ -85,11 +85,11 @@ namespace Module\Application\Model\DAO;
             $object_permissao = new Object_Permissao();
             
             if (isset($row['permissao_id'])) {
-            	$object_permissao->set_id($row['permissao_id']);
+                $object_permissao->set_id($row['permissao_id']);
             }
             
             if (isset($row['permissao_nome'])) {
-            	$object_permissao->set_nome($row['permissao_nome']);
+                $object_permissao->set_nome($row['permissao_nome']);
             }
             
             return $object_permissao;

@@ -1,48 +1,48 @@
 <?php
 namespace Module\Application\Model\Object;
-	
-	use Module\Application\Model\Object\Endereco as Object_Endereco;
+    
+    use Module\Application\Model\Object\Endereco as Object_Endereco;
 
-	class Entidade
-	{
-		
-		private $id;
-		private $usuario_id;
+    class Entidade
+    {
+        
+        private $id;
+        private $usuario_id;
         private $status_id;
         private $cpf_cnpj;
         private $nome_comercial;
         private $imagem;
-		private $site;
+        private $site;
         private $data;
         private $enderecos = array();
         private $plano_id;
         private $intervalo_pagamento_id;
         private $data_contratacao_plano;
-		
-		function __constructor()
-		{
-			
-		}
-		
-		public function set_id(int $id) : void
-		{
-			$this->id = $id;
-		}
-		
-		public function get_id() : ?int
-		{
-			return $this->id;
-		}
-		
-		public function set_usuario_id(int $usuario_id) : void
-		{
-			$this->usuario_id = $usuario_id;
-		}
-		
-		public function get_usuario_id() : ?int
-		{
-			return $this->usuario_id;
-		}
+        
+        function __constructor()
+        {
+            
+        }
+        
+        public function set_id(int $id) : void
+        {
+            $this->id = $id;
+        }
+        
+        public function get_id() : ?int
+        {
+            return $this->id;
+        }
+        
+        public function set_usuario_id(int $usuario_id) : void
+        {
+            $this->usuario_id = $usuario_id;
+        }
+        
+        public function get_usuario_id() : ?int
+        {
+            return $this->usuario_id;
+        }
         
         public function set_status_id(int $status_id) : void
         {
@@ -83,7 +83,7 @@ namespace Module\Application\Model\Object;
         {
             return $this->imagem;
         }
-		
+        
         public function set_site(?string $site = null) : void
         {
             $this->site = $site;
@@ -106,19 +106,19 @@ namespace Module\Application\Model\Object;
         
         public function set_enderecos(array $enderecos) : void
         {
-        	foreach ($enderecos as $endereco) {
-        		$this->set_endereco($endereco);
-        	}
+            foreach ($enderecos as $endereco) {
+                $this->set_endereco($endereco);
+            }
         }
         
         public function set_endereco(Object_Endereco $endereco) : void
         {
-        	$this->enderecos[] = $endereco;
+            $this->enderecos[] = $endereco;
         }
         
         public function get_enderecos() : ?array
         {
-        	return $this->enderecos;
+            return $this->enderecos;
         }
         
         public function set_data_contratacao_plano(string $data_contratacao_plano) : void
@@ -150,4 +150,4 @@ namespace Module\Application\Model\Object;
         {
             return $this->intervalo_pagamento_id;
         }
-	}
+    }

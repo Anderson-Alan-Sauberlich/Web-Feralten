@@ -1,14 +1,14 @@
 <?php
 namespace Module\Application\Controller\Usuario\Meu_Perfil;
-	
-	use Module\Application\View\SRC\Usuario\Meu_Perfil\Perfil as View_Perfil;
-	use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
-	use Module\Application\Model\Common\Util\Login_Session;
-	use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
-	use Module\Application\Model\DAO\Adicionado as DAO_Adicionado;
-	use Module\Application\Model\DAO\Removido as DAO_Removido;
-	use \DateTime;
-	
+    
+    use Module\Application\View\SRC\Usuario\Meu_Perfil\Perfil as View_Perfil;
+    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Model\Common\Util\Login_Session;
+    use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
+    use Module\Application\Model\DAO\Adicionado as DAO_Adicionado;
+    use Module\Application\Model\DAO\Removido as DAO_Removido;
+    use \DateTime;
+    
     class Perfil
     {
 
@@ -19,15 +19,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
         
         public function Carregar_Pagina()
         {
-        	if (Controller_Usuario::Verificar_Autenticacao()) {
-        		$status = Controller_Usuario::Verificar_Status_Usuario();
-        		
-        		$view = new View_Perfil($status);
-        		
-        		$view->Executar();
-        	} else {
-        		return false;
-        	}
+            if (Controller_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Usuario::Verificar_Status_Usuario();
+                
+                $view = new View_Perfil($status);
+                
+                $view->Executar();
+            } else {
+                return false;
+            }
         }
         
         public function Retornar_Valores_Visualizados()
