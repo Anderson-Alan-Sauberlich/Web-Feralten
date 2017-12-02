@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Layout;
     
-    //use Module\Application\Controller\Layout\Loader as View_Loader;
+    use Module\Application\Controller\Layout\Loader as Controller_Loader;
     
     class Loader
     {
@@ -13,6 +13,8 @@ namespace Module\Application\View\SRC\Layout;
         
         public function Executar() : void
         {
-            include RAIZ.'/Module/Application/View/HTML/Layout/Loader.php';
+            if (!Controller_Loader::Validar_IP()) {
+                include RAIZ.'/Module/Application/View/HTML/Layout/Loader.php';
+            }
         }
     }

@@ -6,7 +6,7 @@
     <title>Início | Feralten</title>
 </head>
 <body>
-    <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Loader.php'; ?>
+    <?php View_Inicio::Carregar_Loader(); ?>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
     </header>
