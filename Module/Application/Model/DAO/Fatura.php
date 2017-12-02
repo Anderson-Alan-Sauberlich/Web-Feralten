@@ -43,7 +43,7 @@ namespace Module\Application\Model\DAO;
                 $sql = "UPDATE tb_fatura SET
                         fatura_id = :id,
                         fatura_ent_id = :ent_id,
-                           fatura_valor_total = :vlr_ttl,
+                        fatura_valor_total = :vlr_ttl,
                         fatura_sts_ftr_id = :sts_ftr_id,
                         fatura_data_emissao = :data_ems,
                         fatura_data_vencimento = :data_vcm 
@@ -58,6 +58,25 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
 
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Atualizar_Status(int $fatura_id, int $status_id) : bool
+        {
+            try {
+                $sql = "UPDATE tb_fatura SET
+                        fatura_id = :id,
+                        fatura_sts_ftr_id = :sts_ftr_id 
+                        WHERE fatura_id = :id";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':id', $fatura_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':sts_ftr_id', $status_id, PDO::PARAM_INT);
+                
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
                 return false;

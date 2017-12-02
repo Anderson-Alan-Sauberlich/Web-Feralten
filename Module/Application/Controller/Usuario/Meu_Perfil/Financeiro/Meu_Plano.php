@@ -57,11 +57,14 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             if (Controller_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
+                    $fatura_antiga = null;
                     $retorno = array();
                     $retorno['status'] = 'certo';
                     $retorno['erros'] = array();
                     
                     if (empty($this->erros)) {
+                        $fatura_antiga = DAO_Fatura::BuscarPorCodStatus(Login_session::get_entidade_id(), 1);
+                        
                         $object_entidade = new Object_Entidade();
                         
                         $object_entidade->set_id(Login_Session::get_entidade_id());
@@ -115,10 +118,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     if (!empty($this->erros)) {
                         $retorno['erros'] = $this->erros;
                         $retorno['status'] = 'erro';
+                    } else if (!empty($fatura_antiga)) {
+                        foreach ($fatura_antiga as $fatura) {
+                            DAO_Fatura::Atualizar_Status($fatura->get_id(), 8);
+                        }
                     }
                     
                     echo json_encode($retorno);
                 }
+                
                 return $status;
             } else {
                 return false;
