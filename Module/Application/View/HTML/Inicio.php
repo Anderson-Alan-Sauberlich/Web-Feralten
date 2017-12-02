@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <title>Início | Feralten</title>
+    <title>Peças Novas e Usadas de Carros, Motos, Camihões, Ônibus e Muito Mais em Ferro Velho, Oficinas e Lojas | Feralten</title>
 </head>
 <body>
     <?php View_Inicio::Carregar_Loader(); ?>
