@@ -1,13 +1,6 @@
 $('.ui.accordion').accordion();
 $('.ui.checkbox').checkbox();
 $('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
-$(document).ready(function() {
-	Accordion_Categoria();
-});
-function Accordion_Categoria() {
-	$('#title_categoria').addClass('active');
-	$('#content_categoria').addClass('active');
-}
 function Carregar_Categoria(ca) {
 	if ($(ca).val() != 0 && $(ca).val() != null) {
 	    $("#marca").html('<option>Carregando...</option>');

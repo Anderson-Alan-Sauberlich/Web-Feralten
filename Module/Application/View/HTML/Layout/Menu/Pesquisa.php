@@ -3,8 +3,8 @@
     <div class="page-header">
         <div class="well borderPainel sombra_painel">
             <div class="ui accordion field">
-                <div id="title_categoria" class="title ui horizontal divider header"><i class="icon dropdown"></i>Categorias</div>
-                <div id="content_categoria" class="content field">
+                <div id="title_categoria" class="title ui horizontal divider header <?php View_Pesquisa::Mostrar_Status(); ?>"><i class="icon dropdown"></i>Categorias</div>
+                <div id="content_categoria" class="content field <?php View_Pesquisa::Mostrar_Status(); ?>">
                     <div class="well well-sm wellBranco">
                         <div class="row">
                             <?php View_Pesquisa::Carregar_Categorias(); ?>

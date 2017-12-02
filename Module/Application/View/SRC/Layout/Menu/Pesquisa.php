@@ -163,4 +163,11 @@ namespace Module\Application\View\SRC\Layout\Menu;
                 echo self::$form_pesquisa['peca_nome'];
             }
         }
+        
+        public static function Mostrar_Status() : void
+        {
+            if (!isset(self::$form_pesquisa['categoria']) OR empty(self::$form_pesquisa['categoria'])) {
+                echo 'active';
+            }
+        }
     }
