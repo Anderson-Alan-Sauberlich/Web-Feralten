@@ -24,7 +24,7 @@
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
-        <script type="text/javascript" src="/resources/packages/chart/chart.bundle.2.7.0.min.js"></script>
+        <script type="text/javascript" src="/resources/packages/chart/chart.bundle.2.7.1.min.js"></script>
         <script type="text/javascript" src="/application/js/usuario/meu_perfil/perfil.js"></script>
     </footer>
 </body>
