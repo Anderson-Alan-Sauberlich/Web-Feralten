@@ -44,13 +44,17 @@ $(document).ready(function() {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
 	            label: 'Visualizados - 2017',
-	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez]
+	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
+	            borderColor: '#0E6EB8'
 	        }]
 	    },
 	    options: {
 	        scales: {
 	            yAxes: [{
-	            	stacked: true
+	            	stacked:true,
+	            	ticks: {
+	                    beginAtZero:true
+	                }
 	            }]
 	        }
 	    }
@@ -104,13 +108,17 @@ $(document).ready(function() {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
 	            label: 'Adicionados - 2017',
-	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez]
+	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
+	            borderColor: '#016936'
 	        }]
 	    },
 	    options: {
 	        scales: {
 	            yAxes: [{
-	            	stacked: true
+	            	stacked:true,
+	            	ticks: {
+	                    beginAtZero:true
+	                }
 	            }]
 	        }
 	    }
@@ -164,13 +172,17 @@ $(document).ready(function() {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
 	            label: 'Removidos - 2017',
-	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez]
+	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
+	            borderColor: '#B03060'
 	        }]
 	    },
 	    options: {
 	        scales: {
 	            yAxes: [{
-	            	stacked: true
+	            	stacked:true,
+	            	ticks: {
+	                    beginAtZero:true
+	                }
 	            }]
 	        }
 	    }
