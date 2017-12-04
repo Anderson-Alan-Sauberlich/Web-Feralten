@@ -11,6 +11,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\Object\Entidade as Object_Entidade;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
+    use Module\Application\Model\Common\Util\Conexao;
     use \DateTime;
     use \DateInterval;
     use \Exception;
@@ -57,26 +58,24 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             if (Controller_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
-                    $fatura_antiga = null;
                     $retorno = array();
                     $retorno['status'] = 'certo';
                     $retorno['erros'] = array();
                     
                     if (empty($this->erros)) {
                         $fatura_antiga = DAO_Fatura::BuscarPorCodStatus(Login_session::get_entidade_id(), 1);
+                        $fatura_antiga_sts = true;
                         
-                        $object_entidade = new Object_Entidade();
+                        Conexao::$conection->beginTransaction();
                         
-                        $object_entidade->set_id(Login_Session::get_entidade_id());
-                        $object_entidade->set_plano_id($this->plano_id);
-                        $object_entidade->set_intervalo_pagamento_id(1);
-                        $object_entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
+                        foreach ($fatura_antiga as $fatura) {
+                            if (!DAO_Fatura::Atualizar_Status($fatura->get_id(), 8)) {
+                                $fatura_antiga_sts = false;
+                            }
+                        }
                         
-                        if (DAO_Entidade::Atualizar_Financeiro($object_entidade)) {
-                            Login_Session::set_entidade_plano($this->plano_id);
-                            
+                        if ($fatura_antiga_sts) {
                             $object_fatura = new Object_Fatura();
-                            
                             $object_fatura->set_id(0);
                             $object_fatura->set_entidade_id(Login_Session::get_entidade_id());
                             $object_fatura->set_data_emissao(date('Y-m-d H:i:s'));
@@ -103,25 +102,37 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                                 $object_status->set_id(1);
                                 $object_fatura->set_object_status($object_status);
                                 
-                                if (!DAO_Fatura::Inserir($object_fatura)) {
+                                if (DAO_Fatura::Inserir($object_fatura)) {
+                                    $object_entidade = new Object_Entidade();
+                                    $object_entidade->set_id(Login_Session::get_entidade_id());
+                                    $object_entidade->set_plano_id($this->plano_id);
+                                    $object_entidade->set_intervalo_pagamento_id(1);
+                                    $object_entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
+                                    
+                                    if (DAO_Entidade::Atualizar_Financeiro($object_entidade)) {
+                                        Login_Session::set_entidade_plano($this->plano_id);
+                                        Conexao::$conection->commit();
+                                    } else {
+                                        $this->erros[] = 'Erro ao tentar Ativar novo plano';
+                                        Conexao::$conection->rollBack();
+                                    }
+                                } else {
                                     $this->erros[] = 'Erro ao tentar gerar Fatura';
+                                    Conexao::$conection->rollBack();
                                 }
                             } else {
                                 $this->erros[] = 'Erro ao tentar fechar Fatura';
+                                Conexao::$conection->rollBack();
                             }
                         } else {
-                            $this->erros[] = 'Erro ao tentar Ativar novo plano';
+                            $this->erros[] = 'Erro ao tentar Cancelar fatura antiga';
+                            Conexao::$conection->rollBack();
                         }
-                        
                     }
                     
                     if (!empty($this->erros)) {
                         $retorno['erros'] = $this->erros;
                         $retorno['status'] = 'erro';
-                    } else if (!empty($fatura_antiga)) {
-                        foreach ($fatura_antiga as $fatura) {
-                            DAO_Fatura::Atualizar_Status($fatura->get_id(), 8);
-                        }
                     }
                     
                     echo json_encode($retorno);
