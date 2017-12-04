@@ -14,22 +14,22 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                       <div class="row-fluid buscaDropEspaco">
-                        <select id="marca" class="ui fluid scrolling search selection dropdown">
+                    <div class="row-fluid buscaDropEspaco">
+                        <select id="marca" class="ui fluid scrolling search selection dropdown" form="searschform">
                             <?php View_Pesquisa::Carregar_Marcas(); ?>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                       <div class="row-fluid buscaDropEspaco">
-                           <select id="modelo" class="ui fluid scrolling search selection dropdown">
+                    <div class="row-fluid buscaDropEspaco">
+                        <select id="modelo" class="ui fluid scrolling search selection dropdown" form="searschform">
                             <?php View_Pesquisa::Carregar_Modelos(); ?>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                       <div class="row-fluid buscaDropEspaco">
-                           <select id="versao" class="ui fluid scrolling search selection dropdown">
+                    <div class="row-fluid buscaDropEspaco">
+                        <select id="versao" class="ui fluid scrolling search selection dropdown" form="searschform">
                             <?php View_Pesquisa::Carregar_Versoes(); ?>
                         </select>
                     </div>
@@ -38,15 +38,15 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
                                <div class="row-fluid buscaDropEspaco">
-                                   <select id="ano_de" name="ano_de" class="ui fluid scrolling search selection dropdown">
+                                   <select id="ano_de" name="ano_de" class="ui fluid scrolling search selection dropdown" form="searschform">
                                     <option value="0">Ano De</option>
                                     <?php View_Pesquisa::Carregar_Ano_De(); ?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                               <div class="row-fluid buscaDropEspaco">
-                                   <select id="ano_ate" name="ano_ate" class="ui fluid scrolling search selection dropdown">
+                            <div class="row-fluid buscaDropEspaco">
+                                <select id="ano_ate" name="ano_ate" class="ui fluid scrolling search selection dropdown" form="searschform">
                                     <option value="0">Ano Até</option>
                                     <?php View_Pesquisa::Carregar_Ano_Ate(); ?>
                                 </select>
@@ -56,10 +56,10 @@
                 </div>
             </div>
             <div class="row">
-                   <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="ui fluid big left icon input">
                         <i class="search icon"></i>
-                        <input id="peca" name="peca" value="<?php View_Pesquisa::Manter_Valor_Pesquisa(); ?>" placeholder="Digite o que deseja Procurar..." type="text">
+                        <input id="peca" name="peca" value="<?php View_Pesquisa::Manter_Valor_Pesquisa(); ?>" placeholder="Digite o que deseja Procurar..." type="text" form="searschform">
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12">
