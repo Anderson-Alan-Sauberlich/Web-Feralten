@@ -41,6 +41,11 @@ namespace Module\Application\Model\Validador;
             
         }
         
+        public static function validar_data_fechamento($data_vencimento = null) : void
+        {
+            
+        }
+        
         public static function filtrar_id($id = null) : void
         {
             
@@ -67,6 +72,11 @@ namespace Module\Application\Model\Validador;
         }
         
         public static function filtrar_data_vencimento($data_vencimento = null) : void
+        {
+            
+        }
+        
+        public static function filtrar_data_fechamento($data_vencimento = null) : void
         {
             
         }

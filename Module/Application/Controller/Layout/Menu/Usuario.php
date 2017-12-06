@@ -24,6 +24,9 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * @return number|NULL
+         */
         public static function Verificar_Status_Usuario()
         {
             $status = Login_Session::get_entidade_status();

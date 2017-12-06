@@ -14,15 +14,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Estado as DAO_Estado;
     use Module\Application\Model\DAO\Cidade as DAO_Cidade;
-    use Module\Application\Model\DAO\Plano as DAO_Plano;
-    use Module\Application\Model\DAO\Fatura as DAO_Fatura;
-    use Module\Application\Model\Object\Fatura as Object_Fatura;
-    use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Concluir as View_Concluir;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
-    use \DateTime;
-    use \DateInterval;
+    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura as Controller_Fatura;
     use \Exception;
     
     class Concluir
@@ -33,23 +28,90 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             
         }
         
+        /**
+         * @var string $fone Numero de telefone principal do Usuario
+         */
         private $fone;
+        
+        /**
+         * @var string $fone_alternativo Numero de telefone alternativo do Usuario
+         */
         private $fone_alternativo;
+        
+        /**
+         * @var string $email_alternativo Endereço de E-mail alternativo do Usuario
+         */
         private $email_alternativo;
+        
+        /**
+         * @var int $estado ID do Estado do Endereço
+         */
         private $estado;
+        
+        /**
+         * @var int $cidade ID da Cidade do Endereço
+         */
         private $cidade;
+        
+        /**
+         * @var string $numero Numero do Endereço
+         */
         private $numero;
+        
+        /**
+         * @var string $cep Numero do CEP do Endereço
+         */
         private $cep;
+        
+        /**
+         * @var string $bairro Nome do Bairro do Endereço
+         */
         private $bairro;
+        
+        /**
+         * @var string $rua Nome da Rua do Endereço
+         */
         private $rua;
+        
+        /**
+         * @var string $complemento Descrição do Complemento do Endereço
+         */
         private $complemento;
+        
+        /**
+         * @var string $cpf_cnpj Numero do CPF ou CPNJ da Entidade
+         */
         private $cpf_cnpj;
+        
+        /**
+         * @var string $site Endereço do Site da Entidade
+         */
         private $site;
+        
+        /**
+         * @var string $nome_comercial Nome Comercial da Entidade
+         */
         private $nome_comercial;
+        
+        /**
+         * @var array $concluir_erros Array com todos os erros
+         */
         private $concluir_erros = array();
+        
+        /**
+         * @var array $concluir_campos Array com todos os Status dos Campos do Formulario
+         */
         private $concluir_campos = array();
+        
+        /**
+         * @var array $concluir_form Array com todos os Valores dos Campos do Formulario
+         */
         private $concluir_form = array();
         
+        /**
+         * @param string $fone
+         * @return void
+         */
         public function set_fone($fone) : void
         {
             try {
@@ -63,6 +125,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $fone_alternativo
+         * @return void
+         */
         public function set_fone_alternativo($fone_alternativo = null) : void
         {
             try {
@@ -75,6 +141,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $email_alternativo
+         * @return void
+         */
         public function set_email_alternativo($email_alternativo = null) : void
         {
             try {
@@ -87,6 +157,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param int $estado
+         * @return void
+         */
         public function set_estado($estado) : void
         {
             try {
@@ -100,6 +174,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param int $cidade
+         * @return void
+         */
         public function set_cidade($cidade) : void
         {
             try {
@@ -113,6 +191,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $numero
+         * @return void
+         */
         public function set_numero($numero) : void
         {
             try {
@@ -126,6 +208,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $cep
+         * @return void
+         */
         public function set_cep($cep) : void
         {
             try {
@@ -139,6 +225,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $bairro
+         * @return void
+         */
         public function set_bairro($bairro) : void
         {
             try {
@@ -152,6 +242,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $rua
+         * @return void
+         */
         public function set_rua($rua) : void
         {
             try {
@@ -165,6 +259,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $complemento
+         * @return void
+         */
         public function set_complemento($complemento = null) : void
         {
             try {
@@ -177,6 +275,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $cpf_cnpj
+         * @return void
+         */
         public function set_cpf_cnpj($cpf_cnpj) : void
         {
             try {
@@ -190,6 +292,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $site
+         * @return void
+         */
         public function set_site($site = null) : void
         {
             try {
@@ -202,6 +308,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * @param string $nome_comercial
+         * @return void
+         */
         public function set_nome_comercial($nome_comercial = null) : void
         {
             try {
@@ -214,6 +324,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Instancia e Abre a View
+         * 
+         * @return number|NULL|boolean
+         */
         public function Carregar_Pagina()
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -235,6 +350,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Salva os dados do usuario
+         * 
+         * @return string|number|NULL|boolean
+         */
         public function Concluir_Cadastro()
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -264,25 +384,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
                             
                             if ($id_entidade != false) {
                                 Login_Session::set_entidade_id($id_entidade);
-                                Login_Session::set_entidade_plano(1);
                                 
-                                $object_fatura = new Object_Fatura();
-                                
-                                $object_fatura->set_id(0);
-                                $object_fatura->set_entidade_id(Login_Session::get_entidade_id());
-                                $object_fatura->set_valor_total(DAO_Plano::BuscarValorMensalPorCOD(1));
-                                
-                                $datetime = new DateTime();
-                                $object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
-                                $datetime->add(new DateInterval('P30D'));
-                                $object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
-                                
-                                $object_status = new Object_Status_Fatura();
-                                $object_status->set_id(1);
-                                $object_fatura->set_object_status($object_status);
-                                
-                                if (!DAO_Fatura::Inserir($object_fatura)) {
-                                    $this->concluir_erros[] = 'Erro ao tentar gerar Fatura';
+                                try {
+                                    Controller_Fatura::Criar_Primeira_Fatura();
+                                    Login_Session::set_entidade_plano(1);
+                                } catch (Exception $e) {
+                                    $this->concluir_erros[] = $e->getMessage();
                                 }
                                 
                                 $imagem = $this->Salvar_Imagem();
@@ -348,6 +455,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Retorna por Ajax as Cidades quando o usuario seleciona um Estado
+         */
         public function Retornar_Cidades_Por_Estado() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -359,6 +469,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Salva as Imagens em uma pasta temporaria até o usuario concluir o cadastro
+         */
         public function Salvar_Imagem_TMP() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -376,6 +489,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Remove as imagens da pasta temporaria
+         */
         public function Deletar_Imagem() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -389,6 +505,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Retorna a imagem em formato Base64
+         * function usada após carregar as imagens no servidor
+         * 
+         * @param string $nome_imagem
+         * @return string
+         */
         public static function Pegar_Imagem_URL(?string $nome_imagem = null) : string
         {
             $imagens = new Gerenciar_Imagens();
@@ -402,6 +525,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
 
+        /**
+         * Salva as imagens da pasta temporaria para a pasta real do usuario
+         * Function chamada ao Concluir Cadastro
+         * 
+         * @return string|NULL
+         */
         private function Salvar_Imagem() : ?string
         {
             if (isset($_SESSION['imagem_tmp']) AND !empty($_SESSION['imagem_tmp'])) {
@@ -426,11 +555,24 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
+        /**
+         * Retorna um array com todos os estados
+         * Function chamada na View Concluir Cadastro
+         * 
+         * @return array
+         */
         public static function Buscar_Todos_Estados() : array
         {
             return DAO_Estado::BuscarTodos();
         }
         
+        /**
+         * Retorna todas as cidades do estado celecionado
+         * Function chamada na View Concluir Cadastro
+         * 
+         * @param int $id_estado
+         * @return array
+         */
         public static function Buscar_Cidades_Por_Estado(?int $id_estado = null) : array
         {
             return DAO_Cidade::BuscarPorCOD($id_estado);

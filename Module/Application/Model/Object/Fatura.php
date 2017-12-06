@@ -12,6 +12,7 @@ namespace Module\Application\Model\Object;
         private $object_status;
         private $data_emissao;
         private $data_vencimento;
+        private $data_fechamento;
         
         function __constructor()
         {
@@ -76,5 +77,15 @@ namespace Module\Application\Model\Object;
         public function get_data_vencimento() : ?string
         {
             return $this->data_vencimento;
+        }
+        
+        public function set_data_fechamento(string $data_fechamento) : void
+        {
+            $this->data_fechamento = $data_fechamento;
+        }
+        
+        public function get_data_fechamento() : ?string
+        {
+            return $this->data_fechamento;
         }
     }

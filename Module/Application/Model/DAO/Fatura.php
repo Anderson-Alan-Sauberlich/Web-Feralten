@@ -19,8 +19,8 @@ namespace Module\Application\Model\DAO;
         public static function Inserir(Object_Fatura $object_fatura) : bool
         {
             try {
-                $sql = "INSERT INTO tb_fatura (fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento) 
-                        VALUES (:id, :ent_id, :vlr_ttl, :sts_ftr_id, :data_ems, :data_vcm);";
+                $sql = "INSERT INTO tb_fatura (fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento) 
+                        VALUES (:id, :ent_id, :vlr_ttl, :sts_ftr_id, :data_ems, :data_vcm, :data_fch);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -30,6 +30,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_fch', $object_fatura->get_data_fechamento(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -46,7 +47,8 @@ namespace Module\Application\Model\DAO;
                         fatura_valor_total = :vlr_ttl,
                         fatura_sts_ftr_id = :sts_ftr_id,
                         fatura_data_emissao = :data_ems,
-                        fatura_data_vencimento = :data_vcm 
+                        fatura_data_vencimento = :data_vcm,
+                        fatura_data_fechamento = :data_fch 
                         WHERE fatura_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -57,6 +59,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_fch', $object_fatura->get_data_fechamento(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -100,7 +103,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorCOD(int $id)
         {
             try {
-                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento FROM tb_fatura WHERE fatura_id = :id';
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
@@ -115,7 +118,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorCodStatus(int $entidade_id, int $status_id)
         {
             try {
-                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_ent_id = :ent_id';
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_ent_id = :ent_id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
@@ -159,6 +162,10 @@ namespace Module\Application\Model\DAO;
                     $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
                 }
                 
+                if (isset($row['fatura_data_fechamento'])) {
+                    $object_fatura->set_data_vencimento($row['fatura_data_fechamento']);
+                }
+                
                 $faturas[] = $object_fatura;
             }
             
@@ -191,6 +198,10 @@ namespace Module\Application\Model\DAO;
             
             if (isset($row['fatura_data_vencimento'])) {
                 $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
+            }
+            
+            if (isset($row['fatura_data_fechamento'])) {
+                $object_fatura->set_data_vencimento($row['fatura_data_fechamento']);
             }
             
             return $object_fatura;
