@@ -110,7 +110,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $fone
-         * @return void
          */
         public function set_fone($fone) : void
         {
@@ -127,7 +126,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $fone_alternativo
-         * @return void
          */
         public function set_fone_alternativo($fone_alternativo = null) : void
         {
@@ -143,7 +141,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $email_alternativo
-         * @return void
          */
         public function set_email_alternativo($email_alternativo = null) : void
         {
@@ -159,7 +156,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param int $estado
-         * @return void
          */
         public function set_estado($estado) : void
         {
@@ -176,7 +172,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param int $cidade
-         * @return void
          */
         public function set_cidade($cidade) : void
         {
@@ -193,7 +188,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $numero
-         * @return void
          */
         public function set_numero($numero) : void
         {
@@ -210,7 +204,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $cep
-         * @return void
          */
         public function set_cep($cep) : void
         {
@@ -227,7 +220,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $bairro
-         * @return void
          */
         public function set_bairro($bairro) : void
         {
@@ -244,7 +236,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $rua
-         * @return void
          */
         public function set_rua($rua) : void
         {
@@ -261,7 +252,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $complemento
-         * @return void
          */
         public function set_complemento($complemento = null) : void
         {
@@ -277,7 +267,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $cpf_cnpj
-         * @return void
          */
         public function set_cpf_cnpj($cpf_cnpj) : void
         {
@@ -294,7 +283,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $site
-         * @return void
          */
         public function set_site($site = null) : void
         {
@@ -310,7 +298,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         /**
          * @param string $nome_comercial
-         * @return void
          */
         public function set_nome_comercial($nome_comercial = null) : void
         {

@@ -8,16 +8,24 @@ namespace Module\Application\Model\Common\Util;
     class Login_Session
     {
         
-        /** @const Parametro Funcionalidade */
+        /** 
+         * @const Parametro Funcionalidade
+         */
         public const PERFIL = 1;
         
-        /** @const Parametro Funcionalidade */
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const MEUS_DADOS = 2;
         
-        /** @const Parametro Funcionalidade */
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const PECAS = 3;
         
-        /** @const Parametro Funcionalidade */
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const FINANCEIRO = 4;
         
         function __constructor()
@@ -27,6 +35,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Verificar_Login
+         * 
          * @return bool
          */
         public static function Verificar_Login() : bool
@@ -40,6 +49,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Verificar_Entidade
+         * 
          * @return bool
          */
         public static function Verificar_Entidade() : bool
@@ -53,6 +63,7 @@ namespace Module\Application\Model\Common\Util;
         
         /** 
          * Function Set_Usuario_Id
+         * 
          * @param int $usuario_id 'Id do usuario'
          * @return void
          */
@@ -63,6 +74,7 @@ namespace Module\Application\Model\Common\Util;
         
         /** 
          * Function Get_Usuario_Id
+         * 
          * @param none
          * @return ?int 'Id do usuario'
          */
@@ -77,6 +89,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Set_Usuario_Nome
+         * 
          * @param string $usuario_nome 'Nome do usuario'
          * @return void
          */
@@ -87,6 +100,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Usuario_Nome
+         * 
          * @param none
          * @return ?string 'Nome do usuario'
          */
@@ -101,6 +115,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Set_Usuario_Status
+         * 
          * @param int $usuario_status 'Status do usuario'
          * @return void
          */
@@ -111,6 +126,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Usuario_Status
+         * 
          * @param none
          * @return ?int 'Status do usuario'
          */
@@ -125,6 +141,7 @@ namespace Module\Application\Model\Common\Util;
         
         /** 
          * Function Set_Entidade_Id
+         * 
          * @param int $entidade_id 'Id da entidade'
          * @return void
          */
@@ -135,6 +152,7 @@ namespace Module\Application\Model\Common\Util;
         
         /** 
          * Function Get_Entidade_Id
+         * 
          * @param none
          * @return ?int 'Id da entidade'
          */
@@ -149,6 +167,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Set_Entidade_Nome
+         * 
          * @param string $entidade_nome 'Nome da entidade'
          * @return void
          */
@@ -159,6 +178,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Entidade_Nome
+         * 
          * @param none
          * @return ?string 'Nome da entidade'
          */
@@ -173,6 +193,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Set_Entidade_Status
+         * 
          * @param int $entidade_status 'Status da entidade'
          * @return void
          */
@@ -183,6 +204,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Entidade_Status
+         * 
          * @param none
          * @return ?int 'Status da entidade'
          */
@@ -197,6 +219,7 @@ namespace Module\Application\Model\Common\Util;
         
         /** 
          * Function Set_Permissão
+         * 
          * @param int $funcionalidade_id const Login_Session::PERFIL = 1 'Id da funcionalidade'
          * @param int $funcionalidade_id const Login_Session::MEUS_DADOS = 2 'Id da funcionalidade'
          * @param int $funcionalidade_id const Login_Session::PECAS = 3 'Id da funcionalidade'
@@ -211,6 +234,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Permissão
+         * 
          * @param int $funcionalidade_id const Login_Session::PERFIL = 1 'Id da funcionalidade'
          * @param int $funcionalidade_id const Login_Session::MEUS_DADOS = 2 'Id da funcionalidade'
          * @param int $funcionalidade_id const Login_Session::PECAS = 3 'Id da funcionalidade'
@@ -228,6 +252,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Set_Entidade_Plano
+         * 
          * @param int $entidade_plano 'Plano da entidade'
          * @return void
          */
@@ -238,6 +263,7 @@ namespace Module\Application\Model\Common\Util;
         
         /**
          * Function Get_Entidade_Plano
+         * 
          * @param none
          * @return ?int 'Plano da entidade'
          */

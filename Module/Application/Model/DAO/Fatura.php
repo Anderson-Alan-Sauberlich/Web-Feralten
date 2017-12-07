@@ -85,6 +85,25 @@ namespace Module\Application\Model\DAO;
                 return false;
             }
         }
+        
+        public static function Atualizar_Valor_Total(int $fatura_id, float $valor_total) : bool
+        {
+            try {
+                $sql = "UPDATE tb_fatura SET
+                        fatura_id = :id,
+                        fatura_valor_total = :vlr_ttl
+                        WHERE fatura_id = :id";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':id', $fatura_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $valor_total, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
  
         public static function Deletar(int $id) : bool
         {
@@ -123,6 +142,21 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
                 $p_sql->bindValue(':sts_id', $status_id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarPorCODEntidade(int $entidade_id)
+        {
+            try {
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_ent_id = :ent_id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));

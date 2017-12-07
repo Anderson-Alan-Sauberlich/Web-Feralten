@@ -21,9 +21,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         
         /**
          * Abre a pagina html
-         * 
-         * @param
-         * @return void
          */
         public function Executar() : void
         {
@@ -32,9 +29,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         
         /**
          * Inclui a view do Menu Usuario na pagina
-         * 
-         * @param
-         * @return void
          */
         public static function Incluir_Menu_Usuario() : void
         {

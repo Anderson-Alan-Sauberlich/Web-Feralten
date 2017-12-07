@@ -20,13 +20,39 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             
         }
         
+        /**
+         * @var int $categoria ID da Categoria
+         */
         private $categoria;
+        
+        /**
+         * @var int $marca ID da Marca
+         */
         private $marca;
+        
+        /**
+         * @var int $modelo ID do Modelo
+         */
         private $modelo;
+        
+        /**
+         * @var int $versao ID da Versão
+         */
         private $versao;
+        
+        /**
+         * @var string $nome Nome do Elemento
+         */
         private $nome;
+        
+        /**
+         * @var string $url URL do Elemento
+         */
         private $url;
         
+        /**
+         * @param int $categoria
+         */
         public function set_categoria($categoria) : void
         {
             if (filter_var($categoria, FILTER_VALIDATE_INT) !== false) {
@@ -34,6 +60,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $marca
+         */
         public function set_marca($marca) : void
         {
             if (filter_var($marca, FILTER_VALIDATE_INT) !== false) {
@@ -41,6 +70,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $modelo
+         */
         public function set_modelo($modelo) : void
         {
             if (filter_var($modelo, FILTER_VALIDATE_INT) !== false) {
@@ -48,6 +80,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $versao
+         */
         public function set_versao($versao) : void
         {
             if (filter_var($versao, FILTER_VALIDATE_INT) !== false) {
@@ -55,16 +90,27 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param string $nome
+         */
         public function set_nome($nome) : void
         {
             $this->nome = $nome;
         }
         
+        /**
+         * @param string $url
+         */
         public function set_url($url) : void
         {
             $this->url = $url;
         }
         
+        /**
+         * Instancia e Chama View
+         * 
+         * @return boolean|void
+         */
         public function Carregar_Pagina()
         {
             if (Controller_Admin::Verificar_Autenticacao()) {
@@ -78,6 +124,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Alterar informações do elemento selecionado pelo usuario
+         */
         public function Alterar_CMMV() : void
         {
             if (!empty($this->versao)) {
@@ -91,6 +140,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Altera as informações da Versão
+         */
         private function Alterar_Versao() : void
         {
             if ($this->Validar_Nome_URL()) {
@@ -109,6 +161,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Altera as informações do Modelo
+         */
         private function Alterar_Modelo() : void
         {
             if ($this->Validar_Nome_URL()) {
@@ -127,6 +182,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Altera as informações da Marca
+         */
         private function Alterar_Marca() : void
         {
             if ($this->Validar_Nome_URL()) {
@@ -145,6 +203,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Altera as informações da Categoria
+         */
         private function Alterar_Categoria() : void
         {
             if ($this->Validar_Nome_URL()) {
@@ -162,6 +223,11 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Valida as informações a serem alterdas no Elemento selecionado pelo usuario
+         * 
+         * @return bool
+         */
         private function Validar_Nome_URL() : bool
         {
             if (!empty($this->nome) AND !empty($this->url)) {
@@ -173,6 +239,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Retorna por Ajax as informações da Categoria em formato json
+         */
         public function Retornar_Categoria() : void
         {
             $object_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
@@ -187,6 +256,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Retorna por Ajax as informações da Marca em formato json
+         */
         public function Retornar_Marca() : void
         {
             $object_marca = $this->Buscar_Marca_Por_Id($this->marca);
@@ -201,6 +273,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Retorna por Ajax as informações do Modelo em formato json
+         */
         public function Retornar_Modelo() : void
         {
             $object_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
@@ -215,6 +290,9 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Retorna por Ajax as informações da Versão em formato json
+         */
         public function Retornar_Versao() : void
         {
             $object_versao = $this->Buscar_Versao_Por_Id($this->versao);
@@ -229,26 +307,42 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * Carrega todas as categorias
+         */
         public function Retornar_Categorias() : void
         {
             View_Alterar::Carregar_Categorias(DAO_Categoria::BuscarTodos());
         }
         
+        /**
+         * Carrega todas as Marcas da Categoria selecionada
+         */
         public function Retornar_Marcas_Por_Categoria() : void
         {
             View_Alterar::Carregar_Marcas($this->Buscar_Marca_Por_Id_Categoria($this->categoria));
         }
         
+        /**
+         * Carrega todos os Modelos da Marca selecionada
+         */
         public function Retornar_Modelos_Por_Marca() : void
         {
             View_Alterar::Carregar_Modelos($this->Buscar_Modelo_Por_Id_Marca($this->marca));
         }
         
+        /**
+         * Carrega todas as Versões do Modelo selecionado
+         */
         public function Retornar_Versoes_Por_Modelo() : void
         {
             View_Alterar::Carregar_Versoes($this->Buscar_Versoes_Por_Id_Modelo($this->modelo));
         }
         
+        /**
+         * @param int $categoria
+         * @return boolean|array|NULL
+         */
         private function Buscar_Marca_Por_Id_Categoria(?int $categoria)
         {
             if (!empty($categoria)) {
@@ -258,6 +352,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $marca
+         * @return boolean|array|NULL
+         */
         private function Buscar_Modelo_Por_Id_Marca(?int $marca)
         {
             if (!empty($marca)) {
@@ -267,6 +365,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $modelo
+         * @return boolean|array|NULL
+         */
         private function Buscar_Versoes_Por_Id_Modelo(?int $modelo)
         {
             if (!empty($modelo)) {
@@ -276,6 +378,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $categoria
+         * @return boolean|Object_Categoria|NULL
+         */
         private function Buscar_Categoria_Por_Id(?int $categoria)
         {
             if (!empty($categoria)) {
@@ -285,6 +391,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $marca
+         * @return boolean|Object_Marca|NULL
+         */
         private function Buscar_Marca_Por_Id(?int $marca)
         {
             if (!empty($marca)) {
@@ -294,6 +404,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $modelo
+         * @return boolean|Object_Modelo|NULL
+         */
         private function Buscar_Modelo_Por_Id(?int $modelo)
         {
             if (!empty($modelo)) {
@@ -303,6 +417,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
             }
         }
         
+        /**
+         * @param int $versao
+         * @return boolean|Object_Versao|NULL
+         */
         private function Buscar_Versao_Por_Id(?int $versao)
         {
             if (!empty($versao)) {
