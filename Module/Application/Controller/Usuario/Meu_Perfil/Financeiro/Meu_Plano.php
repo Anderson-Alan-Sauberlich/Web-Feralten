@@ -5,8 +5,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura as Controller_Fatura;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
+    use Module\Application\Model\DAO\Entidade as DAO_Entidade;
+    use Module\Application\Model\Object\Entidade as Object_Entidade;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
+    use Module\Application\Model\Common\Util\Conexao;
     use \Exception;
     
     class Meu_Plano
@@ -76,10 +79,34 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     $retorno['erros'] = array();
                     
                     if (empty($this->erros)) {
-                        try {
-                            Controller_Fatura::Alterar_Plano($this->plano_id);
-                        } catch (Exception $e) {
-                            $this->erros[] = $e->getMessage();
+                        Conexao::$conection->beginTransaction();
+                        
+                        if (Controller_Fatura::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, Controller_Fatura::IMEDIATA)) {
+                            $object_entidade = new Object_Entidade();
+                            $object_entidade->set_id(Login_Session::get_entidade_id());
+                            $object_entidade->set_plano_id($this->plano_id);
+                            $object_entidade->set_intervalo_pagamento_id(1);
+                            $object_entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
+                            
+                            if (DAO_Entidade::Atualizar_Financeiro($object_entidade)) {
+                                if (Conexao::$conection->commit()) {
+                                    Login_Session::set_entidade_plano($this->plano_id);
+                                } else {
+                                    $this->erros[] = 'Erro Fatal ao tentar salvar modificações';
+                                }
+                            } else {
+                                if (Conexao::$conection->rollBack()) {
+                                    $this->erros[] = 'Erro ao tentar Ativar novo plano';
+                                } else {
+                                    $this->erros[] = 'Erro Fatal ao tentar salvar modificações';
+                                }
+                            }
+                        } else {
+                            if (Conexao::$conection->rollBack()) {
+                                $this->erros[] = 'Erro ao tentar gerar nova fatura';
+                            } else {
+                                $this->erros[] = 'Erro Fatal ao tentar salvar modificações';
+                            }
                         }
                     }
                     

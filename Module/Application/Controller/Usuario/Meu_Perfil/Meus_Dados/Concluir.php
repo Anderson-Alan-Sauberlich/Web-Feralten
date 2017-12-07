@@ -372,11 +372,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
                             if ($id_entidade != false) {
                                 Login_Session::set_entidade_id($id_entidade);
                                 
-                                try {
-                                    Controller_Fatura::Criar_Primeira_Fatura();
+                                if (Controller_Fatura::Criar_Fatura($id_entidade, 1)) {
                                     Login_Session::set_entidade_plano(1);
-                                } catch (Exception $e) {
-                                    $this->concluir_erros[] = $e->getMessage();
+                                } else {
+                                    $this->concluir_erros[] = 'Erro ao tentar gerar fatura';
                                 }
                                 
                                 $imagem = $this->Salvar_Imagem();

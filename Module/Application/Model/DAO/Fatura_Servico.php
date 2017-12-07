@@ -18,8 +18,8 @@ namespace Module\Application\Model\DAO;
         public static function Inserir(Object_Fatura_Servico $object_fatura_servico) : bool
         {
             try {
-                if (empty($object_fatura_servico->get_id())) {
-                    $id_fatura_servico = self::Pegar_Id_Livre();
+                if (empty($object_fatura_servico->get_id()) AND !empty($object_fatura_servico->get_fatura_id())) {
+                    $id_fatura_servico = self::Pegar_Id_Livre($object_fatura_servico->get_fatura_id());
                     
                     if (empty($id_fatura_servico)) {
                         $object_fatura_servico->set_id(0);
@@ -81,12 +81,13 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        private static function Pegar_Id_Livre() : ?int
+        private static function Pegar_Id_Livre(int $fatura_id) : ?int
         {
             try {
-                $sql = 'SELECT fc_achar_id_livre_fatura_servico()';
+                $sql = 'SELECT fc_achar_id_livre_fatura_servico(:ftr_id)';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ftr_id', $fatura_id, PDO::PARAM_INT);
                 
                 $p_sql->execute();
                 
