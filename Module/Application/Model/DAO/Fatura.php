@@ -197,7 +197,7 @@ namespace Module\Application\Model\DAO;
                 }
                 
                 if (isset($row['fatura_data_fechamento'])) {
-                    $object_fatura->set_data_vencimento($row['fatura_data_fechamento']);
+                    $object_fatura->set_data_fechamento($row['fatura_data_fechamento']);
                 }
                 
                 $faturas[] = $object_fatura;
@@ -235,7 +235,7 @@ namespace Module\Application\Model\DAO;
             }
             
             if (isset($row['fatura_data_fechamento'])) {
-                $object_fatura->set_data_vencimento($row['fatura_data_fechamento']);
+                $object_fatura->set_data_fechamento($row['fatura_data_fechamento']);
             }
             
             return $object_fatura;

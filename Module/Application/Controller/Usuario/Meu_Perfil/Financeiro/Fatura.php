@@ -12,7 +12,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\Common\Util\Login_Session;
     use \DateTime;
     use \DateInterval;
-    use \Exception;
     
     class Fatura
     {
@@ -44,6 +43,30 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 
                 if ($status != 0) {
                     $view = new View_Fatura($status);
+                    
+                    $fatura_aberta = self::Retornar_Fatura(Login_Session::get_entidade_id(), 1);
+                    
+                    if (!empty($fatura_aberta)) {
+                        $view->set_fatura_aberta($fatura_aberta);
+                        
+                        $fatura_servicos_aberta = DAO_Fatura_Servico::BuscarPorCOD($fatura_aberta->get_id());
+                        
+                        if (!empty($fatura_servicos_aberta) AND $fatura_servicos_aberta != false) {
+                            $view->set_fatura_servicos_aberta($fatura_servicos_aberta);
+                        }
+                    }
+                    
+                    $fatura_fechada = self::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                    
+                    if (!empty($fatura_fechada)) {
+                        $view->set_fatura_fechada($fatura_fechada);
+                        
+                        $fatura_servicos_fechada = DAO_Fatura_Servico::BuscarPorCOD($fatura_fechada->get_id());
+                        
+                        if (!empty($fatura_servicos_fechada) AND $fatura_servicos_fechada != false) {
+                            $view->set_fatura_servicos_fechada($fatura_servicos_fechada);
+                        }
+                    }
                     
                     $view->Executar();
                 }
@@ -141,7 +164,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor) : bool
         {
-            $object_fatura = self::Retornar_Fatura_Aberta($id_entidade);
+            $object_fatura = self::Retornar_Fatura($id_entidade, 1);
             
             if (empty($object_fatura)) {
                 return false;
@@ -170,7 +193,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Fechar_Fatura(int $id_entidade, int $id_plano) : bool
         {
-            $object_fatura = self::Retornar_Fatura_Aberta($id_entidade);
+            $object_fatura = self::Retornar_Fatura($id_entidade, 1);
             
             if (empty($object_fatura)) {
                 return false;
@@ -214,11 +237,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * @param int $id_entidade
          * @return Object_Fatura|NULL
          */
-        private static function Retornar_Fatura_Aberta(int $id_entidade) : ?Object_Fatura
+        private static function Retornar_Fatura(int $id_entidade, int $status) : ?Object_Fatura
         {
             $object_fatura = null;
             
-            $faturas = DAO_Fatura::BuscarPorCodStatus($id_entidade, 1);
+            $faturas = DAO_Fatura::BuscarPorCodStatus($id_entidade, $status);
             
             if (count($faturas) === 1) {
                 foreach ($faturas as $fatura) {
