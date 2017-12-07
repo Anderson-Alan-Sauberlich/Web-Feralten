@@ -56,10 +56,12 @@
                     <div id="content_fatura_fechada" class="content active">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<div class="item">
-                        		<div class="header">Plano, 10 Peças</div>
-                        		<div class="content">Mensal, 15/07/1994 até 15/08/1994</div>
-                        	</div>
+                        	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('fechada') as $fatura_servicos) { ?>
+                            	<div class="item">
+                            		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo $fatura_servicos->get_valor(); ?></div>
+                            		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('fechada'); ?> até <?php View_Fatura::Mostrar_Fechamento('fechada'); ?></div>
+                            	</div>
+                        	<?php } ?>
                         </div>
                     </div>
                 </div>
@@ -110,10 +112,12 @@
                     <div id="content_fatura_aberta" class="content">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<div class="item">
-                        		<div class="header">Plano, 10 Peças</div>
-                        		<div class="content">Mensal, 15/07/1994 até 15/08/1994</div>
-                        	</div>
+                        	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('aberta') as $fatura_servicos) { ?>
+                            	<div class="item">
+                            		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo $fatura_servicos->get_valor(); ?></div>
+                            		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('aberta'); ?> até <?php View_Fatura::Mostrar_Fechamento('aberta'); ?></div>
+                            	</div>
+                        	<?php } ?>
                         </div>
                     </div>
                 </div>

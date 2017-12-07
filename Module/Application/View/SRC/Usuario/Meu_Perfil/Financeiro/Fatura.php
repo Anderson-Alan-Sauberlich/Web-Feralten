@@ -132,7 +132,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         {
             if ($status === 'fechada') {
                 $data = new DateTime(self::$fatura_fechada->get_data_emissao());
-                echo $data->format('d/m/Y');
+                echo $data->format('d-m-Y');
             } else if ($status === 'aberta') {
                 $data = new DateTime(self::$fatura_aberta->get_data_emissao());
                 echo $data->format('d-m-Y');
@@ -188,6 +188,15 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
                 echo self::$fatura_fechada->get_valor_total();
             } else if ($status === 'aberta') {
                 echo self::$fatura_aberta->get_valor_total();
+            }
+        }
+        
+        public static function Retornar_Lista_Fatura_Servicos(string $status) : array
+        {
+            if ($status === 'fechada') {
+                return self::$fatura_servicos_fechada;
+            } else if ($status === 'aberta') {
+                return self::$fatura_servicos_aberta;
             }
         }
     }
