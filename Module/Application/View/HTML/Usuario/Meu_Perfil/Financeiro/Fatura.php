@@ -63,6 +63,46 @@
                             	</div>
                         	<?php } ?>
                         </div>
+                        <div class="ui pointing secondary three item menu" role="tablist">
+                            <a data-tab="credito" class="active red item" role="tab">Crédito</a>
+                            <a data-tab="debito" class="red item" role="tab">Débito</a>
+                            <a data-tab="boleto" class="red item" role="tab">Boleto</a>
+                        </div>
+                        <div id="credito" class="ui bottom attached active tab" data-tab="credito" role="tabpanel">
+                            <form class="ui form">
+                            	<div class="field">
+                            		<label>Número cartão</label>
+                            		<input id="numero" name="numero" placeholder="(ex.: 0000 0000 0000 0000)" type="text">
+                            	</div>
+                            	<div class="field">
+                            		<label>Nome</label>
+                            		<input id="name" name="name" placeholder="Exatamente como está no cartão" type="text">
+                            	</div>
+                            	<div class="field">
+                            		<label>Código de Segurança</label>
+                            		<input id="codigo" name="codigo" placeholder="Geralente está no verso do cartão e tem de 3 a 4 digitos" type="text">
+                            	</div>
+                            	<div class="field">
+                            		<label>Validade</label>
+                            		<input id="validade" name="validade" placeholder="Mes/Ano" type="text">
+                            	</div>
+                            	<div class="field">
+                            		<label>Data de nascimento</label>
+                            		<input id="nascimento" name="nascimento" placeholder="Dia/Mes/Ano" type="text">
+                            	</div>
+                            	<div class="field">
+                            		<label>CPF</label>
+                            		<input id="cpf" name="cpf" placeholder="Digite apenas os numeros" type="text">
+                            	</div>
+                            	<button class="ui blue big button" type="submit">Continuar</button>
+                            </form>
+                        </div>
+                        <div id="debito" class="ui bottom attached tab" data-tab="debito" role="tabpanel">
+                            
+                        </div>
+                        <div id="boleto" class="ui bottom attached tab " data-tab="boleto" role="tabpanel">
+                            <button class="ui blue big button">Gerar Boleto</button>
+                        </div>
                     </div>
                 </div>
             </div>
