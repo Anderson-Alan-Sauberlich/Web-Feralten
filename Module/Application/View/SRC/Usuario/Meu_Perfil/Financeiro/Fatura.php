@@ -185,18 +185,43 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         public static function Mostrar_Total(string $status) : void
         {
             if ($status === 'fechada') {
-                echo self::$fatura_fechada->get_valor_total();
+                echo number_format(self::$fatura_fechada->get_valor_total(), 2, ',', '.');
             } else if ($status === 'aberta') {
-                echo self::$fatura_aberta->get_valor_total();
+                echo number_format(self::$fatura_aberta->get_valor_total(), 2, ',', '.');
             }
         }
         
+        /**
+         * @param string $status
+         * @return array
+         */
         public static function Retornar_Lista_Fatura_Servicos(string $status) : array
         {
             if ($status === 'fechada') {
                 return self::$fatura_servicos_fechada;
             } else if ($status === 'aberta') {
                 return self::$fatura_servicos_aberta;
+            }
+        }
+        
+        /**
+         * @param string $status
+         * @return bool
+         */
+        public static function Verificar_Valor_Fatura(string $status) : bool
+        {
+            if ($status === 'fechada') {
+                if (self::$fatura_fechada->get_valor_total() > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if ($status === 'aberta') {
+                if (self::$fatura_aberta->get_valor_total() > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }

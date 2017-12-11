@@ -108,6 +108,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         public static function Criar_Fatura(int $id_entidade, int $id_plano, ?int $cobrança = null) : bool
         {
             if (self::Cancelar_Fatura_Aberta($id_entidade)) {
+                if ($id_plano === 1) {
+                    $cobrança = null;
+                }
+                
                 $object_fatura = new Object_Fatura();
                 
                 $object_fatura->set_id(0);
@@ -159,7 +163,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * @param int $id_entidade
          * @param string $descricao
          * @param int $valor
-         * @param ?int $id_fatura
          * @return bool True para Sucesso e False para Erro
          */
         public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor) : bool
@@ -177,7 +180,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             $object_fatura_servico->set_valor($valor);
             
             if (DAO_Fatura_Servico::Inserir($object_fatura_servico)) {
-                return self::Recalcular_Valor_Total($object_fatura->get_id());
+                if (self::Recalcular_Valor_Total($object_fatura->get_id()) !== null) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -199,12 +206,20 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 return false;
             }
             
-            if (self::Recalcular_Valor_Total($object_fatura->get_id())) {
-                if (DAO_Fatura::Atualizar_Status($object_fatura->get_id(), 2)) {
-                    return self::Criar_Fatura($id_entidade, $id_plano);
+            $valor_total = self::Recalcular_Valor_Total($object_fatura->get_id());
+            
+            if ($valor_total !== null) {
+                if ($valor_total === 0) {
+                    if (!DAO_Fatura::Atualizar_Status($object_fatura->get_id(), 4)) {
+                        return false;
+                    }
                 } else {
-                    return false;
+                    if (!DAO_Fatura::Atualizar_Status($object_fatura->get_id(), 2)) {
+                        return false;
+                    }
                 }
+                
+                return self::Criar_Fatura($id_entidade, $id_plano);
             } else {
                 return false;
             }
@@ -214,9 +229,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * Recalcula o valor total da fatura analizando todos os serviços
          * 
          * @param int $id_fatura
-         * @return bool True para Sucesso e False para Erro
+         * @return ?int Valor Total para Sucesso e Null para Erro
          */
-        public static function Recalcular_Valor_Total(int $id_fatura) : bool
+        public static function Recalcular_Valor_Total(int $id_fatura) : ?int
         {
             $fatura_servicos = DAO_Fatura_Servico::BuscarPorCOD($id_fatura);
             
@@ -226,7 +241,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 $valor_total += $fatura_servico->get_valor();
             }
             
-            return DAO_Fatura::Atualizar_Valor_Total($id_fatura, $valor_total);
+            if (DAO_Fatura::Atualizar_Valor_Total($id_fatura, $valor_total)) {
+                return $valor_total;
+            } else {
+                return null;
+            }
         }
         
         /**
