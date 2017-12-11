@@ -177,19 +177,28 @@
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-body">
                         <div class="row-fluid">
-                            <button id="restaurar" name="restaurar" value="1" type="submit" class="hidden-xs pull-right big ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
-                            <button id="salvar" name="salvar" value="1" type="submit" class="hidden-xs pull-left big ui green button"><i class="glyphicon glyphicon-floppy-saved"></i> Cadastrar Peça</button>
+                        	<div onclick="Submit_Salvar();" id="salvar" class="hidden-xs pull-left big ui green button"><i class="glyphicon glyphicon-floppy-saved"></i> Cadastrar Peça</div>
+                            <a href="/usuario/meu-perfil/pecas/cadastrar/" class="hidden-xs pull-right big ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</a>
                         </div>
                         <div class="row visible-xs">
                             <div class="large ui buttons bntCadPeca">
-                                <button id="salvar" name="salvar" value="1" type="submit" class="ui positive button">Cadastrar Peça</button>
+                                <div onclick="Submit_Salvar();" id="salvar" class="ui positive button">Cadastrar Peça</div>
                                 <div class="or" data-text="Ou"></div>
-                                <button id="restaurar" name="restaurar" value="1" type="submit" class="ui button">Limpar</button>
+                                <a href="/usuario/meu-perfil/pecas/cadastrar/" class="ui button">Limpar</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+        </div>
+        <div id="mdl_msg" class="ui small basic modal">
+            <i class="close icon"></i>
+            <div id="msg_header" class="header">Deseja continuar?</div>
+            <div id="msg_content" class="content"></div>
+            <div class="actions">
+                <div id="btn_cancelar" class="ui cancel button">Cancelar</div>
+                <div id="btn_aceitar" class="ui approve positive right labeled icon button">Aceitar <i class="checkmark icon"></i></div>
+            </div>
         </div>
     </section>
     <footer>

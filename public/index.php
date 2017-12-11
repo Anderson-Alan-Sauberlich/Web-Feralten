@@ -299,6 +299,14 @@
                         }
                     });
                     
+                    $app->get('/dados/', function(Request $request, Response $response, $args) use ($app) {
+                        $cadastrar = new Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar();
+                        
+                        $cadastrar->Retornar_Dados_Plano();
+                        
+                        return $response;
+                    });
+                    
                     $app->get('/compatibilidade/', function(Request $request, Response $response, $args) use ($app) {
                         $cadastrar = new Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar();
                         
@@ -350,7 +358,7 @@
                         
                         $cadastrar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
                         
-                        $resposta = $cadastrar->Verificar_Evento();
+                        $resposta = $cadastrar->Cadastrar_Peca();
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');

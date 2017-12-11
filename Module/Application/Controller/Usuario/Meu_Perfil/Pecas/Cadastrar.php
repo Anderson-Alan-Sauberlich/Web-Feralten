@@ -5,6 +5,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
     use Module\Application\Controller\Common\Util\Peca as Util_Peca;
+    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura as Controller_Fatura;
     use Module\Application\Model\Object\Peca as Object_Peca;
     use Module\Application\Model\Object\Endereco as Object_Endereco;
     use Module\Application\Model\Object\Status_Peca as Object_Status_Peca;
@@ -30,6 +32,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\DAO\Modelo_Compativel as DAO_Modelo_Compativel;
     use Module\Application\Model\DAO\Versao_Compativel as DAO_Versao_Compativel;
     use Module\Application\Model\DAO\Status_Peca as DAO_Status_Peca;
+    use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
     use Module\Application\Model\DAO\Categoria_Pativel as DAO_Categoria_Pativel;
     use Module\Application\Model\DAO\Marca_Pativel as DAO_Marca_Pativel;
@@ -39,7 +42,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Foto_Peca as DAO_Foto_Peca;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas\Cadastrar as View_Cadastrar;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Model\DAO\Adicionado as DAO_Adicionado;
     use Module\Application\Model\Object\Adicionado as Object_Adicionado;
     use \Exception;
@@ -249,27 +251,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
-        public function Verificar_Evento()
-        {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
-                
-                if ($status == 1) {
-                    if (isset($_POST['salvar'])) {
-                        $this->Cadastrar_Peca();
-                    } else if (isset($_POST['restaurar'])) {
-                        unset($_SESSION['compatibilidade']);
-                        $this->Deletar_Imagem(123);
-                        $this->Carregar_Pagina();
-                    }
-                }
-                
-                return $status;
-            } else {
-                return false;
-            }
-        }
-        
         public function Carregar_Compatibilidade() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -436,88 +417,96 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             $_SESSION['compatibilidade'] = $compatibilidade;
         }
         
-        private function Cadastrar_Peca() : void
+        public function Cadastrar_Peca()
         {
-            $categorias_compativeis = null;
-            $marcas_compativeis = null;
-            $modelos_compativeis = null;
-            $versoes_compativeis = null;
-            
-            $categorias_pativeis = array();
-            $marcas_pativeis = array();
-            $modelos_pativeis = array();
-            $versoes_pativeis = array();
-            
-            if (!empty($this->categoria)) {
-                $categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
+            if (Controller_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Usuario::Verificar_Status_Usuario();
                 
-                if (!empty($this->marca)) {
-                    $marcas_compativeis = self::Buscar_Marcas_Compativeis(current($this->marca));
-                    
-                    if (!empty($this->modelo)) {
-                        $modelos_compativeis = self::Buscar_Modelos_Compativeis(current($this->modelo));
+                if ($status == 1) {
+                    if (empty($this->cadastrar_erros)) {
+                        $categorias_compativeis = array();
+                        $marcas_compativeis = array();
+                        $modelos_compativeis = array();
+                        $versoes_compativeis = array();
                         
-                        if (!empty($this->versao)) {
-                            $versoes_compativeis = self::Buscar_Versoes_Compativeis(current($this->versao));
+                        $categorias_pativeis = array();
+                        $marcas_pativeis = array();
+                        $modelos_pativeis = array();
+                        $versoes_pativeis = array();
+                        
+                        if (!empty($this->categoria)) {
+                            $categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
+                            
+                            if (!empty($this->marca)) {
+                                $marcas_compativeis = self::Buscar_Marcas_Compativeis(current($this->marca));
+                                
+                                if (!empty($this->modelo)) {
+                                    $modelos_compativeis = self::Buscar_Modelos_Compativeis(current($this->modelo));
+                                    
+                                    if (!empty($this->versao)) {
+                                        $versoes_compativeis = self::Buscar_Versoes_Compativeis(current($this->versao));
+                                    }
+                                }
+                            }
                         }
-                    }
-                }
-            }
-            
-            if (!empty($this->categoria)) {
-                foreach ($this->categoria as $categoria_selecionada) {
-                    if (in_array($categoria_selecionada, $categorias_compativeis)) {
-                        $categoria_pativel = new Object_Categoria_Pativel();
-                        $object_categoria = new object_Categoria();
-                        $object_categoria->set_id($categoria_selecionada);
-                        $categoria_pativel->set_object_categoria($object_categoria);
                         
-                        $categorias_pativeis[] = $categoria_pativel;
+                        if (!empty($this->categoria)) {
+                            foreach ($this->categoria as $categoria_selecionada) {
+                                if (in_array($categoria_selecionada, $categorias_compativeis)) {
+                                    $categoria_pativel = new Object_Categoria_Pativel();
+                                    $object_categoria = new object_Categoria();
+                                    $object_categoria->set_id($categoria_selecionada);
+                                    $categoria_pativel->set_object_categoria($object_categoria);
+                                    
+                                    $categorias_pativeis[] = $categoria_pativel;
+                                    
+                                    if (!empty($this->marca)) {
+                                        foreach ($this->marca as $marca_selecionada) {
+                                            if (in_array($marca_selecionada, $marcas_compativeis)) {
+                                                if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
+                                                    $marca_pativel = new Object_Marca_Pativel();
+                                                    $object_marca = new Object_Marca();
+                                                    $object_marca->set_id($marca_selecionada);
+                                                    $marca_pativel->set_object_marca($object_marca);
+                                                    
+                                                    if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
+                                                        $marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
+                                                    }
+                                                    
+                                                    $marcas_pativeis[] = $marca_pativel;
+                                                    
+                                                    if (!empty($this->modelo)) {
+                                                        foreach ($this->modelo as $modelo_selecionado) {
+                                                            if (in_array($modelo_selecionado, $modelos_compativeis)) {
+                                                                if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
+                                                                    $modelo_pativel = new Object_Modelo_Pativel();
+                                                                    $object_modelo = new Object_Modelo();
+                                                                    $object_modelo->set_id($modelo_selecionado);
+                                                                    $modelo_pativel->set_object_modelo($object_modelo);
+                                                                    
+                                                                    if (isset($_POST['ano_mdl_'.$modelo_selecionado]) AND !empty($_POST['ano_mdl_'.$modelo_selecionado])) {
+                                                                        $modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
+                                                                    }
+                                                                    
+                                                                    $modelos_pativeis[] = $modelo_pativel;
+                                                                    
+                                                                    if (!empty($this->versao)) {
+                                                                        foreach ($this->versao as $versao_selecionada) {
+                                                                            if (in_array($versao_selecionada, $versoes_compativeis)) {
+                                                                                if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
+                                                                                    $versao_pativel = new Object_Versao_Pativel();
+                                                                                    $object_versao = new Object_versao();
+                                                                                    $object_versao->set_id($versao_selecionada);
+                                                                                    $versao_pativel->set_object_versao($object_versao);
                         
-                        if (!empty($this->marca)) {
-                            foreach ($this->marca as $marca_selecionada) {
-                                if (in_array($marca_selecionada, $marcas_compativeis)) {
-                                    if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
-                                        $marca_pativel = new Object_Marca_Pativel();
-                                        $object_marca = new Object_Marca();
-                                        $object_marca->set_id($marca_selecionada);
-                                        $marca_pativel->set_object_marca($object_marca);
-                                        
-                                        if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
-                                            $marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
-                                        }
-                                        
-                                        $marcas_pativeis[] = $marca_pativel;
-                                        
-                                        if (!empty($this->modelo)) {
-                                            foreach ($this->modelo as $modelo_selecionado) {
-                                                if (in_array($modelo_selecionado, $modelos_compativeis)) {
-                                                    if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
-                                                        $modelo_pativel = new Object_Modelo_Pativel();
-                                                        $object_modelo = new Object_Modelo();
-                                                        $object_modelo->set_id($modelo_selecionado);
-                                                        $modelo_pativel->set_object_modelo($object_modelo);
-                                                        
-                                                        if (isset($_POST['ano_mdl_'.$modelo_selecionado]) AND !empty($_POST['ano_mdl_'.$modelo_selecionado])) {
-                                                            $modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
-                                                        }
-                                                        
-                                                        $modelos_pativeis[] = $modelo_pativel;
-                                                        
-                                                        if (!empty($this->versao)) {
-                                                            foreach ($this->versao as $versao_selecionada) {
-                                                                if (in_array($versao_selecionada, $versoes_compativeis)) {
-                                                                    if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
-                                                                        $versao_pativel = new Object_Versao_Pativel();
-                                                                        $object_versao = new Object_versao();
-                                                                        $object_versao->set_id($versao_selecionada);
-                                                                        $versao_pativel->set_object_versao($object_versao);
-            
-                                                                        if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
-                                                                            $versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
+                                                                                    if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
+                                                                                        $versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
+                                                                                    }
+                        
+                                                                                    $versoes_pativeis[] = $versao_pativel;
+                                                                                }
+                                                                            }
                                                                         }
-            
-                                                                        $versoes_pativeis[] = $versao_pativel;
                                                                     }
                                                                 }
                                                             }
@@ -530,216 +519,223 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 }
                             }
                         }
-                    }
-                }
-            }
-            
-            if (empty($this->cadastrar_erros)) {
-                $object_peca = new Object_Peca();
-                $object_estado_uso = new Object_Estado_Uso_Peca();
-                $object_status = new Object_Status_Peca();
-                $entidade = new Object_Entidade();
-                $peca_url = Util_Peca::Gerar_URL_Peca($this->peca);
-                $id_peca_tmp = DAO_Peca::Achar_ID_Livre();
-                
-                if ($this->estado_uso > 0) {
-                    $object_estado_uso->set_id($this->estado_uso);
-                }
-                
-                $object_status->set_id(1);
-                
-                $object_peca->set_num_visualizado(0);
-                $object_peca->set_estado_uso($object_estado_uso);
-                $object_peca->set_status($object_status);
-                $object_peca->set_descricao($this->descricao);
-                $object_peca->set_preferencia_entrega($this->preferencia_entrega);
-                $object_peca->set_fabricante($this->fabricante);
-                $object_peca->set_nome($this->peca);
-                $object_peca->set_serie($this->serie);
-                $object_peca->set_preco($this->preco);
-                $object_peca->set_prioridade($this->prioridade);
-                
-                $entidade->set_id(Login_Session::get_entidade_id());
-                $entidade->set_usuario_id(Login_Session::get_usuario_id());
-                
-                $object_peca->set_entidade($entidade);
-                $object_peca->set_data_anuncio(date('Y-m-d H:i:s'));
-                
-                $id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
-                
-                if ($id_endereco === false) {
-                    $this->cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
-                    $this->cadastrar_campos['erro_peca'] = "";
-                } else {
-                    $endereco = new Object_Endereco();
-                    
-                    $endereco->set_id($id_endereco);
-                    
-                    $object_peca->set_endereco($endereco);
-                    
-                    if (empty($id_peca_tmp)) {
-                        $object_peca->set_id(0);
-                        $object_peca->set_url($peca_url.'_'.Login_Session::get_usuario_id().rand(100, 999));
-                    } else {
-                        $object_peca->set_url($peca_url.'_'.$id_peca_tmp);
-                        $object_peca->set_id($id_peca_tmp);
-                    }
-                    
-                    $usuario_responsavel = new Object_Usuario();
-                    
-                    $usuario_responsavel->set_id(Login_Session::get_usuario_id());
-                    
-                    $object_peca->set_responsavel($usuario_responsavel);
-                }
-                
-                $id_peca = DAO_Peca::Inserir($object_peca);
-                
-                if (!empty($id_peca) AND $id_peca !== false) {
-                    if (empty($id_peca_tmp)) {
-                        DAO_Peca::Atualizar_URL($id_peca, $peca_url.'_'.$id_peca);
-                    }
-                    
-                    $retorno = null;
                         
-                    foreach ($categorias_pativeis as $pativel) {
-                        $pativel->set_peca_id($id_peca);
+                        $object_peca = new Object_Peca();
+                        $object_estado_uso = new Object_Estado_Uso_Peca();
+                        $object_status = new Object_Status_Peca();
+                        $entidade = new Object_Entidade();
+                        $peca_url = Util_Peca::Gerar_URL_Peca($this->peca);
+                        $id_peca_tmp = DAO_Peca::Achar_ID_Livre();
                         
-                        if (DAO_Categoria_Pativel::Inserir($pativel) === false) {
-                            $retorno = false;
+                        if ($this->estado_uso > 0) {
+                            $object_estado_uso->set_id($this->estado_uso);
                         }
-                    }
-                    
-                    foreach ($marcas_pativeis as $pativel) {
-                        $pativel->set_peca_id($id_peca);
                         
-                        if (DAO_Marca_Pativel::Inserir($pativel) === false) {
-                            $retorno = false;
+                        $object_status->set_id(1);
+                        
+                        $object_peca->set_num_visualizado(0);
+                        $object_peca->set_estado_uso($object_estado_uso);
+                        $object_peca->set_status($object_status);
+                        $object_peca->set_descricao($this->descricao);
+                        $object_peca->set_preferencia_entrega($this->preferencia_entrega);
+                        $object_peca->set_fabricante($this->fabricante);
+                        $object_peca->set_nome($this->peca);
+                        $object_peca->set_serie($this->serie);
+                        $object_peca->set_preco($this->preco);
+                        $object_peca->set_prioridade($this->prioridade);
+                        
+                        $entidade->set_id(Login_Session::get_entidade_id());
+                        $entidade->set_usuario_id(Login_Session::get_usuario_id());
+                        
+                        $object_peca->set_entidade($entidade);
+                        $object_peca->set_data_anuncio(date('Y-m-d H:i:s'));
+                        
+                        $id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
+                        
+                        if ($id_endereco === false) {
+                            $this->cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
+                            $this->cadastrar_campos['erro_peca'] = "";
+                        } else {
+                            $endereco = new Object_Endereco();
+                            
+                            $endereco->set_id($id_endereco);
+                            
+                            $object_peca->set_endereco($endereco);
+                            
+                            if (empty($id_peca_tmp)) {
+                                $object_peca->set_id(0);
+                                $object_peca->set_url($peca_url.'_'.Login_Session::get_usuario_id().rand(100, 999));
+                            } else {
+                                $object_peca->set_url($peca_url.'_'.$id_peca_tmp);
+                                $object_peca->set_id($id_peca_tmp);
+                            }
+                            
+                            $usuario_responsavel = new Object_Usuario();
+                            
+                            $usuario_responsavel->set_id(Login_Session::get_usuario_id());
+                            
+                            $object_peca->set_responsavel($usuario_responsavel);
                         }
-                    }
-                    
-                    foreach ($modelos_pativeis as $pativel) {
-                        $pativel->set_peca_id($id_peca);
                         
-                        if (DAO_Modelo_Pativel::Inserir($pativel) === false) {
-                            $retorno = false;
-                        }
-                    }
-                    
-                    foreach ($versoes_pativeis as $pativel) {
-                        $pativel->set_peca_id($id_peca);
+                        $id_peca = DAO_Peca::Inserir($object_peca);
                         
-                        if (DAO_Versao_Pativel::Inserir($pativel) === false) {
-                            $retorno = false;
-                        }
-                    }
-                    
-                    if ($retorno === false) {
-                        $this->cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
-                        $this->cadastrar_campos['erro_peca'] = "";
-                    }
-                    
-                    if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
-                        $imagens = new Gerenciar_Imagens();
-                        
-                        $diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca, $peca_url);
-                        
-                        if (!empty($diretorios_imagens)) {
-                            foreach ($diretorios_imagens as $key => $diretorio) {
-                                $foto_peca = new Object_Foto_Peca();
+                        if (!empty($id_peca) AND $id_peca !== false) {
+                            if (empty($id_peca_tmp)) {
+                                DAO_Peca::Atualizar_URL($id_peca, $peca_url.'_'.$id_peca);
+                            }
+                            
+                            $retorno = null;
                                 
-                                $foto_peca->set_peca_id($id_peca);
-                                $foto_peca->set_endereco($diretorio);
-                                $foto_peca->set_numero($key);
-                                $foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$peca_url.'_', $_SESSION['imagens_tmp'][$key]));
+                            foreach ($categorias_pativeis as $pativel) {
+                                $pativel->set_peca_id($id_peca);
                                 
-                                if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-                                    $this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $key para a Peça";
-                                    $this->cadastrar_campos['erro_peca'] = "";
+                                if (DAO_Categoria_Pativel::Inserir($pativel) === false) {
+                                    $retorno = false;
                                 }
                             }
                             
-                            unset($_SESSION['imagens_tmp']);
+                            foreach ($marcas_pativeis as $pativel) {
+                                $pativel->set_peca_id($id_peca);
+                                
+                                if (DAO_Marca_Pativel::Inserir($pativel) === false) {
+                                    $retorno = false;
+                                }
+                            }
+                            
+                            foreach ($modelos_pativeis as $pativel) {
+                                $pativel->set_peca_id($id_peca);
+                                
+                                if (DAO_Modelo_Pativel::Inserir($pativel) === false) {
+                                    $retorno = false;
+                                }
+                            }
+                            
+                            foreach ($versoes_pativeis as $pativel) {
+                                $pativel->set_peca_id($id_peca);
+                                
+                                if (DAO_Versao_Pativel::Inserir($pativel) === false) {
+                                    $retorno = false;
+                                }
+                            }
+                            
+                            if ($retorno === false) {
+                                $this->cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+                                $this->cadastrar_campos['erro_peca'] = "";
+                            }
+                            
+                            if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
+                                $imagens = new Gerenciar_Imagens();
+                                
+                                $diretorios_imagens = $imagens->Arquivar_Imagem_Peca($_SESSION['imagens_tmp'], $id_peca, $peca_url);
+                                
+                                if (!empty($diretorios_imagens)) {
+                                    foreach ($diretorios_imagens as $key => $diretorio) {
+                                        $foto_peca = new Object_Foto_Peca();
+                                        
+                                        $foto_peca->set_peca_id($id_peca);
+                                        $foto_peca->set_endereco($diretorio);
+                                        $foto_peca->set_numero($key);
+                                        $foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$peca_url.'_', $_SESSION['imagens_tmp'][$key]));
+                                        
+                                        if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
+                                            $this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $key para a Peça";
+                                            $this->cadastrar_campos['erro_peca'] = "";
+                                        }
+                                    }
+                                    
+                                    unset($_SESSION['imagens_tmp']);
+                                } else {
+                                    $this->atualizar_erros[] = "Erro ao tentar Cadastrar Fotos da Peça";
+                                    $this->atualizar_campos['erro_peca'] = "";
+                                }
+                            }
                         } else {
-                            $this->atualizar_erros[] = "Erro ao tentar Cadastrar Fotos da Peça";
-                            $this->atualizar_campos['erro_peca'] = "";
+                            $this->cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
+                            $this->cadastrar_campos['erro_peca'] = "";
                         }
                     }
-                } else {
-                    $this->cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
-                    $this->cadastrar_campos['erro_peca'] = "";
-                }
-            }
-            
-            if (empty($this->cadastrar_erros)) {
-                $entidade = new Object_Entidade();
-                $entidade->set_id(Login_Session::get_entidade_id());
-                
-                $usuario_responsavel = new Object_Usuario();
-                $usuario_responsavel->set_id(Login_Session::get_usuario_id());
-                
-                $object_adicionado = new Object_Adicionado();
-                $object_adicionado->set_object_entidade($entidade);
-                $object_adicionado->set_object_usuario($usuario_responsavel);
-                $object_adicionado->set_datahora(date('Y-m-d H:i:s'));
-                
-                DAO_Adicionado::Inserir($object_adicionado);
-                
-                $this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
-                $this->cadastrar_campos['erro_peca'] = "";
-                
-                $this->Carregar_Pagina();
-            } else {
-                $this->cadastrar_form['peca'] = $this->peca;
-                $this->cadastrar_form['fabricante'] = $this->fabricante;
-                $this->cadastrar_form['serie'] = $this->serie;
-                $this->cadastrar_form['preco'] = $this->preco;
-                $this->cadastrar_form['estado_uso'] = $this->estado_uso;
-                $this->cadastrar_form['descricao'] = $this->descricao;
-                $this->cadastrar_form['prioridade'] = $this->prioridade;
-                $this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
-                
-                $marcas = null;
-                $modelos = null;
-                $versoes = null;
-                $anos = array();
-                
-                if (!empty($_SESSION['compatibilidade']['marca'])) {
-                    $marcas = $_SESSION['compatibilidade']['marca'];
-                }
-                if (!empty($_SESSION['compatibilidade']['modelo'])) {
-                    $modelos = $_SESSION['compatibilidade']['modelo'];
-                }
-                if (!empty($_SESSION['compatibilidade']['versao'])) {
-                    $versoes = $_SESSION['compatibilidade']['versao'];
-                }
-                
-                if (!empty($marcas)) {
-                    foreach ($marcas as $marca) {
-                        if (!empty($_POST['ano_mrc_'.$marca])) {
-                            $anos['ano_mrc_'.$marca] = $_POST['ano_mrc_'.$marca];
-                        }
-                    }
-                }
-                
-                if (!empty($modelos)) {
-                    foreach ($modelos as $modelo) {
-                        if (!empty($_POST['ano_mdl_'.$modelo])) {
-                            $anos['ano_mdl_'.$modelo] = $_POST['ano_mdl_'.$modelo];
-                        }
-                    }
-                }
-                
-                if (!empty($versoes)) {
-                    foreach ($versoes as $versao) {
-                        if (!empty($_POST['ano_vrs_'.$versao])) {
-                            $anos['ano_vrs_'.$versao] = $_POST['ano_vrs_'.$versao];
-                        }
-                    }
-                }
                     
-                $_SESSION['compatibilidade']['ano'] = $anos;
+                    if (empty($this->cadastrar_erros)) {
+                        $entidade = new Object_Entidade();
+                        $entidade->set_id(Login_Session::get_entidade_id());
+                        
+                        $usuario_responsavel = new Object_Usuario();
+                        $usuario_responsavel->set_id(Login_Session::get_usuario_id());
+                        
+                        $object_adicionado = new Object_Adicionado();
+                        $object_adicionado->set_object_entidade($entidade);
+                        $object_adicionado->set_object_usuario($usuario_responsavel);
+                        $object_adicionado->set_datahora(date('Y-m-d H:i:s'));
+                        
+                        DAO_Adicionado::Inserir($object_adicionado);
+                        
+                        $count_limite = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
+                        $count_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
+                        
+                        if ($count_pecas >= $count_limite) {
+                            Controller_Fatura::Adicionar_Serviço_Fatura(Login_Session::get_entidade_id(), "$this->peca, Peça excedente: Limite $count_limite, Peças: $count_pecas", 1);
+                        }
+                        
+                        $this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
+                        $this->cadastrar_campos['erro_peca'] = "";
+                    } else {
+                        $this->cadastrar_form['peca'] = $this->peca;
+                        $this->cadastrar_form['fabricante'] = $this->fabricante;
+                        $this->cadastrar_form['serie'] = $this->serie;
+                        $this->cadastrar_form['preco'] = $this->preco;
+                        $this->cadastrar_form['estado_uso'] = $this->estado_uso;
+                        $this->cadastrar_form['descricao'] = $this->descricao;
+                        $this->cadastrar_form['prioridade'] = $this->prioridade;
+                        $this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
+                        
+                        $marcas = null;
+                        $modelos = null;
+                        $versoes = null;
+                        $anos = array();
+                        
+                        if (!empty($_SESSION['compatibilidade']['marca'])) {
+                            $marcas = $_SESSION['compatibilidade']['marca'];
+                        }
+                        if (!empty($_SESSION['compatibilidade']['modelo'])) {
+                            $modelos = $_SESSION['compatibilidade']['modelo'];
+                        }
+                        if (!empty($_SESSION['compatibilidade']['versao'])) {
+                            $versoes = $_SESSION['compatibilidade']['versao'];
+                        }
+                        
+                        if (!empty($marcas)) {
+                            foreach ($marcas as $marca) {
+                                if (!empty($_POST['ano_mrc_'.$marca])) {
+                                    $anos['ano_mrc_'.$marca] = $_POST['ano_mrc_'.$marca];
+                                }
+                            }
+                        }
+                        
+                        if (!empty($modelos)) {
+                            foreach ($modelos as $modelo) {
+                                if (!empty($_POST['ano_mdl_'.$modelo])) {
+                                    $anos['ano_mdl_'.$modelo] = $_POST['ano_mdl_'.$modelo];
+                                }
+                            }
+                        }
+                        
+                        if (!empty($versoes)) {
+                            foreach ($versoes as $versao) {
+                                if (!empty($_POST['ano_vrs_'.$versao])) {
+                                    $anos['ano_vrs_'.$versao] = $_POST['ano_vrs_'.$versao];
+                                }
+                            }
+                        }
+                            
+                        $_SESSION['compatibilidade']['ano'] = $anos;
+                    }
+                    
+                    $this->Carregar_Pagina();
+                }
                 
-                $this->Carregar_Pagina();
+                return $status;
+            } else {
+                return false;
             }
         }
         
@@ -819,6 +815,20 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                             }
                         }
                     }
+                }
+            }
+        }
+        
+        public function Retornar_Dados_Plano() : void
+        {
+            if (Controller_Usuario::Verificar_Autenticacao()) {
+                if (Controller_Usuario::Verificar_Status_Usuario() == 1) {
+                    $retorno = array();
+                    
+                    $retorno['limite'] = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
+                    $retorno['pecas'] = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
+                    
+                    echo json_encode($retorno);
                 }
             }
         }
