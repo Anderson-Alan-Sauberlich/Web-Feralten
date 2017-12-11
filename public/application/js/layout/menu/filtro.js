@@ -1,6 +1,6 @@
-$('.ui.dropdown').dropdown();
-$('.ui.checkbox').checkbox();
-$('.ui.radio.checkbox').checkbox({uncheckable: true});
+$('#menu_filtro .ui.dropdown').dropdown();
+$('#menu_filtro .ui.checkbox').checkbox();
+$('#menu_filtro .ui.radio.checkbox').checkbox({uncheckable: true});
 function Controlar_Classes() {
 	var scren = $("body").width();
 	
@@ -29,12 +29,12 @@ $(window).resize(function() {
 	Controlar_Classes();
 });
 $(document).ready(function() {
-	$('select[name=estado]').change(function(){
-    	$('select[name=cidade]').html('<option value="0">Carregando...</option>');
+	$('#menu_filtro #estado').change(function(){
+    	$('#menu_filtro #cidade').html('<option value="0">Carregando...</option>');
         $.get('/menu-filtro/cidades/', 
         {estado:$(this).val()},
         function(valor){
-        	$('select[name=cidade]').html(valor);
+        	$('#menu_filtro #cidade').html(valor);
         });
    });
 });

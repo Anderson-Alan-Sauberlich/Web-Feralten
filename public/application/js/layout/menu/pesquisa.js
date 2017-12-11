@@ -1,8 +1,9 @@
 $('.ui.accordion').accordion();
-$('.ui.checkbox').checkbox();
+$('#content_categoria .ui.checkbox').checkbox({uncheckable: true});
 $('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
 function Carregar_Categoria(ca) {
-	if ($(ca).val() != 0 && $(ca).val() != null) {
+	var $input_ctg = $("input[name='categoria']:checked").val();
+	if ($(ca).val() != 0 && $(ca).val() != null && $(ca).val() != undefined && $input_ctg != 0 && $input_ctg != null && $input_ctg != undefined) {
 	    $("#marca").html('<option>Carregando...</option>');
 	    $.get('/menu-pesquisa/marca/', 
 	    {categoria:$(ca).val()},
@@ -31,7 +32,7 @@ function Carregar_Categoria(ca) {
 }
 $(document).ready(function( ) {
 	$("#marca").change(function() {
-		if ($(this).val() != 0 && $(this).val() != null) {
+		if ($(this).val() != 0 && $(this).val() != null && $(this).val() != undefined) {
 	    	$("#modelo").html('<option>Carregando...</option>');
 	        $.get('/menu-pesquisa/modelo/', 
 	        {marca:$(this).val()},
@@ -55,7 +56,7 @@ $(document).ready(function( ) {
 });
 $(document).ready(function() {
 	$("#modelo").change(function() {
-		if ($(this).val() != 0 && $(this).val() != null) {
+		if ($(this).val() != 0 && $(this).val() != null && $(this).val() != undefined) {
 	    	$("#versao").html('<option>Carregando...</option>');
 	        $.get('/menu-pesquisa/versao/', 
 	        {modelo:$(this).val()},
