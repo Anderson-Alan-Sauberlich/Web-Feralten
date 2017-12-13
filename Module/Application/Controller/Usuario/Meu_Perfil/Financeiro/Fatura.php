@@ -6,13 +6,14 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\DAO\Fatura as DAO_Fatura;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
+    use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\Object\Fatura as Object_Fatura;
     use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
     use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
     use Module\Application\Model\Common\Util\Login_Session;
     use \DateTime;
     use \DateInterval;
-    
+                    
     class Fatura
     {
         
@@ -56,7 +57,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         }
                     }
                     
-                    $fatura_fechada = self::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                    $fatura_fechada = self::Retornar_Fatura(Login_Session::get_entidade_id(), 16);
+                    
+                    if (empty($fatura_fechada)) {
+                        $fatura_fechada = self::Retornar_Fatura(Login_Session::get_entidade_id(), 32);
+                        
+                        if (empty($fatura_fechada)) {
+                            $fatura_fechada = self::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                        }
+                    }
                     
                     if (!empty($fatura_fechada)) {
                         $view->set_fatura_fechada($fatura_fechada);
@@ -196,11 +205,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * Abri uma nova fatura identica
          * 
          * @param int $id_entidade
+         * @param int $id_plano
+         * @param ?Object_Fatura $object_fatura = null
          * @return bool True para Sucesso e False para Erro
          */
-        public static function Fechar_Fatura(int $id_entidade, int $id_plano) : bool
+        public static function Fechar_Fatura(int $id_entidade, int $id_plano, ?Object_Fatura $object_fatura = null) : bool
         {
-            $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            if (empty($object_fatura)) {
+                $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            }
             
             if (empty($object_fatura)) {
                 return false;
@@ -269,5 +282,37 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             }
             
             return $object_fatura;
+        }
+        
+        /**
+         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada
+         */
+        public static function Gerenciar_Todas_Faturas_Abertas() : void
+        {
+            $faturas = DAO_Fatura::BuscarPorStatusDataFechamento(1, date('Y-m-d H:i:s'));
+            
+            foreach ($faturas as $fatura) {
+                $id_plano = DAO_Entidade::Pegar_Plano_Id($fatura->get_entidade_id());
+                
+                if (!empty($id_plano) AND $id_plano != false) {
+                    self::Fechar_Fatura($fatura->get_entidade_id(), $id_plano, $fatura);
+                }
+            }
+        }
+        
+        /**
+         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada
+         */
+        public static function Gerenciar_Todas_Faturas_Fechadas() : void
+        {
+            $faturas = DAO_Fatura::BuscarPorStatusDataVencimento(2, date('Y-m-d H:i:s'));
+            
+            foreach ($faturas as $fatura) {
+                self::Cancelar_Fatura_Aberta($fatura->get_entidade_id());
+                
+                DAO_Fatura::Atualizar_Status($fatura->get_id(), 32);
+                
+                DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 2);
+            }
         }
     }

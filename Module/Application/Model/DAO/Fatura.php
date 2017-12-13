@@ -134,14 +134,60 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function BuscarPorCodStatus(int $entidade_id, int $status_id)
+        public static function BuscarPorCodStatus(int $entidade_id, int ...$status_id)
         {
+            $query = '';
+            
+            foreach ($status_id as $id) {
+                if (!empty($query)) {
+                    $query .= " OR ";
+                }
+                
+                $query .= "fatura_sts_ftr_id = :sts_id_$id";
+            }
+            
             try {
-                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_ent_id = :ent_id';
+                $sql = "SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE ($query) AND fatura_ent_id = :ent_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
+                
+                foreach ($status_id as $id) {
+                    $p_sql->bindValue(":sts_id_$id", $id, PDO::PARAM_INT);
+                }
+                
+                $p_sql->execute();
+                
+                return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarPorStatusDataFechamento(int $status_id, string $data_fechamento)
+        {
+            try {
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_data_fechamento <= :data_fch';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':sts_id', $status_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':data_fch', $data_fechamento, PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarPorStatusDataVencimento(int $status_id, string $data_vencimento)
+        {
+            try {
+                $sql = 'SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE fatura_sts_ftr_id = :sts_id AND fatura_data_vencimento <= :data_vcm';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':sts_id', $status_id, PDO::PARAM_INT);
+                $p_sql->bindValue(':data_vcm', $data_vencimento, PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));

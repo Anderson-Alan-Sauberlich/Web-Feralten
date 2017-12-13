@@ -86,6 +86,22 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        public static function Atualizar_Status(int $id_entidade, int $id_status_entidade) : bool
+        {
+            try {
+                $sql = "UPDATE tb_entidade SET entidade_sts_ent_id = :sts_ent_id WHERE entidade_id = :ent_id";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                
+                $p_sql->bindValue(':ent_id', $id_entidade, PDO::PARAM_INT);
+                $p_sql->bindValue(':sts_ent_id', $id_status_entidade, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function Atualizar_Imagem(string $imagem, int $entidade) : bool
         {
             try {
@@ -161,9 +177,23 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
-                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
-                return $row['entidade_sts_ent_id'];
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Pegar_Plano_Id(int $id)
+        {
+            try {
+                $sql = 'SELECT entidade_pln_id FROM tb_entidade WHERE entidade_id = :id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
                 return false;
             }

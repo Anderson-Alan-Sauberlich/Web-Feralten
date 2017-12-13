@@ -50,11 +50,13 @@
                     <div id="content_fatura_fechada" class="content active">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('fechada') as $fatura_servicos) { ?>
-                            	<div class="item">
-                            		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
-                            		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('fechada'); ?> até <?php View_Fatura::Mostrar_Fechamento('fechada'); ?></div>
-                            	</div>
+                        	<?php if (!empty(View_Fatura::Retornar_Lista_Fatura_Servicos('fechada'))) { ?>
+                            	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('fechada') as $fatura_servicos) { ?>
+                                	<div class="item">
+                                		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
+                                		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('fechada'); ?> até <?php View_Fatura::Mostrar_Fechamento('fechada'); ?></div>
+                                	</div>
+                            	<?php } ?>
                         	<?php } ?>
                         </div>
                         <?php if (View_Fatura::Verificar_Valor_Fatura('fechada')) { ?>
@@ -144,17 +146,19 @@
                     <div id="content_fatura_aberta" class="content">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('aberta') as $fatura_servicos) { ?>
-                            	<div class="item">
-                            		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
-                            		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('aberta'); ?> até <?php View_Fatura::Mostrar_Fechamento('aberta'); ?></div>
-                            	</div>
+                        	<?php if (!empty(View_Fatura::Retornar_Lista_Fatura_Servicos('aberta'))) { ?>
+                            	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('aberta') as $fatura_servicos) { ?>
+                                	<div class="item">
+                                		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
+                                		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('aberta'); ?> até <?php View_Fatura::Mostrar_Fechamento('aberta'); ?></div>
+                                	</div>
+                            	<?php } ?>
                         	<?php } ?>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php } else { echo '<h3>Erro: Nenhuma fatura encontrada em aberto</h3>'; } ?>
+        <?php } else if (!View_Fatura::Verificar_Fatura('fechada')) { echo '<h3>Erro: Nenhuma fatura encontrada em aberto</h3>'; } ?>
         <div class="margem-inferior-pouco"></div>
     </section>
     <footer>

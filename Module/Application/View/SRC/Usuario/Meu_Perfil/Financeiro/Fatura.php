@@ -195,7 +195,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          * @param string $status
          * @return array
          */
-        public static function Retornar_Lista_Fatura_Servicos(string $status) : array
+        public static function Retornar_Lista_Fatura_Servicos(string $status) : ?array
         {
             if ($status === 'fechada') {
                 return self::$fatura_servicos_fechada;
