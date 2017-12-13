@@ -224,4 +224,24 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
                 }
             }
         }
+        
+        /**
+         * Deveria verificar qual o ano atual e apartir desde calcular + 10
+         */
+        public static function Carregar_Ano_Validade() : void
+        {
+            for ($i=17; $i <= 25; $i++) {
+                echo "<option value=\"".$i."\">20".$i."</option>";
+            }
+        }
+        
+        /**
+         * Deveria pegar o ano atual e apartir deste adicionar os anos até 1900
+         */
+        public static function Carregar_Anos() : void
+        {
+            for ($i=2017; $i >= 1900; $i--) {
+                echo "<option value=\"".$i."\">".$i."</option>";
+            }
+        }
     }
