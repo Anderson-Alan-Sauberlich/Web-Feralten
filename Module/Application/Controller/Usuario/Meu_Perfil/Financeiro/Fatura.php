@@ -171,12 +171,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * 
          * @param int $id_entidade
          * @param string $descricao
-         * @param int $valor
+         * @param float $valor
+         * @param ?Object_Fatura $object_fatura = null
          * @return bool True para Sucesso e False para Erro
          */
-        public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor) : bool
+        public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor, ?Object_Fatura $object_fatura = null) : bool
         {
-            $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            if (empty($object_fatura)) {
+                $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            }
             
             if (empty($object_fatura)) {
                 return false;
@@ -242,9 +245,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * Recalcula o valor total da fatura analizando todos os serviços
          * 
          * @param int $id_fatura
-         * @return ?int Valor Total para Sucesso e Null para Erro
+         * @return ?float Valor Total para Sucesso e Null para Erro
          */
-        public static function Recalcular_Valor_Total(int $id_fatura) : ?int
+        public static function Recalcular_Valor_Total(int $id_fatura) : ?float
         {
             $fatura_servicos = DAO_Fatura_Servico::BuscarPorCOD($id_fatura);
             
@@ -301,18 +304,33 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
-         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada
+         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada.
+         * 
+         * Quando o valor da fatura for fechado com menos de 5 reais e o usuário não realizar o pagamento.
+         * Em vez de bloquear a conta, adicionar esse valor na nova fatura.
          */
         public static function Gerenciar_Todas_Faturas_Fechadas() : void
         {
             $faturas = DAO_Fatura::BuscarPorStatusDataVencimento(2, date('Y-m-d H:i:s'));
             
             foreach ($faturas as $fatura) {
-                self::Cancelar_Fatura_Aberta($fatura->get_entidade_id());
-                
-                DAO_Fatura::Atualizar_Status($fatura->get_id(), 32);
-                
-                DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 2);
+                if ($fatura->get_valor_total() > 5) {
+                    self::Cancelar_Fatura_Aberta($fatura->get_entidade_id());
+                    
+                    DAO_Fatura::Atualizar_Status($fatura->get_id(), 32);
+                    
+                    DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 2);
+                } else {
+                    $id_plano = DAO_Entidade::Pegar_Plano_Id($fatura->get_entidade_id());
+                    
+                    if (!empty($id_plano) AND $id_plano != false) {
+                        DAO_Fatura::Atualizar_Status($fatura->get_id(), 4);
+                        
+                        self::Criar_Fatura($fatura->get_entidade_id(), $id_plano);
+                        
+                        self::Adicionar_Serviço_Fatura($fatura->get_entidade_id(), 'Valor da fatura antiga, por pagamento atrasado', $fatura->get_valor_total());
+                    }
+                }
             }
         }
     }
