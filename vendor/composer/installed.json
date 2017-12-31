@@ -233,57 +233,6 @@
         ]
     },
     {
-        "name": "rmccue/requests",
-        "version": "v1.7.0",
-        "version_normalized": "1.7.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/rmccue/Requests.git",
-            "reference": "87932f52ffad70504d93f04f15690cf16a089546"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/rmccue/Requests/zipball/87932f52ffad70504d93f04f15690cf16a089546",
-            "reference": "87932f52ffad70504d93f04f15690cf16a089546",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2"
-        },
-        "require-dev": {
-            "requests/test-server": "dev-master"
-        },
-        "time": "2016-10-13T00:11:37+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Requests": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "ISC"
-        ],
-        "authors": [
-            {
-                "name": "Ryan McCue",
-                "homepage": "http://ryanmccue.info"
-            }
-        ],
-        "description": "A HTTP library written in PHP, for human beings.",
-        "homepage": "http://github.com/rmccue/Requests",
-        "keywords": [
-            "curl",
-            "fsockopen",
-            "http",
-            "idna",
-            "ipv6",
-            "iri",
-            "sockets"
-        ]
-    },
-    {
         "name": "google/recaptcha",
         "version": "1.1.3",
         "version_normalized": "1.1.3.0",
@@ -328,81 +277,6 @@
             "captcha",
             "recaptcha",
             "spam"
-        ]
-    },
-    {
-        "name": "moip/moip-sdk-php",
-        "version": "v2.2.0",
-        "version_normalized": "2.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/moip/moip-sdk-php.git",
-            "reference": "dc88cad3a240f16426526697a057c47b2320aebd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/moip/moip-sdk-php/zipball/dc88cad3a240f16426526697a057c47b2320aebd",
-            "reference": "dc88cad3a240f16426526697a057c47b2320aebd",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5",
-            "rmccue/requests": ">=1.0"
-        },
-        "require-dev": {
-            "codacy/coverage": "dev-master",
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2017-11-06T11:19:46+00:00",
-        "type": "libraries",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Moip\\": "src/"
-            },
-            "files": [
-                "src/Helper/helpers.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jean Cesar Garcia",
-                "email": "jeancesargarcia@gmail.com"
-            },
-            {
-                "name": "Joao Batista Neto",
-                "email": "neto.joaobatista@gmail.com"
-            },
-            {
-                "name": "Caio Gaspar",
-                "email": "caio.gaspar@moip.com.br"
-            },
-            {
-                "name": "João Lucas Lucchetta",
-                "email": "joao.lucchetta@moip.com.br"
-            },
-            {
-                "name": "Matheus Nakaya",
-                "email": "matheus.nakaya@moip.com.br"
-            }
-        ],
-        "description": "Cliente em PHP para integração server-side com APIs Moip v2",
-        "homepage": "http://dev.moip.com.br",
-        "keywords": [
-            "checkout",
-            "intermediary",
-            "libraries",
-            "marketplace",
-            "moip"
         ]
     },
     {
@@ -544,5 +418,48 @@
             }
         ],
         "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "pagseguro/pagseguro-php-sdk",
+        "version": "3.4.0",
+        "version_normalized": "3.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pagseguro/pagseguro-php-sdk.git",
+            "reference": "3c1fa9940d44b1771c76907ed83824d044c9d766"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pagseguro/pagseguro-php-sdk/zipball/3c1fa9940d44b1771c76907ed83824d044c9d766",
+            "reference": "3c1fa9940d44b1771c76907ed83824d044c9d766",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "lib-curl": "*",
+            "lib-openssl": "*",
+            "php": ">=5.4.27"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7"
+        },
+        "time": "2017-12-18T16:29:39+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PagSeguro\\": "source/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache License 2.0"
+        ],
+        "authors": [
+            {
+                "name": "PagSeguro"
+            }
+        ],
+        "description": "Biblioteca de integração com o PagSeguro"
     }
 ]

@@ -62,7 +62,6 @@
                         <?php if (View_Fatura::Verificar_Valor_Fatura('fechada')) { ?>
                             <div class="ui pointing secondary three item menu" role="tablist">
                                 <a data-tab="credito" class="active red item" role="tab">Cartão de Crédito</a>
-                                <a data-tab="debito" class="red item" role="tab">Débito em Conta</a>
                                 <a data-tab="boleto" class="red item" role="tab">Boleto Bancario</a>
                             </div>
                             <div id="credito" class="ui bottom attached active tab" data-tab="credito" role="tabpanel">
@@ -177,19 +176,10 @@
                                                 	</div>
                                         		</div>
                                         	</div>
-                                        	<button class="ui blue big fluid button" type="submit">Continuar</button>
+                                        	<div class="ui blue big fluid button" type="submit">Continuar</div>
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="debito" class="ui bottom attached tab" data-tab="debito" role="tabpanel">
-                            	<div class="margem-superior-pouco"></div>
-                                <div class="ui stackable three column centered grid">
-                                    <div class="column">
-                                    	
-                                    </div>
-                                </div>
-                                <div class="margem-inferior-pouco"></div>
                             </div>
                             <div id="boleto" class="ui bottom attached tab " data-tab="boleto" role="tabpanel">
                             	<div class="margem-superior-pouco"></div>

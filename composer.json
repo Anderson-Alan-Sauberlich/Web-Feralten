@@ -11,8 +11,8 @@
         "php": ">=5.2.8",
 		"slim/slim": "*",
         "phpmailer/phpmailer": "^6.0",
-        "moip/moip-sdk-php": "^2.0",
-        "google/recaptcha": "~1.1"
+        "google/recaptcha": "~1.1",
+        "pagseguro/pagseguro-php-sdk": "^3.4"
     },
     "autoload": {
         "psr-4": {
