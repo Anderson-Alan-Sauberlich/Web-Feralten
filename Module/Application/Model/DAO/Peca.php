@@ -12,6 +12,7 @@ namespace Module\Application\Model\DAO;
     use Module\Application\Model\DAO\Marca_Pativel as DAO_Marca_Pativel;
     use Module\Application\Model\DAO\Modelo_Pativel as DAO_Modelo_Pativel;
     use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
+    use Module\Application\Model\DAO\Contato_Anunciante as DAO_Contato_Anunciante;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -158,6 +159,7 @@ namespace Module\Application\Model\DAO;
                 DAO_Modelo_Pativel::Deletar($id);
                 DAO_Versao_Pativel::Deletar($id);
                 DAO_Foto_Peca::Deletar_Fotos($id);
+                DAO_Contato_Anunciante::Deletar_Por_Peca($id);
                 
                 $sql = 'DELETE FROM tb_peca WHERE peca_id = :id';
                 

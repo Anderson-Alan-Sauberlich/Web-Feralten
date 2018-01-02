@@ -92,6 +92,20 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        public static function Deletar_Por_Peca(int $peca_id) : bool
+        {
+            try {
+                $sql = 'DELETE FROM tb_contato_anunciante WHERE contato_anunciante_pec_id = :pec_id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':pec_id', $peca_id, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function Achar_ID_Livre(int $peca_id) : ?int
         {
             try {
