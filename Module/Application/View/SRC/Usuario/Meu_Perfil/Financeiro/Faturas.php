@@ -6,7 +6,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
     use \DateTime;
     
-    class Fatura
+    class Faturas
     {
         
         /**
@@ -79,7 +79,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          */
         public function Executar() : void
         {
-            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Financeiro/Fatura.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Financeiro/Faturas.php';
         }
         
         /**
@@ -87,7 +87,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, array('financeiro', 'fatura'));
+            new View_Usuario(self::$status_usuario, array('financeiro', 'faturas'));
         }
         
         /**

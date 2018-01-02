@@ -20,7 +20,7 @@ function alterarPlano($planoID) {
 	}).done(function(valor) {
 		var $valor = JSON.parse(valor);
 		if ($valor.status == 'certo') {
-			window.location.replace('/usuario/meu-perfil/financeiro/fatura/');
+			window.location.replace('/usuario/meu-perfil/financeiro/faturas/');
 		} else if ($valor.status == 'erro') {
 			$('#erro_content').html($valor.erros);
 			$('#mdl_erro').modal('show');

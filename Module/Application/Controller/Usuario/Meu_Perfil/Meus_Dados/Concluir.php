@@ -17,7 +17,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Concluir as View_Concluir;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
-    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura as Controller_Fatura;
+    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use \Exception;
     
     class Concluir
@@ -372,7 +372,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
                             if ($id_entidade != false) {
                                 Login_Session::set_entidade_id($id_entidade);
                                 
-                                if (Controller_Fatura::Criar_Fatura($id_entidade, 1)) {
+                                if (Controller_Faturas::Criar_Fatura($id_entidade, 1)) {
                                     Login_Session::set_entidade_plano(1);
                                 } else {
                                     $this->concluir_erros[] = 'Erro ao tentar gerar fatura';

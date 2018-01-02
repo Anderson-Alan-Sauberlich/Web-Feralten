@@ -1,47 +1,47 @@
-<?php use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Fatura as View_Fatura; ?>
+<?php use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Faturas as View_Faturas; ?>
 <!DOCTYPE HTML>
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <title>Fatura | Feralten</title>
+    <title>Faturas | Feralten</title>
 </head>
 <body>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-        <?php View_Fatura::Incluir_Menu_Usuario(); ?>
-        <?php if (View_Fatura::Verificar_Fatura('fechada')) { ?>
+        <?php View_Faturas::Incluir_Menu_Usuario(); ?>
+        <?php if (View_Faturas::Verificar_Fatura('fechada')) { ?>
             <div class="ui raised segment">
             	<div class="ui stackable doubling five column internally celled grid">
                     <div class="center aligned column">
                     	<h4>Abertura</h4>
                         <div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Abertura('fechada'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Abertura('fechada'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Vencimento</h4>
                         <div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Vencimento('fechada'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Vencimento('fechada'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Fechamento</h4>
                         <div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Fechamento('fechada'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Fechamento('fechada'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Status</h4>
                         <div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Status('fechada'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Status('fechada'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Valor Total</h4>
                         <div class="ui mini statistic">
-                            <div class="content">R$: <?php View_Fatura::Mostrar_Total('fechada'); ?></div>
+                            <div class="content">R$: <?php View_Faturas::Mostrar_Total('fechada'); ?></div>
                         </div>
                     </div>
                 </div>
@@ -50,16 +50,16 @@
                     <div id="content_fatura_fechada" class="content active">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<?php if (!empty(View_Fatura::Retornar_Lista_Fatura_Servicos('fechada'))) { ?>
-                            	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('fechada') as $fatura_servicos) { ?>
+                        	<?php if (!empty(View_Faturas::Retornar_Lista_Fatura_Servicos('fechada'))) { ?>
+                            	<?php foreach (View_Faturas::Retornar_Lista_Fatura_Servicos('fechada') as $fatura_servicos) { ?>
                                 	<div class="item">
                                 		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
-                                		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('fechada'); ?> até <?php View_Fatura::Mostrar_Fechamento('fechada'); ?></div>
+                                		<div class="content">Mensal, <?php View_Faturas::Mostrar_Abertura('fechada'); ?> até <?php View_Faturas::Mostrar_Fechamento('fechada'); ?></div>
                                 	</div>
                             	<?php } ?>
                         	<?php } ?>
                         </div>
-                        <?php if (View_Fatura::Verificar_Valor_Fatura('fechada')) { ?>
+                        <?php if (View_Faturas::Verificar_Valor_Fatura('fechada')) { ?>
                             <div class="ui pointing secondary three item menu" role="tablist">
                                 <a data-tab="credito" class="active red item" role="tab">Cartão de Crédito</a>
                                 <a data-tab="boleto" class="red item" role="tab">Boleto Bancario</a>
@@ -103,7 +103,7 @@
                                                 	<div class="field">
                                                 		<select id="validade_ano" name="validade_ano" class="ui fluid scrolling search selection dropdown">
                                                 			<option value="0">Ano</option>
-                                                			<?php View_Fatura::Carregar_Ano_Validade(); ?>
+                                                			<?php View_Faturas::Carregar_Ano_Validade(); ?>
                                                 		</select>
                                                 	</div>
                                             	</div>
@@ -171,7 +171,7 @@
                                                 	<div class="field">
                                                 		<select id="nascimento_ano" name="nascimento_ano" class="ui fluid scrolling search selection dropdown">
                                                 			<option value="0">Ano</option>
-                                                			<?php View_Fatura::Carregar_Anos(); ?>
+                                                			<?php View_Faturas::Carregar_Anos(); ?>
                                                 		</select>
                                                 	</div>
                                         		</div>
@@ -197,37 +197,37 @@
                 </div>
             </div>
         <?php } ?>
-        <?php if (View_Fatura::Verificar_Fatura('aberta')) { ?>
+        <?php if (View_Faturas::Verificar_Fatura('aberta')) { ?>
             <div class="ui secondary segment">
             	<div class="ui stackable doubling five column internally celled grid">
                     <div class="center aligned column">
                     	<h4>Abertura</h4>
                     	<div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Abertura('aberta'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Abertura('aberta'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Vencimento</h4>
                     	<div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Vencimento('aberta'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Vencimento('aberta'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Fechamento</h4>
                     	<div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Fechamento('aberta'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Fechamento('aberta'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Status</h4>
                     	<div class="ui mini statistic">
-                            <div class="content"><?php View_Fatura::Mostrar_Status('aberta'); ?></div>
+                            <div class="content"><?php View_Faturas::Mostrar_Status('aberta'); ?></div>
                         </div>
                     </div>
                     <div class="center aligned column">
                     	<h4>Valor Total</h4>
                     	<div class="ui mini statistic">
-                            <div class="content">R$: <?php View_Fatura::Mostrar_Total('aberta'); ?></div>
+                            <div class="content">R$: <?php View_Faturas::Mostrar_Total('aberta'); ?></div>
                         </div>
                     </div>
                 </div>
@@ -236,11 +236,11 @@
                     <div id="content_fatura_aberta" class="content">
                         SERVIÇOS:
                         <div class="ui relaxed large celled list">
-                        	<?php if (!empty(View_Fatura::Retornar_Lista_Fatura_Servicos('aberta'))) { ?>
-                            	<?php foreach (View_Fatura::Retornar_Lista_Fatura_Servicos('aberta') as $fatura_servicos) { ?>
+                        	<?php if (!empty(View_Faturas::Retornar_Lista_Fatura_Servicos('aberta'))) { ?>
+                            	<?php foreach (View_Faturas::Retornar_Lista_Fatura_Servicos('aberta') as $fatura_servicos) { ?>
                                 	<div class="item">
                                 		<div class="header"><?php echo $fatura_servicos->get_descricao(); ?>, valor R$: <?php echo number_format($fatura_servicos->get_valor(), 2, ',', '.'); ?></div>
-                                		<div class="content">Mensal, <?php View_Fatura::Mostrar_Abertura('aberta'); ?> até <?php View_Fatura::Mostrar_Fechamento('aberta'); ?></div>
+                                		<div class="content">Mensal, <?php View_Faturas::Mostrar_Abertura('aberta'); ?> até <?php View_Faturas::Mostrar_Fechamento('aberta'); ?></div>
                                 	</div>
                             	<?php } ?>
                         	<?php } ?>
@@ -248,12 +248,12 @@
                     </div>
                 </div>
             </div>
-        <?php } else if (!View_Fatura::Verificar_Fatura('fechada')) { echo '<h3>Erro: Nenhuma fatura encontrada em aberto</h3>'; } ?>
+        <?php } else if (!View_Faturas::Verificar_Fatura('fechada')) { echo '<h3>Erro: Nenhuma fatura encontrada em aberto</h3>'; } ?>
         <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
     	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-    	<script type="text/javascript" src="/application/js/usuario/meu_perfil/financeiro/fatura.js"></script>
+    	<script type="text/javascript" src="/application/js/usuario/meu_perfil/financeiro/faturas.js"></script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
 </body>

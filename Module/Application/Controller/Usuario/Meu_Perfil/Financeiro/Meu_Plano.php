@@ -3,7 +3,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Meu_Plano as View_Meu_Plano;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
-    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura as Controller_Fatura;
+    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\Object\Entidade as Object_Entidade;
@@ -81,7 +81,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     if (empty($this->erros)) {
                         Conexao::$conection->beginTransaction();
                         
-                        if (Controller_Fatura::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, Controller_Fatura::IMEDIATA)) {
+                        if (Controller_Faturas::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, Controller_Faturas::IMEDIATA)) {
                             $object_entidade = new Object_Entidade();
                             $object_entidade->set_id(Login_Session::get_entidade_id());
                             $object_entidade->set_plano_id($this->plano_id);

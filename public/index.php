@@ -283,6 +283,20 @@
                 });
             });
             
+            $app->group('/orcamentos', function() use ($app) {
+                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos();
+                    
+                    $resposta = $orcamentos->Carregar_Pagina();
+                    
+                    if ($resposta === false) {
+                        return $response->withRedirect('/usuario/login/');
+                    } else {
+                        return $response;
+                    }
+                });
+            });
+            
             $app->group('/pecas', function() use ($app) {
                 $app->group('/cadastrar', function() use ($app) {
                     $app->get('/', function(Request $request, Response $response, $args) use ($app) {
@@ -664,11 +678,11 @@
             });
             
             $app->group('/financeiro', function() use ($app) {                
-                $app->group('/fatura', function() use ($app) {
+                $app->group('/faturas', function() use ($app) {
                     $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                        $fatura = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Fatura();
+                        $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
                         
-                        $resposta = $fatura->Carregar_Pagina();
+                        $resposta = $faturas->Carregar_Pagina();
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');

@@ -22,7 +22,10 @@
                                 <h4 class="panel-title"><i class="pointing down icon lbPanel"></i>Meu Perfil</h4>
                             </div>
                             <div class="content <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>">
-                                Perfil
+                                <ul class="nav nav-pills">
+                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'perfil'); ?>"><a href="/usuario/meu-perfil/">Perfil</a></li>
+                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos'); ?>"><a href="/usuario/meu-perfil/orcamentos/">Orçamentos</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -57,7 +60,7 @@
                             <div class="content <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>">
                                 <ul class="nav nav-pills">
                                     <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'meu-lano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'fatura'); ?>"><a href="/usuario/meu-perfil/financeiro/fatura/">Fatura</a></li>
+                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'faturas'); ?>"><a href="/usuario/meu-perfil/financeiro/faturas/">Faturas</a></li>
                                     <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'historico'); ?>"><a href="/usuario/meu-perfil/financeiro/historico/">Historico</a></li>
                                 </ul>
                             </div>
@@ -73,7 +76,10 @@
                     <a id="financeiro" class="item <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>" role="tab" data-tab="financeiro"><i class="pointing down icon lbPanel"></i>Financeiro</a>
                 </div>
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>" data-tab="perfil">
-                    Perfil
+                    <ul class="nav nav-pills">
+                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'perfil'); ?>"><a href="/usuario/meu-perfil/">Perfil</a></li>
+                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos'); ?>"><a href="/usuario/meu-perfil/orcamentos/">Orçamentos</a></li>
+                    </ul>
                 </div>
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>" data-tab="dados">
                     <ul class="nav nav-pills">
@@ -93,7 +99,7 @@
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('financeiro'); ?>" data-tab="financeiro">
                     <ul class="nav nav-pills">
                         <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'meu-plano'); ?>"><a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu Plano</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'fatura'); ?>"><a href="/usuario/meu-perfil/financeiro/fatura/">Fatura</a></li>
+                        <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'faturas'); ?>"><a href="/usuario/meu-perfil/financeiro/faturas/">Faturas</a></li>
                         <li class="<?php View_Usuario::Verificar_URL_Ativa('financeiro', 'historico'); ?>"><a href="/usuario/meu-perfil/financeiro/historico/">Historico</a></li>
                     </ul>
                 </div>
