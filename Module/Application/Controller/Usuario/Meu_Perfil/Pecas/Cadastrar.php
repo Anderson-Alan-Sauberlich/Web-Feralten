@@ -423,6 +423,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
+                    $count_limite = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
+                    $count_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
+                    
+                    if ($count_pecas >= $count_limite) {
+                        $this->cadastrar_erros[] = "Erro: Você atingiu o limite de peças para o seu plano";
+                    }
+                    
                     if (empty($this->cadastrar_erros)) {
                         $categorias_compativeis = array();
                         $marcas_compativeis = array();
@@ -668,13 +675,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         $object_adicionado->set_datahora(date('Y-m-d H:i:s'));
                         
                         DAO_Adicionado::Inserir($object_adicionado);
-                        
-                        $count_limite = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
-                        $count_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
-                        
-                        if ($count_pecas >= $count_limite) {
-                            Controller_Fatura::Adicionar_Serviço_Fatura(Login_Session::get_entidade_id(), "$this->peca, Peça excedente: Limite $count_limite, Peças: $count_pecas", 1);
-                        }
                         
                         $this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
                         $this->cadastrar_campos['erro_peca'] = "";

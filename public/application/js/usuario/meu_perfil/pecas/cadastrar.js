@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
 	$('.ui.dropdown').dropdown();
+	Verificar_Limite_Pecas();
 });
 function Carregar_Categoria(ca) {
 	$.ajax({
@@ -283,18 +284,26 @@ function MostImgErr($ths) {
 }
 function Submit_Salvar() {
 	$('#salvar').addClass('loading');
+	if (Verificar_Limite_Pecas()) {
+		$('#form_cadastrar_pecas').submit();
+	}
+	$('#salvar').removeClass('loading');
+}
+function Verificar_Limite_Pecas() {
+	var $retorno = true;
 	$.ajax({
 		method: "GET",
 		url: "/usuario/meu-perfil/pecas/cadastrar/dados/",
 		async: false
 	}).done(function(valor) {
 		var $valor = JSON.parse(valor);
-		if ($valor.pecas >= $valor.limite) {
-			$('#msg_content').html('<p>Você atingiu o Limite Máximo de Peças do seu plano.</p><p>Você pode optar por um Plano Superior na Aba <a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu-Plano</a>.</p><p>Se você continuar será cobrado uma taxa de R$ 1,00 pelo cadastro excedente.</p>');
-			$('#mdl_msg').modal({ onApprove : function() { $('#form_cadastrar_pecas').submit(); } }).modal('show');
+		if (parseInt($valor.pecas) >= parseInt($valor.limite)) {
+			$('#msg_content').html('<p>Você atingiu o limite máximo de peças para o seu plano.</p><p>Você pode optar por um Plano Superior na Aba <a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu-Plano</a>.</p>');
+			$('#mdl_msg').modal({ onApprove : function() { window.location.href = "/usuario/meu-perfil/financeiro/meu-plano/" } }).modal('show');
+			$retorno = true;
 		} else {
-			$('#form_cadastrar_pecas').submit();
+			$retorno = false;
 		}
 	});
-	$('#salvar').removeClass('loading');
+	return $retorno;
 }

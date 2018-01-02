@@ -26,7 +26,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -58,7 +57,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos Gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -90,7 +88,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos Gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -122,7 +119,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos Gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -154,7 +150,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos Gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -186,7 +181,6 @@
                     <div class="content">
                         <div class="description">
                             <p>Orçamentos Gratuitos</p>
-                            <p>R$: 1,00 por anúncio excedente</p>
                         </div>
                     </div>
                     <div class="center aligned content">

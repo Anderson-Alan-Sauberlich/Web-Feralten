@@ -43,7 +43,7 @@ $(document).ready(function() {
 	    data: {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
-	            label: 'Visualizados - 2017',
+	            label: 'Visualizados - 2018',
 	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
 	            borderColor: '#0E6EB8'
 	        }]
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	    data: {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
-	            label: 'Adicionados - 2017',
+	            label: 'Adicionados - 2018',
 	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
 	            borderColor: '#016936'
 	        }]
@@ -171,7 +171,7 @@ $(document).ready(function() {
 	    data: {
 	        labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
 	        datasets: [{
-	            label: 'Removidos - 2017',
+	            label: 'Removidos - 2018',
 	            data: [$jan, $fev, $mar, $abr, $mai, $jun, $jul, $ago, $set, $out, $nov, $dez],
 	            borderColor: '#B03060'
 	        }]
