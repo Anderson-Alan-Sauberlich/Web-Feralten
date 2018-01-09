@@ -29,7 +29,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\DAO\Marca_Compativel as DAO_Marca_Compativel;
     use Module\Application\Model\DAO\Modelo_Compativel as DAO_Modelo_Compativel;
     use Module\Application\Model\DAO\Versao_Compativel as DAO_Versao_Compativel;
-    use Module\Application\Model\DAO\Status_Peca as DAO_Status_Peca;
     use Module\Application\Model\DAO\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
     use Module\Application\Model\DAO\Categoria_Pativel as DAO_Categoria_Pativel;
     use Module\Application\Model\DAO\Marca_Pativel as DAO_Marca_Pativel;

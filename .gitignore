@@ -1,0 +1,8 @@
+#Ignorar todas as Imagens que são cadastradas.
+public/imagens/*.jpg
+public/imagens/*.jpeg
+public/imagens/*.png
+public/imagens/*.gif
+
+#Ignorar os arquivos com dados .bd dos Usuarios e Entidades
+data/*.db

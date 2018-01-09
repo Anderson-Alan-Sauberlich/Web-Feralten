@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\Common\Util;
     
-    use Module\Application\Model\Common\Util\Login_Session;
+    //use Module\Application\Model\Common\Util\Login_Session;
     use DirectoryIterator;
     
     class Gerenciar_Imagens
@@ -205,6 +205,11 @@ namespace Module\Application\Model\Common\Util;
             $this->caminho = $this->pasta_entidade.$id_peca.'/';
             
             if (file_exists($this->diretorio)) {
+                if (!file_exists($this->caminho)) {
+                    mkdir($this->caminho, 0777, true);
+                    chmod($this->caminho, 0777);
+                }
+                
                 $this->Gerenciar_Temporarios();
                 
                 $imagens_peca = array();
@@ -336,7 +341,7 @@ namespace Module\Application\Model\Common\Util;
         public function Deletar_Imagem_Peca(string $endereco) : bool
         {
             $resposta = true;
-            $endereco = RAIZ.$endereco;
+            $endereco = RAIZ."/public/$endereco";
             
             $imagem1 = str_replace('@', '100x75', $endereco);
             $imagem2 = str_replace('@', '200x150', $endereco);

@@ -297,12 +297,13 @@ function Verificar_Limite_Pecas() {
 		async: false
 	}).done(function(valor) {
 		var $valor = JSON.parse(valor);
+		
 		if (parseInt($valor.pecas) >= parseInt($valor.limite)) {
 			$('#msg_content').html('<p>Você atingiu o limite máximo de peças para o seu plano.</p><p>Você pode optar por um Plano Superior na Aba <a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu-Plano</a>.</p>');
 			$('#mdl_msg').modal({ onApprove : function() { window.location.href = "/usuario/meu-perfil/financeiro/meu-plano/" } }).modal('show');
-			$retorno = true;
-		} else {
 			$retorno = false;
+		} else {
+			$retorno = true;
 		}
 	});
 	return $retorno;
