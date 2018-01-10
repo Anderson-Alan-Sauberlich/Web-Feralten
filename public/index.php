@@ -283,14 +283,30 @@
                 });
             });
             
-            $app->group('/orcamentos', function() use ($app) {
+            $app->group('/meus-orcamentos', function() use ($app) {
                 $app->get('/', function(Request $request, Response $response, $args) use ($app) {
-                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos();
+                    $meus_orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Orcamentos();
+                    
+                    $resposta = $meus_orcamentos->Carregar_Pagina();
+                    
+                    if ($resposta === false) {
+                        return $response->withRedirect('/usuario/login/');
+                    } else {
+                        return $response;
+                    }
+                });
+            });
+            
+            $app->group('/orcamentos-recebidos', function() use ($app) {
+                $app->get('/', function(Request $request, Response $response, $args) use ($app) {
+                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos_Recebidos();
                     
                     $resposta = $orcamentos->Carregar_Pagina();
                     
                     if ($resposta === false) {
                         return $response->withRedirect('/usuario/login/');
+                    } else if ($resposta != 1) {
+                        return $response->withRedirect('/usuario/meu-perfil/');
                     } else {
                         return $response;
                     }

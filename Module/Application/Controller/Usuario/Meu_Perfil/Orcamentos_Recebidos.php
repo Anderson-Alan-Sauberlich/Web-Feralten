@@ -1,11 +1,11 @@
 <?php
 namespace Module\Application\Controller\Usuario\Meu_Perfil;
     
-    use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos as View_Orcamentos;
+    use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos_Recebidos as View_Orcamentos_Recebidos;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Model\Common\Util\Login_Session;
     
-    class Orcamentos
+    class Orcamentos_Recebidos
     {
         
         function __construct()
@@ -18,7 +18,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
             if (Controller_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 
-                $view = new View_Orcamentos($status);
+                $view = new View_Orcamentos_Recebidos($status);
                 
                 $view->Executar();
             } else {
