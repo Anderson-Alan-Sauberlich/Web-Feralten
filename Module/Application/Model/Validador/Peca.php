@@ -453,12 +453,12 @@ namespace Module\Application\Model\Validador;
             return $valor;
         }
         
-        public static function filtrar_estado($estado = null) : ?int
+        public static function filtrar_estado_uso($estado_usp = null) : ?int
         {
             $valor = null;
             
-            if (!empty($estado) AND filter_var($estado, FILTER_VALIDATE_INT)) {
-                $valor = trim($estado);
+            if (!empty($estado_uso) AND filter_var($estado_uso, FILTER_VALIDATE_INT)) {
+                $valor = trim($estado_uso);
             }
             
             return $valor;

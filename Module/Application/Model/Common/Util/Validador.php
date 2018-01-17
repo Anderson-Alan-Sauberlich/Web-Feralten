@@ -23,6 +23,8 @@ namespace Module\Application\Model\Common\Util;
     use Module\Application\Model\Validador\Modelo;
     use Module\Application\Model\Validador\Modelo_Compativel;
     use Module\Application\Model\Validador\Modelo_Pativel;
+    use Module\Application\Model\Validador\Orcamento_Peca;
+    use Module\Application\Model\Validador\Orcamento;
     use Module\Application\Model\Validador\Peca;
     use Module\Application\Model\Validador\Permissao;
     use Module\Application\Model\Validador\Plano;
@@ -90,6 +92,10 @@ namespace Module\Application\Model\Common\Util;
         public static function Modelo_Compativel() : Modelo_Compativel { return new Modelo_Compativel(); }
         
         public static function Modelo_Pativel() : Modelo_Pativel { return new Modelo_Pativel(); }
+        
+        public static function Orcamento_Peca() : Orcamento_Peca { return new Orcamento_Peca(); }
+        
+        public static function Orcamento() : Orcamento { return new Orcamento(); }
         
         public static function Peca() : Peca { return new Peca(); }
         
