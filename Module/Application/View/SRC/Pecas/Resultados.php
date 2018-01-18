@@ -5,7 +5,8 @@ namespace Module\Application\View\SRC\Pecas;
     use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro;
     use Module\Application\View\SRC\Layout\Menu\Paginacao as View_Paginacao;
     use Module\Application\View\SRC\Layout\Card_Peca as View_Card_Peca;
-    
+    use Module\Application\View\SRC\Layout\Modal\Solicitar_Orcamento as View_Solicitar_Orcamento;
+                    
     class Resultados
     {
 
@@ -67,15 +68,23 @@ namespace Module\Application\View\SRC\Pecas;
         
         public static function Mostrar_Cards_Pecas()
         {
+            $view_solicitar_orcamento = new View_Solicitar_Orcamento();
+            
             if (!empty(self::$pecas)) {
                 foreach (self::$pecas as $peca) {
                     $card_peca = new View_Card_Peca();
                     
                     $card_peca->Executar($peca);
                 }
+                
+                if (self::$pagina === self::$paginas) {
+                    $view_solicitar_orcamento->Executar();
+                }
             } else {
-                echo "<div class=\"container\"><h2><label class=\"lbPanel\">Nenhuma peça foi encontrada.</label></h2></div>";
-                echo "<div class=\"container\"><h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/pecas/cadastrar/\"> Clicando Aqui!</a></h3></div>";
+                echo "<div class=\"ui container\"><h2><label class=\"lbPanel\">Nenhuma peça foi encontrada.</label></h2></div>";
+                echo "<div class=\"ui container\"><h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/pecas/cadastrar/\"> Clicando Aqui!</a></h3></div>";
+                
+                $view_solicitar_orcamento->Executar();
             }
         }
     }
