@@ -57,7 +57,7 @@ function Submit($peca_id) {
 	if ($erros === "") {
 		$.ajax({
 			method: "POST",
-			url: "/contato-anunciante/",
+			url: "/layout/form/contato-anunciante/",
 			async: false,
 			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, mensagem:$mensagem, peca_id:$peca_id }
 		}).done(function(valor) {

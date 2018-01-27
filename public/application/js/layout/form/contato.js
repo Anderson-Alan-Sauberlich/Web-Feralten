@@ -60,7 +60,7 @@ function Enviar() {
 	if ($erros === "") {
 		$.ajax({
 			method: "POST",
-			url: "/contato/",
+			url: "/layout/form/contato/",
 			async: false,
 			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, assunto:$assunto, mensagem:$mensagem }
 		}).done(function(valor) {

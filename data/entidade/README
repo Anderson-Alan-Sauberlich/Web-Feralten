@@ -1,0 +1,19 @@
+id_ent.db {
+    tb_orcamento:
+        orcamento_orc_id,
+        orcamento_ntc_id,
+        
+    tb_status:
+        status_id(1, 2, 4, 8, 12),
+        status_descricao('Recebido', 'Visualizado', 'Ocultado', 'Respondido', 'Ocultado/Respondido'),
+        
+    tb_interacao: //lista de todas as interações que cada usuario teve com o orçamento
+        interacao_orc_id,
+        interacao_usr_id,
+        interacao_sts_id,
+        
+    tb_atualizacao: //Para puxar sempre os ultimos orçamentos
+        atualizacao_id,
+        atualizacao_datahora,
+}
+

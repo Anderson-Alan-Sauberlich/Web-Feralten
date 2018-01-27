@@ -42,7 +42,7 @@ function Salvar_Opcoes_Peca($peca) {
 	} else if ($('#invisivel_'+$peca).is(':checked')) {
 		$status = 'invisivel';
 	}
-	$.post('/card-peca/opcoes/',
+	$.post('/layout/card-peca/opcoes/',
 	{deletar:$deletar,
 	 status:$status,
 	 peca:$peca},

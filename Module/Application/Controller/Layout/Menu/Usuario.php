@@ -13,7 +13,7 @@ namespace Module\Application\Controller\Layout\Menu;
         
         public static function Verificar_Autenticacao() : bool
         {
-            if (empty($_SESSION['login'])) {
+            if (!Login_Session::Verificar_Login()) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
                 $_SESSION['login_erros'] = $login_erros;

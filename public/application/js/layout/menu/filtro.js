@@ -31,7 +31,7 @@ $(window).resize(function() {
 $(document).ready(function() {
 	$('#menu_filtro #estado').change(function(){
     	$('#menu_filtro #cidade').html('<option value="0">Carregando...</option>');
-        $.get('/menu-filtro/cidades/', 
+        $.get('/layout/menu/filtro/cidades/', 
         {estado:$(this).val()},
         function(valor){
         	$('#menu_filtro #cidade').html(valor);

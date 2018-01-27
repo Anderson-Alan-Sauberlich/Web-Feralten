@@ -5,7 +5,7 @@ function Carregar_Categoria(ca) {
 	var $input_ctg = $("input[name='categoria']:checked").val();
 	if ($(ca).val() != 0 && $(ca).val() != null && $(ca).val() != undefined && $input_ctg != 0 && $input_ctg != null && $input_ctg != undefined) {
 	    $("#marca").html('<option>Carregando...</option>');
-	    $.get('/menu-pesquisa/marca/', 
+	    $.get('/layout/menu/pesquisa/marca/', 
 	    {categoria:$(ca).val()},
 	    function(valor) {
 	        $("#marca").html(valor);
@@ -34,7 +34,7 @@ $(document).ready(function( ) {
 	$("#marca").change(function() {
 		if ($(this).val() != 0 && $(this).val() != null && $(this).val() != undefined) {
 	    	$("#modelo").html('<option>Carregando...</option>');
-	        $.get('/menu-pesquisa/modelo/', 
+	        $.get('/layout/menu/pesquisa/modelo/', 
 	        {marca:$(this).val()},
 	        function(valor) {
 	        	$("#modelo").html(valor);
@@ -58,7 +58,7 @@ $(document).ready(function() {
 	$("#modelo").change(function() {
 		if ($(this).val() != 0 && $(this).val() != null && $(this).val() != undefined) {
 	    	$("#versao").html('<option>Carregando...</option>');
-	        $.get('/menu-pesquisa/versao/', 
+	        $.get('/layout/menu/pesquisa/versao/', 
 	        {modelo:$(this).val()},
 	        function(valor) {
 	        	$("#versao").html(valor);
@@ -79,9 +79,9 @@ function Pesquisar($bool_p) {
 	var peca = $("#peca").val();
 	var ordem_preco = $("#ordem_preco").val();
 	var ordem_data = $("#ordem_data").val();
-	var estado_uso = $("#estado_uso").val();
-	var status_peca = $("#status_peca").val();
-	var preferencia_entrega = $("#preferencia_entrega").val();
+	var estado_uso = $("#estado_uso").find("option:selected").val();
+	var status_peca = $("#status_peca").find("option:selected").val();
+	var preferencia_entrega = $("#preferencia_entrega").find("option:selected").val();
 	var estado = $("#estado").find("option:selected").data('url');
 	var cidade = $("#cidade").find("option:selected").data('url');
 	
@@ -181,6 +181,9 @@ function Pesquisar($bool_p) {
 	
 	$('input[name*=deletar]').prop('disabled', true);
 	$('input[name*=deletar]').prop('readonly', true);
+	
+	$('#descricao').prop('disabled', true);
+	$('#descricao').prop('readonly', true);
 	
 	$("#searschform").attr("action", base_url);
 	

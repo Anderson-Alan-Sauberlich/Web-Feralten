@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Layout\Modal;
     
     class Solicitar_Orcamento
     {
-
         function __construct()
         {
             
@@ -17,5 +16,4 @@ namespace Module\Application\Controller\Layout\Modal;
             
             $view->Executar();
         }
-        
     }
