@@ -2,6 +2,16 @@ $('.ui.checkbox').checkbox();
 $('.message .close').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
+var onloadCallback = function() { grecaptcha.render('recaptcha', { 'sitekey' : '6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ', 'size' : tamanhoTela() }); };
+function tamanhoTela() {
+	var scren = $("body").width();
+	
+	if (scren <= 767) {
+		return 'compact';
+	} else {
+		return 'normal';
+	}
+};
 function abrirModal() {
 	var categoria = $("input[name='categoria']:checked").val();
 	var marca = $("#marca").find("option:selected").val();
@@ -92,10 +102,104 @@ function criarOrcamento() {
 	$('#div_orcamento').removeClass('loading');
 }
 function cadastrarUsuario() {
-	$('#div_autenticacao').addClass('hidden');
-	$('#div_orcamento').removeClass('hidden');
+	$('#form_cadastro').addClass('loading');
+	var nome = $('#cadastro_nome').val();
+	var sobrenome = $('#cadastro_sobrenome').val();
+	var email = $('#cadastro_email').val();
+	var senha = $('#cadastro_senha').val();
+	var token = $("#g-recaptcha-response").val();
+	var erro = '';
+	if (nome == 0 || nome == "" || nome == undefined) {
+		erro += '<li>Digite seu Nome</li>';
+	}
+	if (sobrenome == 0 || sobrenome == "" || sobrenome == undefined) {
+		erro += '<li>Digite seu sobrenome</li>';
+	}
+	if (email == 0 || email == "" || email == undefined) {
+		erro += '<li>Digite seu E-mail</li>';
+	}
+	if (senha == 0 || senha == "" || senha == undefined) {
+		erro += '<li>Digite sua senha</li>';
+	}
+	if (erro != '') {
+		$('#cadastro_msg').addClass('error');
+		$('#cadastro_msg').removeClass('success');
+		$('#cadastro_msg_header').html('Ops! Algo deu errado! :(');
+		$('#cadastro_msg_list').html(erro);
+		$('#cadastro_msg').addClass('visible');
+		$('#cadastro_msg').removeClass('hidden');
+	} else {
+		$.ajax({
+			method: "POST",
+			url: "/usuario/cadastro/ajax/",
+			async: false,
+			data: { 
+				nome : nome,
+				sobrenome : sobrenome,
+				email : email,
+				senha : senha,
+				token : token
+			}
+		}).done(function(data) {
+			$data = JSON.parse(data);
+			if ($data.status == 'certo') {
+				$('#div_autenticacao').addClass('hidden');
+				$('#div_orcamento').removeClass('hidden');
+			} else if ($data.status == 'erro') {
+				$('#cadastro_msg').addClass('error');
+				$('#cadastro_msg').removeClass('success');
+				$('#cadastro_msg_header').html('Ops! Algo deu errado! :(');
+				$('#cadastro_msg_list').html($data.content);
+				$('#cadastro_msg').addClass('visible');
+				$('#cadastro_msg').removeClass('hidden');
+			}
+		});
+	}
+	$('#form_cadastro').removeClass('loading');
 }
 function logarUsuario() {
-	$('#div_autenticacao').addClass('hidden');
-	$('#div_orcamento').removeClass('hidden');
+	$('#form_login').addClass('loading');
+	var email = $('#login_email').val();
+	var senha = $('#login_senha').val();
+	var manter = $('#login_manter').val();
+	var erro = '';
+	if (email == 0 || email == "" || email == undefined) {
+		erro += '<li>Digite seu E-mail</li>';
+	}
+	if (senha == 0 || senha == "" || senha == undefined) {
+		erro += '<li>Digite sua senha</li>';
+	}
+	if (erro != '') {
+		$('#login_msg').addClass('error');
+		$('#login_msg').removeClass('success');
+		$('#login_msg_header').html('Ops! Algo deu errado! :(');
+		$('#login_msg_list').html(erro);
+		$('#login_msg').addClass('visible');
+		$('#login_msg').removeClass('hidden');
+	} else {
+		$.ajax({
+			method: "POST",
+			url: "/usuario/login/ajax/",
+			async: false,
+			data: { 
+				email : email,
+				senha : senha,
+				manter : manter
+			}
+		}).done(function(data) {
+			$data = JSON.parse(data);
+			if ($data.status == 'certo') {
+				$('#div_autenticacao').addClass('hidden');
+				$('#div_orcamento').removeClass('hidden');
+			} else if ($data.status == 'erro') {
+				$('#login_msg').addClass('error');
+				$('#login_msg').removeClass('success');
+				$('#login_msg_header').html('Ops! Algo deu errado! :(');
+				$('#login_msg_list').html($data.content);
+				$('#login_msg').addClass('visible');
+				$('#login_msg').removeClass('hidden');
+			}
+		});
+	}
+	$('#form_login').removeClass('loading');
 }

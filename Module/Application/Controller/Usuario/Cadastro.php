@@ -152,4 +152,61 @@ namespace Module\Application\Controller\Usuario;
                 $this->Carregar_Pagina();
             }
         }
+        
+        public function Cadastrar_Usuario_Ajax() : void
+        {
+            $retorno_json['status'] = '';
+            $retorno_json['content'] = '';
+            $retorno_json['campos'] = '';
+            
+            if (empty($this->cadastro_erros)) {
+                $recaptcha = new ReCaptcha('6LeGszcUAAAAAG-JTTMkvm1BNiYEo3gKLWDKEQRY');
+                
+                $resp = $recaptcha->verify($this->recaptcha_response, $_SERVER["REMOTE_ADDR"]);
+                
+                if ($resp->isSuccess()) {
+                    $usuario = new Object_Usuario();
+                    $usuario->set_id(0);
+                    $usuario->set_ultimo_login(date("Y-m-d H:i:s"));
+                    $usuario->set_status_id(2);
+                    $usuario->set_fone('00000000');
+                    $usuario->set_nome($this->nome);
+                    $usuario->set_sobrenome($this->sobrenome);
+                    $usuario->set_email($this->email);
+                    $usuario->set_senha($this->senha);
+                    
+                    $usuario->set_senha(password_hash($usuario->get_senha(), PASSWORD_DEFAULT));
+                    
+                    $retorno = DAO_Usuario::Inserir($usuario);
+                    
+                    if ($retorno !== false) {
+                        Email::Enviar_Boas_Vindas($usuario);
+                        
+                        $retorno = Controller_Login::Autenticar_Usuario_Logado($usuario->get_email(), $usuario->get_senha());
+                        
+                        if ($retorno === false) {
+                            $this->cadastro_erros[] = "Usuario Cadastrado com Sucesso, porem Autenticação Falhou";
+                        }
+                    } else {
+                        $this->cadastro_erros[] = "Erro ao tentar Cadastrar Usuario";
+                    }
+                } else {
+                    $this->cadastro_erros[] = $resp->getErrorCodes();
+                }
+            }
+            
+            if (empty($this->cadastro_erros)) {
+                $retorno_json['status'] = 'certo';
+                $retorno_json['content'] = "<li>Cadastro realizado com Sucesso</li>";
+            } else {
+                $retorno_json['status'] = 'erro';
+                $retorno_json['campos'] = $this->cadastro_campos;
+                
+                foreach ($this->cadastro_erros as $erro) {
+                    $retorno_json['content'] .= "<li>$erro</li>";
+                }
+            }
+            
+            echo json_encode($retorno_json);
+        }
     }

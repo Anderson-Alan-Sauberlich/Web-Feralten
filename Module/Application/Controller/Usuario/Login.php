@@ -8,10 +8,9 @@ namespace Module\Application\Controller\Usuario;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\View\SRC\Usuario\Login as View_Login;
     use \Exception;
-
+    
     class Login
     {
-
         function __construct()
         {
             
@@ -21,9 +20,9 @@ namespace Module\Application\Controller\Usuario;
         private $senha;
         private $manter_login;
         private $logout;
-        private $login_campos = array();
-        private $login_erros = array();
-        private $login_form = array();
+        private $login_campos = [];
+        private $login_erros = [];
+        private $login_form = [];
         
         public function set_email($email) : void
         {
@@ -126,7 +125,7 @@ namespace Module\Application\Controller\Usuario;
                         }
                     }
                     
-                    $login = array();
+                    $login = [];
                     
                     $usuario_login->set_token(bin2hex(random_bytes(40)));
                     
@@ -254,7 +253,7 @@ namespace Module\Application\Controller\Usuario;
                         }
                         
                         if ($this->manter_login === true) {
-                            $login = array();
+                            $login = [];
                             
                             $usuario_login->set_token(bin2hex(random_bytes(40)));
                             
@@ -296,5 +295,88 @@ namespace Module\Application\Controller\Usuario;
                 
                 return false;
             }
+        }
+        
+        public function Autenticar_Usuario_Login_Ajax() : void
+        {
+            $retorno_json['status'] = '';
+            $retorno_json['content'] = '';
+            $retorno_json['campos'] = '';
+            
+            if (empty($this->login_erros)) {
+                $usuario_login = DAO_Usuario::Autenticar($this->email);
+                
+                if (!empty($usuario_login) AND $usuario_login !== false) {
+                    if (password_verify($this->senha, $usuario_login->get_senha())) {
+                        $usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
+                        
+                        Login_Session::set_usuario_id($usuario_login->get_id());
+                        Login_Session::set_usuario_nome($usuario_login->get_nome());
+                        Login_Session::set_usuario_status($usuario_login->get_status_id());
+                        
+                        $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
+                        
+                        if (!empty($entidade_login) AND $entidade_login !== false) {
+                            $login['entidade'] = $entidade_login->get_id();
+                            
+                            Login_Session::set_entidade_id($entidade_login->get_id());
+                            Login_Session::set_entidade_nome($entidade_login->get_nome_comercial());
+                            Login_Session::set_entidade_status($entidade_login->get_status_id());
+                            Login_Session::set_entidade_plano($entidade_login->get_plano_id());
+                            
+                            $acessos_login = DAO_Acesso_Usuario::BuscarPorCOD($usuario_login->get_id(), $entidade_login->get_id());
+                            
+                            if (!empty($acessos_login) AND $acessos_login !== false) {
+                                foreach ($acessos_login as $acesso_login) {
+                                    Login_Session::set_permissao($acesso_login->get_funcionalidade_id(), $acesso_login->get_permissao_id());
+                                }
+                            }
+                        }
+                        
+                        if ($this->manter_login === true) {
+                            $login = [];
+                            
+                            $usuario_login->set_token(bin2hex(random_bytes(40)));
+                            
+                            $login['usuario'] = $usuario_login->get_id();
+                            $login['token'] = hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token()));
+                            
+                            setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
+                            
+                            $retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
+                            
+                            if ($retorno === false) {
+                                $this->login_erros[] = "Erro ao tentar Atualizar Usuario";
+                            }
+                        } else {
+                            $retorno = DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
+                            
+                            if ($retorno === false) {
+                                $this->login_erros[] = "Erro ao tentar Atualizar Usuario";
+                            }
+                        }
+                    } else {
+                        $this->login_erros[] = "Senha Incorreta";
+                        $this->login_campos['erro_senha'] = "erro";
+                    }
+                } else {
+                    $this->login_erros[] = "Erro ao tentar Autenticar Usuario";
+                }
+            }
+            
+            if (empty($this->login_erros)) {
+                $retorno_json['status'] = 'certo';
+                $retorno_json['content'] = "<li>Login realizado com Sucesso</li>";
+            } else {
+                setcookie("f_m_l", null, time()-3600, "/");
+                $retorno_json['status'] = 'erro';
+                $retorno_json['campos'] = $this->login_campos;
+                
+                foreach ($this->login_erros as $erro) {
+                    $retorno_json['content'] .= "<li>$erro</li>";
+                }
+            }
+            
+            echo json_encode($retorno_json);
         }
     }

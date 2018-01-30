@@ -201,6 +201,20 @@
                 }
             });
             
+            $app->post('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                $login = new Module\Application\Controller\Usuario\Login();
+                
+                $login->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+                
+                $login->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
+                
+                $login->set_manter_login(isset($_POST['manter']) ? true : null);
+                
+                $resposta = $login->Autenticar_Usuario_Login_Ajax();
+                
+                return $response;
+            });
+            
             $app->get('/sair[/]', function(Request $request, Response $response, $args) use ($app) {
                 $login = new Module\Application\Controller\Usuario\Login();
                 
@@ -241,6 +255,24 @@
                 } else {
                     return $response;
                 }
+            });
+            
+            $app->post('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                $cadastro = new Module\Application\Controller\Usuario\Cadastro();
+                    
+                $cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                
+                $cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                
+                $cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+                
+                $cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
+                
+                $cadastro->set_recaptcha_response(isset($_POST['token']) ? $_POST['token'] : null);
+                
+                $cadastro->Cadastrar_Usuario_Ajax();
+                
+                return $response;
             });
         });
         
