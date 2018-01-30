@@ -90,7 +90,6 @@ namespace Module\Application\Controller\Usuario;
         
         public function Enviar_Link_Email() : void
         {
-            $retorno = array();
             $retorno['status'] = '';
             $retorno['header'] = '';
             $retorno['content'] = '';

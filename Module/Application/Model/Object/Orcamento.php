@@ -75,7 +75,7 @@ namespace Module\Application\Model\Object;
             return $this->modelo_id;
         }
         
-        public function set_versao_id(int $versao_id) : void
+        public function set_versao_id(?int $versao_id) : void
         {
             $this->versao_id = $versao_id;
         }
@@ -85,7 +85,7 @@ namespace Module\Application\Model\Object;
             return $this->versao_id;
         }
         
-        public function set_ano_de(int $ano_de) : void
+        public function set_ano_de(?int $ano_de) : void
         {
             $this->ano_de = $ano_de;
         }
@@ -95,7 +95,7 @@ namespace Module\Application\Model\Object;
             return $this->ano_de;
         }
         
-        public function set_ano_ate(int $ano_ate) : void
+        public function set_ano_ate(?int $ano_ate) : void
         {
             $this->ano_ate = $ano_ate;
         }
@@ -115,7 +115,7 @@ namespace Module\Application\Model\Object;
             return $this->peca_nome;
         }
         
-        public function set_numero_serie(string $numero_serie) : void
+        public function set_numero_serie(?string $numero_serie) : void
         {
             $this->numero_serie = $numero_serie;
         }
@@ -125,7 +125,7 @@ namespace Module\Application\Model\Object;
             return $this->numero_serie;
         }
         
-        public function set_estado_uso_id(int $estado_uso_id) : void
+        public function set_estado_uso_id(?int $estado_uso_id) : void
         {
             $this->estado_uso_id = $estado_uso_id;
         }
@@ -135,7 +135,7 @@ namespace Module\Application\Model\Object;
             return $this->estado_uso_id;
         }
         
-        public function set_preferencia_entrega_id(int $preferencia_entrega_id) : void
+        public function set_preferencia_entrega_id(?int $preferencia_entrega_id) : void
         {
             $this->preferencia_entrega_id = $preferencia_entrega_id;
         }
@@ -145,7 +145,7 @@ namespace Module\Application\Model\Object;
             return $this->preferencia_entrega_id;
         }
         
-        public function set_descricao(string $descricao) : void
+        public function set_descricao(?string $descricao) : void
         {
             $this->descricao = $descricao;
         }

@@ -107,7 +107,7 @@ namespace Module\Application\Model\DAO;
                 $sql = 'SELECT cidade_id FROM tb_cidade WHERE cidade_url = :url';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(':url', $url, PDO::PARAM_INT);
+                $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 return $p_sql->fetch(PDO::FETCH_COLUMN);

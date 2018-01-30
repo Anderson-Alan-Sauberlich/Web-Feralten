@@ -3,14 +3,15 @@
 	<div class="ui horizontal divider">OU</div>
 	<div onclick="abrirModal()" class="ui big yellow button">Solicitar Orçamentos</div>
 </div>
-<div id="mdl_enviar" class="ui tiny modal">
+<div id="mdl_enviar" class="ui mini modal">
 	<i class="close icon"></i>
-    <div id="mdl_content" class="content"></div>
+	<div class="header">Preencha os campos obrigatórios:</div>
+    <ul id="mdl_content" class="inverted list"></ul>
     <div class="actions">
         <div class="ui approve right labeled icon button">Continuar <i class="checkmark icon"></i></div>
     </div>
 </div>
-<div class="ui fullscreen modal">
+<div class="ui large long modal">
 	<i class="close icon"></i>
 	<div class="content">
 		<?php if (!View_Solicitar_Orcamento::Verificar_Logado()) { ?>
@@ -76,8 +77,13 @@
         		<label>Descrição: (Opcional)</label>
            		<textarea id="descricao" name="descricao" rows="2"></textarea>
         	</div>
-        	<button onclick="" class="ui big yellow button">Enviar Solicitação de Orçamentos</button>
+        	<button onclick="criarOrcamento()" class="ui big yellow button">Enviar Solicitação de Orçamentos</button>
 		</div>
+		<div id="div_msg" class="ui hidden message">
+        	<i class="close icon"></i>
+        	<div id="msg_header" class="header"></div>
+        	<ul id="msg_list" class="list"></ul>
+        </div>
 	</div>
 </div>
 <script type="text/javascript" src="/application/js/layout/modal/solicitar_orcamento.js"></script>

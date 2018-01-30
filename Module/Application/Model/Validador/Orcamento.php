@@ -64,7 +64,7 @@ namespace Module\Application\Model\Validador;
             
         }
         
-        public static function validar_peca_nome($nome = null) : string
+        public static function validar_nome($nome = null) : string
         {
             return Peca::validar_nome($nome);
         }

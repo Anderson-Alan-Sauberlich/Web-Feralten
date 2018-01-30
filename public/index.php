@@ -72,6 +72,38 @@
             });
         });
         
+        $app->group('/modal', function() use ($app) {
+            $app->group('/solicitar-orcamento', function() use ($app) {
+                $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $solicitar_orcamento = new Module\Application\Controller\Layout\Modal\Solicitar_Orcamento();
+                    
+                    $solicitar_orcamento->set_categoria_id(isset($_POST['categoria_id']) ? $_POST['categoria_id'] : null);
+                    
+                    $solicitar_orcamento->set_marca_id(isset($_POST['marca_id']) ? $_POST['marca_id'] : null);
+                    
+                    $solicitar_orcamento->set_modelo_id(isset($_POST['modelo_id']) ? $_POST['modelo_id'] : null);
+                    
+                    $solicitar_orcamento->set_versao_id(isset($_POST['versao_id']) ? $_POST['versao_id'] : null);
+                    
+                    $solicitar_orcamento->set_ano_de(isset($_POST['ano_de']) ? $_POST['ano_de'] : null);
+                    
+                    $solicitar_orcamento->set_ano_ate(isset($_POST['ano_ate']) ? $_POST['ano_ate'] : null);
+                    
+                    $solicitar_orcamento->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                    
+                    $solicitar_orcamento->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
+                    
+                    $solicitar_orcamento->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
+                    
+                    $solicitar_orcamento->set_numero_serie(isset($_POST['numero_serie']) ? $_POST['numero_serie'] : null);
+                    
+                    $solicitar_orcamento->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
+                    
+                    $solicitar_orcamento->Criar_Orcamento();
+                });
+            });
+        });
+        
         $app->group('/form', function() use ($app) {
             $app->group('/contato', function() use ($app) {
                 $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
