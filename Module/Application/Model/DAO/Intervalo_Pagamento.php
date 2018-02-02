@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Intervalo_Pagamento
     {
-        
         function __construct()
         {
             

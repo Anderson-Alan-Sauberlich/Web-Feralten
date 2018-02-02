@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Intervalo_Pagamento
     {
-        
         private $id;
         private $descricao;
         

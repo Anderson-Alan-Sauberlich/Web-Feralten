@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Usuario
     {
-        
         private $id;
         private $nome;
         private $sobrenome;

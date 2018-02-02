@@ -6,7 +6,6 @@ namespace Module\Application\Model\Common\Util;
     
     class Conexao
     {
-        
         function __construct()
         {
             $this->Conectar();

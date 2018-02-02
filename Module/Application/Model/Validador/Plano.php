@@ -9,7 +9,6 @@ namespace Module\Application\Model\Validador;
     
     class Plano
     {
-        
         function __constructor()
         {
             

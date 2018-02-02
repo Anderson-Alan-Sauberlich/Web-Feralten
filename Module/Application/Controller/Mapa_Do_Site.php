@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Mapa_Do_Site
     {
-
         function __construct()
         {
             

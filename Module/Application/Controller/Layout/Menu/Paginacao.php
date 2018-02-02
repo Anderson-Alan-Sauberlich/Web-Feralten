@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Layout\Menu;
     
     class Paginacao
     {
-        
         function __construct()
         {
             

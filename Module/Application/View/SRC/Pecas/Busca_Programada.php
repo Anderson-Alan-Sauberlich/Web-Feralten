@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Pecas;
 
     class Busca_Programada
     {
-
         function __construct()
         {
             

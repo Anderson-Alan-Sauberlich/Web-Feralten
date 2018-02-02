@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Categoria_Pativel
     {
-        
         private $peca_id;
         private $object_categoria;
         private $ano_de;

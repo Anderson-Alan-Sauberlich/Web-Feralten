@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Modelo_Pativel
     {
-        
         private $peca_id;
         private $object_modelo;
         private $ano_de;

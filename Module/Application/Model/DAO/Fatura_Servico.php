@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Fatura_Servico
     {
-        
         function __construct()
         {
             

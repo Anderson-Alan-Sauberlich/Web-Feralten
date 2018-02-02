@@ -6,7 +6,6 @@ namespace Module\Application\Model\Validador;
     
     class Marca_Pativel
     {
-        
         function __constructor()
         {
             

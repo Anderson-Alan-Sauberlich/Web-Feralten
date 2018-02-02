@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
 
     class Entidade
     {
-        
         private $id;
         private $usuario_id;
         private $status_id;

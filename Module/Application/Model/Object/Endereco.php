@@ -6,7 +6,6 @@ namespace Module\Application\Model\Object;
     
     class Endereco
     {
-        
         private $id;
         private $entidade_id;
         private $cidade;

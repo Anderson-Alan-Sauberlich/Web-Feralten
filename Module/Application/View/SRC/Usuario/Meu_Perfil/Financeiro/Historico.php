@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     
     class Historico
     {
-        
         function __construct($status)
         {
             self::$status_usuario = $status;

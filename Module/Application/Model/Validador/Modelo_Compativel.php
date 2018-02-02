@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Modelo_Compativel
     {
-        
         function __constructor()
         {
             

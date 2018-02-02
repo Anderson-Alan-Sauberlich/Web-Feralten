@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Contato_Anunciante
     {
-        
         private $id;
         private $object_peca;
         private $nome;

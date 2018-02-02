@@ -7,7 +7,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
     
     class Meus_Orcamentos
     {
-        
         function __construct()
         {
             

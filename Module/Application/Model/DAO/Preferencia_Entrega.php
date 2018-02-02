@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Preferencia_Entrega
     {
-        
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Preferencia_Entrega
     {
-        
         function __constructor()
         {
             

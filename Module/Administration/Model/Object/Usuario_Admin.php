@@ -3,7 +3,6 @@ namespace Module\Administration\Model\Object;
     
     class Usuario_Admin
     {
-        
         private $id;
         private $usuario;
         private $senha;

@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout\Header;
     
     class Cabecalho
     {
-
         function __construct()
         {
             

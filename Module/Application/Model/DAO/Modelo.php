@@ -11,7 +11,6 @@ namespace Module\Application\Model\DAO;
     
     class Modelo
     {
-        
         function __construct()
         {
             

@@ -8,7 +8,6 @@ namespace Module\App\Controller;
     
     class CMMV
     {
-
         function __construct()
         {
             

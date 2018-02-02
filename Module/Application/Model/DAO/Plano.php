@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Plano
     {
-        
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout;
     
     class Loader
     {
-        
         function __construct()
         {
             

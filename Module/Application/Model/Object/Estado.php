@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Estado
     {
-        
         private $id;
         private $uf;
         private $nome;

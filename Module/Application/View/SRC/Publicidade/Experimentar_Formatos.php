@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Publicidade;
     
     class Experimentar_Formatos
     {
-
         function __construct()
         {
             

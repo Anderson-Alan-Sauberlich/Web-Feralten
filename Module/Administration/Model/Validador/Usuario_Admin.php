@@ -5,7 +5,6 @@ namespace Module\Administration\Model\Validador;
     
     class Usuario_Admin
     {
-        
         function __constructor()
         {
             

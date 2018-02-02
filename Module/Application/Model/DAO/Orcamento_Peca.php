@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Orcamento_Peca
     {
-        
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Layout\Header;
 
     class Cabecalho
     {
-
         function __construct()
         {
             

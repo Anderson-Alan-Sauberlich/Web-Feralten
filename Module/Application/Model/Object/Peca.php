@@ -10,7 +10,6 @@ namespace Module\Application\Model\Object;
     
     class Peca
     {
-        
         private $id;
         private $entidade;
         private $usuario_responsavel;

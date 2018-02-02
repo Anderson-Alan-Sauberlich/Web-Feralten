@@ -7,7 +7,6 @@ namespace Module\Application\View\SRC\Pecas;
     
     class Detalhes
     {
-
         function __construct()
         {
             

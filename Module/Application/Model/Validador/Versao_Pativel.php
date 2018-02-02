@@ -6,7 +6,6 @@ namespace Module\Application\Model\Validador;
     
     class Versao_Pativel
     {
-        
         function __constructor()
         {
             

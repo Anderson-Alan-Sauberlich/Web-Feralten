@@ -1,15 +1,19 @@
 <?php
 namespace Module\Application\Model\Object;
-
+    
+    use Module\Application\Model\Object\Categoria as Object_Categoria;
+    use Module\Application\Model\Object\Marca as Object_Marca;
+    use Module\Application\Model\Object\Modelo as Object_Modelo;
+    use Module\Application\Model\Object\Versao as Object_Versao;
+    
     class Orcamento
     {
-        
         private $id;
         private $usuario_id;
-        private $categoria_id;
-        private $marca_id;
-        private $modelo_id;
-        private $versao_id;
+        private $categoria;
+        private $marca;
+        private $modelo;
+        private $versao;
         private $ano_de;
         private $ano_ate;
         private $peca_nome;
@@ -19,7 +23,7 @@ namespace Module\Application\Model\Object;
         private $descricao;
         private $datahora_solicitacao;
         private $datahora_validade;
-                
+        
         function __constructor()
         {
             
@@ -45,44 +49,116 @@ namespace Module\Application\Model\Object;
             return $this->usuario_id;
         }
         
+        public function set_categoria(Object_Categoria $categoria) : void
+        {
+            $this->categoria = $categoria;
+        }
+        
+        public function get_categoria() : ?Object_Categoria
+        {
+            return $this->categoria;
+        }
+        
         public function set_categoria_id(int $categoria_id) : void
         {
-            $this->categoria_id = $categoria_id;
+            if (!$this->categoria instanceof Object_Categoria) {
+                $this->categoria = new Object_Categoria();
+            }
+            
+            $this->categoria->set_id($categoria_id);
         }
         
         public function get_categoria_id() : ?int
         {
-            return $this->categoria_id;
+            if ($this->categoria instanceof Object_Categoria) {
+                return $this->categoria->get_id();
+            } else {
+                return null;
+            }
+        }
+        
+        public function set_marca(Object_Marca $marca) : void
+        {
+            $this->marca = $marca;
+        }
+        
+        public function get_marca() : ?Object_Marca
+        {
+            return $this->marca;
         }
         
         public function set_marca_id(int $marca_id) : void
         {
-            $this->marca_id = $marca_id;
+            if (!$this->marca instanceof Object_Marca) {
+                $this->marca = new Object_Marca();
+            }
+            
+            $this->marca->set_id($marca_id);
         }
         
         public function get_marca_id() : ?int
         {
-            return $this->marca_id;
+            if ($this->marca instanceof Object_Marca) {
+                return $this->marca->get_id();
+            } else {
+                return null;
+            }
+        }
+        
+        public function set_modelo(Object_Modelo $modelo) : void
+        {
+            $this->modelo = $modelo;
+        }
+        
+        public function get_modelo() : ?Object_Modelo
+        {
+            return $this->modelo;
         }
         
         public function set_modelo_id(int $modelo_id) : void
         {
-            $this->modelo_id = $modelo_id;
+            if (!$this->modelo instanceof Object_Modelo) {
+                $this->modelo = new Object_Modelo();
+            }
+            
+            $this->modelo->set_id($modelo_id);
         }
         
         public function get_modelo_id() : ?int
         {
-            return $this->modelo_id;
+            if ($this->modelo instanceof Object_Modelo) {
+                return $this->modelo->get_id();
+            } else {
+                return null;
+            }
+        }
+        
+        public function set_versao(?Object_Versao $versao) : void
+        {
+            $this->versao = $versao;
+        }
+        
+        public function get_versao() : ?Object_Versao
+        {
+            return $this->versao;
         }
         
         public function set_versao_id(?int $versao_id) : void
         {
-            $this->versao_id = $versao_id;
+            if (!$this->versao instanceof Object_Versao) {
+                $this->versao = new Object_Versao();
+            }
+            
+            $this->versao->set_id($versao_id);
         }
         
         public function get_versao_id() : ?int
         {
-            return $this->versao_id;
+            if ($this->versao instanceof Object_Versao) {
+                return $this->versao->get_id();
+            } else {
+                return null;
+            }
         }
         
         public function set_ano_de(?int $ano_de) : void

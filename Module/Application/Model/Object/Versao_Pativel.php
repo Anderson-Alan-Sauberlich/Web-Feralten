@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Versao_Pativel
     {
-        
         private $peca_id;
         private $object_versao;
         private $ano_de;

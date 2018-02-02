@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Estado
     {
-        
         function __constructor()
         {
             

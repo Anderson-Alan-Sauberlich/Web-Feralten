@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Marca_Compativel
     {
-    
         function __construct()
         {
     

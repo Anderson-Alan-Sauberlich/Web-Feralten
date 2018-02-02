@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Transacao
     {
-        
         function __constructor()
         {
             

@@ -6,7 +6,6 @@ namespace Module\Application\Model\Object;
     
     class Visualizado
     {
-        
         private $id;
         private $object_entidade;
         private $object_usuario;

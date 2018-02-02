@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Preferencia_Entrega
     {
-        
         private $id;
         private $nome;
         private $url;

@@ -14,7 +14,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     
     class Atualizar
     {
-
         function __construct()
         {
             

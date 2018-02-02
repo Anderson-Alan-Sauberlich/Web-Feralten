@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Dicas_De_Venda;
 
     class Apresentacao
     {
-
         function __construct()
         {
             

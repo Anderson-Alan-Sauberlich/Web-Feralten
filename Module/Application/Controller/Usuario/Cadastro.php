@@ -12,7 +12,6 @@ namespace Module\Application\Controller\Usuario;
     
     class Cadastro
     {
-        
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Recuperar_Senha
     {
-        
         function __constructor()
         {
             

@@ -6,7 +6,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     class Cadastrar
     {
-        
         function __construct(int $status) 
         {
             self::$status_usuario = $status;

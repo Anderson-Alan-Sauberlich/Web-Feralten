@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Categoria_Compativel
     {
-        
         private $da_id;
         private $com_id;
     

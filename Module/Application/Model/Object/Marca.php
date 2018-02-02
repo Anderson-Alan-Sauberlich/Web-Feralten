@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Marca
     {
-        
         private $id;
         private $categoria_id;
         private $nome;

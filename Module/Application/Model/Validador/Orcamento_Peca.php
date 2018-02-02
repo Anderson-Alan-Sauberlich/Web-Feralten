@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Orcamento_Peca
     {
-        
         function __constructor()
         {
             

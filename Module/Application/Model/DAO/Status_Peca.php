@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Status_Peca
     {
-        
         function __construct()
         {
             

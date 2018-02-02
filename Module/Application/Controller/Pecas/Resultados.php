@@ -7,7 +7,6 @@ namespace Module\Application\Controller\Pecas;
     
     class Resultados
     {
-
         function __construct()
         {
             $this->controller_pesquisa = new Controller_Pesquisa();

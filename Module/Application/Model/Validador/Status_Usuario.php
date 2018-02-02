@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Status_Usuario
     {
-        
         function __constructor()
         {
             

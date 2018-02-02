@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Marca_Pativel
     {
-        
         private $peca_id;
         private $object_marca;
         private $ano_de;

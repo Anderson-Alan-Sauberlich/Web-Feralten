@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Entidade
     {
-        
         function __construct()
         {
             

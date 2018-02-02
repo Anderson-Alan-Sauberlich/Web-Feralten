@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout\Menu;
     
     class Paginacao
     {
-        
         function __construct(int $pagina, int $paginas)
         {
             if ($paginas > 1) {

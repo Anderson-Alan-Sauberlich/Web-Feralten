@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Publicidade;
     
     class Condicoes_Gerais
     {
-
         function __construct()
         {
             

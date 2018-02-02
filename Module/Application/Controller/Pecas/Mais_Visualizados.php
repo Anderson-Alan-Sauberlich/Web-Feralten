@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Pecas;
     
     class Mais_Visualizados
     {
-
         function __construct()
         {
             

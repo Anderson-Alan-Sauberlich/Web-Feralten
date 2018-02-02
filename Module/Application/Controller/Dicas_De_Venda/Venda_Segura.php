@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Dicas_De_Venda;
     
     class Venda_Segura
     {
-
         function __construct()
         {
             

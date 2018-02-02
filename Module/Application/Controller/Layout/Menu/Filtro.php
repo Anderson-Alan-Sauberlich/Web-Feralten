@@ -18,7 +18,6 @@ namespace Module\Application\Controller\Layout\Menu;
     
     class Filtro
     {
-        
         function __construct()
         {
             

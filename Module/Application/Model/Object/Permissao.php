@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Permissao
     {
-        
         private $id;
         private $nome;
         

@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Status_Entidade
     {
-        
         private $id;
         private $nome;
         

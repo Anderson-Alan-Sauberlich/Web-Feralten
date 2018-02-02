@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Contato
     {
-        
         private $nome;
         private $email;
         private $telefone;

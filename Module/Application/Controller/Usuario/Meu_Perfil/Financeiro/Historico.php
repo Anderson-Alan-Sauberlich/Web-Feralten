@@ -6,7 +6,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     class Historico
     {
-
         function __construct()
         {
             

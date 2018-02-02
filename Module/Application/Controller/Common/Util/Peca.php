@@ -3,7 +3,6 @@ namespace Module\Application\Controller\Common\Util;
     
     class Peca
     {
-        
         function __construct()
         {
             

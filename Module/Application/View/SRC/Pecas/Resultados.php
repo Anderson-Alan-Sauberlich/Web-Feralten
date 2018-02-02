@@ -9,7 +9,6 @@ namespace Module\Application\View\SRC\Pecas;
                     
     class Resultados
     {
-
         function __construct()
         {
             

@@ -46,7 +46,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     
     class Cadastrar
     {
-
         function __construct()
         {
             

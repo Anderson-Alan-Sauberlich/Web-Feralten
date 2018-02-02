@@ -6,7 +6,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     class Atualizar
     {
-        
         function __construct($status)
         {
             self::$status_usuario = $status;

@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Estado_Uso_Peca
     {
-        
         function __constructor()
         {
             

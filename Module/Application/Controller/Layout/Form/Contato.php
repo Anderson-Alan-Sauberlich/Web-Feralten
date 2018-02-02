@@ -9,7 +9,6 @@ namespace Module\Application\Controller\Layout\Form;
 
     class Contato
     {
-        
         function __construct()
         {
             $this->object_contato = new Object_Contato();

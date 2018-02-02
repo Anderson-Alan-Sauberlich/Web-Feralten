@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
     
     class Perfil
     {
-
         function __construct(int $status)
         {
             self::$status_usuario = $status;

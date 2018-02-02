@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Publicidade;
     
     class Dicas
     {
-
         function __construct()
         {
             

@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Fatura
     {
-        
         function __construct()
         {
             

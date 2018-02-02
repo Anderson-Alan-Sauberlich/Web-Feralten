@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Recuperar_Senha
     {
-        
         function __construct()
         {
             

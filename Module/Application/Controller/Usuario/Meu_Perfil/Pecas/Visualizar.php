@@ -9,7 +9,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 
     class Visualizar
     {
-
         function __construct()
         {
             $this->controller_pesquisa = new Controller_Pesquisa();

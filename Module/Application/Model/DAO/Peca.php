@@ -21,7 +21,6 @@ namespace Module\Application\Model\DAO;
     
     class Peca
     {
-        
         function __construct()
         {
             

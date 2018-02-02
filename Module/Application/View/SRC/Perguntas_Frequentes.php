@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC;
     
     class Perguntas_Frequentes
     {
-        
         function __construct()
         {
             

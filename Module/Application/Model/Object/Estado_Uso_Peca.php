@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Estado_Uso_Peca
     {
-        
         private $id;
         private $nome;
         private $url;

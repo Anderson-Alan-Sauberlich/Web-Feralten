@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC;
     
     class Quem_Somos
     {
-        
         function __construct()
         {
             

@@ -14,7 +14,6 @@ namespace Module\Application\Model\DAO;
     
     class Modelo_Pativel
     {
-        
         function __construct()
         {
             

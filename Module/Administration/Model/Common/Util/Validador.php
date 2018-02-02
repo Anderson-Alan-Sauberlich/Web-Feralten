@@ -5,7 +5,6 @@ namespace Module\Administration\Model\Common\Util;
     
     class Validador
     {
-        
         function __construct()
         {
             

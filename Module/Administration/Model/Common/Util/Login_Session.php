@@ -7,7 +7,6 @@ namespace Module\Administration\Model\Common\Util;
     
     class Login_Session
     {
-        
         function __constructor()
         {
             

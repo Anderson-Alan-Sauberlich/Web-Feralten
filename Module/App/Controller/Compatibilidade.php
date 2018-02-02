@@ -8,7 +8,6 @@ namespace Module\App\Controller;
     
     class Compatibilidade
     {
-        
         function __construct()
         {
             

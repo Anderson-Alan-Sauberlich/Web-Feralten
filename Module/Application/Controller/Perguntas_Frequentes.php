@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Perguntas_Frequentes
     {
-        
         function __construct()
         {
             

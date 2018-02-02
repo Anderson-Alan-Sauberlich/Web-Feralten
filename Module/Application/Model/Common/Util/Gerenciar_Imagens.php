@@ -6,7 +6,6 @@ namespace Module\Application\Model\Common\Util;
     
     class Gerenciar_Imagens
     {
-        
         function __construct()
         {
             $this->usuario = Login_Session::get_usuario_id();

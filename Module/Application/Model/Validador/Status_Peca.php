@@ -6,7 +6,6 @@ namespace Module\Application\Model\Validador;
     
     class Status_Peca
     {
-        
         function __constructor()
         {
             

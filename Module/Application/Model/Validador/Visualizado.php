@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Visualizado
     {
-        
         function __constructor()
         {
             

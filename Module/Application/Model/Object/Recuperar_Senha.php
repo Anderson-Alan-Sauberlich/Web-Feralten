@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Recuperar_Senha
     {
-        
         private $object_usuario;
         private $data_hora;
         private $codigo;

@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Status_Fatura
     {
-        
         private $id;
         private $descricao;
         

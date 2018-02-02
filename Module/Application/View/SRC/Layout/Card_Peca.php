@@ -6,7 +6,6 @@ namespace Module\Application\View\SRC\Layout;
         
     class Card_Peca
     {
-        
         function __construct()
         {
             

@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Marca_Pativel_Ano
     {
-        
         private $anos = array();
         private $ano_id;
         

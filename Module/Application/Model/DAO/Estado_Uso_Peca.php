@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Estado_Uso_Peca
     {
-        
         function __construct()
         {
             

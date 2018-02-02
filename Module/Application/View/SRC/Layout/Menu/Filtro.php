@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout\Menu;
     
     class Filtro
     {
-        
         function __construct(?array $form_filtro = null)
         {
             self::$form_filtro = $form_filtro;

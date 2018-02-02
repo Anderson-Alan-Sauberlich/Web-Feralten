@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Cidade
     {
-        
         private $id;
         private $estado_id;
         private $nome;

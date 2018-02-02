@@ -5,7 +5,6 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     
     class Cadastrar
     {
-
         function __construct()
         {
             

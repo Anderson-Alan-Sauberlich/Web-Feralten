@@ -6,7 +6,6 @@ namespace Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\CMM
     
     class Gerenciar
     {
-        
         function __construct()
         {
             

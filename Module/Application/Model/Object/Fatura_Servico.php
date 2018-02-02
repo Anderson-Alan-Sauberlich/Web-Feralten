@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Fatura_Servico
     {
-        
         private $id;
         private $fatura_id;
         private $valor;

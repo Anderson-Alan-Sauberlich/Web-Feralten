@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout\Menu;
     
     class Usuario
     {
-        
         private static $status_usuario;
         private static $url_menu;
 

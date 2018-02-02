@@ -7,7 +7,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
     
     class Orcamentos_Recebidos
     {
-        
         function __construct()
         {
             
@@ -21,9 +20,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
                 $view = new View_Orcamentos_Recebidos($status);
                 
                 $view->Executar();
+                
+                return $status;
             } else {
                 return false;
             }
         }
-        //TODO Criar foreach no html, e passar o objeto de dentro da array por aparetro para uma function statica, e a function statica retorna o valor com echo no src
+        //TODO Criar foreach no html, e passar o objeto de dentro da array por paretro para uma function statica, e a function statica retorna o valor com echo no src
     }

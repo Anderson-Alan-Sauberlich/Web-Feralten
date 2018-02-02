@@ -5,11 +5,8 @@ namespace Module\Common\Util;
     
     class Pagamento
     {
-        
         function __construct()
         {
             
         }
-        
-        
     }

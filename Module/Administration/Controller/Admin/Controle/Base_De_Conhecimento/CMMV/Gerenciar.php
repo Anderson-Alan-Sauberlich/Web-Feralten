@@ -9,7 +9,6 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     
     class Gerenciar
     {
-        
         function __construct()
         {
             

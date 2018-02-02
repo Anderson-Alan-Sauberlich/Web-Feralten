@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Publicidade;
     
     class Experimentar_Formatos
     {
-
         function __construct()
         {
             

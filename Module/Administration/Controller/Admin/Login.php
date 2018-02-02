@@ -8,7 +8,6 @@ namespace Module\Administration\Controller\Admin;
     
     class Login
     {
-        
         function __construct()
         {
             

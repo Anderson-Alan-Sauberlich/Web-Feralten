@@ -8,7 +8,6 @@ namespace Module\Application\Model\Validador;
     
     class Entidade
     {
-        
         function __constructor()
         {
             

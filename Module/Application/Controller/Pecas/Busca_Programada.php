@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Pecas;
     
     class Busca_Programada
     {
-
         function __construct()
         {
             

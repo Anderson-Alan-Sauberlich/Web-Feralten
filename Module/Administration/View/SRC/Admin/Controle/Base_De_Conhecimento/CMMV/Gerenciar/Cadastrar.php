@@ -5,7 +5,6 @@ namespace Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\CMM
     
     class Cadastrar
     {
-    
         function __construct()
         {
             

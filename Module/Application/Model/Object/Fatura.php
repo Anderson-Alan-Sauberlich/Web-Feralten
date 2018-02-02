@@ -5,7 +5,6 @@ namespace Module\Application\Model\Object;
     
     class Fatura
     {
-        
         private $id;
         private $entidade_id;
         private $valor_total;

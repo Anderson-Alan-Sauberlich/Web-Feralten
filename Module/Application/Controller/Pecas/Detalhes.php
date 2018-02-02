@@ -15,7 +15,6 @@ namespace Module\Application\Controller\Pecas;
     
     class Detalhes
     {
-
         function __construct()
         {
             

@@ -12,7 +12,6 @@ namespace Module\Application\Model\DAO;
     
     class Endereco
     {
-
         function __construct()
         {
             

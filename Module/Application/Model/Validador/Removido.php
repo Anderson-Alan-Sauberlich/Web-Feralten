@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Removido
     {
-        
         function __constructor()
         {
             

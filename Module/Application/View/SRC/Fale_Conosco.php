@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC;
     
     class Fale_Conosco
     {
-        
         function __construct()
         {
             

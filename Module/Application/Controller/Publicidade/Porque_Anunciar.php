@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Publicidade;
     
     class Porque_Anunciar
     {
-
         function __construct()
         {
             

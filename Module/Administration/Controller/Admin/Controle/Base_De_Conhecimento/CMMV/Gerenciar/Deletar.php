@@ -14,7 +14,6 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     
     class Deletar
     {
-
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Layout\Menu;
     
     class Pesquisa
     {
-        
         function __construct(?array $form_pesquisa = null)
         {
             self::$form_pesquisa = $form_pesquisa;

@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Peca
     {
-        
         function __constructor()
         {
             

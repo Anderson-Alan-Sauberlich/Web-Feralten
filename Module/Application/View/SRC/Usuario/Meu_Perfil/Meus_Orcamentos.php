@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
     
     class Meus_Orcamentos
     {
-
         function __construct(int $status)
         {
             self::$status_usuario = $status;

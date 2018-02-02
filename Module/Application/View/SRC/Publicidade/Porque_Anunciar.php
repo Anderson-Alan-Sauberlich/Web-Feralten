@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Publicidade;
     
     class Porque_Anunciar
     {
-
         function __construct()
         {
             

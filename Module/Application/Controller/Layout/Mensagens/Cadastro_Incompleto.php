@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Layout\Mensagens;
     
     class Cadastro_Incompleto
     {
-
         function __construct()
         {
             

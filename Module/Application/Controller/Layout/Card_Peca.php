@@ -14,7 +14,6 @@ namespace Module\Application\Controller\Layout;
 
     class Card_Peca
     {
-        
         function __construct()
         {
             

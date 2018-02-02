@@ -10,7 +10,6 @@ namespace Module\Application\Controller\Common\Util;
     
     class Email
     {
-        
         function __construct()
         {
             

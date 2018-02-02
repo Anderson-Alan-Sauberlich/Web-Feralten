@@ -43,9 +43,10 @@ namespace Module\Application\Model\Common\Util;
     use Module\Application\Model\Validador\Versao_Pativel;
     use Module\Application\Model\Validador\Visualizado;
     
-    class Validador {
-        
-        function __construct() {
+    class Validador
+    {
+        function __construct()
+        {
             
         }
         

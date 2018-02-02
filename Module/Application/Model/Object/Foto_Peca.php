@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Foto_Peca
     {
-        
         private $peca_id;
         private $endereco;
         private $numero;

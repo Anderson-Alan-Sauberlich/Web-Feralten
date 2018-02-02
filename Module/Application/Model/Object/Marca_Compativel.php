@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Marca_Compativel
     {
-        
         private $da_id;
         private $com_id;
     

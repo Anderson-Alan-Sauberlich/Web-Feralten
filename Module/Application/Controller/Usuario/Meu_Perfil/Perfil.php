@@ -11,7 +11,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
     
     class Perfil
     {
-
         function __construct()
         {
             

@@ -6,7 +6,6 @@ namespace Module\Administration\Controller\Layout\Menu;
     
     class Admin
     {
-        
         function __construct()
         {
             

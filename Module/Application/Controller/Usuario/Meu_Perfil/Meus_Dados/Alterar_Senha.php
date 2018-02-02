@@ -10,7 +10,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     
     class Alterar_Senha
     {
-
         function __construct()
         {
             

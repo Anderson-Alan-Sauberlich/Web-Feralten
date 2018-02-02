@@ -14,7 +14,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     class Meu_Plano
     {
-        
         function __construct()
         {
             

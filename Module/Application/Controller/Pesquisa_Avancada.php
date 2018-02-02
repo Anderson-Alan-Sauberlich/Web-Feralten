@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Pesquisa_Avancada
     {
-
         function __construct()
         {
             

@@ -12,7 +12,6 @@ namespace Module\Application\Controller\Usuario;
     
     class Recuperar_Senha
     {
-
         function __construct()
         {
             $this->object_recuperar_senha = new Object_Recuperar_Senha();

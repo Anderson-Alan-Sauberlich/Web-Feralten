@@ -3,7 +3,6 @@ namespace Module\Administration\View\SRC\Layout\Header;
 
     class Admin
     {
-        
         function __construct()
         {
             

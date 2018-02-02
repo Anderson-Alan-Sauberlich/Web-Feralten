@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Contato
     {
-        
         function __constructor()
         {
             

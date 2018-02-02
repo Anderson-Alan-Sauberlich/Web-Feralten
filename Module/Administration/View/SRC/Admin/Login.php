@@ -3,7 +3,6 @@ namespace Module\Administration\View\SRC\Admin;
 
     class Login
     {
-        
         function __construct()
         {
             

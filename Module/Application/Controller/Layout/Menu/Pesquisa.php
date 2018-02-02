@@ -28,7 +28,6 @@ namespace Module\Application\Controller\Layout\Menu;
     
     class Pesquisa
     {
-
         function __construct()
         {
             $this->object_peca = new Object_Peca();

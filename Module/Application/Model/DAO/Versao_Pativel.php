@@ -14,7 +14,6 @@ namespace Module\Application\Model\DAO;
     
     class Versao_Pativel
     {
-        
         function __construct()
         {
             

@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
     
     class Funcionalidade
     {
-        
         private $id;
         private $nome;
         

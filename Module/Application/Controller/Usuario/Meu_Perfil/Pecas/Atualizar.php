@@ -43,7 +43,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     
     class Atualizar
     {
-        
         function __construct()
         {
             

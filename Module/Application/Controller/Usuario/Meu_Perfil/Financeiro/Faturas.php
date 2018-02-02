@@ -16,7 +16,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
     class Faturas
     {
-        
         /**
          * @const Parametro Cobrança
          */

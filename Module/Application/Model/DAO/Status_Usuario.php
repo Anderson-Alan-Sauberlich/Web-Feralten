@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Status_Usuario
     {
-        
         function __construct()
         {
             

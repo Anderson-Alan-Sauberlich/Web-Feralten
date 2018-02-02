@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Versao_Compativel
     {
-        
         private $da_id;
         private $com_id;
     

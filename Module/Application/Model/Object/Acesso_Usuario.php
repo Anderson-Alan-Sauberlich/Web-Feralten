@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Acesso_Usuario
     {
-        
         private $usuario_id;
         private $entidade_id;
         private $funcionalidade_id;

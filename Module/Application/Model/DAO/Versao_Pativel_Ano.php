@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Versao_Pativel_Ano
     {
-        
         function __construct()
         {
             

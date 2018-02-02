@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Plano
     {
-        
         private $id;
         private $valor_mensal;
         private $valor_anual;

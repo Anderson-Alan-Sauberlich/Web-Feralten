@@ -7,7 +7,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
     
     class Enderecos
     {
-
         function __construct(?int $status = null)
         {
             self::$status_usuario = $status;

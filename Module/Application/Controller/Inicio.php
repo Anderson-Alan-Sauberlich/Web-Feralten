@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Inicio
     {
-        
         function __construct()
         {
             

@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Foto_Peca
     {
-        
         function __constructor()
         {
             

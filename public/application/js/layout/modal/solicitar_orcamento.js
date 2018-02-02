@@ -45,7 +45,7 @@ function abrirModal() {
 		$('#mdl_content').html(erro);
 		$('#mdl_enviar').modal('show');
 	} else {
-		$('#div_text_orc').html('<h3>Categoria: '+$("input[name='categoria']:checked").data('nome')+', Marca: '+$("#marca").find("option:selected").text()+', Modelo: '+$("#modelo").find("option:selected").text()+', Versão: '+$("#versao").find("option:selected").text()+'</h3>');
+		$('#div_text_orc').html('<h3>'+$("input[name='categoria']:checked").data('nome')+', '+$("#marca").find("option:selected").text()+', '+$("#modelo").find("option:selected").text()+', '+$("#versao").find("option:selected").text()+'</h3>');
 		$('#div_text_orc').append('<h3>Nome da Peça: '+peca+'</h3>');
 		$('#div_text_orc').append('<h3>Ano: de '+ano_de+' até '+ano_ate+'</h3>');
 		if (preferencia_entrega != 0) {

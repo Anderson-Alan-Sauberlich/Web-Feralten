@@ -10,7 +10,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     class Visualizar
     {
-        
         function __construct($status)
         {
             self::$status_usuario = $status;

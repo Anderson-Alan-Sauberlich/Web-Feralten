@@ -7,7 +7,6 @@ namespace Module\Application\Model\Validador;
     
     class Endereco
     {
-        
         function __constructor()
         {
             

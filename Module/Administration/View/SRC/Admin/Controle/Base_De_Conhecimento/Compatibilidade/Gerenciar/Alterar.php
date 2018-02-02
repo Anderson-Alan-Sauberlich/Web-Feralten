@@ -3,7 +3,6 @@ namespace Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\Com
 
     class Alterar
     {
-    
         function __construct()
         {
             

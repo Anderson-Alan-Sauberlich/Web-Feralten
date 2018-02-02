@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Orcamento_Peca
     {
-        
         private $orcamento_id;
         private $peca_id;
         

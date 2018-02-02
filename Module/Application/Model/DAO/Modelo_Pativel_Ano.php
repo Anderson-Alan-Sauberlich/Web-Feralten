@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Modelo_Pativel_Ano
     {
-        
         function __construct()
         {
             

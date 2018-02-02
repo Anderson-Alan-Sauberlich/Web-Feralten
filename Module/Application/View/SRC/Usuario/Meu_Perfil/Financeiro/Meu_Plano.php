@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     
     class Meu_Plano
     {
-        
         function __construct($status, $planos, $plano_id)
         {
             self::$planos = $planos;

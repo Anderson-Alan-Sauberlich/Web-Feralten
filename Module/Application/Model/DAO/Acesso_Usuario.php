@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Acesso_Usuario
     {
-        
         function __construct()
         {
             

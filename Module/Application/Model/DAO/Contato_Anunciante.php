@@ -10,7 +10,6 @@ namespace Module\Application\Model\DAO;
     
     class Contato_Anunciante
     {
-        
         function __construct()
         {
             

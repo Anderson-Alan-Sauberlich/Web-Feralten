@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC;
     
     class Documentacao
     {
-
         function __construct()
         {
             

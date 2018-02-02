@@ -7,7 +7,6 @@ namespace Module\Application\Model\Common\Util;
     
     class Login_Session
     {
-        
         /** 
          * @const Parametro Funcionalidade
          */

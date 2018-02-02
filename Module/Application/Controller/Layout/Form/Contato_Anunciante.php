@@ -11,7 +11,6 @@ namespace Module\Application\Controller\Layout\Form;
     
     class Contato_Anunciante
     {
-        
         function __construct()
         {
             $this->object_contato_anunciante = new Object_Contato_Anunciante();

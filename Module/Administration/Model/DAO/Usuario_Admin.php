@@ -9,7 +9,6 @@ namespace Module\Administration\Model\DAO;
     
     class Usuario_Admin
     {
-
         function __construct()
         {
             

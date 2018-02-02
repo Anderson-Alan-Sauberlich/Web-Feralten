@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Usuario;
 
     class Login
     {
-
         function __construct()
         {
             

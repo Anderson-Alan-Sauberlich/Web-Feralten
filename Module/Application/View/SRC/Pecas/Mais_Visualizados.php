@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Pecas;
     
     class Mais_Visualizados
     {
-
         function __construct()
         {
             

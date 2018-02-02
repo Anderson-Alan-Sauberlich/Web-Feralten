@@ -5,7 +5,6 @@ namespace Module\Application\View\SRC\Usuario;
     
     class Recuperar_Senha
     {
-
         function __construct()
         {
             

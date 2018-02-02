@@ -15,7 +15,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     
     class Enderecos
     {
-        
         function __construct()
         {
             

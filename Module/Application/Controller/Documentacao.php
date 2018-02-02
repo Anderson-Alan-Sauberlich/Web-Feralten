@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Documentacao
     {
-
         function __construct()
         {
             

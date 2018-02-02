@@ -8,7 +8,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     
     class Faturas
     {
-        
         /**
          * @param number|NULL $status
          */

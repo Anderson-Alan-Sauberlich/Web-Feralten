@@ -2,6 +2,10 @@
 namespace Module\Application\Model\DAO;
     
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\DAO\Categoria as DAO_Categoria;
+    use Module\Application\Model\DAO\Marca as DAO_Marca;
+    use Module\Application\Model\DAO\Modelo as DAO_Modelo;
+    use Module\Application\Model\DAO\Versao as DAO_Versao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -9,7 +13,6 @@ namespace Module\Application\Model\DAO;
     
     class Orcamento
     {
-        
         function __construct()
         {
             
@@ -150,19 +153,19 @@ namespace Module\Application\Model\DAO;
                 }
                 
                 if (isset($row['orcamento_ctg_id'])) {
-                    $object_orcamento->set_categoria_id($row['orcamento_ctg_id']);
+                    $object_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
                 }
                 
                 if (isset($row['orcamento_mrc_id'])) {
-                    $object_orcamento->set_marca_id($row['orcamento_mrc_id']);
+                    $object_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
                 }
                 
                 if (isset($row['orcamento_mdl_id'])) {
-                    $object_orcamento->set_modelo_id($row['orcamento_mdl_id']);
+                    $object_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
                 }
                 
                 if (isset($row['orcamento_vrs_id'])) {
-                    $object_orcamento->set_versao_id($row['orcamento_vrs_id']);
+                    $object_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
                 }
                 
                 if (isset($row['orcamento_ano_de'])) {
@@ -220,19 +223,19 @@ namespace Module\Application\Model\DAO;
             }
             
             if (isset($row['orcamento_ctg_id'])) {
-                $object_orcamento->set_categoria_id($row['orcamento_ctg_id']);
+                $object_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
             }
             
             if (isset($row['orcamento_mrc_id'])) {
-                $object_orcamento->set_marca_id($row['orcamento_mrc_id']);
+                $object_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
             }
             
             if (isset($row['orcamento_mdl_id'])) {
-                $object_orcamento->set_modelo_id($row['orcamento_mdl_id']);
+                $object_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
             }
             
             if (isset($row['orcamento_vrs_id'])) {
-                $object_orcamento->set_versao_id($row['orcamento_vrs_id']);
+                $object_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
             }
             
             if (isset($row['orcamento_ano_de'])) {

@@ -6,7 +6,6 @@ namespace Module\Application\View\SRC;
     
     class Inicio
     {
-        
         function __construct()
         {
             

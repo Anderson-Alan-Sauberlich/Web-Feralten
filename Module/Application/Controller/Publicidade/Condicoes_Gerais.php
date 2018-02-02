@@ -5,7 +5,6 @@ namespace Module\Application\Controller\Publicidade;
     
     class Condicoes_Gerais
     {
-
         function __construct()
         {
             

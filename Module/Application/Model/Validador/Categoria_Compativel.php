@@ -5,7 +5,6 @@ namespace Module\Application\Model\Validador;
     
     class Categoria_Compativel
     {
-        
         function __constructor()
         {
             

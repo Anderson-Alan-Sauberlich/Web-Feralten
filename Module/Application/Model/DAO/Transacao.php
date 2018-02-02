@@ -9,7 +9,6 @@ namespace Module\Application\Model\DAO;
     
     class Transacao
     {
-        
         function __construct()
         {
             

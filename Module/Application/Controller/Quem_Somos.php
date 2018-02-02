@@ -5,7 +5,6 @@ namespace Module\Application\Controller;
     
     class Quem_Somos
     {
-
         function __construct()
         {
             

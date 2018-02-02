@@ -3,7 +3,6 @@ namespace Module\Application\Model\Object;
 
     class Categoria
     {
-        
         private $id;
         private $nome;
         private $url;

@@ -3,7 +3,6 @@ namespace Module\Application\View\SRC\Usuario;
 
     class Cadastro
     {
-
         function __construct()
         {
             
