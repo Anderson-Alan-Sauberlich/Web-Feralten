@@ -1,5 +1,5 @@
 <?php
-namespace Module\Application\View\SRC\Layout;
+namespace Module\Application\View\SRC\Layout\Elemento;
     
     //use Module\Application\Controller\Layout\Card_Peca as View_Card_Peca;
     use Module\Application\Model\Object\Peca as Object_Peca;
@@ -13,6 +13,6 @@ namespace Module\Application\View\SRC\Layout;
         
         public function Executar(Object_Peca $peca) : void
         {
-            include RAIZ.'/Module/Application/View/HTML/Layout/Card_Peca.php';
+            include RAIZ.'/Module/Application/View/HTML/Layout/Elemento/Card_Peca.php';
         }
     }

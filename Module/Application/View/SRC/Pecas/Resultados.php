@@ -4,7 +4,7 @@ namespace Module\Application\View\SRC\Pecas;
     use Module\Application\View\SRC\Layout\Menu\Pesquisa as View_Pesquisa;
     use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro;
     use Module\Application\View\SRC\Layout\Menu\Paginacao as View_Paginacao;
-    use Module\Application\View\SRC\Layout\Card_Peca as View_Card_Peca;
+    use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca;
     use Module\Application\View\SRC\Layout\Modal\Solicitar_Orcamento as View_Solicitar_Orcamento;
                     
     class Resultados

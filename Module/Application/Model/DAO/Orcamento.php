@@ -38,7 +38,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':num_serie', $object_orcamento->get_numero_serie(), PDO::PARAM_STR);
                 $p_sql->bindValue(':std_uso_id', $object_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':prf_ntr_id', $object_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_slctc', $object_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vldd', $object_orcamento->get_datahora_validade(), PDO::PARAM_STR);
                 
@@ -83,7 +83,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':num_serie', $object_orcamento->get_numero_serie(), PDO::PARAM_STR);
                 $p_sql->bindValue(':std_uso_id', $object_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':prf_ntr_id', $object_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_slctc', $object_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vldd', $object_orcamento->get_datahora_validade(), PDO::PARAM_STR);
                 
@@ -116,7 +116,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaOrcamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaOrcamento($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -131,7 +131,36 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaOrcamento($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopulaOrcamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarPorData(string $data_solicitacao)
+        {
+            try {
+                $sql = 'SELECT orcamento_id, orcamento_data_solicitacao, orcamento_data_validade FROM tb_orcamento WHERE orcamento_data_solicitacao > :data_slctc';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':data_slctc', $data_solicitacao, PDO::PARAM_STR);
+                $p_sql->execute();
+                
+                return self::PopulaOrcamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarTodos()
+        {
+            try {
+                $sql = 'SELECT orcamento_id, orcamento_usr_id, orcamento_ctg_id, orcamento_mrc_id, orcamento_mdl_id, orcamento_vrs_id, orcamento_ano_de, orcamento_ano_ate, orcamento_peca_nome, orcamento_numero_serie, orcamento_std_uso_pec_id, orcamento_prf_ntr_id, orcamento_descricao, orcamento_data_solicitacao, orcamento_data_validade FROM tb_orcamento';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->execute();
+                
+                return self::PopulaOrcamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }

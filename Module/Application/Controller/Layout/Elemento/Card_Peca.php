@@ -1,11 +1,10 @@
 <?php
-namespace Module\Application\Controller\Layout;
+namespace Module\Application\Controller\Layout\Elemento;
     
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
-    use Module\Application\View\SRC\layout\Card_Peca as View_Card_Peca;
     use Module\Application\Model\Object\Entidade as Object_Entidade;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\DAO\Removido as DAO_Removido;

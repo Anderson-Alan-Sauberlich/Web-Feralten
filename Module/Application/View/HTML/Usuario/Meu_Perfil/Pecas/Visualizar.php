@@ -4,7 +4,7 @@
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
     <script type="text/javascript" src="/application/js/usuario/meu_perfil/pecas/visualizar.js"></script>
-    <script type="text/javascript" src="/application/js/layout/card_peca.js"></script>
+    <script type="text/javascript" src="/application/js/layout/elemento/card_peca.js"></script>
     <title>Visualizar | Feralten</title>
 </head>
 <body>

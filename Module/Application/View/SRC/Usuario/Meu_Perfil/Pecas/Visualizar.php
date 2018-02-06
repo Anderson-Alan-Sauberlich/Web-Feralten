@@ -5,7 +5,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
     use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro;
     use Module\Application\View\SRC\Layout\Menu\Paginacao as View_Paginacao;
-    use Module\Application\View\SRC\Layout\Card_Peca as View_Card_Peca;
+    use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca;
     use Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Visualizar as Controller_Visualizar;
     
     class Visualizar

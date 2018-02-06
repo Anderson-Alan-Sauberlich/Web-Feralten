@@ -150,25 +150,27 @@
             });
         });
         
-        $app->group('/card-peca', function() use ($app) {
-            $app->post('/opcoes[/]', function(Request $request, Response $response, $args) use ($app) {
-                $card_peca = new Module\Application\Controller\Layout\Card_Peca();
-                
-                if (isset($_POST['peca'])) {
-                    $card_peca->set_peca($_POST['peca']);
-                }
-                
-                if (isset($_POST['deletar'])) {
-                    $card_peca->set_deletar($_POST['deletar']);
-                }
-                
-                if (isset($_POST['status'])) {
-                    $card_peca->set_status($_POST['status']);
-                }
-                
-                $card_peca->Salvar_Alteracoes_Peca();
-                
-                return $response;
+        $app->group('/elemento', function() use ($app) {
+            $app->group('/card-peca', function() use ($app) {
+                $app->post('/opcoes[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $card_peca = new Module\Application\Controller\Layout\Elemento\Card_Peca();
+                    
+                    if (isset($_POST['peca'])) {
+                        $card_peca->set_peca($_POST['peca']);
+                    }
+                    
+                    if (isset($_POST['deletar'])) {
+                        $card_peca->set_deletar($_POST['deletar']);
+                    }
+                    
+                    if (isset($_POST['status'])) {
+                        $card_peca->set_status($_POST['status']);
+                    }
+                    
+                    $card_peca->Salvar_Alteracoes_Peca();
+                    
+                    return $response;
+                });
             });
         });
     });

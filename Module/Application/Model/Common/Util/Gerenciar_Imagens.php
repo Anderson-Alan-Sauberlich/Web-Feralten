@@ -1,7 +1,6 @@
 <?php
 namespace Module\Application\Model\Common\Util;
     
-    //use Module\Application\Model\Common\Util\Login_Session;
     use DirectoryIterator;
     
     class Gerenciar_Imagens

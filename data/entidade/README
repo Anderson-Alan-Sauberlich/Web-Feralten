@@ -1,19 +1,13 @@
 id_ent.db {
     tb_orcamento:
         orcamento_orc_id,
-        orcamento_ntc_id,
+        orcamento_sts_id,
+        orcamento_data_solicitacao,
+        orcamento_data_validade,
         
     tb_status:
-        status_id(1, 2, 4, 8, 12),
-        status_descricao('Recebido', 'Visualizado', 'Ocultado', 'Respondido', 'Ocultado/Respondido'),
-        
-    tb_interacao: //lista de todas as interações que cada usuario teve com o orçamento
-        interacao_orc_id,
-        interacao_usr_id,
-        interacao_sts_id,
-        
-    tb_atualizacao: //Para puxar sempre os ultimos orçamentos
-        atualizacao_id,
-        atualizacao_datahora,
+        status_id(1, 2, 4, 8),
+        status_descricao('Recebido', 'Visualizado', 'Não Tenho', 'Respondido'),
 }
 
+Aqui ficarão os arquivos .bd das entidades, que conterão os dados volumosos e unicos de cada entidade, como manipulação dos orçamentos.
