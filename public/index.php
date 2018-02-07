@@ -383,6 +383,16 @@
                         return $response;
                     }
                 });
+                
+                $app->get('/caixa-de-entrada[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos_Recebidos();
+                    
+                    $orcamentos->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                    
+                    $resposta = $orcamentos->Carregar_Orcamentos_Recebidos();
+                    
+                    return $response;
+                });
             });
             
             $app->group('/pecas', function() use ($app) {

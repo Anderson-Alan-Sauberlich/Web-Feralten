@@ -200,11 +200,16 @@ namespace Module\Application\Model\Common\Util;
          * @param int $status const Entidade_BD::VISUALIZADO
          * @param int $status const Entidade_BD::NAO_TENHO
          * @param int $status const Entidade_BD::RESPONDIDO
+         * @param int $limit numero do limite
+         * @param int $offset numero da pagina
          * @return array|NULL
          */
-        public function RetornaOrcamentosPorStatus(int $status) : ?array
+        public function RetornaOrcamentosPorStatus(int $status, int $indice = 1) : ?array
         {
-            $sql = "SELECT orcamento_orc_id FROM tb_orcamento WHERE orcamento_sts_id = $status;";
+            $limit = 10;
+            $offset = ($indice * 10) - 10;
+            
+            $sql = "SELECT orcamento_orc_id FROM tb_orcamento WHERE orcamento_sts_id = $status GROUP BY orcamento_data_solicitacao ORDER BY orcamento_data_solicitacao DESC LIMIT $limit OFFSET $offset;";
             
             $ret = $this->query($sql);
             

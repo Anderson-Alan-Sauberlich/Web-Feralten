@@ -10,6 +10,19 @@ namespace Module\Application\Model\Validador;
             
         }
         
+        public static function validar_indice($indice = null) : int
+        {
+            if (empty($indice)) {
+                throw new Exception("Informe um Índice para os Orçamentos");
+            } else {
+                if (filter_var($indice, FILTER_VALIDATE_INT)) {
+                    return $indice;
+                } else {
+                    throw new Exception("Informe um Índice Válido Para os Orçamentos");
+                }
+            }
+        }
+        
         public static function validar_id($id = null) : int
         {
             if (empty($id)) {

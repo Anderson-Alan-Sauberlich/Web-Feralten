@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="eleven wide column">
+            <div id="div_orcamentos" class="eleven wide column">
             	<?php View_Orcamentos_Recebidos::Incluir_Elemento_Orcamento(); ?>
             </div>
         </div>
