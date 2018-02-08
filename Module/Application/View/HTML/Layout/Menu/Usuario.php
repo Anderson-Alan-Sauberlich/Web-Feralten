@@ -24,8 +24,8 @@
                             <div class="content <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>">
                                 <ul class="nav nav-pills">
                                     <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'perfil'); ?>"><a href="/usuario/meu-perfil/">Perfil</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'meus-orcamentos'); ?>"><a href="/usuario/meu-perfil/meus-orcamentos/">Meus Orçamentos</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos-recebidos'); ?>"><a href="/usuario/meu-perfil/orcamentos-recebidos/">Orçamentos Recebidos</a></li>
+                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'meus-orcamentos'); ?>"><a href="/usuario/meu-perfil/orcamentos/meus-orcamentos/">Meus Orçamentos</a></li>
+                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos-recebidos'); ?>"><a href="/usuario/meu-perfil/orcamentos/caixa-de-entrada/">Orçamentos Recebidos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -79,8 +79,8 @@
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?>" data-tab="perfil">
                     <ul class="nav nav-pills">
                         <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'perfil'); ?>"><a href="/usuario/meu-perfil/">Perfil</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'meus-orcamentos'); ?>"><a href="/usuario/meu-perfil/meus-orcamentos/">Meus Orçamentos</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos-recebidos'); ?>"><a href="/usuario/meu-perfil/orcamentos-recebidos/">Orçamentos Recebidos</a></li>
+                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'meus-orcamentos'); ?>"><a href="/usuario/meu-perfil/orcamentos/meus-orcamentos/">Meus Orçamentos</a></li>
+                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil', 'orcamentos-recebidos'); ?>"><a href="/usuario/meu-perfil/orcamentos/caixa-de-entrada/">Orçamentos Recebidos</a></li>
                     </ul>
                 </div>
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>" data-tab="dados">

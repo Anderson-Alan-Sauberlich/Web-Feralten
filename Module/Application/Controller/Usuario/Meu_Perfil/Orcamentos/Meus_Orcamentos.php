@@ -1,8 +1,9 @@
 <?php
-namespace Module\Application\Controller\Usuario\Meu_Perfil;
+namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
     
-    use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Orcamentos as View_Meus_Orcamentos;
+    use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos\Meus_Orcamentos as View_Meus_Orcamentos;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Menu\Orcamento as Controller_Menu_Orcamento;
     use Module\Application\Model\Common\Util\Login_Session;
     
     class Meus_Orcamentos
@@ -19,10 +20,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
                 
                 $view = new View_Meus_Orcamentos($status);
                 
+                $controller_menu_orcamento = new Controller_Menu_Orcamento();
+                
+                $view->set_view_menu_orcamento($controller_menu_orcamento->Retornar_Pagina());
+                
                 $view->Executar();
             } else {
                 return false;
             }
         }
-        //TODO Criar foreach no html, e passar o objeto de dentro da array por aparetro para uma function statica, e a function statica retorna o valor com echo no src
     }

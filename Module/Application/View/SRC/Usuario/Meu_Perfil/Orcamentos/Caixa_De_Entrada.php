@@ -1,10 +1,11 @@
 <?php
-namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
+namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
     
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
     use Module\Application\View\SRC\Layout\Elemento\Orcamento as View_Orcamento;
+    use Module\Application\View\SRC\Layout\Menu\Orcamento as View_Menu_Orcamento;
     
-    class Orcamentos_Recebidos
+    class Caixa_De_Entrada
     {
         function __construct(int $status)
         {
@@ -12,34 +13,22 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
         }
         
         private static $status_usuario;
-        private static $numero_recebido;
-        private static $numero_nao_tenho;
-        private static $numero_respondido;
         private static $orcamentos;
-        
-        public function set_numero_recebidos(int $numero_recebidos) : void
-        {
-            self::$numero_recebido = $numero_recebidos;
-        }
-        
-        public function set_numero_nao_tenho(int $numero_nao_tenho) : void
-        {
-            self::$numero_nao_tenho = $numero_nao_tenho;
-        }
-        
-        public function set_numero_respondido(int $numero_respondido) : void
-        {
-            self::$numero_respondido = $numero_respondido;
-        }
+        private static $view_menu_orcamento;
         
         public function set_orcamentos(array $orcamentos) : void
         {
             self::$orcamentos = $orcamentos;
         }
         
+        public function set_view_menu_orcamento(View_Menu_Orcamento $view_menu_orcamento) : void
+        {
+            self::$view_menu_orcamento = $view_menu_orcamento;
+        }
+        
         public function Executar() : void
         {
-            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Orcamentos_Recebidos.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Orcamentos/Caixa_De_Entrada.php';
         }
         
         public static function Incluir_Menu_Usuario() : void
@@ -47,19 +36,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
             new View_Usuario(self::$status_usuario, ['meu-perfil', 'orcamentos-recebidos']);
         }
         
-        public static function MostrarNumeroRecebido() : void
+        public static function Incluir_Menu_Orcamento() : void
         {
-            echo self::$numero_recebido;
-        }
-        
-        public static function MostrarNumeroNaoTenho() : void
-        {
-            echo self::$numero_nao_tenho;
-        }
-        
-        public static function MostrarNumeroRespondido() : void
-        {
-            echo self::$numero_respondido;
+            if (self::$view_menu_orcamento instanceof View_Menu_Orcamento) {
+                self::$view_menu_orcamento->Executar();
+            }
         }
         
         public static function Incluir_Elemento_Orcamento(?array $orcamentos = null) : void

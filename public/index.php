@@ -172,6 +172,18 @@
                     return $response;
                 });
             });
+            
+            $app->group('/orcamento', function() use ($app) {
+                $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $orcamento = new Module\Application\Controller\Layout\Elemento\Orcamento();
+                    
+                    $orcamento->set_id_orcamento(isset($_POST['id_orcamento']) ? $_POST['id_orcamento'] : null);
+                    
+                    $orcamento->SetarOrcamentoNaoTenho();
+                    
+                    return $response;
+                });
+            });
         });
     });
     
@@ -355,43 +367,93 @@
                 });
             });
             
-            $app->group('/meus-orcamentos', function() use ($app) {
-                $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                    $meus_orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Orcamentos();
-                    
-                    $resposta = $meus_orcamentos->Carregar_Pagina();
-                    
-                    if ($resposta === false) {
-                        return $response->withRedirect('/usuario/login/');
-                    } else {
-                        return $response;
-                    }
-                });
-            });
-            
-            $app->group('/orcamentos-recebidos', function() use ($app) {
-                $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos_Recebidos();
-                    
-                    $resposta = $orcamentos->Carregar_Pagina();
-                    
-                    if ($resposta === false) {
-                        return $response->withRedirect('/usuario/login/');
-                    } else if ($resposta != 1) {
-                        return $response->withRedirect('/usuario/meu-perfil/');
-                    } else {
-                        return $response;
-                    }
+            $app->group('/orcamentos', function() use ($app) {
+                $app->group('/meus-orcamentos', function() use ($app) {
+                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $meus_orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Meus_Orcamentos();
+                        
+                        $resposta = $meus_orcamentos->Carregar_Pagina();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else {
+                            return $response;
+                        }
+                    });
                 });
                 
-                $app->get('/caixa-de-entrada[/]', function(Request $request, Response $response, $args) use ($app) {
-                    $orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos_Recebidos();
+                $app->group('/caixa-de-entrada', function() use ($app) {
+                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $caixa_de_entrada = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Caixa_De_Entrada();
+                        
+                        $resposta = $caixa_de_entrada->Carregar_Pagina();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else if ($resposta != 1) {
+                            return $response->withRedirect('/usuario/meu-perfil/');
+                        } else {
+                            return $response;
+                        }
+                    });
                     
-                    $orcamentos->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                    $app->get('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $caixa_de_entrada = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Caixa_De_Entrada();
+                        
+                        $caixa_de_entrada->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                        
+                        $caixa_de_entrada->Carregar_Orcamentos_Recebidos();
+                        
+                        return $response;
+                    });
+                });
+                
+                $app->group('/respondidos', function() use ($app) {
+                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $respondidos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Respondidos();
+                        
+                        $resposta = $respondidos->Carregar_Pagina();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else {
+                            return $response;
+                        }
+                    });
                     
-                    $resposta = $orcamentos->Carregar_Orcamentos_Recebidos();
+                    $app->get('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $respondidos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Respondidos();
+                        
+                        $respondidos->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                        
+                        $respondidos->Carregar_Orcamentos_Recebidos();
+                        
+                        return $response;
+                    });
+                });
+                
+                $app->group('/nao-tenho', function() use ($app) {
+                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $nao_tenho = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Nao_Tenho();
+                        
+                        $resposta = $nao_tenho->Carregar_Pagina();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else {
+                            return $response;
+                        }
+                    });
                     
-                    return $response;
+                    $app->get('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $nao_tenho = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Nao_Tenho();
+                        
+                        $nao_tenho->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                        
+                        $nao_tenho->Carregar_Orcamentos_NaoTenho();
+                        
+                        return $response;
+                    });
                 });
             });
             

@@ -247,4 +247,21 @@ namespace Module\Application\Model\Common\Util;
             
             return $numero;
         }
+        
+        /**
+         * Seta o Status passado por parametro para o orçamento na base local.
+         *
+         * @param int $id_orcamento O ID do Orçamento a ser atualizado
+         * @param int $status const Entidade_BD::RECEBIDO
+         * @param int $status const Entidade_BD::VISUALIZADO
+         * @param int $status const Entidade_BD::NAO_TENHO
+         * @param int $status const Entidade_BD::RESPONDIDO
+         * @return bool Retorna False em caso de Erro e True quando executado com sucesso, ou nenhum elemento precisar ser atualizado.
+         */
+        public function SetarStatusOrcamento(int $id_orcamento, int $status) : bool
+        {
+            $sql = "UPDATE tb_orcamento SET orcamento_sts_id = $status WHERE orcamento_orc_id = $id_orcamento;";
+            
+            return $this->exec($sql);
+        }
     }

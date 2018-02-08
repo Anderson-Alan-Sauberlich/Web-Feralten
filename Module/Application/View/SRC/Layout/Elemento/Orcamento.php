@@ -22,6 +22,13 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             include RAIZ.'/Module/Application/View/HTML/Layout/Elemento/Orcamento.php';
         }
         
+        public static function Mostrar_ID() : void
+        {
+            if (self::$obj_orcamento instanceof Object_Orcamento) {
+                echo self::$obj_orcamento->get_id();
+            }
+        }
+        
         public static function Mostrar_Nome() : void
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
