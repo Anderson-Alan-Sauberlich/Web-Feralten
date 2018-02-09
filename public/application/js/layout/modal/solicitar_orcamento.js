@@ -89,7 +89,7 @@ function criarOrcamento() {
 	}).done(function(data) {
 		$data = JSON.parse(data);
 		if ($data.status == 'certo') {
-			window.location.replace("/usuario/meu-perfil/meus-orcamentos/");
+			window.location.replace("/usuario/meu-perfil/orcamentos/meus-orcamentos/");
 		} else if ($data.status == 'erro') {
 			$('#div_msg').addClass('error');
 			$('#div_msg').removeClass('success');

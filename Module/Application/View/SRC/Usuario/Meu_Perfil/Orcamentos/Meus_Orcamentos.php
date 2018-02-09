@@ -32,6 +32,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         public static function Incluir_Menu_Orcamento() : void
         {
             if (self::$view_menu_orcamento instanceof View_Menu_Orcamento) {
+                self::$view_menu_orcamento->set_pagina(View_Menu_Orcamento::MEUS_ORCAMENTOS);
                 self::$view_menu_orcamento->Executar();
             }
         }

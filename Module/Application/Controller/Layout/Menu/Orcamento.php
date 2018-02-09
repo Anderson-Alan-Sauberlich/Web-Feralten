@@ -19,14 +19,7 @@ namespace Module\Application\Controller\Layout\Menu;
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
-                    $view = new View_Orcamento();
-                    
-                    $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
-                    $obj_entidade_bd->Atualizar_Orcamentos();
-                    
-                    $view->set_numero_recebidos($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RECEBIDO));
-                    $view->set_numero_nao_tenho($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::NAO_TENHO));
-                    $view->set_numero_respondido($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RESPONDIDO));
+                    $view = $this->Retornar_Pagina();
                     
                     $view->Executar();
                 }

@@ -39,6 +39,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         public static function Incluir_Menu_Orcamento() : void
         {
             if (self::$view_menu_orcamento instanceof View_Menu_Orcamento) {
+                self::$view_menu_orcamento->set_pagina(View_Menu_Orcamento::NAO_TENHO);
                 self::$view_menu_orcamento->Executar();
             }
         }
@@ -54,6 +55,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
                     $view_orcamento = new View_Orcamento();
                     
                     $view_orcamento->set_obj_orcamento($obj_orcamento);
+                    $view_orcamento->set_pagina(View_Orcamento::NAO_TENHO);
                     
                     $view_orcamento->Executar();
                 }
