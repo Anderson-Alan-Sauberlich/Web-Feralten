@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <title>Meu-Perfeil | Feralten</title>
+    <title>Meus Orçamentos | Feralten</title>
 </head>
 <body>
     <header>
@@ -16,7 +16,7 @@
         		<?php View_Meus_Orcamentos::Incluir_Menu_Orcamento(); ?>
             </div>
             <div id="div_orcamentos" class="eleven wide column">
-            	<?php //View_Meus_Orcamentos::Incluir_Elemento_Orcamento(); ?>
+            	<?php View_Meus_Orcamentos::Incluir_Elemento_Orcamento(); ?>
             </div>
         </div>
         <div class="margem-inferior-pouco"></div>
@@ -24,6 +24,7 @@
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
         <script type="text/javascript" src="/application/js/usuario/meu_perfil/orcamentos/meus_orcamentos.js"></script>
+    	<script type="text/javascript" src="/application/js/layout/elemento/orcamento.js"></script>
     </footer>
 </body>
 </html>

@@ -9,6 +9,7 @@ function NaoTenho($id_orcamento) {
 		}
 	}).done(function(data) {
 		AjaxCaixaDeEntrada();
+		AtualizarNumeros();
 	});
 }
 function SimTenho($id_orcamento) {

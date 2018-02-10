@@ -52,6 +52,11 @@ namespace Module\Application\View\SRC\Layout\Menu;
             require_once RAIZ.'/Module/Application/View/HTML/Layout/Menu/Orcamento.php';
         }
         
+        public static function MostrarNumeroMeus() : void
+        {
+            echo self::$numero_meus;
+        }
+        
         public static function MostrarNumeroRecebido() : void
         {
             echo self::$numero_recebido;

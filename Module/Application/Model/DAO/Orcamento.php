@@ -137,6 +137,21 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        public static function Buscar_Numero_Por_ID_Usuario(int $id)
+        {
+            try {
+                $sql = 'SELECT COUNT(orcamento_id) FROM tb_orcamento WHERE orcamento_usr_id = :id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function BuscarPorData(string $data_solicitacao)
         {
             try {

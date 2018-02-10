@@ -70,6 +70,16 @@
                     return $response;
                 });
             });
+            
+            $app->group('/orcamento', function() use ($app) {
+                $app->get('/numeros[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $orcamento = new Module\Application\Controller\Layout\Menu\Orcamento();
+                    
+                    $orcamento->Atualizar_Numeros();
+                    
+                    return $response;
+                });
+            });
         });
         
         $app->group('/modal', function() use ($app) {

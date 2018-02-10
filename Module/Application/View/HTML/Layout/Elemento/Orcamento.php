@@ -34,9 +34,11 @@
     	</div>
     </div>
     <?php } ?>
-    <div class="ui divider"></div>
-    <div class="ui two bottom buttons">
-    	<div id="btn_sim_tenho_<?php View_Orcamento::Mostrar_ID(); ?>" OnClick="SimTenho(<?php View_Orcamento::Mostrar_ID(); ?>)" class="ui primary button">SIM TENHO</div>
-    	<div id="btn_nao_tenho_<?php View_Orcamento::Mostrar_ID(); ?>" OnClick="NaoTenho(<?php View_Orcamento::Mostrar_ID(); ?>)" class="ui <?php View_Orcamento::Verificar_Desativar_Botao(); ?> secondary button">NÃO TENHO</div>
-	</div>
+    <?php if (View_Orcamento::Verificar_Mostrar_Botoes()) { ?>
+    	<div class="ui divider"></div>
+        <div class="ui two bottom buttons">
+        	<div id="btn_sim_tenho_<?php View_Orcamento::Mostrar_ID(); ?>" OnClick="SimTenho(<?php View_Orcamento::Mostrar_ID(); ?>)" class="ui primary button">SIM TENHO</div>
+        	<div id="btn_nao_tenho_<?php View_Orcamento::Mostrar_ID(); ?>" OnClick="NaoTenho(<?php View_Orcamento::Mostrar_ID(); ?>)" class="ui <?php View_Orcamento::Verificar_Desativar_Botao(); ?> secondary button">NÃO TENHO</div>
+    	</div>
+	<?php } ?>
 </div>

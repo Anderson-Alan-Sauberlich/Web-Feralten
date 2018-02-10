@@ -4,6 +4,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos\Meus_Orcamentos as View_Meus_Orcamentos;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Controller\Layout\Menu\Orcamento as Controller_Menu_Orcamento;
+    use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
     use Module\Application\Model\Common\Util\Login_Session;
     
     class Meus_Orcamentos
@@ -19,6 +20,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
                 $status = Controller_Usuario::Verificar_Status_Usuario();
                 
                 $view = new View_Meus_Orcamentos($status);
+                
+                $orcamentos = DAO_Orcamento::Buscar_Por_ID_Usuario(Login_Session::get_usuario_id());
+                
+                if (!empty($orcamentos)) {
+                    $view->set_orcamentos($orcamentos);
+                }
                 
                 $controller_menu_orcamento = new Controller_Menu_Orcamento();
                 

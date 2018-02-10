@@ -90,4 +90,13 @@ namespace Module\Application\View\SRC\Layout\Elemento;
                 return false;
             }
         }
+        
+        public static function Verificar_Mostrar_Botoes() : bool
+        {
+            if (self::$pagina === self::MEUS_ORCAMENTOS) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
