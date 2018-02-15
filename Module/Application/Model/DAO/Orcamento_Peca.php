@@ -2,6 +2,7 @@
 namespace Module\Application\Model\DAO;
     
     use Module\Application\Model\Object\Orcamento_Peca as Object_Orcamento_Peca;
+    use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -74,6 +75,21 @@ namespace Module\Application\Model\DAO;
                 $p_sql->execute();
                 
                 return self::PopulaOrcamentosPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarPecasPorCOD(int $id)
+        {
+            try {
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM vw_orcamento_peca WHERE orcamento_peca_orc_id = :id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return DAO_Peca::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }

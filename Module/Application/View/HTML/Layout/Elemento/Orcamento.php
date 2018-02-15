@@ -21,12 +21,12 @@
     	</div>
     	<div class="content">
             <div class="ui relaxed divided list">
-            	<?php foreach ($pecas as $peca) { ?>
+            	<?php foreach (View_Orcamento::Retornar_Pecas() as $peca) { ?>
                 	<div class="item">
-                		<i class="large github middle aligned icon"></i>
+                		<i class="large share middle aligned icon"></i>
                 		<div class="content">
-                			<a class="header">Semantic-Org/Semantic-UI</a>
-                			<div class="description">Updated 10 mins ago</div>
+                			<a href="/pecas/detalhes/<?= $peca->get_url(); ?>/" class="header"><?= $peca->get_nome(); ?></a>
+                			<div class="description">Peça adicionada em: <?= $peca->get_data_anuncio(); ?></div>
                 		</div>
                 	</div>
             	<?php } ?>

@@ -60,6 +60,13 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        public static function Retornar_Pecas() : ?array
+        {
+            if (self::$obj_orcamento instanceof Object_Orcamento) {
+                return self::$obj_orcamento->get_pecas();
+            }
+        }
+        
         public static function Mostrar_Anos() : void
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {

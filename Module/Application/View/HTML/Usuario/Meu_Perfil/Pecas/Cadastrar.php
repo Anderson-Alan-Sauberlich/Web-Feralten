@@ -13,7 +13,7 @@
     <section class="ui container" role="main">
         <?php View_Cadastrar::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
-            <form id="form_cadastrar_pecas" name="form_cadastrar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/cadastrar/" method="post" role="form">
+            <form id="form_cadastrar_pecas" name="form_cadastrar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/cadastrar/<?php View_Cadastrar::MostrarURLOrcamento(); ?>" method="post" role="form">
                 <?php View_Cadastrar::Mostrar_Sucesso(); ?>
                 <?php View_Cadastrar::Mostrar_Erros(); ?>
                 <div class="panel panel-default sombra_painel">

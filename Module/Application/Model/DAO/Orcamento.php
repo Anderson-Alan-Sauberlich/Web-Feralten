@@ -2,6 +2,7 @@
 namespace Module\Application\Model\DAO;
     
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\DAO\Orcamento_Peca as DAO_Orcamento_Peca;
     use Module\Application\Model\DAO\Categoria as DAO_Categoria;
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
@@ -190,6 +191,8 @@ namespace Module\Application\Model\DAO;
                 
                 if (isset($row['orcamento_id'])) {
                     $object_orcamento->set_id($row['orcamento_id']);
+                    
+                    $object_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
                 }
                 
                 if (isset($row['orcamento_usr_id'])) {
@@ -260,6 +263,8 @@ namespace Module\Application\Model\DAO;
             
             if (isset($row['orcamento_id'])) {
                 $object_orcamento->set_id($row['orcamento_id']);
+                
+                $object_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
             }
             
             if (isset($row['orcamento_usr_id'])) {

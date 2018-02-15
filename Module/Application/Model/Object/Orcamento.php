@@ -23,6 +23,7 @@ namespace Module\Application\Model\Object;
         private $descricao;
         private $datahora_solicitacao;
         private $datahora_validade;
+        private $pecas = [];
         
         function __constructor()
         {
@@ -249,5 +250,15 @@ namespace Module\Application\Model\Object;
         public function get_datahora_validade() : ?string
         {
             return $this->datahora_validade;
+        }
+        
+        public function set_pecas(?array $pecas) : void
+        {
+            $this->pecas = $pecas;
+        }
+        
+        public function get_pecas() : ?array
+        {
+            return $this->pecas;
         }
     }

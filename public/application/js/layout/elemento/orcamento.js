@@ -8,10 +8,19 @@ function NaoTenho($id_orcamento) {
 			id_orcamento : $id_orcamento
 		}
 	}).done(function(data) {
-		AjaxCaixaDeEntrada();
 		AtualizarNumeros();
+		try {
+			AjaxCaixaDeEntrada();
+		} catch($e) {
+			
+		}
+		try {
+			AjaxRespondidos();
+		} catch($e) {
+			
+		}
 	});
 }
 function SimTenho($id_orcamento) {
-	
+	window.location.href = "/usuario/meu-perfil/pecas/cadastrar/no-orcamento/"+$id_orcamento+"/";
 }

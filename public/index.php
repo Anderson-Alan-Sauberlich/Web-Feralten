@@ -88,25 +88,15 @@
                     $solicitar_orcamento = new Module\Application\Controller\Layout\Modal\Solicitar_Orcamento();
                     
                     $solicitar_orcamento->set_categoria_id(isset($_POST['categoria_id']) ? $_POST['categoria_id'] : null);
-                    
                     $solicitar_orcamento->set_marca_id(isset($_POST['marca_id']) ? $_POST['marca_id'] : null);
-                    
                     $solicitar_orcamento->set_modelo_id(isset($_POST['modelo_id']) ? $_POST['modelo_id'] : null);
-                    
                     $solicitar_orcamento->set_versao_id(isset($_POST['versao_id']) ? $_POST['versao_id'] : null);
-                    
                     $solicitar_orcamento->set_ano_de(isset($_POST['ano_de']) ? $_POST['ano_de'] : null);
-                    
                     $solicitar_orcamento->set_ano_ate(isset($_POST['ano_ate']) ? $_POST['ano_ate'] : null);
-                    
                     $solicitar_orcamento->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                    
                     $solicitar_orcamento->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
-                    
                     $solicitar_orcamento->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
-                    
                     $solicitar_orcamento->set_numero_serie(isset($_POST['numero_serie']) ? $_POST['numero_serie'] : null);
-                    
                     $solicitar_orcamento->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
                     
                     $solicitar_orcamento->Criar_Orcamento();
@@ -120,15 +110,10 @@
                     $contato = new Module\Application\Controller\Layout\Form\Contato();
                     
                     $contato->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                    
                     $contato->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                    
                     $contato->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
-                    
                     $contato->set_whatsapp(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : null);
-                    
                     $contato->set_assunto(isset($_POST['assunto']) ? $_POST['assunto'] : null);
-                    
                     $contato->set_mensagem(isset($_POST['mensagem']) ? $_POST['mensagem'] : null);
                     
                     $contato->Enviar_Email();
@@ -142,15 +127,10 @@
                     $contato_anunciante = new Module\Application\Controller\Layout\Form\Contato_Anunciante();
                     
                     $contato_anunciante->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                    
                     $contato_anunciante->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                    
                     $contato_anunciante->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
-                    
                     $contato_anunciante->set_whatsapp(isset($_POST['whatsapp']) ? $_POST['whatsapp'] : null);
-                    
                     $contato_anunciante->set_mensagem(isset($_POST['mensagem']) ? $_POST['mensagem'] : null);
-                    
                     $contato_anunciante->set_peca_id(isset($_POST['peca_id']) ? $_POST['peca_id'] : null);
                     
                     $contato_anunciante->Enviar_Email();
@@ -211,9 +191,7 @@
                 $login = new Module\Application\Controller\Usuario\Login();
                 
                 $login->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                
                 $login->set_senha(isset($_POST['password']) ? $_POST['password'] : null);
-                
                 $login->set_manter_login(isset($_POST['manter_login']) ? true : null);
                 
                 $resposta = $login->Autenticar_Usuario_Login();
@@ -229,9 +207,7 @@
                 $login = new Module\Application\Controller\Usuario\Login();
                 
                 $login->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                
                 $login->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
-                
                 $login->set_manter_login(isset($_POST['manter']) ? true : null);
                 
                 $resposta = $login->Autenticar_Usuario_Login_Ajax();
@@ -263,13 +239,9 @@
                 $cadastro = new Module\Application\Controller\Usuario\Cadastro();
                     
                 $cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                
                 $cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
-                
                 $cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                
                 $cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
-                
                 $cadastro->set_recaptcha_response(isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null);
                 
                 $resposta = $cadastro->Cadastrar_Usuario();
@@ -285,13 +257,9 @@
                 $cadastro = new Module\Application\Controller\Usuario\Cadastro();
                     
                 $cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                
                 $cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
-                
                 $cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                
                 $cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
-                
                 $cadastro->set_recaptcha_response(isset($_POST['token']) ? $_POST['token'] : null);
                 
                 $cadastro->Cadastrar_Usuario_Ajax();
@@ -327,9 +295,7 @@
                 $recuperar_senha = new Module\Application\Controller\Usuario\Recuperar_Senha();
                 
                 $recuperar_senha->set_codigo(isset($_POST['codigo']) ? $_POST['codigo'] : null);
-                
                 $recuperar_senha->set_senha_nova(isset($_POST['senha_nova']) ? $_POST['senha_nova'] : null);
-                
                 $recuperar_senha->set_senha_confnova(isset($_POST['senha_confnova']) ? $_POST['senha_confnova'] : null);
                 
                 $recuperar_senha->Salvar_Senha();
@@ -469,8 +435,12 @@
             
             $app->group('/pecas', function() use ($app) {
                 $app->group('/cadastrar', function() use ($app) {
-                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $app->get('[/[no-orcamento/{id_orcamento}[/]]]', function(Request $request, Response $response, $args) use ($app) {
                         $cadastrar = new Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar();
+                        
+                        if (isset($args['id_orcamento'])) {
+                            $cadastrar->set_orcamento_id($args['id_orcamento']);
+                        }
                         
                         $resposta = $cadastrar->Carregar_Pagina();
                         
@@ -515,31 +485,24 @@
                         return $response;
                     });
                     
-                    $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                    $app->post('[/[no-orcamento/{id_orcamento}[/]]]', function(Request $request, Response $response, $args) use ($app) {
                         $cadastrar = new Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar();
                         
+                        if (isset($args['id_orcamento'])) {
+                            $cadastrar->set_orcamento_id($args['id_orcamento']);
+                        }
+                        
                         $cadastrar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
-                        
                         $cadastrar->set_marca(isset($_POST['marca']) ? $_POST['marca'] : null);
-                        
                         $cadastrar->set_modelo(isset($_POST['modelo']) ? $_POST['modelo'] : null);
-                        
                         $cadastrar->set_versao(isset($_POST['versao']) ? $_POST['versao'] : null);
-                        
                         $cadastrar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
-                        
                         $cadastrar->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
-                        
                         $cadastrar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
-                        
                         $cadastrar->set_fabricante(isset($_POST['fabricante']) ? $_POST['fabricante'] : null);
-                        
                         $cadastrar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
-                        
                         $cadastrar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
-                        
                         $cadastrar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
-                        
                         $cadastrar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
                         
                         $resposta = $cadastrar->Cadastrar_Peca();
@@ -807,29 +770,17 @@
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Atualizar();
                         
                         $atualizar->set_categoria(isset($_POST['categoria']) ? $_POST['categoria'] : null);
-                        
                         $atualizar->set_marca(isset($_POST['marca']) ? $_POST['marca'] : null);
-                        
                         $atualizar->set_modelo(isset($_POST['modelo']) ? $_POST['modelo'] : null);
-                        
                         $atualizar->set_versao(isset($_POST['versao']) ? $_POST['versao'] : null);
-                        
                         $atualizar->set_descricao(isset($_POST['descricao']) ? $_POST['descricao'] : null);
-                        
                         $atualizar->set_estado_uso(isset($_POST['estado_uso']) ? $_POST['estado_uso'] : null);
-                        
                         $atualizar->set_preferencia_entrega(isset($_POST['preferencia_entrega']) ? $_POST['preferencia_entrega'] : null);
-                        
                         $atualizar->set_fabricante(isset($_POST['fabricante']) ? $_POST['fabricante'] : null);
-                        
                         $atualizar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
-                        
                         $atualizar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
-                        
                         $atualizar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
-                        
                         $atualizar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
-                        
                         $atualizar->set_peca_url(isset($args['peca']) ? $args['peca'] : null);
                         
                         $resposta = $atualizar->Verificar_Evento();
@@ -933,15 +884,10 @@
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Atualizar();
                         
                         $atualizar->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
-                        
                         $atualizar->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
-                        
                         $atualizar->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
-                        
                         $atualizar->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
-                        
                         $atualizar->set_email(isset($_POST['email']) ? $_POST['email'] : null);
-                        
                         $atualizar->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
                         
                         $resposta = $atualizar->Verificar_Evento();
@@ -959,7 +905,6 @@
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Atualizar();
                         
                         $atualizar->set_site(isset($_POST['site']) ? $_POST['site'] : null);
-                        
                         $atualizar->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
                         
                         $resposta = $atualizar->Verificar_Evento();
@@ -1007,9 +952,7 @@
                         $alterar_senha = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Alterar_Senha();
                         
                         $alterar_senha->set_senha_antiga(isset($_POST['senha_antiga']) ? $_POST['senha_antiga'] : null);
-                        
                         $alterar_senha->set_senha_nova(isset($_POST['senha_nova']) ? $_POST['senha_nova'] : null);
-                        
                         $alterar_senha->set_senha_confnova(isset($_POST['senha_confnova']) ? $_POST['senha_confnova'] : null);
                         
                         $resposta = $alterar_senha->Atualizar_Senha_Usuario();
@@ -1055,17 +998,11 @@
                         $enderecos = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Enderecos();
                         
                         $enderecos->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
-                        
                         $enderecos->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
-                        
                         $enderecos->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
-                        
                         $enderecos->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
-                        
                         $enderecos->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
-                        
                         $enderecos->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
-                        
                         $enderecos->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
                         
                         $resposta = $enderecos->Atualizar_Endereco();
@@ -1127,29 +1064,17 @@
                         $concluir = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Concluir();
                         
                         $concluir->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
-                        
                         $concluir->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
-                        
                         $concluir->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
-                        
                         $concluir->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
-                        
                         $concluir->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
-                        
                         $concluir->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
-                        
                         $concluir->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
-                        
                         $concluir->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
-                        
                         $concluir->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
-                        
                         $concluir->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
-                        
                         $concluir->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
-                        
                         $concluir->set_site(isset($_POST['site']) ? $_POST['site'] : null);
-                        
                         $concluir->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
                         
                         $resposta = $concluir->Concluir_Cadastro();
@@ -1445,7 +1370,6 @@
                 $login = new Module\Administration\Controller\Admin\Login();
                 
                 $login->set_usuario(isset($_POST['usuario']) ? $_POST['usuario'] : null);
-                
                 $login->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
                 
                 $resposta = $login->Login();
@@ -1834,15 +1758,24 @@
                     });
                     
                     $app->group('/cadastrar', function() use ($app) {
-                        
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            
+                            return $response;
+                        });
                     });
                     
                     $app->group('/alterar', function() use ($app) {
-                        
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            
+                            return $response;
+                        });
                     });
                     
                     $app->group('/deletar', function() use ($app) {
-                        
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            
+                            return $response;
+                        });
                     });
                 });
             });

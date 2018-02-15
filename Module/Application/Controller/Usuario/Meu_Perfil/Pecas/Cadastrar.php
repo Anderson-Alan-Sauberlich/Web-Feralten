@@ -4,6 +4,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
+    use Module\Application\Model\Common\Util\Entidade_BD;
     use Module\Application\Controller\Common\Util\Peca as Util_Peca;
     use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
     use Module\Application\Model\Object\Peca as Object_Peca;
@@ -21,6 +22,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\Object\Modelo as Object_Modelo;
     use Module\Application\Model\Object\Versao as Object_Versao;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\Object\Orcamento_Peca as Object_Orcamento_Peca;
     use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use Module\Application\Model\DAO\Categoria as DAO_Categoria;
     use Module\Application\Model\DAO\Marca as DAO_Marca;
@@ -39,6 +42,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Foto_Peca as DAO_Foto_Peca;
+    use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
+    use Module\Application\Model\DAO\Orcamento_Peca as DAO_Orcamento_Peca;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas\Cadastrar as View_Cadastrar;
     use Module\Application\Model\DAO\Adicionado as DAO_Adicionado;
     use Module\Application\Model\Object\Adicionado as Object_Adicionado;
@@ -51,6 +56,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             
         }
         
+        private $orcamento;
         private $categoria;
         private $marca;
         private $modelo;
@@ -68,6 +74,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         private $cadastrar_sucesso = array();
         private $cadastrar_campos = array();
         private $cadastrar_form = array();
+        
+        public function set_orcamento_id($orcamento_id) : void
+        {
+            try {
+                $this->orcamento = DAO_Orcamento::BuscarPorCOD(Validador::Orcamento()::validar_id($orcamento_id));
+            } catch (Exception $e) {
+                $this->cadastrar_erros[] = $e->getMessage();
+            }
+        }
         
         public function set_categoria($categoria) : void
         {
@@ -230,10 +245,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     if (empty($this->cadastrar_form)) {
                         unset($_SESSION['compatibilidade']);
                         $this->Deletar_Imagem(123);
+                        $this->SetarDadosDoOrcamento();
                     }
                     
                     $view = new View_Cadastrar($status);
                     
+                    $view->set_orcamento($this->orcamento);
                     $view->set_cadastrar_campos($this->cadastrar_campos);
                     $view->set_cadastrar_erros($this->cadastrar_erros);
                     $view->set_cadastrar_form($this->cadastrar_form);
@@ -248,6 +265,24 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
+        private function SetarDadosDoOrcamento() : void
+        {
+            if ($this->orcamento instanceof Object_Orcamento) {
+                $_SESSION['compatibilidade']['categoria'][$this->orcamento->get_categoria_id()] = $this->orcamento->get_categoria_id();
+                $_SESSION['compatibilidade']['marca'][$this->orcamento->get_marca_id()] = $this->orcamento->get_marca_id();
+                $_SESSION['compatibilidade']['modelo'][$this->orcamento->get_modelo_id()] = $this->orcamento->get_modelo_id();
+                $_SESSION['compatibilidade']['versao'][$this->orcamento->get_versao_id()] = $this->orcamento->get_versao_id();
+                
+                $this->cadastrar_form['peca'] = $this->orcamento->get_peca_nome();;
+                $this->cadastrar_form['serie'] = $this->orcamento->get_numero_serie();
+                $this->cadastrar_form['estado_uso'] = $this->orcamento->get_estado_uso_id();
+                $this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->orcamento->get_preferencia_entrega_id());
+            }
+        }
+        
+        /**
+         * Function chamada por ajax para carregar os checkbox das compatibilidades
+         */
         public function Carregar_Compatibilidade() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -289,42 +324,46 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
+        /**
+         * Function chamada em Carregar_Compatibilidade() para ordenar de forma correta os dados CMMS 
+         * conforme os selecionados pelo usuario.
+         */
         private function Salvar_Session_Compatibilidade() : void
         {
             $compatibilidade = array();
-                
+            
             $compatibilidade['categoria'] = array();
             $compatibilidade['marca'] = array();
             $compatibilidade['modelo'] = array();
             $compatibilidade['versao'] = array();
             $compatibilidade['ano'] = array();
-                
+            
             if (isset($_SESSION['compatibilidade'])) {
                 $compatibilidade = $_SESSION['compatibilidade'];
             }
-                
+            
             if (!empty($this->categoria)) {
                 if (isset($compatibilidade['categoria'])) {
                     if (isset($compatibilidade['categoria'][$this->categoria])) {
                         unset($compatibilidade['categoria'][$this->categoria]);
-        
+                        
                         if (isset($compatibilidade['marca'])) {
                             $id_marcas = self::Buscar_Id_Marcas_Por_Id_Categoria($this->categoria);
-                                
+                            
                             foreach ($id_marcas as $id_marca) {
                                 if (isset($compatibilidade['marca'][$id_marca])) {
                                     unset($compatibilidade['marca'][$id_marca]);
-                                        
+                                    
                                     if (isset($compatibilidade['modelo'])) {
                                         $id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($id_marca);
-        
+                                        
                                         foreach ($id_modelos as $id_modelo) {
                                             if (isset($compatibilidade['modelo'][$id_modelo])) {
                                                 unset($compatibilidade['modelo'][$id_modelo]);
-        
+                                                
                                                 if (isset($compatibilidade['versao'])) {
                                                     $id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($id_modelo);
-                                                        
+                                                    
                                                     foreach ($id_versoes as $id_versao) {
                                                         if (isset($compatibilidade['versao'][$id_versao])) {
                                                             unset($compatibilidade['versao'][$id_versao]);
@@ -344,22 +383,22 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $compatibilidade['categoria'][$this->categoria] = $this->categoria;
                 }
             }
-                
+            
             if (!empty($this->marca)) {
                 if (isset($compatibilidade['marca'])) {
                     if (isset($compatibilidade['marca'][$this->marca])) {
                         unset($compatibilidade['marca'][$this->marca]);
-        
+                        
                         if (isset($compatibilidade['modelo'])) {
                             $id_modelos = self::Buscar_Id_Modelos_Por_Id_Marca($this->marca);
-                                
+                            
                             foreach ($id_modelos as $id_modelo) {
                                 if (isset($compatibilidade['modelo'][$id_modelo])) {
                                     unset($compatibilidade['modelo'][$id_modelo]);
-                                        
+                                    
                                     if (isset($compatibilidade['versao'])) {
                                         $id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($id_modelo);
-        
+                                        
                                         foreach ($id_versoes as $id_versao) {
                                             if (isset($compatibilidade['versao'][$id_versao])) {
                                                 unset($compatibilidade['versao'][$id_versao]);
@@ -376,15 +415,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $compatibilidade['marca'][$this->marca] = $this->marca;
                 }
             }
-                
+            
             if (!empty($this->modelo)) {
                 if (isset($compatibilidade['modelo'])) {
                     if (isset($compatibilidade['modelo'][$this->modelo])) {
                         unset($compatibilidade['modelo'][$this->modelo]);
-        
+                        
                         if (isset($compatibilidade['versao'])) {
                             $id_versoes = self::Buscar_Id_Versoes_Por_Id_Modelo($this->modelo);
-                                
+                            
                             foreach ($id_versoes as $id_versao) {
                                 if (isset($compatibilidade['versao'][$id_versao])) {
                                     unset($compatibilidade['versao'][$id_versao]);
@@ -398,7 +437,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $compatibilidade['modelo'][$this->modelo] = $this->modelo;
                 }
             }
-                
+            
             if (!empty($this->versao)) {
                 if (isset($compatibilidade['versao'])) {
                     if (isset($compatibilidade['versao'][$this->versao])) {
@@ -410,7 +449,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $compatibilidade['versao'][$this->versao] = $this->versao;
                 }
             }
-                
+            
             $_SESSION['compatibilidade'] = $compatibilidade;
         }
         
@@ -502,11 +541,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                                                                     $object_versao = new Object_versao();
                                                                                     $object_versao->set_id($versao_selecionada);
                                                                                     $versao_pativel->set_object_versao($object_versao);
-                        
+                                                                                    
                                                                                     if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
                                                                                         $versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
                                                                                     }
-                        
+                                                                                    
                                                                                     $versoes_pativeis[] = $versao_pativel;
                                                                                 }
                                                                             }
@@ -588,8 +627,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 DAO_Peca::Atualizar_URL($id_peca, $peca_url.'_'.$id_peca);
                             }
                             
-                            $retorno = null;
+                            if ($this->orcamento instanceof Object_Orcamento) {
+                                $obj_orcamento_peca = new Object_Orcamento_Peca();
                                 
+                                $obj_orcamento_peca->set_orcamento_id($this->orcamento->get_id());
+                                $obj_orcamento_peca->set_peca_id($id_peca);
+                                
+                                if (DAO_Orcamento_Peca::Inserir($obj_orcamento_peca)) {
+                                    $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
+                                    
+                                    $obj_entidade_bd->SetarStatusOrcamento($this->orcamento->get_id(), Entidade_BD::RESPONDIDO);
+                                }
+                            }
+                            
+                            $retorno = null;
+                            
                             foreach ($categorias_pativeis as $pativel) {
                                 $pativel->set_peca_id($id_peca);
                                 
@@ -723,7 +775,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 }
                             }
                         }
-                            
+                        
                         $_SESSION['compatibilidade']['ano'] = $anos;
                     }
                     
@@ -736,6 +788,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
+        /**
+         * Function chamado por ajax para salvar as imagens carregadas pelo usuario antes de finalizar o cadastro.
+         */
         public function Salvar_Imagem_TMP() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -757,6 +812,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
+        /**
+         * Functino para Deletar as ou a imagem temporaria que o usuario carregou antes do cadastro.
+         * 
+         * @param int $num_img
+         */
         public function Deletar_Imagem(int $num_img) : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -816,6 +876,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
         }
         
+        /**
+         * Function para verificar com JS se o usuario já atingiu o limite de peças.
+         */
         public function Retornar_Dados_Plano() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -829,7 +892,14 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 }
             }
         }
-
+        
+        /**
+         * Function chamada na 'View_Cadastrar' - 'Manter_Imagens()' para manter as imagens 
+         * apos recarregar a pagina em um erro.
+         * 
+         * @param string $nome_imagem
+         * @return string
+         */
         public static function Pegar_Imagem_URL(string $nome_imagem) : string
         {
             $imagens = new Gerenciar_Imagens();

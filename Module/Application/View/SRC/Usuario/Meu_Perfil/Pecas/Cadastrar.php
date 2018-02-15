@@ -3,6 +3,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar as Controller_Cadastrar;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
     
     class Cadastrar
     {
@@ -16,6 +17,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         private static $cadastrar_campos;
         private static $cadastrar_form;
         private static $cadastrar_sucesso;
+        private static $orcamento;
         
         public function set_cadastrar_erros(?array $cadastrar_erros = null) : void
         {
@@ -35,6 +37,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         public function set_cadastrar_sucesso(?array $cadastrar_sucesso = null) : void
         {
             self::$cadastrar_sucesso = $cadastrar_sucesso;
+        }
+        
+        public function set_orcamento(?Object_Orcamento $obj_orcamento) : void
+        {
+            self::$orcamento = $obj_orcamento;
         }
         
         public function Executar() : void
@@ -569,6 +576,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                 for ($i=2017; $i >= 1900; $i--) {
                     echo "<option value=\"".$i."\">".$i."</option>";
                 }
+            }
+        }
+        
+        public static function MostrarURLOrcamento() : void
+        {
+            if (self::$orcamento instanceof Object_Orcamento) {
+                echo 'no-orcamento/'.self::$orcamento->get_id().'/';
             }
         }
     }

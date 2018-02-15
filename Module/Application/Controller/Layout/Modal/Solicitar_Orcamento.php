@@ -145,7 +145,7 @@ namespace Module\Application\Controller\Layout\Modal;
                         $retorno['content'] = "<li>Sua Solicitação de Orçamento foi enviada com sucesso para todos os clientes do Feralten.</li>";
                     } else {
                         $retorno['status'] = 'erro';
-                        $retorno['content'] .= "<li>Erro ao tentar criar um covo orçamento</li>";
+                        $retorno['content'] .= "<li>Erro ao tentar criar um novo orçamento</li>";
                     }
                 } else {
                     $retorno['status'] = 'erro';
