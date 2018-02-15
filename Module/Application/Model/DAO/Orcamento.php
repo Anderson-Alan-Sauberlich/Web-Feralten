@@ -156,7 +156,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorData(string $data_solicitacao)
         {
             try {
-                $sql = 'SELECT orcamento_id, orcamento_data_solicitacao, orcamento_data_validade FROM tb_orcamento WHERE orcamento_data_solicitacao > :data_slctc';
+                $sql = 'SELECT orcamento_id, orcamento_data_solicitacao, orcamento_data_validade FROM tb_orcamento WHERE orcamento_data_solicitacao >= :data_slctc';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':data_slctc', $data_solicitacao, PDO::PARAM_STR);

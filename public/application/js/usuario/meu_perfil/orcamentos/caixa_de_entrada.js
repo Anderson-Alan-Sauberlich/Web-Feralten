@@ -13,10 +13,12 @@ function AjaxCaixaDeEntrada() {
 			indice : $indice
 		}
 	}).done(function(data) {
-		$('#div_orcamentos').append(data);
-		$('.ui.accordion').accordion();
-		$indice += 1;
-		EventoScrollCaixaDeEntrada();
+		if (data != '' && data != null) {
+			$('#div_orcamentos').append(data);
+			$('.ui.accordion').accordion();
+			$indice += 1;
+			EventoScrollCaixaDeEntrada();
+		}
 	});
 }
 function EventoScrollCaixaDeEntrada() {

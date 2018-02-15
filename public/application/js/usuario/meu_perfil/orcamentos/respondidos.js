@@ -13,10 +13,12 @@ function AjaxRespondidos() {
 			indice : $indice
 		}
 	}).done(function(data) {
-		$('#div_orcamentos').append(data);
-		$('.ui.accordion').accordion();
-		$indice += 1;
-		EventoScrollRespondidos();
+		if (data != '' && data != null) {
+			$('#div_orcamentos').append(data);
+			$('.ui.accordion').accordion();
+			$indice += 1;
+			EventoScrollRespondidos();
+		}
 	});
 }
 function EventoScrollRespondidos() {

@@ -13,10 +13,12 @@ function AjaxNaoTenho() {
 			indice : $indice
 		}
 	}).done(function(data) {
-		$('#div_orcamentos').append(data);
-		$('.ui.accordion').accordion();
-		$indice += 1;
-		EventoScrollNaoTenho();
+		if (data != '' && data != null) {
+			$('#div_orcamentos').append(data);
+			$('.ui.accordion').accordion();
+			$indice += 1;
+			EventoScrollNaoTenho();
+		}
 	});
 }
 function EventoScrollNaoTenho() {
