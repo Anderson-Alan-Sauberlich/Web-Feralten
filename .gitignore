@@ -5,4 +5,7 @@ public/imagens/*.png
 public/imagens/*.gif
 
 #Ignorar os arquivos com dados .bd dos Usuarios e Entidades
-data/*.db
+data/**/*.db
+data/entidade/**/*.db
+data/usuario/**/*.db
+data/cache/**/*.db
