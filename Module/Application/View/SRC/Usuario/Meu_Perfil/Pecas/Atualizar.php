@@ -44,7 +44,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Incluir_Menu_Usuario()
         {
-            new View_Usuario(self::$status_usuario, array('pecas', 'atualizar'));
+            new View_Usuario(self::$status_usuario, ['pecas', 'atualizar']);
         }
         
         public static function Mostrar_Sucesso() : void

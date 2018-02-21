@@ -23,7 +23,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         
         public static function Incluir_Menu_Usuario()
         {
-            new View_Usuario(self::$status_usuario, array('financeiro', 'meu-plano'));
+            new View_Usuario(self::$status_usuario, ['financeiro', 'meu-plano']);
         }
         
         public static function Mostrar_Valor(int $id) : void

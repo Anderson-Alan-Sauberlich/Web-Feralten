@@ -38,7 +38,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, array('meus-dados', 'concluir'));
+            new View_Usuario(self::$status_usuario, ['meus-dados', 'concluir']);
         }
         
         public static function Manter_Valor(string $campo) : void

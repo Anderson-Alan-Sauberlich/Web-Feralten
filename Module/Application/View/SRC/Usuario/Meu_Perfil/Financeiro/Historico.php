@@ -19,6 +19,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         
         public static function Incluir_Menu_Usuario()
         {
-            new View_Usuario(self::$status_usuario, array('financeiro', 'historico'));
+            new View_Usuario(self::$status_usuario, ['financeiro', 'historico']);
         }
     }

@@ -58,7 +58,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, array('meus-dados', 'atualizar'));
+            new View_Usuario(self::$status_usuario, ['meus-dados', 'atualizar']);
         }
         
         public static function Manter_Valor(?string $quadro = null, ?string $campo = null) : void
