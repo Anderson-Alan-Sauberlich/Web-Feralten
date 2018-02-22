@@ -8,7 +8,7 @@ $('#endereco_complemento').popup();
 $('#endereco_estado').dropdown();
 $('#endereco_cidade').dropdown();
 $('#endereco_cep').mask('00.000-000');
-$('.message .close').on('click', function() {
+$('#endereco_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
 $(document).ready(function() {

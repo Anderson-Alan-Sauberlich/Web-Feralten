@@ -4,7 +4,7 @@ $('#usuario_email').popup();
 $('#usuario_email_alternativo').popup();
 $('#usuario_fone').popup();
 $('#usuario_fone_alternativo').popup();
-$('.message .close').on('click', function() {
+$('#usuario_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
 SetarMascarasUsuario();

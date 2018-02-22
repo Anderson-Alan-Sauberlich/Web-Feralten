@@ -911,6 +911,7 @@
                             
                             return $response;
                         });
+                        
                         $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
                             $endereco = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco();
                             
@@ -939,14 +940,37 @@
                     });
                     
                     $app->group('/entidade', function() use ($app) {
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->CarregarDados();
+                            
+                            return $response;
+                        });
+                        
                         $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
                             $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
                             
-                            $entidade->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
                             $entidade->set_site(isset($_POST['site']) ? $_POST['site'] : null);
                             $entidade->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
                             
                             $entidade->SalvarDados();
+                            
+                            return $response;
+                        });
+                            
+                        $app->post('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->Salvar_Imagem_TMP();
+                            
+                            return $response;
+                        });
+                        
+                        $app->delete('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->Deletar_Imagem();
                             
                             return $response;
                         });

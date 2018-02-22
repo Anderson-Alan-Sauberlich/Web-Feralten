@@ -54,7 +54,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         /**
          * @var array $sucesso Array com todos as Mensagens de Sucesso
          */
-        private $sucesso = [];
+        private $sucessos = [];
         
         /**
          * @var array $campos Array com todos os Status dos Campos do Formulario
@@ -212,12 +212,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                 } else {
                     Login_Session::set_usuario_nome($usuario->get_nome());
                     
-                    $this->sucesso[] = "Usuario Atualizado com Sucesso";
+                    $this->sucessos[] = "Usuario Atualizado com Sucesso";
                 }
             }
             
             $retorno['erros'] = View_Usuario::CriarListagem($this->erros);
-            $retorno['sucessos'] = View_Usuario::CriarListagem($this->sucesso);
+            $retorno['sucessos'] = View_Usuario::CriarListagem($this->sucessos);
             $retorno['campos'] = $this->campos;
             
             echo json_encode($retorno);

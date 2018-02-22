@@ -22,27 +22,27 @@
                             <div class="ui small bordered image imagemPeca">
                                 <div id="div_img" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
                                 <a onclick="limparCampoFile();" class="ui corner red label"><i class="remove circle icon"></i></a>
-                                <img id="foto" name="foto" onError="MostImgErr($this)" src="">
+                                <img id="foto" name="foto" onError="MostImgErr($this)" src="<?php View_Entidade::Manter_Imagem(); ?>">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="required field">
+            <div id="div_entidade_cpf_cnpj" class="required field">
             	<label class="ui red header" for="entidade_cpf_cnpj">Seu CPF ou CNPJ:</label>
             	<div class="ui left icon input">
 					<i class="id card outline icon"></i>
                		<input id="entidade_cpf_cnpj" name="entidade_cpf_cnpj" placeholder="CPF / CNPJ" value="<?= View_Entidade::MostrarCPF_CNPJ(); ?>" type="text" <?= View_Entidade::BloquearCPF_CNPJ(); ?> data-content="Este campo não mais podera ser alterado. Digite apenas os Numeros do seu CPF ou CNPJ. (Obrigatório)">
             	</div>
             </div>
-            <div class="field">
+            <div id="div_entidade_nome_comercial" class="field">
             	<label class="ui red header" for="entidade_nome_comercial">Nome Comercial:</label>
             	<div class="ui left icon input">
 					<i class="building outline icon"></i>
                		<input id="entidade_nome_comercial" name="entidade_nome_comercial" placeholder="Nome Comercial" value="<?= View_Entidade::MostrarNomeComercial(); ?>" type="text" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado em seus dados, substituindo seu Nome de Usuario. (Opcional)">
             	</div>
             </div>
-            <div class="field">
+            <div id="div_entidade_site" class="field">
                	<label class="ui red header" for="entidade_site">Seu Site:</label>
                	<div class="ui left icon input">
 					<i class="external icon"></i>
@@ -53,9 +53,9 @@
                 <div class="ui divider"></div>
                 <div class="field">
                 	<div class="ui fluid buttons">
-                        <button id="salvar_usuario" name="salvar_usuario" value="1" type="submit" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+                        <button id="salvar_usuario" name="salvar_usuario" onclick="SalvarEntidade()" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
                         <div class="or" data-text="Ou"></div>
-                        <button id="restaurar_usuario" name="restaurar_usuario" value="1" type="submit" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
+                        <button id="restaurar_usuario" name="restaurar_usuario" onclick="RestaurarEntidade()" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
                     </div>
                 </div>
             <?php } ?>

@@ -63,4 +63,32 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados
             
             return null;
         }
+        
+        public static function Manter_Imagem() : void
+        {
+            if (isset($_SESSION['imagem_tmp'])) {
+                if ($_SESSION['imagem_tmp'] == "del") {
+                    echo "/resources/img/imagem_indisponivel.png";
+                } else {
+                    echo self::$obj_entidade->get_imagem();
+                }
+            } else {
+                if (!empty(self::$obj_entidade->get_imagem())) {
+                    echo str_replace("@", "200x150", self::$obj_entidade->get_imagem());
+                } else {
+                    echo "/resources/img/imagem_indisponivel.png";
+                }
+            }
+        }
+        
+        public static function CriarListagem(array $itens) : array
+        {
+            $lista = [];
+            
+            foreach ($itens as $item) {
+                $lista[] = "<li>$item</li>";
+            }
+            
+            return $lista;
+        }
     }
