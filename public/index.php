@@ -878,6 +878,31 @@
                         }
                     });
                     
+                    $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $editar_dados = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados();
+                        
+                        $editar_dados->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                        $editar_dados->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                        $editar_dados->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
+                        $editar_dados->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
+                        $editar_dados->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+                        $editar_dados->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
+                        $editar_dados->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
+                        $editar_dados->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
+                        $editar_dados->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
+                        $editar_dados->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
+                        $editar_dados->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
+                        $editar_dados->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
+                        $editar_dados->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
+                        $editar_dados->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
+                        $editar_dados->set_site(isset($_POST['site']) ? $_POST['site'] : null);
+                        $editar_dados->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
+                        
+                        $editar_dados->Concluir_Cadastro();
+                        
+                        return $response;
+                    });
+                    
                     $app->group('/usuario', function() use ($app) {
                         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
                             $usuario = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Usuario();

@@ -275,8 +275,27 @@ namespace Module\Application\Model\Common\Util;
             }
         }
         
+        /**
+         * Destroi a sessão Inteira.
+         */
         public static function Finalizar_Login_Session() : void
         {
             unset($_SESSION['login']);
+        }
+        
+        /**
+         * Desctroi a sessão do Usuario.
+         */
+        public static function Finalizar_Login_Session_Usuario() : void
+        {
+            unset($_SESSION['login']['usuario']);
+        }
+        
+        /**
+         * Destroi a sessão da Entidade.
+         */
+        public static function Finalizar_Login_Session_Entidade() : void
+        {
+            unset($_SESSION['login']['entidade']);
         }
     }

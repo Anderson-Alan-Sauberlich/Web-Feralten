@@ -8,6 +8,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
+    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use \Exception;
     
     class Entidade
@@ -93,6 +94,36 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
+         * Retorna todass as Mensagens de Erro em lista.
+         *
+         * @return array
+         */
+        public function get_erros() : array
+        {
+            return $this->erros;
+        }
+        
+        /**
+         * Retorna todas as Mensagens de Sucesso em lista.
+         *
+         * @return array
+         */
+        public function get_sucessos() : array
+        {
+            return $this->sucessos;
+        }
+        
+        /**
+         * Retorna todos os campos do formulario com estatus de erro.
+         *
+         * @return array
+         */
+        public function get_campos() : array
+        {
+            return $this->campos;
+        }
+        
+        /**
          * Instancia e Abre a View
          *
          * @return number|NULL|boolean
@@ -139,7 +170,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
-         * FUnction chamada por ajax para salvar os valores do form.
+         * Function chamada por ajax para salvar os valores do form.
+         * Retorna um Json com as mensagens de erro, sucesso e os campos respectivos.
          */
         public function SalvarDados() : void
         {
@@ -177,6 +209,58 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             $retorno['campos'] = $this->campos;
             
             echo json_encode($retorno);
+        }
+        
+        /**
+         * Function chamada no controller Editar_Dados para salvar os valores do form usuario.
+         *
+         * @return bool true para sucesso e false para erro ao salvar os dados.
+         */
+        public function ConcluirCadastro() : bool
+        {
+            if (Login_Session::Verificar_Login()) {
+                if (empty($this->erros)) {
+                    $entidade = new Object_Entidade();
+                    $entidade->set_usuario_id(Login_Session::get_usuario_id());
+                    $entidade->set_status_id(1);
+                    $entidade->set_intervalo_pagamento_id(1);
+                    $entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
+                    $entidade->set_plano_id(1);
+                    $entidade->set_data(date('Y-m-d H:i:s'));
+                    $entidade->set_cpf_cnpj($this->cpf_cnpj);
+                    $entidade->set_site($this->site);
+                    $entidade->set_nome_comercial($this->nome_comercial);
+                    
+                    $id_entidade = DAO_Entidade::Inserir($entidade);
+                    
+                    if ($id_entidade != false) {
+                        if (Controller_Faturas::Criar_Fatura($id_entidade, 1)) {
+                            Login_Session::set_entidade_id($id_entidade);
+                            Login_Session::set_entidade_plano(1);
+                            
+                            $imagem = $this->Salvar_Imagem();
+                            
+                            if (!empty($imagem)) {
+                                DAO_Entidade::Atualizar_Imagem($imagem, $id_entidade);
+                            }
+                            
+                            return true;
+                        } else {
+                            $this->erros[] = 'Erro ao tentar gerar fatura';
+                            
+                            return false;
+                        }
+                    } else {
+                        $this->erros[] = 'Erro ao tentar salvar dados da Entidade';
+                        
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
         
         /**
@@ -218,6 +302,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             }
         }
         
+        /**
+         * Remove as imagens da pasta temporaria e seta a session para deletar a imagem salva ao Salvar os Dados
+         */
         public function Deletar_Imagem() : void
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -233,6 +320,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             }
         }
         
+        /**
+         * Retorna a imagem em formato Base64
+         * function usada após carregar as imagens no servidor
+         *
+         * @param string $nome_imagem
+         * @return string
+         */
         private static function Pegar_Imagem_URL(?string $nome_imagem = null) : string
         {
             $imagens = new Gerenciar_Imagens();
@@ -246,6 +340,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             }
         }
         
+        /**
+         * Salva as imagens da pasta temporaria para a pasta real do usuario
+         * Function chamada ao Concluir Cadastro
+         *
+         * @return string|NULL
+         */
         private function Salvar_Imagem() : ?string
         {
             if (isset($_SESSION['imagem_tmp'])) {

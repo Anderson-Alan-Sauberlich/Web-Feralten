@@ -91,6 +91,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                                 if (Conexao::$conection->commit()) {
                                     Login_Session::set_entidade_plano($this->plano_id);
                                 } else {
+                                    Conexao::$conection->rollBack();
                                     $this->erros[] = 'Erro Fatal ao tentar salvar modificações';
                                 }
                             } else {

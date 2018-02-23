@@ -14,20 +14,21 @@
         <?php View_Editar_Dados::Incluir_Menu_Usuario(); ?>
         <h2 class="ui dividing header">Dados do usuario</h2>
         <?php View_Editar_Dados::Incluir_View_Usuario(); ?>
-        <div class="margem-inferior-pouco"></div>
+        <br/>
         <h2 class="ui dividing header">Dados da entidade</h2>
         <?php View_Editar_Dados::Incluir_View_Entidade(); ?>
-        <div class="margem-inferior-pouco"></div>
+        <br/>
         <h2 class="ui dividing header">Dados do endereço</h2>
         <?php View_Editar_Dados::Incluir_View_Endereco(); ?>
-        <div class="margem-inferior-pouco"></div>
         <?php if (!View_Editar_Dados::VerificaLoginEntidade()) { ?>
-        	<button id="concluir" name="concluir" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Concluir Cadastro</button>
-        	<div class="margem-inferior-pouco"></div>
+        	<h2 class="ui dividing header"></h2>
+        	<button id="concluir" name="concluir" onclick="SalvarDados()" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Concluir Cadastro</button>
         <?php } ?>
+        <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/js/usuario/meu_perfil/meus_dados/editar_dados.js"></script>
     </footer>
 </body>
 </html>

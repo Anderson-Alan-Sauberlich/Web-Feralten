@@ -176,6 +176,36 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
+         * Retorna todass as Mensagens de Erro em lista.
+         *
+         * @return array
+         */
+        public function get_erros() : array
+        {
+            return $this->erros;
+        }
+        
+        /**
+         * Retorna todas as Mensagens de Sucesso em lista.
+         *
+         * @return array
+         */
+        public function get_sucessos() : array
+        {
+            return $this->sucessos;
+        }
+        
+        /**
+         * Retorna todos os campos do formulario com estatus de erro.
+         *
+         * @return array
+         */
+        public function get_campos() : array
+        {
+            return $this->campos;
+        }
+        
+        /**
          * Instancia e Abre a View
          *
          * @return number|NULL|boolean
@@ -230,7 +260,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
-         * FUnction chamada por ajax para salvar os valores do form.
+         * Function chamada por ajax para salvar os valores do form.
+         * Retorna um Json com as mensagens de erro, sucesso e os campos respectivos.
          */
         public function SalvarDados() : void
         {
@@ -270,6 +301,46 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             $retorno['campos'] = $this->campos;
             
             echo json_encode($retorno);
+        }
+        
+        /**
+         * Function chamada no controller Editar_Dados para salvar os valores do form usuario.
+         *
+         * @return bool true para sucesso e false para erro ao salvar os dados.
+         */
+        public function ConcluirCadastro() : bool
+        {
+            if (Login_Session::Verificar_Login()) {
+                if (empty($this->erros)) {
+                    $object_estado = new Object_Estado();
+                    $object_estado->set_id($this->estado);
+                    
+                    $object_cidade = new Object_Cidade();
+                    $object_cidade->set_id($this->cidade);
+                    
+                    $endereco = new Object_Endereco();
+                    $endereco->set_id(0);
+                    $endereco->set_entidade_id(Login_Session::get_entidade_id());
+                    $endereco->set_cidade($object_cidade);
+                    $endereco->set_estado($object_estado);
+                    $endereco->set_numero($this->numero);
+                    $endereco->set_cep($this->cep);
+                    $endereco->set_bairro($this->bairro);
+                    $endereco->set_rua($this->rua);
+                    $endereco->set_complemento($this->complemento);
+                    
+                    if (DAO_Endereco::Inserir($endereco)) {
+                        return true;
+                    } else {
+                        $this->erros[] = 'Erro ao tentar salvar dados do Endereço';
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
         
         /**

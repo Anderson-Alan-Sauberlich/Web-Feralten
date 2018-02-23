@@ -15,13 +15,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         }
         
         private static $status_usuario;
-        private static $view_endereco;
-        private static $view_entidade;
         private static $view_usuario;
+        private static $view_entidade;
+        private static $view_endereco;
         
-        public function set_view_endereco(View_Endereco $view_endereco) : void
+        public function set_view_usuario(View_Usuario $view_usuario) : void
         {
-            self::$view_endereco = $view_endereco;
+            self::$view_usuario = $view_usuario;
         }
         
         public function set_view_entidade(View_Entidade $view_entidade) : void
@@ -29,9 +29,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             self::$view_entidade = $view_entidade;
         }
         
-        public function set_view_usuario(View_Usuario $view_usuario) : void
+        public function set_view_endereco(View_Endereco $view_endereco) : void
         {
-            self::$view_usuario = $view_usuario;
+            self::$view_endereco = $view_endereco;
         }
         
         public function Executar()
@@ -44,10 +44,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             new View_Menu_Usuario(self::$status_usuario, ['meus-dados', 'editar-dados']);
         }
         
-        public static function Incluir_View_Endereco() : void
+        public static function Incluir_View_Usuario() : void
         {
-            if (self::$view_endereco instanceof View_Endereco) {
-                self::$view_endereco->Executar();
+            if (self::$view_usuario instanceof View_Usuario) {
+                self::$view_usuario->Executar();
             }
         }
         
@@ -58,10 +58,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             }
         }
         
-        public static function Incluir_View_Usuario() : void
+        public static function Incluir_View_Endereco() : void
         {
-            if (self::$view_usuario instanceof View_Usuario) {
-                self::$view_usuario->Executar();
+            if (self::$view_endereco instanceof View_Endereco) {
+                self::$view_endereco->Executar();
             }
         }
         

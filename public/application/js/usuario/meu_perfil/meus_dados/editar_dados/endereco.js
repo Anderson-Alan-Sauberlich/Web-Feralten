@@ -27,6 +27,7 @@ $(document).ready(function() {
    });
 });
 $("#endereco_cep").blur(function() {
+	$('#form_endereco').addClass('loading');
     var cep = $(this).val().replace(/\D/g, '');
     if (cep != "") {
         var validacep = /^[0-9]{8}$/;
@@ -41,9 +42,17 @@ $("#endereco_cep").blur(function() {
                 	
                 	$("#endereco_cidade").dropdown('set text', $('div[data-text*="'+dados.localidade+'"]').data('text'));
                 	$("#endereco_cidade").dropdown('set value', $('div[data-text*="'+dados.localidade+'"]').data('value'));
-                 }
+                 
+                	$('#form_endereco').removeClass('loading');
+            	} else {
+            		$('#form_endereco').removeClass('loading');
+            	}
             });
+        } else {
+        	$('#form_endereco').removeClass('loading');
         }
+    } else {
+    	$('#form_endereco').removeClass('loading');
     }
 });
 function SalvarEndereco() {

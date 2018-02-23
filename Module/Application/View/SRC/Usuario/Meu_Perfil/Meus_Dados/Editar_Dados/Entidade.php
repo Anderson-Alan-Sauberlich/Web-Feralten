@@ -73,11 +73,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados
                     echo self::$obj_entidade->get_imagem();
                 }
             } else {
-                if (!empty(self::$obj_entidade->get_imagem())) {
-                    echo str_replace("@", "200x150", self::$obj_entidade->get_imagem());
-                } else {
-                    echo "/resources/img/imagem_indisponivel.png";
-                }
+                //if (!empty(self::$obj_entidade->get_imagem())) {
+                //    echo str_replace("@", "200x150", self::$obj_entidade->get_imagem());
+                //} else {
+                //    echo "/resources/img/imagem_indisponivel.png";
+                //}
             }
         }
         

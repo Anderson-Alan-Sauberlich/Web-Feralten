@@ -152,6 +152,36 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
+         * Retorna todass as Mensagens de Erro em lista.
+         * 
+         * @return array
+         */
+        public function get_erros() : array
+        {
+            return $this->erros;
+        }
+        
+        /**
+         * Retorna todas as Mensagens de Sucesso em lista.
+         * 
+         * @return array
+         */
+        public function get_sucessos() : array
+        {
+            return $this->sucessos;
+        }
+        
+        /**
+         * Retorna todos os campos do formulario com estatus de erro.
+         * 
+         * @return array
+         */
+        public function get_campos() : array
+        {
+            return $this->campos;
+        }
+        
+        /**
          * Instancia e Abre a View
          *
          * @return number|NULL|boolean
@@ -192,7 +222,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         }
         
         /**
-         * FUnction chamada por ajax para salvar os valores do form.
+         * Function chamada por ajax para salvar os valores do form.
+         * Retorna um Json com as mensagens de erro, sucesso e os campos respectivos.
          */
         public function SalvarDados() : void
         {
@@ -207,12 +238,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                 $usuario->set_email_alternativo($this->email_alternativo);
                 $usuario->set_id(Login_Session::get_usuario_id());
                 
-                if (DAO_Usuario::Atualizar($usuario) === false) {
-                    $this->erros[] = "Erro ao tentar Atualizar Usuario";
-                } else {
+                if (DAO_Usuario::Atualizar($usuario)) {
                     Login_Session::set_usuario_nome($usuario->get_nome());
                     
                     $this->sucessos[] = "Usuario Atualizado com Sucesso";
+                } else {
+                    $this->erros[] = "Erro ao tentar Atualizar Usuario";
                 }
             }
             
@@ -221,6 +252,43 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             $retorno['campos'] = $this->campos;
             
             echo json_encode($retorno);
+        }
+        
+        /**
+         * Function chamada no controller Editar_Dados para salvar os valores do form usuario.
+         * 
+         * @return bool true para sucesso e false para erro ao salvar os dados.
+         */
+        public function ConcluirCadastro() : bool
+        {
+            if (Login_Session::Verificar_Login()) {
+                if (empty($this->erros)) {
+                    $usuario = new Object_Usuario();
+                    
+                    $usuario->set_nome($this->nome);
+                    $usuario->set_sobrenome($this->sobrenome);
+                    $usuario->set_email($this->email);
+                    $usuario->set_fone($this->fone);
+                    $usuario->set_fone_alternativo($this->fone_alternativo);
+                    $usuario->set_email_alternativo($this->email_alternativo);
+                    $usuario->set_id(Login_Session::get_usuario_id());
+                    
+                    if (DAO_Usuario::Atualizar($usuario)) {
+                        Login_Session::set_usuario_nome($usuario->get_nome());
+                        
+                        $this->sucessos[] = "Usuario Atualizado com Sucesso";
+                        
+                        return true;
+                    } else {
+                        $this->erros[] = "Erro ao tentar Atualizar Usuario";
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
         
         /**
