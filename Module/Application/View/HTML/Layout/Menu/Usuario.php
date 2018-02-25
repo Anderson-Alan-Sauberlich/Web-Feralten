@@ -36,10 +36,7 @@
                             <div class="content <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>">
                                 <ul class="nav nav-pills">
                                 	<li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'editar-dados'); ?>"><a href="/usuario/meu-perfil/meus-dados/editar-dados/">Editar Dados</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'concluir'); ?>"><a href="/usuario/meu-perfil/meus-dados/concluir/">Concluir Cadastro</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'atualizar'); ?>"><a href="/usuario/meu-perfil/meus-dados/atualizar/">Atualizar Dados</a></li>
                                     <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'alterar-senha'); ?>"><a href="/usuario/meu-perfil/meus-dados/alterar-senha/">Alterar Senha</a></li>
-                                    <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'enderecos'); ?>"><a href="/usuario/meu-perfil/meus-dados/enderecos/">Meu(s) Endereço(s)</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -87,10 +84,7 @@
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa('meus-dados'); ?>" data-tab="dados">
                     <ul class="nav nav-pills">
                         <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'editar-dados'); ?>"><a href="/usuario/meu-perfil/meus-dados/editar-dados/">Editar Dados</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'concluir'); ?>"><a href="/usuario/meu-perfil/meus-dados/concluir/">Concluir Cadastro</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'atualizar'); ?>"><a href="/usuario/meu-perfil/meus-dados/atualizar/">Atualizar Dados</a></li>
                         <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'alterar-senha'); ?>"><a href="/usuario/meu-perfil/meus-dados/alterar-senha/">Alterar Senha</a></li>
-                        <li class="<?php View_Usuario::Verificar_URL_Ativa('meus-dados', 'enderecos'); ?>"><a href="/usuario/meu-perfil/meus-dados/enderecos/">Meu(s) Endereço(s)</a></li>
                     </ul>
                 </div>
                 <div role="tabpanel" class="ui attached tab segment <?php View_Usuario::Verificar_URL_Ativa("pecas"); ?>" data-tab="pecas">

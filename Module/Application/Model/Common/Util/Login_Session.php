@@ -53,10 +53,12 @@ namespace Module\Application\Model\Common\Util;
          */
         public static function Verificar_Entidade() : bool
         {
-            if (empty(self::get_entidade_id())) {
-                return false;
-            } else {
+            if (!empty(self::get_entidade_id()) &&
+                !empty(self::get_entidade_plano()) &&
+                !empty(self::get_entidade_status())) {
                 return true;
+            } else {
+                return false;
             }
         }
         

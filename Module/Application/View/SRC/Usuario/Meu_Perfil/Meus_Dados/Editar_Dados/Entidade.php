@@ -69,15 +69,19 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados
             if (isset($_SESSION['imagem_tmp'])) {
                 if ($_SESSION['imagem_tmp'] == "del") {
                     echo "/resources/img/imagem_indisponivel.png";
-                } else {
+                } else if (self::$obj_entidade instanceof OBJ_Entidade) {
                     echo self::$obj_entidade->get_imagem();
+                } else {
+                    echo "/resources/img/imagem_indisponivel.png";
+                }
+            } else if (self::$obj_entidade instanceof OBJ_Entidade) {
+                if (!empty(self::$obj_entidade->get_imagem())) {
+                    echo str_replace("@", "200x150", self::$obj_entidade->get_imagem());
+                } else {
+                    echo "/resources/img/imagem_indisponivel.png";
                 }
             } else {
-                //if (!empty(self::$obj_entidade->get_imagem())) {
-                //    echo str_replace("@", "200x150", self::$obj_entidade->get_imagem());
-                //} else {
-                //    echo "/resources/img/imagem_indisponivel.png";
-                //}
+                echo "/resources/img/imagem_indisponivel.png";
             }
         }
         

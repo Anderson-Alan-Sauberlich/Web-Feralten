@@ -161,7 +161,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     $view->set_obj_entidade($obj_entidade);
                     
                     if (empty($obj_entidade->get_imagem())) {
-                        $obj_entidade->set_imagem(self::Pegar_Imagem_URL($_SESSION['imagem_tmp']));
+                        $obj_entidade->set_imagem(self::Pegar_Imagem_URL($obj_entidade->get_imagem()));
                     }
                 }
             }
@@ -333,7 +333,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             
             $caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-200x150");
             
-            if (isset($caminho_imagem)) {
+            if (!empty($caminho_imagem)) {
                 return $imagens::Gerar_Data_URL($caminho_imagem);
             } else {
                 return "/resources/img/imagem_indisponivel.png";
@@ -358,9 +358,17 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     $img_link = null;
                     
                     if (!empty($this->nome_comercial)) {
-                        $img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp'], Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial));
+                        if (Login_Session::Verificar_Entidade()) {
+                            $img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp'], Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial));
+                        } else {
+                            $img_link = $imagens->Arquivar_Imagem_Entidade($_SESSION['imagem_tmp'], Validador::Entidade()::filtrar_descricao_imagem($this->nome_comercial));
+                        }
                     } else {
-                        $img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp']);
+                        if (Login_Session::Verificar_Entidade()) {
+                            $img_link = $imagens->Atualizar_Imagem_Entidade($_SESSION['imagem_tmp']);
+                        } else {
+                            $img_link = $imagens->Arquivar_Imagem_Entidade($_SESSION['imagem_tmp']);
+                        }
                     }
                     
                     unset($_SESSION['imagem_tmp']);
