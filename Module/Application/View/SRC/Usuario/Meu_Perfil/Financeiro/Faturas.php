@@ -86,7 +86,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, array('financeiro', 'faturas'));
+            new View_Usuario(self::$status_usuario, ['financeiro', 'faturas']);
         }
         
         /**

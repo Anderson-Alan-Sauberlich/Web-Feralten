@@ -5,7 +5,6 @@ $('.message .close').on('click', function() {
 var onloadCallback = function() { grecaptcha.render('recaptcha', { 'sitekey' : '6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ', 'size' : tamanhoTela() }); };
 function tamanhoTela() {
 	var scren = $("body").width();
-	
 	if (scren <= 767) {
 		return 'compact';
 	} else {

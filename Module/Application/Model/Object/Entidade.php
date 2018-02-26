@@ -13,7 +13,7 @@ namespace Module\Application\Model\Object;
         private $imagem;
         private $site;
         private $data;
-        private $enderecos = array();
+        private $enderecos = [];
         private $plano_id;
         private $intervalo_pagamento_id;
         private $data_contratacao_plano;

@@ -865,6 +865,143 @@
             });
             
             $app->group('/meus-dados', function() use ($app) {
+                $app->group('/editar-dados', function() use ($app) {
+                    $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $editar_dados = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados();
+                        
+                        $resposta = $editar_dados->Carregar_Pagina();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else {
+                            return $response;
+                        }
+                    });
+                    
+                    $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $editar_dados = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados();
+                        
+                        $editar_dados->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                        $editar_dados->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                        $editar_dados->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
+                        $editar_dados->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
+                        $editar_dados->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+                        $editar_dados->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
+                        $editar_dados->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
+                        $editar_dados->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
+                        $editar_dados->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
+                        $editar_dados->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
+                        $editar_dados->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
+                        $editar_dados->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
+                        $editar_dados->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
+                        $editar_dados->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
+                        $editar_dados->set_site(isset($_POST['site']) ? $_POST['site'] : null);
+                        $editar_dados->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
+                        
+                        $editar_dados->Concluir_Cadastro();
+                        
+                        return $response;
+                    });
+                    
+                    $app->group('/usuario', function() use ($app) {
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $usuario = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Usuario();
+                            
+                            $usuario->CarregarDados();
+                            
+                            return $response;
+                        });
+                        
+                        $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $usuario = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Usuario();
+                            
+                            $usuario->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                            $usuario->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                            $usuario->set_fone(isset($_POST['fone']) ? $_POST['fone'] : null);
+                            $usuario->set_fone_alternativo(isset($_POST['fone_alternativo']) ? $_POST['fone_alternativo'] : null);
+                            $usuario->set_email(isset($_POST['email']) ? $_POST['email'] : null);
+                            $usuario->set_email_alternativo(isset($_POST['email_alternativo']) ? $_POST['email_alternativo'] : null);
+                            
+                            $usuario->SalvarDados();
+                                
+                            return $response;
+                        });
+                    });
+                    
+                    $app->group('/endereco', function() use ($app) {
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $endereco = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco();
+                            
+                            $endereco->CarregarDados();
+                            
+                            return $response;
+                        });
+                        
+                        $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $endereco = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco();
+                            
+                            $endereco->set_cidade(isset($_POST['cidade']) ? $_POST['cidade'] : null);
+                            $endereco->set_estado(isset($_POST['estado']) ? $_POST['estado'] : null);
+                            $endereco->set_numero(isset($_POST['numero']) ? $_POST['numero'] : null);
+                            $endereco->set_cep(isset($_POST['cep']) ? $_POST['cep'] : null);
+                            $endereco->set_bairro(isset($_POST['bairro']) ? $_POST['bairro'] : null);
+                            $endereco->set_rua(isset($_POST['rua']) ? $_POST['rua'] : null);
+                            $endereco->set_complemento(isset($_POST['complemento']) ? $_POST['complemento'] : null);
+                            
+                            $endereco->SalvarDados();
+                            
+                            return $response;
+                        });
+                        
+                        $app->get('/cidades[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $endereco = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco();
+                            
+                            $endereco->set_estado(isset($_GET['estado']) ? $_GET['estado'] : null);
+                            
+                            $endereco->Retornar_Cidades_Por_Estado();
+                            
+                            return $response;
+                        });
+                    });
+                    
+                    $app->group('/entidade', function() use ($app) {
+                        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->CarregarDados();
+                            
+                            return $response;
+                        });
+                        
+                        $app->post('[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->set_site(isset($_POST['site']) ? $_POST['site'] : null);
+                            $entidade->set_nome_comercial(isset($_POST['nome_comercial']) ? $_POST['nome_comercial'] : null);
+                            
+                            $entidade->SalvarDados();
+                            
+                            return $response;
+                        });
+                            
+                        $app->post('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->Salvar_Imagem_TMP();
+                            
+                            return $response;
+                        });
+                        
+                        $app->delete('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $entidade = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade();
+                            
+                            $entidade->Deletar_Imagem();
+                            
+                            return $response;
+                        });
+                    });
+                });
+                
                 $app->group('/atualizar', function() use ($app) {
                     $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Atualizar();
@@ -920,7 +1057,7 @@
                     
                     $app->post('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Atualizar();
-                            
+                        
                         $atualizar->Salvar_Imagem_TMP();
                         
                         return $response;
@@ -928,7 +1065,7 @@
                     
                     $app->delete('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
                         $atualizar = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Atualizar();
-                            
+                        
                         $atualizar->Deletar_Imagem();
                         
                         return $response;
@@ -1054,7 +1191,7 @@
                     
                     $app->post('/imagem[/]', function(Request $request, Response $response, $args) use ($app) {
                         $concluir = new Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Concluir();
-                            
+                        
                         $concluir->Salvar_Imagem_TMP();
                         
                         return $response;

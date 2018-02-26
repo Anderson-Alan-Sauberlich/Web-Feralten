@@ -7,17 +7,17 @@
     </div>
     <div class="content">
         <p>Para Anunciar suas peças você precisa informar seu Contato e Endereço.</p>
-        <p>Por favor, Conclua seu Cadastro: <a href="/usuario/meu-perfil/meus-dados/concluir/">Concluir Cadastro</a></p>
+        <p>Por favor, Conclua seu Cadastro: <a href="/usuario/meu-perfil/meus-dados/editar-dados/">Concluir Cadastro</a></p>
     </div>
       <div class="actions hidden-xs">
         <div class="ui black deny button">Cancelar</div>
-        <a href="/usuario/meu-perfil/meus-dados/concluir/">
+        <a href="/usuario/meu-perfil/meus-dados/editar-dados/">
             <button class="ui positive right labeled icon button">Ok, Concluir Cadastro<i class="checkmark icon"></i></button>
         </a>
     </div>
       <div class="actions visible-xs">
         <div class="ui black deny button">Cancelar</div>
-        <a href="/usuario/meu-perfil/meus-dados/concluir/">
+        <a href="/usuario/meu-perfil/meus-dados/iditar-dados/">
             <button class="ui positive right labeled icon button">Concluir<i class="checkmark icon"></i></button>
         </a>
     </div>

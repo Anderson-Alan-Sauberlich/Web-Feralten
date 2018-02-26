@@ -53,10 +53,12 @@ namespace Module\Application\Model\Common\Util;
          */
         public static function Verificar_Entidade() : bool
         {
-            if (empty(self::get_entidade_id())) {
-                return false;
-            } else {
+            if (!empty(self::get_entidade_id()) &&
+                !empty(self::get_entidade_plano()) &&
+                !empty(self::get_entidade_status())) {
                 return true;
+            } else {
+                return false;
             }
         }
         
@@ -275,8 +277,27 @@ namespace Module\Application\Model\Common\Util;
             }
         }
         
+        /**
+         * Destroi a sessão Inteira.
+         */
         public static function Finalizar_Login_Session() : void
         {
             unset($_SESSION['login']);
+        }
+        
+        /**
+         * Desctroi a sessão do Usuario.
+         */
+        public static function Finalizar_Login_Session_Usuario() : void
+        {
+            unset($_SESSION['login']['usuario']);
+        }
+        
+        /**
+         * Destroi a sessão da Entidade.
+         */
+        public static function Finalizar_Login_Session_Entidade() : void
+        {
+            unset($_SESSION['login']['entidade']);
         }
     }

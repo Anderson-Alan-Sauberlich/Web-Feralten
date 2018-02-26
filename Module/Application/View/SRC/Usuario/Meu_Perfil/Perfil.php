@@ -19,6 +19,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
         
         public static function Incluir_Menu_Usuario()
         {
-            new View_Usuario(self::$status_usuario, array('meu-perfil', 'perfil'));
+            new View_Usuario(self::$status_usuario, ['meu-perfil', 'perfil']);
         }
     }
