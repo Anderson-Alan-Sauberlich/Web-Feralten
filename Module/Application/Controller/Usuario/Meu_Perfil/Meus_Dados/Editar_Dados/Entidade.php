@@ -196,7 +196,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     }
                     
                     if (DAO_Entidade::Atualizar($entidade)) {
-                        $this->atualizar_sucesso[] = 'Entidade Atualizada com Sucesso';
+                        $this->sucessos[] = 'Entidade Atualizada com Sucesso';
                         Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                     } else {
                         $this->erros[] = 'Erro ao tentar Atualizar Entidade';
