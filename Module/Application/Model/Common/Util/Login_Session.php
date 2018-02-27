@@ -174,7 +174,7 @@ namespace Module\Application\Model\Common\Util;
          */
         public static function set_entidade_nome(?string $entidade_nome) : void
         {
-            $_SESSION['login']['Entidade']['nome'] = $entidade_nome;
+            $_SESSION['login']['entidade']['nome'] = $entidade_nome;
         }
         
         /**

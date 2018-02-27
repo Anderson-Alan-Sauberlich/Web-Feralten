@@ -1,12 +1,12 @@
 $('#comprar_item').popup({
     hoverable: true,
     position : 'bottom left',
-    popup: '.comprar.popup'
+    popup: $('.comprar.popup')
 });
 $('#vender_item').popup({
     hoverable: true,
     position : 'bottom left',
-    popup: '.vender.popup'
+    popup: $('.vender.popup')
 });
 $('#drop_meu_feralten').dropdown();
 Controlar_Classes();

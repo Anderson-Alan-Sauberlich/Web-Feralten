@@ -45,4 +45,15 @@ namespace Module\Application\View\SRC\Layout\Header;
         {
             return hash_hmac('sha1', session_id(), sha1(session_id()));
         }
+        
+        public static function RetornarNomeMeuFeralten() : ? string
+        {
+            if (!empty(Login_Session::get_entidade_nome())) {
+                return Login_Session::get_entidade_nome();
+            } else if (!empty(Login_Session::get_usuario_nome())) {
+                return Login_Session::get_usuario_nome();
+            } else {
+                return null;
+            }
+        }
     }
