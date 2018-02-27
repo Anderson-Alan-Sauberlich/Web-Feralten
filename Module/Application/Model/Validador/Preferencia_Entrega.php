@@ -16,7 +16,7 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($id, FILTER_VALIDATE_INT)) {
                     return $id;
                 } else {
-                    throw new Exception('Selecione um Status para Peça Válido.');
+                    throw new Exception('Selecione uma Preferencia de Entrada Válido.');
                 }
             } else {
                 return null;

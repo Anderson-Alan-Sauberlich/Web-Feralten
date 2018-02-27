@@ -14,9 +14,25 @@ namespace Module\Application\Controller\Layout\Elemento;
             
         }
         
+        /**
+         * Armazena o id do orçamento.
+         * 
+         * @var int
+         */
         private $id_orcamento;
+        
+        /**
+         * Armazena as mensagens de erro.
+         * 
+         * @var array
+         */
         private $erros = [];
         
+        /**
+         * Seta o id do orçamento para a variavel $id_orcamento.
+         * 
+         * @param int $id_orcamento
+         */
         public function set_id_orcamento($id_orcamento) : void
         {
             try {
@@ -26,6 +42,12 @@ namespace Module\Application\Controller\Layout\Elemento;
             }
         }
         
+        /**
+         * Function para alterar o status na base local da entidade para Não Tenho.
+         * Assim será mostrado em uma lista diferente estes orçamentos e na listagem principal não aparecera.
+         * 
+         * @return number|NULL|boolean
+         */
         public function SetarOrcamentoNaoTenho()
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {

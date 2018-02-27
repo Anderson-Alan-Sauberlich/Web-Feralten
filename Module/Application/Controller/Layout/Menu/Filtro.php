@@ -23,14 +23,60 @@ namespace Module\Application\Controller\Layout\Menu;
             
         }
         
+        /**
+         * Armazena o id do estado.
+         * 
+         * @var ?int
+         */
         private $estado;
+        
+        /**
+         * Armazena o id da cidade.
+         * 
+         * @var ?int
+         */
         private $cidade;
+        
+        /**
+         * Armazena o estado de uso da peça.
+         * 
+         * @var ?int
+         */
         private $estado_uso;
+        
+        /**
+         * Armazena a ordenação das peças pelo preço.
+         * 
+         * @var ?string
+         */
         private $ordem_preco;
+        
+        /**
+         * Armazena a ordenação das peças pela data.
+         * 
+         * @var ?string
+         */
         private $ordem_data;
+        
+        /**
+         * Armazena o id da preferencia de entrega.
+         * 
+         * @var ?int
+         */
         private $preferencia_entrega;
+        
+        /**
+         * Armazena o status da peça.
+         * 
+         * @var ?int
+         */
         private $status_peca;
         
+        /**
+         * Seta o id do estado.
+         * 
+         * @param ?int $estado
+         */
         public function set_estado($estado) : void
         {
             try {
@@ -40,6 +86,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id da cidade.
+         * 
+         * @param ?int $cidade
+         */
         public function set_cidade($cidade) : void
         {
             try {
@@ -49,6 +100,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id do estado pela string uf.
+         * 
+         * @param ?string $estado_uf
+         */
         public function set_estado_uf($estado_uf) : void
         {
             try {
@@ -58,6 +114,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id da cidade pela url.
+         * 
+         * @param ?string $cidade_url
+         */
         public function set_cidade_url($cidade_url) : void
         {
             try {
@@ -69,6 +130,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta a ordem do preço da peça.
+         * 
+         * @param ?string $ordem_preco
+         */
         public function set_ordem_preco($ordem_preco) : void
         {
             try {
@@ -78,6 +144,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta a ordem da data de cadastro da peça.
+         * 
+         * @param ?string $ordem_data
+         */
         public function set_ordem_data($ordem_data) : void
         {
             try {
@@ -87,6 +158,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id do estado de uso da peça.
+         * 
+         * @param ?int $estado_uso
+         */
         public function set_estado_uso($estado_uso) : void
         {
             try {
@@ -96,6 +172,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id do estado de uso da peça por string url.
+         * 
+         * @param ?string $estado_uso
+         */
         public function set_estado_uso_url($estado_uso) : void
         {
             try {
@@ -105,6 +186,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id da preferencia de entrada da peça.
+         * 
+         * @param ?int $preferencia_entrega
+         */
         public function set_preferencia_entrega($preferencia_entrega) : void
         {
             try {
@@ -114,6 +200,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id da preferencia de entrada da peça por string url.
+         * 
+         * @param ?string $preferencia_entrega
+         */
         public function set_preferencia_entrega_url($preferencia_entrega) : void
         {
             try {
@@ -123,6 +214,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id do status da peça.
+         * 
+         * @param ?int $status_peca
+         */
         public function set_status_peca($status_peca) : void
         {
             try {
@@ -134,6 +230,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Seta o id do status da pela pela string url.
+         * 
+         * @param ?string $status_peca
+         */
         public function set_status_peca_url($status_peca) : void
         {
             try {
@@ -145,31 +246,61 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna o id do estado.
+         * 
+         * @return int|NULL
+         */
         public function get_estado() : ?int
         {
             return $this->estado;
         }
         
+        /**
+         * Retorna o id da cidade.
+         * 
+         * @return int|NULL
+         */
         public function get_cidade() : ?int
         {
             return $this->cidade;
         }
         
+        /**
+         * Retorna o id do estado de uso.
+         * 
+         * @return int|NULL
+         */
         public function get_estado_uso() : ?int
         {
             return $this->estado_uso;
         }
         
+        /**
+         * Retorna a preferencia de entraga.
+         * 
+         * @return int|NULL
+         */
         public function get_preferencia_entrega() : ?int
         {
             return $this->preferencia_entrega;
         }
         
+        /**
+         * Retorna o status da peça.
+         * 
+         * @return int|NULL
+         */
         public function get_status_peca() : ?int
         {
             return $this->status_peca;
         }
         
+        /**
+         * Retorna o objeto Estado.
+         * 
+         * @return Object_Estado|NULL
+         */
         public function get_object_estado() : ?Object_Estado
         {
             if (!empty($this->estado)) {
@@ -183,6 +314,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna o objeto Cidade.
+         * 
+         * @return Object_Cidade|NULL
+         */
         public function get_object_cidade() : ?Object_Cidade
         {
             if (!empty($this->cidade)) {
@@ -196,6 +332,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna o objeto Estaro de Uso.
+         * 
+         * @return Object_Estado_Uso_Peca|NULL
+         */
         public function get_object_estado_uso() : ?Object_Estado_Uso_Peca
         {
             if (!empty($this->estado_uso)) {
@@ -209,6 +350,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna o objeto Preferencia de Entraga.
+         * 
+         * @return Object_Preferencia_Entrega|NULL
+         */
         public function get_object_preferencia_entrega() : ?Object_Preferencia_Entrega
         {
             if (!empty($this->preferencia_entrega)) {
@@ -222,6 +368,11 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna o objeto Status da Peça.
+         * 
+         * @return Object_Status_Peca|NULL
+         */
         public function get_object_status_peca() : ?Object_Status_Peca
         {
             if (!empty($this->status_peca)) {
@@ -235,6 +386,12 @@ namespace Module\Application\Controller\Layout\Menu;
             }
         }
         
+        /**
+         * Retorna uma array list com os dados do formulario.
+         * (Filtrados)
+         * 
+         * @return array|NULL
+         */
         public function get_form() : ?array
         {
             $form_filtro = array();

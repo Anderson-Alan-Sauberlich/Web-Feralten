@@ -18,10 +18,32 @@ namespace Module\Application\Controller\Layout\Elemento;
             
         }
         
+        /**
+         * Armazena o ID da Peça.
+         * 
+         * @var $peca int
+         */
         private $peca;
+        
+        /**
+         * Armazena o codigo para verificar se a peça deve ser deletada, o codigo deveria ser 'deletar'.
+         * 
+         * @var $deletar ?string
+         */
         private $deletar;
+        
+        /**
+         * Armazena o status que a peça deve receber.
+         * 
+         * @var $status ?int
+         */
         private $status;
         
+        /**
+         * Seta o id para a variavel $peca.
+         * 
+         * @param int $peca
+         */
         public function set_peca($peca) : void
         {
             try {
@@ -31,11 +53,21 @@ namespace Module\Application\Controller\Layout\Elemento;
             }
         }
         
+        /**
+         * Seta o cidogo 'deletar' para a variavel $deletar, caso o usuario tenha escolhido deletar a peça.
+         * 
+         * @param ?string $deletar
+         */
         public function set_deletar($deletar) : void
         {
             $this->deletar = $deletar;
         }
         
+        /**
+         * Seta o status para a peça que o usuario tiver escolhido.
+         * 
+         * @param ?int $status
+         */
         public function set_status($status) : void
         {
             try {
@@ -45,6 +77,9 @@ namespace Module\Application\Controller\Layout\Elemento;
             }
         }
         
+        /**
+         * Executa todas as opções que o usuario tiver selecionado, inclusive deletar os arquivos das imagens.
+         */
         public function Salvar_Alteracoes_Peca() : void
         {
             if (Login_Session::Verificar_Login() AND !empty($this->peca)) {

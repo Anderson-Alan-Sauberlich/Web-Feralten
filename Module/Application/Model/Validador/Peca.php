@@ -169,7 +169,7 @@ namespace Module\Application\Model\Validador;
             
         }
         
-        public static function validar_ordem_data($ordem_data)
+        public static function validar_ordem_data($ordem_data) : ?string
         {
             if (!empty($ordem_data)) {
                 $valor = strip_tags($ordem_data);

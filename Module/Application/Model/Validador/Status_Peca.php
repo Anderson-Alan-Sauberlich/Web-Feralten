@@ -11,9 +11,17 @@ namespace Module\Application\Model\Validador;
             
         }
         
-        public static function validar_id($id = null) : void
+        public static function validar_id($id = null) : ?int
         {
-            
+            if (!empty($id)) {
+                if (filter_var($id, FILTER_VALIDATE_INT)) {
+                    return $id;
+                } else {
+                    throw new Exception('Selecione um Status para Peça Válido.');
+                }
+            } else {
+                return null;
+            }
         }
         
         public static function validar_nome($nome = null) : void

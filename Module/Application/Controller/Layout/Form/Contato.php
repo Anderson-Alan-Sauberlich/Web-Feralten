@@ -9,15 +9,40 @@ namespace Module\Application\Controller\Layout\Form;
 
     class Contato
     {
+        /**
+         * Inicia a variavel $object_contato.
+         */
         function __construct()
         {
             $this->object_contato = new Object_Contato();
         }
         
+        /**
+         * Armazena os dados de uma instancia Object_Contato.
+         * 
+         * @var Object_Contato
+         */
         private $object_contato;
-        private $campos = array();
-        private $erros = array();
         
+        /**
+         * Armazena todos os campos com erro.
+         * 
+         * @var array
+         */
+        private $campos = [];
+        
+        /**
+         * Armazena todas as mensagens de erro.
+         * 
+         * @var array
+         */
+        private $erros = [];
+        
+        /**
+         * Seta o nome para a variavel $object_contato.
+         * 
+         * @param string $nome
+         */
         public function set_nome($nome) : void
         {
             try {
@@ -28,6 +53,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta o email para a variavel $object_contato.
+         * 
+         * @param string $email
+         */
         public function set_email($email) : void
         {
             try {
@@ -38,6 +68,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta o numero de telefone para a variavel $object_contato.
+         * 
+         * @param string $telefone
+         */
         public function set_telefone($telefone) : void
         {
             try {
@@ -48,6 +83,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta true se o telefone for whatsapp e false se não for para a variavel $object_contato.
+         * 
+         * @param ?bool $whatsapp
+         */
         public function set_whatsapp($whatsapp) : void
         {
             try {
@@ -58,6 +98,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta o assunto para a variavel $object_contato.
+         * 
+         * @param string $assunto
+         */
         public function set_assunto($assunto) : void
         {
             try {
@@ -68,6 +113,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta a mensagen para a variavel $object_contato.
+         * 
+         * @param string $mensagem
+         */
         public function set_mensagem($mensagem) : void
         {
             try {
@@ -78,6 +128,9 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Carrega uma pagina abrindo uma nova view.
+         */
         public function Carregar_Pagina() : void
         {
             $view = new View_Contato();
@@ -85,6 +138,10 @@ namespace Module\Application\Controller\Layout\Form;
             $view->Executar();
         }
         
+        /**
+         * Function para enviar o email.
+         * Echo de json com campos e mensagens de erro e sucesso.
+         */
         public function Enviar_Email() : void
         {
             $valor = array();

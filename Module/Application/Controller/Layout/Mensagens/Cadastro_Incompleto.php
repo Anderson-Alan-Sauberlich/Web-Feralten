@@ -10,6 +10,11 @@ namespace Module\Application\Controller\Layout\Mensagens;
             
         }
         
+        /**
+         * Retorna o nome do usuario logado.
+         * 
+         * @return string
+         */
         public static function Mostrar_Nome() : string
         {
             return Login_Session::get_usuario_nome();

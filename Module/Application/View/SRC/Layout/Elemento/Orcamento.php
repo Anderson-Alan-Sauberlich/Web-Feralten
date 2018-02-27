@@ -36,27 +36,33 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             include RAIZ.'/Module/Application/View/HTML/Layout/Elemento/Orcamento.php';
         }
         
-        public static function Mostrar_ID() : void
+        public static function Mostrar_ID() : ?int
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                echo self::$obj_orcamento->get_id();
+                return self::$obj_orcamento->get_id();
+            } else {
+                return null;
             }
         }
         
-        public static function Mostrar_Nome() : void
+        public static function Mostrar_Nome() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                echo self::$obj_orcamento->get_peca_nome();
+                return self::$obj_orcamento->get_peca_nome();
+            } else {
+                return null;
             }
         }
         
-        public static function Mostrar_CMMV() : void
+        public static function Mostrar_CMMV() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                echo self::$obj_orcamento->get_categoria()->get_nome().', '
-                    .self::$obj_orcamento->get_marca()->get_nome().', '
-                    .self::$obj_orcamento->get_modelo()->get_nome().', '
-                    .self::$obj_orcamento->get_versao()->get_nome();
+                return self::$obj_orcamento->get_categoria()->get_nome().', '.
+                       self::$obj_orcamento->get_marca()->get_nome().', '.
+                       self::$obj_orcamento->get_modelo()->get_nome().', '.
+                       self::$obj_orcamento->get_versao()->get_nome();
+            } else {
+                return null;
             }
         }
         
@@ -67,24 +73,30 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
-        public static function Mostrar_Anos() : void
+        public static function Mostrar_Anos() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                echo 'Ano: de '.self::$obj_orcamento->get_ano_de().' até '.self::$obj_orcamento->get_ano_ate();
+                return 'Ano: de '.self::$obj_orcamento->get_ano_de().' até '.self::$obj_orcamento->get_ano_ate();
+            } else {
+                return null;
             }
         }
         
-        public static function Mostrar_Descricao() : void
+        public static function Mostrar_Descricao() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                echo self::$obj_orcamento->get_descricao();
+                return self::$obj_orcamento->get_descricao();
+            } else {
+                return null;
             }
         }
         
-        public static function Verificar_Desativar_Botao() : void
+        public static function Verificar_Desativar_Botao() : ?string
         {
             if (self::$pagina === self::NAO_TENHO) {
-                echo 'disabled';
+                return 'disabled';
+            } else {
+                return null;
             }
         }
         

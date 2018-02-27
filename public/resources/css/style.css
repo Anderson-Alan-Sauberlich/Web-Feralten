@@ -224,6 +224,12 @@ div#loader {
 	margin-bottom: 170px;
 }
 
+.btn_abre_header {
+	float: right !important;
+	margin-right: 0em !important;
+	margin-left: 6em !important;
+}
+
 .navbar-titulo {
 	z-index: 9999 !important;
 }

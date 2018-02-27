@@ -11,15 +11,40 @@ namespace Module\Application\Controller\Layout\Form;
     
     class Contato_Anunciante
     {
+        /**
+         * Inicia a variavel $object_contato_anunciante.
+         */
         function __construct()
         {
             $this->object_contato_anunciante = new Object_Contato_Anunciante();
         }
         
+        /**
+         * Armazena o objeto contato anunciante.
+         * 
+         * @var Object_Contato_Anunciante
+         */
         private $object_contato_anunciante;
-        private $campos = array();
-        private $erros = array();
         
+        /**
+         * Armazena todos os campos com erros.
+         * 
+         * @var array
+         */
+        private $campos = [];
+        
+        /**
+         * Armazena todas as mensagens de erro.
+         * 
+         * @var array
+         */
+        private $erros = [];
+        
+        /**
+         * Seta o nome para a variavel $object_contato_anunciante.
+         * 
+         * @param string $nome
+         */
         public function set_nome($nome) : void
         {
             try {
@@ -30,6 +55,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * seta o email para a variavel $object_contato_anunciante.
+         * 
+         * @param string $email
+         */
         public function set_email($email) : void
         {
             try {
@@ -40,6 +70,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta o numero de telefone para a variavel $object_contato_anunciante.
+         * 
+         * @param string $telefone
+         */
         public function set_telefone($telefone) : void
         {
             try {
@@ -50,6 +85,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta true se o numero de telefone for whatsapp e false se não for na variavel $object_contato_anunciante.
+         * 
+         * @param ?bool $whatsapp
+         */
         public function set_whatsapp($whatsapp) : void
         {
             try {
@@ -60,6 +100,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta a mensagem para a variavel $object_contato_anunciante.
+         * 
+         * @param string $mensagem
+         */
         public function set_mensagem($mensagem) : void
         {
             try {
@@ -70,6 +115,11 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Seta o id da peça para a variavel $object_contato_anunciante.
+         * 
+         * @param int $peca_id
+         */
         public function set_peca_id($peca_id) : void
         {
             try {
@@ -79,6 +129,9 @@ namespace Module\Application\Controller\Layout\Form;
             }
         }
         
+        /**
+         * Carrega a pagina abrindo uma nova view.
+         */
         public function Carregar_Pagina() : void
         {
             $view = new View_Contato_Anunciante();
@@ -88,6 +141,10 @@ namespace Module\Application\Controller\Layout\Form;
             $view->Executar();
         }
         
+        /**
+         * Realiza o envio do email.
+         * Echo de json com os campos e mensagens de erro e sucesso.
+         */
         public function Enviar_Email() : void
         {
             $valor = array();
