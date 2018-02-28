@@ -1,18 +1,67 @@
 <?php use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho; ?>
 <section class="margem-inferior-pouco">
-    <nav class="ui red inverted stackable top fixed menu" role="navigation">
+	<nav id="m_header" class="ui red inverted top fixed two item hidden menu" role="navigation">
+        <div class="header item">
+            <img class="logo" src="/resources/img/favicon.png">
+        	Feralten
+        </div>
+        <div onclick="AbrirMobileHeaderSidebar()" class="link fluid item">
+           	<i class="bars icon"></i>Menu
+        </div>
+	</nav>
+	<nav id="m_header_menu" class="ui red inverted top sidebar vertical menu" role="navigation">
+    	<div class="ui container">
+    		<div class="item">
+            	<a href="/"><i class="home icon"></i>INÍCIO</a>
+            </div>
+            <div class="ui inverted accordion item">
+            	<div class="title"><i class="cart arrow down icon"></i>COMPRAR</div>
+                <div class="content field">
+                    <div class="ui inverted link large relaxed list">
+                       	<a href="#" class="item">Vendedores</a>
+                    	<a href="/pesquisa-avancada/" class="item">Pesquisa Avançada</a>
+                    	<a href="/pecas/busca-programada/" class="item">Busca Programada</a>
+                    	<a href="/pecas/mais-visualizados/" class="item">Mais Visualizados</a>
+                    </div>
+                </div>
+            </div>
+    		<div class="ui inverted accordion item">
+            	<div class="title"><i class="bullhorn icon"></i>VENDER</div>
+                <div class="content field">
+                    <div class="ui inverted link large relaxed list">
+                        <a href="/dicas-de-venda/venda-segura/" class="item">Venda Segura</a>
+                        <a href="/pecas/resultados/" class="item">Auto Peças</a>
+                        <a href="/publicidade/experimentar-formatos/" class="item">Publicidade</a>
+                    </div>
+                </div>
+            </div>
+			<?php if (View_Cabecalho::VerificaAutenticacao()) { ?>
+				<div class="item">
+					<a href="/usuario/meu-perfil/"><i class="user icon"></i>Olá! <b><?= View_Cabecalho::RetornarNomeMeuFeralten(); ?></b></a>
+				</div>
+				<div class="item">
+					<a href="/usuario/login/sair/?logout=<?= View_Cabecalho::RetornarCodigoLogout(); ?>"><i class="sign out icon"></i><b>SAIR</b></a>
+				</div>
+			<?php } else { ?>
+				<div class="item">
+					<a href="/usuario/cadastro/"><i class="user icon"></i><b>CADASTRAR</b></a>
+				</div>
+				<div class="item">
+					<a href="/usuario/login/"><i class="sign in icon"></i><b>ENTRAR</b></a>
+				</div>
+			<?php } ?>
+		</div>
+	</nav>
+    <nav id="pc_header" class="ui red inverted stackable top fixed menu" role="navigation">
     	<div class="ui container">
         	<div class="header item">
         		<img class="logo" src="/resources/img/favicon.png">
         		Feralten
-            	<div onclick="ControlaItems()" id="btn_controle_header" class="ui icon inverted basic hidden button btn_abre_header">
-                	<i class="bars icon"></i>
-                </div>
             </div>
-           	<div id="header_esquerda" class="left menu">
+           	<div class="left menu">
                	<a href="/" class="item"><i class="home icon"></i>INÍCIO</a>
                	<a id="comprar_item" class="item"><i class="cart arrow down icon"></i>COMPRAR</a>
-                <div class="ui comprar popup bottom left transition hidden">
+                <div id="popup_comprar" class="ui popup">
             		<div class="ui basic segment">
                 		<div class="ui link divided large very relaxed list">
                         	<a href="#" class="item">Vendedores</a>
@@ -23,7 +72,7 @@
                     </div>
                 </div>
                	<a id="vender_item" class="item"><i class="bullhorn icon"></i>VENDER</a>
-               	<div class="ui vender popup bottom left transition hidden">
+               	<div id="popup_vender" class="ui popup">
             		<div class="ui basic segment">
                 		<div class="ui link divided large very relaxed list">
                         	<a href="/dicas-de-venda/venda-segura/" class="item">Venda Segura</a>
@@ -33,15 +82,15 @@
                     </div>
                 </div>
             </div>
-           	<div id="header_direita" class="right menu">
+           	<div class="right menu">
            		<?php if (View_Cabecalho::VerificaAutenticacao()) { ?>
                     <div id="drop_meu_feralten" class="ui pointing dropdown item">
                     	<label for="drop_meu_feralten" class="ui basic red label">Olá!</label>
                     	<b>MEU FERALTEN</b>
                     	<i class="dropdown icon"></i>
                     	<div class="menu">
-                    		<div class="header">Bem vindo,</div>
-                    		<a href="/usuario/meu-perfil/" class="item"><b><?= View_Cabecalho::RetornarNomeMeuFeralten(); ?></b></a>
+                    		<h3 class="ui header"><div class="sub header">Bem vindo,</div></h3>
+                    		<a href="/usuario/meu-perfil/" class="item"><i class="user icon"></i><?= View_Cabecalho::RetornarNomeMeuFeralten(); ?></a>
                     		<div class="divider"></div>
                         	<a href="/usuario/meu-perfil/orcamentos/meus-orcamentos/" class="item">Meus Orçamentos</a>
                         	<a href="/usuario/meu-perfil/pecas/cadastrar/" class="item">Cadastrar Peças</a>

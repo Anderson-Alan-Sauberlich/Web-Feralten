@@ -1,42 +1,35 @@
-$('#comprar_item').popup({
-    hoverable: true,
-    position : 'bottom left',
-    popup: $('.comprar.popup')
-});
-$('#vender_item').popup({
-    hoverable: true,
-    position : 'bottom left',
-    popup: $('.vender.popup')
-});
+$('.ui.accordion').accordion();
 $('#drop_meu_feralten').dropdown();
 Controlar_Classes();
+$(document).ready(function () {
+	Controlar_Classes();
+	$('#m_header_menu').sidebar();
+});
+$('#comprar_item').click(function() {
+	$('#comprar_item').popup({
+		popup : '#popup_comprar',
+		hoverable : true
+	}).popup('toggle');
+});
+$('#vender_item').click(function() {
+	$('#vender_item').popup({
+		popup : '#popup_vender',
+		hoverable : true
+	}).popup('toggle');
+});
 function Controlar_Classes() {
 	var scren = $("body").width();
 	if (scren <= 767) {
-		$("#header_esquerda").addClass("hidden");
-		$("#header_direita").addClass("hidden");
-		$("#btn_controle_header").removeClass("hidden");
+		$("#pc_header").addClass("hidden");
+		$("#m_header").removeClass("hidden");
 	} else {
-		$("#header_esquerda").removeClass("hidden");
-		$("#header_direita").removeClass("hidden");
-		$("#btn_controle_header").addClass("hidden");
+		$("#pc_header").removeClass("hidden");
+		$("#m_header").addClass("hidden");
 	}
 }
-$(document).ready(function () {
-	Controlar_Classes();
-});
 $(window).resize(function() {
 	Controlar_Classes();
 });
-function ControlaItems() {
-	if ($('#header_esquerda').hasClass('hidden')) {
-		$("#header_esquerda").removeClass("hidden");
-	} else {
-		$("#header_esquerda").addClass("hidden");
-	}
-	if ($('#header_direita').hasClass('hidden')) {
-		$("#header_direita").removeClass("hidden");
-	} else {
-		$("#header_direita").addClass("hidden");
-	}
+function AbrirMobileHeaderSidebar() {
+	$('#m_header_menu').sidebar('toggle');
 }
