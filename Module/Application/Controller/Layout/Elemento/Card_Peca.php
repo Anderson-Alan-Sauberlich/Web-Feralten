@@ -84,7 +84,7 @@ namespace Module\Application\Controller\Layout\Elemento;
         {
             if (Login_Session::Verificar_Login() AND !empty($this->peca)) {
                 if (!empty($this->deletar) AND $this->deletar === 'deletar') {
-                    if (DAO_Peca::Deletar($this->peca)) {
+                    if (DAO_Peca::DeletarComTransaction($this->peca)) {
                         Gerenciar_Imagens::Deletar_Imagens_Peca($this->peca, Login_Session::get_entidade_id());
                         
                         $entidade = new Object_Entidade();

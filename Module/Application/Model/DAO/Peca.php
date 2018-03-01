@@ -13,6 +13,7 @@ namespace Module\Application\Model\DAO;
     use Module\Application\Model\DAO\Modelo_Pativel as DAO_Modelo_Pativel;
     use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
     use Module\Application\Model\DAO\Contato_Anunciante as DAO_Contato_Anunciante;
+    use Module\Application\Model\DAO\Orcamento_Peca as DAO_Orcamento_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -153,28 +154,60 @@ namespace Module\Application\Model\DAO;
         public static function Deletar(int $id) : bool
         {
             try {
-                DAO_Categoria_Pativel::Deletar($id);
-                DAO_Marca_Pativel::Deletar($id);
-                DAO_Modelo_Pativel::Deletar($id);
-                DAO_Versao_Pativel::Deletar($id);
-                DAO_Foto_Peca::Deletar_Fotos($id);
-                DAO_Contato_Anunciante::Deletar_Por_Peca($id);
-                
                 $sql = 'DELETE FROM tb_peca WHERE peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
-                if ($p_sql->execute()) {
-                    if (self::Salvar_Id_Peca($id)) {
-                        return true;
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function DeletarComTransaction(int $id) : bool
+        {
+            Conexao::Conectar()->beginTransaction();
+            
+            if (DAO_Categoria_Pativel::Deletar($id)) {
+                if (DAO_Marca_Pativel::Deletar($id)) {
+                    if (DAO_Modelo_Pativel::Deletar($id)) {
+                        if (DAO_Versao_Pativel::Deletar($id)) {
+                            if (DAO_Foto_Peca::Deletar_Fotos($id)) {
+                                if (DAO_Contato_Anunciante::Deletar_Por_Peca($id)) {
+                                    if (DAO_Orcamento_Peca::DeletarPorPeca($id)) {
+                                        if (self::Deletar($id)) {
+                                            return Conexao::$conection->commit();
+                                        } else {
+                                            Conexao::$conection->rollBack();
+                                            return false;
+                                        }
+                                    } else {
+                                        Conexao::$conection->rollBack();
+                                        return false;
+                                    }
+                                } else {
+                                    Conexao::$conection->rollBack();
+                                    return false;
+                                }
+                            } else {
+                                Conexao::$conection->rollBack();
+                                return false;
+                            }
+                        } else {
+                            Conexao::$conection->rollBack();
+                            return false;
+                        }
                     } else {
+                        Conexao::$conection->rollBack();
                         return false;
                     }
                 } else {
+                    Conexao::$conection->rollBack();
                     return false;
                 }
-            } catch (PDOException | Exception $e) {
+            } else {
+                Conexao::$conection->rollBack();
                 return false;
             }
         }
@@ -191,22 +224,6 @@ namespace Module\Application\Model\DAO;
                 return $p_sql->fetch(PDO::FETCH_COLUMN);
             } catch (PDOException | Exception $e) {
                 return null;
-            }
-        }
-        
-        private static function Salvar_Id_Peca(int $id) : bool
-        {
-            try {
-                $sql = "INSERT INTO tb_id_livre_peca (id_livre_peca)
-                        VALUES (:id);";
-                
-                $p_sql = Conexao::Conectar()->prepare($sql);
-                
-                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-                
-                return $p_sql->execute();
-            } catch (PDOException | Exception $e) {
-                return false;
             }
         }
         

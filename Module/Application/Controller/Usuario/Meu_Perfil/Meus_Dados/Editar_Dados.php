@@ -15,6 +15,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     
     class Editar_Dados
     {
+        /**
+         * Inicializa as variaveis com os objetos
+         * 
+         * $controller_usuario Controller_Usuario
+         * $controller_entidade Controller_Entidade
+         * $controller_endereco Controller_Endereco
+         */
         function __construct()
         {
             $this->controller_usuario = new Controller_Usuario();
@@ -22,8 +29,25 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             $this->controller_endereco = new Controller_Endereco();
         }
         
+        /**
+         * Armazena o objeto do controller usuario
+         * 
+         * @var Controller_Usuario
+         */
         private $controller_usuario;
+        
+        /**
+         * Armazena o objeto do controller entidade
+         * 
+         * @var Controller_Entidade
+         */
         private $controller_entidade;
+        
+        /**
+         * Armazena o objeto do controller endereço
+         * 
+         * @var Controller_Endereco
+         */
         private $controller_endereco;
         
         /**

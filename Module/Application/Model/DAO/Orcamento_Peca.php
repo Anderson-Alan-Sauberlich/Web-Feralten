@@ -51,13 +51,27 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar(int $id) : bool
+        public static function DeletarPorOrcamento(int $id_orcamento) : bool
         {
             try {
-                $sql = 'DELETE FROM tb_orcamento_peca WHERE orcamento_peca_orc_id = :id';
+                $sql = 'DELETE FROM tb_orcamento_peca WHERE orcamento_peca_orc_id = :id_orc';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
+                $p_sql->bindValue(':id_orc', $id_orcamento, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function DeletarPorPeca(int $id_peca) : bool
+        {
+            try {
+                $sql = 'DELETE FROM tb_orcamento_peca WHERE orcamento_peca_pec_id = :id_pec';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':id_pec', $id_peca, PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
