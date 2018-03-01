@@ -1,12 +1,14 @@
-$('#endereco_cep').popup();
-$('#endereco_estado').popup();
-$('#endereco_cidade').popup();
-$('#endereco_bairro').popup();
-$('#endereco_rua').popup();
-$('#endereco_numero').popup();
-$('#endereco_complemento').popup();
-$('#endereco_estado').dropdown();
-$('#endereco_cidade').dropdown();
+$(document).ready(function () {
+	$('#endereco_cep').popup();
+	$('#endereco_estado').popup();
+	$('#endereco_cidade').popup();
+	$('#endereco_bairro').popup();
+	$('#endereco_rua').popup();
+	$('#endereco_numero').popup();
+	$('#endereco_complemento').popup();
+	$('#endereco_estado').dropdown();
+	$('#endereco_cidade').dropdown();
+});
 $('#endereco_cep').mask('00.000-000');
 $('#endereco_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');

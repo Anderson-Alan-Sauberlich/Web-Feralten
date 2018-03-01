@@ -2,15 +2,28 @@
 namespace Module\Application\View\SRC\Layout\Elemento;
     
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\Common\Util\Login_Session;
         
     class Orcamento
     {
+        /** 
+         * @const Parametro Funcionalidade
+         */
         public const MEUS_ORCAMENTOS = 'meus-orcamentos';
         
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const CAIXA_DE_ENTRADA = 'caixa-de-entrada';
         
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const RESPONDIDOS = 'respondidos';
         
+        /**
+         * @const Parametro Funcionalidade
+         */
         public const NAO_TENHO = 'nao-tenho';
         
         function __construct()
@@ -18,24 +31,53 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             
         }
         
+        /**
+         * Armazena o objeto do orçamento a sermostrado na view html.
+         * 
+         * @var Object_Orcamento $obj_orcamento
+         */
         private static $obj_orcamento;
+        
+        /**
+         * Armazena o nome da pagina aberta, onde será mostrado o elemento orçamento.
+         * 
+         * @var string $pagina
+         */
         private static $pagina;
         
+        /**
+         * Seta o objeto orçamento.
+         * 
+         * @param Object_Orcamento $obj_orcamento
+         */
         public function set_obj_orcamento(Object_Orcamento $obj_orcamento) : void
         {
             self::$obj_orcamento = $obj_orcamento;
         }
         
+        /**
+         * Seta a variavel pagina.
+         * 
+         * @param string $pagina
+         */
         public function set_pagina(string $pagina) : void
         {
             self::$pagina = $pagina;
         }
         
+        /**
+         * Chama a pagina html que por sua vez chama todas as function estaticas.
+         */
         public function Executar() : void
         {
             include RAIZ.'/Module/Application/View/HTML/Layout/Elemento/Orcamento.php';
         }
         
+        /**
+         * Retorna o ID do orçamento.
+         * 
+         * @return int|NULL
+         */
         public static function Mostrar_ID() : ?int
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
@@ -45,6 +87,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Retorna o Nome do orçamento.
+         * 
+         * @return string|NULL
+         */
         public static function Mostrar_Nome() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
@@ -54,6 +101,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Retorna o texto dos nomes da categoria, marca, modelo, verssão do orçamento.
+         * 
+         * @return string|NULL
+         */
         public static function Mostrar_CMMV() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
@@ -66,13 +118,35 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
-        public static function Retornar_Pecas() : ?array
+        /**
+         * Retorna a lista de peças, se for na pagina Respondidos, vai retornar apenas as peças da entidade autenticada.
+         * 
+         * @return array
+         */
+        public static function Retornar_Pecas() : array
         {
+            $pecas =[];
+            
             if (self::$obj_orcamento instanceof Object_Orcamento) {
-                return self::$obj_orcamento->get_pecas();
+                if (self::$pagina === self::RESPONDIDOS) {
+                    foreach (self::$obj_orcamento->get_pecas() as $peca) {
+                        if ($peca->get_entidade()->get_id() === Login_Session::get_entidade_id()) {
+                            $pecas[] = $peca;
+                        }
+                    }
+                } else {
+                    $pecas = self::$obj_orcamento->get_pecas();
+                }
             }
+            
+            return $pecas;
         }
         
+        /**
+         * Retorna em texto os anos do orçamento.
+         * 
+         * @return string|NULL
+         */
         public static function Mostrar_Anos() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
@@ -82,6 +156,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Retorna a descrição do orçamento.
+         * 
+         * @return string|NULL
+         */
         public static function Mostrar_Descricao() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
@@ -91,6 +170,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Retorna uma classe css para desativar o o botão Não Tenho, caso já esteja na pagina Não Tenho.
+         * 
+         * @return string|NULL
+         */
         public static function Verificar_Desativar_Botao() : ?string
         {
             if (self::$pagina === self::NAO_TENHO) {
@@ -100,6 +184,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Verifica se esta em uma pagina onde a lista de peças deve ser mostrado.
+         * 
+         * @return bool
+         */
         public static function Verificar_Mostrar_ListaPecas() : bool
         {
             if (self::$pagina === self::RESPONDIDOS ||
@@ -110,6 +199,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             }
         }
         
+        /**
+         * Verifica se está em uma pagina onde os botões Sim Tenho e Não Tenho devem ser mostrados.
+         * 
+         * @return bool
+         */
         public static function Verificar_Mostrar_Botoes() : bool
         {
             if (self::$pagina === self::MEUS_ORCAMENTOS) {

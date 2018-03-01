@@ -1,9 +1,11 @@
-$('#usuario_nome').popup();
-$('#usuario_sobrenome').popup();
-$('#usuario_email').popup();
-$('#usuario_email_alternativo').popup();
-$('#usuario_fone').popup();
-$('#usuario_fone_alternativo').popup();
+$(document).ready(function () {
+	$('#usuario_nome').popup();
+	$('#usuario_sobrenome').popup();
+	$('#usuario_email').popup();
+	$('#usuario_email_alternativo').popup();
+	$('#usuario_fone').popup();
+	$('#usuario_fone_alternativo').popup();
+});
 $('#usuario_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });

@@ -60,10 +60,6 @@
                         <div class="panel-footer sombra_painel">
                             <button type="submit" class="big ui green button"><i class="add user icon"></i>Criar Conta</button>
                             <label>Já possui uma conta? <a href="/usuario/login/">Clique aqui para Entrar!</a></label>
-                            <div class="ui checkbox">
-                                <input type="checkbox" checked="checked" id="email_marketing" name="email_marketing" value="1">
-                                <label for="email_marketing">Desejo receber promoções e oportunidades exclusivas do Feralten e de seus parceiros</label>
-                            </div>
                             <p>Ao me cadastrar, eu concordo com os Termos de Uso e a Política de Privacidade do Feralten.</p>
                         </div>
                     </form>

@@ -1,6 +1,8 @@
-$('#entidade_cpf_cnpj').popup();
-$('#entidade_nome_comercial').popup();
-$('#entidade_site').popup();
+$(document).ready(function () {
+	$('#entidade_cpf_cnpj').popup();
+	$('#entidade_nome_comercial').popup();
+	$('#entidade_site').popup();
+});
 $('#entidade_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
