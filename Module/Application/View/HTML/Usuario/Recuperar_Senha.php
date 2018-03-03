@@ -11,9 +11,10 @@
         <script type="text/javascript" src="/application/js/usuario/recuperar_senha.js"></script>
     </header>
     <section class="ui container" role="main">
+    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
         <div class="ui two column stackable grid">
             <div class="column">
-                <h1>Recuperar Senha</h1>
+                <h1 class="ui red huge dividing header">Recuperar Senha</h1>
                 <div id="sgm_recuperar_senha" class="ui secondary segment">
                     <?php if (View_Recuperar_Senha::Verificar_Codigo_Setado()) { ?>
                         <form data-toggle="validator" role="form">
@@ -57,7 +58,7 @@
                 </div>
                </div>
                <div class="column">
-                   <h1>Recuperar E-Mail</h1>
+                   <h1 class="ui red huge dividing header">Recuperar E-Mail</h1>
                    <div class="ui secondary segment">
                        <p>Esqueceu seu e-mail? Envie uma mensagem atravez da pagina Fale Conosco. O título do assunto deve ser “Esqueci meu e-mail”. Na mensagem, informe seu nome completo, telefone e CPF.</p>
                    </div>

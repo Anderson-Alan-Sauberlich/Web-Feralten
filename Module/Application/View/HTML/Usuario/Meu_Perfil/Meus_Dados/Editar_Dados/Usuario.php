@@ -35,7 +35,7 @@
                    	<label class="ui red header" for="usuario_email_alternativo">E-Mail alternativo:</label>
                    	<div class="ui left icon input">
 						<i class="mail outline icon"></i>
-               			<input id="usuario_email_alternativo" name="usuario_email_alternativo" placeholder="E-Mail Alternativo" value="<?= View_Usuario::MostrarEmailAlternativo(); ?>" type="email" data-content="Este e-mail recebe cópias de todos os e-mails enviados ao se e-mail principal. (Opcional)">
+               			<input id="usuario_email_alternativo" name="usuario_email_alternativo" placeholder="E-Mail Alternativo" value="<?= View_Usuario::MostrarEmailAlternativo(); ?>" type="email" data-content="Este e-mail recebe cópias de todos os e-mails enviados ao seu e-mail principal. (Opcional)">
             		</div>
             	</div>
         	</div>

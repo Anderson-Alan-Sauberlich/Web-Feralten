@@ -11,27 +11,90 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
+    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
         <div class="ui grid">
             <div class="eleven wide column">
+            	<h1 class="ui red huge dividing header">Perguntas Frequentes</h1>
                 <div class="ui styled fluid accordion margem-inferior-pouco">
-                    <div class="title"><i class="dropdown icon"></i> Titulo-1</div>
+                    <div class="title"><i class="dropdown icon"></i>Como alterar meu e-mail?</div>
                     <div class="content">
-                        <p class="transition hidden">Descrição-Descrição- Descrição-</p>
+                        <p>Para alterar seu e-mail siga as instruções:</p>
+                        <p>1 - No menu superior clique em “Entrar”</p>
+                        <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
+                        <p>3 - No menu do usuario clique em "Meus Dados" depois em "Editar Dados"</p>
+                        <p>4 - No formulario do usuario informe seu novo e-mail e clique em "Salvar"</p>
                     </div>
-                    
-                    <div class="title"><i class="dropdown icon"></i> Titulo-2</div>
+                    <div class="title"><i class="dropdown icon"></i>Esqueci meu e-mail cadastrado no Feralten. Como posso recuperá-lo?</div>
                     <div class="content">
-                        <p class="transition hidden">Descrição-Descrição- Descrição-</p>
+                        <p>Para realizar a recuperação do seu e-mail, preencha o formulário do Fale Conosco ao lado e informe seu CPF.</p>
                     </div>
-                    
-                    <div class="title"><i class="dropdown icon"></i> Titulo-3</div>
+                    <div class="title"><i class="dropdown icon"></i>Tive problemas com minha senha. O que devo fazer?</div>
                     <div class="content">
-                        <p class="transition hidden">Descrição-Descrição- Descrição-</p>
+                        <p>Se sua senha está inválida ou se você esqueceu sua senha, solicite uma nova senha de acesso, seguindo as instruções abaixo:</p>
+                        <p>1 - No menu superior clique em “Entrar”</p>
+                        <p>2 - Na caixa de login clique na opção "Esqueceu Sua Senha ou E-mail?"</p>
+                        <p>3 - Informe seu e-mail cadastrado e clique em "Enviar Link"</p>
+                        <p>4 - Em até 20 minutos, você receberá em seu e-mail cadastrado no Feralten um link para criar uma nova senha</p>
+                        <p>Caso você não receba a senha em até 20 minutos, provavelmente ela deverá estar bloqueada pelo anti-spam do seu provedor.</p>
                     </div>
-                    
+                    <div class="title"><i class="dropdown icon"></i>Como atualizar meus dados pessoais?</div>
+                    <div class="content">
+                        <p>Para alterar os dados pessoais, siga as instruções:</p>
+                        <p>1 - Clique no menu superior "Entrar"</p>
+                        <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
+                        <p>3 - No menu do usuario, clique em "Meus Dados" depois "Editar Dados"</p>
+                        <p>4 - Altere os dados que desejar nos formularios que desejar: Usuario, Entidade e Ebdereço</p>
+                        <p>5 - Clique em Salvar</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Como desativar o bloqueador de pop-up no meu navegador?</div>
+                    <div class="content">
+                        <p>Ao fazer um anúncio, para realizar o pagamento é necessário que seu navegador esteja com bloqueador de pop-up desativado. Caso contrário, você não verá o sistema de pagamento.</p>
+                        <p>Para realizar o desbloqueio siga as instruções válidas para o seu navegador:</p>
+                        <p><b>Internet Explorer</b></p>
+                        <p>1 - Na tela do navegador, clique no menu superior “Ferramentas” > “Bloqueador de Pop-ups”</p>
+                        <p>2 - Nesta janela, clique na opção “Desativar Bloqueador de Pop-ups”</p>
+                        <p><b>Nas versões mais recentes do Explorer:</b></p>
+                        <p>1 - Na tela do navegador, no canto superior direito clique na engrenagem;</p>
+                        <p>2 - Selecione “Opções da Internet”</p>
+                        <p>3 - No menu superior selecione “Privacidade”</p>
+                        <p>4 - Nessa janela desabilite a opção “Ativar Bloqueado de Pop-ups”</p>
+                        <p><b>Mozilla Firefox</b></p>
+                        <p>1 - Na tela do navegador, clique no menu “Ferramentas” > “Opções”; nas versões mais recentes, clique no canto superior direito na aba Firefox e então em “Opções”</p>
+                        <p>2 - No menu superior selecione “Conteúdo” e desabilite a opção “Bloquear janelas Pop-up”</p>
+                        <p><b>Google Chrome</b></p>
+                        <p>1 - Na tela do navegador, no canto superior direito, clique na chave de manutenção</p>
+                        <p>2 - Selecione “Opções” e no menu lateral esquerdo “Configurações avançadas”</p>
+                        <p>3 - Na área “Privacidade” selecione “Configurações de conteúdo”</p>
+                        <p>4 - Na área “Pop-ups” selecione a opção “Permitir que todos os sites exibam pop-ups” e feche a tela</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Como realizar a limpeza de cache?</div>
+                    <div class="content">
+                        <p>As configurações de segurança do seu computador podem impedir que você navegue normalmente pelo Webmotors. Caso tenha algum problema, recomendamos a limpeza de cache do seu navegador. </p>
+                        <p>Para realizar o desbloqueio siga as instruções válidas para o seu navegador:</p>
+                        <p><b>Internet Explorer</b></p>
+                        <p>1 - Na tela do navegador, clique no menu superior “Ferramentas” > “Opções da Internet”; nas versões mais novas, clique no canto superior direito na engrenagem;</p>
+                        <p>2 - Na aba “Geral”, localize a área “Histórico de Navegação” e clique em “Excluir...”</p>
+                        <p>3 - Nesta janela, selecione todos os itens e clique em “Excluir”</p>
+                        <p>4 - Se disponível, antes de confirmar, marque a caixa “Excluir também arquivos e configurações armazenadas por complementos”</p>
+                        <p>5 - Aguarde a finalização da limpeza dos arquivos temporários e clique em “OK” ou “Fechar”</p>
+                        <p>6 - Feche e abra novamente o Explorer</p>
+                        <p><b>Mozilla Firefox</b></p>
+                        <p>1 - Na tela do navegador, clique no menu “Ferramentas” > “Opções”; nas versões mais novas, clique no canto superior direito na aba Firefox e então “Opções”</p>
+                        <p>2 - No menu superior selecione “Privacidade”; aí, clique no link “Você pode desejar limpar dados pessoais mais recentes”</p>
+                        <p>3 - Na janela, no item “Limpar este período”, selecione no combo “Tudo”; selecione também todos os itens abaixo, e clique em “Limpar agora”</p>
+                        <p>4 - Aguarde a finalização da limpeza dos arquivos temporários e clique em “OK”</p>
+                        <p>5 - Feche e abra novamente o Firefox</p>
+                        <p><b>Google Chrome</b></p>
+                        <p>1 - Na tela do navegador, no canto superior direito, clique na chave de manutenção</p>
+                        <p>2 - Selecione “Opções” e no menu lateral esquerdo “Configurações avançadas”</p>
+                        <p>3 - Na área “Privacidade” selecione “Limpar dados de navegação”</p>
+                        <p>4 - Na janela, no item “Eliminar os seguintes itens de”, selecione no combo “desde o começo”; selecione também todos os itens abaixo, e clique em “Limpar dados de navegação”</p>
+                        <p>5 - Feche e abra novamente o Chrome</p>
+                    </div>
                 </div>
             </div>
             <div class="five wide column">
+            	<h1 class="ui red huge dividing header">Fale Conosco</h1>
                 <div id="div_contato" class="ui secondary segment">
                     <?php View_Perguntas_Frequentes::Incluir_Form_Contato(); ?>
                 </div>

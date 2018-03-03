@@ -17,7 +17,7 @@
     </div>
       <div class="actions visible-xs">
         <div class="ui black deny button">Cancelar</div>
-        <a href="/usuario/meu-perfil/meus-dados/iditar-dados/">
+        <a href="/usuario/meu-perfil/meus-dados/editar-dados/">
             <button class="ui positive right labeled icon button">Concluir<i class="checkmark icon"></i></button>
         </a>
     </div>

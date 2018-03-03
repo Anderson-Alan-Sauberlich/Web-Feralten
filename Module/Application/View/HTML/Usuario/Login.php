@@ -52,11 +52,11 @@
                         <div class="panel-footer sombra_painel">
                             <div class="loginDivfooter" >
                                 <div class="row">
-                                    <div class="col-sm-7">
+                                    <div class="col-sm-6">
                                         <label>Não tem uma conta? <a href="/usuario/cadastro/">Crie uma agora!</a></label>
                                     </div>
-                                    <div class="col-sm-5">
-                                        <a href="/usuario/recuperar-senha/">Esqueceu a Senha ou E-mail?</a>
+                                    <div class="col-sm-6">
+                                        <a href="/usuario/recuperar-senha/">Esqueceu Sua Senha ou E-mail?</a>
                                     </div>
                                 </div>
                             </div>

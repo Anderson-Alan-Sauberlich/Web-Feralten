@@ -386,8 +386,8 @@ div#loader {
 .headIMG {
 	margin: 0 auto;
     float: none;
-    margin-top: -30px;
-    margin-bottom: -20px;
+    margin-top: -70px;
+    margin-bottom: -70px;
 }
 
 .colunaFooterH {
@@ -395,88 +395,8 @@ div#loader {
 	margin-bottom: 40px;
 }
 
-.navbar-default {
-	background-color: #a00000;
-	border-color: #b00000;
-}
-
-.navbar-default .navbar-brand {
-	color: #ffffff;
-}
-
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-	color: #ffffff;
-	text-shadow: 2px -2px 10px white;
-}
-
-.navbar-default .navbar-text {
-	color: #ffffff;
-}
-
-.navbar-default .navbar-nav > li > a {
-	color: #ffffff;
-}
-
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: #ffffff;
-	text-shadow: 2px -2px 10px white;
-}
-
-.navbar-default .navbar-nav > li > .dropdown-menu {
-	background-color: #d00000;
-}
-
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
-	color: #ffffff;
-}
-
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
-	color: #ffffff;
-	background-color: #b00000;
-	text-shadow: 2px -2px 10px white;
-}
-
-.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
-	background-color: #d00000;
-}
-
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #ffffff;
-	background-color: #b00000;
-	text-shadow: 2px -2px 10px white;
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-	color: #ffffff;
-	background-color: #b00000;
-	text-shadow: 2px -2px 10px white;
-}
-
-.navbar-default .navbar-toggle {
-	border-color: #b00000;
-}
-
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-	background-color: #b00000;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-	background-color: #ffffff;
-}
-
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-	border-color: #ffffff;
-}
-
-.navbar-default .navbar-link {
-	color: #ffffff;
-}
-
-.navbar-default .navbar-link:hover {
-	color: #ffffff;
-	text-shadow: 2px -2px 10px white;
+.main.menu.fixed {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
 .menuRowMD {

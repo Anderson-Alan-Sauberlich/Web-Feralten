@@ -1047,16 +1047,6 @@
         });
     });
     
-    $app->group('/documentacao', function() use ($app) {
-        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-            $documentacao = new Module\Application\Controller\Documentacao();
-            
-            $documentacao->Carregar_Pagina();
-            
-            return $response;
-        });
-    });
-    
     $app->group('/perguntas-frequentes', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
             $perguntas_frequentes = new Module\Application\Controller\Perguntas_Frequentes();
@@ -1064,38 +1054,6 @@
             $perguntas_frequentes->Carregar_Pagina();
             
             return $response;
-        });
-    });
-    
-    $app->group('/dicas-de-venda', function() use ($app) {
-        $app->group('/apresentacao', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $apresentacao = new Module\Application\Controller\Dicas_De_Venda\Apresentacao();
-                
-                $apresentacao->Carregar_Pagina();
-                
-                return $response;
-            });
-        });
-        
-        $app->group('/venda-segura', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $venda_segura = new Module\Application\Controller\Dicas_De_Venda\Venda_Segura();
-                
-                $venda_segura->Carregar_Pagina();
-                
-                return $response;
-            });
-        });
-        
-        $app->group('/principais', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $principais = new Module\Application\Controller\Dicas_De_Venda\Principais();
-                
-                $principais->Carregar_Pagina();
-                
-                return $response;
-            });
         });
     });
     
@@ -1120,16 +1078,6 @@
     });
     
     $app->group('/pecas', function() use ($app) {
-        $app->group('/busca-programada', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $busca_programada = new Module\Application\Controller\Pecas\Busca_Programada();
-                
-                $busca_programada->Carregar_Pagina();
-                
-                return $response;
-            });
-        });
-        
         $app->group('/mais-visualizados', function() use ($app) {
             $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
                 $mais_visualizados = new Module\Application\Controller\Pecas\Mais_Visualizados();
@@ -1283,18 +1231,6 @@
                 }
                 
                 $detalhes->Carregar_Pagina();
-                
-                return $response;
-            });
-        });
-    });
-    
-    $app->group('/publicidade', function() use ($app) {
-        $app->group('/experimentar-formatos', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $experimentar_formatos = new Module\Application\Controller\Publicidade\Experimentar_Formatos();
-                
-                $experimentar_formatos->Carregar_Pagina();
                 
                 return $response;
             });

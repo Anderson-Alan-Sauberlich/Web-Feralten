@@ -10,8 +10,10 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
+    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
         <div class="ui grid">
             <div class="eleven wide column">
+            	<h1 class="ui red huge dividing header">Fale Conosco</h1>
                 <div id="div_contato" class="ui secondary segment">
                     <?php View_Fale_Conosco::Incluir_Form_Contato(); ?>
                 </div>
@@ -21,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>

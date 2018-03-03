@@ -40,7 +40,7 @@
                 	<label class="ui red header" for="entidade_nome_comercial">Nome Comercial:</label>
                 	<div class="ui left icon input">
     					<i class="building outline icon"></i>
-                   		<input id="entidade_nome_comercial" name="entidade_nome_comercial" placeholder="Nome Comercial" value="<?= View_Entidade::MostrarNomeComercial(); ?>" type="text" data-content="Ao Informar um Nome neste campo o mesmo sera mostrado substituindo seu Nome de Usuario. (Opcional)">
+                   		<input id="entidade_nome_comercial" name="entidade_nome_comercial" placeholder="Nome Comercial" value="<?= View_Entidade::MostrarNomeComercial(); ?>" type="text" data-content="Ao Informar um Nome neste campo o mesmo será mostrado substituindo seu Nome de Usuario. (Opcional)">
                 	</div>
                 </div>
             </div>

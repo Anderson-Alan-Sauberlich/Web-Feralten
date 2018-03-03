@@ -1,6 +1,6 @@
 <?php use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho; ?>
 <section class="margem-inferior-pouco">
-	<nav id="m_header" class="ui red inverted top fixed two item hidden menu" role="navigation">
+	<nav id="m_header" class="ui borderless red inverted top fixed two item hidden menu main" role="navigation">
         <div class="header item">
             <img class="logo" src="/resources/img/favicon.png">
         	Feralten
@@ -20,20 +20,12 @@
                     <div class="ui inverted link large relaxed list">
                        	<a href="#" class="item">Vendedores</a>
                     	<a href="/pesquisa-avancada/" class="item">Pesquisa Avançada</a>
-                    	<a href="/pecas/busca-programada/" class="item">Busca Programada</a>
                     	<a href="/pecas/mais-visualizados/" class="item">Mais Visualizados</a>
                     </div>
                 </div>
             </div>
-    		<div class="ui inverted accordion item">
-            	<div class="title"><i class="bullhorn icon"></i>VENDER</div>
-                <div class="content field">
-                    <div class="ui inverted link large relaxed list">
-                        <a href="/dicas-de-venda/venda-segura/" class="item">Venda Segura</a>
-                        <a href="/pecas/resultados/" class="item">Auto Peças</a>
-                        <a href="/publicidade/experimentar-formatos/" class="item">Publicidade</a>
-                    </div>
-                </div>
+    		<div class="item">
+            	<a href="/fale-conosco/"><i class="envelope icon"></i>CONTATO</a>
             </div>
 			<?php if (View_Cabecalho::VerificaAutenticacao()) { ?>
 				<div class="item">
@@ -52,7 +44,7 @@
 			<?php } ?>
 		</div>
 	</nav>
-    <nav id="pc_header" class="ui red inverted stackable top fixed menu" role="navigation">
+    <nav id="pc_header" class="ui borderless red inverted stackable top fixed menu main" role="navigation">
     	<div class="ui container">
         	<div class="header item">
         		<img class="logo" src="/resources/img/favicon.png">
@@ -66,21 +58,11 @@
                 		<div class="ui link divided large very relaxed list">
                         	<a href="#" class="item">Vendedores</a>
             	    		<a href="/pesquisa-avancada/" class="item">Pesquisa Avançada</a>
-                    		<a href="/pecas/busca-programada/" class="item">Busca Programada</a>
                     		<a href="/pecas/mais-visualizados/" class="item">Mais Visualizados</a>
                         </div>
                     </div>
                 </div>
-               	<a id="vender_item" class="item"><i class="bullhorn icon"></i>VENDER</a>
-               	<div id="popup_vender" class="ui popup">
-            		<div class="ui basic segment">
-                		<div class="ui link divided large very relaxed list">
-                        	<a href="/dicas-de-venda/venda-segura/" class="item">Venda Segura</a>
-                            <a href="/pecas/resultados/" class="item">Auto Peças</a>
-                            <a href="/publicidade/experimentar-formatos/" class="item">Publicidade</a>
-                        </div>
-                    </div>
-                </div>
+               	<a href="/fale-conosco/" class="item"><i class="envelope icon"></i>CONTATO</a>
             </div>
            	<div class="right menu">
            		<?php if (View_Cabecalho::VerificaAutenticacao()) { ?>
