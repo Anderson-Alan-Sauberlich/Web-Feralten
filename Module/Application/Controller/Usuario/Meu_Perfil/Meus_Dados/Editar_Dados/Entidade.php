@@ -193,11 +193,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                 } else {
                     if ($entidade->get_imagem() == 'del') {
                         $entidade->set_imagem(null);
+                        Login_Session::set_entidade_imagem(null);
                     }
                     
                     if (DAO_Entidade::Atualizar($entidade)) {
                         $this->sucessos[] = 'Entidade Atualizada com Sucesso';
                         Login_Session::set_entidade_nome($entidade->get_nome_comercial());
+                        Login_Session::set_entidade_imagem($entidade->get_imagem());
                     } else {
                         $this->erros[] = 'Erro ao tentar Atualizar Entidade';
                     }

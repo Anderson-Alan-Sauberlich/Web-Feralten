@@ -35,13 +35,16 @@ namespace Module\Application\Controller\Layout\Menu;
         {
             $view = new View_Orcamento();
             
-            $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
-            $obj_entidade_bd->Atualizar_Orcamentos();
+            if (Login_Session::Verificar_Entidade()) {
+                $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
+                $obj_entidade_bd->Atualizar_Orcamentos();
+                
+                $view->set_numero_recebidos($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RECEBIDO));
+                $view->set_numero_nao_tenho($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::NAO_TENHO));
+                $view->set_numero_respondido($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RESPONDIDO));
+            }
             
             $view->set_numero_meus(DAO_Orcamento::Buscar_Numero_Por_ID_Usuario(Login_Session::get_usuario_id()));
-            $view->set_numero_recebidos($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RECEBIDO));
-            $view->set_numero_nao_tenho($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::NAO_TENHO));
-            $view->set_numero_respondido($obj_entidade_bd->RetornaContagemPorStatus(Entidade_BD::RESPONDIDO));
             
             return $view;
         }
