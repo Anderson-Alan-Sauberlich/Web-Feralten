@@ -108,7 +108,7 @@
     </nav>
 </aside>
 <div class="visible-xs">
-    <div class="fluid ui secondary labeled icon toggle button"><i class="left arrow icon"></i>Abrir Filtro de Busca</div>
+    <div class="ui fluid blue labeled icon toggle button"><i class="left arrow icon"></i>Abrir Filtro de Busca</div>
     <div class="ui horizontal divider"></div>
 </div>
 <script type="text/javascript" src="/application/js/layout/menu/filtro.js"></script>

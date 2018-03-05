@@ -2,6 +2,7 @@
 namespace Module\Application\View\SRC\Layout\Menu;
     
     use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho;
+    use Module\Application\Model\Common\Util\Login_Session;
     
     class Usuario
     {
@@ -41,7 +42,7 @@ namespace Module\Application\View\SRC\Layout\Menu;
             if (self::$url_menu[0] === $id_tab) {
                 $class = 'active';
                 
-                if (isset($id_pill)) {
+                if (!empty($id_pill)) {
                     if (self::$url_menu[1] !== $id_pill) {
                         $class = '';
                     }
@@ -54,5 +55,14 @@ namespace Module\Application\View\SRC\Layout\Menu;
         public static function MostrarCodigoLogout() : void
         {
             echo View_Cabecalho::RetornarCodigoLogout();
+        }
+        
+        public static function RetornarImagemEntidade() : ?string
+        {
+            if (!empty(Login_Session::get_entidade_imagem())) {
+                return str_replace("@", "200x150", Login_Session::get_entidade_imagem());
+            } else {
+                return '/resources/img/imagem_indisponivel.png';
+            }
         }
     }

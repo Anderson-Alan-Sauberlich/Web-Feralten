@@ -278,6 +278,32 @@ namespace Module\Application\Model\Common\Util;
         }
         
         /**
+         * Function Set_Entidade_Imagem
+         *
+         * @param string $entidade_imagem 'Imagem da entidade'
+         * @return void
+         */
+        public static function set_entidade_imagem(?string $entidade_imagem) : void
+        {
+            $_SESSION['login']['entidade']['imagem'] = $entidade_imagem;
+        }
+        
+        /**
+         * Function Get_Entidade_Imagem
+         *
+         * @param none
+         * @return ?string 'Imagem da entidade'
+         */
+        public static function get_entidade_imagem() : ?string
+        {
+            if (isset($_SESSION['login']['entidade']['imagem'])) {
+                return $_SESSION['login']['entidade']['imagem'];
+            } else {
+                return null;
+            }
+        }
+        
+        /**
          * Destroi a sessão Inteira.
          */
         public static function Finalizar_Login_Session() : void

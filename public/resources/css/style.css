@@ -189,11 +189,9 @@ div#loader {
 	bottom: 0;
 	left: 10px;
 	right: 10px;
- 
 	-webkit-border-radius: 100% / 29%;
 	   -moz-border-radius: 100% / 29%;
 	        border-radius: 100% / 29%;
- 
 	-webkit-box-shadow: 0px 0px 23px #666;
 	   -moz-box-shadow: 0px 0px 23px #666; 
 	        box-shadow: 0px 0px 23px #666; 
@@ -209,6 +207,10 @@ div#loader {
 
 .margem-superior-grande {
 	margin-top: 170px;
+}
+
+.margem-inferior-minimo {
+	margin-bottom: 50px;
 }
 
 .margem-inferior-pouco {
@@ -233,6 +235,10 @@ div#loader {
 
 .margem-inferior-menu-usuario {
 	margin-bottom: 100px;
+}
+
+.segment_graficos {
+	margin-bottom: 50px;
 }
 
 .btn_abre_header {

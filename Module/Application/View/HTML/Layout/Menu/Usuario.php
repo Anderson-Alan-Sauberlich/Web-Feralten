@@ -1,7 +1,7 @@
 <?php use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario; ?>
 <nav id="m_menu_usuario" class="ui two item borderless grey inverted top fixed large menu" role="navigation">
     <a href="/usuario/meu-perfil/" class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?> item">
-    	<img class="ui mini rounded image menu_logo" src="/resources/img/imagem_indisponivel.png">
+    	<img class="ui mini rounded image menu_logo" onError="MostImgErr($this)" src="<?= View_Usuario::RetornarImagemEntidade(); ?>"/>
         <b>Meu Perfil</b>
     </a>
     <div onclick="AbrirMobileMenuUsuarioSidebar()" class="link fluid item">
@@ -61,7 +61,7 @@
 <nav id="pc_menu_usuario" class="ui six item borderless grey inverted top fixed stackable large menu main" role="navigation">
     <div class="ui container">
         <a href="/usuario/meu-perfil/" class="<?php View_Usuario::Verificar_URL_Ativa('meu-perfil'); ?> item">
-        	<img class="ui mini rounded image menu_logo" src="/resources/img/imagem_indisponivel.png">
+        	<img class="ui mini rounded image menu_logo" onError="MostImgErr($this)" src="<?= View_Usuario::RetornarImagemEntidade(); ?>"/>
         	<b>Meu Perfil</b>
         </a>
         <div class="ui dropdown <?php //View_Usuario::Verificar_URL_Ativa('orcamentos'); ?> item">

@@ -1,10 +1,10 @@
 <?php use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho; ?>
 <section class="margem-inferior-pouco">
 	<nav id="m_header" class="ui borderless red inverted top fixed two item hidden menu main" role="navigation">
-        <div class="header item">
-            <img class="logo menu_logo" src="/resources/img/favicon.png">
-        	Feralten
-        </div>
+        <a href="/" class="header item">
+            <img class="logo menu_logo" src="/resources/img/favicon.png"/>
+        	FERALTEN
+        </a>
         <div onclick="AbrirMobileHeaderSidebar()" class="link fluid item">
            	<i class="bars icon"></i>Menu
         </div>
@@ -46,10 +46,10 @@
 	</nav>
     <nav id="pc_header" class="ui borderless red inverted stackable top fixed menu main" role="navigation">
     	<div class="ui container">
-        	<div class="header item">
-        		<img class="logo menu_logo" src="/resources/img/favicon.png">
-        		Feralten
-            </div>
+        	<a href="/quem-somos/" class="header item">
+        		<img class="logo menu_logo" src="/resources/img/favicon.png"/>
+        		FERALTEN
+            </a>
            	<div class="left menu">
                	<a href="/" class="item"><i class="home icon"></i>INÍCIO</a>
                	<a id="comprar_item" class="item"><i class="cart arrow down icon"></i>COMPRAR</a>

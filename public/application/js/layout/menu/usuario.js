@@ -21,3 +21,6 @@ $(window).resize(function() {
 function AbrirMobileMenuUsuarioSidebar() {
 	$('#m_menu_usuario_sidebar').sidebar('toggle');
 }
+function MostImgErr($this) {
+	$this.src='/resources/img/imagem_indisponivel.png';
+}
