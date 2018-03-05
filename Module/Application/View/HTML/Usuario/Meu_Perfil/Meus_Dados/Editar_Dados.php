@@ -8,17 +8,16 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Editar_Dados::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Editar_Dados::Incluir_Menu_Usuario(); ?>
-        <h2 class="ui dividing header">Dados do usuario</h2>
+        <h2 class="ui red dividing header">Dados do usuario</h2>
         <?php View_Editar_Dados::Incluir_View_Usuario(); ?>
         <br/>
-        <h2 class="ui dividing header">Dados da entidade</h2>
+        <h2 class="ui red dividing header">Dados da entidade</h2>
         <?php View_Editar_Dados::Incluir_View_Entidade(); ?>
         <br/>
-        <h2 class="ui dividing header">Dados do endereço</h2>
+        <h2 class="ui red dividing header">Dados do endereço</h2>
         <?php View_Editar_Dados::Incluir_View_Endereco(); ?>
         <?php if (!View_Editar_Dados::VerificaLoginEntidade()) { ?>
         	<h2 class="ui dividing header"></h2>

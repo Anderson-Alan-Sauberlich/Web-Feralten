@@ -7,10 +7,9 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Historico::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Historico::Incluir_Menu_Usuario(); ?>
             
         <div class="container-fluid">
             <div class="row-fluid">

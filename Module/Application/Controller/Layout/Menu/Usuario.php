@@ -2,6 +2,7 @@
 namespace Module\Application\Controller\Layout\Menu;
     
     use Module\Application\Model\Common\Util\Login_Session;
+    use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho;
     
     class Usuario
     {
@@ -12,6 +13,8 @@ namespace Module\Application\Controller\Layout\Menu;
         
         public static function Verificar_Autenticacao() : bool
         {
+            View_Cabecalho::VerificaAutenticacao();
+            
             if (!Login_Session::Verificar_Login()) {
                 $login_erros = array();
                 $login_erros[] = "Você deve estar Autenticado.";
@@ -41,10 +44,5 @@ namespace Module\Application\Controller\Layout\Menu;
             } else {
                 return null;
             }
-        }
-        
-        public static function Mostrar_Nome()
-        {
-            return Login_Session::get_usuario_nome();
         }
     }

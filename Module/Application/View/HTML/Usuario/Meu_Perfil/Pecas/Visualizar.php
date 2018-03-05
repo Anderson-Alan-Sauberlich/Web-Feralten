@@ -9,11 +9,10 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
+        <?php View_Visualizar::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Visualizar::Incluir_Menu_Usuario(); ?>
-        <div class="container-fluid margem-inferior-pouco">
+        <div class="container-fluid margem-menu-visualizar margem-inferior-pouco">
             <form id="searschform" class="form-horizontal" name="searschform" action="/usuario/meu-perfil/pecas/visualizar/" method="get" role="form">
                 <div class="row">
                     <?php View_Visualizar::Incluir_Menu_Pesquisa(); ?>

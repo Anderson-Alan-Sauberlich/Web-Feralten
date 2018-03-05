@@ -8,11 +8,9 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Atualizar::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Atualizar::Incluir_Menu_Usuario(); ?>
-            
         <div class="panel-group">
             <form id="form_atualizar_pecas" name="form_atualizar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/atualizar/<?php View_Atualizar::Mostrar_URL_Peca(); ?>/" method="post" role="form">
                 <?php View_Atualizar::Mostrar_Sucesso(); ?>
@@ -178,15 +176,7 @@
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-body">
                         <div class="row-fluid">
-                            <button id="restaurar" name="restaurar" value="1" type="submit" class="hidden-xs pull-right big ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
-                            <button id="salvar" name="salvar" value="1" type="submit" class="hidden-xs pull-left big ui green button"><i class="glyphicon glyphicon-floppy-saved"></i> Atualizar Peça</button>
-                        </div>
-                        <div class="row visible-xs">
-                            <div class="large ui buttons bntCadPeca">
-                                <button id="salvar" name="salvar" value="1" type="submit" class="ui positive button">Atualizar Peça</button>
-                                <div class="or" data-text="Ou"></div>
-                                <button id="restaurar" name="restaurar" value="1" type="submit" class="ui button">Limpar</button>
-                            </div>
+                            <button id="salvar" name="salvar" value="1" type="submit" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Atualizar Peça</button>
                         </div>
                     </div>
                 </div>

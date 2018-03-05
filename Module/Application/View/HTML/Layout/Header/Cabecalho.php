@@ -2,7 +2,7 @@
 <section class="margem-inferior-pouco">
 	<nav id="m_header" class="ui borderless red inverted top fixed two item hidden menu main" role="navigation">
         <div class="header item">
-            <img class="logo" src="/resources/img/favicon.png">
+            <img class="logo menu_logo" src="/resources/img/favicon.png">
         	Feralten
         </div>
         <div onclick="AbrirMobileHeaderSidebar()" class="link fluid item">
@@ -47,7 +47,7 @@
     <nav id="pc_header" class="ui borderless red inverted stackable top fixed menu main" role="navigation">
     	<div class="ui container">
         	<div class="header item">
-        		<img class="logo" src="/resources/img/favicon.png">
+        		<img class="logo menu_logo" src="/resources/img/favicon.png">
         		Feralten
             </div>
            	<div class="left menu">

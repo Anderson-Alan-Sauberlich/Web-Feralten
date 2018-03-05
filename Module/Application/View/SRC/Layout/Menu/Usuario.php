@@ -1,24 +1,19 @@
 <?php
 namespace Module\Application\View\SRC\Layout\Menu;
     
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Cabecalho as View_Cabecalho;
     
     class Usuario
     {
         private static $status_usuario;
         private static $url_menu;
-
+        
         function __construct(int $status, array $url)
         {
             self::$status_usuario = $status;
             self::$url_menu = $url;
             
             require_once RAIZ.'/Module/Application/View/HTML/Layout/Menu/Usuario.php';
-        }
-        
-        public static function Mostrar_Nome() : void
-        {
-            echo Controller_Usuario::Mostrar_Nome();
         }
         
         public static function Incluir_Mensagem_Status_Usuario() : void
@@ -54,5 +49,10 @@ namespace Module\Application\View\SRC\Layout\Menu;
             }
             
             echo $class;
+        }
+        
+        public static function MostrarCodigoLogout() : void
+        {
+            echo View_Cabecalho::RetornarCodigoLogout();
         }
     }

@@ -1,24 +1,23 @@
-$(document).ready(function() {
-	$('.menu .item').tab();
-	$('.ui.accordion').accordion();
+$('.ui.dropdown').dropdown();
+$('.ui.accordion').accordion();
+Controlar_Classes();
+$(document).ready(function () {
+	Controlar_Classes();
+	$('#m_menu_usuario_sidebar').sidebar();
 });
-function MudarTabPerfil() {
-	$(this).tab('change tab', 'perfil');
-    $('.menu .item').removeClass('active');
-    $('#perfil').addClass('active');
+function Controlar_Classes() {
+	var scren = $("body").width();
+	if (scren <= 767) {
+		$("#pc_menu_usuario").addClass("hidden");
+		$("#m_menu_usuario").removeClass("hidden");
+	} else {
+		$("#pc_menu_usuario").removeClass("hidden");
+		$("#m_menu_usuario").addClass("hidden");
+	}
 }
-function MudarTabDados() {
-	$(this).tab('change tab', 'dados');
-    $('.menu .item').removeClass('active');
-    $('#dados').addClass('active');
-}
-function MudarTabPecas() {
-	$(this).tab('change tab', 'pecas');
-    $('.menu .item').removeClass('active');
-    $('#pecas').addClass('active');
-}
-function MudarTabFinanceiro() {
-	$(this).tab('change tab', 'financeiro');
-    $('.menu .item').removeClass('active');
-    $('#financeiro').addClass('active');
+$(window).resize(function() {
+	Controlar_Classes();
+});
+function AbrirMobileMenuUsuarioSidebar() {
+	$('#m_menu_usuario_sidebar').sidebar('toggle');
 }

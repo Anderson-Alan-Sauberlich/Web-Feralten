@@ -7,10 +7,9 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Faturas::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Faturas::Incluir_Menu_Usuario(); ?>
         <?php if (View_Faturas::Verificar_Fatura('fechada')) { ?>
             <div class="ui raised segment">
             	<div class="ui stackable doubling five column internally celled grid">

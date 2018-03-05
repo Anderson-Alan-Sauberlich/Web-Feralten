@@ -8,10 +8,9 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Cadastrar::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Cadastrar::Incluir_Menu_Usuario(); ?>
         <div class="panel-group">
             <form id="form_cadastrar_pecas" name="form_cadastrar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/cadastrar/<?php View_Cadastrar::MostrarURLOrcamento(); ?>" method="post" role="form">
                 <?php View_Cadastrar::Mostrar_Sucesso(); ?>
@@ -177,15 +176,7 @@
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-body">
                         <div class="row-fluid">
-                        	<div onclick="Submit_Salvar();" id="salvar" class="hidden-xs pull-left big ui green button"><i class="glyphicon glyphicon-floppy-saved"></i> Cadastrar Peça</div>
-                            <a href="/usuario/meu-perfil/pecas/cadastrar/" class="hidden-xs pull-right big ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</a>
-                        </div>
-                        <div class="row visible-xs">
-                            <div class="large ui buttons bntCadPeca">
-                                <div onclick="Submit_Salvar();" id="salvar" class="ui positive button">Cadastrar Peça</div>
-                                <div class="or" data-text="Ou"></div>
-                                <a href="/usuario/meu-perfil/pecas/cadastrar/" class="ui button">Limpar</a>
-                            </div>
+                        	<div onclick="Submit_Salvar();" id="salvar" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Cadastrar Peça</div>
                         </div>
                     </div>
                 </div>

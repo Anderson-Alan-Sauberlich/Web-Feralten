@@ -1,7 +1,8 @@
 <?php use Module\Application\View\SRC\Layout\Modal\Solicitar_Orcamento as View_Solicitar_Orcamento; ?>
 <div class="ui container">
 	<div class="ui horizontal divider">OU</div>
-	<div onclick="abrirModal()" class="ui big yellow button">Solicitar Orçamentos</div>
+	<h4 class="ui header">Não achou o que procurava? Solicite aos vendedores!</h4>
+	<div onclick="abrirModal()" class="ui massive black button">Solicitar Orçamentos</div>
 </div>
 <div id="mdl_enviar" class="ui mini modal">
 	<i class="close icon"></i>
@@ -83,7 +84,7 @@
         		<label>Descrição: (Opcional)</label>
            		<textarea id="descricao" name="descricao" rows="2"></textarea>
         	</div>
-        	<button onclick="criarOrcamento()" class="ui big yellow button">Enviar Solicitação de Orçamentos</button>
+        	<button onclick="criarOrcamento()" class="ui big black button">Enviar Solicitação de Orçamentos</button>
 		</div>
 		<div id="div_msg" class="ui hidden message">
         	<i class="close icon"></i>

@@ -33,7 +33,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, ['meu-perfil', 'orcamentos-recebidos']);
+            new View_Usuario(self::$status_usuario, ['orcamentos', 'orcamentos-recebidos']);
         }
         
         public static function Incluir_Menu_Orcamento() : void

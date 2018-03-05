@@ -7,10 +7,10 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
+        <?php View_Perfil::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Perfil::Incluir_Menu_Usuario(); ?>
+    	<h3 class="ui red dividing header">Olá, bem vindo(a) <?= View_Perfil::RetornarNomeUsuario(); ?></h3>
         <div id="div_visualizado" class="ui loading center aligned blue segment">
             <canvas id="crt_visualizado" width="400" height="125"></canvas>
         </div>

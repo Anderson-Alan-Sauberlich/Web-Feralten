@@ -167,7 +167,6 @@ div#loader {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
- 
 	-webkit-box-shadow: 0px 0px 10px #ccc inset; 
 	   -moz-box-shadow: 0px 0px 10px #ccc inset;
 	        box-shadow: 0px 0px 10px #ccc inset; 
@@ -222,6 +221,18 @@ div#loader {
 
 .margem-inferior-grande {
 	margin-bottom: 170px;
+}
+
+.menu_usuario {
+	margin-bottom: 55px;
+}
+
+.margem-menu-visualizar {
+	margin-top: -25px;
+}
+
+.margem-inferior-menu-usuario {
+	margin-bottom: 100px;
 }
 
 .btn_abre_header {
@@ -397,6 +408,10 @@ div#loader {
 
 .main.menu.fixed {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.menu_logo {
+    margin-right: 1em;
 }
 
 .menuRowMD {

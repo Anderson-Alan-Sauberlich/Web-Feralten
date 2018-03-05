@@ -2,6 +2,7 @@
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
     
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\Model\Common\Util\Login_Session;
     
     class Perfil
     {
@@ -20,5 +21,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
         public static function Incluir_Menu_Usuario()
         {
             new View_Usuario(self::$status_usuario, ['meu-perfil', 'perfil']);
+        }
+        
+        public static function RetornarNomeUsuario() : ?string
+        {
+            return Login_Session::get_usuario_nome();
         }
     }

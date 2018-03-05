@@ -8,10 +8,9 @@
 </head>
 <body>
     <header>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
+        <?php View_Meu_Plano::Incluir_Menu_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <?php View_Meu_Plano::Incluir_Menu_Usuario(); ?>
         <div class="ui secondary segment">
             <div class="ui doubling raised inverted grey stackable link three cards">
                 <div onclick="bnt_plano(1);" class="card">

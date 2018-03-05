@@ -39,7 +39,7 @@
     </div>
     <div class="container-fluid footerDOWN">
         <div class="row-fluid">
-            <label class="labelFooter">Feralten. Todos os direitos reservados. <a href="#" class="link">Termos de uso e Política de privacidade</a> - <a href="#" class="link">Mapa do site</a></label>
+            <label class="labelFooter">2018 - Feralten. Todos os direitos reservados. <a href="#" class="link">Termos de uso e Política de privacidade</a> - <a href="#" class="link">Mapa do site</a></label>
         </div>
     </div>
 </section>
