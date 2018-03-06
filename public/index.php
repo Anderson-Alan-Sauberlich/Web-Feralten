@@ -356,6 +356,16 @@
                             return $response;
                         }
                     });
+                    
+                    $app->get('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $meus_orcamentos = new Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos\Meus_Orcamentos();
+                        
+                        $meus_orcamentos->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+                        
+                        $meus_orcamentos->Carregar_Meus_Orcamentos();
+                        
+                        return $response;
+                    });
                 });
                 
                 $app->group('/caixa-de-entrada', function() use ($app) {

@@ -171,21 +171,22 @@ namespace Module\Application\Model\Common\Util;
             $orcamentos = [];
             
             if (empty($data_timestamp)) {
-                $orcamentos = DAO_Orcamento::BuscarTodos();
+                $orcamentos = DAO_Orcamento::BuscarLiteTodos();
             } else {
                 $orcamentos = DAO_Orcamento::BuscarPorData(date('Y-m-d H:i:s', $data_timestamp));
             }
             
             if (!empty($orcamentos)) {
-                $sql = '';
+                $sql = 'INSERT OR IGNORE INTO tb_orcamento (orcamento_orc_id, orcamento_sts_id, orcamento_data_solicitacao, orcamento_data_validade) VALUES ';
                 
                 foreach ($orcamentos as $orcamento) {
                     $data_solicitacao = new DateTime($orcamento->get_datahora_solicitacao());
                     $data_validade = new DateTime($orcamento->get_datahora_validade());
                     
-                    $sql .= "INSERT OR IGNORE INTO tb_orcamento (orcamento_orc_id, orcamento_sts_id, orcamento_data_solicitacao, orcamento_data_validade)
-                             VALUES (".$orcamento->get_id().", 1, ".$data_solicitacao->getTimestamp().", ".$data_validade->getTimestamp().");";
+                    $sql .= "(".$orcamento->get_id().", 1, ".$data_solicitacao->getTimestamp().", ".$data_validade->getTimestamp()."),";
                 }
+                
+                $sql = substr($sql, 0, -1).';';
                 
                 return $this->exec($sql);
             } else {
@@ -207,7 +208,7 @@ namespace Module\Application\Model\Common\Util;
         public function RetornaOrcamentosPorStatus(int $status, int $indice = 1) : ?array
         {
             $limit = 10;
-            $offset = ($indice * 10) - 10;
+            $offset = ($indice * $limit) - $limit;
             
             $sql = "SELECT orcamento_orc_id FROM tb_orcamento WHERE orcamento_sts_id = $status GROUP BY orcamento_data_solicitacao ORDER BY orcamento_data_solicitacao DESC LIMIT $limit OFFSET $offset;";
             

@@ -1,3 +1,7 @@
+$('#categoria').dropdown();
+$('#marca').dropdown();
+$('#modelo').dropdown();
+$('#versao').dropdown();
 function AtualizarNumeros() {
 	$.ajax({
 		method: "GET",

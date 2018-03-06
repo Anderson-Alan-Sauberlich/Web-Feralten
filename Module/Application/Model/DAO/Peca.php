@@ -322,9 +322,8 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
                 $p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
-                
-                $p_sql->bindValue(":inicio", $inicio, PDO::PARAM_INT);
-                $p_sql->bindValue(":limite", $limite, PDO::PARAM_INT);
+                $p_sql->bindValue(':inicio', $inicio, PDO::PARAM_INT);
+                $p_sql->bindValue(':limite', $limite, PDO::PARAM_INT);
                 $p_sql->execute();
                 
                 return self::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));

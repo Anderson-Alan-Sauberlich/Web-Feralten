@@ -1,3 +1,4 @@
+$('#div_orcamentos .ui.accordion').accordion();
 function NaoTenho($id_orcamento) {
 	$('#div_orcamento_'+$id_orcamento).remove();
 	$.ajax({
@@ -9,15 +10,17 @@ function NaoTenho($id_orcamento) {
 		}
 	}).done(function(data) {
 		AtualizarNumeros();
-		try {
-			AjaxCaixaDeEntrada();
-		} catch($e) {
-			
-		}
-		try {
-			AjaxRespondidos();
-		} catch($e) {
-			
+		if ($('#div_orcamentos div').length < 40) {
+			try {
+				AjaxCaixaDeEntrada();
+			} catch($e) {
+				
+			}
+			try {
+				AjaxRespondidos();
+			} catch($e) {
+				
+			}
 		}
 	});
 }

@@ -9,19 +9,19 @@
 </div>
 <div class="ui fluid vertical menu">
     <div class="active item">
-        <select class="ui fluid search selection scrolling dropdown">
+        <select id="categoria" name="categoria" class="ui fluid search selection scrolling dropdown">
         	<option value="0">Todas as Categorias...</option>
         </select>
     	<div class="ui divider"></div>
-        <select class="ui fluid search selection scrolling dropdown">
+        <select id="marca" name="marca" class="ui fluid search selection scrolling dropdown">
         	<option value="0">Todas as Marcas...</option>
         </select>
     	<div class="ui divider"></div>
-        <select class="ui fluid search selection scrolling dropdown">
+        <select id="modelo" name="modelo" class="ui fluid search selection scrolling dropdown">
         	<option value="0">Todos os Modelos...</option>
         </select>
         <div class="ui divider"></div>
-        <select class="ui fluid search selection scrolling dropdown">
+        <select id="versao" name="versao" class="ui fluid search selection scrolling dropdown">
         	<option value="0">Todas as Versões...</option>
         </select>
     </div>

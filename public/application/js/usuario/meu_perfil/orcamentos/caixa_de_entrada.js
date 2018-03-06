@@ -1,5 +1,3 @@
-$('.ui.accordion').accordion();
-$('.ui.dropdown').dropdown();
 var $indice = 2;
 $(document).ready(function() {
 	EventoScrollCaixaDeEntrada();

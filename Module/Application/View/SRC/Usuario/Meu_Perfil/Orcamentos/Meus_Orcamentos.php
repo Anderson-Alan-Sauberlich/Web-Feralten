@@ -26,12 +26,12 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
             self::$view_menu_orcamento = $view_menu_orcamento;
         }
         
-        public function Executar()
+        public function Executar() : void
         {
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Orcamentos/Meus_Orcamentos.php';
         }
         
-        public static function Incluir_Menu_Usuario()
+        public static function Incluir_Menu_Usuario() : void
         {
             new View_Usuario(self::$status_usuario, ['orcamentos', 'meus-orcamentos']);
         }

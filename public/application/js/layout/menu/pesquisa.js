@@ -1,4 +1,4 @@
-$('.ui.accordion').accordion();
+$('#categoria').accordion();
 $('#content_categoria .ui.checkbox').checkbox({uncheckable: true});
 $('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
 function Carregar_Categoria(ca) {
@@ -17,6 +17,7 @@ function Carregar_Categoria(ca) {
 	       	$('#marca').dropdown('set value', '0');
 	        $('#modelo').dropdown('set value', '0');
 	       	$('#versao').dropdown('set value', '0');
+	       	$('#categoria').accordion('close', 0);
 	    });
 	} else {
 		$("#marca").html('<option value="0">Marca</option>');
