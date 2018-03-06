@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
 	$('.ui.dropdown').dropdown();
+	$('#preco').mask('#.##0,00', {reverse: true});
 	Verificar_Limite_Pecas();
 });
 function Carregar_Categoria(ca) {

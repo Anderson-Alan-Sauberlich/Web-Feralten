@@ -35,7 +35,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $object_fatura_servico->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ftr_id', $object_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':dsc', $object_fatura_servico->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -58,7 +58,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $object_fatura_servico->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ftr_id', $object_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':dsc', $object_fatura_servico->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {

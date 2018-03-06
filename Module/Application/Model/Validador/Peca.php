@@ -137,6 +137,9 @@ namespace Module\Application\Model\Validador;
         public static function validar_preco($preco = null) : ?float
         {
             if (!empty($preco)) {
+                $preco = str_replace('.', '', $preco);
+                $preco = str_replace(',', '.', $preco);
+                
                 if (filter_var($preco, FILTER_VALIDATE_FLOAT)) {
                     return $preco;
                 } else {

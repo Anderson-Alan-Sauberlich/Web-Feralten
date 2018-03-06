@@ -25,7 +25,7 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
@@ -54,7 +54,7 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
@@ -96,7 +96,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
                 $p_sql->bindValue(':id', $fatura_id, PDO::PARAM_INT);
-                $p_sql->bindValue(':vlr_ttl', $valor_total, PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $valor_total, PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {

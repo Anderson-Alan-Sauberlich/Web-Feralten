@@ -23,8 +23,8 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':id', $object_plano->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_STR);
                 $p_sql->bindValue(':vrl_lmt_pcs', $object_plano->get_limite_pecas(), PDO::PARAM_INT);
                 $p_sql->bindValue(':dsc', $object_plano->get_descricao(), PDO::PARAM_STR);
                 
@@ -48,8 +48,8 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
                 $p_sql->bindValue(':id', $object_plano->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_STR);
                 $p_sql->bindValue(':vrl_lmt_pcs', $object_plano->get_limite_pecas(), PDO::PARAM_INT);
                 $p_sql->bindValue(':dsc', $object_plano->get_descricao(), PDO::PARAM_STR);
 

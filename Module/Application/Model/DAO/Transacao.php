@@ -25,7 +25,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $object_transacao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ftr_id', $object_transacao->get_fatura_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':datahora', $object_transacao->get_datahora(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts', $object_transacao->get_status(), PDO::PARAM_STR);
                 $p_sql->bindValue(':frm_pag', $object_transacao->get_forma_pagamento(), PDO::PARAM_STR);
                 
@@ -52,7 +52,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $object_transacao->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':ftr_id', $object_transacao->get_fatura_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':datahora', $object_transacao->get_datahora(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts', $object_transacao->get_status(), PDO::PARAM_STR);
                 $p_sql->bindValue(':frm_pag', $object_transacao->get_forma_pagamento(), PDO::PARAM_STR);
 
