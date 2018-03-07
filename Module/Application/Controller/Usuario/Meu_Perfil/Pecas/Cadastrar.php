@@ -725,8 +725,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         
                         DAO_Adicionado::Inserir($object_adicionado);
                         
-                        $this->cadastrar_sucesso[] = "Peça Cadastrada Com Sucesso";
-                        $this->cadastrar_campos['erro_peca'] = "";
+                        $this->cadastrar_sucesso[] = 'Peça Cadastrada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
+                        $this->cadastrar_campos['erro_peca'] = '';
                     } else {
                         $this->cadastrar_form['peca'] = $this->peca;
                         $this->cadastrar_form['fabricante'] = $this->fabricante;

@@ -29,10 +29,12 @@
                     </ul>
                 </div>
                 <div class="col-xs-6">
-                    <ul class="row">
-                        <p class="titlePFooter"><span class="glyphicon glyphicon-tags"></span> VENDER</p>
-                        <li><a href="/pecas/resultados/" class="linkFooter">Auto Peças</a></li>
-                    </ul>
+                    <div class="row">
+                    	<img class="ui medium image" src="/resources/img/Feralten_logo_Transparente_intertido.png"/>
+                    	<br/>
+                    	<p>contato@feralten.com.br</p>
+                    	<p>(47) 99285-3500</p>
+                    </div>
                 </div>
             </div>
         </div>
