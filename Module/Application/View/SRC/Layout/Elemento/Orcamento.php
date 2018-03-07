@@ -83,7 +83,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return int|NULL
          */
-        public static function Mostrar_ID() : ?int
+        public static function MostrarID() : ?int
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
                 return self::$obj_orcamento->get_id();
@@ -97,7 +97,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function Mostrar_Nome() : ?string
+        public static function MostrarNome() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
                 return self::$obj_orcamento->get_peca_nome();
@@ -111,7 +111,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function Mostrar_CMMV() : ?string
+        public static function MostrarCMMV() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
                 return self::$obj_orcamento->get_categoria()->get_nome().', '.
@@ -128,7 +128,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return array
          */
-        public static function Retornar_Pecas() : array
+        public static function RetornarPecas() : array
         {
             $pecas =[];
             
@@ -152,7 +152,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function Mostrar_Anos() : ?string
+        public static function MostrarAnos() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
                 return 'Ano: de '.self::$obj_orcamento->get_ano_de().' até '.self::$obj_orcamento->get_ano_ate();
@@ -166,7 +166,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function Mostrar_Descricao() : ?string
+        public static function MostrarDescricao() : ?string
         {
             if (self::$obj_orcamento instanceof Object_Orcamento) {
                 return self::$obj_orcamento->get_descricao();
@@ -180,7 +180,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function Verificar_Desativar_Botao() : ?string
+        public static function VerificarDesativarBotao() : ?string
         {
             if (self::$pagina === self::NAO_TENHO) {
                 return 'disabled';
@@ -194,7 +194,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return bool
          */
-        public static function Verificar_Mostrar_ListaPecas() : bool
+        public static function VerificarMostrarListaPecas() : bool
         {
             if (self::$pagina === self::RESPONDIDOS ||
                 self::$pagina === self::MEUS_ORCAMENTOS) {
@@ -209,11 +209,25 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return bool
          */
-        public static function Verificar_Mostrar_Botoes() : bool
+        public static function VerificarMostrarBotoes() : bool
         {
             if (self::$pagina === self::CAIXA_DE_ENTRADA ||
                 self::$pagina === self::NAO_TENHO ||
                 self::$pagina === self::RESPONDIDOS) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+        /**
+         * Verifica se está em uma pagina onde o botão 'Eu tenho essa peça' devem ser mostrados.
+         *
+         * @return bool
+         */
+        public static function VerificarMostrarBotaoCadastrar() : bool
+        {
+            if (self::$pagina === self::ORCAMENTOS) {
                 return true;
             } else {
                 return false;

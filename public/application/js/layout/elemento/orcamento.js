@@ -24,6 +24,3 @@ function NaoTenho($id_orcamento) {
 		}
 	});
 }
-function SimTenho($id_orcamento) {
-	window.location.href = "/usuario/meu-perfil/pecas/cadastrar/no-orcamento/"+$id_orcamento+"/";
-}
