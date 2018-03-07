@@ -175,6 +175,26 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        public static function BuscarIndiceTodos(int $indice)
+        {
+            $limite = 10;
+            $inicio = ($indice * $limite) - $limite;
+            
+            try {
+                $sql = 'SELECT orcamento_id, orcamento_usr_id, orcamento_ctg_id, orcamento_mrc_id, orcamento_mdl_id, orcamento_vrs_id, orcamento_ano_de, orcamento_ano_ate, orcamento_peca_nome, orcamento_numero_serie, orcamento_std_uso_pec_id, orcamento_prf_ntr_id, orcamento_descricao, orcamento_data_solicitacao, orcamento_data_validade
+                        FROM tb_orcamento LIMIT :inicio, :limite';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':inicio', $inicio, PDO::PARAM_INT);
+                $p_sql->bindValue(':limite', $limite, PDO::PARAM_INT);
+                $p_sql->execute();
+                
+                return self::PopulaOrcamentos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
         public static function BuscarTodos()
         {
             try {

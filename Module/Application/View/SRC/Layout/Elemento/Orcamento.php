@@ -26,6 +26,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public const NAO_TENHO = 'nao-tenho';
         
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const ORCAMENTOS = 'orcamentos';
+        
         function __construct()
         {
             
@@ -206,10 +211,12 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function Verificar_Mostrar_Botoes() : bool
         {
-            if (self::$pagina === self::MEUS_ORCAMENTOS) {
-                return false;
-            } else {
+            if (self::$pagina === self::CAIXA_DE_ENTRADA ||
+                self::$pagina === self::NAO_TENHO ||
+                self::$pagina === self::RESPONDIDOS) {
                 return true;
+            } else {
+                return false;
             }
         }
     }

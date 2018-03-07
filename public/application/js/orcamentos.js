@@ -1,11 +1,11 @@
 var $indice = 2;
 $(document).ready(function() {
-	EventoScrollCaixaDeEntrada();
+	EventoScrollOrcamentos();
 });
-function AjaxCaixaDeEntrada() {
+function AjaxOrcamentos() {
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/orcamentos/caixa-de-entrada/ajax/",
+		url: "/orcamentos/ajax/",
 		async: false,
 		data: { 
 			indice : $indice
@@ -15,15 +15,15 @@ function AjaxCaixaDeEntrada() {
 			$('#div_orcamentos').append(data);
 			$('#div_orcamentos .ui.accordion').accordion();
 			$indice += 1;
-			EventoScrollCaixaDeEntrada();
+			EventoScrollOrcamentos();
 		}
 	});
 }
-function EventoScrollCaixaDeEntrada() {
+function EventoScrollOrcamentos() {
 	$(window).scroll(function() {
 	    if(($(window).scrollTop() + $(window).height() + 20) >= $(document).height() - (($(document).height() / 100) * 25)) {
 	    	$(window).unbind('scroll');
-	    	AjaxCaixaDeEntrada();
+	    	AjaxOrcamentos();
 	    }
 	});
 }

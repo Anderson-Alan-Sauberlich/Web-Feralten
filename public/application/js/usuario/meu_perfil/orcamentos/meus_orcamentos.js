@@ -13,7 +13,7 @@ function AjaxMeusOrcamentos() {
 	}).done(function(data) {
 		if (data != '' && data != null) {
 			$('#div_orcamentos').append(data);
-			$('.ui.accordion').accordion();
+			$('#div_orcamentos .ui.accordion').accordion();
 			$indice += 1;
 			EventoScrollMeusOrcamentos();
 		}

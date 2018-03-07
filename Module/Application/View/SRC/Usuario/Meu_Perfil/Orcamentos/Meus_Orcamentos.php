@@ -7,35 +7,76 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
     
     class Meus_Orcamentos
     {
+        /**
+         * Cria uma nova instancia da classe com o parametro requirido status do usuario.
+         * 
+         * @param int $status
+         */
         function __construct(int $status)
         {
             self::$status_usuario = $status;
         }
         
+        /**
+         * Armazena o codigo do status do usuario.
+         * 
+         * @var int
+         */
         private static $status_usuario;
+        
+        /**
+         * Lista de orçamentos.
+         * 
+         * @var array
+         */
         private static $orcamentos;
+        
+        /**
+         * Instancia da view menu lateral orçamento.
+         * 
+         * @var View_Menu_Orcamento
+         */
         private static $view_menu_orcamento;
         
+        /**
+         * Seta a lista de orçamentos.
+         * 
+         * @param array $orcamentos
+         */
         public function set_orcamentos(array $orcamentos) : void
         {
             self::$orcamentos = $orcamentos;
         }
         
+        /**
+         * Seta o objeto do menu lateral orçamento.
+         * 
+         * @param View_Menu_Orcamento $view_menu_orcamento
+         */
         public function set_view_menu_orcamento(View_Menu_Orcamento $view_menu_orcamento) : void
         {
             self::$view_menu_orcamento = $view_menu_orcamento;
         }
         
+        /**
+         * Chama o arquivo html que por sua vez chama todas as functions staticas da classe.
+         */
         public function Executar() : void
         {
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Orcamentos/Meus_Orcamentos.php';
         }
         
+        /**
+         * Chama o codigo fonte do menu header usuario.
+         */
         public static function Incluir_Menu_Usuario() : void
         {
             new View_Usuario(self::$status_usuario, ['orcamentos', 'meus-orcamentos']);
         }
         
+        /**
+         * Chama o codigo fonte do menu lateral orçamento.
+         */
         public static function Incluir_Menu_Orcamento() : void
         {
             if (self::$view_menu_orcamento instanceof View_Menu_Orcamento) {
@@ -44,6 +85,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
             }
         }
         
+        /**
+         * Chama o codigo fonte dos elementos dos orçamentos.
+         * 
+         * @param array $orcamentos
+         */
         public static function Incluir_Elemento_Orcamento(?array $orcamentos = null) : void
         {
             if (!empty($orcamentos)) {

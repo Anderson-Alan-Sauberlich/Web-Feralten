@@ -25,7 +25,8 @@
                         <p class="titlePFooter"><span class="glyphicon glyphicon-shopping-cart"></span> COMPRAR</p>
                         <li><a href="/pesquisa-avancada/" class="linkFooter">Pesquisa Avançada</a></li>
                         <li><a href="/pecas/mais-visualizados/" class="linkFooter">Mais Visualizados</a></li>
-                        <li><a href="#" class="linkFooter">Vendedores</a></li>
+                        <li><a href="/vendedores/" class="linkFooter">Vendedores</a></li>
+                        <li><a href="/orcamentos/" class="linkFooter">Orçamentos</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-6">

@@ -1087,6 +1087,26 @@
         });
     });
     
+    $app->group('/orcamentos', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $orcamentos = new Module\Application\Controller\Orcamentos();
+            
+            $orcamentos->Carregar_Pagina();
+            
+            return $response;
+        });
+        
+        $app->get('/ajax[/]', function(Request $request, Response $response, $args) use ($app) {
+            $orcamentos = new Module\Application\Controller\Orcamentos();
+            
+            $orcamentos->set_indice(isset($_GET['indice']) ? $_GET['indice'] : null);
+            
+            $orcamentos->Carregar_Orcamentos();
+            
+            return $response;
+        });
+    });
+    
     $app->group('/pesquisa-avancada', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
             $pesquisa_avancada = new Module\Application\Controller\Pesquisa_Avancada();

@@ -21,9 +21,9 @@
         <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
-        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
-        <script type="text/javascript" src="/application/js/usuario/meu_perfil/orcamentos/caixa_de_entrada.js"></script>
+    	<script type="text/javascript" src="/application/js/usuario/meu_perfil/orcamentos/caixa_de_entrada.js"></script>
         <script type="text/javascript" src="/application/js/layout/elemento/orcamento.js"></script>
+        <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
 </body>
 </html>

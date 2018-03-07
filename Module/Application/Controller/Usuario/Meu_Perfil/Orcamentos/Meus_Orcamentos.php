@@ -16,9 +16,25 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
             
         }
         
+        /**
+         * Armazena o indice da paginação por demanda, inicia com 1 pois ao carregar a pagina já deve vir com valores.
+         * 
+         * @var integer
+         */
         private $indice = 1;
+        
+        /**
+         * Lista de mensagens de erro.
+         * 
+         * @var array
+         */
         private $erros = [];
         
+        /**
+         * Seta o numero do indice da paginação por demanda.
+         * 
+         * @param int $indice
+         */
         public function set_indice($indice) : void
         {
             try {
@@ -28,6 +44,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
             }
         }
         
+        /**
+         * Chama e retorna a pagina.
+         * 
+         * @return boolean
+         */
         public function Carregar_Pagina()
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
@@ -51,6 +72,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
             }
         }
         
+        /**
+         * Function chamada por ajax para carregar novos elementos de orçamento.
+         * 
+         * @return number|NULL|boolean
+         */
         public function Carregar_Meus_Orcamentos()
         {
             if (Controller_Usuario::Verificar_Autenticacao()) {
