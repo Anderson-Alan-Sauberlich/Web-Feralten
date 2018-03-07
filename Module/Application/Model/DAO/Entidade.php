@@ -2,6 +2,7 @@
 namespace Module\Application\Model\DAO;
     
     use Module\Application\Model\Object\Entidade as Object_Entidade;
+    use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -212,7 +213,7 @@ namespace Module\Application\Model\DAO;
                 $entidade = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 if (!empty($entidade) AND $entidade != false) {
-                    return self::PopulaUsuario($entidade);
+                    return self::PopulaEntidade($entidade);
                 } else {
                     return false;
                 }
@@ -235,10 +236,26 @@ namespace Module\Application\Model\DAO;
                 $entidade = $p_sql->fetch(PDO::FETCH_ASSOC);
                 
                 if (!empty($entidade) AND $entidade != false) {
-                    return self::PopulaUsuario($entidade);
+                    return self::PopulaEntidade($entidade);
                 } else {
                     return false;
                 }
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function BuscarVendedores()
+        {
+            try {
+                $sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
+                        entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano
+                        FROM tb_entidade WHERE entidade_id IN (SELECT peca_ent_id FROM tb_peca)";
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->execute();
+                
+                return self::PopulaEntidades($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -259,7 +276,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaUsuario(array $row) : Object_Entidade
+        public static function PopulaEntidade(array $row) : Object_Entidade
         {
             $object_entidade = new Object_Entidade();
             
@@ -269,7 +286,7 @@ namespace Module\Application\Model\DAO;
             }
             
             if (isset($row['entidade_usr_id'])) {
-                $object_entidade->set_usuario_id($row['entidade_usr_id']);
+                $object_entidade->set_usuario(DAO_Usuario::Buscar_Usuario($row['entidade_usr_id']));
             }
             
             if (isset($row['entidade_sts_ent_id'])) {
@@ -309,5 +326,63 @@ namespace Module\Application\Model\DAO;
             }
             
             return $object_entidade;
+        }
+        
+        public static function PopulaEntidades(array $rows) : array
+        {
+            $entidades = [];
+            
+            foreach ($rows as $row) {
+                $object_entidade = new Object_Entidade();
+                
+                if (isset($row['entidade_id'])) {
+                    $object_entidade->set_id($row['entidade_id']);
+                    $object_entidade->set_endereco(DAO_Endereco::Buscar_Por_Id_Entidade($row['entidade_id']));
+                }
+                
+                if (isset($row['entidade_usr_id'])) {
+                    $object_entidade->set_usuario(DAO_Usuario::Buscar_Usuario($row['entidade_usr_id']));
+                }
+                
+                if (isset($row['entidade_sts_ent_id'])) {
+                    $object_entidade->set_status_id($row['entidade_sts_ent_id']);
+                }
+                
+                if (isset($row['entidade_cpf_cnpj'])) {
+                    $object_entidade->set_cpf_cnpj($row['entidade_cpf_cnpj']);
+                }
+                
+                if (isset($row['entidade_nome_comercial'])) {
+                    $object_entidade->set_nome_comercial($row['entidade_nome_comercial']);
+                }
+                
+                if (isset($row['entidade_imagem'])) {
+                    $object_entidade->set_imagem($row['entidade_imagem']);
+                }
+                
+                if (isset($row['entidade_site'])) {
+                    $object_entidade->set_site($row['entidade_site']);
+                }
+                
+                if (isset($row['entidade_data_cadastro'])) {
+                    $object_entidade->set_data($row['entidade_data_cadastro']);
+                }
+                
+                if (isset($row['entidade_pln_id'])) {
+                    $object_entidade->set_plano_id($row['entidade_pln_id']);
+                }
+                
+                if (isset($row['entidade_int_pag_id'])) {
+                    $object_entidade->set_intervalo_pagamento_id($row['entidade_int_pag_id']);
+                }
+                
+                if (isset($row['entidade_data_contratacao_plano'])) {
+                    $object_entidade->set_data_contratacao_plano($row['entidade_data_contratacao_plano']);
+                }
+                
+                $entidades[] = $object_entidade;
+            }
+            
+            return $entidades;
         }
     }

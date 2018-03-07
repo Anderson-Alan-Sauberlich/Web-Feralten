@@ -1,12 +1,13 @@
 <?php
 namespace Module\Application\Model\Object;
     
+    use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\Object\Endereco as Object_Endereco;
 
     class Entidade
     {
         private $id;
-        private $usuario_id;
+        private $usuario;
         private $status_id;
         private $cpf_cnpj;
         private $nome_comercial;
@@ -35,12 +36,25 @@ namespace Module\Application\Model\Object;
         
         public function set_usuario_id(int $usuario_id) : void
         {
-            $this->usuario_id = $usuario_id;
+            $usuario = new Object_Usuario();
+            $usuario->set_id($usuario_id);
+            
+            $this->usuario = $usuario;
         }
         
         public function get_usuario_id() : ?int
         {
-            return $this->usuario_id;
+            return $this->usuario->get_id();
+        }
+        
+        public function set_usuario(Object_Usuario $obj_usuario) : void
+        {
+            $this->usuario = $obj_usuario;
+        }
+        
+        public function get_usuario() : ?Object_Usuario
+        {
+            return $this->usuario;
         }
         
         public function set_status_id(int $status_id) : void

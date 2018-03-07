@@ -10,7 +10,7 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    
+    	
         <div class="container-fluid">
             <div class="row-fluid">
                 <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />

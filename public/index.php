@@ -1077,6 +1077,16 @@
         });
     });
     
+    $app->group('/vendedores', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $vendedores = new Module\Application\Controller\Vendedores();
+            
+            $vendedores->Carregar_Pagina();
+            
+            return $response;
+        });
+    });
+    
     $app->group('/pesquisa-avancada', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
             $pesquisa_avancada = new Module\Application\Controller\Pesquisa_Avancada();
