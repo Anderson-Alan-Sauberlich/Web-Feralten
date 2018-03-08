@@ -22,7 +22,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     background: url(buying-car-background.jpg)no-repeat center 0px;
 	-webkit-background-size:cover;
-	-moz-background-size:cover; 
+	-moz-background-size:cover;
 	background-size:cover;
     background-attachment: fixed;
 } 
@@ -31,7 +31,8 @@ body {
     margin:0 auto;
 }
 .w3top-nav-right {
-    margin-top: 4em;
+    background-color: grey;
+    margin-top: 2em;
 }
 .w3top-nav-left h1 {
     font-size: 3em; 
@@ -68,6 +69,7 @@ h1 {
 	line-height: 1.8em;
 }  
 p.w3lstext {
+    background-color: grey;
     font-size: 0.9em;
     color: #fff;
     line-height: 1.8em;
@@ -129,6 +131,7 @@ p.w3lstext a:hover{
 	color:#fff !important;
 }
 .copyright {
+    background-color: grey;
     margin:3em 0 2em;
     text-align: center;
 }
