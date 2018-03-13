@@ -3,7 +3,7 @@ namespace Module\Application\Controller\Layout\Form;
 
     use Module\Application\Model\Object\Contato_Anunciante as Object_Contato_Anunciante;
     use Module\Application\Model\DAO\Contato_Anunciante as DAO_Contato_Anunciante;
-    use Module\Application\Controller\Common\Util\Email;
+    use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\View\SRC\Layout\Form\Contato_Anunciante as View_Contato_Anunciante;

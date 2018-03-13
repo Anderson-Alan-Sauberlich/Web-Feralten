@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="panel-footer sombra_painel">
-                            <button type="submit" class="big ui green button"><i class="add user icon"></i>Criar Conta</button>
+                            <button id="btn_cadastrar" type="submit" onclick="BtnCadastrarLoading()" class="ui big green button"><i class="add user icon"></i>Criar Conta</button>
                             <label>Já possui uma conta? <a href="/usuario/login/">Clique aqui para Entrar!</a></label>
                             <p>Ao me cadastrar, eu concordo com os Termos de Uso e a Política de Privacidade do Feralten.</p>
                         </div>

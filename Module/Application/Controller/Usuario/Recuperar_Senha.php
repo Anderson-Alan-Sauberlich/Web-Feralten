@@ -6,7 +6,7 @@ namespace Module\Application\Controller\Usuario;
     use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
     use Module\Application\Model\DAO\Recuperar_Senha as DAO_Recuperar_Senha;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
-    use Module\Application\Controller\Common\Util\Email;
+    use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Model\Common\Util\Validador;
     use \Exception;
     

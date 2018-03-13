@@ -4,7 +4,7 @@ namespace Module\Application\Controller\Usuario;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
-    use Module\Application\Controller\Common\Util\Email;
+    use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
     use Module\Application\View\SRC\Usuario\Cadastro as View_Cadastro;
     use \ReCaptcha\ReCaptcha;

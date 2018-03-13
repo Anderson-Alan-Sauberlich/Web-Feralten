@@ -12,7 +12,7 @@
     </header>
     <section class="ui container" role="main">
     	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
-        <div class="ui grid">
+        <div class="ui stackable grid">
             <div class="eleven wide column">
             	<h1 class="ui red huge dividing header">Perguntas Frequentes</h1>
                 <div class="ui styled fluid accordion margem-inferior-pouco">

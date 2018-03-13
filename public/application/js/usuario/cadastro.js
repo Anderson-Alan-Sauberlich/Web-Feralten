@@ -22,3 +22,6 @@ function tamanhoTela() {
 		return 'normal';
 	}
 };
+function BtnCadastrarLoading() {
+	$('#btn_cadastrar').addClass('loading');
+}

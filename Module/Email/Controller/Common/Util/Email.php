@@ -1,5 +1,5 @@
 <?php
-namespace Module\Application\Controller\Common\Util;
+namespace Module\Email\Controller\Common\Util;
     
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception as Mail_Exception;
@@ -7,6 +7,9 @@ namespace Module\Application\Controller\Common\Util;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
     use Module\Application\Model\Object\Contato as Object_Contato;
+    use Module\Email\View\SRC\Boas_Vindas as View_Boas_Vindas;
+    use Module\Email\View\SRC\Recuperar_Senha as View_Recuperar_Senha;
+    use Module\Email\View\SRC\Contato_Anunciante as View_Contato_Anunciante;
     
     class Email
     {
@@ -31,16 +34,23 @@ namespace Module\Application\Controller\Common\Util;
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
+                $mail->setFrom('feralten@feralten.com', 'Feralten');
                 $mail->addAddress($object_contato_anunciante->get_object_peca()->get_responsavel()->get_email());
                 $mail->addReplyTo($object_contato_anunciante->get_email(), $object_contato_anunciante->get_nome());
                 $mail->addCC('contato.feralten@gmail.com');
                 
+                $view_contato_anunciante = new View_Contato_Anunciante();
+                $view_contato_anunciante->set_obj_contato_anunciante($object_contato_anunciante);
+                ob_start();
+                $view_contato_anunciante->Executar();
+                $body_html = ob_get_contents();
+                ob_end_clean();
+                
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Nova mensagem de '.$object_contato_anunciante->get_nome();
-                $mail->Body    = $object_contato_anunciante->get_mensagem();
-                $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
+                $mail->Body    = $body_html;
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();
             } catch (Mail_Exception $e) {
@@ -64,7 +74,7 @@ namespace Module\Application\Controller\Common\Util;
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
+                $mail->setFrom('feralten@feralten.com', 'Feralten');
                 $mail->addAddress('contato.feralten@gmail.com', 'Feralten');
                 $mail->addReplyTo($object_contato->get_email(), $object_contato->get_nome());
                 
@@ -77,7 +87,7 @@ namespace Module\Application\Controller\Common\Util;
                 $mail->Body   .= '<p>Whatsapp: '.$object_contato->get_whatsapp().'</p>';
                 $mail->Body   .= '<p>Assunto: '.$object_contato->get_assunto().'</p>';
                 $mail->Body   .= '<p>Mensagem: '.$object_contato->get_mensagem().'</p>';
-                $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();
             } catch (Mail_Exception $e) {
@@ -101,16 +111,23 @@ namespace Module\Application\Controller\Common\Util;
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
+                $mail->setFrom('feralten@feralten.com', 'Feralten');
                 $mail->addAddress($object_usuario->get_email());
-                $mail->addReplyTo('contato.feralten@gmail.com', 'Feralten');
+                $mail->addReplyTo('feralten@feralten.com', 'Feralten');
                 $mail->addCC('contato.feralten@gmail.com');
+                
+                $view_boas_vindas = new View_Boas_Vindas();
+                $view_boas_vindas->set_obj_usuario($object_usuario);
+                ob_start();
+                $view_boas_vindas->Executar();
+                $body_html = ob_get_contents();
+                ob_end_clean();
                 
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Seja muito bem vindo '.$object_usuario->get_nome();
-                $mail->Body    = 'Que bom que você está com a gente!';
-                $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
+                $mail->Body    = $body_html;
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();
             } catch (Mail_Exception $e) {
@@ -134,16 +151,23 @@ namespace Module\Application\Controller\Common\Util;
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('contato.feralten@gmail.com', 'Feralten');
+                $mail->setFrom('feralten@feralten.com', 'Feralten');
                 $mail->addAddress($object_recuperar_senha->get_object_usuario()->get_email());
-                $mail->addReplyTo('contato.feralten@gmail.com', 'Feralten');
+                $mail->addReplyTo('feralten@feralten.com', 'Feralten');
                 $mail->addCC('contato.feralten@gmail.com');
+                
+                $view_recuperar_senha = new View_Recuperar_Senha();
+                $view_recuperar_senha->set_obj_recuperar_senha($object_recuperar_senha);
+                ob_start();
+                $view_recuperar_senha->Executar();
+                $body_html = ob_get_contents();
+                ob_end_clean();
                 
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Criar Nova Senha';
-                $mail->Body    = 'Abra o Link e crie uma nova senha: <a>https://www.feralten.com.br/usuario/recuperar-senha/?codigo='.hash_hmac('sha512', $object_recuperar_senha->get_codigo(), hash('sha512', $object_recuperar_senha->get_codigo())).'</a>';
-                $mail->AltBody = 'Sauber Sistemas - ©2017 Feralten. Todos os direitos reservados.';
+                $mail->Body    = $body_html;
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 
                 return $mail->send();
             } catch (Mail_Exception $e) {
