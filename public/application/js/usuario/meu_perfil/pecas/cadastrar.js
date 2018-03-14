@@ -287,8 +287,9 @@ function Submit_Salvar() {
 	$('#salvar').addClass('loading');
 	if (Verificar_Limite_Pecas()) {
 		$('#form_cadastrar_pecas').submit();
+	} else {
+		$('#salvar').removeClass('loading');
 	}
-	$('#salvar').removeClass('loading');
 }
 function Verificar_Limite_Pecas() {
 	var $retorno = true;
