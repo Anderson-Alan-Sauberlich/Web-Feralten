@@ -266,7 +266,13 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
                 $p_sql->execute();
                 
-                return self::PopulaPeca($p_sql->fetch(PDO::FETCH_ASSOC));
+                $row = $p_sql->fetch(PDO::FETCH_ASSOC);
+                
+                if (!empty($row) && $row != false) {
+                    return self::PopulaPeca($row);
+                } else {
+                    return false;
+                }
             } catch (PDOException | Exception $e) {
                 return false;
             }

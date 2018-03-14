@@ -1,6 +1,7 @@
 <?php
 namespace Module\Application\Model\Object;
     
+    use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\Object\Categoria as Object_Categoria;
     use Module\Application\Model\Object\Marca as Object_Marca;
     use Module\Application\Model\Object\Modelo as Object_Modelo;
@@ -9,7 +10,7 @@ namespace Module\Application\Model\Object;
     class Orcamento
     {
         private $id;
-        private $usuario_id;
+        private $usuario;
         private $categoria;
         private $marca;
         private $modelo;
@@ -40,14 +41,32 @@ namespace Module\Application\Model\Object;
             return $this->id;
         }
         
+        public function set_usuario(Object_Usuario $usuario) : void
+        {
+            $this->usuario = $usuario;
+        }
+        
+        public function get_usuario() : ?Object_Usuario
+        {
+            return $this->usuario;
+        }
+        
         public function set_usuario_id(int $usuario_id) : void
         {
-            $this->usuario_id = $usuario_id;
+            if (!$this->usuario instanceof Object_Usuario) {
+                $this->usuario = new Object_Usuario();
+            }
+            
+            $this->usuario->set_id($usuario_id);
         }
         
         public function get_usuario_id() : ?int
         {
-            return $this->usuario_id;
+            if ($this->usuario instanceof Object_Usuario) {
+                return $this->usuario->get_id();
+            } else {
+                return null;
+            }
         }
         
         public function set_categoria(Object_Categoria $categoria) : void

@@ -3,6 +3,7 @@ namespace Module\Application\Model\DAO;
     
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
     use Module\Application\Model\DAO\Orcamento_Peca as DAO_Orcamento_Peca;
+    use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\DAO\Categoria as DAO_Categoria;
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
@@ -238,7 +239,7 @@ namespace Module\Application\Model\DAO;
                 }
                 
                 if (isset($row['orcamento_usr_id'])) {
-                    $object_orcamento->set_usuario_id($row['orcamento_usr_id']);
+                    $object_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
                 }
                 
                 if (isset($row['orcamento_ctg_id'])) {
@@ -310,7 +311,7 @@ namespace Module\Application\Model\DAO;
             }
             
             if (isset($row['orcamento_usr_id'])) {
-                $object_orcamento->set_usuario_id($row['orcamento_usr_id']);
+                $object_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
             }
             
             if (isset($row['orcamento_ctg_id'])) {

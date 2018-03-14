@@ -1,6 +1,7 @@
 <?php
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     
+    use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
@@ -625,18 +626,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         if (!empty($id_peca) AND $id_peca !== false) {
                             if (empty($id_peca_tmp)) {
                                 DAO_Peca::Atualizar_URL($id_peca, $peca_url.'_'.$id_peca);
+                                $object_peca->set_url($peca_url.'_'.$id_peca);
                             }
                             
                             if ($this->orcamento instanceof Object_Orcamento) {
                                 $obj_orcamento_peca = new Object_Orcamento_Peca();
                                 
-                                $obj_orcamento_peca->set_orcamento_id($this->orcamento->get_id());
-                                $obj_orcamento_peca->set_peca_id($id_peca);
+                                $obj_orcamento_peca->set_orcamento($this->orcamento);
+                                $obj_orcamento_peca->set_peca($object_peca);
                                 
                                 if (DAO_Orcamento_Peca::Inserir($obj_orcamento_peca)) {
                                     $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
                                     
                                     $obj_entidade_bd->SetarStatusOrcamento($this->orcamento->get_id(), Entidade_BD::RESPONDIDO);
+                                    
+                                    Email::Enviar_Orcamento_Peca($obj_orcamento_peca);
                                 }
                             }
                             

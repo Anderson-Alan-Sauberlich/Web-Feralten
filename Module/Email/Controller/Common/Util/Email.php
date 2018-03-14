@@ -7,9 +7,11 @@ namespace Module\Email\Controller\Common\Util;
     use Module\Application\Model\Object\Usuario as Object_Usuario;
     use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
     use Module\Application\Model\Object\Contato as Object_Contato;
+    use Module\Application\Model\Object\Orcamento_Peca as Object_Orcamento_Peca;
     use Module\Email\View\SRC\Boas_Vindas as View_Boas_Vindas;
     use Module\Email\View\SRC\Recuperar_Senha as View_Recuperar_Senha;
     use Module\Email\View\SRC\Contato_Anunciante as View_Contato_Anunciante;
+    use Module\Email\View\SRC\Orcamento_Peca as View_Orcamento_Peca;
     
     class Email
     {
@@ -24,6 +26,7 @@ namespace Module\Email\Controller\Common\Util;
             
             try {
                 //Server settings
+                $mail->CharSet = 'UTF-8';
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
@@ -64,6 +67,7 @@ namespace Module\Email\Controller\Common\Util;
             
             try {
                 //Server settings
+                $mail->CharSet = 'UTF-8';
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
@@ -101,6 +105,7 @@ namespace Module\Email\Controller\Common\Util;
             
             try {
                 //Server settings
+                $mail->CharSet = 'UTF-8';
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
@@ -141,6 +146,7 @@ namespace Module\Email\Controller\Common\Util;
             
             try {
                 //Server settings
+                $mail->CharSet = 'UTF-8';
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
@@ -166,6 +172,47 @@ namespace Module\Email\Controller\Common\Util;
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Criar Nova Senha';
+                $mail->Body    = $body_html;
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
+                
+                return $mail->send();
+            } catch (Mail_Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Enviar_Orcamento_Peca(Object_Orcamento_Peca $object_orcamento_peca) : bool
+        {
+            $mail = new PHPMailer(true);
+            
+            try {
+                //Server settings
+                $mail->CharSet = 'UTF-8';
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'contato.feralten@gmail.com';
+                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                
+                //Recipients
+                $mail->setFrom('feralten@feralten.com', 'Feralten');
+                $mail->addAddress($object_orcamento_peca->get_orcamento()->get_usuario()->get_email());
+                $mail->addReplyTo('feralten@feralten.com', 'Feralten');
+                $mail->addCC('contato.feralten@gmail.com');
+                
+                $view_orcamento_peca = new View_Orcamento_Peca();
+                $view_orcamento_peca->set_obj_orcamento_peca($object_orcamento_peca);
+                ob_start();
+                $view_orcamento_peca->Executar();
+                $body_html = ob_get_contents();
+                ob_end_clean();
+                
+                //Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Feralten - Nova Peça Adicionada';
                 $mail->Body    = $body_html;
                 $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 

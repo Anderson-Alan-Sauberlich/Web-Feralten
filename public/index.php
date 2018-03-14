@@ -1270,9 +1270,13 @@
                     $detalhes->set_peca_url($args['peca']);
                 }
                 
-                $detalhes->Carregar_Pagina();
+                $retorno = $detalhes->Carregar_Pagina();
                 
-                return $response;
+                if ($retorno === 'erro') {
+                    return $response->withStatus(404);
+                } else {
+                    return $response;
+                }
             });
         });
     });
