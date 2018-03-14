@@ -1,8 +1,8 @@
 $('.ui.accordion').accordion();
 $('#drop_meu_feralten').dropdown();
-Controlar_Classes();
+ControlarClassesHeader();
 $(document).ready(function () {
-	Controlar_Classes();
+	ControlarClassesHeader();
 	$('#m_header_menu').sidebar();
 });
 $('#comprar_item').click(function() {
@@ -17,7 +17,7 @@ $('#vender_item').click(function() {
 		hoverable : true
 	}).popup('toggle');
 });
-function Controlar_Classes() {
+function ControlarClassesHeader() {
 	var scren = $("body").width();
 	if (scren <= 767) {
 		$("#pc_header").addClass("hidden");
@@ -28,7 +28,7 @@ function Controlar_Classes() {
 	}
 }
 $(window).resize(function() {
-	Controlar_Classes();
+	ControlarClassesHeader();
 });
 function AbrirMobileHeaderSidebar() {
 	$('#m_header_menu').sidebar('toggle');

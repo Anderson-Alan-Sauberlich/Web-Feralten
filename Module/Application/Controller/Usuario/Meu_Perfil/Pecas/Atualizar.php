@@ -852,8 +852,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             $_SESSION['compatibilidade']['ano'] = $anos;
             
             if (empty($this->atualizar_erros)) {
-                $this->atualizar_sucesso[] = "Peça Atualizada Com Sucesso";
-                $this->atualizar_campos['erro_peca'] = "";
+                $this->atualizar_sucesso[] = 'Peça Atualizada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
+                $this->atualizar_campos['erro_peca'] = '';
             }
             
             $this->Carregar_Pagina();

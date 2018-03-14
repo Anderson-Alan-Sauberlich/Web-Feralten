@@ -4,7 +4,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Feralten - Seja muito bem vindo <?= View_Boas_Vindas::Retornar_Nome_Usuario(); ?></title>
+    <title>Feralten - Seja muito bem vindo(a) <?= View_Boas_Vindas::Retornar_Nome_Usuario(); ?></title>
     <style>
       
       .logo {

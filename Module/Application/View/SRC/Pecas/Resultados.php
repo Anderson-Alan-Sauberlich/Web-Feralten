@@ -73,6 +73,8 @@ namespace Module\Application\View\SRC\Pecas;
                 foreach (self::$pecas as $peca) {
                     $card_peca = new View_Card_Peca();
                     
+                    $card_peca->set_obj_peca($peca);
+                    
                     $card_peca->Executar($peca);
                 }
                 

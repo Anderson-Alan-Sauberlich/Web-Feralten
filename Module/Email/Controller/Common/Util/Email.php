@@ -130,7 +130,7 @@ namespace Module\Email\Controller\Common\Util;
                 
                 //Content
                 $mail->isHTML(true);
-                $mail->Subject = 'Feralten - Seja muito bem vindo '.$object_usuario->get_nome();
+                $mail->Subject = 'Feralten - Seja muito bem vindo(a) '.$object_usuario->get_nome();
                 $mail->Body    = $body_html;
                 $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 

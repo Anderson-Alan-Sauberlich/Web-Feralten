@@ -1,7 +1,7 @@
 $('#menu_filtro .ui.dropdown').dropdown();
 $('#menu_filtro .ui.checkbox').checkbox();
 $('#menu_filtro .ui.radio.checkbox').checkbox({uncheckable: true});
-function Controlar_Classes() {
+function ControlarClassesFiltro() {
 	var scren = $("body").width();
 	
 	if (scren <= 767) {
@@ -23,10 +23,10 @@ function Controlar_Classes() {
 	}
 }
 $(document).ready(function () {
-	Controlar_Classes();
+	ControlarClassesFiltro();
 });
 $(window).resize(function() {
-	Controlar_Classes();
+	ControlarClassesFiltro();
 });
 $(document).ready(function() {
 	$('#menu_filtro #estado').change(function(){
