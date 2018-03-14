@@ -23,7 +23,6 @@
                 <div class="col-xs-6">
                     <ul class="row">
                         <p class="titlePFooter"><span class="glyphicon glyphicon-shopping-cart"></span> COMPRAR</p>
-                        <li><a href="/pesquisa-avancada/" class="linkFooter">Pesquisa Avançada</a></li>
                         <li><a href="/pecas/mais-visualizados/" class="linkFooter">Mais Visualizados</a></li>
                         <li><a href="/vendedores/" class="linkFooter">Vendedores</a></li>
                         <li><a href="/orcamentos/" class="linkFooter">Orçamentos</a></li>
@@ -42,7 +41,7 @@
     </div>
     <div class="container-fluid footerDOWN">
         <div class="row-fluid">
-            <label class="labelFooter">2018 - Feralten. Todos os direitos reservados. <a href="#" class="link">Termos de uso e Política de privacidade</a> - <a href="#" class="link">Mapa do site</a></label>
+            <label class="labelFooter">2018 - Feralten. Todos os direitos reservados. <a href="/termos-de-uso/" class="link">Termos de uso</a> e <a href="/politica-de-privacidade/" class="link">Política de privacidade</a> - <a href="/mapa-do-site/" class="link">Mapa do site</a></label>
         </div>
     </div>
 </section>

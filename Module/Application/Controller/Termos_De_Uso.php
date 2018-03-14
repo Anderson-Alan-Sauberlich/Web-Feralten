@@ -1,18 +1,18 @@
 <?php
 namespace Module\Application\Controller;
     
-    use Module\Application\View\SRC\Pesquisa_Avancada as View_Pesquisa_Avancada;
+    use Module\Application\View\SRC\Termos_De_Uso as View_Termos_De_Uso;
     
-    class Pesquisa_Avancada
+    class Termos_De_Uso
     {
         function __construct()
         {
             
         }
         
-        public function Carregar_Pagina()
+        public static function Carregar_Pagina()
         {
-            $view = new View_Pesquisa_Avancada();
+            $view = new View_Termos_De_Uso();
             
             $view->Executar();
         }

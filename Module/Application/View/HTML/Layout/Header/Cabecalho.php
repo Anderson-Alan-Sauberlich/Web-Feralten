@@ -20,7 +20,6 @@
                     <div class="ui inverted link large relaxed list">
                        	<a href="/vendedores/" class="item">Vendedores</a>
                        	<a href="/orcamentos/" class="item">Orçamentos</a>
-                    	<a href="/pesquisa-avancada/" class="item">Pesquisa Avançada</a>
                     	<a href="/pecas/mais-visualizados/" class="item">Mais Visualizados</a>
                     </div>
                 </div>
@@ -59,7 +58,6 @@
                 		<div class="ui link divided large very relaxed list">
                         	<a href="/vendedores/" class="item">Vendedores</a>
                         	<a href="/orcamentos/" class="item">Orçamentos</a>
-            	    		<a href="/pesquisa-avancada/" class="item">Pesquisa Avançada</a>
                     		<a href="/pecas/mais-visualizados/" class="item">Mais Visualizados</a>
                         </div>
                     </div>

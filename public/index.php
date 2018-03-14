@@ -1107,11 +1107,31 @@
         });
     });
     
-    $app->group('/pesquisa-avancada', function() use ($app) {
+    $app->group('/termos-de-uso', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-            $pesquisa_avancada = new Module\Application\Controller\Pesquisa_Avancada();
+            $termos_de_uso = new Module\Application\Controller\Termos_De_Uso();
             
-            $pesquisa_avancada->Carregar_Pagina();
+            $termos_de_uso->Carregar_Pagina();
+            
+            return $response;
+        });
+    });
+    
+    $app->group('/mapa-do-site', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $mapa_do_site = new Module\Application\Controller\Mapa_Do_Site();
+            
+            $mapa_do_site->Carregar_Pagina();
+            
+            return $response;
+        });
+    });
+    
+    $app->group('/politica-de-privacidade', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $politica_de_privacidade = new Module\Application\Controller\Politica_De_Privacidade();
+            
+            $politica_de_privacidade->Carregar_Pagina();
             
             return $response;
         });

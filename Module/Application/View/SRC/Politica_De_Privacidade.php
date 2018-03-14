@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC;
     
-    class Pesquisa_Avancada
+    class Politica_De_Privacidade
     {
         function __construct()
         {
@@ -10,6 +10,6 @@ namespace Module\Application\View\SRC;
         
         public function Executar()
         {
-            require_once RAIZ.'/Module/Application/View/HTML/Pesquisa_Avancada.php';
+            require_once RAIZ.'/Module/Application/View/HTML/Politica_De_Privacidade.php';
         }
     }
