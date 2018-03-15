@@ -23,7 +23,7 @@
                 <div class="col-xs-6">
                     <ul class="row">
                         <p class="titlePFooter"><span class="glyphicon glyphicon-shopping-cart"></span> COMPRAR</p>
-                        <li><a href="/pecas/mais-visualizados/" class="linkFooter">Mais Visualizados</a></li>
+                        <li><a href="/pecas/resultados/" class="linkFooter">Peças Cadastradas</a></li>
                         <li><a href="/vendedores/" class="linkFooter">Vendedores</a></li>
                         <li><a href="/orcamentos/" class="linkFooter">Orçamentos</a></li>
                     </ul>

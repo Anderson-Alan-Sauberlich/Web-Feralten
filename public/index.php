@@ -1138,16 +1138,6 @@
     });
     
     $app->group('/pecas', function() use ($app) {
-        $app->group('/mais-visualizados', function() use ($app) {
-            $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
-                $mais_visualizados = new Module\Application\Controller\Pecas\Mais_Visualizados();
-                
-                $mais_visualizados->Carregar_Pagina();
-                
-                return $response;
-            });
-        });
-        
         $app->group('/resultados', function() use ($app) {
             $app->group('/em', function() use ($app) {
                 $app->get('[/{estado}/{cidade}[/[{categoria}[/[{marca}[/[{modelo}[/[{versao}[/]]]]]]]]]]', function(Request $request, Response $response, $args) use ($app) {
