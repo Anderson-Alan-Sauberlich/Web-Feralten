@@ -513,7 +513,6 @@
                         $cadastrar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
                         $cadastrar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
                         $cadastrar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
-                        $cadastrar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
                         
                         $resposta = $cadastrar->Cadastrar_Peca();
                         
@@ -790,7 +789,6 @@
                         $atualizar->set_peca(isset($_POST['peca']) ? $_POST['peca'] : null);
                         $atualizar->set_serie(isset($_POST['serie']) ? $_POST['serie'] : null);
                         $atualizar->set_preco(isset($_POST['preco']) ? $_POST['preco'] : null);
-                        $atualizar->set_prioridade(isset($_POST['prioridade']) ? $_POST['prioridade'] : null);
                         $atualizar->set_peca_url(isset($args['peca']) ? $args['peca'] : null);
                         
                         $resposta = $atualizar->Verificar_Evento();

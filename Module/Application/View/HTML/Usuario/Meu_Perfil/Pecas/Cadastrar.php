@@ -122,12 +122,6 @@
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <div class="ui checkbox">
-                                    <input type="checkbox" id="prioridade" name="prioridade" <?php View_Cadastrar::Manter_Valor("prioridade") ?> value="checked"/>
-                                    <label for="prioridade" class="lbPanel">Acresentar Alta Prioridade Para a Peça. <small>(Será uma das primeiras a ser exibida por um custo a mais de R$: 5,00)</small></label>
-                                </div>
-                            </div>
-                            <div class="row-fluid">
                                 <label for="preferencia_entrega" class="lbPanel">Selecione Suas Preferencias de Entrega:</label>
                                 <select id="preferencia_entrega" name="preferencia_entrega[]" multiple="multiple" class="ui fluid multiple scrolling search selection dropdown">
                                     <option value="">Preferencias de Entrega</option>

@@ -21,7 +21,6 @@ namespace Module\Application\Model\Object;
         private $descricao;
         private $data_anuncio;
         private $serie;
-        private $prioridade;
         private $status;
         private $estado_uso;
         private $fotos = array();
@@ -140,16 +139,6 @@ namespace Module\Application\Model\Object;
         public function get_descricao() : ?string
         {
             return $this->descricao;
-        }
-        
-        public function set_prioridade(?bool $prioridade = null) : void
-        {
-            $this->prioridade = $prioridade;
-        }
-        
-        public function get_prioridade() : ?bool
-        {
-            return $this->prioridade;
         }
         
         public function set_status(?Object_Status_Peca $status = null) : void

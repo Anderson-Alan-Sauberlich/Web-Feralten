@@ -40,8 +40,8 @@ namespace Module\Application\Model\DAO;
                     }
                 }
                 
-                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado) 
-                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :url, :fabricante, :preco, :descricao, :data, :serie, :prioridade, :prf_ntr, :std_uso_id, :num_visualizado);";
+                $sql = "INSERT INTO tb_peca (peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado) 
+                        VALUES (:id, :ent_id, :usr_id, :end_id, :st_id, :nome, :url, :fabricante, :preco, :descricao, :data, :serie, :prf_ntr, :std_uso_id, :num_visualizado);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
@@ -57,7 +57,6 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data', $object_peca->get_data_anuncio(), PDO::PARAM_STR);
                 $p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':prioridade', $object_peca->get_prioridade(), PDO::PARAM_BOOL);
                 $p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
                 $p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':num_visualizado', $object_peca->get_num_visualizado(), PDO::PARAM_INT);
@@ -88,7 +87,6 @@ namespace Module\Application\Model\DAO;
                         peca_descricao = :descricao, 
                         peca_data_anuncio = :data, 
                         peca_numero_serie = :serie, 
-                        peca_prioridade = :prioridade, 
                         peca_prf_ntr_id = :prf_ntr,
                         peca_std_uso_pec_id = :std_uso_id,
                         peca_num_visualizado = :num_visualizado 
@@ -108,7 +106,6 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
                 $p_sql->bindValue(':data', $object_peca->get_data_anuncio(), PDO::PARAM_STR);
                 $p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':prioridade', $object_peca->get_prioridade(), PDO::PARAM_BOOL);
                 $p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
                 $p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
                 $p_sql->bindValue(':num_visualizado', $object_peca->get_num_visualizado(), PDO::PARAM_INT);
@@ -230,7 +227,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorCOD(int $id)
         {
             try {
-                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_id = :id';
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
@@ -260,7 +257,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorURL(string $url)
         {
             try {
-                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_url = :url';
+                $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM tb_peca WHERE peca_url = :url';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':url', $url, PDO::PARAM_STR);
@@ -322,7 +319,7 @@ namespace Module\Application\Model\DAO;
             }
             
             try {
-                $sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_std_uso_pec_id, peca_num_visualizado 
+                $sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_std_uso_pec_id, peca_num_visualizado 
                 FROM vw_peca $pesquisa LIMIT :inicio, :limite";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -430,13 +427,6 @@ namespace Module\Application\Model\DAO;
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_prf_ntr_id = :prf_ntr";
-            }
-            
-            if (!empty($object_peca->get_prioridade())) {
-                if (!empty($pesquisa)) {
-                    $pesquisa .= " AND ";
-                }
-                $pesquisa .= "peca_prioridade = :prioridade";
             }
             
             if (!empty($object_peca->get_num_visualizado())) {
@@ -548,10 +538,6 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_peca->get_prioridade())) {
-                $p_sql->bindValue(":prioridade", $object_peca->get_prioridade(), PDO::PARAM_BOOL);
-            }
-            
             if (!empty($object_peca->get_num_visualizado())) {
                 $p_sql->bindValue(":num_visualizado", $object_peca->get_num_visualizado(), PDO::PARAM_INT);
             }
@@ -642,10 +628,6 @@ namespace Module\Application\Model\DAO;
                 $object_peca->set_serie($row['peca_numero_serie']);
             }
             
-            if (isset($row['peca_prioridade'])) {
-                $object_peca->set_prioridade($row['peca_prioridade']);
-            }
-            
             if (isset($row['peca_prf_ntr_id'])) {
                 $object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
             }
@@ -720,10 +702,6 @@ namespace Module\Application\Model\DAO;
                 
                 if (isset($row['peca_numero_serie'])) {
                     $object_peca->set_serie($row['peca_numero_serie']);
-                }
-                
-                if (isset($row['peca_prioridade'])) {
-                    $object_peca->set_prioridade($row['peca_prioridade']);
                 }
                 
                 if (isset($row['peca_prf_ntr_id'])) {

@@ -16,10 +16,10 @@
                 <div onclick="bnt_plano(1);" class="card">
                     <div class="content">
                         <div class="center aligned header">
-                            <h1>Orçamentos</h1>
+                            <h1>Até 5</h1>
                         </div>
                         <div class="center aligned meta">
-                            <h3>1 Peças</h3>
+                            <h3>Peças</h3>
                         </div>
                     </div>
                     <div class="content">

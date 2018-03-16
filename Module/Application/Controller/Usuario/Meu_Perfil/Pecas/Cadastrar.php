@@ -69,7 +69,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         private $peca;
         private $serie;
         private $preco;
-        private $prioridade;
         private $imagens = array();
         private $cadastrar_erros = array();
         private $cadastrar_sucesso = array();
@@ -214,17 +213,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $this->cadastrar_campos['erro_preco'] = 'erro';
                 
                 $this->preco = Validador::Peca()::filtrar_preco($preco);
-            }
-        }
-        
-        public function set_prioridade($prioridade) : void
-        {
-            try {
-                $this->prioridade = Validador::Peca()::validar_prioridade($prioridade);
-            } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                
-                $this->prioridade = Validador::Peca()::filtrar_prioridade($prioridade);
             }
         }
         
@@ -586,7 +574,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         $object_peca->set_nome($this->peca);
                         $object_peca->set_serie($this->serie);
                         $object_peca->set_preco($this->preco);
-                        $object_peca->set_prioridade($this->prioridade);
                         
                         $entidade->set_id(Login_Session::get_entidade_id());
                         $entidade->set_usuario_id(Login_Session::get_usuario_id());
@@ -738,7 +725,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         $this->cadastrar_form['preco'] = $this->preco;
                         $this->cadastrar_form['estado_uso'] = $this->estado_uso;
                         $this->cadastrar_form['descricao'] = $this->descricao;
-                        $this->cadastrar_form['prioridade'] = $this->prioridade;
                         $this->cadastrar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
                         
                         $marcas = null;
