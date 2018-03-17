@@ -1,7 +1,8 @@
 <?php
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
+    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Menu_Usuario;
     use Module\Application\Model\Object\Fatura as Object_Fatura;
     use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
     use \DateTime;
@@ -82,11 +83,19 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
+         * Inclui a view do Header Usuario na pagina
+         */
+        public static function Incluir_Header_Usuario() : void
+        {
+            new View_Header_Usuario(self::$status_usuario, ['financeiro', 'faturas']);
+        }
+        
+        /**
          * Inclui a view do Menu Usuario na pagina
          */
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, ['financeiro', 'faturas']);
+            new View_Menu_Usuario(self::$status_usuario, ['financeiro', 'faturas']);
         }
         
         /**

@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade as View_Entidade;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\Object\Entidade as Object_Entidade;
     use Module\Application\Model\Common\Util\Validador;
@@ -130,8 +130,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status != 0) {
                     $view = $this->Retornar_Pagina();
@@ -289,7 +289,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         
         public function Salvar_Imagem_TMP() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (isset($_FILES['imagem']) AND $_FILES['imagem']['error'] === 0) {
                     $imagens = new Gerenciar_Imagens();
                     
@@ -309,7 +309,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function Deletar_Imagem() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (isset($_SESSION['imagem_tmp'])) {
                     if ($_SESSION['imagem_tmp'] != "del") {
                         $imagens = new Gerenciar_Imagens();

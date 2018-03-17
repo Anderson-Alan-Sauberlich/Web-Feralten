@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos\Meus_Orcamentos as View_Meus_Orcamentos;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Controller\Layout\Menu\Orcamento as Controller_Menu_Orcamento;
     use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
     use Module\Application\Model\Common\Util\Login_Session;
@@ -51,8 +51,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
          */
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 $view = new View_Meus_Orcamentos($status);
                 
@@ -79,8 +79,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
          */
         public function Carregar_Meus_Orcamentos()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     $orcamentos = DAO_Orcamento::Buscar_Por_ID_Usuario(Login_Session::get_usuario_id(), $this->indice);

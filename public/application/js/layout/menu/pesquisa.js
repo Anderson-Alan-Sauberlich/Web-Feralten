@@ -1,6 +1,10 @@
 $('#categoria').accordion();
 $('#content_categoria .ui.checkbox').checkbox({uncheckable: true});
-$('.ui.dropdown').dropdown({message: {noResults: "Nenhum Resultado..."}});
+$('#marca').dropdown({message: {noResults: "Nenhum Resultado..."}});
+$('#modelo').dropdown({message: {noResults: "Nenhum Resultado..."}});
+$('#versao').dropdown({fullTextSearch: true, message: {noResults: "Nenhum Resultado..."}});
+$('#ano_de').dropdown({message: {noResults: "Nenhum Resultado..."}});
+$('#ano_ate').dropdown({message: {noResults: "Nenhum Resultado..."}});
 function Carregar_Categoria(ca) {
 	var $input_ctg = $("input[name='categoria']:checked").val();
 	if ($(ca).val() != 0 && $(ca).val() != null && $(ca).val() != undefined && $input_ctg != 0 && $input_ctg != null && $input_ctg != undefined) {

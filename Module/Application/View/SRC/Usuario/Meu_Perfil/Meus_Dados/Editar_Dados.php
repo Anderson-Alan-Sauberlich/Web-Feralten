@@ -1,6 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
     
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Menu_Usuario;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco as View_Endereco;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade as View_Entidade;
@@ -37,6 +38,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
         public function Executar()
         {
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Editar_Dados.php';
+        }
+        
+        public static function Incluir_Header_Usuario()
+        {
+            new View_Header_Usuario(self::$status_usuario, ['meus-dados', 'editar-dados']);
         }
         
         public static function Incluir_Menu_Usuario()

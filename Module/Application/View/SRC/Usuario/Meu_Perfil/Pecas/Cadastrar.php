@@ -2,7 +2,7 @@
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar as Controller_Cadastrar;
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
     
     class Cadastrar
@@ -49,9 +49,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Pecas/Cadastrar.php';
         }
 
-        public static function Incluir_Menu_Usuario() : void
+        public static function Incluir_Header_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, ['pecas', 'cadastrar']);
+            new View_Header_Usuario(self::$status_usuario, ['pecas', 'cadastrar']);
         }
         
         public static function Mostrar_Sucesso() : void

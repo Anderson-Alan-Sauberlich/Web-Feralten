@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco as View_Endereco;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\Object\Endereco as Object_Endereco;
     use Module\Application\Model\DAO\Cidade as DAO_Cidade;
@@ -212,8 +212,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status != 0) {
                     $view = $this->Retornar_Pagina();
@@ -265,8 +265,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function SalvarDados() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (empty($this->erros)) {
@@ -378,7 +378,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function Retornar_Cidades_Por_Estado() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (empty($this->erros)) {
                     $cidades = DAO_Cidade::BuscarPorCOD($this->estado);
                     

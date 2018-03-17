@@ -7,16 +7,22 @@
 </head>
 <body>
     <header>
-        <?php View_Historico::Incluir_Menu_Usuario(); ?>
+        <?php View_Historico::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-            
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
-            </div>
+        <div class="ui stackable grid">
+        	<div class="three wide column">
+        		<?php View_Historico::Incluir_Menu_Usuario(); ?>
+        	</div>
+        	<div class="thirteen wide column">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
+                    </div>
+                </div>
+                <div class="margem-inferior-pouco"></div>
+        	</div>
         </div>
-        
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>

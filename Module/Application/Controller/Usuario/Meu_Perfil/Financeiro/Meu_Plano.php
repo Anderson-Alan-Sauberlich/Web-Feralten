@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Meu_Plano as View_Meu_Plano;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
@@ -50,8 +50,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          */
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
                     $view = new View_Meu_Plano($status, DAO_Plano::BuscarTodos(), Login_Session::get_entidade_plano());
                     
@@ -70,8 +70,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          */
         public function Salvar_Novo_Plano()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
                     $retorno = array();
                     $retorno['status'] = 'certo';

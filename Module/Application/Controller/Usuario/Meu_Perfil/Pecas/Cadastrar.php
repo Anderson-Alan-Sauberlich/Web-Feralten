@@ -7,7 +7,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
     use Module\Application\Model\Common\Util\Entidade_BD;
     use Module\Application\Controller\Common\Util\Peca as Util_Peca;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\Object\Peca as Object_Peca;
     use Module\Application\Model\Object\Endereco as Object_Endereco;
     use Module\Application\Model\Object\Status_Peca as Object_Status_Peca;
@@ -227,8 +227,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (empty($this->cadastrar_form)) {
@@ -274,7 +274,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
          */
         public function Carregar_Compatibilidade() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (!empty($this->categoria)) {
                     if ($this->categoria == "verificar") {
                         View_Cadastrar::Carregar_Marcas();
@@ -444,8 +444,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Cadastrar_Peca()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     $count_limite = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
@@ -783,7 +783,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
          */
         public function Salvar_Imagem_TMP() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (!empty($this->imagens)) {
                     $imagens = new Gerenciar_Imagens();
                     
@@ -809,7 +809,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
          */
         public function Deletar_Imagem(int $num_img) : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (isset($_SESSION['imagens_tmp'])) {
                     if (isset($_SESSION['imagens_tmp'][$num_img]) OR $num_img == 123) {
                         $imagens = new Gerenciar_Imagens();
@@ -871,8 +871,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
          */
         public function Retornar_Dados_Plano() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                if (Controller_Usuario::Verificar_Status_Usuario() == 1) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                if (Controller_Header_Usuario::Verificar_Status_Usuario() == 1) {
                     $retorno = array();
                     
                     $retorno['limite'] = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());

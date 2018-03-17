@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Usuario\Meu_Perfil;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Perfil as View_Perfil;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
     use Module\Application\Model\DAO\Adicionado as DAO_Adicionado;
@@ -18,8 +18,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
         
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 $view = new View_Perfil($status);
                 
@@ -31,7 +31,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
         
         public function Retornar_Valores_Visualizados()
         {
-            if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
                 $visualizados = DAO_Visualizado::BuscarPorCOD_Entidade(Login_Session::get_entidade_id());
@@ -77,7 +77,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
         
         public function Retornar_Valores_Adicionados()
         {
-            if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
                 $adicionados = DAO_Adicionado::BuscarPorCOD_Entidade(Login_Session::get_entidade_id());
@@ -123,7 +123,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
         
         public function Retornar_Valores_Removidos()
         {
-            if (Controller_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao() AND Login_Session::Verificar_Entidade()) {
                 $valor = array('jan' => 0, 'fev' => 0, 'mar' => 0, 'abr' => 0, 'mai' => 0, 'jun' => 0, 'jul' => 0, 'ago' => 0, 'set' => 0, 'out' => 0, 'nov' => 0, 'dez' => 0);
                 
                 $removidos = DAO_Removido::BuscarPorCOD_Entidade(Login_Session::get_entidade_id());

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
     
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Elemento\Orcamento as View_Orcamento;
     use Module\Application\View\SRC\Layout\Menu\Orcamento as View_Menu_Orcamento;
     
@@ -31,9 +31,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Orcamentos/Respondidos.php';
         }
         
-        public static function Incluir_Menu_Usuario() : void
+        public static function Incluir_Header_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, ['orcamentos', 'orcamentos-recebidos']);
+            new View_Header_Usuario(self::$status_usuario, ['orcamentos', 'orcamentos-recebidos']);
         }
         
         public static function Incluir_Menu_Orcamento() : void

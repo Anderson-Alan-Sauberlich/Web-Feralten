@@ -2,7 +2,7 @@
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Atualizar as Controller_Atualizar;
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     
     class Atualizar
     {
@@ -42,9 +42,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Pecas/Atualizar.php';
         }
         
-        public static function Incluir_Menu_Usuario()
+        public static function Incluir_Header_Usuario()
         {
-            new View_Usuario(self::$status_usuario, ['pecas', 'atualizar']);
+            new View_Header_Usuario(self::$status_usuario, ['pecas', 'atualizar']);
         }
         
         public static function Mostrar_Sucesso() : void

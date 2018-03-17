@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <?php View_Visualizar::Incluir_Menu_Usuario(); ?>
+        <?php View_Visualizar::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
         <div class="container-fluid margem-menu-visualizar margem-inferior-pouco">

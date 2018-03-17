@@ -2,7 +2,7 @@
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\View\SRC\Layout\Menu\Pesquisa as View_Pesquisa;
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro;
     use Module\Application\View\SRC\Layout\Menu\Paginacao as View_Paginacao;
     use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca;
@@ -57,9 +57,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             new View_Pesquisa(self::$form_pesquisa);
         }
         
-        public static function Incluir_Menu_Usuario()
+        public static function Incluir_Header_Usuario()
         {
-            new View_Usuario(self::$status_usuario, ['pecas', 'visualizar']);
+            new View_Header_Usuario(self::$status_usuario, ['pecas', 'visualizar']);
         }
         
         public static function Incluir_Menu_Filtro()

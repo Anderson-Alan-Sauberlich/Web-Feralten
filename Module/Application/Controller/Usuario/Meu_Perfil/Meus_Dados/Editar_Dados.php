@@ -8,7 +8,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     use Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco as Controller_Endereco;
     use Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade as Controller_Entidade;
     use Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Usuario as Controller_Usuario;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Menu_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Conexao;
@@ -185,8 +185,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
          */
         public function Carregar_Pagina()
         {
-            if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 $view = new View_Editar_Dados($status);
                 
@@ -207,8 +207,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
          */
         public function Concluir_Cadastro() : void
         {
-            if (Controller_Menu_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Menu_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 0) {
                     $retorno['usuario']['erros'] = [];

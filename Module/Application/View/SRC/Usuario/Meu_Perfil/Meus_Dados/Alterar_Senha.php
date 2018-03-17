@@ -1,7 +1,8 @@
 <?php
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
     
-    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Usuario;
+    use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
+    use Module\Application\View\SRC\Layout\Menu\Usuario as View_Menu_Usuario;
     
     class Alterar_Senha
     {
@@ -35,9 +36,14 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados;
             require_once RAIZ.'/Module/Application/View/HTML/Usuario/Meu_Perfil/Meus_Dados/Alterar_Senha.php';
         }
         
+        public static function Incluir_Header_Usuario() : void
+        {
+            new View_Header_Usuario(self::$status_usuario, ['meus-dados', 'alterar-senha']);
+        }
+        
         public static function Incluir_Menu_Usuario() : void
         {
-            new View_Usuario(self::$status_usuario, ['meus-dados', 'alterar-senha']);
+            new View_Menu_Usuario(self::$status_usuario, ['meus-dados', 'alterar-senha']);
         }
         
         public static function Manter_Valor(string $campo) : void

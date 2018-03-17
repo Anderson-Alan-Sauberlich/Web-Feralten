@@ -8,22 +8,29 @@
 </head>
 <body>
     <header>
-        <?php View_Editar_Dados::Incluir_Menu_Usuario(); ?>
+        <?php View_Editar_Dados::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <h2 class="ui red dividing header">Dados do usuario</h2>
-        <?php View_Editar_Dados::Incluir_View_Usuario(); ?>
-        <br/>
-        <h2 class="ui red dividing header">Dados da entidade</h2>
-        <?php View_Editar_Dados::Incluir_View_Entidade(); ?>
-        <br/>
-        <h2 class="ui red dividing header">Dados do endereço</h2>
-        <?php View_Editar_Dados::Incluir_View_Endereco(); ?>
-        <?php if (!View_Editar_Dados::VerificaLoginEntidade()) { ?>
-        	<h2 class="ui dividing header"></h2>
-        	<button id="concluir" name="concluir" onclick="SalvarDados()" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Concluir Cadastro</button>
-        <?php } ?>
-        <div class="margem-inferior-pouco"></div>
+    	<div class="ui stackable grid">
+        	<div class="three wide column">
+        		<?php View_Editar_Dados::Incluir_Menu_Usuario(); ?>
+        	</div>
+        	<div class="thirteen wide column">
+                <h2 class="ui red dividing header">Dados do usuário</h2>
+                <?php View_Editar_Dados::Incluir_View_Usuario(); ?>
+                <br/>
+                <h2 class="ui red dividing header">Dados da entidade</h2>
+                <?php View_Editar_Dados::Incluir_View_Entidade(); ?>
+                <br/>
+                <h2 class="ui red dividing header">Dados do endereço</h2>
+                <?php View_Editar_Dados::Incluir_View_Endereco(); ?>
+                <?php if (!View_Editar_Dados::VerificaLoginEntidade()) { ?>
+                	<h2 class="ui dividing header"></h2>
+                	<button id="concluir" name="concluir" onclick="SalvarDados()" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Concluir Cadastro</button>
+                <?php } ?>
+                <div class="margem-inferior-pouco"></div>
+        	</div>
+        </div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>

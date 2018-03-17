@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <?php View_Nao_Tenho::Incluir_Menu_Usuario(); ?>
+        <?php View_Nao_Tenho::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
         <div class="ui stackable relaxed grid">

@@ -5,7 +5,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Alterar_Senha as View_Alterar_Senha;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use \Exception;
     
     class Alterar_Senha
@@ -63,8 +63,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 $view = new View_Alterar_Senha($status);
                 
@@ -80,7 +80,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
         
         public function Atualizar_Senha_Usuario()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (empty($this->alterar_senha_erros)) {
                     $this->senha_nova = password_hash($this->senha_nova, PASSWORD_DEFAULT);
                     

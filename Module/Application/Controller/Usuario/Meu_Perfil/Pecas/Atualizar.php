@@ -38,7 +38,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Foto_Peca as DAO_Foto_Peca;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas\Atualizar as View_Atualizar;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use \Exception;
     
     class Atualizar
@@ -234,8 +234,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (!empty($this->peca_id) AND $this->Verificar_Dono_Peca($this->peca_id)) {
@@ -325,8 +325,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Verificar_Evento()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (!empty($this->peca_id)) {
@@ -350,7 +350,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Carregar_Compatibilidade() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (!empty($this->categoria)) {
                     if ($this->categoria == "verificar") {
                         View_Atualizar::Carregar_Marcas();
@@ -881,7 +881,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Salvar_Imagem_TMP() : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (!empty($this->imagens)) {
                     $imagens = new Gerenciar_Imagens();
                     
@@ -902,7 +902,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Deletar_Imagem(int $num_img) : void
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (isset($_SESSION['imagens_tmp'])) {
                     $imagens = new Gerenciar_Imagens();
                     

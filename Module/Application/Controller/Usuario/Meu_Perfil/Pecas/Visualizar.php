@@ -3,7 +3,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas\Visualizar as View_Visualizar;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Controller\Layout\Menu\Pesquisa as Controller_Pesquisa;
     use Module\Application\Controller\Layout\Menu\Filtro as Controller_Filtro;
                 
@@ -96,8 +96,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function Carregar_Pagina()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (empty($this->erros_visualizar)) {

@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <?php View_Atualizar::Incluir_Menu_Usuario(); ?>
+        <?php View_Atualizar::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
         <div class="panel-group">
