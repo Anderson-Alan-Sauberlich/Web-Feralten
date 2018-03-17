@@ -304,7 +304,7 @@
                       <td>
                       	<img class="logo" src="https://www.feralten.com.br/email/img/Feralten_logo_Transparente_lateral.png"/>
                         <h2>Olá, <?= View_Recuperar_Senha::Retornar_Nome_Usuario(); ?></h2>
-                        <p>Clique no link abaixo, você será direcionado para a pagina do feralten onde podera criar uma nova senha.</p>
+                        <p>Clique no link abaixo, você será direcionado para a pagina do feralten onde poderá criar uma nova senha.</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary btn-recuperar-senha">
                           <tbody>
                             <tr>

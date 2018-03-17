@@ -35,7 +35,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         public static function RetornarPecaNome() : ?string
         {
             if (self::$obj_peca instanceof Object_Peca) {
-                return self::$obj_peca->get_url();
+                return self::$obj_peca->get_nome();
             } else {
                 return null;
             }

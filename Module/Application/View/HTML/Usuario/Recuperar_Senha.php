@@ -52,17 +52,17 @@
                                 <label for="email">Digite seu e-mail. Em breve você receberá um link para redefinir sua senha</label>
                                 <input id="email" name="email" placeholder="E-Mail" type="email">
                             </div>
-                            <div class="ui red button" onclick="Enviar();">Enviar Link</div>
+                            <div id="btn_enviar" class="ui red button" onclick="Enviar();">Enviar Link</div>
                         </form>
                     <?php } ?>
                 </div>
-               </div>
-               <div class="column">
-                   <h1 class="ui red huge dividing header">Recuperar E-Mail</h1>
-                   <div class="ui secondary segment">
-                       <p>Esqueceu seu e-mail? Envie uma mensagem atravez da pagina Fale Conosco. O título do assunto deve ser “Esqueci meu e-mail”. Na mensagem, informe seu nome completo, telefone e CPF.</p>
-                   </div>
-               </div>
+            </div>
+            <div class="column">
+                <h1 class="ui red huge dividing header">Recuperar E-Mail</h1>
+                <div class="ui secondary segment">
+                    <p>Esqueceu seu e-mail? Envie uma mensagem atravez da pagina Fale Conosco. O título do assunto deve ser “Esqueci meu e-mail”. Na mensagem, informe seu nome completo, telefone e CPF.</p>
+                </div>
+            </div>
         </div>
         <div id="mdl_enviar" class="ui modal">
             <div id="mdl_header" class="header"></div>
@@ -71,7 +71,7 @@
                 <div class="ui approve positive right labeled icon button">Continuar <i class="checkmark icon"></i></div>
             </div>
         </div>
-        <div class="margem-inferior-pouco"></div>
+        <div class="margem-inferior-grande"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>

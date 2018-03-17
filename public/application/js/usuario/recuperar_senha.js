@@ -28,6 +28,9 @@ function Enviar() {
 			
 			if ($valor.campos.email === 'erro') {
 				$('#div_email').addClass('error');
+			} else {
+				$('#email').val('');
+				$('#btn_enviar').addClass('disabled');
 			}
 		});
 	} else {
