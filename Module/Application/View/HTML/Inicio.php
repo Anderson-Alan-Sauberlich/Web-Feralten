@@ -31,28 +31,32 @@
        				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros Velhos, Oficinas Mêcanicas e Pessoas Interessadas em peças originais, usadas ou novas.
        			</div>
        		</h2>
-       		<div class="margem-inferior-minimo"></div>
-       		<h2 class="ui red header">Por que Anunciar no Feralten?</h2>
-       		<h2 class="ui header">
-       			<div class="sub header">
-       				Portal exclusivo para negociantes de peças usadas;<br/>
-       				Único portal da área no Brasil;<br/>
-       				Com menos de 1 café por dia você é visto pelo mês todo, lembre-se, quem é visto é  lembrado!
-       			</div>
-       		</h2>
     	</section>
     	<div class="margem-inferior-minimo"></div>
     </div>
-    <div class="margem-superior-pouco"></div>
-	<div class="margem-inferior-minimo"></div>
+    <img src="/resources/img/fundo_pecas1.jpg" class="ui fluid image" />
     <div class="ui basic secondary vertical segment">
     	<div class="margem-inferior-minimo"></div>
     	<section class="ui container" role="main">
-       		<h2 class="ui red header">Confira as nossas dicas para vender mais e melhor! Acesse: <a href="/dicas-de-venda/">Dicas de Venda</a></h2>
+    		<div class="ui two column very relaxed stackable grid">
+        		<div class="column">
+               		<h2 class="ui red header">Por que Anunciar no Feralten?</h2>
+               		<h2 class="ui header">
+               			<div class="sub header">
+               				Portal exclusivo para negociantes de peças usadas;<br/>
+               				Único portal da área no Brasil;<br/>
+               				Com menos de 1 café por dia você é visto pelo mês todo, lembre-se, quem é visto é  lembrado!
+               			</div>
+               		</h2>
+           		</div>
+           		<div class="column">
+           			<h2 class="ui red header">Confira as nossas dicas para vender mais e melhor! Acesse: <a href="/dicas-de-venda/">Dicas de Venda</a></h2>
+           		</div>
+       		</div>
     	</section>
     	<div class="margem-inferior-minimo"></div>
     </div>
-    <div class="margem-superior-pouco"></div>    
+    <div class="margem-superior-minimo"></div>
     <section class="ui container" role="main">
         <h1 class="ui red huge dividing header">Nossos Patrocinadores</h1>
         <div class="ui four column doubling grid">

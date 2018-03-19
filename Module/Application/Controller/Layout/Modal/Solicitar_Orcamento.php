@@ -6,7 +6,7 @@ namespace Module\Application\Controller\Layout\Modal;
     use Module\Administration\Model\Common\Util\Login_Session;
     use Module\Application\Model\Object\Orcamento as Object_Orcamento;
     use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use \Exception;
     use \DateTime;
     use \DateInterval;
@@ -133,7 +133,7 @@ namespace Module\Application\Controller\Layout\Modal;
             $retorno['content'] = '';
             
             if (empty($this->erros)) {
-                if (Controller_Usuario::Verificar_Autenticacao()) {
+                if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                     $datetime = new DateTime();
                     $this->obj_orcamento->set_datahora_solicitacao($datetime->format('Y-m-d H:i:s'));
                     $datetime->add(new DateInterval('P60D'));
