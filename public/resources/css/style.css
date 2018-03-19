@@ -197,6 +197,10 @@ div#loader {
 	        box-shadow: 0px 0px 23px #666; 
 }
 
+.margem-superior-minimo {
+	margin-top: 50px;
+}
+
 .margem-superior-pouco {
 	margin-top: 85px;
 }

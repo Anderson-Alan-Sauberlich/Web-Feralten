@@ -15,6 +15,7 @@
                     <ul class="row">
                         <p class="titlePFooter"><span class="glyphicon glyphicon-headphones"></span> CONTATO</p>
                         <li><a href="/perguntas-frequentes/" class="linkFooter">Perguntas Freguentes</a></li>
+                        <li><a href="/dicas-de-venda/" class="linkFooter">Dicas de Venda</a></li>
                         <li><a href="/fale-conosco/" class="linkFooter">Fale Conosco</a></li>
                     </ul>
                 </div>

@@ -1065,6 +1065,16 @@
         });
     });
     
+    $app->group('/dicas-de-venda', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $dicas_de_venda = new Module\Application\Controller\Dicas_De_Venda();
+            
+            $dicas_de_venda->Carregar_Pagina();
+            
+            return $response;
+        });
+    });
+    
     $app->group('/fale-conosco', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
             $fale_conosco = new Module\Application\Controller\Fale_Conosco();

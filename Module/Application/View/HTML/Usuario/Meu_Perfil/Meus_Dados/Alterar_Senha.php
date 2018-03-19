@@ -61,7 +61,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="margem-inferior-pouco"></div>
+                    <div class="margem-inferior-medio"></div>
                 </form>
         	</div>
         </div>

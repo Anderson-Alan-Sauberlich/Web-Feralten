@@ -10,7 +10,7 @@
         <?php View_Meus_Orcamentos::Incluir_Header_Usuario(); ?>
     </header>
     <section class="ui container" role="main">
-        <div class="ui stackable relaxed grid">
+        <div class="ui stackable grid">
         	<div class="five wide column">
         		<?php View_Meus_Orcamentos::Incluir_Menu_Orcamento(); ?>
             </div>

@@ -16,6 +16,33 @@
             <div class="eleven wide column">
             	<h1 class="ui red huge dividing header">Perguntas Frequentes</h1>
                 <div class="ui styled fluid accordion margem-inferior-pouco">
+                    <div class="title"><i class="dropdown icon"></i>O que é o Grupo Feralten?</div>
+                    <div class="content">
+                        <p>O grupo Feralten é o maior portal de Ferros-velhos do Brasil e nossa finalidade é aproximar consumidores e vendedores, sempre visando o melhor custo benefício para ambos os lados.</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Como funciona?</div>
+                    <div class="content">
+                        <p>O proprietário do da peça ou do estabelecimento faz seu cadastro por meio de CPF ou CNPJ e após a adesão de um pacote de publicações já pode começar a postar fotos e receber ofertas para suas mercadorias.</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Quem participa?</div>
+                    <div class="content">
+                        <p>Pessoas físicas e jurídicas podem participar.</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Como faço meu Cadastro?</div>
+                    <div class="content">
+                        <p>Assim que efetuar a primeira etapa do cadastro nesse Link <a href="/usuario/cadastro/">aqui,</a> em alguns instantes um e-mail de confirmação será gerado e enviado. Ao clicar no link desse e-mail você será encaminhado para a escolha do pacote de adesão e em seguida poderá começar seus anúncios!</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Como vão me encontrar?</div>
+                    <div class="content">
+                        <p>A exibição dos anúncios é feito com base na cidade que foi cadastrada em seu perfil, ou seja, pessoas de localidades próximas a sua visualizarão seus anúncios e entrarão em contato primeiramente via E-mail. A partir desse ponto os envolvidos são livres para compartilharem novas formas de comunicação.</p>
+                    </div>
+                    <div class="title"><i class="dropdown icon"></i>Quais são as minhas vantagens?</div>
+                    <div class="content">
+                    	<p>São inúmeras vantagens, confira algumas delas abaixo:</p>
+                    	<p>- Portal exclusivo para negociantes de peças usadas;</p>
+                    	<p>- Único portal da área no Brasil;</p>
+                    	<p>- Com menos de 1 café por dia você é visto pelo mês todo, lembre-se, quem é visto é  lembrado!</p>
+                    </div>
                     <div class="title"><i class="dropdown icon"></i>Como alterar meu e-mail?</div>
                     <div class="content">
                         <p>Para alterar seu e-mail siga as instruções:</p>
