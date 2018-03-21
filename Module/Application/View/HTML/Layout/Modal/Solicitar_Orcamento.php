@@ -1,7 +1,7 @@
 <?php use Module\Application\View\SRC\Layout\Modal\Solicitar_Orcamento as View_Solicitar_Orcamento; ?>
 <div class="ui container">
 	<div class="ui horizontal divider">OU</div>
-	<h4 class="ui header">Não achou o que procurava? Solicite aos vendedores!</h4>
+	<h4 class="ui header">Não achou o que procurava? Solicite aos nossos vendedores!</h4>
 	<div onclick="abrirModal()" class="ui massive black button">Solicitar Orçamentos</div>
 </div>
 <div id="mdl_enviar" class="ui mini modal">

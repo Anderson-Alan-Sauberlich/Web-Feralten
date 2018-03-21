@@ -22,7 +22,7 @@
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como funciona?</div>
                     <div class="content">
-                        <p>O proprietário do da peça ou do estabelecimento faz seu cadastro por meio de CPF ou CNPJ e após a adesão de um pacote de publicações já pode começar a postar fotos e receber ofertas para suas mercadorias.</p>
+                        <p>O proprietário da peça ou do estabelecimento faz seu cadastro por meio de CPF ou CNPJ e após a adesão de um pacote de publicações já pode começar a postar fotos e receber ofertas para suas mercadorias.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Quem participa?</div>
                     <div class="content">

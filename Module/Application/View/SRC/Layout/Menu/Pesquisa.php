@@ -44,16 +44,16 @@ namespace Module\Application\View\SRC\Layout\Menu;
                 foreach ($categorias as $categoria) {
                     if (isset(self::$form_pesquisa['categoria'])) {
                         if (self::$form_pesquisa['categoria'] == $categoria->get_id()) {
-                            echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui checked slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" checked=\"checked\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
+                            echo "<div class=\"col-lg-3 col-md-4 col-sm-6 col-xs-12\"><div class=\"ui checked slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" checked=\"checked\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
                         } else {
-                            echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
+                            echo "<div class=\"col-lg-3 col-md-4 col-sm-6 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
                         }
                     } else {
-                        echo "<div class=\"col-md-3 col-sm-4 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
+                        echo "<div class=\"col-lg-3 col-md-4 col-sm-6 col-xs-12\"><div class=\"ui slider checkbox\"><input type=\"radio\" onchange=\"Carregar_Categoria(this)\" id=\"".$categoria->get_id()."\" name=\"categoria\" data-nome=\"".$categoria->get_nome()."\" data-url=\"".$categoria->get_url()."\" value=\"".$categoria->get_id()."\" form=\"searschform\"><label>".$categoria->get_nome()."</label></div></div>";
                     }
                 }
             } else {
-                echo "<div class=\"col-md-3 col-sm-4 col-xs-12\">Erro</div>";
+                echo "<div class=\"col-lg-3 col-md-4 col-sm-6 col-xs-12\">Erro</div>";
             }
         }
         

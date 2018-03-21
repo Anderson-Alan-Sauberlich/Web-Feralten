@@ -17,8 +17,8 @@ namespace Module\Administration\Model\DAO;
         public static function Inserir(Object_Usuario_Admin $object_usuario_admin) : bool
         {
             try {
-                $sql = "INSERT INTO tb_usuario_admin (usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome) 
-                        VALUES (:id, :usuario, :senha, :nome);";
+                $sql = 'INSERT INTO tb_usuario_admin (usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome) 
+                        VALUES (:id, :usuario, :senha, :nome);';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -36,7 +36,7 @@ namespace Module\Administration\Model\DAO;
         public static function Atualizar(Object_Usuario_Admin $object_usuario_admin) : bool
         {
             try {
-                $sql = "UPDATE tb_usuario_admin SET usuario_admin_nome = :nome, usuario_admin_usuario = :usuario WHERE usuario_admin_id = :id";
+                $sql = 'UPDATE tb_usuario_admin SET usuario_admin_nome = :nome, usuario_admin_usuario = :usuario WHERE usuario_admin_id = :id';
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -53,7 +53,7 @@ namespace Module\Administration\Model\DAO;
         public static function Atualizar_Senha(string $senha, int $id) : bool
         {
             try {
-                $sql = "UPDATE tb_usuario_admin SET usuario_admin_senha = :ps WHERE usuario_admin_id = :id";
+                $sql = 'UPDATE tb_usuario_admin SET usuario_admin_senha = :ps WHERE usuario_admin_id = :id';
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
