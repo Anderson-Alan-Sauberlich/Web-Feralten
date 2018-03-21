@@ -57,32 +57,6 @@
     	<div class="margem-inferior-minimo"></div>
     </div>
     <div class="margem-superior-minimo"></div>
-    <section class="ui container" role="main">
-        <h1 class="ui red huge dividing header">Nossos Patrocinadores</h1>
-        <div class="ui four column doubling grid">
-            <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
-            		<img src="/resources/img/patrocinadores/Feralten_logo_Transparente_mini.png"/>
-            	</a>
-            </div>
-            <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
-            		<img src="/resources/img/patrocinadores/Feralten_logo_Transparente_mini.png"/>
-            	</a>
-            </div>
-            <div class="column">
-           		<a href="#" class="ui fluid bordered rounded image">
-            		<img src="/resources/img/patrocinadores/Feralten_logo_Transparente_mini.png"/>
-            	</a>
-           	</div>
-            <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
-            		<img src="/resources/img/patrocinadores/Feralten_logo_Transparente_mini.png"/>
-            	</a>
-            </div>
-        </div>
-        <div class="margem-inferior-pouco"></div>
-    </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
