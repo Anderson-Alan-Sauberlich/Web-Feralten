@@ -12,6 +12,33 @@
     <section class="ui container" role="main">
     	<h2 class="ui red dividing header">Olá <?= View_Perfil::RetornarNomeUsuario(); ?>, seja bem vindo(a)!</h2>
         <div class="margem-inferior-minimo"></div>
+        <div class="ui stackable four column center aligned grid">
+        	<div class="column">
+            	<div class="ui tiny orange statistic">
+            		<div class="value"><?= View_Perfil::RetornarNumPecas(); ?></div>
+            		<div class="label">Peças Cadastradas</div>
+            	</div>
+        	</div>
+        	<div class="column">
+            	<div class="ui tiny orange statistic">
+            		<div class="value"><?= View_Perfil::RetornarNumLimitePlano(); ?></div>
+            		<div class="label">Plano, Limite de Peças</div>
+            	</div>
+        	</div>
+        	<div class="column">
+            	<div class="ui tiny orange statistic">
+            		<div class="value"><?= View_Perfil::RetornarNumMeusOrcamentos(); ?></div>
+            		<div class="label">Meus Orçamentos</div>
+            	</div>
+        	</div>
+        	<div class="column">
+            	<div class="ui tiny orange statistic">
+            		<div class="value"><?= View_Perfil::RetornarNumOrcamentosRecebidos(); ?></div>
+            		<div class="label">Orçamentos Recebidos</div>
+            	</div>
+        	</div>
+        </div>
+        <div class="margem-inferior-minimo"></div>
         <div class="ui stackable grid">
         	<div class="three wide column">
         		<?php View_Perfil::Incluir_Menu_Usuario(); ?>
