@@ -177,7 +177,6 @@
                 </div>
             </form>
         </div>
-        
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>

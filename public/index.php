@@ -821,6 +821,14 @@
                             return $response;
                         }
                     });
+                    
+                    $app->group('/pagseguro', function() use ($app) {
+                        $app->post('/credito[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
+                            
+                            $faturas->PagarPagSeguroCredito();
+                        });
+                    });
                 });
                 
                 $app->group('/historico', function() use ($app) {

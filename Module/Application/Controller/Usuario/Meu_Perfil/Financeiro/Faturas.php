@@ -11,6 +11,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
     use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
     use Module\Application\Model\Common\Util\Login_Session;
+    use Module\Common\Util\PagSeguro;
     use \DateTime;
     use \DateInterval;
                     
@@ -30,6 +31,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         {
             
         }
+        
+        /**
+         * @var array $erros Array com todas as mensagens de erro
+         */
+        private $erros = [];
+        
+        /**
+         * @var array $sucesso Array com todos as Mensagens de Sucesso
+         */
+        private $sucessos = [];
+        
+        /**
+         * @var array $campos Array com todos os Status dos Campos do Formulario
+         */
+        private $campos = [];
         
         /**
          * Instancia e Abre a View
@@ -75,6 +91,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                             $view->set_fatura_servicos_fechada($fatura_servicos_fechada);
                         }
                     }
+                    
+                    $pagseguro = new PagSeguro();
+                    
+                    $view->set_pagseguro_sessao_id($pagseguro->getIdSessao());
                     
                     $view->Executar();
                 }
@@ -331,5 +351,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     }
                 }
             }
+        }
+        
+        public function PagarPagSeguroCredito() : void
+        {
+            $pagseguro = new PagSeguro();
+            
+            $pagseguro->pagarCredito();
         }
     }

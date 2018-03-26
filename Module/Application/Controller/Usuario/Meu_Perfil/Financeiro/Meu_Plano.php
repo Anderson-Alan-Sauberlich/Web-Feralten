@@ -27,7 +27,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         /**
          * @var array $erros Array com todas as mensagens de erro
          */
-        private $erros;
+        private $erros = [];
         
         /**
          * @param int $plano_id

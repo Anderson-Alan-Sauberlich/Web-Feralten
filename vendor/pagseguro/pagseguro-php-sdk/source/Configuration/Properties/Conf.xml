@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config>
-    <environment>production</environment><!-- sandbox or production -->
+    <environment>sandbox</environment><!-- sandbox or production -->
     <credentials>
         <account>
-            <email>your_pagseguro_email</email>
+            <email>andersonalansauberlich@gmail.com</email>
             <production>
                 <token>your_production_token</token>
             </production>
             <sandbox>
-                <token>your_sandbox_token</token>
+                <token>0BDADF387CE54A61B62596F54A500380</token>
             </sandbox>
         </account>
         <application>
@@ -17,8 +17,8 @@
                 <appKey>your_production_application_key</appKey>
             </production>
             <sandbox>
-                <appId>your_sandbox_application_id</appId>
-                <appKey>your_sandbox_application_key</appKey>
+                <appId>app0656069688</appId>
+                <appKey>app0656069688</appKey>
             </sandbox>
         </application>
     </credentials>

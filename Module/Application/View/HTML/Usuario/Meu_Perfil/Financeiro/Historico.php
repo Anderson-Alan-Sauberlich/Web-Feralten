@@ -3,7 +3,7 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <title>Historico | Feralten</title>
+    <title>Histórico | Feralten</title>
 </head>
 <body>
     <header>

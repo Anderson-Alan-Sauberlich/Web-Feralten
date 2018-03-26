@@ -15,7 +15,7 @@
         <div class="ui text container margem-inferior-pouco">
         	<p>A presente Política regula as condições gerais de coleta, uso, armazenamento, tratamento e proteção de dados no site Feralten (www.feralten.com.br), em conformidade com a Lei 12.965/2014 (Marco Civil da Internet).</p>
         	<p>Ao utilizar-se dos serviços do site Feralten você concorda expressa e integralmente com esta Política de Privacidade.</p>
-        	<p><b>A ACEITAÇÃO DESTA POLÍTICA É INDISPENSÁVEL À UTILIZAÇÃO DO SITE E DOS SERVIÇOS PRESTADOS PELO Feralten.</b></p>
+        	<p><b>A ACEITAÇÃO DESTA POLÍTICA É INDISPENSÁVEL À UTILIZAÇÃO DO SITE E DOS SERVIÇOS PRESTADOS PELO FERALTEN.</b></p>
         	<p><b>I - Coleta de Dados</b></p>
         	<p>A coleta de dados no site Feralten é realizada com os seguintes objetivos:</p>
         	<p>1. proporcionar alta eficácia na prestação dos seus serviços, identificando perfis, preferências e necessidades de seus usuários, visando ao fechamento de negócios entre anunciantes e compradores;</p>
@@ -52,7 +52,7 @@
         	<p>Neste canal também poderão ser encaminhadas quaisquer reclamações ou denúncias.</p>
         	<p>Mediante requerimento expresso de usuário, através de email para suporte@feralten.com.br, o site Feralten se compromete a excluir dos seus sistemas todas as informações a respeito do solicitante, encerrando sua conta, ressalvadas as hipóteses de guarda obrigatória de registros ou dados previstas em lei ou objeto de ordem judicial, do Ministério Público ou de autoridade policial ou administrativa, nos termos do art. 7o, X, da Lei 12.965/14.</p>
         	<p><b>VI - Licença de Direitos Autorais</b></p>
-        	<p>A publicação de anúncios ou de quaisquer outros conteúdos, incluindo mensagens e comentários, no site Feralten, implica em licença não-exclusiva, irrevocável e irretratável, para sua utilização pela Empresa Sauber Sistemas LTDA-ME, no site Feralten, ou ainda em outros sites/plataformas, sem qualquer limitação.</p>
+        	<p>A publicação de anúncios ou de quaisquer outros conteúdos, incluindo mensagens e comentários, no site Feralten, implica em licença não-exclusiva, irrevogável e irretratável, para sua utilização pela Empresa Sauber Sistemas LTDA-ME, no site Feralten, ou ainda em outros sites/plataformas, sem qualquer limitação.</p>
         	<p><b>VII - Direito de Edição e Exclusão de Conteúdos</b></p>
         	<p>O site Feralten se reserva o direito de editar ou mesmo excluir quaisquer conteúdos publicados por usuários que não estejam em conformidade com a lei, com a sua Política de Privacidade ou Termos de Uso.</p>
         	<p>Essa condição, todavia, não configura obrigação do site Feralten ou da Empresa Sauber Sistemas LTDA-ME, sendo que, por força do art. 15, parágrafo 3o da Lei 12.965/14, via de regra solicitações de edição ou remoção devem se dar sob a forma de ordem judicial, solicitação do Ministério Público, de autoridade policial ou administrativa.</p>
@@ -64,7 +64,7 @@
         	<p>As alterações desta Política de Privacidade serão informadas com destaque no site Feralten.</p>
         	<p><b>X - Lei Aplicável e Foro Competente</b></p>
         	<p>Na interpretação da presente Política de Privacidade, aplica-se a legislação brasileira.</p>
-        	<p>Quaisquer litígios relacionados a esta Política de Privacidade serão da competência exclusiva do Foro Central da Comarca de Porto Alegre, RS, Brasil.</p>
+        	<p>Quaisquer litígios relacionados a esta Política de Privacidade serão da competência exclusiva do Foro Central da Comarca de Blumenau, SC, Brasil.</p>
         	<p>Blumenau, março de 2018.</p>
         </div>
     </section>

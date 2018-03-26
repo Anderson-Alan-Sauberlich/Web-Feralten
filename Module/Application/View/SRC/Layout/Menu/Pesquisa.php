@@ -16,7 +16,7 @@ namespace Module\Application\View\SRC\Layout\Menu;
         
         public static function Carregar_Ano_De() : void
         {
-            for ($i=2017; $i >= 1900; $i--) {
+            for ($i=2019; $i >= 1900; $i--) {
                 if (self::$form_pesquisa['ano_de'] == $i) {
                     echo "<option selected value=\"".$i."\">".$i."</option>";
                 } else {
@@ -27,7 +27,7 @@ namespace Module\Application\View\SRC\Layout\Menu;
         
         public static function Carregar_Ano_Ate() : void
         {
-            for ($i=2017; $i >= 1900; $i--) {
+            for ($i=2019; $i >= 1900; $i--) {
                 if (self::$form_pesquisa['ano_ate'] == $i) {
                     echo "<option selected value=\"".$i."\">".$i."</option>";
                 } else {

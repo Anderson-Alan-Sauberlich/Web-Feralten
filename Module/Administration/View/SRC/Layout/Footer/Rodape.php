@@ -1,5 +1,5 @@
 <?php
-namespace Module\Application\View\SRC\Layout\Footer;
+namespace Module\Administration\View\SRC\Layout\Footer;
 
     class Rodape
     {

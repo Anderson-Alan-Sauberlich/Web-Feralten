@@ -571,7 +571,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         private static function Mostrar_Anos(?array $anos = null) : void
         {
             if (!empty($anos)) {
-                for ($i=2017; $i >= 1900; $i--) {
+                for ($i=2019; $i >= 1900; $i--) {
                     if (in_array($i, $anos)) {
                         echo "<option selected value=\"".$i."\">".$i."</option>";
                     } else {
@@ -579,7 +579,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                     }
                 }
             } else {
-                for ($i=2017; $i >= 1900; $i--) {
+                for ($i=2019; $i >= 1900; $i--) {
                     echo "<option value=\"".$i."\">".$i."</option>";
                 }
             }

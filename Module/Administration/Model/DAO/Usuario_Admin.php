@@ -1,7 +1,7 @@
 <?php
 namespace Module\Administration\Model\DAO;
     
-    use Module\Administration\Model\Object\Usuario_Admin as Object_Usuario_Admin;
+    use Module\Administration\Model\OBJ\Usuario_Admin as OBJ_Usuario_Admin;
     use Module\Administration\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Administration\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Usuario_Admin $object_usuario_admin) : bool
+        public static function Inserir(OBJ_Usuario_Admin $obj_usuario_admin) : bool
         {
             try {
                 $sql = 'INSERT INTO tb_usuario_admin (usuario_admin_id, usuario_admin_usuario, usuario_admin_senha, usuario_admin_nome) 
@@ -22,10 +22,10 @@ namespace Module\Administration\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_usuario_admin->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usuario', $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
-                $p_sql->bindValue(':senha', $object_usuario_admin->get_senha(), PDO::PARAM_STR);
-                $p_sql->bindValue(':nome', $object_usuario_admin->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario_admin->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usuario', $obj_usuario_admin->get_usuario(), PDO::PARAM_STR);
+                $p_sql->bindValue(':senha', $obj_usuario_admin->get_senha(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $obj_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -33,16 +33,16 @@ namespace Module\Administration\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Usuario_Admin $object_usuario_admin) : bool
+        public static function Atualizar(OBJ_Usuario_Admin $obj_usuario_admin) : bool
         {
             try {
                 $sql = 'UPDATE tb_usuario_admin SET usuario_admin_nome = :nome, usuario_admin_usuario = :usuario WHERE usuario_admin_id = :id';
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_usuario_admin->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usuario', $object_usuario_admin->get_usuario(), PDO::PARAM_STR);
-                $p_sql->bindValue(':nome', $object_usuario_admin->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario_admin->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usuario', $obj_usuario_admin->get_usuario(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $obj_usuario_admin->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -156,26 +156,26 @@ namespace Module\Administration\Model\DAO;
             }
         }
         
-        public static function PopulaUsuario(array $row) : Object_Usuario_Admin
+        public static function PopulaUsuario(array $row) : OBJ_Usuario_Admin
         {
-            $object_usuario_admin = new Object_Usuario_Admin();
+            $obj_usuario_admin = new OBJ_Usuario_Admin();
             
             if (isset($row['usuario_admin_id'])) {
-                $object_usuario_admin->set_id($row['usuario_admin_id']);
+                $obj_usuario_admin->set_id($row['usuario_admin_id']);
             }
             
             if (isset($row['usuario_admin_usuario'])) {
-                $object_usuario_admin->set_usuario($row['usuario_admin_usuario']);
+                $obj_usuario_admin->set_usuario($row['usuario_admin_usuario']);
             }
             
             if (isset($row['usuario_admin_senha'])) {
-                $object_usuario_admin->set_senha($row['usuario_admin_senha']);
+                $obj_usuario_admin->set_senha($row['usuario_admin_senha']);
             }
             
             if (isset($row['usuario_admin_nome'])) {
-                $object_usuario_admin->set_nome($row['usuario_admin_nome']);
+                $obj_usuario_admin->set_nome($row['usuario_admin_nome']);
             }
             
-            return $object_usuario_admin;
+            return $obj_usuario_admin;
         }
     }

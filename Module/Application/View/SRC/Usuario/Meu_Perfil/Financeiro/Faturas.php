@@ -43,6 +43,12 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         private static $fatura_servicos_fechada;
         
         /**
+         * Id da sessão do PagSeguro
+         * @var int
+         */
+        private static $pagseguro_sessao_id;
+        
+        /**
          * @param Object_Fatura $object_fatura_aberta
          */
         public function set_fatura_aberta(?Object_Fatura $object_fatura_aberta = null) : void
@@ -72,6 +78,14 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         public function set_fatura_servicos_fechada(?array $fatura_servicos_fechada = null) : void
         {
             self::$fatura_servicos_fechada = $fatura_servicos_fechada;
+        }
+        
+        /**
+         * @param string id da sessão do pagseguro
+         */
+        public function set_pagseguro_sessao_id(string $pagseguro_sessao_id) : void
+        {
+            self::$pagseguro_sessao_id = $pagseguro_sessao_id;
         }
         
         /**
@@ -238,8 +252,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Carregar_Ano_Validade() : void
         {
-            for ($i=17; $i <= 25; $i++) {
-                echo "<option value=\"".$i."\">20".$i."</option>";
+            for ($i=2018; $i <= 2030; $i++) {
+                echo "<option value=\"".$i."\">".$i."</option>";
             }
         }
         
@@ -248,8 +262,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
          */
         public static function Carregar_Anos() : void
         {
-            for ($i=2017; $i >= 1900; $i--) {
+            for ($i=2018; $i >= 1900; $i--) {
                 echo "<option value=\"".$i."\">".$i."</option>";
             }
+        }
+        
+        public static function RetornarPagSeguroSessaoId() : ?string
+        {
+            return self::$pagseguro_sessao_id;
         }
     }

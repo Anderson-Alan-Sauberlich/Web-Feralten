@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3691137292d50e66f49e232cb75ad892",
+    "content-hash": "041ccb932afe3e4c8e82b5a5f54dda69",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -130,16 +130,16 @@
         },
         {
             "name": "pagseguro/pagseguro-php-sdk",
-            "version": "3.4.1",
+            "version": "4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pagseguro/pagseguro-php-sdk.git",
-                "reference": "d122eac2c9fe094c688e1e7cf75d307420559cda"
+                "reference": "653f921d268bb7f7360bcc3fd79abc3b49c106ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pagseguro/pagseguro-php-sdk/zipball/d122eac2c9fe094c688e1e7cf75d307420559cda",
-                "reference": "d122eac2c9fe094c688e1e7cf75d307420559cda",
+                "url": "https://api.github.com/repos/pagseguro/pagseguro-php-sdk/zipball/653f921d268bb7f7360bcc3fd79abc3b49c106ae",
+                "reference": "653f921d268bb7f7360bcc3fd79abc3b49c106ae",
                 "shasum": ""
             },
             "require": {
@@ -149,7 +149,7 @@
                 "php": ">=5.4.27"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^4.8"
             },
             "type": "library",
             "autoload": {
@@ -159,7 +159,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache License 2.0"
+                "Apache-2.0"
             ],
             "authors": [
                 {
@@ -167,7 +167,7 @@
                 }
             ],
             "description": "Biblioteca de integração com o PagSeguro",
-            "time": "2018-01-09T18:53:25+00:00"
+            "time": "2018-03-19T13:04:02+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
