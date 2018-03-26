@@ -8,7 +8,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
-    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
+    use Module\Application\Controller\Common\Util\GerenciarFaturas;
     use \Exception;
     
     class Entidade
@@ -236,7 +236,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     $id_entidade = DAO_Entidade::Inserir($entidade);
                     
                     if ($id_entidade != false) {
-                        if (Controller_Faturas::Criar_Fatura($id_entidade, 1)) {
+                        if (GerenciarFaturas::Criar_Fatura($id_entidade, 1)) {
                             Login_Session::set_entidade_id($id_entidade);
                             Login_Session::set_entidade_plano(1);
                             

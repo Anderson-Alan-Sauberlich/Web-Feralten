@@ -3,10 +3,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Meu_Plano as View_Meu_Plano;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
-    use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
+    use Module\Application\Controller\Common\Util\GerenciarFaturas;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Conexao;
@@ -80,7 +80,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     if (empty($this->erros)) {
                         Conexao::$conection->beginTransaction();
                         
-                        if (Controller_Faturas::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, Controller_Faturas::IMEDIATA)) {
+                        if (GerenciarFaturas::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, GerenciarFaturas::IMEDIATA)) {
                             $obj_entidade = new OBJ_Entidade();
                             $obj_entidade->set_id(Login_Session::get_entidade_id());
                             $obj_entidade->set_plano_id($this->plano_id);
