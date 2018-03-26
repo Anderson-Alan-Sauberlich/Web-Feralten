@@ -7,9 +7,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
-    use Module\Application\Model\Object\Fatura as Object_Fatura;
-    use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
-    use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
+    use Module\Application\Model\OBJ\Fatura as OBJ_Fatura;
+    use Module\Application\Model\OBJ\Fatura_Servico as OBJ_Fatura_Servico;
+    use Module\Application\Model\OBJ\Status_Fatura as OBJ_Status_Fatura;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Common\Util\PagSeguro;
     use \DateTime;
@@ -140,32 +140,32 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     $cobrança = null;
                 }
                 
-                $object_fatura = new Object_Fatura();
+                $obj_fatura = new OBJ_Fatura();
                 
-                $object_fatura->set_id(0);
-                $object_fatura->set_entidade_id($id_entidade);
-                $object_fatura->set_valor_total(0);
+                $obj_fatura->set_id(0);
+                $obj_fatura->set_entidade_id($id_entidade);
+                $obj_fatura->set_valor_total(0);
                 
                 $datetime = new DateTime();
-                $object_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
+                $obj_fatura->set_data_emissao($datetime->format('Y-m-d H:i:s'));
                 
                 if ($cobrança !== self::IMEDIATA) {
                     $datetime->add(new DateInterval('P30D'));
                 }
                 
-                $object_fatura->set_data_fechamento($datetime->format('Y-m-d H:i:s'));
+                $obj_fatura->set_data_fechamento($datetime->format('Y-m-d H:i:s'));
                 $datetime->add(new DateInterval('P10D'));
-                $object_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
+                $obj_fatura->set_data_vencimento($datetime->format('Y-m-d H:i:s'));
                 
-                $object_status = new Object_Status_Fatura();
-                $object_status->set_id(1);
-                $object_fatura->set_object_status($object_status);
+                $obj_status = new OBJ_Status_Fatura();
+                $obj_status->set_id(1);
+                $obj_fatura->set_obj_status($obj_status);
                 
-                if (DAO_Fatura::Inserir($object_fatura)) {
-                    $object_plano = DAO_Plano::BuscarPorCOD($id_plano);
+                if (DAO_Fatura::Inserir($obj_fatura)) {
+                    $obj_plano = DAO_Plano::BuscarPorCOD($id_plano);
                     
-                    if (!empty($object_plano)) {
-                        if (self::Adicionar_Serviço_Fatura($id_entidade, 'Plano mensal: '.$object_plano->get_descricao(), $object_plano->get_valor_mensal())) {
+                    if (!empty($obj_plano)) {
+                        if (self::Adicionar_Serviço_Fatura($id_entidade, 'Plano mensal: '.$obj_plano->get_descricao(), $obj_plano->get_valor_mensal())) {
                             if ($cobrança === self::IMEDIATA) {
                                 return self::Fechar_Fatura($id_entidade, $id_plano);
                             } else {
@@ -191,27 +191,27 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * @param int $id_entidade
          * @param string $descricao
          * @param float $valor
-         * @param ?Object_Fatura $object_fatura = null
+         * @param ?OBJ_Fatura $obj_fatura = null
          * @return bool True para Sucesso e False para Erro
          */
-        public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor, ?Object_Fatura $object_fatura = null) : bool
+        public static function Adicionar_Serviço_Fatura(int $id_entidade, string $descricao, float $valor, ?OBJ_Fatura $obj_fatura = null) : bool
         {
-            if (empty($object_fatura)) {
-                $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            if (empty($obj_fatura)) {
+                $obj_fatura = self::Retornar_Fatura($id_entidade, 1);
             }
             
-            if (empty($object_fatura)) {
+            if (empty($obj_fatura)) {
                 return false;
             }
             
-            $object_fatura_servico = new Object_Fatura_Servico();
+            $obj_fatura_servico = new OBJ_Fatura_Servico();
             
-            $object_fatura_servico->set_descricao($descricao);
-            $object_fatura_servico->set_fatura_id($object_fatura->get_id());
-            $object_fatura_servico->set_valor($valor);
+            $obj_fatura_servico->set_descricao($descricao);
+            $obj_fatura_servico->set_fatura_id($obj_fatura->get_id());
+            $obj_fatura_servico->set_valor($valor);
             
-            if (DAO_Fatura_Servico::Inserir($object_fatura_servico)) {
-                if (self::Recalcular_Valor_Total($object_fatura->get_id()) !== null) {
+            if (DAO_Fatura_Servico::Inserir($obj_fatura_servico)) {
+                if (self::Recalcular_Valor_Total($obj_fatura->get_id()) !== null) {
                     return true;
                 } else {
                     return false;
@@ -228,28 +228,28 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * 
          * @param int $id_entidade
          * @param int $id_plano
-         * @param ?Object_Fatura $object_fatura = null
+         * @param ?OBJ_Fatura $obj_fatura = null
          * @return bool True para Sucesso e False para Erro
          */
-        public static function Fechar_Fatura(int $id_entidade, int $id_plano, ?Object_Fatura $object_fatura = null) : bool
+        public static function Fechar_Fatura(int $id_entidade, int $id_plano, ?OBJ_Fatura $obj_fatura = null) : bool
         {
-            if (empty($object_fatura)) {
-                $object_fatura = self::Retornar_Fatura($id_entidade, 1);
+            if (empty($obj_fatura)) {
+                $obj_fatura = self::Retornar_Fatura($id_entidade, 1);
             }
             
-            if (empty($object_fatura)) {
+            if (empty($obj_fatura)) {
                 return false;
             }
             
-            $valor_total = self::Recalcular_Valor_Total($object_fatura->get_id());
+            $valor_total = self::Recalcular_Valor_Total($obj_fatura->get_id());
             
             if ($valor_total !== null) {
                 if ($valor_total === 0) {
-                    if (!DAO_Fatura::Atualizar_Status($object_fatura->get_id(), 4)) {
+                    if (!DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), 4)) {
                         return false;
                     }
                 } else {
-                    if (!DAO_Fatura::Atualizar_Status($object_fatura->get_id(), 2)) {
+                    if (!DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), 2)) {
                         return false;
                     }
                 }
@@ -289,21 +289,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * Não podem existem mais de uma fatura fechada ao mesmo tempo
          * 
          * @param int $id_entidade
-         * @return Object_Fatura|NULL
+         * @return OBJ_Fatura|NULL
          */
-        private static function Retornar_Fatura(int $id_entidade, int $status) : ?Object_Fatura
+        private static function Retornar_Fatura(int $id_entidade, int $status) : ?OBJ_Fatura
         {
-            $object_fatura = null;
+            $obj_fatura = null;
             
             $faturas = DAO_Fatura::BuscarPorCodStatus($id_entidade, $status);
             
             if (count($faturas) === 1) {
                 foreach ($faturas as $fatura) {
-                    $object_fatura = $fatura;
+                    $obj_fatura = $fatura;
                 }
             }
             
-            return $object_fatura;
+            return $obj_fatura;
         }
         
         /**

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Status_Entidade as Object_Status_Entidade;
+    use Module\Application\Model\OBJ\Status_Entidade as OBJ_Status_Entidade;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Status_Entidade $object_status_entidade) : bool
+        public static function Inserir(OBJ_Status_Entidade $obj_status_entidade) : bool
         {
             try {
                 $sql = "INSERT INTO tb_status_entidade (status_entidade_id, status_entidade_nome) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_entidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_entidade->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Status_Entidade $status) : bool
+        public static function Atualizar(OBJ_Status_Entidade $status) : bool
         {
             try {
                 $sql = "UPDATE tb_status_entidade SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_entidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_entidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_entidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_entidade->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -79,18 +79,18 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaStatus(array $row) : Object_Status_Entidade
+        public static function PopulaStatus(array $row) : OBJ_Status_Entidade
         {
-            $object_status_entidade = new Object_Status_Entidade();
+            $obj_status_entidade = new OBJ_Status_Entidade();
             
             if (isset($row['status_entidade_id'])) {
-                $object_status_entidade->set_id($row['status_entidade_id']);
+                $obj_status_entidade->set_id($row['status_entidade_id']);
             }
             
             if (isset($row['status_entidade_nome'])) {
-                $object_status_entidade->set_nome($row['status_entidade_nome']);
+                $obj_status_entidade->set_nome($row['status_entidade_nome']);
             }
             
-            return $object_status_entidade;
+            return $obj_status_entidade;
         }                
     }

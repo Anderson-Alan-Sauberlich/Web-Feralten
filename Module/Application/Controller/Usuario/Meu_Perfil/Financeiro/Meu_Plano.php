@@ -6,7 +6,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas as Controller_Faturas;
     use Module\Application\Model\DAO\Plano as DAO_Plano;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Conexao;
@@ -81,13 +81,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         Conexao::$conection->beginTransaction();
                         
                         if (Controller_Faturas::Criar_Fatura(Login_Session::get_entidade_id(), $this->plano_id, Controller_Faturas::IMEDIATA)) {
-                            $object_entidade = new Object_Entidade();
-                            $object_entidade->set_id(Login_Session::get_entidade_id());
-                            $object_entidade->set_plano_id($this->plano_id);
-                            $object_entidade->set_intervalo_pagamento_id(1);
-                            $object_entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
+                            $obj_entidade = new OBJ_Entidade();
+                            $obj_entidade->set_id(Login_Session::get_entidade_id());
+                            $obj_entidade->set_plano_id($this->plano_id);
+                            $obj_entidade->set_intervalo_pagamento_id(1);
+                            $obj_entidade->set_data_contratacao_plano(date('Y-m-d H:i:s'));
                             
-                            if (DAO_Entidade::Atualizar_Financeiro($object_entidade)) {
+                            if (DAO_Entidade::Atualizar_Financeiro($obj_entidade)) {
                                 if (Conexao::$conection->commit()) {
                                     Login_Session::set_entidade_plano($this->plano_id);
                                 } else {

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Controller\Layout\Elemento;
     
-    use Module\Application\Controller\Layout\Menu\Usuario as Controller_Usuario;
+    use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\Common\Util\Entidade_BD;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
@@ -50,8 +50,8 @@ namespace Module\Application\Controller\Layout\Elemento;
          */
         public function SetarOrcamentoNaoTenho()
         {
-            if (Controller_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Usuario::Verificar_Status_Usuario();
+            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
+                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
                     if (empty($this->erros)) {

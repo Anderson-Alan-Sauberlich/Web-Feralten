@@ -5,10 +5,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
     use Module\Application\Model\DAO\Versao as DAO_Versao;
-    use Module\Application\Model\Object\Versao as Object_Versao;
-    use Module\Application\Model\Object\Modelo as Object_Modelo;
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
+    use Module\Application\Model\OBJ\Modelo as OBJ_Modelo;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
     use Module\Administration\Controller\Layout\Menu\Admin as Controller_Admin;
     use Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\CMMV\Gerenciar\Deletar as View_Deletar;
     
@@ -120,13 +120,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         public function Retornar_Categoria() : void
         {
-            $object_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
+            $obj_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
              
-            if (!empty($object_categoria)) {
+            if (!empty($obj_categoria)) {
                 $categoria = array();
         
-                $categoria['nome'] = $object_categoria->get_nome();
-                $categoria['url'] = $object_categoria->get_url();
+                $categoria['nome'] = $obj_categoria->get_nome();
+                $categoria['url'] = $obj_categoria->get_url();
         
                 echo json_encode($categoria);
             }
@@ -134,13 +134,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         public function Retornar_Marca() : void
         {
-            $object_marca = $this->Buscar_Marca_Por_Id($this->marca);
+            $obj_marca = $this->Buscar_Marca_Por_Id($this->marca);
         
-            if (!empty($object_marca)) {
+            if (!empty($obj_marca)) {
                 $marca = array();
         
-                $marca['nome'] = $object_marca->get_nome();
-                $marca['url'] = $object_marca->get_url();
+                $marca['nome'] = $obj_marca->get_nome();
+                $marca['url'] = $obj_marca->get_url();
         
                 echo json_encode($marca);
             }
@@ -148,13 +148,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         public function Retornar_Modelo() : void
         {
-            $object_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
+            $obj_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
         
-            if (!empty($object_modelo)) {
+            if (!empty($obj_modelo)) {
                 $modelo = array();
         
-                $modelo['nome'] = $object_modelo->get_nome();
-                $modelo['url'] = $object_modelo->get_url();
+                $modelo['nome'] = $obj_modelo->get_nome();
+                $modelo['url'] = $obj_modelo->get_url();
         
                 echo json_encode($modelo);
             }
@@ -162,13 +162,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         public function Retornar_Versao() : void
         {
-            $object_versao = $this->Buscar_Versao_Por_Id($this->versao);
+            $obj_versao = $this->Buscar_Versao_Por_Id($this->versao);
         
-            if (!empty($object_versao)) {
+            if (!empty($obj_versao)) {
                 $versao = array();
         
-                $versao['nome'] = $object_versao->get_nome();
-                $versao['url'] = $object_versao->get_url();
+                $versao['nome'] = $obj_versao->get_nome();
+                $versao['url'] = $obj_versao->get_url();
         
                 echo json_encode($versao);
             }

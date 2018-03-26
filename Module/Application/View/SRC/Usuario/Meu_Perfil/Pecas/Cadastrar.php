@@ -3,7 +3,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
     
     use Module\Application\Controller\Usuario\Meu_Perfil\Pecas\Cadastrar as Controller_Cadastrar;
     use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
-    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     
     class Cadastrar
     {
@@ -39,7 +39,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             self::$cadastrar_sucesso = $cadastrar_sucesso;
         }
         
-        public function set_orcamento(?Object_Orcamento $obj_orcamento) : void
+        public function set_orcamento(?OBJ_Orcamento $obj_orcamento) : void
         {
             self::$orcamento = $obj_orcamento;
         }
@@ -581,7 +581,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function MostrarURLOrcamento() : void
         {
-            if (self::$orcamento instanceof Object_Orcamento) {
+            if (self::$orcamento instanceof OBJ_Orcamento) {
                 echo 'no-orcamento/'.self::$orcamento->get_id().'/';
             }
         }

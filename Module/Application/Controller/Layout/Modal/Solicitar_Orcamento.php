@@ -4,7 +4,7 @@ namespace Module\Application\Controller\Layout\Modal;
     use Module\Application\View\SRC\Layout\Modal\Solicitar_Orcamento as View_Solicitar_Orcamento;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Administration\Model\Common\Util\Login_Session;
-    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use \Exception;
@@ -15,7 +15,7 @@ namespace Module\Application\Controller\Layout\Modal;
     {
         function __construct()
         {
-            $this->obj_orcamento = new Object_Orcamento();
+            $this->obj_orcamento = new OBJ_Orcamento();
         }
         
         private $obj_orcamento;

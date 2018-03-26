@@ -2,7 +2,7 @@
 namespace Module\Application\Controller\Layout\Form;
     
     use Module\Application\View\SRC\Layout\Form\Contato as View_Contato;
-    use Module\Application\Model\Object\Contato as Object_Contato;
+    use Module\Application\Model\OBJ\Contato as OBJ_Contato;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Email\Controller\Common\Util\Email;
     use \Exception;
@@ -10,19 +10,19 @@ namespace Module\Application\Controller\Layout\Form;
     class Contato
     {
         /**
-         * Inicia a variavel $object_contato.
+         * Inicia a variavel $obj_contato.
          */
         function __construct()
         {
-            $this->object_contato = new Object_Contato();
+            $this->obj_contato = new OBJ_Contato();
         }
         
         /**
-         * Armazena os dados de uma instancia Object_Contato.
+         * Armazena os dados de uma instancia OBJ_Contato.
          * 
-         * @var Object_Contato
+         * @var OBJ_Contato
          */
-        private $object_contato;
+        private $obj_contato;
         
         /**
          * Armazena todos os campos com erro.
@@ -39,14 +39,14 @@ namespace Module\Application\Controller\Layout\Form;
         private $erros = [];
         
         /**
-         * Seta o nome para a variavel $object_contato.
+         * Seta o nome para a variavel $obj_contato.
          * 
          * @param string $nome
          */
         public function set_nome($nome) : void
         {
             try {
-                $this->object_contato->set_nome(Validador::Contato()::validar_nome($nome));
+                $this->obj_contato->set_nome(Validador::Contato()::validar_nome($nome));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['nome'] = "erro";
@@ -54,14 +54,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta o email para a variavel $object_contato.
+         * Seta o email para a variavel $obj_contato.
          * 
          * @param string $email
          */
         public function set_email($email) : void
         {
             try {
-                $this->object_contato->set_email(Validador::Contato()::validar_email($email));
+                $this->obj_contato->set_email(Validador::Contato()::validar_email($email));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['email'] = "erro";
@@ -69,14 +69,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta o numero de telefone para a variavel $object_contato.
+         * Seta o numero de telefone para a variavel $obj_contato.
          * 
          * @param string $telefone
          */
         public function set_telefone($telefone) : void
         {
             try {
-                $this->object_contato->set_telefone(Validador::Contato()::validar_telefone($telefone));
+                $this->obj_contato->set_telefone(Validador::Contato()::validar_telefone($telefone));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['telefone'] = "erro";
@@ -84,14 +84,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta true se o telefone for whatsapp e false se não for para a variavel $object_contato.
+         * Seta true se o telefone for whatsapp e false se não for para a variavel $obj_contato.
          * 
          * @param ?bool $whatsapp
          */
         public function set_whatsapp($whatsapp) : void
         {
             try {
-                $this->object_contato->set_whatsapp(Validador::Contato()::validar_whatsapp($whatsapp));
+                $this->obj_contato->set_whatsapp(Validador::Contato()::validar_whatsapp($whatsapp));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['whatsapp'] = "erro";
@@ -99,14 +99,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta o assunto para a variavel $object_contato.
+         * Seta o assunto para a variavel $obj_contato.
          * 
          * @param string $assunto
          */
         public function set_assunto($assunto) : void
         {
             try {
-                $this->object_contato->set_assunto(Validador::Contato()::validar_assunto($assunto));
+                $this->obj_contato->set_assunto(Validador::Contato()::validar_assunto($assunto));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['assunto'] = "erro";
@@ -114,14 +114,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta a mensagen para a variavel $object_contato.
+         * Seta a mensagen para a variavel $obj_contato.
          * 
          * @param string $mensagem
          */
         public function set_mensagem($mensagem) : void
         {
             try {
-                $this->object_contato->set_mensagem(Validador::Contato()::validar_mensagem($mensagem));
+                $this->obj_contato->set_mensagem(Validador::Contato()::validar_mensagem($mensagem));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['mensagem'] = "erro";
@@ -150,7 +150,7 @@ namespace Module\Application\Controller\Layout\Form;
             $valor['campos'] = $this->campos;
             
             if (empty($this->erros)) {
-                if (Email::Enviar_Contato($this->object_contato)) {
+                if (Email::Enviar_Contato($this->obj_contato)) {
                     $valor['status'] = 'certo';
                     $valor['html'] = "<li>Enviado com Sucesso</li>";
                 } else {

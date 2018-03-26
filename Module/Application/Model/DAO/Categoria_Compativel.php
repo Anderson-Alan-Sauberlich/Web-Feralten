@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Categoria_Compativel as Object_Categoria_Compativel;
+    use Module\Application\Model\OBJ\Categoria_Compativel as OBJ_Categoria_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
     
-        public static function Inserir(Object_Categoria_Compativel $object_categoria_compativel) : bool
+        public static function Inserir(OBJ_Categoria_Compativel $obj_categoria_compativel) : bool
         {
             try {
                 $sql = "INSERT INTO tb_categoria_compativel (categoria_compativel_da_id_ctg, categoria_compativel_com_id_ctg)
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
     
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_categoria_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_categoria_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_categoria_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function Atualizar(Object_Categoria_Compativel $object_categoria_compativel) : bool
+        public static function Atualizar(OBJ_Categoria_Compativel $obj_categoria_compativel) : bool
         {
             try {
                 $sql = "UPDATE tb_categoria_compativel SET categoria_compativel_da_id_ctg = :da_id, categoria_compativel_com_id_ctg = :com_id 
@@ -39,8 +39,8 @@ namespace Module\Application\Model\DAO;
     
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_categoria_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_categoria_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_categoria_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_categoria_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -70,7 +70,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
     
-                return self::PopulaCategoriasCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaCategoriasCompativeisOBJ($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -91,37 +91,37 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function PopulaCategoriaCompativel(array $row) : Object_Categoria_Compativel
+        public static function PopulaCategoriaCompativel(array $row) : OBJ_Categoria_Compativel
         {
-            $object_categoria_compativel = new Object_Categoria_Compativel();
+            $obj_categoria_compativel = new OBJ_Categoria_Compativel();
             
             if (isset($row['categoria_compativel_da_id_ctg'])) {
-                $object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ctg']);
+                $obj_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ctg']);
             }
             
             if (isset($row['categoria_compativel_com_id_ctg'])) {
-                $object_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ctg']);
+                $obj_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ctg']);
             }
             
-            return $object_categoria_compativel;
+            return $obj_categoria_compativel;
         }
         
-        public static function PopulaCategoriasCompativeisObject(array $rows) : array
+        public static function PopulaCategoriasCompativeisOBJ(array $rows) : array
         {
             $categorias_compativeis = array();
             
             foreach ($rows as $row) {
-                $object_categoria_compativel = new Object_Categoria_Compativel();
+                $obj_categoria_compativel = new OBJ_Categoria_Compativel();
                 
                 if (isset($row['categoria_compativel_da_id_ctg'])) {
-                    $object_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ctg']);
+                    $obj_categoria_compativel->set_da_id($row['categoria_compativel_da_id_ctg']);
                 }
                 
                 if (isset($row['categoria_compativel_com_id_ctg'])) {
-                    $object_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ctg']);
+                    $obj_categoria_compativel->set_com_id($row['categoria_compativel_com_id_ctg']);
                 }
                 
-                $categorias_compativeis[] = $object_categoria_compativel;
+                $categorias_compativeis[] = $obj_categoria_compativel;
             }
             
             return $categorias_compativeis;

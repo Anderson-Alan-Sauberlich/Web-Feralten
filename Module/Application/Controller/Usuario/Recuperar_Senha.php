@@ -3,7 +3,7 @@ namespace Module\Application\Controller\Usuario;
     
     use Module\Application\View\SRC\Usuario\Recuperar_Senha as View_Recuperar_Senha;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
-    use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
+    use Module\Application\Model\OBJ\Recuperar_Senha as OBJ_Recuperar_Senha;
     use Module\Application\Model\DAO\Recuperar_Senha as DAO_Recuperar_Senha;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Email\Controller\Common\Util\Email;
@@ -14,10 +14,10 @@ namespace Module\Application\Controller\Usuario;
     {
         function __construct()
         {
-            $this->object_recuperar_senha = new Object_Recuperar_Senha();
+            $this->obj_recuperar_senha = new OBJ_Recuperar_Senha();
         }
         
-        private $object_recuperar_senha;
+        private $obj_recuperar_senha;
         private $senha_nova;
         private $senha_confnova;
         private $campos = array();
@@ -26,7 +26,7 @@ namespace Module\Application\Controller\Usuario;
         public function set_email($email) : void
         {
             try {
-                $this->object_recuperar_senha->set_object_usuario(DAO_Usuario::Autenticar(Validador::Usuario()::validar_email_login($email)));
+                $this->obj_recuperar_senha->set_obj_usuario(DAO_Usuario::Autenticar(Validador::Usuario()::validar_email_login($email)));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['email'] = "erro";
@@ -42,7 +42,7 @@ namespace Module\Application\Controller\Usuario;
                 
                 foreach ($recuperar_senhas as $recuperar_senha) {
                     if (hash_hmac('sha512', $recuperar_senha->get_codigo(), hash('sha512', $recuperar_senha->get_codigo())) === $codigo) {
-                        $this->object_recuperar_senha = $recuperar_senha;
+                        $this->obj_recuperar_senha = $recuperar_senha;
                         break;
                     }
                 }
@@ -82,7 +82,7 @@ namespace Module\Application\Controller\Usuario;
         {
             $view = new View_Recuperar_Senha();
             
-            $view->set_object_recuperar_senha($this->object_recuperar_senha);
+            $view->set_obj_recuperar_senha($this->obj_recuperar_senha);
             
             $view->Executar();
         }
@@ -95,12 +95,12 @@ namespace Module\Application\Controller\Usuario;
             $retorno['campos'] = $this->campos;
             
             if (empty($this->erros)) {
-                $this->object_recuperar_senha->set_codigo(bin2hex(random_bytes(40)));
+                $this->obj_recuperar_senha->set_codigo(bin2hex(random_bytes(40)));
                 
-                if (Email::Enviar_Recuperar_Senha($this->object_recuperar_senha)) {
-                    $this->object_recuperar_senha->set_data_hora(date('Y-m-d H:i:s'));
+                if (Email::Enviar_Recuperar_Senha($this->obj_recuperar_senha)) {
+                    $this->obj_recuperar_senha->set_data_hora(date('Y-m-d H:i:s'));
                     
-                    if (DAO_Recuperar_Senha::Inserir($this->object_recuperar_senha)) {
+                    if (DAO_Recuperar_Senha::Inserir($this->obj_recuperar_senha)) {
                         $retorno['status'] = 'certo';
                         $retorno['header'] = '<h3>Enviado com Sucesso</h3>';
                         $retorno['content'] = '<p>Link enviado com sucesso para sua conta de E-Mail!</p>
@@ -136,17 +136,17 @@ namespace Module\Application\Controller\Usuario;
             $retorno['campos'] = $this->campos;
             
             if (empty($this->erros)) {
-                if (!empty($this->object_recuperar_senha->get_object_usuario())) {
+                if (!empty($this->obj_recuperar_senha->get_obj_usuario())) {
                     $this->senha_nova = password_hash($this->senha_nova, PASSWORD_DEFAULT);
                     
-                    if (DAO_Usuario::Atualizar_Senha($this->senha_nova, $this->object_recuperar_senha->get_object_usuario()->get_id()) === false) {
+                    if (DAO_Usuario::Atualizar_Senha($this->senha_nova, $this->obj_recuperar_senha->get_obj_usuario()->get_id()) === false) {
                         $retorno['status'] = 'erro';
                         $retorno['header'] = '<h3>Erro Salvar Nova Senha</h3>';
                         $retorno['content'] = '<p>Desculpe, não foi possível salvar a nova senha</p>';
                     } else {
-                        DAO_Recuperar_Senha::Deletar($this->object_recuperar_senha->get_object_usuario()->get_id());
+                        DAO_Recuperar_Senha::Deletar($this->obj_recuperar_senha->get_obj_usuario()->get_id());
                         
-                        Controller_Login::ReAutenticar_Usuario_Logado($this->object_recuperar_senha->get_object_usuario()->get_id());
+                        Controller_Login::ReAutenticar_Usuario_Logado($this->obj_recuperar_senha->get_obj_usuario()->get_id());
                         
                         $retorno['status'] = 'certo';
                         $retorno['header'] = '<h3>Senha Alterada com Sucesso</h3>';

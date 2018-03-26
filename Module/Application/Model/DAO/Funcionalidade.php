@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Funcionalidade as Object_Funcionalidade;
+    use Module\Application\Model\OBJ\Funcionalidade as OBJ_Funcionalidade;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Funcionalidade $object_funcionalidade) : bool
+        public static function Inserir(OBJ_Funcionalidade $obj_funcionalidade) : bool
         {
             try {
                 $sql = "INSERT INTO tb_funcionalidade (funcionalidade_id, funcionalidade_nome) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_funcionalidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_funcionalidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_funcionalidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_funcionalidade->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Funcionalidade $funcionalidade) : bool
+        public static function Atualizar(OBJ_Funcionalidade $funcionalidade) : bool
         {
             try {
                 $sql = "UPDATE tb_funcionalidade SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_funcionalidade->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_funcionalidade->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_funcionalidade->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_funcionalidade->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -79,18 +79,18 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaFuncionalidade(array $row) : Object_Funcionalidade
+        public static function PopulaFuncionalidade(array $row) : OBJ_Funcionalidade
         {
-            $object_funcionalidade = new Object_Funcionalidade();
+            $obj_funcionalidade = new OBJ_Funcionalidade();
             
             if (isset($row['funcionalidade_id'])) {
-                $object_funcionalidade->set_id($row['funcionalidade_id']);
+                $obj_funcionalidade->set_id($row['funcionalidade_id']);
             }
             
             if (isset($row['funcionalidade_nome'])) {
-                $object_funcionalidade->set_nome($row['funcionalidade_nome']);
+                $obj_funcionalidade->set_nome($row['funcionalidade_nome']);
             }
             
-            return $object_funcionalidade;
+            return $obj_funcionalidade;
         }                
     }

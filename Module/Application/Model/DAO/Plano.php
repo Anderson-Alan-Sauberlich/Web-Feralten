@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Plano as Object_Plano;
+    use Module\Application\Model\OBJ\Plano as OBJ_Plano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Plano $object_plano) : bool
+        public static function Inserir(OBJ_Plano $obj_plano) : bool
         {
             try {
                 $sql = "INSERT INTO tb_plano (plano_id, plano_valor_mensal, plano_valor_anual, plano_limite_pecas, plano_descricao) 
@@ -22,11 +22,11 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_plano->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vrl_lmt_pcs', $object_plano->get_limite_pecas(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_plano->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_plano->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrl_msl', $obj_plano->get_valor_mensal(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_anl', $obj_plano->get_valor_anual(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_lmt_pcs', $obj_plano->get_limite_pecas(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_plano->get_descricao(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -34,7 +34,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Plano $object_plano) : bool
+        public static function Atualizar(OBJ_Plano $obj_plano) : bool
         {
             try {
                 $sql = "UPDATE tb_plano SET
@@ -47,11 +47,11 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_plano->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrl_msl', $object_plano->get_valor_mensal(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vrl_anl', $object_plano->get_valor_anual(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vrl_lmt_pcs', $object_plano->get_limite_pecas(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_plano->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_plano->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrl_msl', $obj_plano->get_valor_mensal(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_anl', $obj_plano->get_valor_anual(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vrl_lmt_pcs', $obj_plano->get_limite_pecas(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_plano->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -137,71 +137,71 @@ namespace Module\Application\Model\DAO;
             $planos = array();
             
             foreach ($rows as $row) {
-                $object_plano = new Object_Plano();
+                $obj_plano = new OBJ_Plano();
                 $bool = true;
                 
                 if (isset($row['plano_id'])) {
-                    $object_plano->set_id($row['plano_id']);
+                    $obj_plano->set_id($row['plano_id']);
                 } else {
                     $bool = false;
                 }
                 
                 if (isset($row['plano_valor_mensal'])) {
-                    $object_plano->set_valor_mensal($row['plano_valor_mensal']);
+                    $obj_plano->set_valor_mensal($row['plano_valor_mensal']);
                 } else {
                     $bool = false;
                 }
                 
                 if (isset($row['plano_valor_anual'])) {
-                    $object_plano->set_valor_anual($row['plano_valor_anual']);
+                    $obj_plano->set_valor_anual($row['plano_valor_anual']);
                 } else {
                     $bool = false;
                 }
                 
                 if (isset($row['plano_limite_pecas'])) {
-                    $object_plano->set_limite_pecas($row['plano_limite_pecas']);
+                    $obj_plano->set_limite_pecas($row['plano_limite_pecas']);
                 } else {
                     $bool = false;
                 }
                 
                 if (isset($row['plano_descricao'])) {
-                    $object_plano->set_descricao($row['plano_descricao']);
+                    $obj_plano->set_descricao($row['plano_descricao']);
                 } else {
                     $bool = false;
                 }
                 
                 if ($bool) {
-                    $planos[$row['plano_id']] = $object_plano;
+                    $planos[$row['plano_id']] = $obj_plano;
                 }
             }
             
             return $planos;
         }
         
-        public static function PopulaPlano(array $row) : Object_Plano
+        public static function PopulaPlano(array $row) : OBJ_Plano
         {
-            $object_plano = new Object_Plano();
+            $obj_plano = new OBJ_Plano();
             
             if (isset($row['plano_id'])) {
-                $object_plano->set_id($row['plano_id']);
+                $obj_plano->set_id($row['plano_id']);
             }
             
             if (isset($row['plano_valor_mensal'])) {
-                $object_plano->set_valor_mensal($row['plano_valor_mensal']);
+                $obj_plano->set_valor_mensal($row['plano_valor_mensal']);
             }
             
             if (isset($row['plano_valor_anual'])) {
-                $object_plano->set_valor_anual($row['plano_valor_anual']);
+                $obj_plano->set_valor_anual($row['plano_valor_anual']);
             }
             
             if (isset($row['plano_limite_pecas'])) {
-                $object_plano->set_limite_pecas($row['plano_limite_pecas']);
+                $obj_plano->set_limite_pecas($row['plano_limite_pecas']);
             }
             
             if (isset($row['plano_descricao'])) {
-                $object_plano->set_descricao($row['plano_descricao']);
+                $obj_plano->set_descricao($row['plano_descricao']);
             }
             
-            return $object_plano;
+            return $obj_plano;
         }
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Orcamento_Peca as Object_Orcamento_Peca;
+    use Module\Application\Model\OBJ\Orcamento_Peca as OBJ_Orcamento_Peca;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -15,7 +15,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Orcamento_Peca $object_orcamento_peca) : bool
+        public static function Inserir(OBJ_Orcamento_Peca $obj_orcamento_peca) : bool
         {
             try {
                 $sql = "INSERT INTO tb_orcamento_peca (orcamento_peca_orc_id, orcamento_peca_pec_id) 
@@ -23,8 +23,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':orc_id', $object_orcamento_peca->get_orcamento_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_orcamento_peca->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':orc_id', $obj_orcamento_peca->get_orcamento_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_orcamento_peca->get_peca_id(), PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -32,7 +32,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Orcamento_Peca $object_orcamento_peca) : bool
+        public static function Atualizar(OBJ_Orcamento_Peca $obj_orcamento_peca) : bool
         {
             try {
                 $sql = "UPDATE tb_orcamento_peca SET
@@ -42,8 +42,8 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':orc_id', $object_orcamento_peca->get_orcamento_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_orcamento_peca->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':orc_id', $obj_orcamento_peca->get_orcamento_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_orcamento_peca->get_peca_id(), PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -114,34 +114,34 @@ namespace Module\Application\Model\DAO;
             $orcamento_pecas = array();
             
             foreach ($rows as $row) {
-                $object_orcamento_peca = new Object_Orcamento_Peca();
+                $obj_orcamento_peca = new OBJ_Orcamento_Peca();
                 
                 if (isset($row['orcamento_peca_orc_id'])) {
-                    $object_orcamento_peca->set_orcamento_id($row['orcamento_peca_orc_id']);
+                    $obj_orcamento_peca->set_orcamento_id($row['orcamento_peca_orc_id']);
                 }
                 
                 if (isset($row['orcamento_peca_pec_id'])) {
-                    $object_orcamento_peca->set_peca_id($row['orcamento_peca_pec_id']);
+                    $obj_orcamento_peca->set_peca_id($row['orcamento_peca_pec_id']);
                 }
                 
-                $orcamento_pecas[] = $object_orcamento_peca;
+                $orcamento_pecas[] = $obj_orcamento_peca;
             }
 
             return $orcamento_pecas;
         }
         
-        public static function PopulaOrcamentoPeca(array $row) : Object_Orcamento_Peca
+        public static function PopulaOrcamentoPeca(array $row) : OBJ_Orcamento_Peca
         {
-            $object_orcamento_peca = new Object_Orcamento_Peca();
+            $obj_orcamento_peca = new OBJ_Orcamento_Peca();
             
             if (isset($row['orcamento_peca_orc_id'])) {
-                $object_orcamento_peca->set_orcamento_id($row['orcamento_peca_orc_id']);
+                $obj_orcamento_peca->set_orcamento_id($row['orcamento_peca_orc_id']);
             }
             
             if (isset($row['orcamento_peca_pec_id'])) {
-                $object_orcamento_peca->set_peca_id($row['orcamento_peca_pec_id']);
+                $obj_orcamento_peca->set_peca_id($row['orcamento_peca_pec_id']);
             }
             
-            return $object_orcamento_peca;
+            return $obj_orcamento_peca;
         }
     }

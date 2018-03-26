@@ -4,7 +4,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Entidade as View_Entidade;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
@@ -157,7 +157,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             if (Login_Session::Verificar_Entidade()) {
                 $obj_entidade = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
                 
-                if ($obj_entidade instanceof Object_Entidade) {
+                if ($obj_entidade instanceof OBJ_Entidade) {
                     $view->set_obj_entidade($obj_entidade);
                     
                     if (empty($obj_entidade->get_imagem())) {
@@ -176,7 +176,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         public function SalvarDados() : void
         {
             if (empty($this->erros) && Login_Session::Verificar_Login()) {
-                $entidade = new Object_Entidade();
+                $entidade = new OBJ_Entidade();
                 
                 $entidade->set_site($this->site);
                 $entidade->set_nome_comercial($this->nome_comercial);
@@ -222,7 +222,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         {
             if (Login_Session::Verificar_Login()) {
                 if (empty($this->erros)) {
-                    $entidade = new Object_Entidade();
+                    $entidade = new OBJ_Entidade();
                     $entidade->set_usuario_id(Login_Session::get_usuario_id());
                     $entidade->set_status_id(1);
                     $entidade->set_intervalo_pagamento_id(1);
@@ -277,7 +277,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             if (Login_Session::Verificar_Login()) {
                 $obj_entidade = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
                 
-                if ($obj_entidade instanceof Object_Entidade) {
+                if ($obj_entidade instanceof OBJ_Entidade) {
                     $entidade['cpf_cnpj'] = $obj_entidade->get_cpf_cnpj();
                     $entidade['nome_comercial'] = $obj_entidade->get_nome_comercial();
                     $entidade['site'] = $obj_entidade->get_site();

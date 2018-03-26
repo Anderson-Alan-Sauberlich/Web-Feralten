@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Layout\Elemento;
     
-    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     use Module\Application\Model\Common\Util\Login_Session;
         
     class Orcamento
@@ -39,7 +39,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         /**
          * Armazena o objeto do orçamento a sermostrado na view html.
          * 
-         * @var Object_Orcamento $obj_orcamento
+         * @var OBJ_Orcamento $obj_orcamento
          */
         private static $obj_orcamento;
         
@@ -53,9 +53,9 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         /**
          * Seta o objeto orçamento.
          * 
-         * @param Object_Orcamento $obj_orcamento
+         * @param OBJ_Orcamento $obj_orcamento
          */
-        public function set_obj_orcamento(Object_Orcamento $obj_orcamento) : void
+        public function set_obj_orcamento(OBJ_Orcamento $obj_orcamento) : void
         {
             self::$obj_orcamento = $obj_orcamento;
         }
@@ -85,7 +85,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function MostrarID() : ?int
         {
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 return self::$obj_orcamento->get_id();
             } else {
                 return null;
@@ -99,7 +99,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function MostrarNome() : ?string
         {
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 return self::$obj_orcamento->get_peca_nome();
             } else {
                 return null;
@@ -113,7 +113,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function MostrarCMMV() : ?string
         {
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 return self::$obj_orcamento->get_categoria()->get_nome().', '.
                        self::$obj_orcamento->get_marca()->get_nome().', '.
                        self::$obj_orcamento->get_modelo()->get_nome().', '.
@@ -132,7 +132,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         {
             $pecas =[];
             
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 if (self::$pagina === self::RESPONDIDOS) {
                     foreach (self::$obj_orcamento->get_pecas() as $peca) {
                         if ($peca->get_entidade()->get_id() === Login_Session::get_entidade_id()) {
@@ -154,7 +154,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function MostrarAnos() : ?string
         {
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 return 'Ano: de '.self::$obj_orcamento->get_ano_de().' até '.self::$obj_orcamento->get_ano_ate();
             } else {
                 return null;
@@ -168,7 +168,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function MostrarDescricao() : ?string
         {
-            if (self::$obj_orcamento instanceof Object_Orcamento) {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 return self::$obj_orcamento->get_descricao();
             } else {
                 return null;

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Email\View\SRC;
     
-    use Module\Application\Model\Object\Contato_Anunciante as Object_Contato_Anunciante;
+    use Module\Application\Model\OBJ\Contato_Anunciante as OBJ_Contato_Anunciante;
     
     class Contato_Anunciante
     {
@@ -12,7 +12,7 @@ namespace Module\Email\View\SRC;
         
         private static $obj_contato_anunciante;
         
-        public function set_obj_contato_anunciante(Object_Contato_Anunciante $obj_contato_anunciante) : void
+        public function set_obj_contato_anunciante(OBJ_Contato_Anunciante $obj_contato_anunciante) : void
         {
             self::$obj_contato_anunciante = $obj_contato_anunciante;
         }
@@ -24,8 +24,8 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarNomeUsuario() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
-                return self::$obj_contato_anunciante->get_object_peca()->get_responsavel()->get_nome();
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
+                return self::$obj_contato_anunciante->get_obj_peca()->get_responsavel()->get_nome();
             } else {
                 return false;
             }
@@ -33,8 +33,8 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarPecaNome() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
-                return self::$obj_contato_anunciante->get_object_peca()->get_nome();
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
+                return self::$obj_contato_anunciante->get_obj_peca()->get_nome();
             } else {
                 return false;
             }
@@ -42,8 +42,8 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarPecaURL() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
-                return self::$obj_contato_anunciante->get_object_peca()->get_url();
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
+                return self::$obj_contato_anunciante->get_obj_peca()->get_url();
             } else {
                 return false;
             }
@@ -51,7 +51,7 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarNome() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
                 return self::$obj_contato_anunciante->get_nome();
             } else {
                 return false;
@@ -60,7 +60,7 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarEmail() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
                 return self::$obj_contato_anunciante->get_email();
             } else {
                 return false;
@@ -69,7 +69,7 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarTelefone() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
                 $fone = self::$obj_contato_anunciante->get_telefone();
                 
                 if (strlen($fone) === 11) {
@@ -84,7 +84,7 @@ namespace Module\Email\View\SRC;
         
         public static function RetornarMensagem() : ?string
         {
-            if (self::$obj_contato_anunciante instanceof Object_Contato_Anunciante) {
+            if (self::$obj_contato_anunciante instanceof OBJ_Contato_Anunciante) {
                 return self::$obj_contato_anunciante->get_mensagem();
             } else {
                 return false;

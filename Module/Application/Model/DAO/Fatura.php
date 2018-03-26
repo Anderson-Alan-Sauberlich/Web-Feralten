@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Fatura as Object_Fatura;
+    use Module\Application\Model\OBJ\Fatura as OBJ_Fatura;
     use Module\Application\Model\DAO\Status_Fatura as DAO_Status_Fatura;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -15,7 +15,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Fatura $object_fatura) : bool
+        public static function Inserir(OBJ_Fatura $obj_fatura) : bool
         {
             try {
                 $sql = "INSERT INTO tb_fatura (fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento) 
@@ -23,13 +23,13 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_fch', $object_fatura->get_data_fechamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_fatura->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_fatura->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $obj_fatura->get_valor_total(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sts_ftr_id', $obj_fatura->get_obj_status()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':data_ems', $obj_fatura->get_data_emissao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_vcm', $obj_fatura->get_data_vencimento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_fch', $obj_fatura->get_data_fechamento(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,7 +37,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Fatura $object_fatura) : bool
+        public static function Atualizar(OBJ_Fatura $obj_fatura) : bool
         {
             try {
                 $sql = "UPDATE tb_fatura SET
@@ -52,13 +52,13 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_fatura->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_fatura->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vlr_ttl', $object_fatura->get_valor_total(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sts_ftr_id', $object_fatura->get_object_status()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':data_ems', $object_fatura->get_data_emissao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_vcm', $object_fatura->get_data_vencimento(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_fch', $object_fatura->get_data_fechamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_fatura->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_fatura->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vlr_ttl', $obj_fatura->get_valor_total(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sts_ftr_id', $obj_fatura->get_obj_status()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':data_ems', $obj_fatura->get_data_emissao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_vcm', $obj_fatura->get_data_vencimento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_fch', $obj_fatura->get_data_fechamento(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -215,74 +215,74 @@ namespace Module\Application\Model\DAO;
             $faturas = array();
             
             foreach ($rows as $row) {
-                $object_fatura = new Object_Fatura();
+                $obj_fatura = new OBJ_Fatura();
                 
                 if (isset($row['fatura_id'])) {
-                    $object_fatura->set_id($row['fatura_id']);
+                    $obj_fatura->set_id($row['fatura_id']);
                 }
                 
                 if (isset($row['fatura_ent_id'])) {
-                    $object_fatura->set_entidade_id($row['fatura_ent_id']);
+                    $obj_fatura->set_entidade_id($row['fatura_ent_id']);
                 }
                 
                 if (isset($row['fatura_valor_total'])) {
-                    $object_fatura->set_valor_total($row['fatura_valor_total']);
+                    $obj_fatura->set_valor_total($row['fatura_valor_total']);
                 }
                 
                 if (isset($row['fatura_sts_ftr_id'])) {
-                    $object_fatura->set_object_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
+                    $obj_fatura->set_obj_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
                 }
                 
                 if (isset($row['fatura_data_emissao'])) {
-                    $object_fatura->set_data_emissao($row['fatura_data_emissao']);
+                    $obj_fatura->set_data_emissao($row['fatura_data_emissao']);
                 }
                 
                 if (isset($row['fatura_data_vencimento'])) {
-                    $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
+                    $obj_fatura->set_data_vencimento($row['fatura_data_vencimento']);
                 }
                 
                 if (isset($row['fatura_data_fechamento'])) {
-                    $object_fatura->set_data_fechamento($row['fatura_data_fechamento']);
+                    $obj_fatura->set_data_fechamento($row['fatura_data_fechamento']);
                 }
                 
-                $faturas[] = $object_fatura;
+                $faturas[] = $obj_fatura;
             }
             
             return $faturas;
         }
         
-        public static function PopulaFatura(array $row) : Object_Fatura
+        public static function PopulaFatura(array $row) : OBJ_Fatura
         {
-            $object_fatura = new Object_Fatura();
+            $obj_fatura = new OBJ_Fatura();
             
             if (isset($row['fatura_id'])) {
-                $object_fatura->set_id($row['fatura_id']);
+                $obj_fatura->set_id($row['fatura_id']);
             }
             
             if (isset($row['fatura_ent_id'])) {
-                $object_fatura->set_entidade_id($row['fatura_ent_id']);
+                $obj_fatura->set_entidade_id($row['fatura_ent_id']);
             }
             
             if (isset($row['fatura_valor_total'])) {
-                $object_fatura->set_valor_total($row['fatura_valor_total']);
+                $obj_fatura->set_valor_total($row['fatura_valor_total']);
             }
             
             if (isset($row['fatura_sts_ftr_id'])) {
-                $object_fatura->set_object_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
+                $obj_fatura->set_obj_status(DAO_Status_Fatura::BuscarPorCOD($row['fatura_sts_ftr_id']));
             }
             
             if (isset($row['fatura_data_emissao'])) {
-                $object_fatura->set_data_emissao($row['fatura_data_emissao']);
+                $obj_fatura->set_data_emissao($row['fatura_data_emissao']);
             }
             
             if (isset($row['fatura_data_vencimento'])) {
-                $object_fatura->set_data_vencimento($row['fatura_data_vencimento']);
+                $obj_fatura->set_data_vencimento($row['fatura_data_vencimento']);
             }
             
             if (isset($row['fatura_data_fechamento'])) {
-                $object_fatura->set_data_fechamento($row['fatura_data_fechamento']);
+                $obj_fatura->set_data_fechamento($row['fatura_data_fechamento']);
             }
             
-            return $object_fatura;
+            return $obj_fatura;
         }
     }

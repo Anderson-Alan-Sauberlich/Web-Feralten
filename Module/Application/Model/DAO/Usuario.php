@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Usuario $object_usuario) : bool
+        public static function Inserir(OBJ_Usuario $obj_usuario) : bool
         {
             try {
                 $sql = "INSERT INTO tb_usuario (usuario_id, usuario_email, usuario_nome, usuario_sobrenome, usuario_senha, usuario_ultimo_login, usuario_sts_usr_id, usuario_fone, usuario_fone_alternativo, usuario_email_alternativo) 
@@ -22,16 +22,16 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':email', $object_usuario->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(':nome', $object_usuario->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sobrenome', $object_usuario->get_sobrenome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':senha', $object_usuario->get_senha(), PDO::PARAM_STR);
-                $p_sql->bindValue(':login', $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sts_id', $object_usuario->get_status_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':email', $obj_usuario->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $obj_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sobrenome', $obj_usuario->get_sobrenome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':senha', $obj_usuario->get_senha(), PDO::PARAM_STR);
+                $p_sql->bindValue(':login', $obj_usuario->get_ultimo_login(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sts_id', $obj_usuario->get_status_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fone', $obj_usuario->get_fone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone_alt', $obj_usuario->get_fone_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email_alt', $obj_usuario->get_email_alternativo(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -39,7 +39,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Usuario $object_usuario) : bool
+        public static function Atualizar(OBJ_Usuario $obj_usuario) : bool
         {
             try {
                 $sql = "UPDATE tb_usuario SET
@@ -53,13 +53,13 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_usuario->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sobrenome', $object_usuario->get_sobrenome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email', $object_usuario->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sobrenome', $obj_usuario->get_sobrenome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email', $obj_usuario->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone', $obj_usuario->get_fone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone_alt', $obj_usuario->get_fone_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email_alt', $obj_usuario->get_email_alternativo(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -67,7 +67,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar_Contato(Object_Usuario $object_usuario) : bool
+        public static function Atualizar_Contato(OBJ_Usuario $obj_usuario) : bool
         {
             try {
                 $sql = "UPDATE tb_usuario SET
@@ -78,10 +78,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':fone', $object_usuario->get_fone(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fone_alt', $object_usuario->get_fone_alternativo(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email_alt', $object_usuario->get_email_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fone', $obj_usuario->get_fone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fone_alt', $obj_usuario->get_fone_alternativo(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email_alt', $obj_usuario->get_email_alternativo(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -121,16 +121,16 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar_Token_Ultimo_Login(Object_Usuario $object_usuario) : bool
+        public static function Atualizar_Token_Ultimo_Login(OBJ_Usuario $obj_usuario) : bool
         {
             try {
                 $sql = 'UPDATE tb_usuario SET usuario_token_login = :tk, usuario_ultimo_login = :ul WHERE usuario_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':tk', $object_usuario->get_token(), PDO::PARAM_STR);
-                $p_sql->bindValue(':ul', $object_usuario->get_ultimo_login(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':tk', $obj_usuario->get_token(), PDO::PARAM_STR);
+                $p_sql->bindValue(':ul', $obj_usuario->get_ultimo_login(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -258,54 +258,54 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaUsuario(array $row) : Object_Usuario
+        public static function PopulaUsuario(array $row) : OBJ_Usuario
         {
-            $object_usuario = new Object_Usuario();
+            $obj_usuario = new OBJ_Usuario();
             
             if (isset($row['usuario_id'])) {
-                $object_usuario->set_id($row['usuario_id']);
+                $obj_usuario->set_id($row['usuario_id']);
             }
             
             if (isset($row['usuario_nome'])) {
-                $object_usuario->set_nome($row['usuario_nome']);
+                $obj_usuario->set_nome($row['usuario_nome']);
             }
             
             if (isset($row['usuario_sobrenome'])) {
-                $object_usuario->set_sobrenome($row['usuario_sobrenome']);
+                $obj_usuario->set_sobrenome($row['usuario_sobrenome']);
             }
             
             if (isset($row['usuario_email'])) {
-                $object_usuario->set_email($row['usuario_email']);
+                $obj_usuario->set_email($row['usuario_email']);
             }
             
             if (isset($row['usuario_senha'])) {
-                $object_usuario->set_senha($row['usuario_senha']);
+                $obj_usuario->set_senha($row['usuario_senha']);
             }
             
             if (isset($row['usuario_ultimo_login'])) {
-                $object_usuario->set_ultimo_login($row['usuario_ultimo_login']);
+                $obj_usuario->set_ultimo_login($row['usuario_ultimo_login']);
             }
             
             if (isset($row['usuario_token_login'])) {
-                $object_usuario->set_token($row['usuario_token_login']);
+                $obj_usuario->set_token($row['usuario_token_login']);
             }
             
             if (isset($row['usuario_sts_usr_id'])) {
-                $object_usuario->set_status_id($row['usuario_sts_usr_id']);
+                $obj_usuario->set_status_id($row['usuario_sts_usr_id']);
             }
             
             if (isset($row['usuario_fone'])) {
-                $object_usuario->set_fone($row['usuario_fone']);
+                $obj_usuario->set_fone($row['usuario_fone']);
             }
             
             if (isset($row['usuario_fone_alternativo'])) {
-                $object_usuario->set_fone_alternativo($row['usuario_fone_alternativo']);
+                $obj_usuario->set_fone_alternativo($row['usuario_fone_alternativo']);
             }
             
             if (isset($row['usuario_email_alternativo'])) {
-                $object_usuario->set_email_alternativo($row['usuario_email_alternativo']);
+                $obj_usuario->set_email_alternativo($row['usuario_email_alternativo']);
             }
             
-            return $object_usuario;
+            return $obj_usuario;
         }
     }

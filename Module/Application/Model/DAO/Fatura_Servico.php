@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
+    use Module\Application\Model\OBJ\Fatura_Servico as OBJ_Fatura_Servico;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,16 +14,16 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Fatura_Servico $object_fatura_servico) : bool
+        public static function Inserir(OBJ_Fatura_Servico $obj_fatura_servico) : bool
         {
             try {
-                if (empty($object_fatura_servico->get_id()) AND !empty($object_fatura_servico->get_fatura_id())) {
-                    $id_fatura_servico = self::Pegar_Id_Livre($object_fatura_servico->get_fatura_id());
+                if (empty($obj_fatura_servico->get_id()) AND !empty($obj_fatura_servico->get_fatura_id())) {
+                    $id_fatura_servico = self::Pegar_Id_Livre($obj_fatura_servico->get_fatura_id());
                     
                     if (empty($id_fatura_servico)) {
-                        $object_fatura_servico->set_id(0);
+                        $obj_fatura_servico->set_id(0);
                     } else {
-                        $object_fatura_servico->set_id($id_fatura_servico);
+                        $obj_fatura_servico->set_id($id_fatura_servico);
                     }
                 }
                 
@@ -32,10 +32,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_fatura_servico->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ftr_id', $object_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_fatura_servico->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_fatura_servico->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ftr_id', $obj_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_fatura_servico->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vlr', $obj_fatura_servico->get_valor(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -43,7 +43,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Fatura_Servico $object_fatura_servico) : bool
+        public static function Atualizar(OBJ_Fatura_Servico $obj_fatura_servico) : bool
         {
             try {
                 $sql = "UPDATE tb_fatura_servico SET
@@ -55,10 +55,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_fatura_servico->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ftr_id', $object_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_fatura_servico->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_fatura_servico->get_valor(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_fatura_servico->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ftr_id', $obj_fatura_servico->get_fatura_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_fatura_servico->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vlr', $obj_fatura_servico->get_valor(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -116,50 +116,50 @@ namespace Module\Application\Model\DAO;
             $faturasServicos = array();
             
             foreach ($rows as $row) {
-                $object_fatura_servico = new Object_Fatura_Servico();
+                $obj_fatura_servico = new OBJ_Fatura_Servico();
                 
                 if (isset($row['fatura_servico_id'])) {
-                    $object_fatura_servico->set_id($row['fatura_servico_id']);
+                    $obj_fatura_servico->set_id($row['fatura_servico_id']);
                 }
                 
                 if (isset($row['fatura_servico_ftr_id'])) {
-                    $object_fatura_servico->set_fatura_id($row['fatura_servico_ftr_id']);
+                    $obj_fatura_servico->set_fatura_id($row['fatura_servico_ftr_id']);
                 }
                 
                 if (isset($row['fatura_servico_descricao'])) {
-                    $object_fatura_servico->set_descricao($row['fatura_servico_descricao']);
+                    $obj_fatura_servico->set_descricao($row['fatura_servico_descricao']);
                 }
                 
                 if (isset($row['fatura_servico_valor'])) {
-                    $object_fatura_servico->set_valor($row['fatura_servico_valor']);
+                    $obj_fatura_servico->set_valor($row['fatura_servico_valor']);
                 }
                 
-                $faturasServicos[] = $object_fatura_servico;
+                $faturasServicos[] = $obj_fatura_servico;
             }
             
             return $faturasServicos;
         }
         
-        public static function PopulaFaturaServico(array $row) : Object_Fatura_Servico
+        public static function PopulaFaturaServico(array $row) : OBJ_Fatura_Servico
         {
-            $object_fatura_servico = new Object_Fatura_Servico();
+            $obj_fatura_servico = new OBJ_Fatura_Servico();
             
             if (isset($row['fatura_servico_id'])) {
-                $object_fatura_servico->set_id($row['fatura_servico_id']);
+                $obj_fatura_servico->set_id($row['fatura_servico_id']);
             }
             
             if (isset($row['fatura_servico_ftr_id'])) {
-                $object_fatura_servico->set_fatura_id($row['fatura_servico_ftr_id']);
+                $obj_fatura_servico->set_fatura_id($row['fatura_servico_ftr_id']);
             }
             
             if (isset($row['fatura_servico_descricao'])) {
-                $object_fatura_servico->set_descricao($row['fatura_servico_descricao']);
+                $obj_fatura_servico->set_descricao($row['fatura_servico_descricao']);
             }
             
             if (isset($row['fatura_servico_valor'])) {
-                $object_fatura_servico->set_valor($row['fatura_servico_valor']);
+                $obj_fatura_servico->set_valor($row['fatura_servico_valor']);
             }
             
-            return $object_fatura_servico;
+            return $obj_fatura_servico;
         }
     }

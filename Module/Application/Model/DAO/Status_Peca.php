@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Status_Peca as Object_Status_Peca;
+    use Module\Application\Model\OBJ\Status_Peca as OBJ_Status_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Status_Peca $object_status_peca) : bool
+        public static function Inserir(OBJ_Status_Peca $obj_status_peca) : bool
         {
             try {
                 $sql = "INSERT INTO tb_status_peca (status_peca_id, status_peca_nome, status_peca_url) 
@@ -22,9 +22,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_status_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_status_peca->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -32,16 +32,16 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Status_Peca $object_status_peca) : bool
+        public static function Atualizar(OBJ_Status_Peca $obj_status_peca) : bool
         {
             try {
                 $sql = "UPDATE tb_status_peca SET status_peca_id = :id, status_peca_nome = :nome, status_peca_url = :url WHERE status_peca_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_status_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_status_peca->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -121,23 +121,23 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Popular_Status_Peca(array $row) : Object_Status_Peca
+        public static function Popular_Status_Peca(array $row) : OBJ_Status_Peca
         {
-            $object_status_peca = new Object_Status_Peca();
+            $obj_status_peca = new OBJ_Status_Peca();
             
             if (isset($row['status_peca_id'])) {
-                $object_status_peca->set_id($row['status_peca_id']);
+                $obj_status_peca->set_id($row['status_peca_id']);
             }
             
             if (isset($row['status_peca_nome'])) {
-                $object_status_peca->set_nome($row['status_peca_nome']);
+                $obj_status_peca->set_nome($row['status_peca_nome']);
             }
             
             if (isset($row['status_peca_url'])) {
-                $object_status_peca->set_url($row['status_peca_url']);
+                $obj_status_peca->set_url($row['status_peca_url']);
             }
             
-            return $object_status_peca;
+            return $obj_status_peca;
         }
         
         public static function Popular_Status_Pecas(array $rows) : array
@@ -145,21 +145,21 @@ namespace Module\Application\Model\DAO;
             $status_pecas = array();
             
             foreach ($rows as $row) {
-                $object_status_peca = new Object_Status_Peca();
+                $obj_status_peca = new OBJ_Status_Peca();
                 
                 if (isset($row['status_peca_id'])) {
-                    $object_status_peca->set_id($row['status_peca_id']);
+                    $obj_status_peca->set_id($row['status_peca_id']);
                 }
                 
                 if (isset($row['status_peca_nome'])) {
-                    $object_status_peca->set_nome($row['status_peca_nome']);
+                    $obj_status_peca->set_nome($row['status_peca_nome']);
                 }
                 
                 if (isset($row['status_peca_url'])) {
-                    $object_status_peca->set_url($row['status_peca_url']);
+                    $obj_status_peca->set_url($row['status_peca_url']);
                 }
                 
-                $status_pecas[] = $object_status_peca;
+                $status_pecas[] = $obj_status_peca;
             }
             
             return $status_pecas;

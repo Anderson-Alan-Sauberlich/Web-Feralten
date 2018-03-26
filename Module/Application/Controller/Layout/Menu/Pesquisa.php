@@ -12,17 +12,17 @@ namespace Module\Application\Controller\Layout\Menu;
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
     use Module\Application\Model\DAO\Versao as DAO_Versao;
-    use Module\Application\Model\Object\Peca as Object_Peca;
-    use Module\Application\Model\Object\Categoria_Pativel as Object_Categoria_Pativel;
-    use Module\Application\Model\Object\Marca_Pativel as Object_Marca_Pativel;
-    use Module\Application\Model\Object\Modelo_Pativel as Object_Modelo_Pativel;
-    use Module\Application\Model\Object\Versao_Pativel as Object_Versao_Pativel;
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
-    use Module\Application\Model\Object\Endereco as Object_Endereco;
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Modelo as Object_Modelo;
-    use Module\Application\Model\Object\Versao as Object_Versao;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
+    use Module\Application\Model\OBJ\Categoria_Pativel as OBJ_Categoria_Pativel;
+    use Module\Application\Model\OBJ\Marca_Pativel as OBJ_Marca_Pativel;
+    use Module\Application\Model\OBJ\Modelo_Pativel as OBJ_Modelo_Pativel;
+    use Module\Application\Model\OBJ\Versao_Pativel as OBJ_Versao_Pativel;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
+    use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Modelo as OBJ_Modelo;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
     use Module\Application\Controller\Layout\Menu\Filtro as Controller_Filtro;
     use \Exception;
     
@@ -30,8 +30,8 @@ namespace Module\Application\Controller\Layout\Menu;
     {
         function __construct()
         {
-            $this->object_peca = new Object_Peca();
-            $this->object_controller_filtro = new Controller_Filtro();
+            $this->obj_peca = new OBJ_Peca();
+            $this->obj_controller_filtro = new Controller_Filtro();
         }
         
         private $pagina = 0;
@@ -42,8 +42,8 @@ namespace Module\Application\Controller\Layout\Menu;
         private $versao;
         private $ano_de;
         private $ano_ate;
-        private $object_peca;
-        private $object_controller_filtro;
+        private $obj_peca;
+        private $obj_controller_filtro;
         
         public function set_pagina($pagina) : void
         {
@@ -176,7 +176,7 @@ namespace Module\Application\Controller\Layout\Menu;
         public function set_peca_nome($nome_peca) : void
         {
             try {
-                $this->object_peca->set_nome(Validador::Peca()::validar_nome($nome_peca));
+                $this->obj_peca->set_nome(Validador::Peca()::validar_nome($nome_peca));
             } catch (Exception $e) {
                 
             }
@@ -185,42 +185,42 @@ namespace Module\Application\Controller\Layout\Menu;
         public function set_peca_usuario(int $id_usuario = null) : void
         {
             try {
-                $entidade = new Object_Entidade();
+                $entidade = new OBJ_Entidade();
                 $entidade->set_usuario_id(Validador::Peca()::validar_responsavel($id_usuario));
-                $this->object_peca->set_entidade($entidade);
+                $this->obj_peca->set_entidade($entidade);
             } catch (Exception $e) {
                 
             }
         }
         
-        public function set_object_controller_filtro(Controller_Filtro $object_controller_filtro) : void
+        public function set_obj_controller_filtro(Controller_Filtro $obj_controller_filtro) : void
         {
-            $this->object_controller_filtro = $object_controller_filtro;
+            $this->obj_controller_filtro = $obj_controller_filtro;
             
-            if (!empty($object_controller_filtro->get_estado()) OR !empty($object_controller_filtro->get_cidade())) {
-                $object_endereco = new Object_Endereco();
+            if (!empty($obj_controller_filtro->get_estado()) OR !empty($obj_controller_filtro->get_cidade())) {
+                $obj_endereco = new OBJ_Endereco();
                 
-                if (!empty($object_controller_filtro->get_estado())) {
-                    $object_endereco->set_estado($object_controller_filtro->get_object_estado());
+                if (!empty($obj_controller_filtro->get_estado())) {
+                    $obj_endereco->set_estado($obj_controller_filtro->get_obj_estado());
                 }
                 
-                if (!empty($object_controller_filtro->get_cidade())) {
-                    $object_endereco->set_cidade($object_controller_filtro->get_object_cidade());
+                if (!empty($obj_controller_filtro->get_cidade())) {
+                    $obj_endereco->set_cidade($obj_controller_filtro->get_obj_cidade());
                 }
                 
-                $this->object_peca->set_endereco($object_endereco);
+                $this->obj_peca->set_endereco($obj_endereco);
             }
             
-            if (!empty($object_controller_filtro->get_estado_uso())) {
-                $this->object_peca->set_estado_uso($object_controller_filtro->get_object_estado_uso());
+            if (!empty($obj_controller_filtro->get_estado_uso())) {
+                $this->obj_peca->set_estado_uso($obj_controller_filtro->get_obj_estado_uso());
             }
             
-            if (!empty($object_controller_filtro->get_preferencia_entrega())) {
-                $this->object_peca->set_preferencia_entrega($object_controller_filtro->get_preferencia_entrega());
+            if (!empty($obj_controller_filtro->get_preferencia_entrega())) {
+                $this->obj_peca->set_preferencia_entrega($obj_controller_filtro->get_preferencia_entrega());
             }
             
-            if (!empty($object_controller_filtro->get_status_peca())) {
-                $this->object_peca->set_status($object_controller_filtro->get_object_status_peca());
+            if (!empty($obj_controller_filtro->get_status_peca())) {
+                $this->obj_peca->set_status($obj_controller_filtro->get_obj_status_peca());
             }
         }
         
@@ -242,7 +242,7 @@ namespace Module\Application\Controller\Layout\Menu;
             $form_pesquisar['marca'] = $this->marca;
             $form_pesquisar['modelo'] = $this->modelo;
             $form_pesquisar['versao'] = $this->versao;
-            $form_pesquisar['peca_nome'] = $this->object_peca->get_nome();
+            $form_pesquisar['peca_nome'] = $this->obj_peca->get_nome();
             $form_pesquisar['ano_de'] = $this->ano_de;
             $form_pesquisar['ano_ate'] = $this->ano_ate;
             
@@ -321,72 +321,72 @@ namespace Module\Application\Controller\Layout\Menu;
         
         private function Buscar_Por_Usuario()
         {
-            $this->set_paginas(DAO_Peca::Buscar_Numero_Paginas($this->object_peca, $this->object_controller_filtro->get_form()));
+            $this->set_paginas(DAO_Peca::Buscar_Numero_Paginas($this->obj_peca, $this->obj_controller_filtro->get_form()));
             
-            return DAO_Peca::Buscar_Pecas($this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
+            return DAO_Peca::Buscar_Pecas($this->obj_peca, $this->obj_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Categoria()
         {
-            $object_categoria_pativel = new Object_Categoria_Pativel();
+            $obj_categoria_pativel = new OBJ_Categoria_Pativel();
             
-            $object_categoria = new Object_Categoria();
-            $object_categoria->set_id($this->categoria);
+            $obj_categoria = new OBJ_Categoria();
+            $obj_categoria->set_id($this->categoria);
             
-            $object_categoria_pativel->set_object_categoria($object_categoria);
-            $object_categoria_pativel->set_ano_de($this->ano_de);
-            $object_categoria_pativel->set_ano_ate($this->ano_ate);
+            $obj_categoria_pativel->set_obj_categoria($obj_categoria);
+            $obj_categoria_pativel->set_ano_de($this->ano_de);
+            $obj_categoria_pativel->set_ano_ate($this->ano_ate);
             
-            $this->set_paginas(DAO_Categoria_Pativel::Buscar_Numero_Paginas($object_categoria_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
+            $this->set_paginas(DAO_Categoria_Pativel::Buscar_Numero_Paginas($obj_categoria_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form()));
             
-            return DAO_Categoria_Pativel::Buscar_Pecas($object_categoria_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
+            return DAO_Categoria_Pativel::Buscar_Pecas($obj_categoria_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Marca()
         {
-            $object_marca_pativel = new Object_Marca_Pativel();
+            $obj_marca_pativel = new OBJ_Marca_Pativel();
             
-            $object_marca = new Object_Marca();
-            $object_marca->set_id($this->marca);
+            $obj_marca = new OBJ_Marca();
+            $obj_marca->set_id($this->marca);
             
-            $object_marca_pativel->set_object_marca($object_marca);
-            $object_marca_pativel->set_ano_de($this->ano_de);
-            $object_marca_pativel->set_ano_ate($this->ano_ate);
+            $obj_marca_pativel->set_obj_marca($obj_marca);
+            $obj_marca_pativel->set_ano_de($this->ano_de);
+            $obj_marca_pativel->set_ano_ate($this->ano_ate);
             
-            $this->set_paginas(DAO_Marca_Pativel::Buscar_Numero_Paginas($object_marca_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
+            $this->set_paginas(DAO_Marca_Pativel::Buscar_Numero_Paginas($obj_marca_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form()));
              
-            return DAO_Marca_Pativel::Buscar_Pecas($object_marca_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
+            return DAO_Marca_Pativel::Buscar_Pecas($obj_marca_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Modelo()
         {
-            $object_modelo_pativel = new Object_Modelo_Pativel();
+            $obj_modelo_pativel = new OBJ_Modelo_Pativel();
             
-            $object_modelo = new Object_Modelo();
-            $object_modelo->get_id($this->modelo);
+            $obj_modelo = new OBJ_Modelo();
+            $obj_modelo->get_id($this->modelo);
             
-            $object_modelo_pativel->set_object_modelo($object_modelo);
-            $object_modelo_pativel->set_ano_de($this->ano_de);
-            $object_modelo_pativel->set_ano_ate($this->ano_ate);
+            $obj_modelo_pativel->set_obj_modelo($obj_modelo);
+            $obj_modelo_pativel->set_ano_de($this->ano_de);
+            $obj_modelo_pativel->set_ano_ate($this->ano_ate);
             
-            $this->set_paginas(DAO_Modelo_Pativel::Buscar_Numero_Paginas($object_modelo_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
+            $this->set_paginas(DAO_Modelo_Pativel::Buscar_Numero_Paginas($obj_modelo_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form()));
             
-            return DAO_Modelo_Pativel::Buscar_Pecas($object_modelo_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
+            return DAO_Modelo_Pativel::Buscar_Pecas($obj_modelo_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form(), $this->pagina);
         }
         
         private function Buscar_Por_Versao()
         {
-            $object_versao_pativel = new Object_Versao_Pativel();
+            $obj_versao_pativel = new OBJ_Versao_Pativel();
             
-            $object_versao = new Object_Versao();
-            $object_versao->set_id($this->versao);
+            $obj_versao = new OBJ_Versao();
+            $obj_versao->set_id($this->versao);
             
-            $object_versao_pativel->set_object_versao($object_versao);
-            $object_versao_pativel->set_ano_de($this->ano_de);
-            $object_versao_pativel->set_ano_ate($this->ano_ate);
+            $obj_versao_pativel->set_obj_versao($obj_versao);
+            $obj_versao_pativel->set_ano_de($this->ano_de);
+            $obj_versao_pativel->set_ano_ate($this->ano_ate);
             
-            $this->set_paginas(DAO_Versao_Pativel::Buscar_Numero_Paginas($object_versao_pativel, $this->object_peca, $this->object_controller_filtro->get_form()));
+            $this->set_paginas(DAO_Versao_Pativel::Buscar_Numero_Paginas($obj_versao_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form()));
              
-            return DAO_Versao_Pativel::Buscar_Pecas($object_versao_pativel, $this->object_peca, $this->object_controller_filtro->get_form(), $this->pagina);
+            return DAO_Versao_Pativel::Buscar_Pecas($obj_versao_pativel, $this->obj_peca, $this->obj_controller_filtro->get_form(), $this->pagina);
         }
     }

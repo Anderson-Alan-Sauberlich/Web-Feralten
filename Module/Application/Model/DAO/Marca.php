@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Marca_Compativel as Object_Marca_Compativel;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Marca_Compativel as OBJ_Marca_Compativel;
     use Module\Application\Model\DAO\Marca_Compativel as DAO_Marca_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -16,11 +16,11 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Marca $object_marca) : bool
+        public static function Inserir(OBJ_Marca $obj_marca) : bool
         {
             try {
-                if (empty($object_marca->get_id())) {
-                    $object_marca->set_id(self::Achar_ID_Livre($object_marca->get_categoria_id()));
+                if (empty($obj_marca->get_id())) {
+                    $obj_marca->set_id(self::Achar_ID_Livre($obj_marca->get_categoria_id()));
                 }
                 
                 $sql = "INSERT INTO tb_marca (marca_id, marca_ctg_id, marca_nome, marca_url) 
@@ -28,18 +28,18 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_marca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_marca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ca_id', $obj_marca->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_marca->get_url(), PDO::PARAM_STR);
 
                 if ($p_sql->execute()) {
-                    $object_marca_compativel = new Object_Marca_Compativel();
+                    $obj_marca_compativel = new OBJ_Marca_Compativel();
                     
-                    $object_marca_compativel->set_com_id($object_marca->get_id());
-                    $object_marca_compativel->set_da_id($object_marca->get_id());
+                    $obj_marca_compativel->set_com_id($obj_marca->get_id());
+                    $obj_marca_compativel->set_da_id($obj_marca->get_id());
                     
-                    return DAO_Marca_Compativel::Inserir($object_marca_compativel);
+                    return DAO_Marca_Compativel::Inserir($obj_marca_compativel);
                 } else {
                     return false;
                 }
@@ -48,17 +48,17 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Marca $object_marca) : bool
+        public static function Atualizar(OBJ_Marca $obj_marca) : bool
         {
             try {
                 $sql = "UPDATE tb_marca SET marca_ctg_id = :ca_id, marca_nome = :nome, marca_url = :url WHERE marca_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_marca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_marca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ca_id', $obj_marca->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_marca->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -210,20 +210,20 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Verificar_Marca_Repetida(Object_Marca $object_marca) : bool
+        public static function Verificar_Marca_Repetida(OBJ_Marca $obj_marca) : bool
         {
             try {
                 $sql = 'SELECT marca_id FROM tb_marca WHERE marca_ctg_id = :ca_id AND (marca_nome = :nome OR marca_url = :url)';
         
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(':ca_id', $object_marca->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_marca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_marca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':ca_id', $obj_marca->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_marca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_marca->get_url(), PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 $marca_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-                if (!empty($marca_id) AND $marca_id != $object_marca->get_id()) {
+                if (!empty($marca_id) AND $marca_id != $obj_marca->get_id()) {
                     return false;
                 } else {
                     return true;
@@ -233,27 +233,27 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaMarca(array $row) : Object_Marca
+        public static function PopulaMarca(array $row) : OBJ_Marca
         {
-            $object_marca = new Object_Marca();
+            $obj_marca = new OBJ_Marca();
             
             if (isset($row['marca_id'])) {
-                $object_marca->set_id($row['marca_id']);
+                $obj_marca->set_id($row['marca_id']);
             }
             
             if (isset($row['marca_ctg_id'])) {
-                $object_marca->set_categoria_id($row['marca_ctg_id']);
+                $obj_marca->set_categoria_id($row['marca_ctg_id']);
             }
             
             if (isset($row['marca_nome'])) {
-                $object_marca->set_nome($row['marca_nome']);
+                $obj_marca->set_nome($row['marca_nome']);
             }
             
             if (isset($row['marca_url'])) {
-                $object_marca->set_url($row['marca_url']);
+                $obj_marca->set_url($row['marca_url']);
             }
             
-            return $object_marca;
+            return $obj_marca;
         }
         
         public static function PopulaMarcas(array $rows) : array
@@ -261,25 +261,25 @@ namespace Module\Application\Model\DAO;
             $marcas = array();
             
             foreach ($rows as $row) {
-                $object_marca = new Object_Marca();
+                $obj_marca = new OBJ_Marca();
                 
                 if (isset($row['marca_id'])) {
-                    $object_marca->set_id($row['marca_id']);
+                    $obj_marca->set_id($row['marca_id']);
                 }
                 
                 if (isset($row['marca_ctg_id'])) {
-                    $object_marca->set_categoria_id($row['marca_ctg_id']);
+                    $obj_marca->set_categoria_id($row['marca_ctg_id']);
                 }
                 
                 if (isset($row['marca_nome'])) {
-                    $object_marca->set_nome($row['marca_nome']);
+                    $obj_marca->set_nome($row['marca_nome']);
                 }
                 
                 if (isset($row['marca_url'])) {
-                    $object_marca->set_url($row['marca_url']);
+                    $obj_marca->set_url($row['marca_url']);
                 }
                 
-                $marcas[] = $object_marca;
+                $marcas[] = $obj_marca;
             }
 
             return $marcas;

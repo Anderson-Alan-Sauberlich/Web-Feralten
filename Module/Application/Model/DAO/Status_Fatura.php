@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Status_Fatura as Object_Status_Fatura;
+    use Module\Application\Model\OBJ\Status_Fatura as OBJ_Status_Fatura;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Status_Fatura $object_status_fatura) : bool
+        public static function Inserir(OBJ_Status_Fatura $obj_status_fatura) : bool
         {
             try {
                 $sql = "INSERT INTO tb_status_fatura (status_fatura_id, status_fatura_descricao) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_status_fatura->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_status_fatura->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_fatura->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_status_fatura->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Status_Fatura $object_status_fatura) : bool
+        public static function Atualizar(OBJ_Status_Fatura $obj_status_fatura) : bool
         {
             try {
                 $sql = "UPDATE tb_status_fatura SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_status_fatura->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_status_fatura->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_fatura->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_status_fatura->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -84,34 +84,34 @@ namespace Module\Application\Model\DAO;
             $intervalos_pagamentos = array();
             
             foreach ($rows as $row) {
-                $object_status_fatura = new Object_Status_Fatura();
+                $obj_status_fatura = new OBJ_Status_Fatura();
                 
                 if (isset($row['status_fatura_id'])) {
-                    $object_status_fatura->set_id($row['status_fatura_id']);
+                    $obj_status_fatura->set_id($row['status_fatura_id']);
                 }
                 
                 if (isset($row['status_fatura_descricao'])) {
-                    $object_status_fatura->set_descricao($row['status_fatura_descricao']);
+                    $obj_status_fatura->set_descricao($row['status_fatura_descricao']);
                 }
                 
-                $intervalos_pagamentos[] = $object_status_fatura;
+                $intervalos_pagamentos[] = $obj_status_fatura;
             }
             
             return $intervalos_pagamentos;
         }
         
-        public static function PopulaStatusFatura(array $row) : Object_Status_Fatura
+        public static function PopulaStatusFatura(array $row) : OBJ_Status_Fatura
         {
-            $object_status_fatura = new Object_Status_Fatura();
+            $obj_status_fatura = new OBJ_Status_Fatura();
             
             if (isset($row['status_fatura_id'])) {
-                $object_status_fatura->set_id($row['status_fatura_id']);
+                $obj_status_fatura->set_id($row['status_fatura_id']);
             }
             
             if (isset($row['status_fatura_descricao'])) {
-                $object_status_fatura->set_descricao($row['status_fatura_descricao']);
+                $obj_status_fatura->set_descricao($row['status_fatura_descricao']);
             }
             
-            return $object_status_fatura;
+            return $obj_status_fatura;
         }
     }

@@ -5,10 +5,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
     use Module\Application\Model\DAO\Versao as DAO_Versao;
-    use Module\Application\Model\Object\Versao as Object_Versao;
-    use Module\Application\Model\Object\Modelo as Object_Modelo;
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
+    use Module\Application\Model\OBJ\Modelo as OBJ_Modelo;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
     use Module\Administration\Controller\Layout\Menu\Admin as Controller_Admin;
     use Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\CMMV\Gerenciar\Alterar as View_Alterar;
     
@@ -145,15 +145,15 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Alterar_Versao() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_versao = new Object_Versao();
+                $obj_versao = new OBJ_Versao();
                 
-                $object_versao->set_id($this->versao);
-                $object_versao->set_modelo_id($this->modelo);
-                $object_versao->set_nome($this->nome);
-                $object_versao->set_url($this->url);
+                $obj_versao->set_id($this->versao);
+                $obj_versao->set_modelo_id($this->modelo);
+                $obj_versao->set_nome($this->nome);
+                $obj_versao->set_url($this->url);
         
-                if (DAO_Versao::Verificar_Versao_Repetida($object_versao)) {
-                    DAO_Versao::Atualizar($object_versao);
+                if (DAO_Versao::Verificar_Versao_Repetida($obj_versao)) {
+                    DAO_Versao::Atualizar($obj_versao);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Versão Nome/URL Já Estão Cadastrados Para Este Modelo</b></div>";
                 }
@@ -166,15 +166,15 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Alterar_Modelo() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_modelo = new Object_Modelo();
+                $obj_modelo = new OBJ_Modelo();
                 
-                $object_modelo->set_id($this->modelo);
-                $object_modelo->set_marca_id($this->marca);
-                $object_modelo->set_nome($this->nome);
-                $object_modelo->set_url($this->url);
+                $obj_modelo->set_id($this->modelo);
+                $obj_modelo->set_marca_id($this->marca);
+                $obj_modelo->set_nome($this->nome);
+                $obj_modelo->set_url($this->url);
         
-                if (DAO_Modelo::Verificar_Modelo_Repetido($object_modelo)) {
-                    DAO_Modelo::Atualizar($object_modelo);
+                if (DAO_Modelo::Verificar_Modelo_Repetido($obj_modelo)) {
+                    DAO_Modelo::Atualizar($obj_modelo);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Modelo Nome/URL Já Estão Cadastrados Para Está Marca</b></div>";
                 }
@@ -187,15 +187,15 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Alterar_Marca() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_marca = new Object_Marca();
+                $obj_marca = new OBJ_Marca();
                 
-                $object_marca->set_id($this->marca);
-                $object_marca->set_categoria_id($this->categoria);
-                $object_marca->set_nome($this->nome);
-                $object_marca->set_url($this->url);
+                $obj_marca->set_id($this->marca);
+                $obj_marca->set_categoria_id($this->categoria);
+                $obj_marca->set_nome($this->nome);
+                $obj_marca->set_url($this->url);
         
-                if (DAO_Marca::Verificar_Marca_Repetida($object_marca)) {
-                    DAO_Marca::Atualizar($object_marca);
+                if (DAO_Marca::Verificar_Marca_Repetida($obj_marca)) {
+                    DAO_Marca::Atualizar($obj_marca);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Marca Nome/URL Já Estão Cadastrados Para Está Categoria</b></div>";
                 }
@@ -208,14 +208,14 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Alterar_Categoria() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_categoria = new Object_Categoria();
+                $obj_categoria = new OBJ_Categoria();
         
-                $object_categoria->set_id($this->categoria);
-                $object_categoria->set_nome($this->nome);
-                $object_categoria->set_url($this->url);
+                $obj_categoria->set_id($this->categoria);
+                $obj_categoria->set_nome($this->nome);
+                $obj_categoria->set_url($this->url);
         
-                if (DAO_Categoria::Verificar_Categoria_Repetida($object_categoria)) {
-                    DAO_Categoria::Atualizar($object_categoria);
+                if (DAO_Categoria::Verificar_Categoria_Repetida($obj_categoria)) {
+                    DAO_Categoria::Atualizar($obj_categoria);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Categoria Nome/URL Já Estão Cadastrados</b></div>";
                 }
@@ -243,13 +243,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
          */
         public function Retornar_Categoria() : void
         {
-            $object_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
+            $obj_categoria = $this->Buscar_Categoria_Por_Id($this->categoria);
             
-            if (!empty($object_categoria)) {
+            if (!empty($obj_categoria)) {
                 $categoria = array();
                 
-                $categoria['nome'] = $object_categoria->get_nome();
-                $categoria['url'] = $object_categoria->get_url();
+                $categoria['nome'] = $obj_categoria->get_nome();
+                $categoria['url'] = $obj_categoria->get_url();
                 
                 echo json_encode($categoria);
             }
@@ -260,13 +260,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
          */
         public function Retornar_Marca() : void
         {
-            $object_marca = $this->Buscar_Marca_Por_Id($this->marca);
+            $obj_marca = $this->Buscar_Marca_Por_Id($this->marca);
              
-            if (!empty($object_marca)) {
+            if (!empty($obj_marca)) {
                 $marca = array();
         
-                $marca['nome'] = $object_marca->get_nome();
-                $marca['url'] = $object_marca->get_url();
+                $marca['nome'] = $obj_marca->get_nome();
+                $marca['url'] = $obj_marca->get_url();
         
                 echo json_encode($marca);
             }
@@ -277,13 +277,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
          */
         public function Retornar_Modelo() : void
         {
-            $object_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
+            $obj_modelo = $this->Buscar_Modelo_Por_Id($this->modelo);
         
-            if (!empty($object_modelo)) {
+            if (!empty($obj_modelo)) {
                 $modelo = array();
         
-                $modelo['nome'] = $object_modelo->get_nome();
-                $modelo['url'] = $object_modelo->get_url();
+                $modelo['nome'] = $obj_modelo->get_nome();
+                $modelo['url'] = $obj_modelo->get_url();
         
                 echo json_encode($modelo);
             }
@@ -294,13 +294,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
          */
         public function Retornar_Versao() : void
         {
-            $object_versao = $this->Buscar_Versao_Por_Id($this->versao);
+            $obj_versao = $this->Buscar_Versao_Por_Id($this->versao);
         
-            if (!empty($object_versao)) {
+            if (!empty($obj_versao)) {
                 $versao = array();
         
-                $versao['nome'] = $object_versao->get_nome();
-                $versao['url'] = $object_versao->get_url();
+                $versao['nome'] = $obj_versao->get_nome();
+                $versao['url'] = $obj_versao->get_url();
         
                 echo json_encode($versao);
             }
@@ -379,7 +379,7 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         /**
          * @param int $categoria
-         * @return boolean|Object_Categoria|NULL
+         * @return boolean|OBJ_Categoria|NULL
          */
         private function Buscar_Categoria_Por_Id(?int $categoria)
         {
@@ -392,7 +392,7 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         /**
          * @param int $marca
-         * @return boolean|Object_Marca|NULL
+         * @return boolean|OBJ_Marca|NULL
          */
         private function Buscar_Marca_Por_Id(?int $marca)
         {
@@ -405,7 +405,7 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         /**
          * @param int $modelo
-         * @return boolean|Object_Modelo|NULL
+         * @return boolean|OBJ_Modelo|NULL
          */
         private function Buscar_Modelo_Por_Id(?int $modelo)
         {
@@ -418,7 +418,7 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         
         /**
          * @param int $versao
-         * @return boolean|Object_Versao|NULL
+         * @return boolean|OBJ_Versao|NULL
          */
         private function Buscar_Versao_Por_Id(?int $versao)
         {

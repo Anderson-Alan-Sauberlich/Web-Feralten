@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Contato_Anunciante as Object_Contato_Anunciante;
+    use Module\Application\Model\OBJ\Contato_Anunciante as OBJ_Contato_Anunciante;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -15,26 +15,26 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Contato_Anunciante $object_contato_anunciante) : bool
+        public static function Inserir(OBJ_Contato_Anunciante $obj_contato_anunciante) : bool
         {
             try {
-                $object_contato_anunciante->set_id(self::Achar_ID_Livre($object_contato_anunciante->get_object_peca()->get_id()));
+                $obj_contato_anunciante->set_id(self::Achar_ID_Livre($obj_contato_anunciante->get_obj_peca()->get_id()));
                 
                 $sql = "INSERT INTO tb_contato_anunciante (contato_anunciante_id, contato_anunciante_pec_id, contato_anunciante_nome, contato_anunciante_email, contato_anunciante_aprovacao, contato_anunciante_lido, contato_anunciante_telefone, contato_anunciante_whatsapp, contato_anunciante_mensagem, contato_anunciante_datahora_envio) 
                         VALUES (:id, :pec_id, :nome, :email, :aprovacao, :lido, :telefone, :whatsapp, :mensagem, :datahora_envio);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_contato_anunciante->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_object_peca()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_contato_anunciante->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email', $object_contato_anunciante->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(':aprovacao', $object_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':lido', $object_contato_anunciante->get_lido(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':telefone', $object_contato_anunciante->get_telefone(), PDO::PARAM_STR);
-                $p_sql->bindValue(':whatsapp', $object_contato_anunciante->get_whatsapp(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':mensagem', $object_contato_anunciante->get_mensagem(), PDO::PARAM_STR);
-                $p_sql->bindValue(':datahora_envio', $object_contato_anunciante->get_datahora_envio(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_contato_anunciante->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_contato_anunciante->get_obj_peca()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_contato_anunciante->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email', $obj_contato_anunciante->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(':aprovacao', $obj_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':lido', $obj_contato_anunciante->get_lido(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':telefone', $obj_contato_anunciante->get_telefone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':whatsapp', $obj_contato_anunciante->get_whatsapp(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':mensagem', $obj_contato_anunciante->get_mensagem(), PDO::PARAM_STR);
+                $p_sql->bindValue(':datahora_envio', $obj_contato_anunciante->get_datahora_envio(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -42,7 +42,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Contato_Anunciante $object_contato_anunciante) : bool
+        public static function Atualizar(OBJ_Contato_Anunciante $obj_contato_anunciante) : bool
         {
             try {
                 $sql = "UPDATE tb_contato_anunciante SET
@@ -60,16 +60,16 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_contato_anunciante->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_id', $object_contato_anunciante->get_object_peca()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_contato_anunciante->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':email', $object_contato_anunciante->get_email(), PDO::PARAM_STR);
-                $p_sql->bindValue(':aprovacao', $object_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':lido', $object_contato_anunciante->get_lido(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':telefone', $object_contato_anunciante->get_telefone(), PDO::PARAM_STR);
-                $p_sql->bindValue(':whatsapp', $object_contato_anunciante->get_whatsapp(), PDO::PARAM_BOOL);
-                $p_sql->bindValue(':mensagem', $object_contato_anunciante->get_mensagem(), PDO::PARAM_STR);
-                $p_sql->bindValue(':datahora_envio', $object_contato_anunciante->get_datahora_envio(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_contato_anunciante->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_contato_anunciante->get_obj_peca()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_contato_anunciante->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':email', $obj_contato_anunciante->get_email(), PDO::PARAM_STR);
+                $p_sql->bindValue(':aprovacao', $obj_contato_anunciante->get_aprovacao(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':lido', $obj_contato_anunciante->get_lido(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':telefone', $obj_contato_anunciante->get_telefone(), PDO::PARAM_STR);
+                $p_sql->bindValue(':whatsapp', $obj_contato_anunciante->get_whatsapp(), PDO::PARAM_BOOL);
+                $p_sql->bindValue(':mensagem', $obj_contato_anunciante->get_mensagem(), PDO::PARAM_STR);
+                $p_sql->bindValue(':datahora_envio', $obj_contato_anunciante->get_datahora_envio(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -142,98 +142,98 @@ namespace Module\Application\Model\DAO;
             $contato_anunciantes = array();
             
             foreach ($rows as $row) {
-                $object_contato_anunciante = new Object_Contato_Anunciante();
+                $obj_contato_anunciante = new OBJ_Contato_Anunciante();
                 
                 if (isset($row['contato_anunciante_id'])) {
-                    $object_contato_anunciante->set_id($row['contato_anunciante_id']);
+                    $obj_contato_anunciante->set_id($row['contato_anunciante_id']);
                 }
                 
                 if (isset($row['contato_anunciante_pec_id'])) {
-                    $object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
+                    $obj_contato_anunciante->set_obj_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
                 }
                 
                 if (isset($row['contato_anunciante_nome'])) {
-                    $object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
+                    $obj_contato_anunciante->set_nome($row['contato_anunciante_nome']);
                 }
                 
                 if (isset($row['contato_anunciante_email'])) {
-                    $object_contato_anunciante->set_email($row['contato_anunciante_email']);
+                    $obj_contato_anunciante->set_email($row['contato_anunciante_email']);
                 }
                 
                 if (isset($row['contato_anunciante_aprovacao'])) {
-                    $object_contato_anunciante->set_aprovacao($row['contato_anunciante_aprovacao']);
+                    $obj_contato_anunciante->set_aprovacao($row['contato_anunciante_aprovacao']);
                 }
                 
                 if (isset($row['contato_anunciante_lido'])) {
-                    $object_contato_anunciante->set_lido($row['contato_anunciante_lido']);
+                    $obj_contato_anunciante->set_lido($row['contato_anunciante_lido']);
                 }
                 
                 if (isset($row['contato_anunciante_telefone'])) {
-                    $object_contato_anunciante->set_telefone($row['contato_anunciante_telefone']);
+                    $obj_contato_anunciante->set_telefone($row['contato_anunciante_telefone']);
                 }
                 
                 if (isset($row['contato_anunciante_whatsapp'])) {
-                    $object_contato_anunciante->set_whatsapp($row['contato_anunciante_whatsapp']);
+                    $obj_contato_anunciante->set_whatsapp($row['contato_anunciante_whatsapp']);
                 }
                 
                 if (isset($row['contato_anunciante_mensagem'])) {
-                    $object_contato_anunciante->set_mensagem($row['contato_anunciante_mensagem']);
+                    $obj_contato_anunciante->set_mensagem($row['contato_anunciante_mensagem']);
                 }
                 
                 if (isset($row['contato_anunciante_datahora_envio'])) {
-                    $object_contato_anunciante->set_datahora_envio($row['contato_anunciante_datahora_envio']);
+                    $obj_contato_anunciante->set_datahora_envio($row['contato_anunciante_datahora_envio']);
                 }
                 
-                $contato_anunciantes[] = $object_contato_anunciante;
+                $contato_anunciantes[] = $obj_contato_anunciante;
             }
 
             return $contato_anunciantes;
         }
         
-        public static function PopulaContatoAnunciante(array $row) : Object_Contato_Anunciante
+        public static function PopulaContatoAnunciante(array $row) : OBJ_Contato_Anunciante
         {
-            $object_contato_anunciante = new Object_Contato_Anunciante();
+            $obj_contato_anunciante = new OBJ_Contato_Anunciante();
             
             if (isset($row['contato_anunciante_id'])) {
-                $object_contato_anunciante->set_id($row['contato_anunciante_id']);
+                $obj_contato_anunciante->set_id($row['contato_anunciante_id']);
             }
             
             if (isset($row['contato_anunciante_pec_id'])) {
-                $object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
+                $obj_contato_anunciante->set_obj_peca(DAO_Peca::BuscarPorCOD($row['contato_anunciante_pec_id']));
             }
             
             if (isset($row['contato_anunciante_nome'])) {
-                $object_contato_anunciante->set_nome($row['contato_anunciante_nome']);
+                $obj_contato_anunciante->set_nome($row['contato_anunciante_nome']);
             }
             
             if (isset($row['contato_anunciante_email'])) {
-                $object_contato_anunciante->set_email($row['contato_anunciante_email']);
+                $obj_contato_anunciante->set_email($row['contato_anunciante_email']);
             }
             
             if (isset($row['contato_anunciante_aprovacao'])) {
-                $object_contato_anunciante->set_aprovacao($row['contato_anunciante_aprovacao']);
+                $obj_contato_anunciante->set_aprovacao($row['contato_anunciante_aprovacao']);
             }
             
             if (isset($row['contato_anunciante_lido'])) {
-                $object_contato_anunciante->set_lido($row['contato_anunciante_lido']);
+                $obj_contato_anunciante->set_lido($row['contato_anunciante_lido']);
             }
             
             if (isset($row['contato_anunciante_telefone'])) {
-                $object_contato_anunciante->set_telefone($row['contato_anunciante_telefone']);
+                $obj_contato_anunciante->set_telefone($row['contato_anunciante_telefone']);
             }
             
             if (isset($row['contato_anunciante_whatsapp'])) {
-                $object_contato_anunciante->set_whatsapp($row['contato_anunciante_whatsapp']);
+                $obj_contato_anunciante->set_whatsapp($row['contato_anunciante_whatsapp']);
             }
             
             if (isset($row['contato_anunciante_mensagem'])) {
-                $object_contato_anunciante->set_mensagem($row['contato_anunciante_mensagem']);
+                $obj_contato_anunciante->set_mensagem($row['contato_anunciante_mensagem']);
             }
             
             if (isset($row['contato_anunciante_datahora_envio'])) {
-                $object_contato_anunciante->set_datahora_envio($row['contato_anunciante_datahora_envio']);
+                $obj_contato_anunciante->set_datahora_envio($row['contato_anunciante_datahora_envio']);
             }
             
-            return $object_contato_anunciante;
+            return $obj_contato_anunciante;
         }
     }

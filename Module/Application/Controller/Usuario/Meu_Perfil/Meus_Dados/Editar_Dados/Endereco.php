@@ -4,11 +4,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Endereco as View_Endereco;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
-    use Module\Application\Model\Object\Endereco as Object_Endereco;
+    use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
     use Module\Application\Model\DAO\Cidade as DAO_Cidade;
     use Module\Application\Model\DAO\Estado as DAO_Estado;
-    use Module\Application\Model\Object\Cidade as Object_Cidade;
-    use Module\Application\Model\Object\Estado as Object_Estado;
+    use Module\Application\Model\OBJ\Cidade as OBJ_Cidade;
+    use Module\Application\Model\OBJ\Estado as OBJ_Estado;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use \Exception;
@@ -245,7 +245,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             if (Login_Session::Verificar_Entidade()) {
                 $obj_endereco = DAO_Endereco::Buscar_Por_Id_Entidade(Login_Session::get_entidade_id());
                 
-                if ($obj_endereco instanceof Object_Endereco) {
+                if ($obj_endereco instanceof OBJ_Endereco) {
                     $view->set_obj_endereco($obj_endereco);
                     
                     $cidades = DAO_Cidade::BuscarPorCOD($obj_endereco->get_estado()->get_id());
@@ -270,7 +270,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                 
                 if ($status == 1) {
                     if (empty($this->erros)) {
-                        $endereco = new Object_Endereco();
+                        $endereco = new OBJ_Endereco();
                         
                         $endereco->set_entidade_id(Login_Session::get_entidade_id());
                         $endereco->set_complemento($this->complemento);
@@ -279,13 +279,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                         $endereco->set_cep($this->cep);
                         $endereco->set_numero($this->numero);
                         
-                        $object_cidade = new Object_Cidade();
-                        $object_cidade->set_id($this->cidade);
-                        $endereco->set_cidade($object_cidade);
+                        $obj_cidade = new OBJ_Cidade();
+                        $obj_cidade->set_id($this->cidade);
+                        $endereco->set_cidade($obj_cidade);
                         
-                        $object_estado = new Object_Estado();
-                        $object_estado->set_id($this->estado);
-                        $endereco->set_estado($object_estado);
+                        $obj_estado = new OBJ_Estado();
+                        $obj_estado->set_id($this->estado);
+                        $endereco->set_estado($obj_estado);
                         
                         if (DAO_Endereco::Atualizar($endereco) === false) {
                             $this->erros[] = "Erro ao tentar Atualizar Endereço";
@@ -312,17 +312,17 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         {
             if (Login_Session::Verificar_Login()) {
                 if (empty($this->erros)) {
-                    $object_estado = new Object_Estado();
-                    $object_estado->set_id($this->estado);
+                    $obj_estado = new OBJ_Estado();
+                    $obj_estado->set_id($this->estado);
                     
-                    $object_cidade = new Object_Cidade();
-                    $object_cidade->set_id($this->cidade);
+                    $obj_cidade = new OBJ_Cidade();
+                    $obj_cidade->set_id($this->cidade);
                     
-                    $endereco = new Object_Endereco();
+                    $endereco = new OBJ_Endereco();
                     $endereco->set_id(0);
                     $endereco->set_entidade_id(Login_Session::get_entidade_id());
-                    $endereco->set_cidade($object_cidade);
-                    $endereco->set_estado($object_estado);
+                    $endereco->set_cidade($obj_cidade);
+                    $endereco->set_estado($obj_estado);
                     $endereco->set_numero($this->numero);
                     $endereco->set_cep($this->cep);
                     $endereco->set_bairro($this->bairro);
@@ -359,7 +359,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             if (Login_Session::Verificar_Entidade()) {
                 $obj_endereco = DAO_Endereco::Buscar_Por_Id_Entidade(Login_Session::get_entidade_id());
                 
-                if ($obj_endereco instanceof Object_Endereco) {
+                if ($obj_endereco instanceof OBJ_Endereco) {
                     $endereco['cep'] = $obj_endereco->get_cep();
                     $endereco['estado'] = $obj_endereco->get_estado()->get_uf();
                     $endereco['cidade'] = $obj_endereco->get_cidade()->get_id();

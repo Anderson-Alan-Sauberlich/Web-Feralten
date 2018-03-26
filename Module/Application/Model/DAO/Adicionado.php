@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Adicionado as Object_Adicionado;
+    use Module\Application\Model\OBJ\Adicionado as OBJ_Adicionado;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
@@ -16,20 +16,20 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Adicionado $object_adicionado) : bool
+        public static function Inserir(OBJ_Adicionado $obj_adicionado) : bool
         {
             try {
-                $object_adicionado->set_id(self::Achar_ID_Livre($object_adicionado->get_object_entidade()->get_id()));
+                $obj_adicionado->set_id(self::Achar_ID_Livre($obj_adicionado->get_obj_entidade()->get_id()));
                 
                 $sql = "INSERT INTO tb_adicionado (adicionado_id, adicionado_ent_id, adicionado_usr_id, adicionado_datahora) 
                         VALUES (:id, :ent_id, :usr_id, :datahora);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_adicionado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_adicionado->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_adicionado->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_adicionado->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_adicionado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_adicionado->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_adicionado->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_adicionado->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,7 +37,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Adicionado $object_adicionado) : bool
+        public static function Atualizar(OBJ_Adicionado $obj_adicionado) : bool
         {
             try {
                 $sql = "UPDATE tb_adicionado SET
@@ -49,10 +49,10 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_adicionado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_adicionado->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_adicionado->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_adicionado->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_adicionado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_adicionado->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_adicionado->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_adicionado->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -126,50 +126,50 @@ namespace Module\Application\Model\DAO;
             $adicionados = array();
             
             foreach ($rows as $row) {
-                $object_adicionado = new Object_Adicionado();
+                $obj_adicionado = new OBJ_Adicionado();
                 
                 if (isset($row['adicionado_id'])) {
-                    $object_adicionado->set_id($row['adicionado_id']);
+                    $obj_adicionado->set_id($row['adicionado_id']);
                 }
                 
                 if (isset($row['adicionado_ent_id'])) {
-                    $object_adicionado->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['adicionado_ent_id']));
+                    $obj_adicionado->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['adicionado_ent_id']));
                 }
                 
                 if (isset($row['adicionado_usr_id'])) {
-                    $object_adicionado->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['adicionado_usr_id']));
+                    $obj_adicionado->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['adicionado_usr_id']));
                 }
                                 
                 if (isset($row['adicionado_datahora'])) {
-                    $object_adicionado->set_datahora($row['adicionado_datahora']);
+                    $obj_adicionado->set_datahora($row['adicionado_datahora']);
                 }
                 
-                $adicionados[] = $object_adicionado;
+                $adicionados[] = $obj_adicionado;
             }
 
             return $adicionados;
         }
         
-        public static function Popula_Adicionado(array $row) : Object_Adicionado
+        public static function Popula_Adicionado(array $row) : OBJ_Adicionado
         {
-            $object_adicionado = new Object_Adicionado();
+            $obj_adicionado = new OBJ_Adicionado();
             
             if (isset($row['adicionado_id'])) {
-                $object_adicionado->set_id($row['adicionado_id']);
+                $obj_adicionado->set_id($row['adicionado_id']);
             }
             
             if (isset($row['adicionado_ent_id'])) {
-                $object_adicionado->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['adicionado_ent_id']));
+                $obj_adicionado->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['adicionado_ent_id']));
             }
             
             if (isset($row['adicionado_usr_id'])) {
-                $object_adicionado->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['adicionado_usr_id']));
+                $obj_adicionado->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['adicionado_usr_id']));
             }
             
             if (isset($row['adicionado_datahora'])) {
-                $object_adicionado->set_datahora($row['adicionado_datahora']);
+                $obj_adicionado->set_datahora($row['adicionado_datahora']);
             }
             
-            return $object_adicionado;
+            return $obj_adicionado;
         }
     }

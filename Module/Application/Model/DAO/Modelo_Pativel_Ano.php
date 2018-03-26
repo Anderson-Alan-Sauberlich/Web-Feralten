@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Modelo_Pativel_Ano as Object_Modelo_Pativel_Ano;
+    use Module\Application\Model\OBJ\Modelo_Pativel_Ano as OBJ_Modelo_Pativel_Ano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -15,10 +15,10 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Modelo_Pativel_Ano $object_modelo_pativel_ano) : bool
+        public static function Inserir(OBJ_Modelo_Pativel_Ano $obj_modelo_pativel_ano) : bool
         {
             try {
-                $anos = $object_modelo_pativel->get_anos();
+                $anos = $obj_modelo_pativel->get_anos();
                 
                 if (!empty($anos) AND !empty($proximo_id_ano)) {
                        foreach ($anos as $ano) {
@@ -42,7 +42,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Modelo_Pativel_Ano $object_modelo_pative_anol) : bool
+        public static function Atualizar(OBJ_Modelo_Pativel_Ano $obj_modelo_pative_anol) : bool
         {
             try {
                 
@@ -51,7 +51,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Modelo_Pativel_Ano $object_modelo_pativel_ano) : bool
+        public static function Deletar_Por_Objeto(OBJ_Modelo_Pativel_Ano $obj_modelo_pativel_ano) : bool
         {
             try {
                 
@@ -225,17 +225,17 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_modelo_pativel_ano = new Object_Modelo_Pativel_Ano();
+                $obj_modelo_pativel_ano = new OBJ_Modelo_Pativel_Ano();
                 
                 if (isset($row['modelo_pativel_mdl_id'])) {
-                    $object_modelo_pativel_ano->set_ano_id($row['modelo_pativel_mdl_id']);
+                    $obj_modelo_pativel_ano->set_ano_id($row['modelo_pativel_mdl_id']);
                 }
                 
                 if (isset($row['modelo_pativel_ano_id'])) {
-                    $object_modelo_pativel_ano->set_anos($row['modelo_pativel_ano_id']);
+                    $obj_modelo_pativel_ano->set_anos($row['modelo_pativel_ano_id']);
                 }
                 
-                $pativeis[] = $object_modelo_pativel_ano;
+                $pativeis[] = $obj_modelo_pativel_ano;
             }
             
             return $pativeis;

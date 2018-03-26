@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Status_Usuario as Object_Status_Usuario;
+    use Module\Application\Model\OBJ\Status_Usuario as OBJ_Status_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Status_Usuario $object_status_usuario) : bool
+        public static function Inserir(OBJ_Status_Usuario $obj_status_usuario) : bool
         {
             try {
                 $sql = "INSERT INTO tb_status_usuario (status_usuario_id, status_usuario_nome) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_usuario->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Status_Usuario $status) : bool
+        public static function Atualizar(OBJ_Status_Usuario $status) : bool
         {
             try {
                 $sql = "UPDATE tb_status_usuario SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_status_usuario->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_status_usuario->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_status_usuario->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_status_usuario->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -79,18 +79,18 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaStatus(array $row) : Object_Status_Usuario
+        public static function PopulaStatus(array $row) : OBJ_Status_Usuario
         {
-            $object_status_usuario = new Object_Status_Usuario();
+            $obj_status_usuario = new OBJ_Status_Usuario();
             
             if (isset($row['status_usuario_id'])) {
-                $object_status_usuario->set_id($row['status_usuario_id']);
+                $obj_status_usuario->set_id($row['status_usuario_id']);
             }
             
             if (isset($row['status_usuario_nome'])) {
-                $object_status_usuario->set_nome($row['status_usuario_nome']);
+                $obj_status_usuario->set_nome($row['status_usuario_nome']);
             }
             
-            return $object_status_usuario;
+            return $obj_status_usuario;
         }                
     }

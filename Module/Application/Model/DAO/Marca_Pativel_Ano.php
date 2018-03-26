@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Marca_Pativel_Ano as Object_Marca_Pativel_Ano;
+    use Module\Application\Model\OBJ\Marca_Pativel_Ano as OBJ_Marca_Pativel_Ano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -15,10 +15,10 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Marca_Pativel_Ano $object_marca_pativel_ano) : bool
+        public static function Inserir(OBJ_Marca_Pativel_Ano $obj_marca_pativel_ano) : bool
         {
             try {
-                $anos = $object_marca_pativel_ano->get_anos();
+                $anos = $obj_marca_pativel_ano->get_anos();
                 
                 if (!empty($anos) AND !empty($proximo_id_ano)) {
                        foreach ($anos as $ano) {
@@ -42,7 +42,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Marca_Pativel_Ano $object_marca_pativel_ano) : bool
+        public static function Atualizar(OBJ_Marca_Pativel_Ano $obj_marca_pativel_ano) : bool
         {
             try {
                 
@@ -51,7 +51,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Marca_Pativel_Ano $object_marca_pativel_ano) : bool
+        public static function Deletar_Por_Objeto(OBJ_Marca_Pativel_Ano $obj_marca_pativel_ano) : bool
         {
             try {
                 
@@ -226,17 +226,17 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_marca_pativel_ano = new Object_Marca_Pativel_Ano();
+                $obj_marca_pativel_ano = new OBJ_Marca_Pativel_Ano();
                 
                 if (isset($row['marca_pativel_mrc_id'])) {
-                    $object_marca_pativel_ano->set_ano_id($row['marca_pativel_mrc_id']);
+                    $obj_marca_pativel_ano->set_ano_id($row['marca_pativel_mrc_id']);
                 }
                 
                 if (isset($row['marca_pativel_ano_id'])) {
-                    $object_marca_pativel_ano->set_anos($row['marca_pativel_ano_id']);
+                    $obj_marca_pativel_ano->set_anos($row['marca_pativel_ano_id']);
                 }
                 
-                $pativeis[] = $object_marca_pativel_ano;
+                $pativeis[] = $obj_marca_pativel_ano;
             }
             
             return $pativeis;

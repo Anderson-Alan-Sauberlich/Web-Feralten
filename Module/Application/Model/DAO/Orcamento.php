@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Orcamento as Object_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     use Module\Application\Model\DAO\Orcamento_Peca as DAO_Orcamento_Peca;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\DAO\Categoria as DAO_Categoria;
@@ -20,7 +20,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Orcamento $object_orcamento) : bool
+        public static function Inserir(OBJ_Orcamento $obj_orcamento) : bool
         {
             try {
                 $sql = "INSERT INTO tb_orcamento (orcamento_id, orcamento_usr_id, orcamento_ctg_id, orcamento_mrc_id, orcamento_mdl_id, orcamento_vrs_id, orcamento_ano_de, orcamento_ano_ate, orcamento_peca_nome, orcamento_numero_serie, orcamento_std_uso_pec_id, orcamento_prf_ntr_id, orcamento_descricao, orcamento_data_solicitacao, orcamento_data_validade) 
@@ -28,21 +28,21 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_orcamento->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_orcamento->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ctg_id', $object_orcamento->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mrc_id', $object_orcamento->get_marca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mdl_id', $object_orcamento->get_modelo_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrs_id', $object_orcamento->get_versao_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ano_de', $object_orcamento->get_ano_de(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ano_ate', $object_orcamento->get_ano_ate(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_nome', $object_orcamento->get_peca_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':num_serie', $object_orcamento->get_numero_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':std_uso_id', $object_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':prf_ntr_id', $object_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_slctc', $object_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_vldd', $object_orcamento->get_datahora_validade(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_orcamento->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_orcamento->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ctg_id', $obj_orcamento->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mrc_id', $obj_orcamento->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mdl_id', $obj_orcamento->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrs_id', $obj_orcamento->get_versao_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ano_de', $obj_orcamento->get_ano_de(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ano_ate', $obj_orcamento->get_ano_ate(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_nome', $obj_orcamento->get_peca_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':num_serie', $obj_orcamento->get_numero_serie(), PDO::PARAM_STR);
+                $p_sql->bindValue(':std_uso_id', $obj_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':prf_ntr_id', $obj_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dscrc', $obj_orcamento->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_slctc', $obj_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_vldd', $obj_orcamento->get_datahora_validade(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -50,7 +50,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Orcamento $object_orcamento) : bool
+        public static function Atualizar(OBJ_Orcamento $obj_orcamento) : bool
         {
             try {
                 $sql = "UPDATE tb_orcamento SET
@@ -73,21 +73,21 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_orcamento->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_orcamento->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ctg_id', $object_orcamento->get_categoria_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mrc_id', $object_orcamento->get_marca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mdl_id', $object_orcamento->get_modelo_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrs_id', $object_orcamento->get_versao_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ano_de', $object_orcamento->get_ano_de(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ano_ate', $object_orcamento->get_ano_ate(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pec_nome', $object_orcamento->get_peca_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':num_serie', $object_orcamento->get_numero_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':std_uso_id', $object_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':prf_ntr_id', $object_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dscrc', $object_orcamento->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_slctc', $object_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data_vldd', $object_orcamento->get_datahora_validade(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_orcamento->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_orcamento->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ctg_id', $obj_orcamento->get_categoria_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mrc_id', $obj_orcamento->get_marca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mdl_id', $obj_orcamento->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrs_id', $obj_orcamento->get_versao_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ano_de', $obj_orcamento->get_ano_de(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ano_ate', $obj_orcamento->get_ano_ate(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_nome', $obj_orcamento->get_peca_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':num_serie', $obj_orcamento->get_numero_serie(), PDO::PARAM_STR);
+                $p_sql->bindValue(':std_uso_id', $obj_orcamento->get_estado_uso_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':prf_ntr_id', $obj_orcamento->get_preferencia_entrega_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dscrc', $obj_orcamento->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_slctc', $obj_orcamento->get_datahora_solicitacao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data_vldd', $obj_orcamento->get_datahora_validade(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -244,142 +244,142 @@ namespace Module\Application\Model\DAO;
             $orcamentos = array();
             
             foreach ($rows as $row) {
-                $object_orcamento = new Object_Orcamento();
+                $obj_orcamento = new OBJ_Orcamento();
                 
                 if (isset($row['orcamento_id'])) {
-                    $object_orcamento->set_id($row['orcamento_id']);
+                    $obj_orcamento->set_id($row['orcamento_id']);
                     
-                    $object_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
+                    $obj_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
                 }
                 
                 if (isset($row['orcamento_usr_id'])) {
-                    $object_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
+                    $obj_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
                 }
                 
                 if (isset($row['orcamento_ctg_id'])) {
-                    $object_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
+                    $obj_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
                 }
                 
                 if (isset($row['orcamento_mrc_id'])) {
-                    $object_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
+                    $obj_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
                 }
                 
                 if (isset($row['orcamento_mdl_id'])) {
-                    $object_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
+                    $obj_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
                 }
                 
                 if (isset($row['orcamento_vrs_id'])) {
-                    $object_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
+                    $obj_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
                 }
                 
                 if (isset($row['orcamento_ano_de'])) {
-                    $object_orcamento->set_ano_de($row['orcamento_ano_de']);
+                    $obj_orcamento->set_ano_de($row['orcamento_ano_de']);
                 }
                 
                 if (isset($row['orcamento_ano_ate'])) {
-                    $object_orcamento->set_ano_ate($row['orcamento_ano_ate']);
+                    $obj_orcamento->set_ano_ate($row['orcamento_ano_ate']);
                 }
                 
                 if (isset($row['orcamento_peca_nome'])) {
-                    $object_orcamento->set_peca_nome($row['orcamento_peca_nome']);
+                    $obj_orcamento->set_peca_nome($row['orcamento_peca_nome']);
                 }
                 
                 if (isset($row['orcamento_numero_serie'])) {
-                    $object_orcamento->set_numero_serie($row['orcamento_numero_serie']);
+                    $obj_orcamento->set_numero_serie($row['orcamento_numero_serie']);
                 }
                 
                 if (isset($row['orcamento_std_uso_pec_id'])) {
-                    $object_orcamento->set_estado_uso_id($row['orcamento_std_uso_pec_id']);
+                    $obj_orcamento->set_estado_uso_id($row['orcamento_std_uso_pec_id']);
                 }
                 
                 if (isset($row['orcamento_prf_ntr_id'])) {
-                    $object_orcamento->set_preferencia_entrega_id($row['orcamento_prf_ntr_id']);
+                    $obj_orcamento->set_preferencia_entrega_id($row['orcamento_prf_ntr_id']);
                 }
                 
                 if (isset($row['orcamento_descricao'])) {
-                    $object_orcamento->set_descricao($row['orcamento_descricao']);
+                    $obj_orcamento->set_descricao($row['orcamento_descricao']);
                 }
                 
                 if (isset($row['orcamento_data_solicitacao'])) {
-                    $object_orcamento->set_datahora_solicitacao($row['orcamento_data_solicitacao']);
+                    $obj_orcamento->set_datahora_solicitacao($row['orcamento_data_solicitacao']);
                 }
                 
                 if (isset($row['orcamento_data_validade'])) {
-                    $object_orcamento->set_datahora_validade($row['orcamento_data_validade']);
+                    $obj_orcamento->set_datahora_validade($row['orcamento_data_validade']);
                 }
                 
-                $orcamentos[] = $object_orcamento;
+                $orcamentos[] = $obj_orcamento;
             }
 
             return $orcamentos;
         }
         
-        public static function PopulaOrcamento(array $row) : Object_Orcamento
+        public static function PopulaOrcamento(array $row) : OBJ_Orcamento
         {
-            $object_orcamento = new Object_Orcamento();
+            $obj_orcamento = new OBJ_Orcamento();
             
             if (isset($row['orcamento_id'])) {
-                $object_orcamento->set_id($row['orcamento_id']);
+                $obj_orcamento->set_id($row['orcamento_id']);
                 
-                $object_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
+                $obj_orcamento->set_pecas(DAO_Orcamento_Peca::BuscarPecasPorCOD($row['orcamento_id']));
             }
             
             if (isset($row['orcamento_usr_id'])) {
-                $object_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
+                $obj_orcamento->set_usuario(DAO_Usuario::Buscar_Usuario($row['orcamento_usr_id']));
             }
             
             if (isset($row['orcamento_ctg_id'])) {
-                $object_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
+                $obj_orcamento->set_categoria(DAO_Categoria::BuscarPorCOD($row['orcamento_ctg_id']));
             }
             
             if (isset($row['orcamento_mrc_id'])) {
-                $object_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
+                $obj_orcamento->set_marca(DAO_Marca::BuscarPorCOD($row['orcamento_mrc_id']));
             }
             
             if (isset($row['orcamento_mdl_id'])) {
-                $object_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
+                $obj_orcamento->set_modelo(DAO_Modelo::BuscarPorCOD($row['orcamento_mdl_id']));
             }
             
             if (isset($row['orcamento_vrs_id'])) {
-                $object_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
+                $obj_orcamento->set_versao(DAO_Versao::BuscarPorCOD($row['orcamento_vrs_id']));
             }
             
             if (isset($row['orcamento_ano_de'])) {
-                $object_orcamento->set_ano_de($row['orcamento_ano_de']);
+                $obj_orcamento->set_ano_de($row['orcamento_ano_de']);
             }
             
             if (isset($row['orcamento_ano_ate'])) {
-                $object_orcamento->set_ano_ate($row['orcamento_ano_ate']);
+                $obj_orcamento->set_ano_ate($row['orcamento_ano_ate']);
             }
             
             if (isset($row['orcamento_peca_nome'])) {
-                $object_orcamento->set_peca_nome($row['orcamento_peca_nome']);
+                $obj_orcamento->set_peca_nome($row['orcamento_peca_nome']);
             }
             
             if (isset($row['orcamento_numero_serie'])) {
-                $object_orcamento->set_numero_serie($row['orcamento_numero_serie']);
+                $obj_orcamento->set_numero_serie($row['orcamento_numero_serie']);
             }
             
             if (isset($row['orcamento_std_uso_pec_id'])) {
-                $object_orcamento->set_estado_uso_id($row['orcamento_std_uso_pec_id']);
+                $obj_orcamento->set_estado_uso_id($row['orcamento_std_uso_pec_id']);
             }
             
             if (isset($row['orcamento_prf_ntr_id'])) {
-                $object_orcamento->set_preferencia_entrega_id($row['orcamento_prf_ntr_id']);
+                $obj_orcamento->set_preferencia_entrega_id($row['orcamento_prf_ntr_id']);
             }
             
             if (isset($row['orcamento_descricao'])) {
-                $object_orcamento->set_descricao($row['orcamento_descricao']);
+                $obj_orcamento->set_descricao($row['orcamento_descricao']);
             }
             
             if (isset($row['orcamento_data_solicitacao'])) {
-                $object_orcamento->set_datahora_solicitacao($row['orcamento_data_solicitacao']);
+                $obj_orcamento->set_datahora_solicitacao($row['orcamento_data_solicitacao']);
             }
             
             if (isset($row['orcamento_data_validade'])) {
-                $object_orcamento->set_datahora_validade($row['orcamento_data_validade']);
+                $obj_orcamento->set_datahora_validade($row['orcamento_data_validade']);
             }
             
-            return $object_orcamento;
+            return $obj_orcamento;
         }
     }

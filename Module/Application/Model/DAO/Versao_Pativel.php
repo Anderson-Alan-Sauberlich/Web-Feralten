@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Versao_Pativel as Object_Versao_Pativel;
-    use Module\Application\Model\Object\Peca as Object_Peca;
+    use Module\Application\Model\OBJ\Versao_Pativel as OBJ_Versao_Pativel;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\DAO\Versao as DAO_Versao;
     use Module\Application\Model\DAO\Versao_Pativel_Ano as DAO_Versao_Pativel_Ano;
@@ -19,7 +19,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Versao_Pativel $object_versao_pativel) : bool
+        public static function Inserir(OBJ_Versao_Pativel $obj_versao_pativel) : bool
         {
             try {
                 $sql = "INSERT INTO tb_versao_pativel (versao_pativel_pec_id, versao_pativel_vrs_id, versao_pativel_ano_id) 
@@ -27,25 +27,25 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrs_id', $obj_versao_pativel->get_obj_versao()->get_id(), PDO::PARAM_INT);
                 
                 $proximo_id_ano = null;
                 
-                if (empty($object_versao_pativel->get_anos())) {
+                if (empty($obj_versao_pativel->get_anos())) {
                     $p_sql->bindValue(':ano_id', null, PDO::PARAM_INT);
                 } else {
-                    if (empty($object_versao_pativel->get_ano_id())) {
+                    if (empty($obj_versao_pativel->get_ano_id())) {
                         $proximo_id_ano = self::Pegar_Proximo_Id_Ano();
                     } else {
-                        $proximo_id_ano = $object_versao_pativel->get_ano_id();
+                        $proximo_id_ano = $obj_versao_pativel->get_ano_id();
                     }
                     
                     $p_sql->bindValue(':ano_id', $proximo_id_ano, PDO::PARAM_INT);
                 }
                 
                 if ($p_sql->execute()) {
-                    $anos = $object_versao_pativel->get_anos();
+                    $anos = $obj_versao_pativel->get_anos();
                     
                     if (!empty($anos) AND !empty($proximo_id_ano)) {
                         foreach ($anos as $ano) {
@@ -72,16 +72,16 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Versao_Pativel $object_versao_pativel) : bool
+        public static function Atualizar(OBJ_Versao_Pativel $obj_versao_pativel) : bool
         {
             try {
-                if (empty($object_versao_pativel->get_ano_id())) {
-                    $object_versao_pativel->set_ano_id(self::Pegar_Id_Ano($object_versao_pativel->get_peca_id(),
-                                                                          $object_versao_pativel->get_object_versao()->get_id()));
+                if (empty($obj_versao_pativel->get_ano_id())) {
+                    $obj_versao_pativel->set_ano_id(self::Pegar_Id_Ano($obj_versao_pativel->get_peca_id(),
+                                                                          $obj_versao_pativel->get_obj_versao()->get_id()));
                 }
                 
-                if (self::Deletar_Por_Objeto($object_versao_pativel)) {
-                    if (self::Inserir($object_versao_pativel)) {
+                if (self::Deletar_Por_Objeto($obj_versao_pativel)) {
+                    if (self::Inserir($obj_versao_pativel)) {
                         return true;
                     } else {
                         return false;
@@ -94,19 +94,19 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Versao_Pativel $object_versao_pativel) : bool
+        public static function Deletar_Por_Objeto(OBJ_Versao_Pativel $obj_versao_pativel) : bool
         {
             try {
-                if (!empty($object_versao_pativel->get_ano_id())) {
-                    self::Deletar_Anos($object_versao_pativel->get_ano_id());
+                if (!empty($obj_versao_pativel->get_ano_id())) {
+                    self::Deletar_Anos($obj_versao_pativel->get_ano_id());
                 }
                 
                 $sql = 'DELETE FROM tb_versao_pativel WHERE versao_pativel_pec_id = :pec_id AND versao_pativel_vrs_id = :vrs_id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':vrs_id', $obj_versao_pativel->get_obj_versao()->get_id(), PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -275,14 +275,14 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Numero_Paginas(Object_Versao_Pativel $object_versao_pativel, Object_Peca $object_peca, array $form_filtro)
+        public static function Buscar_Numero_Paginas(OBJ_Versao_Pativel $obj_versao_pativel, OBJ_Peca $obj_peca, array $form_filtro)
         {
             try {
                 $pesquisa = '';
                 
-                $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_versao_pativel);
+                $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_versao_pativel);
                 
-                $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+                $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
                 
                 if (!empty($pesquisa)) {
                     if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -294,9 +294,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_versao_pativel);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_versao_pativel);
                 
                 $p_sql->execute();
                 $select = $p_sql->fetchAll();
@@ -308,15 +308,15 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Pecas(Object_Versao_Pativel $object_versao_pativel, Object_Peca $object_peca, array $form_filtro, int $pg)
+        public static function Buscar_Pecas(OBJ_Versao_Pativel $obj_versao_pativel, OBJ_Peca $obj_peca, array $form_filtro, int $pg)
         {
             $limite = 9;
             $inicio = ($pg * $limite) - $limite;
             $pesquisa = "";
             
-            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_versao_pativel);
+            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_versao_pativel);
             
-            $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+            $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
             
             if (!empty($pesquisa)) {
                 if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -330,9 +330,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_versao_pativel);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_versao_pativel);
                 
                 $p_sql->bindValue(':inicio', $inicio, PDO::PARAM_INT);
                 $p_sql->bindValue(':limite', $limite, PDO::PARAM_INT);
@@ -344,37 +344,37 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Versao_Pativel $object_versao_pativel) : string
+        public static function Criar_String_Pesquisa(string $pesquisa, OBJ_Versao_Pativel $obj_versao_pativel) : string
         {
-            if (!empty($object_versao_pativel->get_peca_id())) {
+            if (!empty($obj_versao_pativel->get_peca_id())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "versao_pativel_pec_id = :pec_id";
             }
             
-            if (!empty($object_versao_pativel->get_object_versao()->get_id())) {
+            if (!empty($obj_versao_pativel->get_obj_versao()->get_id())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "versao_pativel_vrs_id = :vrs_id";
             }
             
-            if (!empty($object_versao_pativel->get_ano_de()) OR !empty($object_versao_pativel->get_ano_ate())) {
+            if (!empty($obj_versao_pativel->get_ano_de()) OR !empty($obj_versao_pativel->get_ano_ate())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 
                 $pesquisa_ano = "";
                 
-                if (!empty($object_versao_pativel->get_ano_de())) {
+                if (!empty($obj_versao_pativel->get_ano_de())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
                     $pesquisa_ano .= "versao_pativel_ano_ano >= :ano_de";
                 }
                 
-                if (!empty($object_versao_pativel->get_ano_ate())) {
+                if (!empty($obj_versao_pativel->get_ano_ate())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
@@ -387,22 +387,22 @@ namespace Module\Application\Model\DAO;
             return $pesquisa;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Versao_Pativel $object_versao_pativel) : PDOStatement
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, OBJ_Versao_Pativel $obj_versao_pativel) : PDOStatement
         {
-            if (!empty($object_versao_pativel->get_peca_id())) {
-                $p_sql->bindValue(':pec_id', $object_versao_pativel->get_peca_id(), PDO::PARAM_INT);
+            if (!empty($obj_versao_pativel->get_peca_id())) {
+                $p_sql->bindValue(':pec_id', $obj_versao_pativel->get_peca_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_versao_pativel->get_object_versao()->get_id())) {
-                $p_sql->bindValue(':vrs_id', $object_versao_pativel->get_object_versao()->get_id(), PDO::PARAM_INT);
+            if (!empty($obj_versao_pativel->get_obj_versao()->get_id())) {
+                $p_sql->bindValue(':vrs_id', $obj_versao_pativel->get_obj_versao()->get_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_versao_pativel->get_ano_de())) {
-                $p_sql->bindValue(':ano_de', $object_versao_pativel->get_ano_de(), PDO::PARAM_INT);
+            if (!empty($obj_versao_pativel->get_ano_de())) {
+                $p_sql->bindValue(':ano_de', $obj_versao_pativel->get_ano_de(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_versao_pativel->get_ano_ate())) {
-                $p_sql->bindValue(':ano_ate', $object_versao_pativel->get_ano_ate(), PDO::PARAM_INT);
+            if (!empty($obj_versao_pativel->get_ano_ate())) {
+                $p_sql->bindValue(':ano_ate', $obj_versao_pativel->get_ano_ate(), PDO::PARAM_INT);
             }
             
             return $p_sql;
@@ -413,23 +413,23 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_versao_pativel = new Object_Versao_Pativel();
+                $obj_versao_pativel = new OBJ_Versao_Pativel();
                 
                 if (isset($row['versao_pativel_pec_id'])) {
-                    $object_versao_pativel->set_peca_id($row['versao_pativel_pec_id']);
+                    $obj_versao_pativel->set_peca_id($row['versao_pativel_pec_id']);
                 }
                 
                 if (isset($row['versao_pativel_vrs_id'])) {
-                    $object_versao_pativel->set_object_versao(DAO_Versao::BuscarPorCOD($row['versao_pativel_vrs_id']));
+                    $obj_versao_pativel->set_obj_versao(DAO_Versao::BuscarPorCOD($row['versao_pativel_vrs_id']));
                 }
                 
                 if (isset($row['versao_pativel_ano_id'])) {
-                    $object_versao_pativel->set_ano_id($row['versao_pativel_ano_id']);
+                    $obj_versao_pativel->set_ano_id($row['versao_pativel_ano_id']);
                     
-                    $object_versao_pativel->set_anos(DAO_Versao_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['versao_pativel_ano_id']));
+                    $obj_versao_pativel->set_anos(DAO_Versao_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['versao_pativel_ano_id']));
                 }
                 
-                $pativeis[] = $object_versao_pativel;
+                $pativeis[] = $obj_versao_pativel;
             }
             
             return $pativeis;

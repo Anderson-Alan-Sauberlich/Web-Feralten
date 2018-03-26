@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Layout\Elemento;
     
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
     
     class Vendedor
     {
@@ -13,16 +13,16 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         /**
          * Armazena o objeto da entidade a sermostrado na view html.
          *
-         * @var Object_Entidade $obj_entidade
+         * @var OBJ_Entidade $obj_entidade
          */
         private static $obj_entidade;
         
         /**
          * Seta o objeto entidade.
          *
-         * @param Object_Entidade $obj_orcamento
+         * @param OBJ_Entidade $obj_orcamento
          */
-        public function set_obj_entidade(Object_Entidade $obj_entidade) : void
+        public function set_obj_entidade(OBJ_Entidade $obj_entidade) : void
         {
             self::$obj_entidade = $obj_entidade;
         }
@@ -42,7 +42,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornarImagem() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 if (!empty(self::$obj_entidade->get_imagem())) {
                     return str_replace("@", "200x150", self::$obj_entidade->get_imagem());
                 } else {
@@ -58,7 +58,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornaNome() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 if (!empty(self::$obj_entidade->get_nome_comercial())) {
                     return self::$obj_entidade->get_nome_comercial();
                 } else {
@@ -76,7 +76,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornaCidadeEstado() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 $retorno = '';
                 
                 foreach (self::$obj_entidade->get_enderecos() as $obj_endereco) {
@@ -96,7 +96,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornaSite() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 return '<a href="'.self::$obj_entidade->get_site().'">'.self::$obj_entidade->get_site().'</a>';
             } else {
                 return null;
@@ -110,7 +110,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornarEmail() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 return self::$obj_entidade->get_usuario()->get_email();
             } else {
                 return null;
@@ -124,7 +124,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornaTelefone() : ?string
         {
-            if (self::$obj_entidade instanceof Object_Entidade) {
+            if (self::$obj_entidade instanceof OBJ_Entidade) {
                 $fone = self::$obj_entidade->get_usuario()->get_fone();
                 
                 if (strlen($fone) === 11) {

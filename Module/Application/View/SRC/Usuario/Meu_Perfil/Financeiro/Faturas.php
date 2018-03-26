@@ -3,8 +3,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     
     use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Menu_Usuario;
-    use Module\Application\Model\Object\Fatura as Object_Fatura;
-    use Module\Application\Model\Object\Fatura_Servico as Object_Fatura_Servico;
+    use Module\Application\Model\OBJ\Fatura as OBJ_Fatura;
+    use Module\Application\Model\OBJ\Fatura_Servico as OBJ_Fatura_Servico;
     use \DateTime;
     
     class Faturas
@@ -23,22 +23,22 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         private static $status_usuario;
         
         /**
-         * @var Object_Fatura
+         * @var OBJ_Fatura
          */
         private static $fatura_aberta;
         
         /**
-         * @var Object_Fatura
+         * @var OBJ_Fatura
          */
         private static $fatura_fechada;
         
         /**
-         * @var Object_Fatura_Servico
+         * @var OBJ_Fatura_Servico
          */
         private static $fatura_servicos_aberta;
         
         /**
-         * @var Object_Fatura_Servico
+         * @var OBJ_Fatura_Servico
          */
         private static $fatura_servicos_fechada;
         
@@ -49,11 +49,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         private static $pagseguro_sessao_id;
         
         /**
-         * @param Object_Fatura $object_fatura_aberta
+         * @param OBJ_Fatura $obj_fatura_aberta
          */
-        public function set_fatura_aberta(?Object_Fatura $object_fatura_aberta = null) : void
+        public function set_fatura_aberta(?OBJ_Fatura $obj_fatura_aberta = null) : void
         {
-            self::$fatura_aberta = $object_fatura_aberta;
+            self::$fatura_aberta = $obj_fatura_aberta;
         }
         
         /**
@@ -65,11 +65,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
-         * @param Object_Fatura $object_fatura_fechada
+         * @param OBJ_Fatura $obj_fatura_fechada
          */
-        public function set_fatura_fechada(?Object_Fatura $object_fatura_fechada = null) : void
+        public function set_fatura_fechada(?OBJ_Fatura $obj_fatura_fechada = null) : void
         {
-            self::$fatura_fechada = $object_fatura_fechada;
+            self::$fatura_fechada = $obj_fatura_fechada;
         }
         
         /**
@@ -195,9 +195,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         public static function Mostrar_Status(string $status) : void
         {
             if ($status === 'fechada') {
-                echo self::$fatura_fechada->get_object_status()->get_descricao();
+                echo self::$fatura_fechada->get_obj_status()->get_descricao();
             } else if ($status === 'aberta') {
-                echo self::$fatura_aberta->get_object_status()->get_descricao();
+                echo self::$fatura_aberta->get_obj_status()->get_descricao();
             }
         }
         

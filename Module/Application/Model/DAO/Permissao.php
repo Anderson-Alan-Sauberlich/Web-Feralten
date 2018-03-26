@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Permissao as Object_Permissao;
+    use Module\Application\Model\OBJ\Permissao as OBJ_Permissao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Permissao $object_permissao) : bool
+        public static function Inserir(OBJ_Permissao $obj_permissao) : bool
         {
             try {
                 $sql = "INSERT INTO tb_permissao (permissao_id, permissao_nome) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_permissao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_permissao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_permissao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_permissao->get_nome(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Permissao $permissao) : bool
+        public static function Atualizar(OBJ_Permissao $permissao) : bool
         {
             try {
                 $sql = "UPDATE tb_permissao SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_permissao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_permissao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_permissao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_permissao->get_nome(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -79,18 +79,18 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaPermissao(array $row) : Object_Permissao
+        public static function PopulaPermissao(array $row) : OBJ_Permissao
         {
-            $object_permissao = new Object_Permissao();
+            $obj_permissao = new OBJ_Permissao();
             
             if (isset($row['permissao_id'])) {
-                $object_permissao->set_id($row['permissao_id']);
+                $obj_permissao->set_id($row['permissao_id']);
             }
             
             if (isset($row['permissao_nome'])) {
-                $object_permissao->set_nome($row['permissao_nome']);
+                $obj_permissao->set_nome($row['permissao_nome']);
             }
             
-            return $object_permissao;
+            return $obj_permissao;
         }                
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Layout\Elemento;
     
-    use Module\Application\Model\Object\Peca as Object_Peca;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
     use Module\Application\Model\Common\Util\Login_Session;
         
     class Card_Peca
@@ -13,7 +13,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         private static $obj_peca;
         
-        public function set_obj_peca(Object_Peca $obj_peca) : void
+        public function set_obj_peca(OBJ_Peca $obj_peca) : void
         {
             self::$obj_peca = $obj_peca;
         }
@@ -25,7 +25,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaID() : ?int
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_id();
             } else {
                 return null;
@@ -34,7 +34,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaNome() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_nome();
             } else {
                 return null;
@@ -43,7 +43,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaURL() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_url();
             } else {
                 return null;
@@ -52,7 +52,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaFabricante() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_fabricante();
             } else {
                 return null;
@@ -61,7 +61,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function VerificaPecaFabricante() : bool
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 if (empty(self::$obj_peca->get_fabricante())) {
                     return false;
                 } else {
@@ -74,7 +74,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaEstadoUso() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_estado_uso()->get_nome();
             } else {
                 return null;
@@ -83,7 +83,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function VerificaPecaEstadoUso() : bool
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 if (empty(self::$obj_peca->get_estado_uso())) {
                     return false;
                 } else {
@@ -96,7 +96,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaPreco() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_preco();
             } else {
                 return null;
@@ -105,7 +105,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function VerificarPecaPreco() : bool
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 if (empty(self::$obj_peca->get_preco())) {
                     return false;
                 } else {
@@ -118,7 +118,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaStatus() : ?int
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return self::$obj_peca->get_status()->get_id();
             } else {
                 return null;
@@ -127,7 +127,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaData() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return date('d/m/Y', strtotime(self::$obj_peca->get_data_anuncio()));
             } else {
                 return null;
@@ -136,7 +136,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetornarPecaImagem() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 if (!empty(self::$obj_peca->get_foto(1))) {
                     return str_replace("@", "400x300", $peca->get_foto(1)->get_endereco());
                 } else if (!empty(self::$obj_peca->get_foto(2))) {
@@ -153,7 +153,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function RetonrarStatusPecaImagem() : ?string
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 if (self::$obj_peca->get_status()->get_id() !== 1) {
                     return 'disabled';
                 } else {
@@ -166,7 +166,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         
         public static function VerificarUsuarioAutenticado() : bool
         {
-            if (self::$obj_peca instanceof Object_Peca) {
+            if (self::$obj_peca instanceof OBJ_Peca) {
                 return Login_Session::Verificar_Login() AND self::$obj_peca->get_entidade()->get_usuario_id() === Login_Session::get_usuario_id();
             } else {
                 return false;

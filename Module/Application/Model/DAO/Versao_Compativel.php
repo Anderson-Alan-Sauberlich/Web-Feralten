@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Versao_Compativel as Object_Versao_Compativel;
+    use Module\Application\Model\OBJ\Versao_Compativel as OBJ_Versao_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
     
         }
     
-        public static function Inserir(Object_Versao_Compativel $object_versao_compativel) : bool
+        public static function Inserir(OBJ_Versao_Compativel $obj_versao_compativel) : bool
         {
             try {
                 $sql = "INSERT INTO tb_versao_compativel (versao_compativel_da_id_vrs, versao_compativel_com_id_vrs)
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_versao_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_versao_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,15 +31,15 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function Atualizar(Object_Versao_Compativel $object_versao_compativel) : bool
+        public static function Atualizar(OBJ_Versao_Compativel $obj_versao_compativel) : bool
         {
             try {
                 $sql = "UPDATE tb_versao_compativel SET versao_compativel_da_id_vrs = :da_id, versao_compativel_com_id_vrs = :com_id WHERE versao_compativel_da_id_vrs = :da_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_versao_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_versao_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_versao_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_versao_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -69,7 +69,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
     
-                return self::PopulaVersoesCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaVersoesCompativeisOBJ($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -90,37 +90,37 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function PopulaVersaoCompativel(array $row) : Object_Versao_Compativel
+        public static function PopulaVersaoCompativel(array $row) : OBJ_Versao_Compativel
         {
-            $object_versao_compativel = new Object_Versao_Compativel();
+            $obj_versao_compativel = new OBJ_Versao_Compativel();
             
             if (isset($row['versao_compativel_da_id_vrs'])) {
-                $object_versao_compativel->set_da_id($row['versao_compativel_da_id_vrs']);
+                $obj_versao_compativel->set_da_id($row['versao_compativel_da_id_vrs']);
             }
             
             if (isset($row['versao_compativel_com_id_vrs'])) {
-                $object_versao_compativel->set_com_id($row['versao_compativel_com_id_vrs']);
+                $obj_versao_compativel->set_com_id($row['versao_compativel_com_id_vrs']);
             }
             
-            return $object_versao_compativel;
+            return $obj_versao_compativel;
         }
         
-        public static function PopulaVersoesCompativeisObject(array $rows) : array
+        public static function PopulaVersoesCompativeisOBJ(array $rows) : array
         {
             $versoes_compativeis = array();
             
             foreach ($rows as $row) {
-                $object_versao_compativel = new Object_Versao_Compativel();
+                $obj_versao_compativel = new OBJ_Versao_Compativel();
                 
                 if (isset($row['versao_compativel_da_id_vrs'])) {
-                    $object_versao_compativel->set_da_id($row['versao_compativel_da_id_vrs']);
+                    $obj_versao_compativel->set_da_id($row['versao_compativel_da_id_vrs']);
                 }
                 
                 if (isset($row['versao_compativel_com_id_vrs'])) {
-                    $object_versao_compativel->set_com_id($row['versao_compativel_com_id_vrs']);
+                    $obj_versao_compativel->set_com_id($row['versao_compativel_com_id_vrs']);
                 }
                 
-                $versoes_compativeis[] = $object_versao_compativel;
+                $versoes_compativeis[] = $obj_versao_compativel;
             }
             
             return $versoes_compativeis;

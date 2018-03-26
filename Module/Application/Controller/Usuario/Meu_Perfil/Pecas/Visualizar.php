@@ -102,7 +102,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 if ($status == 1) {
                     if (empty($this->erros_visualizar)) {
                         $this->controller_pesquisa->set_peca_usuario(Login_Session::get_entidade_id());
-                        $this->controller_pesquisa->set_object_controller_filtro($this->controller_filtro);
+                        $this->controller_pesquisa->set_obj_controller_filtro($this->controller_filtro);
                         
                         $view = new View_Visualizar($status);
                         

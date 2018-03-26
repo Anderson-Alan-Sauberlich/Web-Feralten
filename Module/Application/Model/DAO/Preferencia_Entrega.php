@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Preferencia_Entrega as Object_Preferencia_Entrega;
+    use Module\Application\Model\OBJ\Preferencia_Entrega as OBJ_Preferencia_Entrega;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Preferencia_Entrega $object_preferencia_entrega) : bool
+        public static function Inserir(OBJ_Preferencia_Entrega $obj_preferencia_entrega) : bool
         {
             try {
                 $sql = "INSERT INTO tb_preferencia_entrega (preferencia_entrega_id, preferencia_entrega_nome, preferencia_entrega_url) 
@@ -22,9 +22,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_preferencia_entrega->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_preferencia_entrega->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_preferencia_entrega->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -32,16 +32,16 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Preferencia_Entrega $object_preferencia_entrega) : bool
+        public static function Atualizar(OBJ_Preferencia_Entrega $obj_preferencia_entrega) : bool
         {
             try {
                 $sql = "UPDATE tb_preferencia_entrega SET preferencia_entrega_id = :id, preferencia_entrega_nome = :nome, preferencia_entrega_url = :url WHERE preferencia_entrega_id = :id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_preferencia_entrega->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_preferencia_entrega->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_preferencia_entrega->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_preferencia_entrega->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_preferencia_entrega->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_preferencia_entrega->get_url(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -143,23 +143,23 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Popular_Preferencia_Entrega(array $row) : Object_Preferencia_Entrega
+        public static function Popular_Preferencia_Entrega(array $row) : OBJ_Preferencia_Entrega
         {
-            $object_preferencia_entrega = new Object_Preferencia_Entrega();
+            $obj_preferencia_entrega = new OBJ_Preferencia_Entrega();
             
             if (isset($row['preferencia_entrega_id'])) {
-                $object_preferencia_entrega->set_id($row['preferencia_entrega_id']);
+                $obj_preferencia_entrega->set_id($row['preferencia_entrega_id']);
             }
             
             if (isset($row['preferencia_entrega_nome'])) {
-                $object_preferencia_entrega->set_nome($row['preferencia_entrega_nome']);
+                $obj_preferencia_entrega->set_nome($row['preferencia_entrega_nome']);
             }
             
             if (isset($row['preferencia_entrega_url'])) {
-                $object_preferencia_entrega->set_url($row['preferencia_entrega_url']);
+                $obj_preferencia_entrega->set_url($row['preferencia_entrega_url']);
             }
             
-            return $object_preferencia_entrega;
+            return $obj_preferencia_entrega;
         }
         
         public static function Popular_Preferencia_Entregas(array $rows) : array
@@ -167,21 +167,21 @@ namespace Module\Application\Model\DAO;
             $preferencia_entregas = array();
             
             foreach ($rows as $row) {
-                $object_preferencia_entrega = new Object_Preferencia_Entrega();
+                $obj_preferencia_entrega = new OBJ_Preferencia_Entrega();
                 
                 if (isset($row['preferencia_entrega_id'])) {
-                    $object_preferencia_entrega->set_id($row['preferencia_entrega_id']);
+                    $obj_preferencia_entrega->set_id($row['preferencia_entrega_id']);
                 }
                 
                 if (isset($row['preferencia_entrega_nome'])) {
-                    $object_preferencia_entrega->set_nome($row['preferencia_entrega_nome']);
+                    $obj_preferencia_entrega->set_nome($row['preferencia_entrega_nome']);
                 }
                 
                 if (isset($row['preferencia_entrega_url'])) {
-                    $object_preferencia_entrega->set_url($row['preferencia_entrega_url']);
+                    $obj_preferencia_entrega->set_url($row['preferencia_entrega_url']);
                 }
                 
-                $preferencia_entregas[] = $object_preferencia_entrega;
+                $preferencia_entregas[] = $obj_preferencia_entrega;
             }
             
             return $preferencia_entregas;

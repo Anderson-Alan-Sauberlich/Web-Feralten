@@ -2,7 +2,7 @@
 namespace Module\Administration\Controller\Layout\Menu;
     
     use Module\Administration\Model\DAO\Usuario_Admin as DAO_Usuario_Admin;
-    use Module\Administration\Model\Object\Usuario_Admin as Object_Usuario_Admin;
+    use Module\Administration\Model\OBJ\Usuario_Admin as OBJ_Usuario_Admin;
     
     class Admin
     {

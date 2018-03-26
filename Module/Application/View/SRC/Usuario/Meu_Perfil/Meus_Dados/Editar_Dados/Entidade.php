@@ -2,7 +2,7 @@
 namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados;
     
     use Module\Application\Model\Common\Util\Login_Session;
-    use Module\Application\Model\Object\Entidade as OBJ_Entidade;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
     
     class Entidade
     {

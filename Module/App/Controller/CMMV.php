@@ -53,14 +53,14 @@ namespace Module\App\Controller;
         
         public function Retornar_Categoria() : void
         {
-            $object_categoria = DAO_Categoria::BuscarPorCOD($this->categoria);
+            $obj_categoria = DAO_Categoria::BuscarPorCOD($this->categoria);
             
-            if (!empty($object_categoria)) {
+            if (!empty($obj_categoria)) {
                 $categoria = array();
                 
-                $categoria['id'] = $object_categoria->get_id();
-                $categoria['nome'] = $object_categoria->get_nome();
-                $categoria['url'] = $object_categoria->get_url();
+                $categoria['id'] = $obj_categoria->get_id();
+                $categoria['nome'] = $obj_categoria->get_nome();
+                $categoria['url'] = $obj_categoria->get_url();
                 
                 echo json_encode($categoria);
             }
@@ -68,15 +68,15 @@ namespace Module\App\Controller;
         
         public function Retornar_Marca() : void
         {
-            $object_marca = DAO_Marca::BuscarPorCOD($this->marca);
+            $obj_marca = DAO_Marca::BuscarPorCOD($this->marca);
              
-            if (!empty($object_marca)) {
+            if (!empty($obj_marca)) {
                 $marca = array();
                 
-                $marca['id'] = $object_marca->get_id();
-                $marca['ctg_id'] = $object_marca->get_categoria_id();
-                $marca['nome'] = $object_marca->get_nome();
-                $marca['url'] = $object_marca->get_url();
+                $marca['id'] = $obj_marca->get_id();
+                $marca['ctg_id'] = $obj_marca->get_categoria_id();
+                $marca['nome'] = $obj_marca->get_nome();
+                $marca['url'] = $obj_marca->get_url();
         
                 echo json_encode($marca);
             }
@@ -84,15 +84,15 @@ namespace Module\App\Controller;
         
         public function Retornar_Modelo() : void
         {
-            $object_modelo = DAO_Modelo::BuscarPorCOD($this->modelo);
+            $obj_modelo = DAO_Modelo::BuscarPorCOD($this->modelo);
         
-            if (!empty($object_modelo)) {
+            if (!empty($obj_modelo)) {
                 $modelo = array();
                 
-                $modelo['id'] = $object_modelo->get_id();
-                $modelo['mrc_id'] = $object_modelo->get_marca_id();
-                $modelo['nome'] = $object_modelo->get_nome();
-                $modelo['url'] = $object_modelo->get_url();
+                $modelo['id'] = $obj_modelo->get_id();
+                $modelo['mrc_id'] = $obj_modelo->get_marca_id();
+                $modelo['nome'] = $obj_modelo->get_nome();
+                $modelo['url'] = $obj_modelo->get_url();
         
                 echo json_encode($modelo);
             }
@@ -100,15 +100,15 @@ namespace Module\App\Controller;
         
         public function Retornar_Versao() : void
         {
-            $object_versao = DAO_Versao::BuscarPorCOD($this->versao);
+            $obj_versao = DAO_Versao::BuscarPorCOD($this->versao);
         
-            if (!empty($object_versao)) {
+            if (!empty($obj_versao)) {
                 $versao = array();
                 
-                $versao['id'] = $object_versao->get_id();
-                $versao['mdl_id'] = $object_versao->get_modelo_id();
-                $versao['nome'] = $object_versao->get_nome();
-                $versao['url'] = $object_versao->get_url();
+                $versao['id'] = $obj_versao->get_id();
+                $versao['mdl_id'] = $obj_versao->get_modelo_id();
+                $versao['nome'] = $obj_versao->get_nome();
+                $versao['url'] = $obj_versao->get_url();
         
                 echo json_encode($versao);
             }
@@ -117,14 +117,14 @@ namespace Module\App\Controller;
         public function Retornar_Categorias() : void
         {
             $categorias = array();
-            $object_categorias = DAO_Categoria::BuscarTodos();
+            $obj_categorias = DAO_Categoria::BuscarTodos();
             
-            foreach ($object_categorias as $object_categoria) {
+            foreach ($obj_categorias as $obj_categoria) {
                 $categoria = array();
                 
-                $categoria['id'] = $object_categoria->get_id();
-                $categoria['nome'] = $object_categoria->get_nome();
-                $categoria['url'] = $object_categoria->get_url();
+                $categoria['id'] = $obj_categoria->get_id();
+                $categoria['nome'] = $obj_categoria->get_nome();
+                $categoria['url'] = $obj_categoria->get_url();
                 
                 $categorias[] = $categoria;
             }
@@ -135,15 +135,15 @@ namespace Module\App\Controller;
         public function Retornar_Marcas() : void
         {
             $marcas = array();
-            $object_marcas = DAO_Marca::BuscarTodos();
+            $obj_marcas = DAO_Marca::BuscarTodos();
             
-            foreach ($object_marcas as $object_marca) {
+            foreach ($obj_marcas as $obj_marca) {
                 $marca = array();
                 
-                $marca['id'] = $object_marca->get_id();
-                $marca['ctg_id'] = $object_marca->get_categoria_id();
-                $marca['nome'] = $object_marca->get_nome();
-                $marca['url'] = $object_marca->get_url();
+                $marca['id'] = $obj_marca->get_id();
+                $marca['ctg_id'] = $obj_marca->get_categoria_id();
+                $marca['nome'] = $obj_marca->get_nome();
+                $marca['url'] = $obj_marca->get_url();
                 
                 $marcas[] = $marca;
             }
@@ -154,15 +154,15 @@ namespace Module\App\Controller;
         public function Retornar_Modelos() : void
         {
             $modelos = array();
-            $object_modelos = DAO_Modelo::BuscarTodos();
+            $obj_modelos = DAO_Modelo::BuscarTodos();
             
-            foreach ($object_modelos as $object_modelo) {
+            foreach ($obj_modelos as $obj_modelo) {
                 $modelo = array();
                 
-                $modelo['id'] = $object_modelo->get_id();
-                $modelo['mrc_id'] = $object_modelo->get_marca_id();
-                $modelo['nome'] = $object_modelo->get_nome();
-                $modelo['url'] = $object_modelo->get_url();
+                $modelo['id'] = $obj_modelo->get_id();
+                $modelo['mrc_id'] = $obj_modelo->get_marca_id();
+                $modelo['nome'] = $obj_modelo->get_nome();
+                $modelo['url'] = $obj_modelo->get_url();
                 
                 $modelos[] = $modelo;
             }
@@ -173,15 +173,15 @@ namespace Module\App\Controller;
         public function Retornar_Versoes() : void
         {
             $versoes = array();
-            $object_versoes = DAO_Versao::BuscarTodos();
+            $obj_versoes = DAO_Versao::BuscarTodos();
             
-            foreach ($object_versoes as $object_versao) {
+            foreach ($obj_versoes as $obj_versao) {
                 $versao = array();
                 
-                $versao['id'] = $object_versao->get_id();
-                $versao['mdl_id'] = $object_versao->get_modelo_id();
-                $versao['nome'] = $object_versao->get_nome();
-                $versao['url'] = $object_versao->get_url();
+                $versao['id'] = $obj_versao->get_id();
+                $versao['mdl_id'] = $obj_versao->get_modelo_id();
+                $versao['nome'] = $obj_versao->get_nome();
+                $versao['url'] = $obj_versao->get_url();
                 
                 $versoes[] = $versao;
             }

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Intervalo_Pagamento as Object_Intervalo_Pagamento;
+    use Module\Application\Model\OBJ\Intervalo_Pagamento as OBJ_Intervalo_Pagamento;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool
+        public static function Inserir(OBJ_Intervalo_Pagamento $obj_intervalo_pagamento) : bool
         {
             try {
                 $sql = "INSERT INTO tb_intervalo_pagamento (intervalo_pagamento_id, intervalo_pagamento_descricao) 
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_intervalo_pagamento->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_intervalo_pagamento->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_intervalo_pagamento->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_intervalo_pagamento->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,7 +31,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Intervalo_Pagamento $object_intervalo_pagamento) : bool
+        public static function Atualizar(OBJ_Intervalo_Pagamento $obj_intervalo_pagamento) : bool
         {
             try {
                 $sql = "UPDATE tb_intervalo_pagamento SET
@@ -41,8 +41,8 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_intervalo_pagamento->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':dsc', $object_intervalo_pagamento->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_intervalo_pagamento->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':dsc', $obj_intervalo_pagamento->get_descricao(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -84,34 +84,34 @@ namespace Module\Application\Model\DAO;
             $intervalos_pagamentos = array();
             
             foreach ($rows as $row) {
-                $object_intervalo_pagamento = new Object_Intervalo_Pagamento();
+                $obj_intervalo_pagamento = new OBJ_Intervalo_Pagamento();
                 
                 if (isset($row['intervalo_pagamento_id'])) {
-                    $object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
+                    $obj_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
                 }
                 
                 if (isset($row['intervalo_pagamento_descricao'])) {
-                    $object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
+                    $obj_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
                 }
                 
-                $intervalos_pagamentos[] = $object_intervalo_pagamento;
+                $intervalos_pagamentos[] = $obj_intervalo_pagamento;
             }
             
             return $intervalos_pagamentos;
         }
         
-        public static function PopulaIntervaloPagamento(array $row) : Object_Intervalo_Pagamento
+        public static function PopulaIntervaloPagamento(array $row) : OBJ_Intervalo_Pagamento
         {
-            $object_intervalo_pagamento = new Object_Intervalo_Pagamento();
+            $obj_intervalo_pagamento = new OBJ_Intervalo_Pagamento();
             
             if (isset($row['intervalo_pagamento_id'])) {
-                $object_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
+                $obj_intervalo_pagamento->set_id($row['intervalo_pagamento_id']);
             }
             
             if (isset($row['intervalo_pagamento_descricao'])) {
-                $object_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
+                $obj_intervalo_pagamento->set_descricao($row['intervalo_pagamento_descricao']);
             }
             
-            return $object_intervalo_pagamento;
+            return $obj_intervalo_pagamento;
         }
     }

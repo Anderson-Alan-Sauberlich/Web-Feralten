@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
-    use Module\Application\Model\Object\Categoria_Compativel as Object_Categoria_Compativel;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
+    use Module\Application\Model\OBJ\Categoria_Compativel as OBJ_Categoria_Compativel;
     use Module\Application\Model\DAO\Categoria_Compativel as DAO_Categoria_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -16,11 +16,11 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Categoria $object_categoria) : bool
+        public static function Inserir(OBJ_Categoria $obj_categoria) : bool
         {
             try {
-                if (empty($object_categoria->get_id())) {
-                    $object_categoria->set_id(self::Achar_ID_Livre());
+                if (empty($obj_categoria->get_id())) {
+                    $obj_categoria->set_id(self::Achar_ID_Livre());
                 }
                 
                 $sql = "INSERT INTO tb_categoria (categoria_id, categoria_nome, categoria_url) 
@@ -28,17 +28,17 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_categoria->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_categoria->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_categoria->get_url(), PDO::PARAM_STR);
 
                 if ($p_sql->execute()) {
-                    $object_categoria_compativel = new Object_Categoria_Compativel();
+                    $obj_categoria_compativel = new OBJ_Categoria_Compativel();
                     
-                    $object_categoria_compativel->set_com_id($object_categoria->get_id());
-                    $object_categoria_compativel->set_da_id($object_categoria->get_id());
+                    $obj_categoria_compativel->set_com_id($obj_categoria->get_id());
+                    $obj_categoria_compativel->set_da_id($obj_categoria->get_id());
                     
-                    return DAO_Categoria_Compativel::Inserir($object_categoria_compativel);
+                    return DAO_Categoria_Compativel::Inserir($obj_categoria_compativel);
                 } else {
                     return false;
                 }
@@ -47,7 +47,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Categoria $object_categoria) : bool
+        public static function Atualizar(OBJ_Categoria $obj_categoria) : bool
         {
             try {
                 $sql = "UPDATE tb_categoria SET categoria_id = :id, categoria_nome = :nome, categoria_url = :url 
@@ -55,9 +55,9 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_categoria->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_categoria->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_categoria->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -155,19 +155,19 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Verificar_Categoria_Repetida(Object_Categoria $object_categoria) : bool
+        public static function Verificar_Categoria_Repetida(OBJ_Categoria $obj_categoria) : bool
         {
             try {
                 $sql = 'SELECT categoria_id FROM tb_categoria WHERE categoria_nome = :nome OR categoria_url = :url';
         
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(':nome', $object_categoria->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_categoria->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':nome', $obj_categoria->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_categoria->get_url(), PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 $categoria_id = $p_sql->fetch(PDO::FETCH_COLUMN);
         
-                if (!empty($categoria_id) AND $categoria_id != $object_categoria->get_id()) {
+                if (!empty($categoria_id) AND $categoria_id != $obj_categoria->get_id()) {
                     return false;
                 } else {
                     return true;
@@ -177,23 +177,23 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaCategoria(array $row) : Object_Categoria
+        public static function PopulaCategoria(array $row) : OBJ_Categoria
         {
-            $object_categoria = new Object_Categoria();
+            $obj_categoria = new OBJ_Categoria();
             
             if (isset($row['categoria_id'])) {
-                $object_categoria->set_id($row['categoria_id']);
+                $obj_categoria->set_id($row['categoria_id']);
             }
             
             if (isset($row['categoria_nome'])) {
-                $object_categoria->set_nome($row['categoria_nome']);
+                $obj_categoria->set_nome($row['categoria_nome']);
             }
             
             if (isset($row['categoria_url'])) {
-                $object_categoria->set_url($row['categoria_url']);
+                $obj_categoria->set_url($row['categoria_url']);
             }
             
-            return $object_categoria;
+            return $obj_categoria;
         }
         
         public static function PopulaCategorias(array $rows) : array
@@ -201,21 +201,21 @@ namespace Module\Application\Model\DAO;
             $categorias = array();
             
             foreach ($rows as $row) {
-                $object_categoria = new Object_Categoria();
+                $obj_categoria = new OBJ_Categoria();
                 
                 if (isset($row['categoria_id'])) {
-                    $object_categoria->set_id($row['categoria_id']);
+                    $obj_categoria->set_id($row['categoria_id']);
                 }
                 
                 if (isset($row['categoria_nome'])) {
-                    $object_categoria->set_nome($row['categoria_nome']);
+                    $obj_categoria->set_nome($row['categoria_nome']);
                 }
                 
                 if (isset($row['categoria_url'])) {
-                    $object_categoria->set_url($row['categoria_url']);
+                    $obj_categoria->set_url($row['categoria_url']);
                 }
                 
-                $categorias[] = $object_categoria;
+                $categorias[] = $obj_categoria;
             }
             
             return $categorias;

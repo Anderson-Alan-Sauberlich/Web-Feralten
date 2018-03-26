@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\View\SRC\Usuario;
     
-    use Module\Application\Model\Object\Recuperar_Senha as Object_Recuperar_Senha;
+    use Module\Application\Model\OBJ\Recuperar_Senha as OBJ_Recuperar_Senha;
     
     class Recuperar_Senha
     {
@@ -10,11 +10,11 @@ namespace Module\Application\View\SRC\Usuario;
             
         }
         
-        private static $object_recuperar_senha;
+        private static $obj_recuperar_senha;
         
-        public function set_object_recuperar_senha(Object_Recuperar_Senha $object_recuperar_senha) : void
+        public function set_obj_recuperar_senha(OBJ_Recuperar_Senha $obj_recuperar_senha) : void
         {
-            self::$object_recuperar_senha = $object_recuperar_senha;
+            self::$obj_recuperar_senha = $obj_recuperar_senha;
         }
         
         public function Executar()
@@ -24,8 +24,8 @@ namespace Module\Application\View\SRC\Usuario;
         
         public static function Verificar_Codigo_Setado() : bool
         {
-            if (isset(self::$object_recuperar_senha)) {
-                if (empty(self::$object_recuperar_senha->get_codigo())) {
+            if (isset(self::$obj_recuperar_senha)) {
+                if (empty(self::$obj_recuperar_senha->get_codigo())) {
                     return false;
                 } else {
                     return true;
@@ -37,9 +37,9 @@ namespace Module\Application\View\SRC\Usuario;
         
         public static function Mostrar_Codigo() : void
         {
-            if (isset(self::$object_recuperar_senha)) {
-                if (!empty(self::$object_recuperar_senha->get_codigo())) {
-                    echo hash_hmac('sha512', self::$object_recuperar_senha->get_codigo(), hash('sha512', self::$object_recuperar_senha->get_codigo()));
+            if (isset(self::$obj_recuperar_senha)) {
+                if (!empty(self::$obj_recuperar_senha->get_codigo())) {
+                    echo hash_hmac('sha512', self::$obj_recuperar_senha->get_codigo(), hash('sha512', self::$obj_recuperar_senha->get_codigo()));
                 }
             }
         }

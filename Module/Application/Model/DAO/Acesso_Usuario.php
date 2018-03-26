@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Acesso_Usuario as Object_Acesso_Usuario;
+    use Module\Application\Model\OBJ\Acesso_Usuario as OBJ_Acesso_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Acesso_Usuario $object_acesso_usuario) : bool
+        public static function Inserir(OBJ_Acesso_Usuario $obj_acesso_usuario) : bool
         {
             try {
                 $sql = "INSERT INTO tb_acesso_usuario (acesso_usuario_usr_id, acesso_usuario_ent_id, acesso_usuario_fnc, acesso_usuario_pms_id) 
@@ -22,10 +22,10 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':usr_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':fnc_id', $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pms_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fnc_id', $obj_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pms_id', $obj_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -33,7 +33,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Acesso_Usuario $object_acesso_usuario) : bool
+        public static function Atualizar(OBJ_Acesso_Usuario $obj_acesso_usuario) : bool
         {
             try {
                 $sql = "UPDATE tb_acesso_usuario SET
@@ -45,10 +45,10 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':usr_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':fnc_id', $object_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':pms_id', $object_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_acesso_usuario->get_entidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':fnc_id', $obj_acesso_usuario->get_funcionalidade_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pms_id', $obj_acesso_usuario->get_usuario_id(), PDO::PARAM_INT);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -91,50 +91,50 @@ namespace Module\Application\Model\DAO;
             $acessos = array();
             
             foreach ($rows as $row) {
-                $object_acesso_usuario = new Object_Acesso_Usuario();
+                $obj_acesso_usuario = new OBJ_Acesso_Usuario();
                 
                 if (isset($row['acesso_usuario_usr_id'])) {
-                    $object_acesso_usuario->set_usuario_id($row['acesso_usuario_usr_id']);
+                    $obj_acesso_usuario->set_usuario_id($row['acesso_usuario_usr_id']);
                 }
                 
                 if (isset($row['acesso_usuario_ent_id'])) {
-                    $object_acesso_usuario->set_entidade_id($row['acesso_usuario_ent_id']);
+                    $obj_acesso_usuario->set_entidade_id($row['acesso_usuario_ent_id']);
                 }
                 
                 if (isset($row['acesso_usuario_fnc'])) {
-                    $object_acesso_usuario->set_funcionalidade_id($row['acesso_usuario_fnc']);
+                    $obj_acesso_usuario->set_funcionalidade_id($row['acesso_usuario_fnc']);
                 }
                 
                 if (isset($row['acesso_usuario_pms_id'])) {
-                    $object_acesso_usuario->set_permissao_id($row['acesso_usuario_pms_id']);
+                    $obj_acesso_usuario->set_permissao_id($row['acesso_usuario_pms_id']);
                 }
                 
-                $acessos[] = $object_acesso_usuario;
+                $acessos[] = $obj_acesso_usuario;
             }
             
             return $acessos;
         }
         
-        public static function PopulaAcesso(array $row) : Object_Acesso_Usuario
+        public static function PopulaAcesso(array $row) : OBJ_Acesso_Usuario
         {
-            $object_acesso_usuario = new Object_Acesso_Usuario();
+            $obj_acesso_usuario = new OBJ_Acesso_Usuario();
             
             if (isset($row['acesso_usuario_usr_id'])) {
-                $object_acesso_usuario->set_usuario_id($row['acesso_usuario_usr_id']);
+                $obj_acesso_usuario->set_usuario_id($row['acesso_usuario_usr_id']);
             }
             
             if (isset($row['acesso_usuario_ent_id'])) {
-                $object_acesso_usuario->set_entidade_id($row['acesso_usuario_ent_id']);
+                $obj_acesso_usuario->set_entidade_id($row['acesso_usuario_ent_id']);
             }
             
             if (isset($row['acesso_usuario_fnc'])) {
-                $object_acesso_usuario->set_funcionalidade_id($row['acesso_usuario_fnc']);
+                $obj_acesso_usuario->set_funcionalidade_id($row['acesso_usuario_fnc']);
             }
             
             if (isset($row['acesso_usuario_pms_id'])) {
-                $object_acesso_usuario->set_permissao_id($row['acesso_usuario_pms_id']);
+                $obj_acesso_usuario->set_permissao_id($row['acesso_usuario_pms_id']);
             }
             
-            return $object_acesso_usuario;
+            return $obj_acesso_usuario;
         }
     }

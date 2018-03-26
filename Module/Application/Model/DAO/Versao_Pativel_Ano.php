@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Versao_Pativel_Ano as Object_Versao_Pativel_Ano;
+    use Module\Application\Model\OBJ\Versao_Pativel_Ano as OBJ_Versao_Pativel_Ano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -15,10 +15,10 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Versao_Pativel_Ano $object_versao_pativel_ano) : bool
+        public static function Inserir(OBJ_Versao_Pativel_Ano $obj_versao_pativel_ano) : bool
         {
             try {
-                $anos = $object_versao_pativel->get_anos();
+                $anos = $obj_versao_pativel->get_anos();
                 
                 if (!empty($anos) AND !empty($proximo_id_ano)) {
                     foreach ($anos as $ano) {
@@ -42,7 +42,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Versao_Pativel_Ano $object_versao_pativel_ano) : bool
+        public static function Atualizar(OBJ_Versao_Pativel_Ano $obj_versao_pativel_ano) : bool
         {
             try {
                 
@@ -51,7 +51,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Versao_Pativel_Ano $object_versao_pativel_ano) : bool
+        public static function Deletar_Por_Objeto(OBJ_Versao_Pativel_Ano $obj_versao_pativel_ano) : bool
         {
             try {
                 
@@ -226,17 +226,17 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_versao_pativel_ano = new Object_Versao_Pativel_Ano();
+                $obj_versao_pativel_ano = new OBJ_Versao_Pativel_Ano();
                 
                 if (isset($row['versao_pativel_vrs_id'])) {
-                    $object_versao_pativel_ano->set_ano_id($row['versao_pativel_vrs_id']);
+                    $obj_versao_pativel_ano->set_ano_id($row['versao_pativel_vrs_id']);
                 }
                 
                 if (isset($row['versao_pativel_ano_id'])) {
-                    $object_versao_pativel_ano->set_anos($row['versao_pativel_ano_id']);
+                    $obj_versao_pativel_ano->set_anos($row['versao_pativel_ano_id']);
                 }
                 
-                $pativeis[] = $object_versao_pativel_ano;
+                $pativeis[] = $obj_versao_pativel_ano;
             }
             
             return $pativeis;

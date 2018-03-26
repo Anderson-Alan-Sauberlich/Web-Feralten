@@ -4,7 +4,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados\Usuario as View_Usuario;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Login_Session;
     use \Exception;
@@ -214,7 +214,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             
             $obj_usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
             
-            if ($obj_usuario instanceof Object_Usuario) {
+            if ($obj_usuario instanceof OBJ_Usuario) {
                 $view->set_obj_usuario($obj_usuario);
             }
             
@@ -228,7 +228,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         public function SalvarDados() : void
         {
             if (empty($this->erros) && Login_Session::Verificar_Login()) {
-                $usuario = new Object_Usuario();
+                $usuario = new OBJ_Usuario();
                 
                 $usuario->set_nome($this->nome);
                 $usuario->set_sobrenome($this->sobrenome);
@@ -263,7 +263,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         {
             if (Login_Session::Verificar_Login()) {
                 if (empty($this->erros)) {
-                    $usuario = new Object_Usuario();
+                    $usuario = new OBJ_Usuario();
                     
                     $usuario->set_nome($this->nome);
                     $usuario->set_sobrenome($this->sobrenome);
@@ -306,7 +306,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
             if (Login_Session::Verificar_Login()) {
                 $obj_usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
                 
-                if ($obj_usuario instanceof Object_Usuario) {
+                if ($obj_usuario instanceof OBJ_Usuario) {
                     $usuario['nome'] = $obj_usuario->get_nome();
                     $usuario['sobrenome'] = $obj_usuario->get_sobrenome();
                     $usuario['email'] = $obj_usuario->get_email();

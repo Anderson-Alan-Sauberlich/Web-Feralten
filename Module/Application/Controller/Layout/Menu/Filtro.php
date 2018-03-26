@@ -6,13 +6,13 @@ namespace Module\Application\Controller\Layout\Menu;
     use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro;
     use Module\Application\Model\DAO\Cidade as DAO_Cidade;
     use Module\Application\Model\DAO\Estado as DAO_Estado;
-    use Module\Application\Model\Object\Cidade as Object_Cidade;
-    use Module\Application\Model\Object\Estado as Object_Estado;
+    use Module\Application\Model\OBJ\Cidade as OBJ_Cidade;
+    use Module\Application\Model\OBJ\Estado as OBJ_Estado;
     use Module\Application\Model\DAO\Status_Peca as DAO_Status_Peca;
     use Module\Application\Model\DAO\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
-    use Module\Application\Model\Object\Status_Peca as Object_Status_Peca;
-    use Module\Application\Model\Object\Estado_Uso_Peca as Object_Estado_Uso_Peca;
-    use Module\Application\Model\Object\Preferencia_Entrega as Object_Preferencia_Entrega;
+    use Module\Application\Model\OBJ\Status_Peca as OBJ_Status_Peca;
+    use Module\Application\Model\OBJ\Estado_Uso_Peca as OBJ_Estado_Uso_Peca;
+    use Module\Application\Model\OBJ\Preferencia_Entrega as OBJ_Preferencia_Entrega;
     use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use \Exception;
     
@@ -299,16 +299,16 @@ namespace Module\Application\Controller\Layout\Menu;
         /**
          * Retorna o objeto Estado.
          * 
-         * @return Object_Estado|NULL
+         * @return OBJ_Estado|NULL
          */
-        public function get_object_estado() : ?Object_Estado
+        public function get_obj_estado() : ?OBJ_Estado
         {
             if (!empty($this->estado)) {
-                $object_estado = new Object_Estado();
+                $obj_estado = new OBJ_Estado();
                 
-                $object_estado->set_id($this->estado);
+                $obj_estado->set_id($this->estado);
                 
-                return $object_estado;
+                return $obj_estado;
             } else {
                 return null;
             }
@@ -317,16 +317,16 @@ namespace Module\Application\Controller\Layout\Menu;
         /**
          * Retorna o objeto Cidade.
          * 
-         * @return Object_Cidade|NULL
+         * @return OBJ_Cidade|NULL
          */
-        public function get_object_cidade() : ?Object_Cidade
+        public function get_obj_cidade() : ?OBJ_Cidade
         {
             if (!empty($this->cidade)) {
-                $object_cidade = new Object_Cidade();
+                $obj_cidade = new OBJ_Cidade();
                 
-                $object_cidade->set_id($this->cidade);
+                $obj_cidade->set_id($this->cidade);
                 
-                return $object_cidade;
+                return $obj_cidade;
             } else {
                 return null;
             }
@@ -335,16 +335,16 @@ namespace Module\Application\Controller\Layout\Menu;
         /**
          * Retorna o objeto Estaro de Uso.
          * 
-         * @return Object_Estado_Uso_Peca|NULL
+         * @return OBJ_Estado_Uso_Peca|NULL
          */
-        public function get_object_estado_uso() : ?Object_Estado_Uso_Peca
+        public function get_obj_estado_uso() : ?OBJ_Estado_Uso_Peca
         {
             if (!empty($this->estado_uso)) {
-                $object_estado_uso_peca = new Object_Estado_Uso_Peca();
+                $obj_estado_uso_peca = new OBJ_Estado_Uso_Peca();
                 
-                $object_estado_uso_peca->set_id($this->estado_uso);
+                $obj_estado_uso_peca->set_id($this->estado_uso);
                 
-                return $object_estado_uso_peca;
+                return $obj_estado_uso_peca;
             } else {
                 return null;
             }
@@ -353,16 +353,16 @@ namespace Module\Application\Controller\Layout\Menu;
         /**
          * Retorna o objeto Preferencia de Entraga.
          * 
-         * @return Object_Preferencia_Entrega|NULL
+         * @return OBJ_Preferencia_Entrega|NULL
          */
-        public function get_object_preferencia_entrega() : ?Object_Preferencia_Entrega
+        public function get_obj_preferencia_entrega() : ?OBJ_Preferencia_Entrega
         {
             if (!empty($this->preferencia_entrega)) {
-                $object_preferencia_entrega = new Object_Preferencia_Entrega();
+                $obj_preferencia_entrega = new OBJ_Preferencia_Entrega();
                 
-                $object_preferencia_entrega->set_id($this->preferencia_entrega);
+                $obj_preferencia_entrega->set_id($this->preferencia_entrega);
                 
-                return $object_preferencia_entrega;
+                return $obj_preferencia_entrega;
             } else {
                 return null;
             }
@@ -371,16 +371,16 @@ namespace Module\Application\Controller\Layout\Menu;
         /**
          * Retorna o objeto Status da Peça.
          * 
-         * @return Object_Status_Peca|NULL
+         * @return OBJ_Status_Peca|NULL
          */
-        public function get_object_status_peca() : ?Object_Status_Peca
+        public function get_obj_status_peca() : ?OBJ_Status_Peca
         {
             if (!empty($this->status_peca)) {
-                $object_status_peca = new Object_Status_Peca();
+                $obj_status_peca = new OBJ_Status_Peca();
                 
-                $object_status_peca->set_id($this->status_peca);
+                $obj_status_peca->set_id($this->status_peca);
                 
-                return $object_status_peca;
+                return $obj_status_peca;
             } else {
                 return null;
             }

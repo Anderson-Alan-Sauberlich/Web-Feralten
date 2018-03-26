@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Marca_Compativel as Object_Marca_Compativel;
+    use Module\Application\Model\OBJ\Marca_Compativel as OBJ_Marca_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
     
         }
     
-        public static function Inserir(Object_Marca_Compativel $object_marca_compativel) : bool
+        public static function Inserir(OBJ_Marca_Compativel $obj_marca_compativel) : bool
         {
             try {
                 $sql = "INSERT INTO tb_marca_compativel (marca_compativel_da_id_mrc, marca_compativel_com_id_mrc)
@@ -22,8 +22,8 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_marca_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_marca_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -31,15 +31,15 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function Atualizar(Object_Marca_Compativel $object_marca_compativel) : bool
+        public static function Atualizar(OBJ_Marca_Compativel $obj_marca_compativel) : bool
         {
             try {
                 $sql = "UPDATE tb_marca_compativel SET marca_compativel_da_id_mrc = :da_id, marca_compativel_com_id_mrc = :com_id WHERE marca_compativel_da_id_mrc = :da_id";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':da_id', $object_marca_compativel->get_da_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':com_id', $object_marca_compativel->get_com_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':da_id', $obj_marca_compativel->get_da_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':com_id', $obj_marca_compativel->get_com_id(), PDO::PARAM_INT);
     
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -69,7 +69,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
     
-                return self::PopulaMarcasCompativeisObject($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaMarcasCompativeisOBJ($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -90,37 +90,37 @@ namespace Module\Application\Model\DAO;
             }
         }
     
-        public static function PopulaMarcaCompativel(array $row) : Object_Marca_Compativel
+        public static function PopulaMarcaCompativel(array $row) : OBJ_Marca_Compativel
         {
-            $object_marca_compativel = new Object_Marca_Compativel();
+            $obj_marca_compativel = new OBJ_Marca_Compativel();
             
             if (isset($row['marca_compativel_da_id_mrc'])) {
-                $object_marca_compativel->set_da_id($row['marca_compativel_da_id_mrc']);
+                $obj_marca_compativel->set_da_id($row['marca_compativel_da_id_mrc']);
             }
             
             if (isset($row['marca_compativel_com_id_mrc'])) {
-                $object_marca_compativel->set_com_id($row['marca_compativel_com_id_mrc']);
+                $obj_marca_compativel->set_com_id($row['marca_compativel_com_id_mrc']);
             }
             
-            return $object_marca_compativel;
+            return $obj_marca_compativel;
         }
         
-        public static function PopulaMarcasCompativeisObject(array $rows) : array
+        public static function PopulaMarcasCompativeisOBJ(array $rows) : array
         {
             $marcas_compativeis = array();
             
             foreach ($rows as $row) {
-                $object_marca_compativel = new Object_Marca_Compativel();
+                $obj_marca_compativel = new OBJ_Marca_Compativel();
                 
                 if (isset($row['marca_compativel_da_id_mrc'])) {
-                    $object_marca_compativel->set_da_id($row['marca_compativel_da_id_mrc']);
+                    $obj_marca_compativel->set_da_id($row['marca_compativel_da_id_mrc']);
                 }
                 
                 if (isset($row['marca_compativel_com_id_mrc'])) {
-                    $object_marca_compativel->set_com_id($row['marca_compativel_com_id_mrc']);
+                    $obj_marca_compativel->set_com_id($row['marca_compativel_com_id_mrc']);
                 }
                 
-                $marcas_compativeis[] = $object_marca_compativel;
+                $marcas_compativeis[] = $obj_marca_compativel;
             }
             
             return $marcas_compativeis;

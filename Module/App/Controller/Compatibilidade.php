@@ -49,13 +49,13 @@ namespace Module\App\Controller;
         public function Retornar_Categorias() : void
         {
             $categorias = array();
-            $object_categorias = DAO_Categoria_Compativel::BuscarTodos();
+            $obj_categorias = DAO_Categoria_Compativel::BuscarTodos();
             
-            foreach ($object_categorias as $object_categoria) {
+            foreach ($obj_categorias as $obj_categoria) {
                 $categoria = array();
                 
-                $categoria['id_da_ctg'] = $object_categoria->get_da_id();
-                $categoria['id_com_ctg'] = $object_categoria->get_com_id();
+                $categoria['id_da_ctg'] = $obj_categoria->get_da_id();
+                $categoria['id_com_ctg'] = $obj_categoria->get_com_id();
                 
                 $categorias[] = $categoria;
             }
@@ -66,13 +66,13 @@ namespace Module\App\Controller;
         public function Retornar_Marcas() : void
         {
             $marcas = array();
-            $object_marcas = DAO_Marca_Compativel::BuscarTodos();
+            $obj_marcas = DAO_Marca_Compativel::BuscarTodos();
             
-            foreach ($object_marcas as $object_marca) {
+            foreach ($obj_marcas as $obj_marca) {
                 $marca = array();
                 
-                $marca['id_da_mrc'] = $object_marca->get_da_id();
-                $marca['id_com_mrc'] = $object_marca->get_com_id();
+                $marca['id_da_mrc'] = $obj_marca->get_da_id();
+                $marca['id_com_mrc'] = $obj_marca->get_com_id();
                 
                 $marcas[] = $marca;
             }
@@ -83,13 +83,13 @@ namespace Module\App\Controller;
         public function Retornar_Modelos() : void
         {
             $modelos = array();
-            $object_modelos = DAO_Modelo_Compativel::BuscarTodos();
+            $obj_modelos = DAO_Modelo_Compativel::BuscarTodos();
             
-            foreach ($object_modelos as $object_modelo) {
+            foreach ($obj_modelos as $obj_modelo) {
                 $modelo = array();
                 
-                $modelo['id_da_mdl'] = $object_modelo->get_da_id();
-                $modelo['id_com_mdl'] = $object_modelo->get_com_id();
+                $modelo['id_da_mdl'] = $obj_modelo->get_da_id();
+                $modelo['id_com_mdl'] = $obj_modelo->get_com_id();
                 
                 $modelos[] = $modelo;
             }
@@ -100,13 +100,13 @@ namespace Module\App\Controller;
         public function Retornar_Versoes() : void
         {
             $versoes = array();
-            $object_versoes = DAO_Versao_Compativel::BuscarTodos();
+            $obj_versoes = DAO_Versao_Compativel::BuscarTodos();
             
-            foreach ($object_versoes as $object_versao) {
+            foreach ($obj_versoes as $obj_versao) {
                 $versao = array();
                 
-                $versao['id_da_vrs'] = $object_versao->get_da_id();
-                $versao['id_com_vrs'] = $object_versao->get_com_id();
+                $versao['id_da_vrs'] = $obj_versao->get_da_id();
+                $versao['id_com_vrs'] = $obj_versao->get_com_id();
                 
                 $versoes[] = $versao;
             }

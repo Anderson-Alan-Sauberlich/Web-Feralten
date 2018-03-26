@@ -93,7 +93,7 @@ namespace Module\Application\Controller\Pecas;
         
         public function Carregar_Pagina()
         {
-            $this->controller_pesquisa->set_object_controller_filtro($this->controller_filtro);
+            $this->controller_pesquisa->set_obj_controller_filtro($this->controller_filtro);
             
             $view = new View_Resultados();
             

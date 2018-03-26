@@ -3,7 +3,7 @@ namespace Module\Application\Controller\Usuario;
     
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Controller\Usuario\Login as Controller_Login;
     use Module\Application\View\SRC\Usuario\Cadastro as View_Cadastro;
@@ -22,9 +22,9 @@ namespace Module\Application\Controller\Usuario;
         private $email;
         private $senha;
         private $recaptcha_response;
-        private $cadastro_erros = array();
-        private $cadastro_campos = array();
-        private $cadastro_form = array();
+        private $cadastro_erros = [];
+        private $cadastro_campos = [];
+        private $cadastro_form = [];
         
         public function set_nome($nome) : void
         {
@@ -110,7 +110,7 @@ namespace Module\Application\Controller\Usuario;
                 $resp = $recaptcha->verify($this->recaptcha_response, $_SERVER["REMOTE_ADDR"]);
                 
                 if ($resp->isSuccess()) {
-                    $usuario = new Object_Usuario();
+                    $usuario = new OBJ_Usuario();
                     $usuario->set_id(0);
                     $usuario->set_ultimo_login(date("Y-m-d H:i:s"));
                     $usuario->set_status_id(2);
@@ -164,7 +164,7 @@ namespace Module\Application\Controller\Usuario;
                 $resp = $recaptcha->verify($this->recaptcha_response, $_SERVER["REMOTE_ADDR"]);
                 
                 if ($resp->isSuccess()) {
-                    $usuario = new Object_Usuario();
+                    $usuario = new OBJ_Usuario();
                     $usuario->set_id(0);
                     $usuario->set_ultimo_login(date("Y-m-d H:i:s"));
                     $usuario->set_status_id(2);

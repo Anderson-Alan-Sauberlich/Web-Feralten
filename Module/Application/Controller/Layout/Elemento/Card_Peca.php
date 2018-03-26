@@ -5,10 +5,10 @@ namespace Module\Application\Controller\Layout\Elemento;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Application\Model\DAO\Removido as DAO_Removido;
-    use Module\Application\Model\Object\Removido as Object_Removido;
+    use Module\Application\Model\OBJ\Removido as OBJ_Removido;
     use \Exception;
 
     class Card_Peca
@@ -87,18 +87,18 @@ namespace Module\Application\Controller\Layout\Elemento;
                     if (DAO_Peca::DeletarComTransaction($this->peca)) {
                         Gerenciar_Imagens::Deletar_Imagens_Peca($this->peca, Login_Session::get_entidade_id());
                         
-                        $entidade = new Object_Entidade();
+                        $entidade = new OBJ_Entidade();
                         $entidade->set_id(Login_Session::get_entidade_id());
                         
-                        $usuario_responsavel = new Object_Usuario();
+                        $usuario_responsavel = new OBJ_Usuario();
                         $usuario_responsavel->set_id(Login_Session::get_usuario_id());
                         
-                        $object_removido = new Object_Removido();
-                        $object_removido->set_object_entidade($entidade);
-                        $object_removido->set_object_usuario($usuario_responsavel);
-                        $object_removido->set_datahora(date('Y-m-d H:i:s'));
+                        $obj_removido = new OBJ_Removido();
+                        $obj_removido->set_obj_entidade($entidade);
+                        $obj_removido->set_obj_usuario($usuario_responsavel);
+                        $obj_removido->set_datahora(date('Y-m-d H:i:s'));
                         
-                        DAO_Removido::Inserir($object_removido);
+                        DAO_Removido::Inserir($obj_removido);
                     }
                 } else if (!empty($this->status)) {
                     DAO_Peca::Atualizar_Status($this->peca, $this->status);

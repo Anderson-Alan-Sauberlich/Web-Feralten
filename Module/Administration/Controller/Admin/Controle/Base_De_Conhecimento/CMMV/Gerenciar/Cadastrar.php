@@ -5,10 +5,10 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
     use Module\Application\Model\DAO\Marca as DAO_Marca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
     use Module\Application\Model\DAO\Versao as DAO_Versao;
-    use Module\Application\Model\Object\Versao as Object_Versao;
-    use Module\Application\Model\Object\Modelo as Object_Modelo;
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
+    use Module\Application\Model\OBJ\Modelo as OBJ_Modelo;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
     use Module\Administration\Controller\Layout\Menu\Admin as Controller_Admin;
     use Module\Administration\View\SRC\Admin\Controle\Base_De_Conhecimento\CMMV\Gerenciar\Cadastrar as View_Cadastrar;
     
@@ -93,14 +93,14 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Cadastrar_Versao() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_versao = new Object_Versao();
+                $obj_versao = new OBJ_Versao();
                 
-                $object_versao->set_modelo_id($this->modelo);
-                $object_versao->set_nome($this->nome);
-                $object_versao->set_url($this->url);
+                $obj_versao->set_modelo_id($this->modelo);
+                $obj_versao->set_nome($this->nome);
+                $obj_versao->set_url($this->url);
                 
-                if (DAO_Versao::Verificar_Versao_Repetida($object_versao)) {
-                    DAO_Versao::Inserir($object_versao);
+                if (DAO_Versao::Verificar_Versao_Repetida($obj_versao)) {
+                    DAO_Versao::Inserir($obj_versao);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Versão Nome/URL Já Estão Cadastrados Para Este Modelo</b></div>";
                 }
@@ -110,14 +110,14 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Cadastrar_Modelo() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_modelo = new Object_Modelo();
+                $obj_modelo = new OBJ_Modelo();
                 
-                $object_modelo->set_marca_id($this->marca);
-                $object_modelo->set_nome($this->nome);
-                $object_modelo->set_url($this->url);
+                $obj_modelo->set_marca_id($this->marca);
+                $obj_modelo->set_nome($this->nome);
+                $obj_modelo->set_url($this->url);
                 
-                if (DAO_Modelo::Verificar_Modelo_Repetido($object_modelo)) {
-                    DAO_Modelo::Inserir($object_modelo);
+                if (DAO_Modelo::Verificar_Modelo_Repetido($obj_modelo)) {
+                    DAO_Modelo::Inserir($obj_modelo);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Modelo Nome/URL Já Estão Cadastrados Para Está Marca</b></div>";
                 }
@@ -127,14 +127,14 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Cadastrar_Marca() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_marca = new Object_Marca();
+                $obj_marca = new OBJ_Marca();
                 
-                $object_marca->set_categoria_id($this->categoria);
-                $object_marca->set_nome($this->nome);
-                $object_marca->set_url($this->url);
+                $obj_marca->set_categoria_id($this->categoria);
+                $obj_marca->set_nome($this->nome);
+                $obj_marca->set_url($this->url);
                 
-                if (DAO_Marca::Verificar_Marca_Repetida($object_marca)) {
-                    DAO_Marca::Inserir($object_marca);
+                if (DAO_Marca::Verificar_Marca_Repetida($obj_marca)) {
+                    DAO_Marca::Inserir($obj_marca);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Marca Nome/URL Já Estão Cadastrados Para Está Categoria</b></div>";
                 }
@@ -144,13 +144,13 @@ namespace Module\Administration\Controller\Admin\Controle\Base_De_Conhecimento\C
         private function Cadastrar_Categoria() : void
         {
             if ($this->Validar_Nome_URL()) {
-                $object_categoria = new Object_Categoria();
+                $obj_categoria = new OBJ_Categoria();
                 
-                $object_categoria->set_nome($this->nome);
-                $object_categoria->set_url($this->url);
+                $obj_categoria->set_nome($this->nome);
+                $obj_categoria->set_url($this->url);
                 
-                if (DAO_Categoria::Verificar_Categoria_Repetida($object_categoria)) {
-                    DAO_Categoria::Inserir($object_categoria);
+                if (DAO_Categoria::Verificar_Categoria_Repetida($obj_categoria)) {
+                    DAO_Categoria::Inserir($obj_categoria);
                 } else {
                     echo "<div class=\"alert alert-danger fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>Erro: Categoria Nome/URL Já Estão Cadastrados</b></div>";
                 }

@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Modelo_Pativel as Object_Modelo_Pativel;
-    use Module\Application\Model\Object\Peca as Object_Peca;
+    use Module\Application\Model\OBJ\Modelo_Pativel as OBJ_Modelo_Pativel;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\DAO\Modelo as DAO_Modelo;
     use Module\Application\Model\DAO\Modelo_Pativel_Ano as DAO_Modelo_Pativel_Ano;
@@ -19,7 +19,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        public static function Inserir(OBJ_Modelo_Pativel $obj_modelo_pativel) : bool
         {
             try {
                 $sql = "INSERT INTO tb_modelo_pativel (modelo_pativel_pec_id, modelo_pativel_mdl_id, modelo_pativel_ano_id) 
@@ -27,25 +27,25 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':pec_id', $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mdl_id', $object_modelo_pativel->get_object_modelo()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mdl_id', $obj_modelo_pativel->get_obj_modelo()->get_id(), PDO::PARAM_INT);
                 
                 $proximo_id_ano = null;
                 
-                if (empty($object_modelo_pativel->get_anos())) {
+                if (empty($obj_modelo_pativel->get_anos())) {
                     $p_sql->bindValue(':ano_id', null, PDO::PARAM_INT);
                 } else {
-                    if (empty($object_modelo_pativel->get_ano_id())) {
+                    if (empty($obj_modelo_pativel->get_ano_id())) {
                         $proximo_id_ano = self::Pegar_Proximo_Id_Ano();
                     } else {
-                        $proximo_id_ano = $object_modelo_pativel->get_ano_id();
+                        $proximo_id_ano = $obj_modelo_pativel->get_ano_id();
                     }
                     
                     $p_sql->bindValue(':ano_id', $proximo_id_ano, PDO::PARAM_INT);
                 }
                 
                 if ($p_sql->execute()) {
-                    $anos = $object_modelo_pativel->get_anos();
+                    $anos = $obj_modelo_pativel->get_anos();
                     
                     if (!empty($anos) AND !empty($proximo_id_ano)) {
                         foreach ($anos as $ano) {
@@ -72,16 +72,16 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        public static function Atualizar(OBJ_Modelo_Pativel $obj_modelo_pativel) : bool
         {
             try {
-                if (empty($object_modelo_pativel->get_ano_id())) {
-                    $object_modelo_pativel->set_ano_id(self::Pegar_Id_Ano($object_modelo_pativel->get_peca_id(),
-                                                                          $object_modelo_pativel->get_object_modelo()->get_id()));
+                if (empty($obj_modelo_pativel->get_ano_id())) {
+                    $obj_modelo_pativel->set_ano_id(self::Pegar_Id_Ano($obj_modelo_pativel->get_peca_id(),
+                                                                          $obj_modelo_pativel->get_obj_modelo()->get_id()));
                 }
                 
-                if (self::Deletar_Por_Objeto($object_modelo_pativel)) {
-                    if (self::Inserir($object_modelo_pativel)) {
+                if (self::Deletar_Por_Objeto($obj_modelo_pativel)) {
+                    if (self::Inserir($obj_modelo_pativel)) {
                         return true;
                     } else {
                         return false;
@@ -94,19 +94,19 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Modelo_Pativel $object_modelo_pativel) : bool
+        public static function Deletar_Por_Objeto(OBJ_Modelo_Pativel $obj_modelo_pativel) : bool
         {
             try {
-                if (!empty($object_modelo_pativel->get_ano_id())) {
-                    self::Deletar_Anos($object_modelo_pativel->get_ano_id());
+                if (!empty($obj_modelo_pativel->get_ano_id())) {
+                    self::Deletar_Anos($obj_modelo_pativel->get_ano_id());
                 }
                 
                 $sql = 'DELETE FROM tb_modelo_pativel WHERE modelo_pativel_pec_id = :pec_id AND modelo_pativel_mdl_id = :mdl_id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':pec_id', $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mdl_id', $object_modelo_pativel->get_object_modelo()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':pec_id', $obj_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mdl_id', $obj_modelo_pativel->get_obj_modelo()->get_id(), PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (Exception $e) {
@@ -275,14 +275,14 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Numero_Paginas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro)
+        public static function Buscar_Numero_Paginas(OBJ_Modelo_Pativel $obj_modelo_pativel, OBJ_Peca $obj_peca, array $form_filtro)
         {
             try {
                 $pesquisa = '';
                 
-                $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_modelo_pativel);
+                $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_modelo_pativel);
                 
-                $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+                $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
                 
                 if (!empty($pesquisa)) {
                     if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -294,9 +294,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_modelo_pativel);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_modelo_pativel);
                 
                 $p_sql->execute();
                 $select = $p_sql->fetchAll();
@@ -308,15 +308,15 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Pecas(Object_Modelo_Pativel $object_modelo_pativel, Object_Peca $object_peca, array $form_filtro, int $pg)
+        public static function Buscar_Pecas(OBJ_Modelo_Pativel $obj_modelo_pativel, OBJ_Peca $obj_peca, array $form_filtro, int $pg)
         {
             $limite = 9;
             $inicio = ($pg * $limite) - $limite;
             $pesquisa = "";
             
-            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_modelo_pativel);
+            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_modelo_pativel);
             
-            $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+            $pesquisa = DAO_Peca::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
             
             if (!empty($pesquisa)) {
                 if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -330,9 +330,9 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = DAO_Peca::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_modelo_pativel);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_modelo_pativel);
                 
                 $p_sql->bindValue(':inicio', $inicio, PDO::PARAM_INT);
                 $p_sql->bindValue(':limite', $limite, PDO::PARAM_INT);
@@ -344,37 +344,37 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Modelo_Pativel $object_modelo_pativel) : string
+        public static function Criar_String_Pesquisa(string $pesquisa, OBJ_Modelo_Pativel $obj_modelo_pativel) : string
         {
-            if (!empty($object_modelo_pativel->get_peca_id())) {
+            if (!empty($obj_modelo_pativel->get_peca_id())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "modelo_pativel_pec_id = :pec_id";
             }
             
-            if (!empty($object_modelo_pativel->get_object_modelo()->get_id())) {
+            if (!empty($obj_modelo_pativel->get_obj_modelo()->get_id())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "modelo_pativel_mdl_id = :mdl_id";
             }
             
-            if (!empty($object_modelo_pativel->get_ano_de()) OR !empty($object_modelo_pativel->get_ano_ate())) {
+            if (!empty($obj_modelo_pativel->get_ano_de()) OR !empty($obj_modelo_pativel->get_ano_ate())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND (";
                 }
                 
                 $pesquisa_ano = "";
                 
-                if (!empty($object_modelo_pativel->get_ano_de())) {
+                if (!empty($obj_modelo_pativel->get_ano_de())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
                     $pesquisa_ano .= "modelo_pativel_ano_ano >= :ano_de";
                 }
                 
-                if (!empty($object_modelo_pativel->get_ano_ate())) {
+                if (!empty($obj_modelo_pativel->get_ano_ate())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
@@ -389,14 +389,14 @@ namespace Module\Application\Model\DAO;
                 
                 $pesquisa_ano = "";
                 
-                if (!empty($object_modelo_pativel->get_ano_de())) {
+                if (!empty($obj_modelo_pativel->get_ano_de())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
                     $pesquisa_ano .= "versao_pativel_ano_ano >= :ano_de";
                 }
                 
-                if (!empty($object_modelo_pativel->get_ano_ate())) {
+                if (!empty($obj_modelo_pativel->get_ano_ate())) {
                     if (!empty($pesquisa_ano)) {
                         $pesquisa_ano .= " AND ";
                     }
@@ -409,22 +409,22 @@ namespace Module\Application\Model\DAO;
             return $pesquisa;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Modelo_Pativel $object_modelo_pativel) : PDOStatement
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, OBJ_Modelo_Pativel $obj_modelo_pativel) : PDOStatement
         {
-            if (!empty($object_modelo_pativel->get_peca_id())) {
-                $p_sql->bindValue(':pec_id', $object_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
+            if (!empty($obj_modelo_pativel->get_peca_id())) {
+                $p_sql->bindValue(':pec_id', $obj_modelo_pativel->get_peca_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_modelo_pativel->get_object_modelo()->get_id())) {
-                $p_sql->bindValue(':mdl_id', $object_modelo_pativel->get_object_modelo()->get_id(), PDO::PARAM_INT);
+            if (!empty($obj_modelo_pativel->get_obj_modelo()->get_id())) {
+                $p_sql->bindValue(':mdl_id', $obj_modelo_pativel->get_obj_modelo()->get_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_modelo_pativel->get_ano_de())) {
-                $p_sql->bindValue(':ano_de', $object_modelo_pativel->get_ano_de(), PDO::PARAM_INT);
+            if (!empty($obj_modelo_pativel->get_ano_de())) {
+                $p_sql->bindValue(':ano_de', $obj_modelo_pativel->get_ano_de(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_modelo_pativel->get_ano_ate())) {
-                $p_sql->bindValue(':ano_ate', $object_modelo_pativel->get_ano_ate(), PDO::PARAM_INT);
+            if (!empty($obj_modelo_pativel->get_ano_ate())) {
+                $p_sql->bindValue(':ano_ate', $obj_modelo_pativel->get_ano_ate(), PDO::PARAM_INT);
             }
             
             return $p_sql;
@@ -435,23 +435,23 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_modelo_pativel = new Object_Modelo_Pativel();
+                $obj_modelo_pativel = new OBJ_Modelo_Pativel();
                 
                 if (isset($row['modelo_pativel_pec_id'])) {
-                    $object_modelo_pativel->set_peca_id($row['modelo_pativel_pec_id']);
+                    $obj_modelo_pativel->set_peca_id($row['modelo_pativel_pec_id']);
                 }
                 
                 if (isset($row['modelo_pativel_mdl_id'])) {
-                    $object_modelo_pativel->set_object_modelo(DAO_Modelo::BuscarPorCOD($row['modelo_pativel_mdl_id']));
+                    $obj_modelo_pativel->set_obj_modelo(DAO_Modelo::BuscarPorCOD($row['modelo_pativel_mdl_id']));
                 }
                 
                 if (isset($row['modelo_pativel_ano_id'])) {
-                    $object_modelo_pativel->set_ano_id($row['modelo_pativel_ano_id']);
+                    $obj_modelo_pativel->set_ano_id($row['modelo_pativel_ano_id']);
                     
-                    $object_modelo_pativel->set_anos(DAO_Modelo_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['modelo_pativel_ano_id']));
+                    $obj_modelo_pativel->set_anos(DAO_Modelo_Pativel_Ano::Buscar_Ano_Por_Id_Ano($row['modelo_pativel_ano_id']));
                 }
                 
-                $pativeis[] = $object_modelo_pativel;
+                $pativeis[] = $obj_modelo_pativel;
             }
             
             return $pativeis;

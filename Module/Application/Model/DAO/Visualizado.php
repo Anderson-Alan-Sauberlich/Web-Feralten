@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Visualizado as Object_Visualizado;
+    use Module\Application\Model\OBJ\Visualizado as OBJ_Visualizado;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
@@ -16,20 +16,20 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Visualizado $object_visualizado) : bool
+        public static function Inserir(OBJ_Visualizado $obj_visualizado) : bool
         {
             try {
-                $object_visualizado->set_id(self::Achar_ID_Livre($object_visualizado->get_object_entidade()->get_id()));
+                $obj_visualizado->set_id(self::Achar_ID_Livre($obj_visualizado->get_obj_entidade()->get_id()));
                 
                 $sql = "INSERT INTO tb_visualizado (visualizado_id, visualizado_ent_id, visualizado_usr_id, visualizado_datahora) 
                         VALUES (:id, :ent_id, :usr_id, :datahora);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_visualizado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_visualizado->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_visualizado->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_visualizado->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_visualizado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_visualizado->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_visualizado->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_visualizado->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,7 +37,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Visualizado $object_visualizado) : bool
+        public static function Atualizar(OBJ_Visualizado $obj_visualizado) : bool
         {
             try {
                 $sql = "UPDATE tb_visualizado SET
@@ -49,10 +49,10 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_visualizado->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_visualizado->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_visualizado->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_visualizado->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_visualizado->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_visualizado->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_visualizado->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_visualizado->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -126,50 +126,50 @@ namespace Module\Application\Model\DAO;
             $visualizados = array();
             
             foreach ($rows as $row) {
-                $object_visualizado = new Object_Visualizado();
+                $obj_visualizado = new OBJ_Visualizado();
                 
                 if (isset($row['visualizado_id'])) {
-                    $object_visualizado->set_id($row['visualizado_id']);
+                    $obj_visualizado->set_id($row['visualizado_id']);
                 }
                 
                 if (isset($row['visualizado_ent_id'])) {
-                    $object_visualizado->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['visualizado_ent_id']));
+                    $obj_visualizado->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['visualizado_ent_id']));
                 }
                 
                 if (isset($row['visualizado_usr_id'])) {
-                    $object_visualizado->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['visualizado_usr_id']));
+                    $obj_visualizado->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['visualizado_usr_id']));
                 }
                                 
                 if (isset($row['visualizado_datahora'])) {
-                    $object_visualizado->set_datahora($row['visualizado_datahora']);
+                    $obj_visualizado->set_datahora($row['visualizado_datahora']);
                 }
                 
-                $visualizados[] = $object_visualizado;
+                $visualizados[] = $obj_visualizado;
             }
 
             return $visualizados;
         }
         
-        public static function Popula_Visualizado(array $row) : Object_Visualizado
+        public static function Popula_Visualizado(array $row) : OBJ_Visualizado
         {
-            $object_visualizado = new Object_Visualizado();
+            $obj_visualizado = new OBJ_Visualizado();
             
             if (isset($row['visualizado_id'])) {
-                $object_visualizado->set_id($row['visualizado_id']);
+                $obj_visualizado->set_id($row['visualizado_id']);
             }
             
             if (isset($row['visualizado_ent_id'])) {
-                $object_visualizado->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['visualizado_ent_id']));
+                $obj_visualizado->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['visualizado_ent_id']));
             }
             
             if (isset($row['visualizado_usr_id'])) {
-                $object_visualizado->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['visualizado_usr_id']));
+                $obj_visualizado->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['visualizado_usr_id']));
             }
             
             if (isset($row['visualizado_datahora'])) {
-                $object_visualizado->set_datahora($row['visualizado_datahora']);
+                $obj_visualizado->set_datahora($row['visualizado_datahora']);
             }
             
-            return $object_visualizado;
+            return $obj_visualizado;
         }
     }

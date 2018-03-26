@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Controller\Layout\Form;
 
-    use Module\Application\Model\Object\Contato_Anunciante as Object_Contato_Anunciante;
+    use Module\Application\Model\OBJ\Contato_Anunciante as OBJ_Contato_Anunciante;
     use Module\Application\Model\DAO\Contato_Anunciante as DAO_Contato_Anunciante;
     use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
@@ -12,19 +12,19 @@ namespace Module\Application\Controller\Layout\Form;
     class Contato_Anunciante
     {
         /**
-         * Inicia a variavel $object_contato_anunciante.
+         * Inicia a variavel $obj_contato_anunciante.
          */
         function __construct()
         {
-            $this->object_contato_anunciante = new Object_Contato_Anunciante();
+            $this->obj_contato_anunciante = new OBJ_Contato_Anunciante();
         }
         
         /**
          * Armazena o objeto contato anunciante.
          * 
-         * @var Object_Contato_Anunciante
+         * @var OBJ_Contato_Anunciante
          */
-        private $object_contato_anunciante;
+        private $obj_contato_anunciante;
         
         /**
          * Armazena todos os campos com erros.
@@ -41,14 +41,14 @@ namespace Module\Application\Controller\Layout\Form;
         private $erros = [];
         
         /**
-         * Seta o nome para a variavel $object_contato_anunciante.
+         * Seta o nome para a variavel $obj_contato_anunciante.
          * 
          * @param string $nome
          */
         public function set_nome($nome) : void
         {
             try {
-                $this->object_contato_anunciante->set_nome(Validador::Contato_Anunciante()::validar_nome($nome));
+                $this->obj_contato_anunciante->set_nome(Validador::Contato_Anunciante()::validar_nome($nome));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['nome'] = "erro";
@@ -56,14 +56,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * seta o email para a variavel $object_contato_anunciante.
+         * seta o email para a variavel $obj_contato_anunciante.
          * 
          * @param string $email
          */
         public function set_email($email) : void
         {
             try {
-                $this->object_contato_anunciante->set_email(Validador::Contato_Anunciante()::validar_email($email));
+                $this->obj_contato_anunciante->set_email(Validador::Contato_Anunciante()::validar_email($email));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['email'] = "erro";
@@ -71,14 +71,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta o numero de telefone para a variavel $object_contato_anunciante.
+         * Seta o numero de telefone para a variavel $obj_contato_anunciante.
          * 
          * @param string $telefone
          */
         public function set_telefone($telefone) : void
         {
             try {
-                $this->object_contato_anunciante->set_telefone(Validador::Contato_Anunciante()::validar_telefone($telefone));
+                $this->obj_contato_anunciante->set_telefone(Validador::Contato_Anunciante()::validar_telefone($telefone));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['telefone'] = "erro";
@@ -86,14 +86,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta true se o numero de telefone for whatsapp e false se não for na variavel $object_contato_anunciante.
+         * Seta true se o numero de telefone for whatsapp e false se não for na variavel $obj_contato_anunciante.
          * 
          * @param ?bool $whatsapp
          */
         public function set_whatsapp($whatsapp) : void
         {
             try {
-                $this->object_contato_anunciante->set_whatsapp(Validador::Contato_Anunciante()::validar_whatsapp($whatsapp));
+                $this->obj_contato_anunciante->set_whatsapp(Validador::Contato_Anunciante()::validar_whatsapp($whatsapp));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['whatsapp'] = "erro";
@@ -101,14 +101,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta a mensagem para a variavel $object_contato_anunciante.
+         * Seta a mensagem para a variavel $obj_contato_anunciante.
          * 
          * @param string $mensagem
          */
         public function set_mensagem($mensagem) : void
         {
             try {
-                $this->object_contato_anunciante->set_mensagem(Validador::Contato_Anunciante()::validar_mensagem($mensagem));
+                $this->obj_contato_anunciante->set_mensagem(Validador::Contato_Anunciante()::validar_mensagem($mensagem));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
                 $this->campos['mensagem'] = "erro";
@@ -116,14 +116,14 @@ namespace Module\Application\Controller\Layout\Form;
         }
         
         /**
-         * Seta o id da peça para a variavel $object_contato_anunciante.
+         * Seta o id da peça para a variavel $obj_contato_anunciante.
          * 
          * @param int $peca_id
          */
         public function set_peca_id($peca_id) : void
         {
             try {
-                $this->object_contato_anunciante->set_object_peca(DAO_Peca::BuscarPorCOD(Validador::Contato_Anunciante()::validar_peca_id($peca_id)));
+                $this->obj_contato_anunciante->set_obj_peca(DAO_Peca::BuscarPorCOD(Validador::Contato_Anunciante()::validar_peca_id($peca_id)));
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
             }
@@ -136,7 +136,7 @@ namespace Module\Application\Controller\Layout\Form;
         {
             $view = new View_Contato_Anunciante();
             
-            $view->set_peca_id($this->object_contato_anunciante->get_object_peca()->get_id());
+            $view->set_peca_id($this->obj_contato_anunciante->get_obj_peca()->get_id());
             
             $view->Executar();
         }
@@ -153,11 +153,11 @@ namespace Module\Application\Controller\Layout\Form;
             $valor['campos'] = $this->campos;
             
             if (empty($this->erros)) {
-                if (Email::Enviar_Contato_Anunciante($this->object_contato_anunciante)) {
-                    $this->object_contato_anunciante->set_datahora_envio(date('Y-m-d H:i:s'));
-                    $this->object_contato_anunciante->set_lido(false);
+                if (Email::Enviar_Contato_Anunciante($this->obj_contato_anunciante)) {
+                    $this->obj_contato_anunciante->set_datahora_envio(date('Y-m-d H:i:s'));
+                    $this->obj_contato_anunciante->set_lido(false);
                     
-                    DAO_Contato_Anunciante::Inserir($this->object_contato_anunciante);
+                    DAO_Contato_Anunciante::Inserir($this->obj_contato_anunciante);
                     
                     $valor['status'] = 'certo';
                     $valor['html'] = "<li>Enviado com Sucesso</li>";

@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Transacao as Object_Transacao;
+    use Module\Application\Model\OBJ\Transacao as OBJ_Transacao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -14,7 +14,7 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Transacao $object_transacao) : bool
+        public static function Inserir(OBJ_Transacao $obj_transacao) : bool
         {
             try {
                 $sql = "INSERT INTO tb_transacao (transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento) 
@@ -22,12 +22,12 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_transacao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ftr_id', $object_transacao->get_fatura_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_transacao->get_datahora(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sts', $object_transacao->get_status(), PDO::PARAM_STR);
-                $p_sql->bindValue(':frm_pag', $object_transacao->get_forma_pagamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_transacao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ftr_id', $obj_transacao->get_fatura_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_transacao->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vlr', $obj_transacao->get_valor(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sts', $obj_transacao->get_status(), PDO::PARAM_STR);
+                $p_sql->bindValue(':frm_pag', $obj_transacao->get_forma_pagamento(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -35,7 +35,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Transacao $object_transacao) : bool
+        public static function Atualizar(OBJ_Transacao $obj_transacao) : bool
         {
             try {
                 $sql = "UPDATE tb_transacao SET
@@ -49,12 +49,12 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_transacao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ftr_id', $object_transacao->get_fatura_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_transacao->get_datahora(), PDO::PARAM_STR);
-                $p_sql->bindValue(':vlr', $object_transacao->get_valor(), PDO::PARAM_STR);
-                $p_sql->bindValue(':sts', $object_transacao->get_status(), PDO::PARAM_STR);
-                $p_sql->bindValue(':frm_pag', $object_transacao->get_forma_pagamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_transacao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ftr_id', $obj_transacao->get_fatura_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_transacao->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':vlr', $obj_transacao->get_valor(), PDO::PARAM_STR);
+                $p_sql->bindValue(':sts', $obj_transacao->get_status(), PDO::PARAM_STR);
+                $p_sql->bindValue(':frm_pag', $obj_transacao->get_forma_pagamento(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -96,66 +96,66 @@ namespace Module\Application\Model\DAO;
             $transacoes = array();
             
             foreach ($rows as $row) {
-                $object_transacao = new Object_Transacao();
+                $obj_transacao = new OBJ_Transacao();
                 
                 if (isset($row['transacao_id'])) {
-                    $object_transacao->set_id($row['transacao_id']);
+                    $obj_transacao->set_id($row['transacao_id']);
                 }
                 
                 if (isset($row['transacao_ftr_id'])) {
-                    $object_transacao->set_fatura_id($row['transacao_ftr_id']);
+                    $obj_transacao->set_fatura_id($row['transacao_ftr_id']);
                 }
                 
                 if (isset($row['transacao_datahora'])) {
-                    $object_transacao->set_datahora($row['transacao_datahora']);
+                    $obj_transacao->set_datahora($row['transacao_datahora']);
                 }
                 
                 if (isset($row['transacao_valor'])) {
-                    $object_transacao->set_valor($row['transacao_valor']);
+                    $obj_transacao->set_valor($row['transacao_valor']);
                 }
                 
                 if (isset($row['transacao_status'])) {
-                    $object_transacao->set_status($row['transacao_status']);
+                    $obj_transacao->set_status($row['transacao_status']);
                 }
                 
                 if (isset($row['transacao_forma_pagamento'])) {
-                    $object_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
+                    $obj_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
                 }
                 
-                $transacoes[] = $object_transacao;
+                $transacoes[] = $obj_transacao;
             }
             
             return $transacoes;
         }
         
-        public static function PopulaTransacao(array $row) : Object_Transacao
+        public static function PopulaTransacao(array $row) : OBJ_Transacao
         {
-            $object_transacao = new Object_Transacao();
+            $obj_transacao = new OBJ_Transacao();
             
             if (isset($row['transacao_id'])) {
-                $object_transacao->set_id($row['transacao_id']);
+                $obj_transacao->set_id($row['transacao_id']);
             }
             
             if (isset($row['transacao_ftr_id'])) {
-                $object_transacao->set_fatura_id($row['transacao_ftr_id']);
+                $obj_transacao->set_fatura_id($row['transacao_ftr_id']);
             }
             
             if (isset($row['transacao_datahora'])) {
-                $object_transacao->set_datahora($row['transacao_datahora']);
+                $obj_transacao->set_datahora($row['transacao_datahora']);
             }
             
             if (isset($row['transacao_valor'])) {
-                $object_transacao->set_valor($row['transacao_valor']);
+                $obj_transacao->set_valor($row['transacao_valor']);
             }
             
             if (isset($row['transacao_status'])) {
-                $object_transacao->set_status($row['transacao_status']);
+                $obj_transacao->set_status($row['transacao_status']);
             }
             
             if (isset($row['transacao_forma_pagamento'])) {
-                $object_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
+                $obj_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
             }
             
-            return $object_transacao;
+            return $obj_transacao;
         }
     }

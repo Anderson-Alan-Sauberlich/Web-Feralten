@@ -5,21 +5,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Gerenciar_Imagens;
     use Module\Application\Controller\Common\Util\Peca as Util_Peca;
-    use Module\Application\Model\Object\Peca as Object_Peca;
-    use Module\Application\Model\Object\Endereco as Object_Endereco;
-    use Module\Application\Model\Object\Status_Peca as Object_Status_Peca;
-    use Module\Application\Model\Object\Estado_Uso_Peca as Object_Estado_Uso_Peca;
-    use Module\Application\Model\Object\Categoria_Pativel as Object_Categoria_Pativel;
-    use Module\Application\Model\Object\Marca_Pativel as Object_Marca_Pativel;
-    use Module\Application\Model\Object\Modelo_Pativel as Object_Modelo_Pativel;
-    use Module\Application\Model\Object\Versao_Pativel as Object_Versao_Pativel;
-    use Module\Application\Model\Object\Foto_Peca as Object_Foto_Peca;
-    use Module\Application\Model\Object\Entidade as Object_Entidade;
-    use Module\Application\Model\Object\Categoria as Object_Categoria;
-    use Module\Application\Model\Object\Marca as Object_Marca;
-    use Module\Application\Model\Object\Modelo as Object_Modelo;
-    use Module\Application\Model\Object\Versao as Object_Versao;
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
+    use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
+    use Module\Application\Model\OBJ\Status_Peca as OBJ_Status_Peca;
+    use Module\Application\Model\OBJ\Estado_Uso_Peca as OBJ_Estado_Uso_Peca;
+    use Module\Application\Model\OBJ\Categoria_Pativel as OBJ_Categoria_Pativel;
+    use Module\Application\Model\OBJ\Marca_Pativel as OBJ_Marca_Pativel;
+    use Module\Application\Model\OBJ\Modelo_Pativel as OBJ_Modelo_Pativel;
+    use Module\Application\Model\OBJ\Versao_Pativel as OBJ_Versao_Pativel;
+    use Module\Application\Model\OBJ\Foto_Peca as OBJ_Foto_Peca;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
+    use Module\Application\Model\OBJ\Categoria as OBJ_Categoria;
+    use Module\Application\Model\OBJ\Marca as OBJ_Marca;
+    use Module\Application\Model\OBJ\Modelo as OBJ_Modelo;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use Module\Application\Model\DAO\Categoria as DAO_Categoria;
     use Module\Application\Model\DAO\Marca as DAO_Marca;
@@ -243,10 +243,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                             unset($_SESSION['compatibilidade']);
                             $this->Deletar_Imagem(123);
                             
-                            $object_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
+                            $obj_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
                             
-                            if (!empty($object_peca) AND $object_peca !== false) {
-                                $this->set_form($object_peca);
+                            if (!empty($obj_peca) AND $obj_peca !== false) {
+                                $this->set_form($obj_peca);
                                 
                                 $categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
                                 $marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
@@ -258,26 +258,26 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 }
                                 
                                 foreach ($marcas as $marca) {
-                                    $_SESSION['compatibilidade']['marca'][$marca->get_object_marca()->get_id()] = $marca->get_object_marca()->get_id();
+                                    $_SESSION['compatibilidade']['marca'][$marca->get_obj_marca()->get_id()] = $marca->get_obj_marca()->get_id();
                                     
                                     if (!empty($marca->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_object_marca()->get_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
+                                        $_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_obj_marca()->get_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
                                     }
                                 }
                                 
                                 foreach ($modelos as $modelo) {
-                                    $_SESSION['compatibilidade']['modelo'][$modelo->get_object_modelo()->get_id()] = $modelo->get_object_modelo()->get_id();
+                                    $_SESSION['compatibilidade']['modelo'][$modelo->get_obj_modelo()->get_id()] = $modelo->get_obj_modelo()->get_id();
                                     
                                     if (!empty($modelo->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_object_modelo()->get_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
+                                        $_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_obj_modelo()->get_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
                                     }
                                 }
                                 
                                 foreach ($versoes as $versao) {
-                                    $_SESSION['compatibilidade']['versao'][$versao->get_object_versao()->get_id()] = $versao->get_object_versao()->get_id();
+                                    $_SESSION['compatibilidade']['versao'][$versao->get_obj_versao()->get_id()] = $versao->get_obj_versao()->get_id();
                                     
                                     if (!empty($versao->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_object_versao()->get_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
+                                        $_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_obj_versao()->get_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
                                     }
                                 }
                             } else {
@@ -545,10 +545,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             if (!empty($this->categoria)) {
                 foreach ($this->categoria as $categoria_selecionada) {
                     if (in_array($categoria_selecionada, $categorias_compativeis)) {
-                        $categoria_pativel = new Object_Categoria_Pativel();
-                        $object_categoria = new Object_Categoria();
-                        $object_categoria->set_id($categoria_selecionada);
-                        $categoria_pativel->set_object_categoria($object_categoria);
+                        $categoria_pativel = new OBJ_Categoria_Pativel();
+                        $obj_categoria = new OBJ_Categoria();
+                        $obj_categoria->set_id($categoria_selecionada);
+                        $categoria_pativel->set_obj_categoria($obj_categoria);
                         
                         $categorias_pativeis[] = $categoria_pativel;
                         
@@ -556,10 +556,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                             foreach ($this->marca as $marca_selecionada) {
                                 if (in_array($marca_selecionada, $marcas_compativeis)) {
                                     if (self::Buscar_Categoria_Id_Por_Marca($marca_selecionada) == $categoria_selecionada) {
-                                        $marca_pativel = new Object_Marca_Pativel();
-                                        $object_marca = new Object_Marca();
-                                        $object_marca->set_id($marca_selecionada);
-                                        $marca_pativel->set_object_marca($object_marca);
+                                        $marca_pativel = new OBJ_Marca_Pativel();
+                                        $obj_marca = new OBJ_Marca();
+                                        $obj_marca->set_id($marca_selecionada);
+                                        $marca_pativel->set_obj_marca($obj_marca);
                                         
                                         if (isset($_POST['ano_mrc_'.$marca_selecionada]) AND !empty($_POST['ano_mrc_'.$marca_selecionada])) {
                                             $marca_pativel->set_anos($_POST['ano_mrc_'.$marca_selecionada]);
@@ -571,10 +571,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                             foreach ($this->modelo as $modelo_selecionado) {
                                                 if (in_array($modelo_selecionado, $modelos_compativeis)) {
                                                     if (self::Buscar_Marca_Id_Por_Modelo($modelo_selecionado) == $marca_selecionada) {
-                                                        $modelo_pativel = new Object_Modelo_Pativel();
-                                                        $object_modelo = new Object_Modelo();
-                                                        $object_modelo->set_id($modelo_selecionado);
-                                                        $modelo_pativel->set_object_modelo($object_modelo);
+                                                        $modelo_pativel = new OBJ_Modelo_Pativel();
+                                                        $obj_modelo = new OBJ_Modelo();
+                                                        $obj_modelo->set_id($modelo_selecionado);
+                                                        $modelo_pativel->set_obj_modelo($obj_modelo);
                                                         
                                                         if (isset($_POST['ano_mdl_'.$modelo_selecionado]) AND !empty($_POST['ano_mdl_'.$modelo_selecionado])) {
                                                             $modelo_pativel->set_anos($_POST['ano_mdl_'.$modelo_selecionado]);
@@ -586,10 +586,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                                             foreach ($this->versao as $versao_selecionada) {
                                                                 if (in_array($versao_selecionada, $versoes_compativeis)) {
                                                                     if (self::Buscar_Modelo_Id_Por_Versao($versao_selecionada) == $modelo_selecionado) {
-                                                                        $versao_pativel = new Object_Versao_Pativel();
-                                                                        $object_versao = new Object_Versao();
-                                                                        $object_versao->set_id($versao_selecionada);
-                                                                        $versao_pativel->set_object_versao($object_versao);
+                                                                        $versao_pativel = new OBJ_Versao_Pativel();
+                                                                        $obj_versao = new OBJ_Versao();
+                                                                        $obj_versao->set_id($versao_selecionada);
+                                                                        $versao_pativel->set_obj_versao($obj_versao);
                                                                         
                                                                         if (isset($_POST['ano_vrs_'.$versao_selecionada]) AND !empty($_POST['ano_vrs_'.$versao_selecionada])) {
                                                                             $versao_pativel->set_anos($_POST['ano_vrs_'.$versao_selecionada]);
@@ -613,35 +613,35 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             }
             
             if (empty($this->atualizar_erros)) {
-                $object_peca = new Object_Peca();
-                $object_estado_uso = new Object_Estado_Uso_Peca();
-                $object_status = new Object_Status_Peca();
-                $entidade = new Object_Entidade();
+                $obj_peca = new OBJ_Peca();
+                $obj_estado_uso = new OBJ_Estado_Uso_Peca();
+                $obj_status = new OBJ_Status_Peca();
+                $entidade = new OBJ_Entidade();
                 $peca_url = Util_Peca::Gerar_URL_Peca($this->peca);
                 
                 if ($this->estado_uso > 0) {
-                    $object_estado_uso->set_id($this->estado_uso);
+                    $obj_estado_uso->set_id($this->estado_uso);
                 }
                 
-                $object_status->set_id(1);
+                $obj_status->set_id(1);
                 
-                $object_peca->set_num_visualizado(0);
-                $object_peca->set_id($this->peca_id);
-                $object_peca->set_url($peca_url.'_'.$this->peca_id);
-                $object_peca->set_estado_uso($object_estado_uso);
-                $object_peca->set_status($object_status);
-                $object_peca->set_descricao($this->descricao);
-                $object_peca->set_preferencia_entrega($this->preferencia_entrega);
-                $object_peca->set_fabricante($this->fabricante);
-                $object_peca->set_nome($this->peca);
-                $object_peca->set_serie($this->serie);
-                $object_peca->set_preco($this->preco);
+                $obj_peca->set_num_visualizado(0);
+                $obj_peca->set_id($this->peca_id);
+                $obj_peca->set_url($peca_url.'_'.$this->peca_id);
+                $obj_peca->set_estado_uso($obj_estado_uso);
+                $obj_peca->set_status($obj_status);
+                $obj_peca->set_descricao($this->descricao);
+                $obj_peca->set_preferencia_entrega($this->preferencia_entrega);
+                $obj_peca->set_fabricante($this->fabricante);
+                $obj_peca->set_nome($this->peca);
+                $obj_peca->set_serie($this->serie);
+                $obj_peca->set_preco($this->preco);
                 
                 $entidade->set_id(Login_Session::get_entidade_id());
                 $entidade->set_usuario_id(Login_Session::get_usuario_id());
                 
-                $object_peca->set_entidade($entidade);
-                $object_peca->set_data_anuncio(date('Y-m-d H:i:s'));
+                $obj_peca->set_entidade($entidade);
+                $obj_peca->set_data_anuncio(date('Y-m-d H:i:s'));
                 
                 $id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
                 
@@ -649,20 +649,20 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $this->atualizar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
                     $this->atualizar_campos['erro_peca'] = "";
                 } else {
-                    $endereco = new Object_Endereco();
+                    $endereco = new OBJ_Endereco();
                     
                     $endereco->set_id($id_endereco);
                     
-                    $object_peca->set_endereco($endereco);
+                    $obj_peca->set_endereco($endereco);
                     
-                    $usuario_responsavel = new Object_Usuario();
+                    $usuario_responsavel = new OBJ_Usuario();
                     
                     $usuario_responsavel->set_id(Login_Session::get_usuario_id());
                     
-                    $object_peca->set_responsavel($usuario_responsavel);
+                    $obj_peca->set_responsavel($usuario_responsavel);
                 }
                 
-                if (DAO_Peca::Atualizar($object_peca)) {
+                if (DAO_Peca::Atualizar($obj_peca)) {
                     $retorno = null;
                     
                     if (!empty($categorias_pativeis)) {
@@ -757,7 +757,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         
                         if (!empty($diretorios_imagens)) {
                             foreach ($diretorios_imagens as $key => $diretorio) {
-                                $foto_peca = new Object_Foto_Peca();
+                                $foto_peca = new OBJ_Foto_Peca();
                                 
                                 $foto_peca->set_peca_id($this->peca_id);
                                 $foto_peca->set_endereco($diretorio);
@@ -808,7 +808,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 }
             }
             
-            $this->set_form($object_peca);
+            $this->set_form($obj_peca);
             
             $anos = array();
             
@@ -856,23 +856,23 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             $this->atualizar_form['preco'] = $this->preco;
             $this->atualizar_form['estado_uso'] = $this->estado_uso;
             $this->atualizar_form['descricao'] = $this->descricao;
-            $this->atualizar_form['preferencia_entrega'] = Object_Peca::get_preferencias_entrega($this->preferencia_entrega);
+            $this->atualizar_form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->preferencia_entrega);
             
             return $this->atualizar_form;
         }
         
-        public function set_form(Object_Peca $object_peca) : ?array
+        public function set_form(OBJ_Peca $obj_peca) : ?array
         {
-            $this->peca = $object_peca->get_nome();
-            $this->peca_url = $object_peca->get_url();
-            $this->fabricante = $object_peca->get_fabricante();
-            $this->serie = $object_peca->get_serie();
-            $this->preco = $object_peca->get_preco();
-            $this->descricao = $object_peca->get_descricao();
-            $this->preferencia_entrega = $object_peca->get_preferencia_entrega();
+            $this->peca = $obj_peca->get_nome();
+            $this->peca_url = $obj_peca->get_url();
+            $this->fabricante = $obj_peca->get_fabricante();
+            $this->serie = $obj_peca->get_serie();
+            $this->preco = $obj_peca->get_preco();
+            $this->descricao = $obj_peca->get_descricao();
+            $this->preferencia_entrega = $obj_peca->get_preferencia_entrega();
             
-            if (!empty($object_peca->get_estado_uso())) {
-                $this->estado_uso = $object_peca->get_estado_uso()->get_id();
+            if (!empty($obj_peca->get_estado_uso())) {
+                $this->estado_uso = $obj_peca->get_estado_uso()->get_id();
             }
             
             return $this->get_form();

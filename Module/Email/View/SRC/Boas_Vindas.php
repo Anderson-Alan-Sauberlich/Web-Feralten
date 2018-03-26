@@ -1,7 +1,7 @@
 <?php
 namespace Module\Email\View\SRC;
     
-    use Module\Application\Model\Object\Usuario as Object_Usuario;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     
     class Boas_Vindas
     {
@@ -12,7 +12,7 @@ namespace Module\Email\View\SRC;
         
         private static $obj_usuario;
         
-        public function set_obj_usuario(Object_Usuario $obj_usuario) : void
+        public function set_obj_usuario(OBJ_Usuario $obj_usuario) : void
         {
             self::$obj_usuario = $obj_usuario;
         }
@@ -24,7 +24,7 @@ namespace Module\Email\View\SRC;
         
         public static function Retornar_Nome_Usuario() : ?string
         {
-            if (self::$obj_usuario instanceof Object_Usuario) {
+            if (self::$obj_usuario instanceof OBJ_Usuario) {
                 return self::$obj_usuario->get_nome();
             } else {
                 return null;

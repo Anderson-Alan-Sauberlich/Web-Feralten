@@ -96,9 +96,9 @@ function criarOrcamento() {
 			$('#msg_list').html($data.content);
 			$('#div_msg').addClass('visible');
 			$('#div_msg').removeClass('hidden');
+			$('#div_orcamento').removeClass('loading');
 		}
 	});
-	$('#div_orcamento').removeClass('loading');
 }
 function cadastrarUsuario() {
 	$('#form_cadastro').addClass('loading');

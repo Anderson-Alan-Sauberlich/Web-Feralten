@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Categoria_Pativel_Ano as Object_Categoria_Pativel_Ano;
+    use Module\Application\Model\OBJ\Categoria_Pativel_Ano as OBJ_Categoria_Pativel_Ano;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -15,19 +15,19 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        public static function Inserir(OBJ_Categoria_Pativel_Ano $obj_categoria_pativel_ano) : bool
         {
             try {
-                $anos = $object_categoria_pativel_ano->get_anos();
+                $anos = $obj_categoria_pativel_ano->get_anos();
                 
-                if (!empty($anos) AND !empty($object_categoria_pativel_ano->get_ano_id())) {
+                if (!empty($anos) AND !empty($obj_categoria_pativel_ano->get_ano_id())) {
                     foreach ($anos as $ano) {
                            $sql = "INSERT INTO tb_categoria_pativel_ano (categoria_pativel_ano_id, categoria_pativel_ano_ano)
                                    VALUES (:ano_id, :ano);";
                            
                            $p_sql = Conexao::Conectar()->prepare($sql);
                            
-                           $p_sql->bindValue(':ano_id', $object_categoria_pativel_ano->get_ano_id(), PDO::PARAM_INT);
+                           $p_sql->bindValue(':ano_id', $obj_categoria_pativel_ano->get_ano_id(), PDO::PARAM_INT);
                            $p_sql->bindValue(':ano', $ano, PDO::PARAM_INT);
                            
                            $p_sql->execute();
@@ -42,7 +42,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        public static function Atualizar(OBJ_Categoria_Pativel_Ano $obj_categoria_pativel_ano) : bool
         {
             try {
                 
@@ -51,7 +51,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Deletar_Por_Objeto(Object_Categoria_Pativel_Ano $object_categoria_pativel_ano) : bool
+        public static function Deletar_Por_Objeto(OBJ_Categoria_Pativel_Ano $obj_categoria_pativel_ano) : bool
         {
             try {
                 
@@ -144,17 +144,17 @@ namespace Module\Application\Model\DAO;
             $pativeis = array();
             
             foreach ($rows as $row) {
-                $object_categoria_pativel_ano = new Object_Categoria_Pativel_Ano();
+                $obj_categoria_pativel_ano = new OBJ_Categoria_Pativel_Ano();
                 
                 if (isset($row['categoria_pativel_ctg_id'])) {
-                    $object_categoria_pativel_ano->set_ano_id();
+                    $obj_categoria_pativel_ano->set_ano_id();
                 }
                 
                 if (isset($row['categoria_pativel_ano_id'])) {
-                    $object_categoria_pativel_ano->set_anos($row['categoria_pativel_ano_id']);
+                    $obj_categoria_pativel_ano->set_anos($row['categoria_pativel_ano_id']);
                 }
                 
-                $pativeis[] = $object_categoria_pativel_ano;
+                $pativeis[] = $obj_categoria_pativel_ano;
             }
             
             return $pativeis;

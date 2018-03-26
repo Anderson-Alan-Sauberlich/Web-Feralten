@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Removido as Object_Removido;
+    use Module\Application\Model\OBJ\Removido as OBJ_Removido;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\Common\Util\Conexao;
@@ -16,20 +16,20 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Removido $object_removido) : bool
+        public static function Inserir(OBJ_Removido $obj_removido) : bool
         {
             try {
-                $object_removido->set_id(self::Achar_ID_Livre($object_removido->get_object_entidade()->get_id()));
+                $obj_removido->set_id(self::Achar_ID_Livre($obj_removido->get_obj_entidade()->get_id()));
                 
                 $sql = "INSERT INTO tb_removido (removido_id, removido_ent_id, removido_usr_id, removido_datahora) 
                         VALUES (:id, :ent_id, :usr_id, :datahora);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_removido->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_removido->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_removido->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_removido->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_removido->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_removido->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_removido->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_removido->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -37,7 +37,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Removido $object_removido) : bool
+        public static function Atualizar(OBJ_Removido $obj_removido) : bool
         {
             try {
                 $sql = "UPDATE tb_removido SET
@@ -49,10 +49,10 @@ namespace Module\Application\Model\DAO;
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_removido->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_removido->get_object_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_removido->get_object_usuario()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':datahora', $object_removido->get_datahora(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_removido->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_removido->get_obj_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_removido->get_obj_usuario()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':datahora', $obj_removido->get_datahora(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -126,50 +126,50 @@ namespace Module\Application\Model\DAO;
             $removidos = array();
             
             foreach ($rows as $row) {
-                $object_removido = new Object_Removido();
+                $obj_removido = new OBJ_Removido();
                 
                 if (isset($row['removido_id'])) {
-                    $object_removido->set_id($row['removido_id']);
+                    $obj_removido->set_id($row['removido_id']);
                 }
                 
                 if (isset($row['removido_ent_id'])) {
-                    $object_removido->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['removido_ent_id']));
+                    $obj_removido->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['removido_ent_id']));
                 }
                 
                 if (isset($row['removido_usr_id'])) {
-                    $object_removido->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['removido_usr_id']));
+                    $obj_removido->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['removido_usr_id']));
                 }
                                 
                 if (isset($row['removido_datahora'])) {
-                    $object_removido->set_datahora($row['removido_datahora']);
+                    $obj_removido->set_datahora($row['removido_datahora']);
                 }
                 
-                $removidos[] = $object_removido;
+                $removidos[] = $obj_removido;
             }
 
             return $removidos;
         }
         
-        public static function Popula_Removido(array $row) : Object_Removido
+        public static function Popula_Removido(array $row) : OBJ_Removido
         {
-            $object_removido = new Object_Removido();
+            $obj_removido = new OBJ_Removido();
             
             if (isset($row['removido_id'])) {
-                $object_removido->set_id($row['removido_id']);
+                $obj_removido->set_id($row['removido_id']);
             }
             
             if (isset($row['removido_ent_id'])) {
-                $object_removido->set_object_entidade(DAO_Entidade::BuscarPorCOD($row['removido_ent_id']));
+                $obj_removido->set_obj_entidade(DAO_Entidade::BuscarPorCOD($row['removido_ent_id']));
             }
             
             if (isset($row['removido_usr_id'])) {
-                $object_removido->set_object_usuario(DAO_Usuario::Buscar_Usuario($row['removido_usr_id']));
+                $obj_removido->set_obj_usuario(DAO_Usuario::Buscar_Usuario($row['removido_usr_id']));
             }
             
             if (isset($row['removido_datahora'])) {
-                $object_removido->set_datahora($row['removido_datahora']);
+                $obj_removido->set_datahora($row['removido_datahora']);
             }
             
-            return $object_removido;
+            return $obj_removido;
         }
     }

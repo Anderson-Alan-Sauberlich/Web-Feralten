@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Versao as Object_Versao;
-    use Module\Application\Model\Object\Versao_Compativel as Object_Versao_Compativel;
+    use Module\Application\Model\OBJ\Versao as OBJ_Versao;
+    use Module\Application\Model\OBJ\Versao_Compativel as OBJ_Versao_Compativel;
     use Module\Application\Model\DAO\Versao_Compativel as DAO_Versao_Compativel;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
@@ -16,11 +16,11 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Versao $object_versao) : bool
+        public static function Inserir(OBJ_Versao $obj_versao) : bool
         {
             try {
-                if (empty($object_versao->get_id())) {
-                    $object_versao->set_id(self::Achar_ID_Livre($object_versao->get_modelo_id()));
+                if (empty($obj_versao->get_id())) {
+                    $obj_versao->set_id(self::Achar_ID_Livre($obj_versao->get_modelo_id()));
                 }
                 
                 $sql = "INSERT INTO tb_versao (versao_id, versao_mdl_id, versao_nome, versao_url) 
@@ -28,18 +28,18 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_versao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mo_id', $object_versao->get_modelo_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_versao->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_versao->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_versao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mo_id', $obj_versao->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_versao->get_url(), PDO::PARAM_STR);
 
                 if ($p_sql->execute()) {
-                    $object_versao_compativel = new Object_Versao_Compativel();
+                    $obj_versao_compativel = new OBJ_Versao_Compativel();
                     
-                    $object_versao_compativel->set_com_id($object_versao->get_id());
-                    $object_versao_compativel->set_da_id($object_versao->get_id());
+                    $obj_versao_compativel->set_com_id($obj_versao->get_id());
+                    $obj_versao_compativel->set_da_id($obj_versao->get_id());
                     
-                    return DAO_Versao_Compativel::Inserir($object_versao_compativel);
+                    return DAO_Versao_Compativel::Inserir($obj_versao_compativel);
                 } else {
                     return false;
                 }
@@ -48,17 +48,17 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Versao $object_versao) : bool
+        public static function Atualizar(OBJ_Versao $obj_versao) : bool
         {
             try {
                 $sql = "UPDATE tb_versao SET versao_mdl_id = :mo_id, versao_nome = :nome, versao_url = :url WHERE versao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
-                $p_sql->bindValue(':id', $object_versao->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':mo_id', $object_versao->get_modelo_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_versao->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_versao->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':id', $obj_versao->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':mo_id', $obj_versao->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_versao->get_url(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -212,20 +212,20 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Verificar_Versao_Repetida(Object_Versao $object_versao) : bool
+        public static function Verificar_Versao_Repetida(OBJ_Versao $obj_versao) : bool
         {
             try {
                 $sql = 'SELECT versao_id FROM tb_versao WHERE versao_mdl_id = :mo_id AND (versao_nome = :nome OR versao_url = :url)';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
-                $p_sql->bindValue(':mo_id', $object_versao->get_modelo_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_versao->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_versao->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':mo_id', $obj_versao->get_modelo_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_versao->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_versao->get_url(), PDO::PARAM_STR);
                 $p_sql->execute();
                 
                 $versao_id = $p_sql->fetch(PDO::FETCH_COLUMN);
                 
-                if (!empty($versao_id) AND $versao_id != $object_versao->get_id()) {
+                if (!empty($versao_id) AND $versao_id != $obj_versao->get_id()) {
                     return false;
                 } else {
                     return true;
@@ -235,27 +235,27 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaVersao(array $row) : Object_Versao
+        public static function PopulaVersao(array $row) : OBJ_Versao
         {
-            $object_versao = new Object_Versao();
+            $obj_versao = new OBJ_Versao();
             
             if (isset($row['versao_id'])) {
-                $object_versao->set_id($row['versao_id']);
+                $obj_versao->set_id($row['versao_id']);
             }
             
             if (isset($row['versao_mdl_id'])) {
-                $object_versao->set_modelo_id($row['versao_mdl_id']);
+                $obj_versao->set_modelo_id($row['versao_mdl_id']);
             }
             
             if (isset($row['versao_nome'])) {
-                $object_versao->set_nome($row['versao_nome']);
+                $obj_versao->set_nome($row['versao_nome']);
             }
             
             if (isset($row['versao_url'])) {
-                $object_versao->set_url($row['versao_url']);
+                $obj_versao->set_url($row['versao_url']);
             }
             
-            return $object_versao;
+            return $obj_versao;
         }
         
         public static function PopulaVersoes(array $rows) : array
@@ -263,25 +263,25 @@ namespace Module\Application\Model\DAO;
             $versoes = array();
             
             foreach ($rows as $row) {
-                $object_versao = new Object_Versao();
+                $obj_versao = new OBJ_Versao();
                 
                 if (isset($row['versao_id'])) {
-                    $object_versao->set_id($row['versao_id']);
+                    $obj_versao->set_id($row['versao_id']);
                 }
                 
                 if (isset($row['versao_mdl_id'])) {
-                    $object_versao->set_modelo_id($row['versao_mdl_id']);
+                    $obj_versao->set_modelo_id($row['versao_mdl_id']);
                 }
                 
                 if (isset($row['versao_nome'])) {
-                    $object_versao->set_nome($row['versao_nome']);
+                    $obj_versao->set_nome($row['versao_nome']);
                 }
                 
                 if (isset($row['versao_url'])) {
-                    $object_versao->set_url($row['versao_url']);
+                    $obj_versao->set_url($row['versao_url']);
                 }
                 
-                $versoes[] = $object_versao;
+                $versoes[] = $obj_versao;
             }
             
             return $versoes;

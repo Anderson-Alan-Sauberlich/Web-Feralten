@@ -1,7 +1,7 @@
 <?php
 namespace Module\Common\Util;
     
-    use Module\Application\Model\Object\Endereco as Object_Endereco;
+    use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
     use \PagSeguro\Library;
     use \PagSeguro\Services\Session;
     use \PagSeguro\Configuration\Configure;

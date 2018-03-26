@@ -10,7 +10,7 @@ namespace Module\Application\Controller\Pecas;
     use Module\Application\Model\DAO\Preferencia_Entrega as DAO_Preferencia_Entrega;
     use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
     use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
-    use Module\Application\Model\Object\Visualizado as Object_Visualizado;
+    use Module\Application\Model\OBJ\Visualizado as OBJ_Visualizado;
     use \Exception;
     
     class Detalhes
@@ -20,7 +20,7 @@ namespace Module\Application\Controller\Pecas;
             
         }
         
-        private $object_peca;
+        private $obj_peca;
         private $peca_url;
         private $peca_id;
         
@@ -29,7 +29,7 @@ namespace Module\Application\Controller\Pecas;
             try {
                 $this->peca_id = Validador::Peca()::validar_id($peca_id);
                 
-                $this->object_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
+                $this->obj_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
             } catch (Exception $e) {
                 $this->peca_id = null;
             }
@@ -40,7 +40,7 @@ namespace Module\Application\Controller\Pecas;
             try {
                 $this->peca_url = Validador::Peca()::validar_url($peca_url);
                 
-                $this->object_peca = DAO_Peca::BuscarPorURL($this->peca_url);
+                $this->obj_peca = DAO_Peca::BuscarPorURL($this->peca_url);
             } catch (Exception $e) {
                 $this->peca_url = null;
             }
@@ -48,22 +48,22 @@ namespace Module\Application\Controller\Pecas;
         
         public function Carregar_Pagina()
         {
-            if (!empty($this->object_peca) AND $this->object_peca != false) {
-                $object_visualizado = new Object_Visualizado();
-                $object_visualizado->set_object_entidade($this->object_peca->get_entidade());
-                $object_visualizado->set_object_usuario($this->object_peca->get_responsavel());
-                $object_visualizado->set_datahora(date('Y-m-d H:i:s'));
+            if (!empty($this->obj_peca) AND $this->obj_peca != false) {
+                $obj_visualizado = new OBJ_Visualizado();
+                $obj_visualizado->set_obj_entidade($this->obj_peca->get_entidade());
+                $obj_visualizado->set_obj_usuario($this->obj_peca->get_responsavel());
+                $obj_visualizado->set_datahora(date('Y-m-d H:i:s'));
                 
-                DAO_Visualizado::Inserir($object_visualizado);
+                DAO_Visualizado::Inserir($obj_visualizado);
                 
-                $categorias_pativeis = DAO_Categoria_Pativel::BuscarPorCOD($this->object_peca->get_id());
-                $marcas_pativeis = DAO_Marca_Pativel::BuscarPorCOD($this->object_peca->get_id());
-                $modelos_pativeis = DAO_Modelo_Pativel::BuscarPorCOD($this->object_peca->get_id());
-                $versoes_pativeis = DAO_Versao_Pativel::BuscarPorCOD($this->object_peca->get_id());
+                $categorias_pativeis = DAO_Categoria_Pativel::BuscarPorCOD($this->obj_peca->get_id());
+                $marcas_pativeis = DAO_Marca_Pativel::BuscarPorCOD($this->obj_peca->get_id());
+                $modelos_pativeis = DAO_Modelo_Pativel::BuscarPorCOD($this->obj_peca->get_id());
+                $versoes_pativeis = DAO_Versao_Pativel::BuscarPorCOD($this->obj_peca->get_id());
                 
                 $view = new View_Detalhes();
                 
-                $view->set_object_peca($this->object_peca);
+                $view->set_obj_peca($this->obj_peca);
                 
                 if (!empty($categorias_pativeis) AND $categorias_pativeis != false) {
                     $view->set_categorias_pativeis($categorias_pativeis);

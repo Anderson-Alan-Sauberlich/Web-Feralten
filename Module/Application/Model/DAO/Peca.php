@@ -1,7 +1,7 @@
 <?php
 namespace Module\Application\Model\DAO;
     
-    use Module\Application\Model\Object\Peca as Object_Peca;
+    use Module\Application\Model\OBJ\Peca as OBJ_Peca;
     use Module\Application\Model\DAO\Foto_Peca as DAO_Foto_Peca;
     use Module\Application\Model\DAO\Status_Peca as DAO_Status_Peca;
     use Module\Application\Model\DAO\Estado_Uso_Peca as DAO_Estado_Uso_Peca;
@@ -27,16 +27,16 @@ namespace Module\Application\Model\DAO;
             
         }
         
-        public static function Inserir(Object_Peca $object_peca)
+        public static function Inserir(OBJ_Peca $obj_peca)
         {
             try {
-                if (empty($object_peca->get_id())) {
+                if (empty($obj_peca->get_id())) {
                     $id_peca = self::Achar_ID_Livre();
                     
                     if (empty($id_peca)) {
-                        $object_peca->set_id(0);
+                        $obj_peca->set_id(0);
                     } else {
-                        $object_peca->set_id($id_peca);
+                        $obj_peca->set_id($id_peca);
                     }
                 }
                 
@@ -45,21 +45,21 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_peca->get_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':end_id', $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':st_id', $object_peca->get_status()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_peca->get_url(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fabricante', $object_peca->get_fabricante(), PDO::PARAM_STR);
-                $p_sql->bindValue(':preco', $object_peca->get_preco(), PDO::PARAM_STR);
-                $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data', $object_peca->get_data_anuncio(), PDO::PARAM_STR);
-                $p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
-                $p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':num_visualizado', $object_peca->get_num_visualizado(), PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $obj_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_peca->get_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':end_id', $obj_peca->get_endereco()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':st_id', $obj_peca->get_status()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fabricante', $obj_peca->get_fabricante(), PDO::PARAM_STR);
+                $p_sql->bindValue(':preco', $obj_peca->get_preco(), PDO::PARAM_STR);
+                $p_sql->bindValue(':descricao', $obj_peca->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data', $obj_peca->get_data_anuncio(), PDO::PARAM_STR);
+                $p_sql->bindValue(':serie', $obj_peca->get_serie(), PDO::PARAM_STR);
+                $p_sql->bindValue(':prf_ntr', $obj_peca->get_preferencia_entrega(), PDO::PARAM_INT);
+                $p_sql->bindValue(':std_uso_id', $obj_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':num_visualizado', $obj_peca->get_num_visualizado(), PDO::PARAM_INT);
                 
                 if ($p_sql->execute()) {
                     return Conexao::Conectar()->lastInsertId();
@@ -71,7 +71,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Atualizar(Object_Peca $object_peca) : bool
+        public static function Atualizar(OBJ_Peca $obj_peca) : bool
         {
             try {
                 $sql = "UPDATE tb_peca SET 
@@ -94,21 +94,21 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql->bindValue(':id', $object_peca->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':ent_id', $object_peca->get_entidade()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':usr_id', $object_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':end_id', $object_peca->get_endereco()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':st_id', $object_peca->get_status()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':nome', $object_peca->get_nome(), PDO::PARAM_STR);
-                $p_sql->bindValue(':url', $object_peca->get_url(), PDO::PARAM_STR);
-                $p_sql->bindValue(':fabricante', $object_peca->get_fabricante(), PDO::PARAM_STR);
-                $p_sql->bindValue(':preco', $object_peca->get_preco(), PDO::PARAM_STR);
-                $p_sql->bindValue(':descricao', $object_peca->get_descricao(), PDO::PARAM_STR);
-                $p_sql->bindValue(':data', $object_peca->get_data_anuncio(), PDO::PARAM_STR);
-                $p_sql->bindValue(':serie', $object_peca->get_serie(), PDO::PARAM_STR);
-                $p_sql->bindValue(':prf_ntr', $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
-                $p_sql->bindValue(':std_uso_id', $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
-                $p_sql->bindValue(':num_visualizado', $object_peca->get_num_visualizado(), PDO::PARAM_INT);
+                $p_sql->bindValue(':id', $obj_peca->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':ent_id', $obj_peca->get_entidade()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':usr_id', $obj_peca->get_responsavel()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':end_id', $obj_peca->get_endereco()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':st_id', $obj_peca->get_status()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':nome', $obj_peca->get_nome(), PDO::PARAM_STR);
+                $p_sql->bindValue(':url', $obj_peca->get_url(), PDO::PARAM_STR);
+                $p_sql->bindValue(':fabricante', $obj_peca->get_fabricante(), PDO::PARAM_STR);
+                $p_sql->bindValue(':preco', $obj_peca->get_preco(), PDO::PARAM_STR);
+                $p_sql->bindValue(':descricao', $obj_peca->get_descricao(), PDO::PARAM_STR);
+                $p_sql->bindValue(':data', $obj_peca->get_data_anuncio(), PDO::PARAM_STR);
+                $p_sql->bindValue(':serie', $obj_peca->get_serie(), PDO::PARAM_STR);
+                $p_sql->bindValue(':prf_ntr', $obj_peca->get_preferencia_entrega(), PDO::PARAM_INT);
+                $p_sql->bindValue(':std_uso_id', $obj_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
+                $p_sql->bindValue(':num_visualizado', $obj_peca->get_num_visualizado(), PDO::PARAM_INT);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -275,11 +275,11 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Numero_Paginas(Object_Peca $object_peca, array $form_filtro)
+        public static function Buscar_Numero_Paginas(OBJ_Peca $obj_peca, array $form_filtro)
         {
             $pesquisa = '';
             
-            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
             
             if (!empty($pesquisa)) {
                 if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -292,7 +292,7 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 
                 $p_sql->execute();
                 $select = $p_sql->fetchAll();
@@ -304,13 +304,13 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Pecas(Object_Peca $object_peca, array $form_filtro, int $pg)
+        public static function Buscar_Pecas(OBJ_Peca $obj_peca, array $form_filtro, int $pg)
         {
             $limite = 9;
             $inicio = ($pg * $limite) - $limite;
             $pesquisa = "";
             
-            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $object_peca, $form_filtro);
+            $pesquisa = self::Criar_String_Pesquisa($pesquisa, $obj_peca, $form_filtro);
             
             if (!empty($pesquisa)) {
                 if (current(str_word_count($pesquisa, 2)) != 'ORDER') {
@@ -324,7 +324,7 @@ namespace Module\Application\Model\DAO;
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 
-                $p_sql = self::Bind_String_Pesquisa($p_sql, $object_peca, $form_filtro);
+                $p_sql = self::Bind_String_Pesquisa($p_sql, $obj_peca, $form_filtro);
                 $p_sql->bindValue(':inicio', $inicio, PDO::PARAM_INT);
                 $p_sql->bindValue(':limite', $limite, PDO::PARAM_INT);
                 $p_sql->execute();
@@ -335,12 +335,12 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Criar_String_Pesquisa(string $pesquisa, Object_Peca $object_peca, array $form_filtro) : string
+        public static function Criar_String_Pesquisa(string $pesquisa, OBJ_Peca $obj_peca, array $form_filtro) : string
         {
-            if (!empty($object_peca->get_entidade())) {
-                $object_entidade = $object_peca->get_entidade();
+            if (!empty($obj_peca->get_entidade())) {
+                $obj_entidade = $obj_peca->get_entidade();
                 
-                if (!empty($object_entidade->get_usuario_id())) {
+                if (!empty($obj_entidade->get_usuario_id())) {
                     if (!empty($pesquisa)) {
                         $pesquisa .= " AND ";
                     }
@@ -348,13 +348,13 @@ namespace Module\Application\Model\DAO;
                 }
             }
             
-            if (!empty($object_peca->get_endereco())) {
-                $object_endereco = $object_peca->get_endereco();
+            if (!empty($obj_peca->get_endereco())) {
+                $obj_endereco = $obj_peca->get_endereco();
                 
-                $pesquisa = DAO_Endereco::Criar_String_Pesquisa($pesquisa, $object_endereco);
+                $pesquisa = DAO_Endereco::Criar_String_Pesquisa($pesquisa, $obj_endereco);
             }
             
-            if (!empty($object_peca->get_status())) {
+            if (!empty($obj_peca->get_status())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
@@ -366,70 +366,70 @@ namespace Module\Application\Model\DAO;
                 $pesquisa .= "peca_sts_pec_id != 3";
             }
             
-            if (!empty($object_peca->get_estado_uso())) {
+            if (!empty($obj_peca->get_estado_uso())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_std_uso_pec_id = :std_uso_id";
             }
             
-            if (!empty($object_peca->get_nome())) {
+            if (!empty($obj_peca->get_nome())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_nome LIKE '%' :nome '%'";
             }
             
-            if (!empty($object_peca->get_url())) {
+            if (!empty($obj_peca->get_url())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_url = :url";
             }
             
-            if (!empty($object_peca->get_fabricante())) {
+            if (!empty($obj_peca->get_fabricante())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_fabricante LIKE '%' :fabricante '%'";
             }
             
-            if (!empty($object_peca->get_preco())) {
+            if (!empty($obj_peca->get_preco())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_preco = :preco";
             }
             
-            if (!empty($object_peca->get_descricao())) {
+            if (!empty($obj_peca->get_descricao())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_descricao LIKE '%' :descricao '%'";
             }
             
-            if (!empty($object_peca->get_data_anuncio())) {
+            if (!empty($obj_peca->get_data_anuncio())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_data_anuncio = :data_anuncio";
             }
             
-            if (!empty($object_peca->get_serie())) {
+            if (!empty($obj_peca->get_serie())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_numero_serie = :numero_serie";
             }
             
-            if (!empty($object_peca->get_preferencia_entrega())) {
+            if (!empty($obj_peca->get_preferencia_entrega())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
                 $pesquisa .= "peca_prf_ntr_id = :prf_ntr";
             }
             
-            if (!empty($object_peca->get_num_visualizado())) {
+            if (!empty($obj_peca->get_num_visualizado())) {
                 if (!empty($pesquisa)) {
                     $pesquisa .= " AND ";
                 }
@@ -482,64 +482,64 @@ namespace Module\Application\Model\DAO;
             return $order_by;
         }
         
-        public static function Bind_String_Pesquisa(PDOStatement $p_sql, Object_Peca $object_peca, array $form_filtro) : PDOStatement
+        public static function Bind_String_Pesquisa(PDOStatement $p_sql, OBJ_Peca $obj_peca, array $form_filtro) : PDOStatement
         {
-            if (!empty($object_peca->get_entidade())) {
-                $object_entidade = $object_peca->get_entidade();
+            if (!empty($obj_peca->get_entidade())) {
+                $obj_entidade = $obj_peca->get_entidade();
                 
-                if (!empty($object_entidade->get_usuario_id())) {
-                    $p_sql->bindValue(":ent_id", $object_entidade->get_usuario_id(), PDO::PARAM_INT);
+                if (!empty($obj_entidade->get_usuario_id())) {
+                    $p_sql->bindValue(":ent_id", $obj_entidade->get_usuario_id(), PDO::PARAM_INT);
                 }
             }
             
-            if (!empty($object_peca->get_endereco())) {
-                $object_endereco = $object_peca->get_endereco();
+            if (!empty($obj_peca->get_endereco())) {
+                $obj_endereco = $obj_peca->get_endereco();
                 
-                $p_sql = DAO_Endereco::Bind_String_Pesquisa($p_sql, $object_endereco);
+                $p_sql = DAO_Endereco::Bind_String_Pesquisa($p_sql, $obj_endereco);
             }
             
-            if (!empty($object_peca->get_status())) {
-                $p_sql->bindValue(":sp_id", $object_peca->get_status()->get_id(), PDO::PARAM_INT);
+            if (!empty($obj_peca->get_status())) {
+                $p_sql->bindValue(":sp_id", $obj_peca->get_status()->get_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_peca->get_estado_uso())) {
-                $p_sql->bindValue(":std_uso_id", $object_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
+            if (!empty($obj_peca->get_estado_uso())) {
+                $p_sql->bindValue(":std_uso_id", $obj_peca->get_estado_uso()->get_id(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_peca->get_nome())) {
-                $p_sql->bindValue(":nome", $object_peca->get_nome(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_nome())) {
+                $p_sql->bindValue(":nome", $obj_peca->get_nome(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_url())) {
-                $p_sql->bindValue(":url", $object_peca->get_url(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_url())) {
+                $p_sql->bindValue(":url", $obj_peca->get_url(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_fabricante())) {
-                $p_sql->bindValue(":fabricante", $object_peca->get_fabricante(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_fabricante())) {
+                $p_sql->bindValue(":fabricante", $obj_peca->get_fabricante(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_preco())) {
-                $p_sql->bindValue(":preco", $object_peca->get_preco(), PDO::PARAM_INT);
+            if (!empty($obj_peca->get_preco())) {
+                $p_sql->bindValue(":preco", $obj_peca->get_preco(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_peca->get_descricao())) {
-                $p_sql->bindValue(":descricao", $object_peca->get_descricao(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_descricao())) {
+                $p_sql->bindValue(":descricao", $obj_peca->get_descricao(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_data_anuncio())) {
-                $p_sql->bindValue(":data", $object_peca->get_data_anuncio(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_data_anuncio())) {
+                $p_sql->bindValue(":data", $obj_peca->get_data_anuncio(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_serie())) {
-                $p_sql->bindValue(":serie", $object_peca->get_serie(), PDO::PARAM_STR);
+            if (!empty($obj_peca->get_serie())) {
+                $p_sql->bindValue(":serie", $obj_peca->get_serie(), PDO::PARAM_STR);
             }
             
-            if (!empty($object_peca->get_preferencia_entrega())) {
-                $p_sql->bindValue(":prf_ntr", $object_peca->get_preferencia_entrega(), PDO::PARAM_INT);
+            if (!empty($obj_peca->get_preferencia_entrega())) {
+                $p_sql->bindValue(":prf_ntr", $obj_peca->get_preferencia_entrega(), PDO::PARAM_INT);
             }
             
-            if (!empty($object_peca->get_num_visualizado())) {
-                $p_sql->bindValue(":num_visualizado", $object_peca->get_num_visualizado(), PDO::PARAM_INT);
+            if (!empty($obj_peca->get_num_visualizado())) {
+                $p_sql->bindValue(":num_visualizado", $obj_peca->get_num_visualizado(), PDO::PARAM_INT);
             }
             
             return $p_sql;
@@ -575,150 +575,150 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function PopulaPeca(array $row) : Object_Peca
+        public static function PopulaPeca(array $row) : OBJ_Peca
         {
-            $object_peca = new Object_Peca();
+            $obj_peca = new OBJ_Peca();
             
             if (isset($row['peca_id'])) {
-                $object_peca->set_id($row['peca_id']);
-                $object_peca->set_fotos(DAO_Foto_Peca::Buscar_Fotos($row['peca_id']));
+                $obj_peca->set_id($row['peca_id']);
+                $obj_peca->set_fotos(DAO_Foto_Peca::Buscar_Fotos($row['peca_id']));
             }
             
             if (isset($row['peca_ent_id'])) {
-                $object_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
+                $obj_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
             }
             
             if (isset($row['peca_responsavel_usr_id'])) {
-                $object_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
+                $obj_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
             }
             
             if (isset($row['peca_end_id'])) {
-                $object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
+                $obj_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
             }
             
             if (isset($row['peca_sts_pec_id'])) {
-                $object_peca->set_status(DAO_Status_Peca::BuscarPorCOD($row['peca_sts_pec_id']));
+                $obj_peca->set_status(DAO_Status_Peca::BuscarPorCOD($row['peca_sts_pec_id']));
             }
             
             if (isset($row['peca_nome'])) {
-                $object_peca->set_nome($row['peca_nome']);
+                $obj_peca->set_nome($row['peca_nome']);
             }
             
             if (isset($row['peca_url'])) {
-                $object_peca->set_url($row['peca_url']);
+                $obj_peca->set_url($row['peca_url']);
             }
             
             if (isset($row['peca_fabricante'])) {
-                $object_peca->set_fabricante($row['peca_fabricante']);
+                $obj_peca->set_fabricante($row['peca_fabricante']);
             }
             
             if (isset($row['peca_preco'])) {
-                $object_peca->set_preco($row['peca_preco']);
+                $obj_peca->set_preco($row['peca_preco']);
             }
             
             if (isset($row['peca_descricao'])) {
-                $object_peca->set_descricao($row['peca_descricao']);
+                $obj_peca->set_descricao($row['peca_descricao']);
             }
             
             if (isset($row['peca_data_anuncio'])) {
-                $object_peca->set_data_anuncio($row['peca_data_anuncio']);
+                $obj_peca->set_data_anuncio($row['peca_data_anuncio']);
             }
             
             if (isset($row['peca_numero_serie'])) {
-                $object_peca->set_serie($row['peca_numero_serie']);
+                $obj_peca->set_serie($row['peca_numero_serie']);
             }
             
             if (isset($row['peca_prf_ntr_id'])) {
-                $object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
+                $obj_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
             }
             
             if (isset($row['peca_std_uso_pec_id'])) {
-                $object_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
+                $obj_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
             }
             
             if (isset($row['peca_num_visualizado'])) {
-                $object_peca->set_num_visualizado($row['peca_num_visualizado']);
+                $obj_peca->set_num_visualizado($row['peca_num_visualizado']);
             }
             
-            return $object_peca;
+            return $obj_peca;
         }
         
         public static function PopulaPecas(array $rows) : array
         {
-            $object_pecas = array();
+            $obj_pecas = array();
             
             foreach ($rows as $row) {
-                $object_peca = new Object_Peca();
+                $obj_peca = new OBJ_Peca();
                 
                 if (isset($row['peca_id'])) {
-                    $object_peca->set_id($row['peca_id']);
+                    $obj_peca->set_id($row['peca_id']);
                     
                     $fotos = DAO_Foto_Peca::Buscar_Fotos($row['peca_id']);
                     
                     if (!empty($fotos) AND $fotos !== false) {
-                        $object_peca->set_fotos($fotos);
+                        $obj_peca->set_fotos($fotos);
                     }
                 }
                 
                 if (isset($row['peca_ent_id'])) {
-                    $object_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
+                    $obj_peca->set_entidade(DAO_Entidade::BuscarPorCOD($row['peca_ent_id']));
                 }
                 
                 if (isset($row['peca_responsavel_usr_id'])) {
-                    $object_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
+                    $obj_peca->set_responsavel(DAO_Usuario::Buscar_Usuario($row['peca_responsavel_usr_id']));
                 }
                 
                 if (isset($row['peca_end_id'])) {
-                    $object_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
+                    $obj_peca->set_endereco(DAO_Endereco::Buscar_Por_Id_Endereco($row['peca_end_id']));
                 }
                 
                 if (isset($row['peca_sts_pec_id'])) {
-                    $object_peca->set_status(DAO_Status_Peca::BuscarPorCOD($row['peca_sts_pec_id']));
+                    $obj_peca->set_status(DAO_Status_Peca::BuscarPorCOD($row['peca_sts_pec_id']));
                 }
                 
                 if (isset($row['peca_nome'])) {
-                    $object_peca->set_nome($row['peca_nome']);
+                    $obj_peca->set_nome($row['peca_nome']);
                 }
                 
                 if (isset($row['peca_url'])) {
-                    $object_peca->set_url($row['peca_url']);
+                    $obj_peca->set_url($row['peca_url']);
                 }
                 
                 if (isset($row['peca_fabricante'])) {
-                    $object_peca->set_fabricante($row['peca_fabricante']);
+                    $obj_peca->set_fabricante($row['peca_fabricante']);
                 }
                 
                 if (isset($row['peca_preco'])) {
-                    $object_peca->set_preco($row['peca_preco']);
+                    $obj_peca->set_preco($row['peca_preco']);
                 }
                 
                 if (isset($row['peca_descricao'])) {
-                    $object_peca->set_descricao($row['peca_descricao']);
+                    $obj_peca->set_descricao($row['peca_descricao']);
                 }
                 
                 if (isset($row['peca_data_anuncio'])) {
-                    $object_peca->set_data_anuncio($row['peca_data_anuncio']);
+                    $obj_peca->set_data_anuncio($row['peca_data_anuncio']);
                 }
                 
                 if (isset($row['peca_numero_serie'])) {
-                    $object_peca->set_serie($row['peca_numero_serie']);
+                    $obj_peca->set_serie($row['peca_numero_serie']);
                 }
                 
                 if (isset($row['peca_prf_ntr_id'])) {
-                    $object_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
+                    $obj_peca->set_preferencia_entrega($row['peca_prf_ntr_id']);
                 }
                 
                 if (isset($row['peca_std_uso_pec_id'])) {
-                    $object_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
+                    $obj_peca->set_estado_uso(DAO_Estado_Uso_Peca::BuscarPorCOD($row['peca_std_uso_pec_id']));
                 }
                 
                 if (isset($row['peca_num_visualizado'])) {
-                    $object_peca->set_num_visualizado($row['peca_num_visualizado']);
+                    $obj_peca->set_num_visualizado($row['peca_num_visualizado']);
                 }
                 
-                $object_pecas[] = $object_peca;
+                $obj_pecas[] = $obj_peca;
             }
             
-            return $object_pecas;
+            return $obj_pecas;
         }
     }
