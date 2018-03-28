@@ -826,6 +826,13 @@
                         $app->post('/credito[/]', function(Request $request, Response $response, $args) use ($app) {
                             $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
                             
+                            $faturas->set_hash(isset($_POST['hash']) ? $_POST['hash'] : null);
+                            $faturas->set_token(isset($_POST['token']) ? $_POST['token'] : null);
+                            $faturas->set_ip(isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
+                            $faturas->set_cpf(isset($_POST['cpf']) ? $_POST['cpf'] : null);
+                            $faturas->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
+                            $faturas->set_nascimento(isset($_POST['nascimento']) ? $_POST['nascimento'] : null);
+                            
                             $faturas->PagarPagSeguroCredito();
                         });
                     });

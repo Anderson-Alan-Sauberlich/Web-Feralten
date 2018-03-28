@@ -144,6 +144,15 @@ function RestaurarEndereco() {
 		$('#endereco_complemento').val($data.complemento);
 		$('#endereco_cidade').dropdown('set value', $('#item_'+$data.cidade).data('value'));
     	$('#endereco_cidade').dropdown('set text', $('#item_'+$data.cidade).data('text'));
+    	$('#endereco_msg').removeClass('visible');
+		$('#endereco_msg').addClass('hidden');
+    	$('#div_endereco_cep').removeClass('error');
+    	$('#div_endereco_estado').removeClass('error');
+    	$('#div_endereco_cidade').removeClass('error');
+    	$('#div_endereco_bairro').removeClass('error');
+    	$('#div_endereco_rua').removeClass('error');
+    	$('#div_endereco_numero').removeClass('error');
+    	$('#div_endereco_complemento').removeClass('error');
 	});
 	$('#form_endereco').removeClass('loading');
 }

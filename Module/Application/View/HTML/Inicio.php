@@ -57,6 +57,11 @@
     	<div class="margem-inferior-minimo"></div>
     </div>
     <div class="margem-superior-minimo"></div>
+    <div class="ui center aligned container">
+    	<h2 class="ui disabled header"><b>Em breve</b> disponível para Mobile:</h2>
+		<img src="/resources/img/googleplay-badge.png" class="ui centered small image" />
+	</div>
+    <div class="margem-superior-minimo"></div>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>

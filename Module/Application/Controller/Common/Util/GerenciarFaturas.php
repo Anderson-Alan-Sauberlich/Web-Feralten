@@ -237,7 +237,9 @@ namespace Module\Application\Controller\Common\Util;
             
             if (count($faturas) === 1) {
                 foreach ($faturas as $fatura) {
-                    $obj_fatura = $fatura;
+                    if ($fatura instanceof OBJ_Fatura) {
+                        $obj_fatura = $fatura;
+                    }
                 }
             }
             

@@ -115,6 +115,32 @@ namespace Module\Application\Model\Common\Util;
         }
         
         /**
+         * Function Set_Usuario_Email
+         *
+         * @param string $usuario_email 'Email do usuario'
+         * @return void
+         */
+        public static function set_usuario_email(string $usuario_email) : void
+        {
+            $_SESSION['login']['usuario']['email'] = $usuario_email;
+        }
+        
+        /**
+         * Function Get_Usuario_Email
+         *
+         * @param none
+         * @return ?string 'Email do usuario'
+         */
+        public static function get_usuario_email() : ?string
+        {
+            if (isset($_SESSION['login']['usuario']['email'])) {
+                return $_SESSION['login']['usuario']['email'];
+            } else {
+                return null;
+            }
+        }
+        
+        /**
          * Function Set_Usuario_Status
          * 
          * @param int $usuario_status 'Status do usuario'

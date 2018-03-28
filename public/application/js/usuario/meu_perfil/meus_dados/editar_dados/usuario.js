@@ -100,6 +100,14 @@ function RestaurarUsuario() {
 		$('#usuario_fone_alternativo').val($data.fone_alternativo).trigger('input');
 		$('#usuario_email').val($data.email);
 		$('#usuario_email_alternativo').val($data.email_alternativo);
+		$('#usuario_msg').removeClass('visible');
+		$('#usuario_msg').addClass('hidden');
+		$('#div_usuario_nome').removeClass('error');
+		$('#div_usuario_sobrenome').removeClass('error');
+		$('#div_usuario_email').removeClass('error');
+		$('#div_usuario_email_alternativo').removeClass('error');
+		$('#div_usuario_fone').removeClass('error');
+		$('#div_usuario_fone_alternativo').removeClass('error');
 	});
 	$('#form_usuario').removeClass('loading');
 }

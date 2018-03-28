@@ -114,6 +114,11 @@ function RestaurarEntidade() {
 		$('#entidade_cpf_cnpj').val($data.cpf_cnpj).trigger('input');
 		$('#entidade_nome_comercial').val($data.nome_comercial);
 		$('#entidade_site').val($data.site);
+		$('#entidade_msg').removeClass('visible');
+		$('#entidade_msg').addClass('hidden');
+		$('#div_entidade_cpf_cnpj').removeClass('error');
+		$('#div_entidade_nome_comercial').removeClass('error');
+		$('#div_entidade_site').removeClass('error');
 	});
 	$('#form_entidade').removeClass('loading');
 }

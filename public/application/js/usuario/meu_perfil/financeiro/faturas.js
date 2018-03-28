@@ -14,24 +14,66 @@ $('#credito_msg').on('click', function() {
 });
 function PagarComCredito() {
 	$('#form_credito').addClass('loading');
-	var $SenderHash = PagSeguroDirectPayment.getSenderHash();
+	var $hash = PagSeguroDirectPayment.getSenderHash();
+	var $numero = $('#numero').val().replace(/[^\d]+/g,'');
+	var $brand = $('#brand').val();
+	var $codigo = $('#codigo').val();
+	var $validade_mes = $('#validade_mes').val();
+	var $validade_ano = $('#validade_ano').val();
+	var $nome = $('#nome').val();
+	var $cpf = $('#cpf').val().replace(/[^\d]+/g,'');
+	var $nascimento = $('#nascimento_dia').val()+'/'+$('#nascimento_mes').val()+'/'+$('#nascimento_ano').val();
 	
 	var $param = {
-		cardNumber: $('#numero').val(),
-		brand: 'visa',
-		cvv: $('#codigo').val(),
-		expirationMonth: $('#validade_mes').val(),
-		expirationYear: $('#validade_ano').val(),
+		cardNumber: $numero,
+		brand: $brand,
+		cvv: $codigo,
+		expirationMonth: $validade_mes,
+		expirationYear: $validade_ano,
 		success: function(response) {
 			$('#form_credito').addClass('loading');
 			$.ajax({
 				method: 'POST',
 				url: '/usuario/meu-perfil/financeiro/faturas/pagseguro/credito/',
 				async: false,
-				data: { json_card_token : response }
-			}).done(function(valor) {
-				//var $valor = JSON.parse(valor);
-				
+				data: { 
+					token : response.card.token,
+					hash :  $hash,
+					nome : $nome,
+					cpf : $cpf,
+					nascimento : $nascimento
+				}
+			}).done(function(data) {
+				var $data = JSON.parse(data);
+				if ($data.sucessos.length > 0) {
+					$('#credito_msg').removeClass('error');
+					$('#credito_msg').addClass('success');
+					$('#credito_msg_header').html('Dados salvos com sucesso! :)');
+					$('#credito_msg_list').html($data.sucessos);
+					$('#credito_msg').addClass('visible');
+					$('#credito_msg').removeClass('hidden');
+				} else if ($data.erros.length > 0) {
+					$('#credito_msg').addClass('error');
+					$('#credito_msg').removeClass('success');
+					$('#credito_msg_header').html('Ops! Algo deu errado! :(');
+					$('#credito_msg_list').html($data.erros);
+					$('#credito_msg').addClass('visible');
+					$('#credito_msg').removeClass('hidden');
+					if ($data.campos.token == 'erro') {
+						$('#div_numero').addClass('error');
+						$('#div_codigo').addClass('error');
+						$('#div_validade').addClass('error');
+					}
+					if ($data.campos.nome == 'erro') {
+						$('#div_nome').addClass('error');
+					}
+					if ($data.campos.cpf == 'erro') {
+						$('#div_cpf').addClass('error');
+					}
+					if ($data.campos.nascimento == 'erro') {
+						$('#div_nascimento').addClass('error');
+					}
+				}
 				$('#form_credito').removeClass('loading');
 			});
 		},
@@ -42,6 +84,10 @@ function PagarComCredito() {
 			$('#credito_msg_list').html(JSON.stringify(response.errors));
 			$('#credito_msg').addClass('visible');
 			$('#credito_msg').removeClass('hidden');
+			
+			$('#div_numero').addClass('error');
+			$('#div_codigo').addClass('error');
+			$('#div_validade').addClass('error');
 		},
 		complete: function(response) {
 			$('#form_credito').removeClass('loading');
@@ -50,15 +96,17 @@ function PagarComCredito() {
 	
 	PagSeguroDirectPayment.createCardToken($param);
 }
+$("#numero").blur(function() {
+	retornaBrandCard()
+});
 function retornaBrandCard() {
-	var numcard = $('#numero').val();
+	var numcard = $('#numero').val().replace(/[^\d]+/g,'');
 	var bin = numcard.substr(0,6);
 
-	var brand;
 	PagSeguroDirectPayment.getBrand({
 	    cardBin: bin,
 	    success: function(response) {
-	        brand = response.name;
+	    	$('#brand').val(response.brand.name);
 	    },
 	    error: function(response) {
 	        
@@ -67,6 +115,4 @@ function retornaBrandCard() {
 	        
 	    }
 	});
-	
-	return brand;
 }

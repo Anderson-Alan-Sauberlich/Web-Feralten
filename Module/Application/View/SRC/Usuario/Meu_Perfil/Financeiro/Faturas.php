@@ -271,4 +271,15 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         {
             return self::$pagseguro_sessao_id;
         }
+        
+        public static function CriarListagem(array $itens) : array
+        {
+            $lista = [];
+            
+            foreach ($itens as $item) {
+                $lista[] = "<li>$item</li>";
+            }
+            
+            return $lista;
+        }
     }

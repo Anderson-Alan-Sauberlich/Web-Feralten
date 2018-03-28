@@ -75,25 +75,26 @@
                                         <div class="ui stackable two column centered grid">
                                             <div class="column">
                                             	<div class="ui secondary segment">
+                                            		<input type="hidden" id="brand" name="brand" value="" />
                                                     <div id="form_credito" class="ui form">
                                                     	<div id="credito_msg" class="ui hidden message">
                                                         	<i class="close icon"></i>
                                                         	<div id="credito_msg_header" class="header"></div>
                                                         	<ul id="credito_msg_list" class="list"></ul>
                                                         </div>
-                                                    	<div class="required field">
+                                                    	<div id="div_numero" class="required field">
                                                     		<label for="numero">Número do cartão</label>
                                                     		<input id="numero" name="numero" placeholder="(ex.: 0000 0000 0000 0000)" type="text">
                                                     	</div>
-                                                    	<div class="required field">
+                                                    	<div id="div_nome" class="required field">
                                                     		<label for="nome">Nome como está no cartão</label>
-                                                    		<input id="name" name="name" placeholder="Exatamente como está no cartão" type="text">
+                                                    		<input id="nome" name="nome" placeholder="Exatamente como está no cartão" type="text">
                                                     	</div>
-                                                    	<div class="ten wide required field">
+                                                    	<div id="div_codigo" class="ten wide required field">
                                                     		<label for="codigo">Código de Segurança</label>
-                                                    		<input id="codigo" name="codigo" placeholder="Geralente está no verso do cartão e tem de 3 a 4 digitos" type="text">
+                                                    		<input id="codigo" name="codigo" placeholder="No verso do cartão, de 3 a 4 digitos" type="text">
                                                     	</div>
-                                                    	<div class="ten wide required field">
+                                                    	<div id="div_validade" class="ten wide required field">
                                                         	<label>Validade</label>
                                                         	<div class="two fields">
                                                             	<div class="field">
@@ -121,11 +122,11 @@
                                                             	</div>
                                                         	</div>
                                                         </div>
-                                                        <div class="required field">
+                                                        <div id="div_cpf" class="ten wide required field">
                                                     		<label for="cpf">CPF</label>
                                                     		<input id="cpf" name="cpf" placeholder="Digite apenas os numeros" type="text">
                                                     	</div>
-                                                    	<div class="required field">
+                                                    	<div id="div_nascimento" class="required field">
                                                     		<label>Data de nascimento</label>
                                                     		<div class="three fields">
                                                     			<div class="field">

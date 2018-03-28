@@ -2,6 +2,7 @@
 namespace Module\Common\Util;
     
     use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
+    use Module\Application\Model\OBJ\Fatura_Servico as OBJ_Fatura_Servico;
     use \PagSeguro\Library;
     use \PagSeguro\Services\Session;
     use \PagSeguro\Configuration\Configure;
@@ -19,36 +20,245 @@ namespace Module\Common\Util;
             Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");
         }
         
+        /**
+         * ID para servir como referencia para achar a tranzação mais facilmente.
+         * 
+         * @var string $reference
+         */
         private $reference;
         
+        /**
+         * Nome do usuario, ser vor cartão de credito, o nome deve estar Identico ao cartão.
+         * 
+         * @var string $nome
+         */
         private $nome;
         
+        /**
+         * Email do cliente comprador.
+         * 
+         * @var string $email
+         */
         private $email;
         
+        /**
+         * Telefone do cliente comprador.
+         * 
+         * @var string $fone
+         */
         private $fone;
         
-        private $cpf;
+        /**
+         * CPF do dono do cartão / da pessoa que esta pagamdno.
+         * 
+         * @var string $cpf_cnpj
+         */
+        private $cpf_cnpj;
         
+        /**
+         * Hash da sessão do usuario no navegador.
+         * 
+         * @var string $hash
+         */
         private $hash;
         
+        /**
+         * IP do cliete que esta realizando o pagamento.
+         * @var string $ip
+         */
         private $ip;
         
+        /**
+         * Objeto do Endereço do cliente comprador.
+         * 
+         * @var OBJ_Endereco $billing
+         */
         private $billing;
         
+        /**
+         * Token do cartão de Credito.
+         * 
+         * @var string $token
+         */
         private $token;
         
+        /**
+         * Data de nacimento do dono do cartão / da pessoa que esta realizando o pagamento.
+         * 
+         * @var string $birthdate
+         */
         private $birthdate;
         
         /**
-         * @var array $erros Array com todas as mensagens de erro
+         * Nome do banco para debito online.
+         * 
+         * @var string $banco
+         */
+        private $banco;
+        
+        /**
+         * Valor todal da fatura.
+         * 
+         * @var float $total
+         */
+        private $total;
+        
+        /**
+         * Lista com objeto Fatura_Servico de todos os serviços a serem cobrados.
+         * 
+         * @var array $servicos
+         */
+        private $servicos = [];
+        
+        /**
+         * Lista com todas as mensagens de erro.
+         * 
+         * @var array $erros
          */
         private $erros = [];
         
         /**
-         * @var array $sucesso Array com todos as Mensagens de Sucesso
+         * Lista com todos as Mensagens de Sucesso.
+         * 
+         * @var array $sucesso
          */
         private $sucessos = [];
         
+        /**
+         * Seta ID para servir como referencia para achar a tranzação mais facilmente.
+         * 
+         * @param string $reference
+         */
+        public function set_reference(string $reference) : void
+        {
+            $this->reference = $reference;
+        }
+        
+        /**
+         * Seta Nome do usuario, ser vor cartão de credito, o nome deve estar Identico ao cartão.
+         * 
+         * @param string $nome
+         */
+        public function set_nome(string $nome) : void
+        {
+            $this->nome = $nome;
+        }
+        
+        /**
+         * Seta Email do cliente comprador.
+         * 
+         * @param string $email
+         */
+        public function set_email(string $email) : void
+        {
+            $this->email = $email;
+        }
+        
+        /**
+         * Seta Telefone do cliente comprador.
+         * 
+         * @param string $fone
+         */
+        public function set_fone(string $fone) : void
+        {
+            $this->fone = $fone;
+        }
+        
+        /**
+         * Seta CPF do dono do cartão / da pessoa que esta pagamdno.
+         * 
+         * @param string $cpf_cnpj
+         */
+        public function set_cpf_cnpj(string $cpf_cnpj) : void
+        {
+            $this->cpf_cnpj = $cpf_cnpj;
+        }
+        
+        /**
+         * Seta Hash da sessão do usuario no navegador.
+         * 
+         * @param string $hash
+         */
+        public function set_hash(string $hash) : void
+        {
+            $this->hash = $hash;
+        }
+        
+        /**
+         * Seta IP do cliete que esta realizando o pagamento.
+         * 
+         * @param string $ip
+         */
+        public function set_ip(string $ip) : void
+        {
+            $this->ip = $ip;
+        }
+        
+        /**
+         * Seta Objeto do Endereço do cliente comprador.
+         * 
+         * @param OBJ_Endereco $billing
+         */
+        public function set_billing(OBJ_Endereco $billing) : void
+        {
+            $this->billing = $billing;
+        }
+        
+        /**
+         * Seta Token do cartão de Credito.
+         * 
+         * @param string $token
+         */
+        public function set_token(string $token) : void
+        {
+            $this->token = $token;
+        }
+        
+        /**
+         * Seta Data de nacimento do dono do cartão / da pessoa que esta realizando o pagamento.
+         * 
+         * @param string $birthdate
+         */
+        public function set_birthdate(string $birthdate) : void
+        {
+            $this->birthdate = $birthdate;
+        }
+        
+        /**
+         * Seta Nome do banco para debito online.
+         * 
+         * @param string $banco
+         */
+        public function set_banco(string $banco) : void
+        {
+            $this->banco = $banco;
+        }
+        
+        /**
+         * Seta Valor todal da fatura.
+         * 
+         * @param float $total
+         */
+        public function set_total(float $total) : void
+        {
+            $this->total = $total;
+        }
+        
+        /**
+         * Seta Lista com objeto Fatura_Servico de todos os serviços a serem cobrados.
+         * 
+         * @param array $servicos
+         */
+        public function set_servicos(array $servicos) : void
+        {
+            $this->servicos = $servicos;
+        }
+        
+        /**
+         * Retorna o id da sessão para usar no navegador, plugin JS do pagseguro.
+         * 
+         * @return string
+         */
         public function getIdSessao() : string
         {
             try {
@@ -60,6 +270,11 @@ namespace Module\Common\Util;
             }
         }
         
+        /**
+         * Reliza o pagamento por cartão de credito.
+         * 
+         * @return bool
+         */
         public function pagarCredito() : bool
         {
             $creditCard = new CreditCard();
@@ -67,75 +282,74 @@ namespace Module\Common\Util;
             /**
              * @todo Change the receiver Email
              */
-            $creditCard->setReceiverEmail('financeiro@feralten.com');
+            $creditCard->setReceiverEmail('andersonalansauberlich@gmail.com');
             
             // Set a reference code for this payment request. It is useful to identify this payment
             // in future notifications.
-            $creditCard->setReference("LIBPHP000001");
+            $creditCard->setReference($this->reference);
             
             // Set the currency
             $creditCard->setCurrency("BRL");
             
-            // Add an item for this payment request
-            $creditCard->addItems()->withParameters(
-                '0001',
-                'Notebook prata',
-                2,
-                10.00
-            );
+            foreach ($this->servicos as $servico) {
+                if ($servico instanceof OBJ_Fatura_Servico) {
+                    // Add an item for this payment request
+                    $creditCard->addItems()->withParameters(
+                        $servico->get_id(),
+                        $servico->get_descricao(),
+                        1,
+                        $servico->get_valor()
+                    );
+                }
+            }
             
             // Set your customer information.
             // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-            $creditCard->setSender()->setName('João Comprador');
-            $creditCard->setSender()->setEmail('email@comprador.com.br');
+            $creditCard->setSender()->setName($this->nome);
+            $creditCard->setSender()->setEmail($this->email);
             
             $creditCard->setSender()->setPhone()->withParameters(
-                11,
-                56273440
+                substr($this->fone, 0, 2),
+                substr($this->fone, 2, strlen($this->fone))
             );
             
-            $creditCard->setSender()->setDocument()->withParameters(
-                'CPF',
-                'insira um numero de CPF valido'
-            );
+            $creditCard->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
             
-            $creditCard->setSender()->setHash('d94d002b6998ca9cd69092746518e50aded5a54aef64c4877ccea02573694986');
-            $creditCard->setSender()->setIp('127.0.0.0');
+            $creditCard->setSender()->setHash($this->hash);
+            $creditCard->setSender()->setIp($this->ip);
             
             $creditCard->setShipping()->setAddressRequired()->withParameters('FALSE');
             
-            //Set billing information for credit card
-            $creditCard->setBilling()->setAddress()->withParameters(
-                'Av. Brig. Faria Lima',
-                '1384',
-                'Jardim Paulistano',
-                '01452002',
-                'São Paulo',
-                'SP',
-                'BRA',
-                'apto. 114'
-            );
+            if ($this->billing instanceof OBJ_Endereco) {
+                //Set billing information for credit card
+                $creditCard->setBilling()->setAddress()->withParameters(
+                    $this->billing->get_rua(),
+                    $this->billing->get_numero(),
+                    $this->billing->get_bairro(),
+                    $this->billing->get_cep(),
+                    $this->billing->get_cidade()->get_nome(),
+                    $this->billing->get_estado()->get_uf(),
+                    'BRA'
+                );
+            }
             
             // Set credit card token
-            $creditCard->setToken('2ed34e61b24d4ea8ae872c66a512525c');
+            $creditCard->setToken($this->token);
             
             // Set the installment quantity and value (could be obtained using the Installments
             // service, that have an example here in \public\getInstallments.php)
-            $creditCard->setInstallment()->withParameters(1, '30.00');
+            $creditCard->setInstallment()->withParameters(1, $this->total);
             
             // Set the credit card holder information
-            $creditCard->setHolder()->setBirthdate('01/10/1979');
-            $creditCard->setHolder()->setName('João Comprador'); // Equals in Credit Card
+            $creditCard->setHolder()->setBirthdate($this->birthdate);
+            $creditCard->setHolder()->setName($this->nome); // Equals in Credit Card
             
             $creditCard->setHolder()->setPhone()->withParameters(
-                11,
-                56273440
+                substr($this->fone, 0, 2),
+                substr($this->fone, 2, strlen($this->fone))
             );
             
-            $creditCard->setHolder()->setDocument()->withParameters(
-                'CPF',
-                'insira um numero de CPF valido'
-            );
+            $creditCard->setHolder()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
             
             // Set the Payment Mode for this payment request
             $creditCard->setMode('DEFAULT');
@@ -153,6 +367,11 @@ namespace Module\Common\Util;
             }
         }
         
+        /**
+         * Realiza o pagamento por Boleto Bancario.
+         * 
+         * @return bool
+         */
         public function pagarBoleto() : bool
         {
             $boleto = new Boleto();
@@ -168,35 +387,36 @@ namespace Module\Common\Util;
             // Set the currency
             $boleto->setCurrency("BRL");
             
-            // Add an item for this payment request
-            $boleto->addItems()->withParameters(
-                '0001',
-                'Notebook prata',
-                2,
-                130.00
-            );
+            foreach ($this->servicos as $servico) {
+                if ($servico instanceof OBJ_Fatura_Servico) {
+                    // Add an item for this payment request
+                    $boleto->addItems()->withParameters(
+                        $servico->get_id(),
+                        $servico->get_descricao(),
+                        1,
+                        $servico->get_valor()
+                    );
+                }
+            }
             
             // Set a reference code for this payment request. It is useful to identify this payment
             // in future notifications.
-            $boleto->setReference("LIBPHP000001-boleto");
+            $boleto->setReference($this->reference);
             
             // Set your customer information.
             // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-            $boleto->setSender()->setName('João Comprador');
-            $boleto->setSender()->setEmail('email@comprador.com.br');
+            $boleto->setSender()->setName($this->nome);
+            $boleto->setSender()->setEmail($this->email);
             
             $boleto->setSender()->setPhone()->withParameters(
-                11,
-                56273440
+                substr($this->fone, 0, 2),
+                substr($this->fone, 2, strlen($this->fone))
             );
             
-            $boleto->setSender()->setDocument()->withParameters(
-                'CPF',
-                'insira um numero de CPF valido'
-            );
+            $boleto->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
             
-            $boleto->setSender()->setHash('3dc25e8a7cb3fd3104e77ae5ad0e7df04621caa33e300b27aeeb9ea1adf1a24f');
-            $boleto->setSender()->setIp('127.0.0.0');
+            $boleto->setSender()->setHash($this->hash);
+            $boleto->setSender()->setIp($this->ip);
             
             $boleto->setShipping()->setAddressRequired()->withParameters('FALSE');
             
@@ -211,6 +431,11 @@ namespace Module\Common\Util;
             }
         }
         
+        /**
+         * Realiza o pagamento por Debito Online.
+         * 
+         * @return bool
+         */
         public function pagarDebito() : bool
         {
             $onlineDebit = new OnlineDebit();
@@ -219,7 +444,7 @@ namespace Module\Common\Util;
             $onlineDebit->setMode('DEFAULT');
             
             // Set bank for this payment request
-            $onlineDebit->setBankName('nomedobanco');
+            $onlineDebit->setBankName($this->banco);
             
             /**
              * @todo Change the receiver Email
@@ -228,36 +453,37 @@ namespace Module\Common\Util;
             
             // Set a reference code for this payment request. It is useful to identify this payment
             // in future notifications.
-            $onlineDebit->setReference("LIBPHP000001");
+            $onlineDebit->setReference($this->reference);
             
             // Set the currency
             $onlineDebit->setCurrency("BRL");
             
-            // Add an item for this payment request
-            $onlineDebit->addItems()->withParameters(
-                '0001',
-                'Notebook prata',
-                2,
-                130.00
-            );
+            foreach ($this->servicos as $servico) {
+                if ($servico instanceof OBJ_Fatura_Servico) {
+                    // Add an item for this payment request
+                    $onlineDebit->addItems()->withParameters(
+                        $servico->get_id(),
+                        $servico->get_descricao(),
+                        1,
+                        $servico->get_valor()
+                    );
+                }
+            }
             
             // Set your customer information.
             // If you using SANDBOX you must use an email @sandbox.pagseguro.com.br
-            $onlineDebit->setSender()->setName('João Comprador');
-            $onlineDebit->setSender()->setEmail('email@comprador.com.br');
+            $onlineDebit->setSender()->setName($this->nome);
+            $onlineDebit->setSender()->setEmail($this->email);
             
             $onlineDebit->setSender()->setPhone()->withParameters(
-                11,
-                56273440
+                substr($this->fone, 0, 2),
+                substr($this->fone, 2, strlen($this->fone))
             );
             
-            $onlineDebit->setSender()->setDocument()->withParameters(
-                'CPF',
-                'insira um numero de CPF valido'
-            );
+            $onlineDebit->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
             
-            $onlineDebit->setSender()->setHash('3dc25e8a7cb3fd3104e77ae5ad0e7df04621caa33e300b27aeeb9ed5fdf1a24f');
-            $onlineDebit->setSender()->setIp('127.0.0.0');
+            $onlineDebit->setSender()->setHash($this->hash);
+            $onlineDebit->setSender()->setIp($this->ip);
             
             $onlineDebit->setShipping()->setAddressRequired()->withParameters('FALSE');
             

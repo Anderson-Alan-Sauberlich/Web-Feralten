@@ -1,8 +1,8 @@
 <?php
 namespace Module\Application\Model\Validador;
     
-    use Module\Application\Model\Object\Cidade as Object_Cidade;
-    use Module\Application\Model\Object\Estado as Object_Estado;
+    use Module\Application\Model\OBJ\Cidade as OBJ_Cidade;
+    use Module\Application\Model\OBJ\Estado as OBJ_Estado;
     use \Exception;
     
     class Endereco
@@ -17,34 +17,34 @@ namespace Module\Application\Model\Validador;
             
         }
         
-        public static function validar_cidade($cidade = null) : Object_Cidade
+        public static function validar_cidade($cidade = null) : OBJ_Cidade
         {
             if (empty($cidade)) {
                 throw new Exception('Selecione sua Cidade');
             } else {
                 if (filter_var($cidade, FILTER_VALIDATE_INT)) {
-                    $object_cidade = new Object_Cidade();
+                    $obj_cidade = new OBJ_Cidade();
                     
-                    $object_cidade->set_id($cidade);
+                    $obj_cidade->set_id($cidade);
                     
-                    return $object_cidade;
+                    return $obj_cidade;
                 } else {
                     throw new Exception('Selecione uma Cidade Válida');
                 }
             }
         }
         
-        public static function validar_estado($estado = null) : Object_Estado
+        public static function validar_estado($estado = null) : OBJ_Estado
         {
             if (empty($estado)) {
                 throw new Exception('Selecione seu Estado');
             } else {
                 if (filter_var($estado, FILTER_VALIDATE_INT)) {
-                    $object_estado = new Object_Estado();
+                    $obj_estado = new OBJ_Estado();
                     
-                    $object_estado->set_id($estado);
+                    $obj_estado->set_id($estado);
                     
-                    return $object_estado;
+                    return $obj_estado;
                 } else {
                     throw new Exception('Selecione um Estado Válido');
                 }
@@ -168,9 +168,9 @@ namespace Module\Application\Model\Validador;
             
         }
         
-        public static function filtrar_cidade($cidade = null) : Object_Cidade
+        public static function filtrar_cidade($cidade = null) : OBJ_Cidade
         {
-            $valor = new Object_Cidade();
+            $valor = new OBJ_Cidade();
             
             if (!empty($cidade) AND filter_var($cidade, FILTER_VALIDATE_INT)) {
                 $valor->set_id($cidade);
@@ -179,9 +179,9 @@ namespace Module\Application\Model\Validador;
             return $valor;
         }
         
-        public static function filtrar_estado($estado = null) : Object_Estado
+        public static function filtrar_estado($estado = null) : OBJ_Estado
         {
-            $valor = new Object_Estado();
+            $valor = new OBJ_Estado();
             
             if (!empty($estado) AND filter_var($estado, FILTER_VALIDATE_INT)) {
                 $valor->set_id($estado);
