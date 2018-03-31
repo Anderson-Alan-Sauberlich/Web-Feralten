@@ -17,8 +17,8 @@ namespace Module\Application\Model\DAO;
         public static function Inserir(OBJ_Transacao $obj_transacao) : bool
         {
             try {
-                $sql = "INSERT INTO tb_transacao (transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento) 
-                        VALUES (:id, :ftr_id, :datahora, :vlr, :sts, :frm_pag);";
+                $sql = "INSERT INTO tb_transacao (transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento, transacao_pags_codigo) 
+                        VALUES (:id, :ftr_id, :datahora, :vlr, :sts, :frm_pag, :pags_codigo);";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
 
@@ -28,6 +28,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':vlr', $obj_transacao->get_valor(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts', $obj_transacao->get_status(), PDO::PARAM_STR);
                 $p_sql->bindValue(':frm_pag', $obj_transacao->get_forma_pagamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':pags_codigo', $obj_transacao->get_pags_codigo(), PDO::PARAM_STR);
                 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -41,10 +42,11 @@ namespace Module\Application\Model\DAO;
                 $sql = "UPDATE tb_transacao SET
                         transacao_id = :id,
                         transacao_ftr_id = :ftr_id,
-                           transacao_datahora = :datahora,
+                        transacao_datahora = :datahora,
                         transacao_valor = :vlr,
                         transacao_status = :sts,
-                        transacao_forma_pagamento = :frm_pag 
+                        transacao_forma_pagamento = :frm_pag,
+                        transacao_pags_codigo = :pags_codigo 
                         WHERE transacao_id = :id";
 
                 $p_sql = Conexao::Conectar()->prepare($sql);
@@ -55,6 +57,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':vlr', $obj_transacao->get_valor(), PDO::PARAM_STR);
                 $p_sql->bindValue(':sts', $obj_transacao->get_status(), PDO::PARAM_STR);
                 $p_sql->bindValue(':frm_pag', $obj_transacao->get_forma_pagamento(), PDO::PARAM_STR);
+                $p_sql->bindValue(':pags_codigo', $obj_transacao->get_pags_codigo(), PDO::PARAM_STR);
 
                 return $p_sql->execute();
             } catch (PDOException | Exception $e) {
@@ -79,7 +82,7 @@ namespace Module\Application\Model\DAO;
         public static function BuscarPorCOD(int $id)
         {
             try {
-                $sql = 'SELECT transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento FROM tb_transacao WHERE transacao_id = :id';
+                $sql = 'SELECT transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento, transacao_pags_codigo FROM tb_transacao WHERE transacao_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
@@ -122,6 +125,10 @@ namespace Module\Application\Model\DAO;
                     $obj_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
                 }
                 
+                if (isset($row['transacao_pags_codigo'])) {
+                    $obj_transacao->set_pags_codigo($row['transacao_pags_codigo']);
+                }
+                
                 $transacoes[] = $obj_transacao;
             }
             
@@ -154,6 +161,10 @@ namespace Module\Application\Model\DAO;
             
             if (isset($row['transacao_forma_pagamento'])) {
                 $obj_transacao->set_forma_pagamento($row['transacao_forma_pagamento']);
+            }
+            
+            if (isset($row['transacao_pags_codigo'])) {
+                $obj_transacao->set_pags_codigo($row['transacao_pags_codigo']);
             }
             
             return $obj_transacao;

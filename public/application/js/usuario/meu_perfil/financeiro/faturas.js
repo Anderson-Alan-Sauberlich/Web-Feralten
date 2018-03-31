@@ -48,10 +48,11 @@ function PagarComCredito() {
 				if ($data.sucessos.length > 0) {
 					$('#credito_msg').removeClass('error');
 					$('#credito_msg').addClass('success');
-					$('#credito_msg_header').html('Dados salvos com sucesso! :)');
+					$('#credito_msg_header').html('Sucesso! :)');
 					$('#credito_msg_list').html($data.sucessos);
 					$('#credito_msg').addClass('visible');
 					$('#credito_msg').removeClass('hidden');
+					window.location.replace("/usuario/meu-perfil/financeiro/faturas/");
 				} else if ($data.erros.length > 0) {
 					$('#credito_msg').addClass('error');
 					$('#credito_msg').removeClass('success');

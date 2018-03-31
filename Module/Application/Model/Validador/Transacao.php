@@ -40,6 +40,11 @@ namespace Module\Application\Model\Validador;
             
         }
         
+        public static function validar_pags_codigo($forma_pagamento = null) : void
+        {
+            
+        }
+        
         public static function filtrar_id($id = null) : void
         {
             
@@ -66,6 +71,11 @@ namespace Module\Application\Model\Validador;
         }
         
         public static function filtrar_forma_pagamento($forma_pagamento = null) : void
+        {
+            
+        }
+        
+        public static function filtrar_pags_codigo($forma_pagamento = null) : void
         {
             
         }

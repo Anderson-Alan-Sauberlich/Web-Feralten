@@ -267,11 +267,22 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
             }
         }
         
+        /**
+         * Retorna o id do pagseguro para ser setado na inicialização da pagina.
+         * 
+         * @return string
+         */
         public static function RetornarPagSeguroSessaoId() : ?string
         {
             return self::$pagseguro_sessao_id;
         }
         
+        /**
+         * Retorna um array list adicionando em cada item os elementos html para tornalos listas.
+         * 
+         * @param array $itens
+         * @return array
+         */
         public static function CriarListagem(array $itens) : array
         {
             $lista = [];
@@ -281,5 +292,21 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
             }
             
             return $lista;
+        }
+        
+        /**
+         * Verifica se os formularios de cobrança devem ser mostrados.
+         * Caso o status seja de 128 "Aguardando Confirmação de Pagamento", e o pagamento foi Credito:
+         * Então os formularios não serão mostrados.
+         * 
+         * @return bool
+         */
+        public static function VerificaMostrarCobranca() : bool
+        {
+            if (self::$fatura_fechada->get_obj_status()->get_id() === 128) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }

@@ -835,6 +835,12 @@
                             
                             $faturas->PagarPagSeguroCredito();
                         });
+                        
+                        $app->post('/resposta[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
+                            
+                            $faturas->RespostaPagSeguro();
+                        });
                     });
                 });
                 

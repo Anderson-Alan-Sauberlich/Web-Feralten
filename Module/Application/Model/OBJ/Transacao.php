@@ -9,6 +9,7 @@ namespace Module\Application\Model\OBJ;
         private $datahora;
         private $status;
         private $forma_pagamento;
+        private $pags_codigo;
         
         function __constructor()
         {
@@ -73,5 +74,15 @@ namespace Module\Application\Model\OBJ;
         public function get_forma_pagamento() : ?string
         {
             return $this->forma_pagamento;
+        }
+        
+        public function set_pags_codigo(string $pags_codigo) : void
+        {
+            $this->pags_codigo = $pags_codigo;
+        }
+        
+        public function get_pags_codigo() : ?string
+        {
+            return $this->pags_codigo;
         }
     }

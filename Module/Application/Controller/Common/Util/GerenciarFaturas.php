@@ -247,6 +247,28 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
+         * Seta como, aguardando pagamento a fatura aberta do usuario.
+         * 
+         * @param OBJ_Fatura $obj_fatura
+         * @return bool
+         */
+        public static function Aguardar_Pagamento_Fatura(OBJ_Fatura $obj_fatura = null) : bool
+        {
+            return DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), 128);
+        }
+        
+        /**
+         * Seta a fatura que está aguardando pagamento do usuario como paga.
+         * 
+         * @param OBJ_Fatura $obj_fatura
+         * @return bool
+         */
+        public static function Pagar_Fatura(OBJ_Fatura $obj_fatura = null) : bool
+        {
+            return DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), 4);
+        }
+        
+        /**
          * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada
          */
         public static function Gerenciar_Todas_Faturas_Abertas() : void

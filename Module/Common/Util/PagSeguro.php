@@ -9,7 +9,11 @@ namespace Module\Common\Util;
     use \PagSeguro\Domains\Requests\DirectPayment\CreditCard;
     use \PagSeguro\Domains\Requests\DirectPayment\Boleto;
     use \PagSeguro\Domains\Requests\DirectPayment\OnlineDebit;
-    use Exception;
+    use \PagSeguro\Parsers\Transaction\Response;
+    use \PagSeguro\Helpers\Xhr;
+    use \PagSeguro\Services\Transactions\Notification;
+    use \Exception;
+    use \InvalidArgumentException;
     
     class PagSeguro
     {
@@ -494,6 +498,31 @@ namespace Module\Common\Util;
                 return true;
             } catch (Exception $e) {
                 return false;
+            }
+        }
+        
+        /**
+         * Recebe o codigo do pagseguro e solicita os dados referentes ao codigo.
+         * 
+         * @throws InvalidArgumentException
+         * @return Response|NULL
+         */
+        public function esperarResposta() : ?Response
+        {
+            try {
+                if (Xhr::hasPost()) {
+                    $response = Notification::check(Configure::getAccountCredentials());
+                } else {
+                    throw new InvalidArgumentException($_POST);
+                }
+                
+                if ($response instanceof Response) {
+                    return $response;
+                } else {
+                    return null;
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
             }
         }
     }

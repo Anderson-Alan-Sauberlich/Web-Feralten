@@ -6,8 +6,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
+    use Module\Application\Model\DAO\Transacao as DAO_Transacao;
     use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
     use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
+    use Module\Application\Model\OBJ\Transacao as OBJ_Transacao;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Controller\Common\Util\GerenciarFaturas;
     use Module\Application\Model\Common\Util\Validador;
@@ -77,6 +79,36 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          * @var array $campos Array com todos os Status dos Campos do Formulario
          */
         private $campos = [];
+        
+        /**
+         * Seta Tipo da notificação vindo como resposta do pagseguro.
+         * 
+         * @param string $notificationType
+         */
+        public function set_notificationType($notificationType) : void
+        {
+            try {
+                $this->notificationType = Validador::Fatura()::validar_notificationType($notificationType);
+            } catch (Exception $e) {
+                $this->campos['notificationType'] = 'erro';
+                $this->erros[] = $e->getMessage();
+            }
+        }
+        
+        /**
+         * Seta Código da notificação vindo como resposta do pagseguro.
+         * 
+         * @param string $notificationCode
+         */
+        public function set_notificationCode($notificationCode) : void
+        {
+            try {
+                $this->notificationCode = Validador::Fatura()::validar_notificationCode($notificationCode);
+            } catch (Exception $e) {
+                $this->campos['notificationCode'] = 'erro';
+                $this->erros[] = $e->getMessage();
+            }
+        }
         
         /**
          * Seta Token do cartão de credito feito pelo pagseguro.
@@ -200,7 +232,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 32);
                         
                         if (empty($fatura_fechada)) {
-                            $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                            $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
+                        
+                            if (empty($fatura_fechada)) {
+                                $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                            }
                         }
                     }
                     
@@ -227,6 +263,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             }
         }
         
+        /**
+         * Recebe os dados de pagamento do formulario de pagamento com cartão de credito e realiza o pagamento com PagSeguro.
+         */
         public function PagarPagSeguroCredito() : void
         {
             if (empty($this->erros)) {
@@ -244,16 +283,23 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 $pagseguro->set_birthdate($this->nascimento);
                 $pagseguro->set_ip($this->ip);
                 
-                $fatura_aberta = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 1);
+                $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 16);
+                if (empty($fatura_fechada)) {
+                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 32);
+                    
+                    if (empty($fatura_fechada)) {
+                        $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                    }
+                }
                 
-                if (!empty($fatura_aberta)) {
-                    $pagseguro->set_reference('fatura_'.$fatura_aberta->get_id().'_credito');
-                    $pagseguro->set_total($fatura_aberta->get_valor_total());
+                if (!empty($fatura_fechada)) {
+                    $pagseguro->set_reference('fatura_'.$fatura_fechada->get_id().'_credito');
+                    $pagseguro->set_total($fatura_fechada->get_valor_total());
                     
-                    $fatura_servicos_aberta = DAO_Fatura_Servico::BuscarPorCOD($fatura_aberta->get_id());
+                    $fatura_servicos_fechada = DAO_Fatura_Servico::BuscarPorCOD($fatura_fechada->get_id());
                     
-                    if (!empty($fatura_servicos_aberta) AND $fatura_servicos_aberta != false) {
-                        $pagseguro->set_servicos($fatura_servicos_aberta);
+                    if (!empty($fatura_servicos_fechada) AND $fatura_servicos_fechada != false) {
+                        $pagseguro->set_servicos($fatura_servicos_fechada);
                     }
                 }
                 
@@ -264,6 +310,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 }
                 
                 $pagseguro->pagarCredito();
+                GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
+                $this->sucessos[] = 'Dados de pagamentos recebidos com sucesso! Em breve o pagamento será confirmado.';
             }
             
             $retorno['erros'] = View_Faturas::CriarListagem($this->erros);
@@ -273,6 +321,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             echo json_encode($retorno);
         }
         
+        /**
+         * Recebe os dados de pagamento do formulario de pagamento com debito online e realiza o pagamento com PagSeguro.
+         */
         public function PagarPagSeguroDebito() : void
         {
             if (empty($this->erros)) {
@@ -282,12 +333,53 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             }
         }
         
+        /**
+         * Recebe os dados de pagamento do formulario de pagamento com boleto bancario e realiza o pagamento com PagSeguro.
+         */
         public function PagarPagSeguroBoleto() : void
         {
             if (empty($this->erros)) {
                 $pagseguro = new PagSeguro();
                 
                 $pagseguro->pagarBoleto();
+            }
+        }
+        
+        /**
+         * Recebe o retorno do pagseguro para informar que o pagamento foi aprovado ou não.
+         */
+        public function RespostaPagSeguro() : void
+        {
+            $pagseguro = new PagSeguro();
+            
+            $response = $pagseguro->esperarResposta();
+            
+            if (!empty($response)) {
+                if ($response->getStatus() === 3) {
+                    $fatura_aberta = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
+                    
+                    if (!empty($fatura_aberta)) {
+                        $obj_transacao = new OBJ_Transacao();
+                        
+                        $obj_transacao->set_fatura_id($fatura_aberta->get_id());
+                        $obj_transacao->set_datahora($response->getDate());
+                        
+                        if ($response->getPaymentMethod() === 1) {
+                            $obj_transacao->set_forma_pagamento('Crédito');
+                        } else if ($response->getPaymentMethod() === 2) {
+                            $obj_transacao->set_forma_pagamento('Boleto');
+                        } else if ($response->getPaymentMethod() === 3) {
+                            $obj_transacao->set_forma_pagamento('Débito');
+                        }
+                        
+                        $obj_transacao->set_valor($response->getGrossAmount());
+                        $obj_transacao->set_status('Pago');
+                        $obj_transacao->set_pags_codigo($response->getCode());
+                        
+                        DAO_Transacao::Inserir($obj_transacao);
+                        GerenciarFaturas::Pagar_Fatura($fatura_aberta);
+                    }
+                }
             }
         }
     }
