@@ -53,7 +53,7 @@
        			</div>
        		</h2>
        		<div class="margem-inferior-minimo"></div>
-    		<img src="/resources/img/fundo_pecas1.jpg" class="ui fluid image" />
+    		<img src="/resources/img/fundo_pecas1_grey.jpg" class="ui fluid image" />
     		<div class="margem-inferior-minimo"></div>
     		<div class="ui two column very relaxed stackable grid">
         		<div class="column">
@@ -69,17 +69,21 @@
            			<h2 class="ui red header">Confira as nossas dicas para vender mais e melhor! Acesse: <a href="/dicas-de-venda/">Dicas de Venda</a></h2>
            		</div>
        		</div>
-       		<div class="margem-inferior-minimo"></div>
-       		<h1 class="ui grey header">
-       			Possui uma loja de autopeças, desmanche, ferro velho, peças usadas? <br/><a href="/usuario/cadastro/">Cadastre-se e comece a vender online agora!</a>
-       			<div class="sub header">
-       				Comece já a vender peças pela internet para todo o Brasil!
-       			</div>
-       		</h1>
     	</section>
     	<div class="margem-inferior-minimo"></div>
     </div>
-    <div class="margem-superior-minimo"></div>
+    <div class="margem-inferior-minimo"></div>
+    <div class="ui basic  vertical segment">
+    	<section class="ui container" role="main">
+           	<h1 class="ui grey center aligned header">
+           		Possui uma loja de autopeças, desmanche, ferro velho, peças usadas? <br/><a href="/usuario/cadastro/">Cadastre-se e comece a vender online agora!</a>
+           		<div class="sub header">
+           			Comece já a vender peças pela internet para todo o Brasil!
+           		</div>
+           	</h1>
+       	</section>
+    </div>
+    <div class="margem-superior-pouco"></div>
     <section class="ui container" role="main">
         <h1 class="ui red huge dividing header">Peças Nacionais e Importadas</h1>
         <div class="ui ten column doubling grid">

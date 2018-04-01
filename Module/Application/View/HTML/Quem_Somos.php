@@ -13,7 +13,7 @@
     	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
     	<h1 class="ui red huge dividing header">Quem Somos</h1>
         <div class="ui text justified container">
-        	<div class="margem-inferior-medio margem-superior-minimo">
+        	<div class="margem-inferior-pouco margem-superior-minimo">
         		<p>O Feralten é um Shopping Online de peças originais, usadas ou novas, que se dispõe a unir todos as lojas de auto peças, ferros-velho e desmanches do país em um único portal centralizado. Como a procura por fornecedores confiáveis sempre foi um problema decidimos criar esse portal, que reúne estabelecimentos e particulares do Brasil inteirinho! Tudo isso para que proprietários e consumidores alcancem juntos o melhor custo benefício.</p>
         		<p>Visamos também que as peças são mais baratas em relação as novas, que muitas vezes não são originais. Inclusive a Reutilização ajuda muito mais o Meio Ambiente. Pois é mais Barato e melhor, mesmo em relação a Reciclagem.</p>
         	</div>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="margem-inferior-minimo"></div>
-        <div class="ui center aligned container margem-inferior-medio">
+        <div class="ui center aligned container margem-inferior-pouco">
         	<h3 class="ui red header">Chega de perder tempo correndo atrás de peças, encontre e anuncie todas aqui no Feralten.</h3>
         </div>
         <div class="ui four column very relaxed stackable grid">
@@ -97,7 +97,7 @@
        			</h2>
         	</div>
         </div>
-        <div class="margem-inferior-medio"></div>
+        <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
