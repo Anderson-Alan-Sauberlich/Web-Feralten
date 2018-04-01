@@ -293,7 +293,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 }
                 
                 if (!empty($fatura_fechada)) {
-                    $pagseguro->set_reference('fatura_'.$fatura_fechada->get_id().'_credito');
+                    $pagseguro->set_reference($fatura_fechada->get_id());
                     $pagseguro->set_total($fatura_fechada->get_valor_total());
                     
                     $fatura_servicos_fechada = DAO_Fatura_Servico::BuscarPorCOD($fatura_fechada->get_id());
@@ -356,7 +356,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             
             if (!empty($response)) {
                 if ($response->getStatus() == 3) {
-                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
+                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura($response->getReference(), 128);
                     
                     if (!empty($fatura_fechada)) {
                         $obj_transacao = new OBJ_Transacao();
