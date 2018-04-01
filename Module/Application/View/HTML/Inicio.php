@@ -18,6 +18,27 @@
         </form>
     </section>
     <div class="margem-inferior-minimo"></div>
+    <section class="ui container" role="main">
+    	<h1 class="ui red huge center aligned dividing header"><i class="settings icon"></i>COMO FUNCIONA</h1>
+    	<div class="ui three column very relaxed stackable grid">
+    		<div class="column">
+    			<h2 class="ui header">
+    				<div class="sub header"><i class="hand point right outline icon"></i>Pesquise pela sua peça, se não encontrar, envie-nos sua solicitação de orçamento pelo formulário clicando em Solicitar Orçamentos.</div>
+    			</h2>
+    		</div>
+    		<div class="column">
+    			<h2 class="ui header">
+    			<div class="sub header"><i class="hand point right outline icon"></i>Sua solicitação é encaminhada para todos os nossos vendedores: lojas de auto peças, ferros-velho, desmanches...</div>
+    			</h2>
+    		</div>
+    		<div class="column">
+    			<h2 class="ui header">
+    			<div class="sub header"><i class="hand point right outline icon"></i>Receba os orçamentos de peças inteiramente grátis em seu e-mail. Com vários orçamentos, avalie e faça o melhor negócio.</div>
+    			</h2>
+    		</div>
+    	</div>
+    </section>
+    <div class="margem-inferior-minimo"></div>
     <div class="ui basic secondary vertical segment">
     	<div class="margem-inferior-minimo"></div>
     	<section class="ui container" role="main">
@@ -31,20 +52,15 @@
        				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros Velhos, Oficinas Mêcanicas e Pessoas Interessadas em peças originais, usadas ou novas.
        			</div>
        		</h2>
-    	</section>
-    	<div class="margem-inferior-minimo"></div>
-    </div>
-    <img src="/resources/img/fundo_pecas1.jpg" class="ui fluid image" />
-    <div class="ui basic secondary vertical segment">
-    	<div class="margem-inferior-minimo"></div>
-    	<section class="ui container" role="main">
+       		<div class="margem-inferior-minimo"></div>
+    		<img src="/resources/img/fundo_pecas1.jpg" class="ui fluid image" />
+    		<div class="margem-inferior-minimo"></div>
     		<div class="ui two column very relaxed stackable grid">
         		<div class="column">
                		<h2 class="ui red header">Por que Anunciar no Feralten?</h2>
                		<h2 class="ui header">
                			<div class="sub header">
                				Portal exclusivo para negociantes de peças usadas;<br/>
-               				Único portal da área no Brasil;<br/>
                				Com menos de 1 café por dia você é visto pelo mês todo, lembre-se, quem é visto é  lembrado!
                			</div>
                		</h2>
@@ -53,9 +69,122 @@
            			<h2 class="ui red header">Confira as nossas dicas para vender mais e melhor! Acesse: <a href="/dicas-de-venda/">Dicas de Venda</a></h2>
            		</div>
        		</div>
+       		<div class="margem-inferior-minimo"></div>
+       		<h1 class="ui grey header">
+       			Possui uma loja de autopeças, desmanche, ferro velho, peças usadas? <br/><a href="/usuario/cadastro/">Cadastre-se e comece a vender online agora!</a>
+       			<div class="sub header">
+       				Comece já a vender peças pela internet para todo o Brasil!
+       			</div>
+       		</h1>
     	</section>
     	<div class="margem-inferior-minimo"></div>
     </div>
+    <div class="margem-superior-minimo"></div>
+    <section class="ui container" role="main">
+        <h1 class="ui red huge dividing header">Peças Nacionais e Importadas</h1>
+        <div class="ui ten column doubling grid">
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_audi.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_bmw.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+           		<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_chevrolet.jpg"/>
+            	</a>
+           	</div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_citroen.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_fiat.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_ford.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_honda.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_hyundai.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+           		<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_jaguar.jpg"/>
+            	</a>
+           	</div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_kia.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_land_rover.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_mercedes_benz.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_mitsubishi.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+           		<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_nissan.jpg"/>
+            	</a>
+           	</div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_peugeot.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_renault.jpg"/>
+            	</a>
+			</div>
+			<div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_subaru.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_toyota.jpg"/>
+            	</a>
+            </div>
+            <div class="column">
+           		<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_volkswagen.jpg"/>
+            	</a>
+           	</div>
+            <div class="column">
+            	<a href="#" class="ui fluid bordered rounded image">
+            		<img src="/resources/img/logos_montadoras/logo_volvo.jpg"/>
+            	</a>
+			</div>
+        </div>
+	</section>
     <div class="margem-superior-minimo"></div>
     <div class="ui center aligned container">
     	<h2 class="ui disabled header"><b>Em breve</b> disponível para Mobile:</h2>
