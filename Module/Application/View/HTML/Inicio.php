@@ -88,102 +88,102 @@
         <h1 class="ui red huge dividing header">Peças Nacionais e Importadas</h1>
         <div class="ui ten column doubling grid">
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/audi/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_audi.jpg"/>
             	</a>
             </div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/bmw/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_bmw.jpg"/>
             	</a>
             </div>
             <div class="column">
-           		<a href="#" class="ui fluid bordered rounded image">
+           		<a href="/pecas/resultados/carro-camioneta/chevrolet/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_chevrolet.jpg"/>
             	</a>
            	</div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/citroen/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_citroen.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/fiat/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_fiat.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/ford/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_ford.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/honda/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_honda.jpg"/>
             	</a>
             </div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/hyundai/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_hyundai.jpg"/>
             	</a>
             </div>
             <div class="column">
-           		<a href="#" class="ui fluid bordered rounded image">
+           		<a href="/pecas/resultados/carro-camioneta/jaguar/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_jaguar.jpg"/>
             	</a>
            	</div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/kia/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_kia.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/land-rover/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_land_rover.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/mercedes-benz/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_mercedes_benz.jpg"/>
             	</a>
             </div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/mitsubishi/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_mitsubishi.jpg"/>
             	</a>
             </div>
             <div class="column">
-           		<a href="#" class="ui fluid bordered rounded image">
+           		<a href="/pecas/resultados/carro-camioneta/nissan/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_nissan.jpg"/>
             	</a>
            	</div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/peugeot/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_peugeot.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/renault/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_renault.jpg"/>
             	</a>
 			</div>
 			<div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/subaru/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_subaru.jpg"/>
             	</a>
             </div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/toyota/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_toyota.jpg"/>
             	</a>
             </div>
             <div class="column">
-           		<a href="#" class="ui fluid bordered rounded image">
+           		<a href="/pecas/resultados/carro-camioneta/volkswagen/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_volkswagen.jpg"/>
             	</a>
            	</div>
             <div class="column">
-            	<a href="#" class="ui fluid bordered rounded image">
+            	<a href="/pecas/resultados/carro-camioneta/volvo/" class="ui fluid bordered rounded image">
             		<img src="/resources/img/logos_montadoras/logo_volvo.jpg"/>
             	</a>
 			</div>
