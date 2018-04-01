@@ -227,6 +227,7 @@ namespace Module\Application\Controller\Common\Util;
          * Não podem existem mais de uma fatura fechada ao mesmo tempo
          * 
          * @param int $id_entidade
+         * @param int ...$status
          * @return OBJ_Fatura|NULL
          */
         public static function Retornar_Fatura(int $id_entidade, int $status) : ?OBJ_Fatura

@@ -127,7 +127,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaArrayFaturas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaFatura($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
