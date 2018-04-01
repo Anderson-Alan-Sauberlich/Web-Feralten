@@ -355,20 +355,20 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             $response = $pagseguro->esperarResposta();
             
             if (!empty($response)) {
-                if ($response->getStatus() === 3) {
-                    $fatura_aberta = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
+                if ($response->getStatus() == 3) {
+                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
                     
-                    if (!empty($fatura_aberta)) {
+                    if (!empty($fatura_fechada)) {
                         $obj_transacao = new OBJ_Transacao();
                         
-                        $obj_transacao->set_fatura_id($fatura_aberta->get_id());
+                        $obj_transacao->set_fatura_id($fatura_fechada->get_id());
                         $obj_transacao->set_datahora($response->getDate());
                         
-                        if ($response->getPaymentMethod() === 1) {
+                        if ($response->getPaymentMethod() == 1) {
                             $obj_transacao->set_forma_pagamento('Crédito');
-                        } else if ($response->getPaymentMethod() === 2) {
+                        } else if ($response->getPaymentMethod() == 2) {
                             $obj_transacao->set_forma_pagamento('Boleto');
-                        } else if ($response->getPaymentMethod() === 3) {
+                        } else if ($response->getPaymentMethod() == 3) {
                             $obj_transacao->set_forma_pagamento('Débito');
                         }
                         
@@ -377,7 +377,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         $obj_transacao->set_pags_codigo($response->getCode());
                         
                         DAO_Transacao::Inserir($obj_transacao);
-                        GerenciarFaturas::Pagar_Fatura($fatura_aberta);
+                        GerenciarFaturas::Pagar_Fatura($fatura_fechada);
                     }
                 }
             }
