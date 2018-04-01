@@ -3,6 +3,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro\Faturas as View_Faturas;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
+    use Module\Application\Model\DAO\Fatura as DAO_Fatura;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
@@ -356,7 +357,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             
             if (!empty($response)) {
                 if ($response->getStatus() == 3) {
-                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura($response->getReference(), 128);
+                    $fatura_fechada = DAO_Fatura::BuscarPorCOD($response->getReference());
                     
                     if (!empty($fatura_fechada)) {
                         $obj_transacao = new OBJ_Transacao();
