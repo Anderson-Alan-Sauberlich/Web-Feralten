@@ -363,13 +363,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         $obj_transacao = new OBJ_Transacao();
                         
                         $obj_transacao->set_fatura_id($fatura_fechada->get_id());
-                        $obj_transacao->set_datahora($response->getDate());
+                        $obj_transacao->set_datahora(date_format(date_create($response->getDate()), 'Y-m-d H:i:s'));
                         
-                        if ($response->getPaymentMethod() == 1) {
+                        if ($response->getPaymentMethod()->getType() == 1) {
                             $obj_transacao->set_forma_pagamento('Crédito');
-                        } else if ($response->getPaymentMethod() == 2) {
+                        } else if ($response->getPaymentMethod()->getType() == 2) {
                             $obj_transacao->set_forma_pagamento('Boleto');
-                        } else if ($response->getPaymentMethod() == 3) {
+                        } else if ($response->getPaymentMethod()->getType() == 3) {
                             $obj_transacao->set_forma_pagamento('Débito');
                         }
                         

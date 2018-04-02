@@ -17,6 +17,16 @@ namespace Module\Application\Model\DAO;
         public static function Inserir(OBJ_Transacao $obj_transacao) : bool
         {
             try {
+                if (empty($obj_transacao->get_id()) AND !empty($obj_transacao->get_fatura_id())) {
+                    $id_transacao = self::Pegar_Id_Livre($obj_transacao->get_fatura_id());
+                    
+                    if (empty($id_transacao)) {
+                        $obj_transacao->set_id(0);
+                    } else {
+                        $obj_transacao->set_id($id_transacao);
+                    }
+                }
+                
                 $sql = "INSERT INTO tb_transacao (transacao_id, transacao_ftr_id, transacao_datahora, transacao_valor, transacao_status, transacao_forma_pagamento, transacao_pags_codigo) 
                         VALUES (:id, :ftr_id, :datahora, :vlr, :sts, :frm_pag, :pags_codigo);";
                 
@@ -78,7 +88,23 @@ namespace Module\Application\Model\DAO;
                 return false;
             }
         }
-
+        
+        private static function Pegar_Id_Livre(int $fatura_id) : ?int
+        {
+            try {
+                $sql = 'SELECT fc_achar_id_livre_transacao(:ftr_id)';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ftr_id', $fatura_id, PDO::PARAM_INT);
+                
+                $p_sql->execute();
+                
+                return $p_sql->fetch(PDO::FETCH_COLUMN);
+            } catch (PDOException | Exception $e) {
+                return null;
+            }
+        }
+        
         public static function BuscarPorCOD(int $id)
         {
             try {
