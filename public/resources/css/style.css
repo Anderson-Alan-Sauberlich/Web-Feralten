@@ -277,6 +277,19 @@ div#loader {
 	margin-bottom: 50px;
 }
 
+footer.footer {
+	text-align: center;
+	margin-top: 70px;
+	border-top: 1px solid #E5E5E5;
+}
+
+.ui.footer.segment {
+	margin: 5em 0em 0em;
+    padding: 5em 0em;
+    background-color: #B00000 !important;
+ }
+
+
 .btn_abre_header {
 	float: right !important;
 	margin-right: 0em !important;
@@ -289,12 +302,6 @@ div#loader {
 
 .headerH {
 	text-align: right;
-}
-
-.footerUP {
-	background-color: #B00000;
-	color: white;
-	width: 100%;
 }
 
 .Hcor {
@@ -321,14 +328,6 @@ div#loader {
     display: block;
 }
 
-.footerMT {
-	margin-top: 50px;
-}
-
-.footerMD {
-	margin-bottom: 30px;
-}
-
 .disabled {
 	pointer-events: none;
 }
@@ -345,17 +344,8 @@ div#loader {
 	margin-top: 10px;
 }
 
-.linkFooter {
-	color: #DCA7A7;
-	line-height: 30px;
-}
-
 .link {
 	color: white;
-}
-
-.titlePFooter {
-	font-weight: bold;
 }
 
 .lbPanel {
@@ -441,11 +431,6 @@ div#loader {
     float: none;
     margin-top: -70px;
     margin-bottom: -70px;
-}
-
-.colunaFooterH {
-	height: 200px;
-	margin-bottom: 40px;
 }
 
 .main.menu.fixed {

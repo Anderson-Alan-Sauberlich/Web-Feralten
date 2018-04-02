@@ -1,48 +1,44 @@
-<section class="footerUP">
-    <div class="container footerMD">
-        <div class="row footerMT">
-            <div class="col-sm-6">
-                <div class="col-xs-6 colunaFooterH">
-                    <ul class="row">
-                        <p class="titlePFooter"><span class="glyphicon glyphicon-briefcase"></span> EMPRESA</p>
-                        <li><a href="/quem-somos/" class="linkFooter">Quem Somos</a></li>
-                        <li><a href="/usuario/login/" class="linkFooter">Login</a></li>
-                        <li><a href="/usuario/cadastro/" class="linkFooter">Cadastro</a></li>
-                        <li><a href="/usuario/recuperar-senha/" class="linkFooter">Recuperar Senha</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-6 colunaFooterH">
-                    <ul class="row">
-                        <p class="titlePFooter"><span class="glyphicon glyphicon-headphones"></span> CONTATO</p>
-                        <li><a href="/perguntas-frequentes/" class="linkFooter">Perguntas Freguentes</a></li>
-                        <li><a href="/dicas-de-venda/" class="linkFooter">Dicas de Venda</a></li>
-                        <li><a href="/fale-conosco/" class="linkFooter">Fale Conosco</a></li>
-                    </ul>
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui stackable inverted relaxed divided grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header"><i class="briefcase icon"></i>EMPRESA</h4>
+                <div class="ui inverted relaxed large link list">
+                    <a href="/quem-somos/" class="item">Quem Somos</a>
+                    <a href="/usuario/login/" class="item">Login</a>
+                    <a href="/usuario/cadastro/" class="item">Cadastro</a>
+                    <a href="/usuario/recuperar-senha/" class="item">Recuperar Senha</a>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="col-xs-6">
-                    <ul class="row">
-                        <p class="titlePFooter"><span class="glyphicon glyphicon-shopping-cart"></span> COMPRAR</p>
-                        <li><a href="/pecas/resultados/" class="linkFooter">Peças Cadastradas</a></li>
-                        <li><a href="/vendedores/" class="linkFooter">Vendedores</a></li>
-                        <li><a href="/orcamentos/" class="linkFooter">Orçamentos</a></li>
-                    </ul>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row">
-                    	<img class="ui medium image" src="/resources/img/Feralten_logo_Transparente_intertido.png"/>
-                    	<br/>
-                    	<p>contato@feralten.com.br</p>
-                    	<p>(47) 99285-3500</p>
-                    </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header"><i class="envelope icon"></i>CONTATO</h4>
+                <div class="ui inverted relaxed large link list">
+                    <a href="/perguntas-frequentes/" class="item">Perguntas Freguentes</a>
+                    <a href="/dicas-de-venda/" class="item">Dicas de Venda</a>
+                    <a href="/fale-conosco/" class="item">Fale Conosco</a>
                 </div>
             </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header"><i class="shopping cart icon"></i>COMPRAR</h4>
+                <div class="ui inverted relaxed large link list">
+                    <a href="/pecas/resultados/" class="item">Peças Cadastradas</a>
+                    <a href="/vendedores/" class="item">Vendedores</a>
+                    <a href="/orcamentos/" class="item">Orçamentos</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <img class="ui centered medium image" src="/resources/img/Feralten_logo_Transparente_intertido.png"/>
+            </div>
         </div>
+      	<div class="ui inverted section divider"></div>
+      	<div class="ui very relaxed horizontal inverted small divided list">
+        	<div class="item">E-mail: contato@feralten.com.br</div>
+        	<div class="item">Fone: (47) 99285-3500</div>
+      	</div>
     </div>
-    <div class="container-fluid footerDOWN">
-        <div class="row-fluid">
-            <label class="labelFooter">2018 - Feralten. Todos os direitos reservados. <a href="/termos-de-uso/" class="link">Termos de uso</a> e <a href="/politica-de-privacidade/" class="link">Política de privacidade</a> - <a href="/mapa-do-site/" class="link">Mapa do site</a></label>
-        </div>
+</div>
+<div class="container-fluid footerDOWN">
+    <div class="row-fluid">
+        <label class="labelFooter">2018 - Feralten. Todos os direitos reservados. <a href="/termos-de-uso/" class="link">Termos de uso</a> e <a href="/politica-de-privacidade/" class="link">Política de privacidade</a> - <a href="/mapa-do-site/" class="link">Mapa do site</a></label>
     </div>
-</section>
+</div>
