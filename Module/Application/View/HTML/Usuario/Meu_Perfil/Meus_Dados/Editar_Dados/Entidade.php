@@ -33,14 +33,14 @@
                 	<label class="ui red header" for="entidade_cpf_cnpj">Seu CPF ou CNPJ:</label>
                 	<div class="ui left icon input">
     					<i class="id card outline icon"></i>
-                   		<input id="entidade_cpf_cnpj" name="entidade_cpf_cnpj" placeholder="CPF / CNPJ" value="<?= View_Entidade::MostrarCPF_CNPJ(); ?>" type="text" <?= View_Entidade::BloquearCPF_CNPJ(); ?> data-content="Este campo não podera mais ser alterado. Digite apenas os Numeros. (Obrigatório)">
+                   		<input id="entidade_cpf_cnpj" name="entidade_cpf_cnpj" placeholder="CPF / CNPJ" value="<?= View_Entidade::MostrarCPF_CNPJ(); ?>" type="text" <?= View_Entidade::BloquearCPF_CNPJ(); ?> data-content="Este campo não podera mais ser alterado. Digite apenas os Números. (Obrigatório)">
                 	</div>
                 </div>
                 <div id="div_entidade_nome_comercial" class="field">
                 	<label class="ui red header" for="entidade_nome_comercial">Nome Comercial:</label>
                 	<div class="ui left icon input">
     					<i class="building outline icon"></i>
-                   		<input id="entidade_nome_comercial" name="entidade_nome_comercial" placeholder="Nome Comercial" value="<?= View_Entidade::MostrarNomeComercial(); ?>" type="text" data-content="Ao Informar um Nome neste campo o mesmo será mostrado substituindo seu Nome de Usuario. (Opcional)">
+                   		<input id="entidade_nome_comercial" name="entidade_nome_comercial" placeholder="Nome Comercial" value="<?= View_Entidade::MostrarNomeComercial(); ?>" type="text" data-content="Ao Informar um Nome neste campo o mesmo será mostrado substituindo seu Nome de Usuário. (Opcional)">
                 	</div>
                 </div>
             </div>

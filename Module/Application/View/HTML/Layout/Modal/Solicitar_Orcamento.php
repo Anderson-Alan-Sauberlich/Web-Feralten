@@ -23,20 +23,20 @@
                     	<h2 class="ui dividing header">Criar Cadastro</h2>
                         <div class="fields">
                         	<div class="field">
-                           		<label for="cadastro_nome">Digite seu nome:</label>
+                           		<label for="cadastro_nome">Seu Nome:</label>
                            		<input id="cadastro_nome" name="cadastro_nome" placeholder="Nome" type="text">
                            	</div>
                            	<div class="field">
-                           		<label for="cadastro_sobrenome">Digite seu sobrenome:</label>
+                           		<label for="cadastro_sobrenome">Seu Sobrenome:</label>
                            		<input id="cadastro_sobrenome" name="cadastro_sobrenome" placeholder="Sobrenome" type="text">
                         	</div>
                         </div>
                     	<div class="field">
-                           	<label for="cadastro_email">Digite seu E-Mail:</label>
+                           	<label for="cadastro_email">Seu E-Mail:</label>
                            	<input id="cadastro_email" name="cadastro_email" placeholder="E-Mail" type="email">
                     	</div>
                     	<div class="field">
-                           	<label for="cadastro_senha">Cire uma senha:</label>
+                           	<label for="cadastro_senha">Crie uma senha:</label>
                            	<input id="cadastro_senha" name="cadastro_senha" placeholder="Senha" type="password">
                     	</div>
                     	<div class="field">
@@ -47,18 +47,18 @@
                         	<div id="cadastro_msg_header" class="header"></div>
                         	<ul id="cadastro_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="cadastrarUsuario()" class="ui green button" type="submit">Criar Conta</button>
+                    	<button onclick="cadastrarUsuario()" class="ui green big button" type="submit">Criar Conta</button>
                     </div>
                 </div>
         		<div class="column">
             		<div id="form_login" class="ui equal width form">
                     	<h2 class="ui dividing header">Entrar</h2>
                     	<div class="field">
-                           	<label for="login_email">Digite seu E-Mail:</label>
+                           	<label for="login_email">Seu E-Mail:</label>
                            	<input id="login_email" name="login_email" placeholder="E-Mail" type="email">
                     	</div>
                     	<div class="field">
-                           	<label for="login_senha">Digite sua senha:</label>
+                           	<label for="login_senha">Sua senha:</label>
                            	<input id="login_senha" name="login_senha" placeholder="Senha" type="password">
                     	</div>
                         <div class="field">
@@ -72,7 +72,7 @@
                         	<div id="login_msg_header" class="header"></div>
                         	<ul id="login_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="logarUsuario();" class="ui red button" type="submit">Entrar</button>
+                    	<button onclick="logarUsuario();" class="ui red big button" type="submit">Entrar</button>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@
             	<label class="ui red header" for="endereco_cep">CEP:</label>
             	<div class="ui left icon input">
 					<i class="marker icon"></i>
-               		<input id="endereco_cep" name="endereco_cep" placeholder="CEP" value="<?= View_Endereco::MostrarCEP(); ?>" type="text" data-content="Digite apenas os numeros do seu CEP. (Obrigatório)">
+               		<input id="endereco_cep" name="endereco_cep" placeholder="CEP" value="<?= View_Endereco::MostrarCEP(); ?>" type="text" data-content="Digite apenas os números do seu CEP. (Obrigatório)">
             	</div>
             </div>
             <div class="ui divider"></div>
@@ -71,10 +71,10 @@
             </div>
             <div class="fields">
             	<div id="div_endereco_numero" class="required field">
-                   	<label class="ui red header" for="endereco_numero">Numero do Estabelecimento:</label>
+                   	<label class="ui red header" for="endereco_numero">Número do Estabelecimento:</label>
                    	<div class="ui left icon input">
 						<i class="home icon"></i>
-               			<input id="endereco_numero" name="endereco_numero" placeholder="Numero" value="<?= View_Endereco::MostrarNumero(); ?>" type="text" data-content="Digite o Numero do Endereço. (Obrigatório)">
+               			<input id="endereco_numero" name="endereco_numero" placeholder="Numero" value="<?= View_Endereco::MostrarNumero(); ?>" type="text" data-content="Digite o Número do Endereço. (Obrigatório)">
             		</div>
             	</div>
             	<div id="div_endereco_complemento" class="field">

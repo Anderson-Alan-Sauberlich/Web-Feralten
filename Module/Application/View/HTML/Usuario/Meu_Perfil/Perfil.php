@@ -44,17 +44,17 @@
         		<?php View_Perfil::Incluir_Menu_Usuario(); ?>
         	</div>
         	<div class="thirteen wide column">
-                <h3 class="ui blue dividing header">Visualizados</h3>
+                <h3 class="ui blue dividing header">Peças Visualizadas</h3>
                 <div id="div_visualizado" class="ui loading center aligned blue segment">
                     <canvas id="crt_visualizado" width="400" height="125"></canvas>
                 </div>
                 <div class="margem-inferior-minimo"></div>
-                <h3 class="ui green dividing header">Adicionados</h3>
+                <h3 class="ui green dividing header">Peças Adicionadas</h3>
                 <div id="div_adicionado" class="ui loading center aligned green segment">
                     <canvas id="crt_adicionado" width="400" height="125"></canvas>
                 </div>
                 <div class="margem-inferior-minimo"></div>
-                <h3 class="ui red dividing header">Removidos</h3>
+                <h3 class="ui red dividing header">Peças Removidas</h3>
                 <div id="div_removido" class="ui loading center aligned red segment">
                     <canvas id="crt_removido" width="400" height="125"></canvas>
                 </div>

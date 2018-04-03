@@ -23,21 +23,21 @@
                         <div class="panel-body cadPanel">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label for="nome" class="lbPanel">Digite Seu Nome:</label>
+                                    <label for="nome" class="lbPanel">Seu Nome:</label>
                                     <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("nome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="nome" name="nome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("nome") ?>" placeholder="Nome" autofocus="autofocus" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite Apenas seu Nome. (Campo Obrigatório)" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <label for="sobrenome" class="lbPanel">Digite Seu Sobrenome:</label>
+                                    <label for="sobrenome" class="lbPanel">Seu Sobrenome:</label>
                                     <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("sobrenome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("sobrenome") ?>" placeholder="Sobrenome" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
                                     </div>
                                 </div>
                             </div>
-                            <label for="email" class="lbPanel">Digite Seu E-Mail:</label>
+                            <label for="email" class="lbPanel">Seu E-Mail:</label>
                             <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("email"); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                                 <input id="email" name="email" type="email" class="form-control" value="<?php View_Cadastro::Manter_Valor("email") ?>" placeholder="E-Mail" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Este e-mail sera usado para gerenciar seu Cadastro e acessar o Sistema. (Campo Obrigatório)" />

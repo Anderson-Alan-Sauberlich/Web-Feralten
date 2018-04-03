@@ -15,7 +15,7 @@
         <div class="ui text justified container">
         	<div class="margem-inferior-pouco margem-superior-minimo">
         		<h3 class="ui grey header">
-        			O Feralten é um Shopping Online de peças originais, usadas ou novas, que se dispõe a unir todos as lojas de auto peças, ferros-velho e desmanches do país em um único portal centralizado. Como a procura por fornecedores confiáveis sempre foi um problema decidimos criar esse portal, que reúne estabelecimentos e particulares do Brasil inteirinho! Tudo isso para que proprietários e consumidores alcancem juntos o melhor custo benefício.
+        			O Feralten é um Shopping Online de peças originais, usadas ou novas, que se dispõe a unir todos as lojas de auto peças, ferros-velho e desmanches do país em um único portal centralizado. Como a procura por fornecedores confiáveis sempre foi um problema decidimos criar esse portal, que reúne estabelecimentos e particulares do Brasil inteiro! Tudo isso para que proprietários e consumidores alcancem juntos o melhor custo benefício.
         		</h3>
         		<h3 class="ui grey header">
         			Visamos também que as peças são mais baratas em relação as novas, que muitas vezes não são originais. Inclusive a reutilização ajuda muito mais o meio ambiente. Pois é mais Barato e melhor, mesmo em relação a reciclagem.

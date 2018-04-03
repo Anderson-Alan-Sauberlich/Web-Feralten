@@ -9,14 +9,14 @@
             </div>
             <div class="fields">
             	<div id="div_usuario_nome" class="required field">
-               		<label class="ui red header" for="usuario_nome">Nome:</label>
+               		<label class="ui red header" for="usuario_nome">Seu Nome:</label>
                		<div class="ui left icon input">
 						<i class="user outline icon"></i>
                			<input id="usuario_nome" name="usuario_nome" placeholder="Nome" value="<?= View_Usuario::MostrarNome(); ?>" type="text" data-content="Digite Apenas seu Nome. (Obrigatório)">
                		</div>
                	</div>
                	<div id="div_usuario_sobrenome" class="required field">
-               		<label class="ui red header" for="usuario_sobrenome">Sobrenome:</label>
+               		<label class="ui red header" for="usuario_sobrenome">Seu Sobrenome:</label>
                		<div class="ui left icon input">
 						<i class="user outline icon"></i>
                			<input id="usuario_sobrenome" name="usuario_sobrenome" placeholder="Sobrenome" value="<?= View_Usuario::MostrarSobrenome(); ?>" type="text" data-content="Digite seu Sobrenome. (Obrigatório)">
@@ -41,17 +41,17 @@
         	</div>
         	<div class="fields">
             	<div id="div_usuario_fone" class="required field">
-               		<label class="ui red header" for="usuario_fone">Numero de telefone:</label>
+               		<label class="ui red header" for="usuario_fone">Número de telefone:</label>
                		<div class="ui left icon input">
 						<i class="text telephone icon"></i>
-               			<input id="usuario_fone" name="usuario_fone" placeholder="Fone Ex.: (00) 0000-0000" value="<?= View_Usuario::MostrarFone(); ?>" type="text" data-content="Digite apenas os Numeros de seu telefone. (Obrigatório)">
+               			<input id="usuario_fone" name="usuario_fone" placeholder="Fone Ex.: (00) 0000-0000" value="<?= View_Usuario::MostrarFone(); ?>" type="text" data-content="Digite apenas os Números de seu telefone. (Obrigatório)">
                		</div>
                	</div>
                	<div id="div_usuario_fone_alternativo" class="field">
-               		<label class="ui red header" for="usuario_fone_alternativo">Numero de telefone alternativo:</label>
+               		<label class="ui red header" for="usuario_fone_alternativo">Número de telefone alternativo:</label>
                		<div class="ui left icon input">
 						<i class="text telephone icon"></i>
-               			<input id="usuario_fone_alternativo" name="usuario_fone_alternativo" placeholder="Fone Ex.: (00) 0000-0000" value="<?= View_Usuario::MostrarFoneAlternativo(); ?>" type="text" data-content="Digite apenas os Numeros de seu telefone alternativo. (Opcional)">
+               			<input id="usuario_fone_alternativo" name="usuario_fone_alternativo" placeholder="Fone Ex.: (00) 0000-0000" value="<?= View_Usuario::MostrarFoneAlternativo(); ?>" type="text" data-content="Digite apenas os Números de seu telefone alternativo. (Opcional)">
             		</div>
             	</div>
             </div>

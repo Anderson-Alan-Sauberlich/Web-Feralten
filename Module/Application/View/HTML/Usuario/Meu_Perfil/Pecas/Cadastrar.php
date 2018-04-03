@@ -18,11 +18,11 @@
                 <?php View_Cadastrar::Mostrar_Erros(); ?>
                 <div class="panel panel-default sombra_painel">
                     <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Compatibilidade Com Marcas e Modelos dos Veiculos</label>
+                        <label class="lbPanel">Compatibilidade Com Marcas e Modelos dos Veículos</label>
                     </div>
                     <div class="panel-body">
-                           <div class="row-fluid">
-                               <h4><label class="lbPanel">Categoria do Veiculo Compativel:</label></h4>
+                        <div class="row-fluid">
+                            <h4><label class="lbPanel">Categoria do Veículo Compatível:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_categoria" class="row">
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                               <h4><label class="lbPanel">Marca do Veiculo Compativel:</label></h4>
+                            <h4><label class="lbPanel">Marca do Veículo Compatível:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_marca" class="row">
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                             </div>
-                               <h4><label class="lbPanel">Modelo do Veiculo Compativel:</label></h4>
+                            <h4><label class="lbPanel">Modelo do Veículo Compatível:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_modelo" class="row">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                             </div>
-                               <h4><label class="lbPanel">Versão do Veiculo Compativel:</label></h4>
+                            <h4><label class="lbPanel">Versão do Veículo Compatível:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_versao" class="row">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                               <h4><label class="lbPanel">Ano do Veiculo Compativel:</label></h4>
+                            <h4><label class="lbPanel">Ano do Veículo Compatível:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_ano" class="row">
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                           </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default sombra_painel">
@@ -71,16 +71,16 @@
                     </div>
                     <div class="panel-body">
                         <div class="row-fluid">
-                               <div class="row">
-                                   <div class="col-sm-6">
-                                    <label for="peca" class="lbPanel">Digite o Nome da Peça:</label>
+                        	<div class="row">
+                                <div class="col-sm-6">
+                                    <label for="peca" class="lbPanel">Nome da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("peca"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
                                         <input id="peca" name="peca" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("peca") ?>" placeholder="Nome da Peça, Ex: Porta" />
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="fabricante" class="lbPanel">Digite o Nome do Fabricante/Marca:</label>
+                                    <label for="fabricante" class="lbPanel">Fabricante/Marca da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("fabricante"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-flag"></i></span>
                                         <input id="fabricante" name="fabricante" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("fabricante") ?>" placeholder="Nome do Fabricante/Marca, Ex: Original" />
@@ -89,14 +89,14 @@
                             </div>
                             <div class="row">
                                    <div class="col-sm-6">
-                                    <label for="serie" class="lbPanel">Digite o Numero de Serie da Peça:</label>
+                                    <label for="serie" class="lbPanel">Numero de Série da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("serie"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                         <input id="serie" name="serie" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("serie") ?>" placeholder="Numero de Serie da Peça" />
                                     </div>
                                 </div>
                                    <div class="col-sm-3">
-                                    <label for="preco" class="lbPanel">Digite Preço da Peça:</label>
+                                    <label for="preco" class="lbPanel">Preço da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("preco"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                                         <input id="preco" name="preco" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("preco") ?>" placeholder="Preço da Peça" />
@@ -111,14 +111,14 @@
                                             <?php View_Cadastrar::Mostrar_Estado_Uso(); ?>
                                         </select>
                                         <span class="glyphicon glyphicon-menu-down form-control-feedback"></span>
-                                       </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <label for="descricao" class="lbPanel">Digite a Descrição da Peça:</label>
+                                <label for="descricao" class="lbPanel">Descrição da Peça:</label>
                                 <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("descricao"); ?>">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                                    <textarea rows="3" id="descricao" name="descricao" class="form-control" placeholder="Descrição da Peça, detalhes e observações inportantes para tornar a peça mais facil de ser encontrada na pesquisa."><?php View_Cadastrar::Manter_Valor("descricao") ?></textarea>
+                                    <textarea rows="3" id="descricao" name="descricao" class="form-control" placeholder="Descrição da Peça, detalhes e observações importantes para tornar a peça mais fácil de ser encontrada na pesquisa."><?php View_Cadastrar::Manter_Valor("descricao") ?></textarea>
                                 </div>
                             </div>
                             <div class="row-fluid">
@@ -137,8 +137,8 @@
                     </div>
                     <div class="panel-body <?php View_Cadastrar::Incluir_Classe_Erros("imagem"); ?>">
                         <div id="drop_zone" class="row-fluid">
-                               <div class="col-md-3 col-sm-4 col-xs-12">
-                                   <div class="row-fluid">
+                            <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="row-fluid">
                                     <span id="adicionar_imagem" class="btn btn-primary btn-file btn-lg btnImagensPeca">
                                         <i class="glyphicon glyphicon-upload"></i> Adicionar Fotos
                                         <input id="imagens" value="" accept="image/*" multiple="multiple" type="file">
@@ -147,7 +147,7 @@
                                 <div class="row-fluid">
                                     <button id="remover_imagem" name="remover_imagem" onClick="limparCampoFile(123);" type="button" class="btn btn-danger btnImagensPeca"><i class="glyphicon glyphicon-trash"></i> Remover Fotos</button>
                                 </div>
-                               </div>
+                            </div>
                             <div class="col-md-9 col-sm-8 col-xs-12">
                                 <div class="ui medium bordered image imagemPeca">
                                     <div id="img1" class="ui dimmer"><div class="ui text loader">Carregando</div></div>
@@ -177,6 +177,7 @@
                 </div>
             </form>
         </div>
+        <div class="margem-inferior-medio"></div>
         <div id="mdl_msg" class="ui small basic modal">
             <i class="close icon"></i>
             <div id="msg_header" class="header">Deseja continuar?</div>

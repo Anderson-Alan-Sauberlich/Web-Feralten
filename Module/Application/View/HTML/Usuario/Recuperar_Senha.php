@@ -60,7 +60,7 @@
             <div class="column">
                 <h1 class="ui red huge dividing header">Recuperar E-Mail</h1>
                 <div class="ui secondary segment">
-                    <p>Esqueceu seu e-mail? Envie uma mensagem atravez da pagina Fale Conosco. O título do assunto deve ser “Esqueci meu e-mail”. Na mensagem, informe seu nome completo, telefone e CPF.</p>
+                    <p>Esqueceu seu e-mail? Envie uma mensagem através da pagina Fale Conosco. O título do assunto deve ser “Esqueci meu e-mail”. Na mensagem, informe seu nome completo, telefone e CPF.</p>
                 </div>
             </div>
         </div>
