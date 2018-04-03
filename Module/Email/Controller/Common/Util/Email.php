@@ -31,16 +31,16 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contato.feralten@gmail.com';
-                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('feralten@feralten.com', 'Feralten');
+                $mail->setFrom('contato@feralten.com', 'Contato Feralten');
                 $mail->addAddress($obj_contato_anunciante->get_obj_peca()->get_responsavel()->get_email());
                 $mail->addReplyTo($obj_contato_anunciante->get_email(), $obj_contato_anunciante->get_nome());
-                $mail->addCC('contato.feralten@gmail.com');
+                $mail->addCC('contato@feralten.com');
                 
                 $view_contato_anunciante = new View_Contato_Anunciante();
                 $view_contato_anunciante->set_obj_contato_anunciante($obj_contato_anunciante);
@@ -72,14 +72,14 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contato.feralten@gmail.com';
-                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('feralten@feralten.com', 'Feralten');
-                $mail->addAddress('contato.feralten@gmail.com', 'Feralten');
+                $mail->setFrom('contato@feralten.com', 'Contato Feralten');
+                $mail->addAddress('contato@feralten.com', 'Contato Feralten');
                 $mail->addReplyTo($obj_contato->get_email(), $obj_contato->get_nome());
                 
                 //Content
@@ -110,8 +110,8 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contato.feralten@gmail.com';
-                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 
@@ -119,7 +119,7 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->setFrom('feralten@feralten.com', 'Feralten');
                 $mail->addAddress($obj_usuario->get_email());
                 $mail->addReplyTo('feralten@feralten.com', 'Feralten');
-                $mail->addCC('contato.feralten@gmail.com');
+                $mail->addCC('contato@feralten.com');
                 
                 $view_boas_vindas = new View_Boas_Vindas();
                 $view_boas_vindas->set_obj_usuario($obj_usuario);
@@ -151,16 +151,16 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contato.feralten@gmail.com';
-                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('feralten@feralten.com', 'Feralten');
+                $mail->setFrom('suporte@feralten.com', 'Suporte Feralten');
                 $mail->addAddress($obj_recuperar_senha->get_obj_usuario()->get_email());
-                $mail->addReplyTo('feralten@feralten.com', 'Feralten');
-                $mail->addCC('contato.feralten@gmail.com');
+                $mail->addReplyTo('suporte@feralten.com', 'Suporte Feralten');
+                $mail->addCC('contato@feralten.com');
                 
                 $view_recuperar_senha = new View_Recuperar_Senha();
                 $view_recuperar_senha->set_obj_recuperar_senha($obj_recuperar_senha);
@@ -192,16 +192,16 @@ namespace Module\Email\Controller\Common\Util;
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'contato.feralten@gmail.com';
-                $mail->Password = 'Abar$ore%FJ#12';
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
                 
                 //Recipients
-                $mail->setFrom('feralten@feralten.com', 'Feralten');
+                $mail->setFrom('contato@feralten.com', 'Contato Feralten');
                 $mail->addAddress($obj_orcamento_peca->get_orcamento()->get_usuario()->get_email());
-                $mail->addReplyTo('feralten@feralten.com', 'Feralten');
-                $mail->addCC('contato.feralten@gmail.com');
+                $mail->addReplyTo('contato@feralten.com', 'Contato Feralten');
+                $mail->addCC('contato@feralten.com');
                 
                 $view_orcamento_peca = new View_Orcamento_Peca();
                 $view_orcamento_peca->set_obj_orcamento_peca($obj_orcamento_peca);
