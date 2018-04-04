@@ -1,4 +1,4 @@
-#Ignorar todas as Imagens que são cadastradas.
+#Ignorar todas as Imagens que são cadastradas
 public/imagens/**/*.jpg
 public/imagens/**/*.jpeg
 public/imagens/**/*.png
@@ -9,3 +9,6 @@ data/**/*.db
 data/entidade/**/*.db
 data/usuario/**/*.db
 data/cache/**/*.db
+
+#Ignorar os arquivos de log
+data/log/**/*.log

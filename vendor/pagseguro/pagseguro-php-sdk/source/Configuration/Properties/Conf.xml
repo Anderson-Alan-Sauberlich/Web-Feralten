@@ -24,7 +24,7 @@
     </credentials>
     <charset>UTF-8</charset>
     <log>
-        <active>false</active>
-        <location>/</location>
+        <active>true</active>
+        <location>../data/log/pagseguro.log</location>
     </log>
 </config>

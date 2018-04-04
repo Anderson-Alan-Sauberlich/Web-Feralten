@@ -32,7 +32,7 @@
         </div>
       	<div class="ui inverted section divider"></div>
       	<div class="ui very relaxed horizontal inverted small divided list">
-        	<div class="item">E-mail: contato@feralten.com.br</div>
+        	<div class="item"><h5 class="ui header">E-mail: contato@feralten.com.br</h5></div>
         	<div class="item">Fone: (47) 99285-3500</div>
       	</div>
     </div>
