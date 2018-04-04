@@ -189,11 +189,26 @@
 			</div>
         </div>
 	</section>
-    <div class="margem-superior-minimo"></div>
-    <div class="ui center aligned container">
-    	<h2 class="ui disabled header"><b>Em breve</b> disponível para Mobile:</h2>
-		<img src="/resources/img/googleplay-badge.png" class="ui centered small image" />
-	</div>
+    <div class="margem-superior-pouco"></div>
+	<div class="ui middle aligned equal width stackable celled grid">
+    	<div class="center aligned row">
+        	<div class="column">
+          		<h2 class="ui disabled header"><b>Em breve</b> disponível para Mobile:</h2>
+				<img src="/resources/img/googleplay-badge.png" class="ui centered small image" />
+        	</div>
+        	<div class="column">
+          		<div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.12';
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+            	<div class="fb-page" data-href="https://www.facebook.com/FeraltenOMundoDasPecasNaWeb/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/FeraltenOMundoDasPecasNaWeb/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/FeraltenOMundoDasPecasNaWeb/">Feralten</a></blockquote></div>
+        	</div>
+      	</div>
+    </div>
     <div class="margem-superior-minimo"></div>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
