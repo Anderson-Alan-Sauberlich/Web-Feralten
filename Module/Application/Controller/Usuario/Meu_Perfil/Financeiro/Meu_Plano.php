@@ -53,7 +53,15 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 if ($status != 0) {
-                    $view = new View_Meu_Plano($status, DAO_Plano::BuscarTodos(), Login_Session::get_entidade_plano());
+                    $view = new View_Meu_Plano($status);
+                    
+                    $planos = DAO_Plano::BuscarTodos();
+                    
+                    if (!empty($planos) AND $planos != false) {
+                        $view->set_planos($planos);
+                    }
+                    
+                    $view->set_plano_id(Login_Session::get_entidade_plano());
                     
                     $view->Executar();
                 }

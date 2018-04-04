@@ -21,7 +21,7 @@
                         <div onclick="bnt_plano(1);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 5</h1>
+                                    <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(1); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>
@@ -52,7 +52,7 @@
                         <div onclick="bnt_plano(2);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 10</h1>
+                                    <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(2); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>
@@ -83,7 +83,7 @@
                         <div onclick="bnt_plano(3);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 100</h1>
+                                    <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(3); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>
@@ -114,7 +114,7 @@
                         <div onclick="bnt_plano(4);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 1.000</h1>
+                                    <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(4); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>
@@ -145,7 +145,7 @@
                         <div onclick="bnt_plano(5);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 5.000</h1>
+                                    <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(5); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>
@@ -176,7 +176,7 @@
                         <div onclick="bnt_plano(6);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Até 10.000</h1>
+                                    <h1>Ilimitado</h1>
                                 </div>
                                 <div class="center aligned meta">
                                     <h3>Peças</h3>

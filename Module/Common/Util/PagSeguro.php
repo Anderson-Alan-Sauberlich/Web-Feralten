@@ -286,7 +286,7 @@ namespace Module\Common\Util;
             /**
              * @todo Change the receiver Email
              */
-            $creditCard->setReceiverEmail('andersonalansauberlich@gmail.com');
+            $creditCard->setReceiverEmail('pagseguro@feralten.com');
             
             // Set a reference code for this payment request. It is useful to identify this payment
             // in future notifications.
@@ -386,7 +386,7 @@ namespace Module\Common\Util;
             /**
              * @todo Change the receiver Email
              */
-            $boleto->setReceiverEmail('financeiro@feralten.com');
+            $boleto->setReceiverEmail('pagseguro@feralten.com');
             
             // Set the currency
             $boleto->setCurrency("BRL");
@@ -453,7 +453,7 @@ namespace Module\Common\Util;
             /**
              * @todo Change the receiver Email
              */
-            $onlineDebit->setReceiverEmail('financeiro@feralten.com');
+            $onlineDebit->setReceiverEmail('pagseguro@feralten.com');
             
             // Set a reference code for this payment request. It is useful to identify this payment
             // in future notifications.

@@ -97,7 +97,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         public static function RetornarPecaPreco() : ?string
         {
             if (self::$obj_peca instanceof OBJ_Peca) {
-                return self::$obj_peca->get_preco();
+                return number_format(self::$obj_peca->get_preco(), 2, ',', '.');
             } else {
                 return null;
             }

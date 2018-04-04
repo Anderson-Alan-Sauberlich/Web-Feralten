@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <config>
-    <environment>sandbox</environment><!-- sandbox or production -->
+    <environment>production</environment><!-- sandbox or production -->
     <credentials>
         <account>
-            <email>andersonalansauberlich@gmail.com</email>
+            <email>pagseguro@feralten.com</email>
             <production>
-                <token>your_production_token</token>
+                <token>2ABEA910704444A7B7337F8AAA054D50</token>
             </production>
             <sandbox>
                 <token>0BDADF387CE54A61B62596F54A500380</token>
@@ -13,8 +13,8 @@
         </account>
         <application>
             <production>
-                <appId>your_production_application_id</appId>
-                <appKey>your_production_application_key</appKey>
+                <appId>web-feralten</appId>
+                <appKey>759BAB1181814C1444624F923DD111E7</appKey>
             </production>
             <sandbox>
                 <appId>app0656069688</appId>

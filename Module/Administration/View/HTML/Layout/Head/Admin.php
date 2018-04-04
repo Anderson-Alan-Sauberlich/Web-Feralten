@@ -1,10 +1,10 @@
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE = edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
-<link rel="stylesheet" type="text/css" href="/resources/packages/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/packages/semantic-ui/semantic-ui-2.3.1/semantic.min.css"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE = edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="/resources/packages/bootstrap/bootstrap-3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+<link rel="stylesheet" type="text/css" href="/resources/packages/semantic-ui/semantic-ui-2.3.1/semantic.min.css">
 <script type="text/javascript" src="/resources/packages/jquery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/resources/packages/bootstrap/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/packages/semantic-ui/semantic-ui-2.3.1/semantic.min.js"></script>

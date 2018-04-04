@@ -76,7 +76,7 @@ namespace Module\Application\View\SRC\Pecas;
             if (empty(self::$obj_peca->get_preco()) OR self::$obj_peca->get_preco() == false) {
                 echo 'a negociar';
             } else {
-                echo self::$obj_peca->get_preco();
+                echo number_format(self::$obj_peca->get_preco(), 2, ',', '.');
             }
         }
         
