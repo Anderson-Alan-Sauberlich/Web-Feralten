@@ -24,12 +24,12 @@
                                     <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(1); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -55,12 +55,12 @@
                                     <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(2); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos Gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -86,12 +86,12 @@
                                     <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(3); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos Gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -117,12 +117,12 @@
                                     <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(4); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos Gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -148,12 +148,12 @@
                                     <h1>Até <?php View_Meu_Plano::Mostrar_Limite_Pecas(5); ?></h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos Gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -176,15 +176,15 @@
                         <div onclick="bnt_plano(6);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
-                                    <h1>Ilimitado</h1>
+                                    <h1>Sem limites</h1>
                                 </div>
                                 <div class="center aligned meta">
-                                    <h3>Peças</h3>
+                                    <h3>Peças<br>Simultaneamente</h3>
                                 </div>
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <p>Orçamentos Gratuitos</p>
+                                    <b>Com orçamentos gratuitos</b>
                                 </div>
                             </div>
                             <div class="center aligned content">
