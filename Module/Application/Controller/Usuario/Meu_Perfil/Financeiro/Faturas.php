@@ -53,11 +53,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         private $nome;
         
         /**
-         * CPF do usuario dono do cartão de credito.
+         * CPF ou CNPJ do usuario dono do cartão de credito.
          * 
-         * @var string $cpf
+         * @var string $cpf_cnpj
          */
-        private $cpf;
+        private $cpf_cnpj;
         
         /**
          * Data de nascimento do usuario dono do cartão de credito.
@@ -173,16 +173,18 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
-         * Seta CPF do usuario dono do cartão de credito.
+         * Seta CPF ou CNPJ do usuario dono do cartão de credito.
          * 
-         * @param string $cpf
+         * @param string $cpf_cnpj
          */
-        public function set_cpf($cpf) : void
+        public function set_cpf_cnpj($cpf_cnpj) : void
         {
             try {
-                $this->cpf = Validador::Fatura()::validar_cpf($cpf);
+                //pagseguro só aceita pagamento com cpf.
+                //$this->cpf_cnpj = Validador::Fatura()::validar_cpf_cnpj($cpf_cnpj);
+                $this->cpf_cnpj = Validador::Fatura()::validar_cpf($cpf_cnpj);
             } catch (Exception $e) {
-                $this->campos['cpf'] = 'erro';
+                $this->campos['cpf_cnpj'] = 'erro';
                 $this->erros[] = $e->getMessage();
             }
         }
@@ -280,7 +282,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 $pagseguro->set_token($this->token);
                 $pagseguro->set_hash($this->hash);
                 $pagseguro->set_nome($this->nome);
-                $pagseguro->set_cpf_cnpj($this->cpf);
+                $pagseguro->set_cpf_cnpj($this->cpf_cnpj);
                 $pagseguro->set_birthdate($this->nascimento);
                 $pagseguro->set_ip($this->ip);
                 

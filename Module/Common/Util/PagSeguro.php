@@ -317,7 +317,11 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            $creditCard->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            if (strlen($this->cpf_cnpj) === 11) {
+                $creditCard->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            } else if (strlen($this->cpf_cnpj) === 14) {
+                $creditCard->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            }
             
             $creditCard->setSender()->setHash($this->hash);
             $creditCard->setSender()->setIp($this->ip);
@@ -353,7 +357,11 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            $creditCard->setHolder()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            if (strlen($this->cpf_cnpj) === 11) {
+                $creditCard->setHolder()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            } else if (strlen($this->cpf_cnpj) === 14) {
+                $creditCard->setHolder()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            }
             
             // Set the Payment Mode for this payment request
             $creditCard->setMode('DEFAULT');

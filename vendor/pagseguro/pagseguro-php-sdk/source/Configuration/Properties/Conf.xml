@@ -8,7 +8,7 @@
                 <token>2ABEA910704444A7B7337F8AAA054D50</token>
             </production>
             <sandbox>
-                <token>0BDADF387CE54A61B62596F54A500380</token>
+                <token>50FB27BB7EBE465AADE1543FDC7ED045</token>
             </sandbox>
         </account>
         <application>
@@ -17,8 +17,8 @@
                 <appKey>759BAB1181814C1444624F923DD111E7</appKey>
             </production>
             <sandbox>
-                <appId>app0656069688</appId>
-                <appKey>app0656069688</appKey>
+                <appId>app2560110124</appId>
+                <appKey>4D25B76A2E2E9ACFF4D6FFB5637262DD</appKey>
             </sandbox>
         </application>
     </credentials>

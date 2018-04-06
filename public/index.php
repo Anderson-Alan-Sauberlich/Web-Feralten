@@ -829,7 +829,7 @@
                             $faturas->set_hash(isset($_POST['hash']) ? $_POST['hash'] : null);
                             $faturas->set_token(isset($_POST['token']) ? $_POST['token'] : null);
                             $faturas->set_ip(isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
-                            $faturas->set_cpf(isset($_POST['cpf']) ? $_POST['cpf'] : null);
+                            $faturas->set_cpf_cnpj(isset($_POST['cpf_cnpj']) ? $_POST['cpf_cnpj'] : null);
                             $faturas->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
                             $faturas->set_nascimento(isset($_POST['nascimento']) ? $_POST['nascimento'] : null);
                             

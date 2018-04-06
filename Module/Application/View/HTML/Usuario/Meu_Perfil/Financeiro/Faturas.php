@@ -91,44 +91,43 @@
                                                         		<label for="nome">Nome como está no cartão</label>
                                                         		<input id="nome" name="nome" placeholder="Exatamente como está no cartão" type="text">
                                                         	</div>
-                                                        	<div id="div_codigo" class="ten wide required field">
-                                                        		<label for="codigo">Código de Segurança</label>
-                                                        		<input id="codigo" name="codigo" placeholder="No verso do cartão, de 3 a 4 digitos" type="text">
-                                                        	</div>
-                                                        	<div id="div_validade" class="ten wide required field">
-                                                            	<label>Validade</label>
-                                                            	<div class="two fields">
-                                                                	<div class="field">
-                                                                		<select id="validade_mes" name="validade_mes" class="ui fluid scrolling search selection dropdown">
-                                                                			<option value="0">Mês</option>
-                                                                			<option value="01">01</option>
-                                                                			<option value="02">02</option>
-                                                                			<option value="03">03</option>
-                                                                			<option value="04">04</option>
-                                                                			<option value="05">05</option>
-                															<option value="06">06</option>
-                															<option value="07">07</option>
-                															<option value="08">08</option>
-                															<option value="09">09</option>
-                															<option value="10">10</option>
-                															<option value="11">11</option>
-                															<option value="12">12</option>
-                                                                		</select>
-                                                                	</div>
-                                                                	<div class="field">
-                                                                		<select id="validade_ano" name="validade_ano" class="ui fluid scrolling search selection dropdown">
-                                                                			<option value="0">Ano</option>
-                                                                			<?php View_Faturas::Carregar_Ano_Validade(); ?>
-                                                                		</select>
-                                                                	</div>
+                                                            <div class="three fields">
+                                                            	<div id="div_validade_mes" class="required field">
+                                                            		<label for="validade_mes">Validade Mês</label>
+                                                            		<select id="validade_mes" name="validade_mes" class="ui fluid scrolling search selection dropdown">
+                                                            			<option value="0">Mês</option>
+                                                            			<option value="01">01</option>
+                                                            			<option value="02">02</option>
+                                                            			<option value="03">03</option>
+                                                            			<option value="04">04</option>
+                                                            			<option value="05">05</option>
+                    													<option value="06">06</option>
+                    													<option value="07">07</option>
+                    													<option value="08">08</option>
+                    													<option value="09">09</option>
+                    													<option value="10">10</option>
+                    													<option value="11">11</option>
+                    													<option value="12">12</option>
+                                                            		</select>
                                                             	</div>
+                                                            	<div id="div_validade_ano" class="required field">
+                                                            		<label for="validade_ano">Validade Ano</label>
+                                                            		<select id="validade_ano" name="validade_ano" class="ui fluid scrolling search selection dropdown">
+                                                            			<option value="0">Ano</option>
+                                                            			<?php View_Faturas::Carregar_Ano_Validade(); ?>
+                                                            		</select>
+                                                            	</div>
+                                                            	<div id="div_cvv" class="required field">
+                                                        			<label for="cvv">CVV</label>
+                                                        			<input id="cvv" name="cvv" placeholder="No verso do cartão, de 3 a 4 digitos" type="text">
+                                                        		</div>
                                                             </div>
-                                                            <div id="div_cpf" class="ten wide required field">
-                                                        		<label for="cpf">CPF</label>
-                                                        		<input id="cpf" name="cpf" placeholder="Digite apenas os numeros" type="text">
+                                                            <div id="div_cpf_cnpj" class="ten wide required field">
+                                                        		<label for="cpf_cnpj">CPF<!-- ou CNPJ--></label>
+                                                        		<input id="cpf_cnpj" name="cpf_cnpj" placeholder="Digite apenas os numeros" type="text">
                                                         	</div>
                                                         	<div id="div_nascimento" class="required field">
-                                                        		<label>Data de nascimento</label>
+                                                        		<label for="nascimento_dia">Data de nascimento</label>
                                                         		<div class="three fields">
                                                         			<div class="field">
                                                                 		<select id="nascimento_dia" name="nascimento_dia" class="ui fluid scrolling search selection dropdown">

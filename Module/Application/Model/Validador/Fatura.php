@@ -124,6 +124,33 @@ namespace Module\Application\Model\Validador;
             }
         }
         
+        public static function validar_cpf_cnpj($cpf_cnpj = null) : string
+        {
+            if (empty($cpf_cnpj)) {
+                throw new Exception('Informe o CPF ou CNPJ do dono do cartão');
+            } else {
+                $cpf_cnpj = trim($cpf_cnpj);
+                $cpf_cnpj = preg_replace('/\s+/', " ", $cpf_cnpj);
+                $cpf_cnpj = preg_replace('/[^a-zA-Z0-9]/', "", $cpf_cnpj);
+                
+                if (filter_var($cpf_cnpj, FILTER_VALIDATE_FLOAT) !== false) {
+                    if (strlen($cpf_cnpj) === 11 OR strlen($cpf_cnpj) === 14) {
+                        $class_cpf_cnpj = new CPF_CNPJ($cpf_cnpj);
+                        
+                        if ($class_cpf_cnpj->valida()) {
+                            return $cpf_cnpj;
+                        } else {
+                            throw new Exception('CPF/CNPJ Inválido');
+                        }
+                    } else {
+                        throw new Exception('CPF/CNPJ, Deve Conter Exatos 11 ou 14 Caracteres');
+                    }
+                } else {
+                    throw new Exception('CPF/CNPJ, Digite Apenas Números');
+                }
+            }
+        }
+        
         public static function validar_nascimento($nascimento = null) : string
         {
             if (!empty($nascimento)) {

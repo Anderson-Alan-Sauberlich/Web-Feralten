@@ -1,9 +1,6 @@
 $('#accordion_fatura_fechada').accordion({animateChildren: false});
 $('#accordion_fatura_aberta').accordion();
 $('#accordion_fatura_fechada .menu .item').tab();
-$('#cpf').mask('000.000.000-00');
-$('#numero').mask('0000 0000 0000 0000');
-$('#codigo').mask('0000');
 $('#validade_mes').dropdown({message: {noResults: "Nenhum Resultado..."}});
 $('#validade_ano').dropdown({message: {noResults: "Nenhum Resultado..."}});
 $('#nascimento_dia').dropdown({message: {noResults: "Nenhum Resultado..."}});
@@ -12,22 +9,36 @@ $('#nascimento_ano').dropdown({message: {noResults: "Nenhum Resultado..."}});
 $('#credito_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
+SetarMascaras();
+function SetarMascaras() {
+	var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length > 11 ? '00.000.000/0000-00' : '000.000.000-00###';
+		},
+		options = {onKeyPress: function(val, e, field, options) {
+		        field.mask(maskBehavior.apply({}, arguments), options);
+		    }
+		};
+
+	$('#cpf_cnpj').mask(maskBehavior, options);
+	$('#numero').mask('0000 0000 0000 0000');
+	$('#cvv').mask('0000');
+}
 function PagarComCredito() {
 	$('#form_credito').addClass('loading');
 	var $hash = PagSeguroDirectPayment.getSenderHash();
 	var $numero = $('#numero').val().replace(/[^\d]+/g,'');
 	var $brand = $('#brand').val();
-	var $codigo = $('#codigo').val();
+	var $cvv = $('#cvv').val();
 	var $validade_mes = $('#validade_mes').val();
 	var $validade_ano = $('#validade_ano').val();
 	var $nome = $('#nome').val();
-	var $cpf = $('#cpf').val().replace(/[^\d]+/g,'');
+	var $cpf_cnpj = $('#cpf_cnpj').val().replace(/[^\d]+/g,'');
 	var $nascimento = $('#nascimento_dia').val()+'/'+$('#nascimento_mes').val()+'/'+$('#nascimento_ano').val();
 	
 	var $param = {
 		cardNumber: $numero,
 		brand: $brand,
-		cvv: $codigo,
+		cvv: $cvv,
 		expirationMonth: $validade_mes,
 		expirationYear: $validade_ano,
 		success: function(response) {
@@ -40,7 +51,7 @@ function PagarComCredito() {
 					token : response.card.token,
 					hash :  $hash,
 					nome : $nome,
-					cpf : $cpf,
+					cpf_cnpj : $cpf_cnpj,
 					nascimento : $nascimento
 				}
 			}).done(function(data) {
@@ -62,14 +73,15 @@ function PagarComCredito() {
 					$('#credito_msg').removeClass('hidden');
 					if ($data.campos.token == 'erro') {
 						$('#div_numero').addClass('error');
-						$('#div_codigo').addClass('error');
-						$('#div_validade').addClass('error');
+						$('#div_cvv').addClass('error');
+						$('#div_validade_mes').addClass('error');
+						$('#div_validade_ano').addClass('error');
 					}
 					if ($data.campos.nome == 'erro') {
 						$('#div_nome').addClass('error');
 					}
-					if ($data.campos.cpf == 'erro') {
-						$('#div_cpf').addClass('error');
+					if ($data.campos.cpf_cnpj == 'erro') {
+						$('#div_cpf_cnpj').addClass('error');
 					}
 					if ($data.campos.nascimento == 'erro') {
 						$('#div_nascimento').addClass('error');
@@ -87,7 +99,7 @@ function PagarComCredito() {
 			$('#credito_msg').removeClass('hidden');
 			
 			$('#div_numero').addClass('error');
-			$('#div_codigo').addClass('error');
+			$('#div_cvv').addClass('error');
 			$('#div_validade').addClass('error');
 		},
 		complete: function(response) {
