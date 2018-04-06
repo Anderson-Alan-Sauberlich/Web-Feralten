@@ -384,7 +384,7 @@ namespace Module\Common\Util;
          * 
          * @return bool
          */
-        public function pagarBoleto() : bool
+        public function pagarBoleto() : ?string
         {
             $boleto = new Boleto();
             
@@ -425,7 +425,11 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            $boleto->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            if (strlen($this->cpf_cnpj) === 11) {
+                $boleto->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            } else if (strlen($this->cpf_cnpj) === 14) {
+                $boleto->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            }
             
             $boleto->setSender()->setHash($this->hash);
             $boleto->setSender()->setIp($this->ip);
@@ -437,9 +441,9 @@ namespace Module\Common\Util;
                 $result = $boleto->register(Configure::getAccountCredentials());
                 
                 // You can use methods like getCode() to get the transaction code and getPaymentLink() for the Payment's URL.
-                return true;
+                return $result->getPaymentLink();
             } catch (Exception $e) {
-                return false;
+                return null;
             }
         }
         
@@ -492,7 +496,11 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            $onlineDebit->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            if (strlen($this->cpf_cnpj) === 11) {
+                $onlineDebit->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
+            } else if (strlen($this->cpf_cnpj) === 14) {
+                $onlineDebit->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            }
             
             $onlineDebit->setSender()->setHash($this->hash);
             $onlineDebit->setSender()->setIp($this->ip);

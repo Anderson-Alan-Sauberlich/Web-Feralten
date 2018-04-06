@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config>
-    <environment>production</environment><!-- sandbox or production -->
+    <environment>sandbox</environment><!-- sandbox or production -->
     <credentials>
         <account>
             <email>pagseguro@feralten.com</email>

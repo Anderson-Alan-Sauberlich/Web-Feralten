@@ -69,20 +69,21 @@
                                         <div class="ui pointing secondary three item menu" role="tablist">
                                             <a class="active red item" data-tab="credito" role="tab">Cartão de Crédito</a>
                                             <a class="red item" data-tab="debito" role="tab">Débito Online</a>
-                                            <a class="red item" data-tab="boleto" role="tab">Boleto Bancario</a>
+                                            <a class="red item" data-tab="boleto" role="tab">Boleto Bancário</a>
                                         </div>
                                         <div id="credito" class="ui bottom attached active tab" data-tab="credito" role="tabpanel">
                                             <div class="margem-inferior-minimo"></div>
                                             <div class="ui stackable two column centered grid">
                                                 <div class="column">
+                                                	<div id="credito_msg" class="ui hidden message">
+                                                       	<i class="close icon"></i>
+                                                       	<div id="credito_msg_header" class="header"></div>
+                                                       	<ul id="credito_msg_list" class="list"></ul>
+                                                    </div>
                                                 	<div class="ui secondary segment">
                                                 		<input type="hidden" id="brand" name="brand" value="" />
                                                         <div id="form_credito" class="ui form">
-                                                        	<div id="credito_msg" class="ui hidden message">
-                                                            	<i class="close icon"></i>
-                                                            	<div id="credito_msg_header" class="header"></div>
-                                                            	<ul id="credito_msg_list" class="list"></ul>
-                                                            </div>
+                                                        	
                                                         	<div id="div_numero" class="required field">
                                                         		<label for="numero">Número do cartão</label>
                                                         		<input id="numero" name="numero" placeholder="(ex.: 0000 0000 0000 0000)" type="text">
@@ -210,7 +211,12 @@
                                         	<div class="margem-superior-pouco"></div>
                                         	<div class="ui stackable three column centered grid">
                                                 <div class="column">
-                                                	<button class="ui blue big fluid button">Gerar Boleto</button>
+                                                	<div id="boleto_msg" class="ui hidden message">
+                                                       	<i class="close icon"></i>
+                                                       	<div id="boleto_msg_header" class="header"></div>
+                                                       	<ul id="boleto_msg_list" class="list"></ul>
+                                                    </div>
+                                                	<button id="gerar_boleto" onclick="PagarComBoleto()" class="ui blue big fluid button">Gerar Boleto</button>
                                                 </div>
                                             </div>
                                             <div class="margem-inferior-pouco"></div>
@@ -218,9 +224,6 @@
                                     <?php } else { ?>
                                     	<h3 class="ui green header">
                                     		<?php View_Faturas::Mostrar_Status('fechada'); ?>
-                                    		<div class="sub header">
-                                    			Dados de pagamentos recebidos com sucesso! Em breve o pagamento será confirmado.
-                                    		</div>
                                     	</h3>
                                     <?php } ?>
                                 <?php } else { ?>
@@ -291,7 +294,7 @@
     <footer>
     	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
     	<script type="text/javascript" src="/application/js/usuario/meu_perfil/financeiro/faturas.js"></script>
-    	<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    	<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     	<script type="text/javascript">PagSeguroDirectPayment.setSessionId('<?= View_Faturas::RetornarPagSeguroSessaoId(); ?>');</script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>

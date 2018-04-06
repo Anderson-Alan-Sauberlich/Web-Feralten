@@ -49,7 +49,7 @@ function PagarComCredito() {
 				async: false,
 				data: { 
 					token : response.card.token,
-					hash :  $hash,
+					hash : $hash,
 					nome : $nome,
 					cpf_cnpj : $cpf_cnpj,
 					nascimento : $nascimento
@@ -63,7 +63,7 @@ function PagarComCredito() {
 					$('#credito_msg_list').html($data.sucessos);
 					$('#credito_msg').addClass('visible');
 					$('#credito_msg').removeClass('hidden');
-					window.location.replace("/usuario/meu-perfil/financeiro/faturas/");
+					window.location.replace('/usuario/meu-perfil/financeiro/faturas/');
 				} else if ($data.erros.length > 0) {
 					$('#credito_msg').addClass('error');
 					$('#credito_msg').removeClass('success');
@@ -128,4 +128,36 @@ function retornaBrandCard() {
 	        
 	    }
 	});
+}
+function PagarComBoleto() {
+	$('#gerar_boleto').addClass('loading');
+	var $hash = PagSeguroDirectPayment.getSenderHash();
+	$.ajax({
+		method: 'POST',
+		url: '/usuario/meu-perfil/financeiro/faturas/pagseguro/boleto/',
+		async: false,
+		data: { 
+			hash : $hash
+		}
+	}).done(function(data) {
+		var $data = JSON.parse(data);
+		if ($data.sucessos.length > 0) {
+			$('#boleto_msg').removeClass('error');
+			$('#boleto_msg').addClass('success');
+			$('#boleto_msg_header').html('Sucesso! :)');
+			$('#boleto_msg_list').html($data.sucessos);
+			$('#boleto_msg').addClass('visible');
+			$('#boleto_msg').removeClass('hidden');
+			window.open($data.link_boleto, '_blank');
+			window.location.replace('/usuario/meu-perfil/financeiro/faturas/');
+		} else if ($data.erros.length > 0) {
+			$('#boleto_msg').addClass('error');
+			$('#boleto_msg').removeClass('success');
+			$('#boleto_msg_header').html('Ops! Algo deu errado! :(');
+			$('#boleto_msg_list').html($data.erros);
+			$('#boleto_msg').addClass('visible');
+			$('#boleto_msg').removeClass('hidden');
+		}
+	});
+	$('#gerar_boleto').removeClass('loading');
 }

@@ -836,6 +836,15 @@
                             $faturas->PagarPagSeguroCredito();
                         });
                         
+                        $app->post('/boleto[/]', function(Request $request, Response $response, $args) use ($app) {
+                            $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
+                            
+                            $faturas->set_hash(isset($_POST['hash']) ? $_POST['hash'] : null);
+                            $faturas->set_ip(isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null);
+                            
+                            $faturas->PagarPagSeguroBoleto();
+                        });
+                        
                         $app->post('/resposta[/]', function(Request $request, Response $response, $args) use ($app) {
                             $faturas = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Faturas();
                             

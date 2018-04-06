@@ -5,10 +5,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Model\DAO\Fatura as DAO_Fatura;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
+    use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\DAO\Endereco as DAO_Endereco;
     use Module\Application\Model\DAO\Usuario as DAO_Usuario;
     use Module\Application\Model\DAO\Transacao as DAO_Transacao;
     use Module\Application\Model\OBJ\Endereco as OBJ_Endereco;
+    use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
     use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
     use Module\Application\Model\OBJ\Transacao as OBJ_Transacao;
     use Module\Application\Model\Common\Util\Login_Session;
@@ -180,7 +182,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         public function set_cpf_cnpj($cpf_cnpj) : void
         {
             try {
-                //pagseguro só aceita pagamento com cpf.
+                //pagseguro por enquanto só aceita pagamento com cpf.
                 //$this->cpf_cnpj = Validador::Fatura()::validar_cpf_cnpj($cpf_cnpj);
                 $this->cpf_cnpj = Validador::Fatura()::validar_cpf($cpf_cnpj);
             } catch (Exception $e) {
@@ -312,9 +314,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     $pagseguro->set_fone($usuario->get_fone());
                 }
                 
-                $pagseguro->pagarCredito();
-                GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
-                $this->sucessos[] = 'Dados de pagamentos recebidos com sucesso! Em breve o pagamento será confirmado.';
+                if ($pagseguro->pagarCredito()) {
+                    GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
+                    $this->sucessos[] = 'Dados de pagamentos recebidos com sucesso! Em breve o pagamento será confirmado.';
+                } else {
+                    $this->erros[] = 'Erro ao tentar enviar solicitação de pagamento';
+                }
             }
             
             $retorno['erros'] = View_Faturas::CriarListagem($this->erros);
@@ -341,11 +346,61 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
          */
         public function PagarPagSeguroBoleto() : void
         {
+            $link_boleto = '';
+            
             if (empty($this->erros)) {
                 $pagseguro = new PagSeguro();
                 
-                $pagseguro->pagarBoleto();
+                $pagseguro->set_hash($this->hash);
+                $pagseguro->set_ip($this->ip);
+                
+                $entidade = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
+                if ($entidade instanceof OBJ_Entidade) {
+                    $pagseguro->set_cpf_cnpj($entidade->get_cpf_cnpj());
+                }
+                
+                $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 16);
+                if (empty($fatura_fechada)) {
+                    $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 32);
+                    
+                    if (empty($fatura_fechada)) {
+                        $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
+                    }
+                }
+                
+                if (!empty($fatura_fechada)) {
+                    $pagseguro->set_reference($fatura_fechada->get_id());
+                    $pagseguro->set_total($fatura_fechada->get_valor_total());
+                    
+                    $fatura_servicos_fechada = DAO_Fatura_Servico::BuscarPorCOD($fatura_fechada->get_id());
+                    
+                    if (!empty($fatura_servicos_fechada) AND $fatura_servicos_fechada != false) {
+                        $pagseguro->set_servicos($fatura_servicos_fechada);
+                    }
+                }
+                
+                $usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
+                if ($usuario instanceof OBJ_Usuario) {
+                    $pagseguro->set_nome($usuario->get_nome().' '.$usuario->get_sobrenome());
+                    $pagseguro->set_email($usuario->get_email());
+                    $pagseguro->set_fone($usuario->get_fone());
+                }
+                
+                $link_boleto = $pagseguro->pagarBoleto();
+                if (!empty($link_boleto)) {
+                    GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
+                    $this->sucessos[] = 'Boleto gerado com sucesso! o pagamento será confirmado em até 1 dia após o pagamento.';
+                } else {
+                    $this->erros[] = 'Erro ao tentar gerar solicitação de pagamento';
+                }
             }
+            
+            $retorno['erros'] = View_Faturas::CriarListagem($this->erros);
+            $retorno['sucessos'] = View_Faturas::CriarListagem($this->sucessos);
+            $retorno['campos'] = $this->campos;
+            $retorno['link_boleto'] = $link_boleto;
+            
+            echo json_encode($retorno);
         }
         
         /**
