@@ -21,7 +21,7 @@
     </div>
     <div id="div_mensagem" class="field">
         <label>Mensagem</label>
-        <textarea rows="4" id="mensagem" name="mensagem" placeholder="Mensagem">Olá, tenho interesse nesta peça que vi no feralten.com.br e gostaria de receber mais informações.</textarea>
+        <textarea rows="4" id="mensagem" name="mensagem" placeholder="Mensagem">Olá, tenho interesse nesta peça, gostaria de receber mais informações...</textarea>
     </div>
     <div id="btn_submit" class="ui button fluid inverted red" onclick="Submit(<?php View_Contato_Anunciante::Mostrar_Peca_Id(); ?>);">Enviar ao Anunciante</div>
 </form>

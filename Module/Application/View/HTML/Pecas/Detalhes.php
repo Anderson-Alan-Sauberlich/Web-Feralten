@@ -48,13 +48,13 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -77,13 +77,13 @@
                                 </ol>
                                 <div class="carousel-inner" role="listbox">
                                     <div id="item_indice0" class="item active">
-                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                        <img src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice1" class="item">
-                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                        <img src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                                     </div>
                                     <div id="item_indice2" class="item">
-                                        <img width="800" height="600" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                        <img src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '800x600'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                                     </div>
                                 </div>
                                 <a class="left carousel-control" href="#carousel-modal" role="button" data-slide="prev">
