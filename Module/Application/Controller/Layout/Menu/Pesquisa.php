@@ -363,7 +363,7 @@ namespace Module\Application\Controller\Layout\Menu;
             $obj_modelo_pativel = new OBJ_Modelo_Pativel();
             
             $obj_modelo = new OBJ_Modelo();
-            $obj_modelo->get_id($this->modelo);
+            $obj_modelo->set_id($this->modelo);
             
             $obj_modelo_pativel->set_obj_modelo($obj_modelo);
             $obj_modelo_pativel->set_ano_de($this->ano_de);

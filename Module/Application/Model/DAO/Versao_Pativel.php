@@ -325,7 +325,7 @@ namespace Module\Application\Model\DAO;
             }
             
             try {
-                $sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade
+                $sql = "SELECT peca_id, peca_ent_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie
                 FROM vw_versao_peca $pesquisa LIMIT :inicio, :limite";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
