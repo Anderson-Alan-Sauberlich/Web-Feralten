@@ -294,7 +294,7 @@
     <footer>
     	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
     	<script type="text/javascript" src="/application/js/usuario/meu_perfil/financeiro/faturas.js"></script>
-    	<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    	<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
     	<script type="text/javascript">PagSeguroDirectPayment.setSessionId('<?= View_Faturas::RetornarPagSeguroSessaoId(); ?>');</script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
