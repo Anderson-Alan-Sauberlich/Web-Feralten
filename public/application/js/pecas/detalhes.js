@@ -1,4 +1,7 @@
 $('.carousel').carousel({interval: false});
+$('#msg_cnt_anc').on('click', function() {
+	$(this).closest('.message').transition('fade');
+});
 function abrirModal($numero) {
 	if ($numero == 1) {
 		$('#ol_indice0').removeClass('active');

@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div class="row">
-                            <div class="ui three stackable doubling link raised cards" id="div_pecas">
+                            <div class="ui three stackable doubling raised cards" id="div_pecas">
                                 <?php View_Visualizar::Mostrar_Cards_Pecas(); ?>
                             </div>
                         </div>

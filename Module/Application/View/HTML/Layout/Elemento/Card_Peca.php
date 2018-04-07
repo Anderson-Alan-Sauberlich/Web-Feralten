@@ -1,12 +1,12 @@
 <?php use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca ?>
 <div class="ui card">
-    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="content">
-        <div class="meta"><?= View_Card_Peca::RetornarPecaNome(); ?></div>
+    <div class="extra content">
+        <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/"><?= View_Card_Peca::RetornarPecaNome(); ?></a>
+    </div>
+    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui bordered image">
+        <img class="ui <?= View_Card_Peca::RetonrarStatusPecaImagem(); ?> image" onerror="this.src='/resources/img/imagem_indisponivel.png'" src="<?= View_Card_Peca::RetornarPecaImagem(); ?>">
     </a>
-    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui medium bordered image">
-        <img width="200" height="150" class="ui <?= View_Card_Peca::RetonrarStatusPecaImagem(); ?> image" onerror="this.src='/resources/img/imagem_indisponivel.png'" src="<?= View_Card_Peca::RetornarPecaImagem(); ?>">
-    </a>
-    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="content">
+    <div class="content">
         <?php if (View_Card_Peca::VerificarPecaPreco() AND View_Card_Peca::VerificaPecaEstadoUso()) { ?>
             <div class="right floated header">R$: <?= View_Card_Peca::RetornarPecaPreco(); ?></div>
             <div class="meta">
@@ -25,15 +25,15 @@
         <?php if (View_Card_Peca::VerificaPecaFabricante()) { ?>
             <div class="description"><?= View_Card_Peca::RetornarPecaFabricante(); ?></div>
         <?php } ?>
-    </a>
-    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="extra content">
+    </div>
+    <div class="extra content">
         <span class="right floated"><?= View_Card_Peca::RetornarPecaData(); ?></span>
-    </a>
+    </div>
     <?php if (View_Card_Peca::VerificarUsuarioAutenticado()) { ?>
         <div class="extra content">
             <div class="ui two buttons">
                 <a id="atualizar" href="/usuario/meu-perfil/pecas/atualizar/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui inverted green button">Atualizar</a>
-                <a id="opcoes" onclick="Mostrar_Modal(<?= View_Card_Peca::RetornarPecaID(); ?>);" class="ui inverted red button">Opções</a>
+                <div id="opcoes" onclick="Mostrar_Modal(<?= View_Card_Peca::RetornarPecaID(); ?>);" class="ui inverted red button">Opções</div>
             </div>
         </div>
         <div id="modal_<?= View_Card_Peca::RetornarPecaID(); ?>" class="ui tiny modal">

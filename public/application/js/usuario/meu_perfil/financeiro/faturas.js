@@ -9,6 +9,9 @@ $('#nascimento_ano').dropdown({message: {noResults: "Nenhum Resultado..."}});
 $('#credito_msg').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
+$('#boleto_msg').on('click', function() {
+	$(this).closest('.message').transition('fade');
+});
 SetarMascaras();
 function SetarMascaras() {
 	var maskBehavior = function (val) {

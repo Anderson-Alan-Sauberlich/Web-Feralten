@@ -10,26 +10,33 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-        <div class="ui doubling stackable segment grid">
-            <div class="sixteen wide column">
-                <h1><?php View_Detalhes::Mostrar_Nome(); ?></h1>
-            </div>
-            <div class="sixteen wide column">
-                <h3>Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
-            </div>
-            <div class="five wide column">
-                <h3>Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
-            </div>
-            <div class="five wide column">
-                <h3>Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
-            </div>
-            <div class="five wide column">
-                <h3>Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
-            </div>
-            <div class="sixteen wide column">
-                <h4>Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
+    	<div class="ui secondary segment">
+            <div class="ui doubling stackable grid">
+                <div class="sixteen wide column">
+                    <h1 class="ui huge red header"><?php View_Detalhes::Mostrar_Nome(); ?></h1>
+                </div>
+                <div class="sixteen wide column">
+                    <div class="ui doubling stackable two column grid">
+                        <div class="column">
+                    		<h3 class="ui grey block header">Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
+                		</div>
+                        <div class="column">
+                            <h3 class="ui grey block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+                        </div>
+                        <div class="column">
+                            <h3 class="ui grey block header">Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
+                        </div>
+                        <div class="column">
+                            <h3 class="ui grey block header">Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="sixteen wide column">
+                    <h4 class="ui grey block header">Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
+                </div>
             </div>
         </div>
+        <div class="margem-inferior-minimo"></div>
         <div class="ui doubling stackable grid">
             <div class="ten wide column">
                 <div class="ui center aligned segment">
@@ -41,13 +48,13 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <div class="item active">
-                                <img width="600" height="450" onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(1);" src="<?php View_Detalhes::Mostrar_Foto_Peca(1, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img width="600" height="450" onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(2);" src="<?php View_Detalhes::Mostrar_Foto_Peca(2, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                             <div class="item">
-                                <img width="600" height="450" onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                                <img onclick="abrirModal(3);" src="<?php View_Detalhes::Mostrar_Foto_Peca(3, '600x450'); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -102,6 +109,7 @@
                 </div>
             </div>
         </div>
+        <div class="margem-inferior-minimo"></div>
         <div class="ui secondary segment">
             <label>Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?>
         </div>
@@ -132,7 +140,7 @@
         <div class="ui segment">
                <?php View_Detalhes::Mostrar_Pativeis(); ?>
         </div>
-        <div class="ui divider"></div>
+        <div class="margem-inferior-minimo"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
