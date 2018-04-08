@@ -1,6 +1,6 @@
 <?php use Module\Application\View\SRC\Layout\Form\Contato_Anunciante as View_Contato_Anunciante; ?>
 <script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
-<form class="ui inverted large form" role="form">
+<form class="ui form" role="form">
     <div id="div_nome" class="field">
         <label>Seu Nome</label>
         <input type="text" id="nome" name="nome" placeholder="Nome">

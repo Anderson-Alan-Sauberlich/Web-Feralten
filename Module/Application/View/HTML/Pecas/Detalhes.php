@@ -18,16 +18,16 @@
                 <div class="sixteen wide column">
                     <div class="ui doubling stackable two column grid">
                         <div class="column">
-                            <h3 class="ui black block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+                            <h3 class="ui block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
                         </div>
                         <div class="column">
-                    		<h3 class="ui grey block header">Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
+                    		<h3 class="ui block header">Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
                 		</div>
                         <div class="column">
-                            <h3 class="ui grey block header">Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
+                            <h3 class="ui block header">Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
                         </div>
                         <div class="column">
-                            <h3 class="ui grey block header">Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
+                            <h3 class="ui block header">Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
                         </div>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                 </div>
             </div>
             <div class="six wide column">
-                <div id="div_cnt_anc" class="ui inverted grey segment">
-                    <h2 class="ui center aligned inverted header">Contato com anunciante</h2>
+                <div id="div_cnt_anc" class="ui secondary segment">
+                    <h2 class="ui center aligned grey header">Contato com anunciante</h2>
                     <?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
                 </div>
                 <div id="msg_cnt_anc" class="ui hidden message">
