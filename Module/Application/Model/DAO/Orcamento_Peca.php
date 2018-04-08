@@ -94,7 +94,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function BuscarPecasPorCOD(int $id)
+        public static function BuscarPecasPorCOD(int $id) : ?array
         {
             try {
                 $sql = 'SELECT peca_id, peca_ent_id, peca_responsavel_usr_id, peca_end_id, peca_sts_pec_id, peca_nome, peca_url, peca_fabricante, peca_preco, peca_descricao, peca_data_anuncio, peca_numero_serie, peca_prioridade, peca_prf_ntr_id, peca_std_uso_pec_id, peca_num_visualizado FROM vw_orcamento_peca WHERE orcamento_peca_orc_id = :id';
@@ -105,13 +105,13 @@ namespace Module\Application\Model\DAO;
                 
                 return DAO_Peca::PopulaPecas($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
-                return false;
+                return null;
             }
         }
         
         public static function PopulaOrcamentosPecas(array $rows) : array
         {
-            $orcamento_pecas = array();
+            $orcamento_pecas = [];
             
             foreach ($rows as $row) {
                 $obj_orcamento_peca = new OBJ_Orcamento_Peca();

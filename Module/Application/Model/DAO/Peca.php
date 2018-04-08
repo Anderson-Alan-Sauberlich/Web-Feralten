@@ -645,7 +645,7 @@ namespace Module\Application\Model\DAO;
         
         public static function PopulaPecas(array $rows) : array
         {
-            $obj_pecas = array();
+            $obj_pecas = [];
             
             foreach ($rows as $row) {
                 $obj_peca = new OBJ_Peca();
