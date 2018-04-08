@@ -18,11 +18,11 @@
                 <div class="sixteen wide column">
                     <div class="ui doubling stackable two column grid">
                         <div class="column">
+                            <h3 class="ui black block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+                        </div>
+                        <div class="column">
                     		<h3 class="ui grey block header">Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
                 		</div>
-                        <div class="column">
-                            <h3 class="ui grey block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
-                        </div>
                         <div class="column">
                             <h3 class="ui grey block header">Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
                         </div>
@@ -100,8 +100,9 @@
                 </div>
             </div>
             <div class="six wide column">
-                <div id="div_cnt_anc" class="ui secondary segment">
-                       <?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
+                <div id="div_cnt_anc" class="ui inverted grey segment">
+                    <h2 class="ui center aligned inverted header">Contato com anunciante</h2>
+                    <?php View_Detalhes::Incluir_Form_Contato_Anunciante(); ?>
                 </div>
                 <div id="msg_cnt_anc" class="ui hidden message">
                     <i class="close icon"></i>
@@ -115,15 +116,15 @@
         </div>
         <div class="ui doubling stackable three column center aligned segment grid">
             <div class="column">
-                   <p><?php View_Detalhes::Mostrar_Estado(); ?></p>
-                   <p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
-                   <?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
-                       <p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
-                      <p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
-                       <p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
-                       <p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
-                       <p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
-                   <?php } ?>
+                <p><?php View_Detalhes::Mostrar_Estado(); ?></p>
+                <p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
+                <?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
+                    <p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
+                    <p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
+                    <p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
+                    <p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
+                    <p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+                <?php } ?>
             </div>
             <div class="column">
                  <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
@@ -138,7 +139,7 @@
             </div>
         </div>
         <div class="ui segment">
-               <?php View_Detalhes::Mostrar_Pativeis(); ?>
+            <?php View_Detalhes::Mostrar_Pativeis(); ?>
         </div>
         <div class="margem-inferior-minimo"></div>
     </section>
