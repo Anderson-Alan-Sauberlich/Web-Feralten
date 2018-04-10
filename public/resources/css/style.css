@@ -43,7 +43,7 @@
 	.headIMG {
 		margin: 0 auto;
 	    float: none;
-	    margin-top: -3em;
+	    margin-top: -2.5em;
 	    margin-bottom: -3.5em;
 	}
 }
@@ -456,6 +456,13 @@ footer.footer {
 
 .main.menu.fixed {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.header_logo {
+	margin-top: -0.5em;
+    margin-bottom: -0.5em;
+    height: 3.5em !important;
+    width: 3.5em !important;
 }
 
 .menu_logo {

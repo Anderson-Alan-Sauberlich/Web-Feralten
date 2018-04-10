@@ -2,7 +2,7 @@
 <section class="margem-inferior-pouco">
 	<nav id="m_header" class="ui borderless red inverted top fixed two item hidden menu main" role="navigation">
         <a href="/" class="header item">
-            <img class="logo menu_logo" src="/resources/img/favicon.png"/>
+            <img class="ui mini image header_logo" src="/resources/img/favicon.png"/>
         	FERALTEN
         </a>
         <div onclick="AbrirMobileHeaderSidebar()" class="link fluid item">
@@ -47,7 +47,7 @@
     <nav id="pc_header" class="ui borderless red inverted stackable top fixed menu main" role="navigation">
     	<div class="ui container">
         	<a href="/quem-somos/" class="header item">
-        		<img class="logo menu_logo" src="/resources/img/favicon.png"/>
+        		<img class="ui mini image header_logo" src="/resources/img/favicon.png"/>
         		FERALTEN
             </a>
            	<div class="left menu">
