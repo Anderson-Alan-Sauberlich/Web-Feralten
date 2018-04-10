@@ -459,7 +459,11 @@ footer.footer {
 }
 
 .menu_logo {
-    margin-right: 1em;
+	margin-right: 1em;
+    margin-top: -0.55em;
+    margin-bottom: -0.55em;
+    height: 3.5em !important;
+    width: 4.5em !important;
 }
 
 .menuRowMD {
