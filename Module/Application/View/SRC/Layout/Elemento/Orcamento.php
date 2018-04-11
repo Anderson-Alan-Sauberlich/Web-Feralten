@@ -130,7 +130,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          */
         public static function RetornarPecas() : array
         {
-            $pecas =[];
+            $pecas = [];
             
             if (self::$obj_orcamento instanceof OBJ_Orcamento) {
                 if (self::$pagina === self::RESPONDIDOS) {
@@ -139,7 +139,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
                             $pecas[] = $peca;
                         }
                     }
-                } else {
+                } else if (!empty(self::$obj_orcamento->get_pecas())) {
                     $pecas = self::$obj_orcamento->get_pecas();
                 }
             }
