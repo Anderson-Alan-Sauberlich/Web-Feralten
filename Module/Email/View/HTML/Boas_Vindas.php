@@ -304,9 +304,11 @@
                       <td>
                         <img class="logo" src="https://www.feralten.com.br/email/img/Feralten_logo_Transparente_lateral.png"/>
                         <h2>Olá, <?= View_Boas_Vindas::Retornar_Nome_Usuario(); ?></h2>
-                        <p>Que bom que você está com a gente!</p>
-                        <p>Chega de perder tempo correndo atrás de peças, encontre e anuncie todas aqui no Feralten.</p>
-                        <p>Obrigado por se cadastrar, se precisar de qualquer coisa é só entrar em contato!</p>
+                        <p><b>Que bom que você está com a gente!</b></p>
+                        <p>Agora você pode escolher um <a href="https://www.feralten.com.br/usuario/meu-perfil/financeiro/meu-plano/">plano</a> e ficar de olho nas <a href="https://www.feralten.com.br/usuario/meu-perfil/orcamentos/caixa-de-entrada/">solicitações de peças</a>.</p>
+                        <p>E solicitar quantos <a href="https://www.feralten.com.br/usuario/meu-perfil/orcamentos/meus-orcamentos/">orçamentos</a> de peças que você quiser inteiramente grátis!</p>
+                        <p>Lembrando que sempre colocamos-nos inteiramente à disposição para esclarecer eventuais dúvidas.</p>
+                        <p>Bons Negocios! :)</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary btn-perfil">
                           <tbody>
                             <tr>
@@ -326,10 +328,11 @@
                     </tr>
                     <tr>
                       <td>
+                      	<p><a href="https://www.feralten.com.br/">https://www.feralten.com.br/</a></p>
                         <p><a href="https://www.feralten.com.br/fale-conosco/" target="_blank">Fale Conosco</a></p>
                         <p><a href="https://www.feralten.com.br/perguntas-frequentes/" target="_blank">Perguntas Frequentes</a></p>
                         <p>(47) 99285-3500</p>
-                        <p>contato@feralten.com</p>
+                        <p><a href="mailto:contato@feralten.com">contato@feralten.com</a></p>
                       </td>
                     </tr>
                   </table>

@@ -49,7 +49,7 @@
        		</h2>
        		<h2 class="ui header">
        			<div class="sub header">
-       				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros Velhos, Oficinas Mêcanicas e Pessoas Interessadas em peças originais, usadas ou novas.
+       				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros-Velhos, Oficinas Mêcanicas e Pessoas Interessadas em peças originais, usadas ou novas.
        			</div>
        		</h2>
        		<div class="margem-inferior-minimo"></div>

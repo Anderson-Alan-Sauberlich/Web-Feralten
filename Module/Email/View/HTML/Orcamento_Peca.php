@@ -359,10 +359,11 @@
                     </tr>
                     <tr>
                       <td>
+                      	<p><a href="https://www.feralten.com.br/">https://www.feralten.com.br/</a></p>
                         <p><a href="https://www.feralten.com.br/fale-conosco/" target="_blank">Fale Conosco</a></p>
                         <p><a href="https://www.feralten.com.br/perguntas-frequentes/" target="_blank">Perguntas Frequentes</a></p>
                         <p>(47) 99285-3500</p>
-                        <p>contato@feralten.com</p>
+                        <p><a href="mailto:contato@feralten.com">contato@feralten.com</a></p>
                       </td>
                     </tr>
                   </table>

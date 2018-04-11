@@ -20,7 +20,7 @@
         	<div id="div_autenticacao" class="ui two column relaxed stackable internally celled grid">
         		<div class="column">
                     <div id="form_cadastro" class="ui equal width form">
-                    	<h2 class="ui dividing header">Criar Cadastro</h2>
+                    	<h2 class="ui dividing header">Criar uma conta</h2>
                         <div class="fields">
                         	<div class="field">
                            		<label for="cadastro_nome">Seu Nome:</label>
@@ -47,12 +47,12 @@
                         	<div id="cadastro_msg_header" class="header"></div>
                         	<ul id="cadastro_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="cadastrarUsuario()" class="ui green big button" type="submit">Criar Conta</button>
+                    	<button onclick="cadastrarUsuario()" class="ui green big fluid button" type="submit">Criar Conta</button>
                     </div>
                 </div>
         		<div class="column">
             		<div id="form_login" class="ui equal width form">
-                    	<h2 class="ui dividing header">Entrar</h2>
+                    	<h2 class="ui dividing header">Entrar com sua conta</h2>
                     	<div class="field">
                            	<label for="login_email">Seu E-Mail:</label>
                            	<input id="login_email" name="login_email" placeholder="E-Mail" type="email">
@@ -72,7 +72,7 @@
                         	<div id="login_msg_header" class="header"></div>
                         	<ul id="login_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="logarUsuario();" class="ui red big button" type="submit">Entrar</button>
+                    	<button onclick="logarUsuario();" class="ui red big fluid button" type="submit">Entrar</button>
                     </div>
                 </div>
             </div>
