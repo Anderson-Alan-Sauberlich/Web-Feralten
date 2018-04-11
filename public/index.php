@@ -899,6 +899,22 @@
                             return $response;
                         }
                     });
+                    
+                    $app->post('/cancelar-contratacao[/]', function(Request $request, Response $response, $args) use ($app) {
+                        $meu_plano = new Module\Application\Controller\Usuario\Meu_Perfil\Financeiro\Meu_Plano();
+                        
+                        $meu_plano->set_senha_usuario(isset($_POST['senha_usuario']) ? $_POST['senha_usuario'] : null);
+                        
+                        $resposta = $meu_plano->Cancelar_Contratacao();
+                        
+                        if ($resposta === false) {
+                            return $response->withRedirect('/usuario/login/');
+                        } else if ($resposta != 1) {
+                            return $response->withRedirect('/usuario/meu-perfil/');
+                        } else {
+                            return $response;
+                        }
+                    });
                 });
             });
             

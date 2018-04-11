@@ -29,22 +29,28 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * @var array $erros Array com todas as mensagens de erro
+         * Lista com todas as mensagens de erro.
+         * 
+         * @var array $erros
          */
         private $erros = [];
         
         /**
-         * @var array $sucesso Array com todos as Mensagens de Sucesso
+         * Lista com todos as Mensagens de Sucesso.
+         * 
+         * @var array $sucesso
          */
         private $sucessos = [];
         
         /**
-         * @var array $campos Array com todos os Status dos Campos do Formulario
+         * Lista com todos os Status dos Campos do Formulario.
+         * 
+         * @var array $campos
          */
         private $campos = [];
         
         /**
-         * Cancela todas as faturas abertas dessa Entidade
+         * Cancela todas as faturas abertas dessa Entidade.
          * 
          * @param int $id_entidade
          * @return bool True para Sucesso e False para Erro
@@ -64,7 +70,7 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Abre uma nova fatura para essa Entidade
+         * Abre uma nova fatura para essa Entidade.
          * 
          * @param int $id_entidade
          * @param int $id_plano
@@ -124,7 +130,7 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Cria um novo serviço dentro da fatura aberta da Entidade, e recalcula o valor total da fatura
+         * Cria um novo serviço dentro da fatura aberta da Entidade, e recalcula o valor total da fatura.
          * 
          * @param int $id_entidade
          * @param string $descricao
@@ -160,9 +166,9 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Recalcula o valor total da fatura analizando todos os serviços
-         * Seta o status da fatura como Fechado
-         * Abri uma nova fatura identica
+         * Recalcula o valor total da fatura analizando todos os serviços.
+         * Seta o status da fatura como Fechado.
+         * Abri uma nova fatura identica.
          * 
          * @param int $id_entidade
          * @param int $id_plano
@@ -199,7 +205,7 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Recalcula o valor total da fatura analizando todos os serviços
+         * Recalcula o valor total da fatura analizando todos os serviços.
          * 
          * @param int $id_fatura
          * @return ?float Valor Total para Sucesso e Null para Erro
@@ -222,9 +228,9 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Procura pelas faturas abertas, se achar mais de uma, retorna null
-         * Não podem exister mais de uma fatura em aberto ao mesmo tempo
-         * Não podem existem mais de uma fatura fechada ao mesmo tempo
+         * Procura pelas faturas abertas, se achar mais de uma, retorna null.
+         * Não podem exister mais de uma fatura em aberto ao mesmo tempo.
+         * Não podem existem mais de uma fatura fechada ao mesmo tempo.
          * 
          * @param int $id_entidade
          * @param int ...$status
@@ -270,7 +276,7 @@ namespace Module\Application\Controller\Common\Util;
         }
         
         /**
-         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada
+         * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada.
          */
         public static function Gerenciar_Todas_Faturas_Abertas() : void
         {

@@ -75,7 +75,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':codigo', $codigo, PDO::PARAM_STR);
                 $p_sql->execute();
                 
-                return self::Popular_Recuperar_Senha($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopularRecuperarSenha($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -90,7 +90,7 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':usr_id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::Popular_Recuperar_Senha($p_sql->fetch(PDO::FETCH_ASSOC));
+                return self::PopularRecuperarSenha($p_sql->fetch(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
@@ -104,13 +104,13 @@ namespace Module\Application\Model\DAO;
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
                 
-                return self::Popular_Recuperar_Senhas($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopularRecuperarSenhas($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
         }
         
-        public static function Popular_Recuperar_Senha(array $row) : OBJ_Recuperar_Senha
+        public static function PopularRecuperarSenha(array $row) : OBJ_Recuperar_Senha
         {
             $obj_recuperar_senha = new OBJ_Recuperar_Senha();
             
@@ -129,9 +129,9 @@ namespace Module\Application\Model\DAO;
             return $obj_recuperar_senha;
         }
         
-        public static function Popular_Recuperar_Senhas(array $rows) : array
+        public static function PopularRecuperarSenhas(array $rows) : array
         {
-            $recuperar_senhas = array();
+            $recuperar_senhas = [];
             
             foreach ($rows as $row) {
                 $obj_recuperar_senha = new OBJ_Recuperar_Senha();

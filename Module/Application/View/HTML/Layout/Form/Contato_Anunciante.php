@@ -23,6 +23,6 @@
         <label>Mensagem</label>
         <textarea rows="4" id="mensagem" name="mensagem" placeholder="Mensagem">Olá, tenho interesse nesta peça, gostaria de receber mais informações...</textarea>
     </div>
-    <div id="btn_submit" class="ui button fluid big red" onclick="Submit(<?php View_Contato_Anunciante::Mostrar_Peca_Id(); ?>);">Enviar ao Anunciante</div>
+    <div id="btn_submit" class="ui fluid big teal button" onclick="Submit(<?php View_Contato_Anunciante::Mostrar_Peca_Id(); ?>);">Enviar ao Anunciante</div>
 </form>
 <script type="text/javascript" src="/application/js/layout/form/contato_anunciante.js"></script>

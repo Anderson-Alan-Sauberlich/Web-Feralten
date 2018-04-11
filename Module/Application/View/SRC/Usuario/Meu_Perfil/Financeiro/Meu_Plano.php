@@ -125,4 +125,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
                 echo 'Contratar';
             }
         }
+        
+        public static function retornarStatusCancelarContratacao() : ?string
+        {
+            if (self::$plano_id === 1) {
+                return 'disabled';
+            } else {
+                return null;
+            }
+        }
     }

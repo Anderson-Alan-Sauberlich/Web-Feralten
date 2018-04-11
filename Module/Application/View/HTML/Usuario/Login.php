@@ -30,12 +30,12 @@
                             <div class="input-group menuRowMD <?php View_Login::Incluir_Classe_Erros('senha'); ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="password" type="password" class="form-control" name="password" autocomplete="off" value="<?php View_Login::Manter_Valor('senha'); ?>" placeholder="Senha" />
-                                  <span class="input-group-addon">
-                                    <div class="ui checkbox passCheck">
+                                <span class="input-group-addon">
+                                    <div id="ui_mostrar" class="ui checkbox passCheck">
                                         <input type="checkbox" id="mostrar" name="mostrar" onchange="MostrarSenha()">
                                         <label for="mostrar"><i class="hidden-xs">Mostrar Senha </i><i class="unlock alternate icon"></i></label>
                                     </div>
-                                  </span>
+                                </span>
                             </div>
                             <div class="row">
                                 <div class="col-sm-7">

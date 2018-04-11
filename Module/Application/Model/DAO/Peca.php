@@ -162,6 +162,27 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        public static function DeletarPorEntidade(int $id_entidade) : bool
+        {
+            try {
+                $sql = 'DELETE FROM tb_peca WHERE peca_ent_id = :ent_id';
+                
+                $p_sql = Conexao::Conectar()->prepare($sql);
+                $p_sql->bindValue(':ent_id', $id_entidade, PDO::PARAM_INT);
+                
+                return $p_sql->execute();
+            } catch (PDOException | Exception $e) {
+                return false;
+            }
+        }
+        
+        /**
+         * DEPRECATED
+         * TODO Deletar esta function que não é mais nescesaria, pois agr as dependencias são deletadas por Cascade.
+         * 
+         * @param int $id
+         * @return bool
+         */
         public static function DeletarComTransaction(int $id) : bool
         {
             Conexao::Conectar()->beginTransaction();

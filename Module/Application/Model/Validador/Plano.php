@@ -21,7 +21,7 @@ namespace Module\Application\Model\Validador;
             } else {
                 if (filter_var($id, FILTER_VALIDATE_INT)) {
                     if ($id != Login_Session::get_entidade_plano()) {
-                        $faturas_pendentes = DAO_Fatura::BuscarPorCodStatus(Login_session::get_entidade_id(), 2, 16, 32);
+                        $faturas_pendentes = DAO_Fatura::BuscarPorCodStatus(Login_session::get_entidade_id(), 2, 16, 32, 128);
                         
                         if (count($faturas_pendentes) === 0) {
                             if ($id < Login_Session::get_entidade_plano()) {

@@ -178,7 +178,7 @@
             </form>
         </div>
         <div class="margem-inferior-medio"></div>
-        <div id="mdl_msg" class="ui small basic modal">
+        <div id="mdl_msg" class="ui small modal">
             <i class="close icon"></i>
             <div id="msg_header" class="header">Deseja continuar?</div>
             <div id="msg_content" class="content"></div>

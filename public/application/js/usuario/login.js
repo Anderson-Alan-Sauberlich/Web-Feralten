@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('.ui.checkbox').checkbox();
+	$('#ui_mostrar').checkbox();
 });
 function MostrarSenha() {
 	var passwordField = $('#password');
