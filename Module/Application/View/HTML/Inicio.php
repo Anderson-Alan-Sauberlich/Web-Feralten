@@ -5,6 +5,13 @@
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
     <title>Peças Novas e Usadas de Carros, Motos, Camihões, Ônibus e Muito Mais em Ferro Velho, Oficinas e Lojas | Feralten</title>
 	<?php include_once RAIZ.'/Module/Application/View/HTML/Common/Util/Gtag.php'; ?>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+    	(adsbygoogle = window.adsbygoogle || []).push({
+    		google_ad_client: "ca-pub-6647185654470379",
+        	enable_page_level_ads: true
+      	});
+	</script>
 </head>
 <body>
     <?php View_Inicio::Carregar_Loader(); ?>
