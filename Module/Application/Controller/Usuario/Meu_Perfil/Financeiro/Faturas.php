@@ -284,7 +284,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 $pagseguro->set_token($this->token);
                 $pagseguro->set_hash($this->hash);
                 $pagseguro->set_nome($this->nome);
-                $pagseguro->set_cpf_cnpj($this->cpf_cnpj);
+                $pagseguro->set_usuario_cpf_cnpj($this->cpf_cnpj);
                 $pagseguro->set_birthdate($this->nascimento);
                 $pagseguro->set_ip($this->ip);
                 
@@ -306,6 +306,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     if (!empty($fatura_servicos_fechada) AND $fatura_servicos_fechada != false) {
                         $pagseguro->set_servicos($fatura_servicos_fechada);
                     }
+                }
+                
+                $entidade = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
+                if ($entidade instanceof OBJ_Entidade) {
+                    $pagseguro->set_entidade_cpf_cnpj($entidade->get_cpf_cnpj());
                 }
                 
                 $usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
@@ -356,7 +361,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 
                 $entidade = DAO_Entidade::BuscarPorCOD(Login_Session::get_entidade_id());
                 if ($entidade instanceof OBJ_Entidade) {
-                    $pagseguro->set_cpf_cnpj($entidade->get_cpf_cnpj());
+                    $pagseguro->set_entidade_cpf_cnpj($entidade->get_cpf_cnpj());
                 }
                 
                 $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 16);

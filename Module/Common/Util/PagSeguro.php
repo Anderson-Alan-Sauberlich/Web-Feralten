@@ -54,10 +54,17 @@ namespace Module\Common\Util;
         
         /**
          * CPF do dono do cartão / da pessoa que esta pagamdno.
-         * 
-         * @var string $cpf_cnpj
+         *
+         * @var string $usuario_cpf_cnpj
          */
-        private $cpf_cnpj;
+        private $usuario_cpf_cnpj;
+        
+        /**
+         * CPF da entidade / a quem recebe o serviço.
+         * 
+         * @var string $entidade_cpf_cnpj
+         */
+        private $entidade_cpf_cnpj;
         
         /**
          * Hash da sessão do usuario no navegador.
@@ -171,11 +178,21 @@ namespace Module\Common\Util;
         /**
          * Seta CPF do dono do cartão / da pessoa que esta pagamdno.
          * 
-         * @param string $cpf_cnpj
+         * @param string $usuario_cpf_cnpj
          */
-        public function set_cpf_cnpj(string $cpf_cnpj) : void
+        public function set_usuario_cpf_cnpj(string $usuario_cpf_cnpj) : void
         {
-            $this->cpf_cnpj = $cpf_cnpj;
+            $this->usuario_cpf_cnpj = $usuario_cpf_cnpj;
+        }
+        
+        /**
+         * Seta CPF da entidade / a quem recebe o serviço.
+         *
+         * @param string $usuario_cpf_cnpj
+         */
+        public function set_entidade_cpf_cnpj(string $entidade_cpf_cnpj) : void
+        {
+            $this->entidade_cpf_cnpj = $entidade_cpf_cnpj;
         }
         
         /**
@@ -317,10 +334,10 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            if (strlen($this->cpf_cnpj) === 11) {
-                $creditCard->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
-            } else if (strlen($this->cpf_cnpj) === 14) {
-                $creditCard->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            if (strlen($this->entidade_cpf_cnpj) === 11) {
+                $creditCard->setSender()->setDocument()->withParameters('CPF', $this->entidade_cpf_cnpj);
+            } else if (strlen($this->entidade_cpf_cnpj) === 14) {
+                $creditCard->setSender()->setDocument()->withParameters('CNPJ', $this->entidade_cpf_cnpj);
             }
             
             $creditCard->setSender()->setHash($this->hash);
@@ -357,10 +374,10 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            if (strlen($this->cpf_cnpj) === 11) {
-                $creditCard->setHolder()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
-            } else if (strlen($this->cpf_cnpj) === 14) {
-                $creditCard->setHolder()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            if (strlen($this->usuario_cpf_cnpj) === 11) {
+                $creditCard->setHolder()->setDocument()->withParameters('CPF', $this->usuario_cpf_cnpj);
+            } else if (strlen($this->usuario_cpf_cnpj) === 14) {
+                $creditCard->setHolder()->setDocument()->withParameters('CNPJ', $this->usuario_cpf_cnpj);
             }
             
             // Set the Payment Mode for this payment request
@@ -425,10 +442,10 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            if (strlen($this->cpf_cnpj) === 11) {
-                $boleto->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
-            } else if (strlen($this->cpf_cnpj) === 14) {
-                $boleto->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            if (strlen($this->entidade_cpf_cnpj) === 11) {
+                $boleto->setSender()->setDocument()->withParameters('CPF', $this->entidade_cpf_cnpj);
+            } else if (strlen($this->entidade_cpf_cnpj) === 14) {
+                $boleto->setSender()->setDocument()->withParameters('CNPJ', $this->entidade_cpf_cnpj);
             }
             
             $boleto->setSender()->setHash($this->hash);
@@ -496,10 +513,10 @@ namespace Module\Common\Util;
                 substr($this->fone, 2, strlen($this->fone))
             );
             
-            if (strlen($this->cpf_cnpj) === 11) {
-                $onlineDebit->setSender()->setDocument()->withParameters('CPF', $this->cpf_cnpj);
-            } else if (strlen($this->cpf_cnpj) === 14) {
-                $onlineDebit->setSender()->setDocument()->withParameters('CNPJ', $this->cpf_cnpj);
+            if (strlen($this->entidade_cpf_cnpj) === 11) {
+                $onlineDebit->setSender()->setDocument()->withParameters('CPF', $this->entidade_cpf_cnpj);
+            } else if (strlen($this->entidade_cpf_cnpj) === 14) {
+                $onlineDebit->setSender()->setDocument()->withParameters('CNPJ', $this->entidade_cpf_cnpj);
             }
             
             $onlineDebit->setSender()->setHash($this->hash);
