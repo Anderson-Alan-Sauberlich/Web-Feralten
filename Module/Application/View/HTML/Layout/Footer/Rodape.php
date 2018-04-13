@@ -13,7 +13,7 @@
             <div class="three wide column">
                 <h4 class="ui inverted header"><i class="envelope icon"></i>CONTATO</h4>
                 <div class="ui inverted relaxed large link list">
-                    <a href="/perguntas-frequentes/" class="item">Perguntas Freguentes</a>
+                    <a href="/perguntas-frequentes/" class="item">Perguntas Frequentes</a>
                     <a href="/dicas-de-venda/" class="item">Dicas de Venda</a>
                     <a href="/fale-conosco/" class="item">Fale Conosco</a>
                 </div>
