@@ -15,16 +15,14 @@
         		<?php View_Historico::Incluir_Menu_Usuario(); ?>
         	</div>
         	<div class="thirteen wide column">
-                <div class="container-fluid">
-                    <div class="row-fluid">
-                        <img src="/resources/img/contrucao.png" position="center" class="img-responsive centerIMG" />
-                    </div>
-                </div>
+        		<h3 class="ui red dividing header">Histórico de Faturas</h3>
+                <?php View_Historico::Incluir_Elemento_Fatura(); ?>
                 <div class="margem-inferior-pouco"></div>
         	</div>
         </div>
     </section>
     <footer>
+    	<script type="text/javascript" src="/application/js/usuario/meu_perfil/financeiro/historico.js"></script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
 </body>

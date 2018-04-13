@@ -12,6 +12,7 @@ namespace Module\Application\Model\OBJ;
         private $data_emissao;
         private $data_vencimento;
         private $data_fechamento;
+        private $servicos = [];
         
         function __constructor()
         {
@@ -86,5 +87,15 @@ namespace Module\Application\Model\OBJ;
         public function get_data_fechamento() : ?string
         {
             return $this->data_fechamento;
+        }
+        
+        public function set_servicos(?array $servicos) : void
+        {
+            $this->servicos = $servicos;
+        }
+        
+        public function get_servicos() : ?array
+        {
+            return $this->servicos;
         }
     }

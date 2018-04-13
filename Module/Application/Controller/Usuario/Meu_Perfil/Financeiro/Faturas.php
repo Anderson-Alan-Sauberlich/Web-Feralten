@@ -223,12 +223,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
                     if (!empty($fatura_aberta)) {
                         $view->set_fatura_aberta($fatura_aberta);
-                        
-                        $fatura_servicos_aberta = DAO_Fatura_Servico::BuscarPorCOD($fatura_aberta->get_id());
-                        
-                        if (!empty($fatura_servicos_aberta) AND $fatura_servicos_aberta != false) {
-                            $view->set_fatura_servicos_aberta($fatura_servicos_aberta);
-                        }
                     }
                     
                     $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 16);
@@ -247,12 +241,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
                     if (!empty($fatura_fechada)) {
                         $view->set_fatura_fechada($fatura_fechada);
-                        
-                        $fatura_servicos_fechada = DAO_Fatura_Servico::BuscarPorCOD($fatura_fechada->get_id());
-                        
-                        if (!empty($fatura_servicos_fechada) AND $fatura_servicos_fechada != false) {
-                            $view->set_fatura_servicos_fechada($fatura_servicos_fechada);
-                        }
                     }
                     
                     $pagseguro = new PagSeguro();

@@ -4,7 +4,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Menu\Usuario as View_Menu_Usuario;
     use Module\Application\Model\OBJ\Fatura as OBJ_Fatura;
-    use Module\Application\Model\OBJ\Fatura_Servico as OBJ_Fatura_Servico;
     use \DateTime;
     
     class Faturas
@@ -33,16 +32,6 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         private static $fatura_fechada;
         
         /**
-         * @var OBJ_Fatura_Servico
-         */
-        private static $fatura_servicos_aberta;
-        
-        /**
-         * @var OBJ_Fatura_Servico
-         */
-        private static $fatura_servicos_fechada;
-        
-        /**
          * Id da sessão do PagSeguro
          * @var int
          */
@@ -57,27 +46,11 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
-         * @param array $fatura_servicos_aberta
-         */
-        public function set_fatura_servicos_aberta(?array $fatura_servicos_aberta = null) : void
-        {
-            self::$fatura_servicos_aberta = $fatura_servicos_aberta;
-        }
-        
-        /**
          * @param OBJ_Fatura $obj_fatura_fechada
          */
         public function set_fatura_fechada(?OBJ_Fatura $obj_fatura_fechada = null) : void
         {
             self::$fatura_fechada = $obj_fatura_fechada;
-        }
-        
-        /**
-         * @param array $fatura_servicos_fechada
-         */
-        public function set_fatura_servicos_fechada(?array $fatura_servicos_fechada = null) : void
-        {
-            self::$fatura_servicos_fechada = $fatura_servicos_fechada;
         }
         
         /**
@@ -220,9 +193,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         public static function Retornar_Lista_Fatura_Servicos(string $status) : ?array
         {
             if ($status === 'fechada') {
-                return self::$fatura_servicos_fechada;
+                return self::$fatura_fechada->get_servicos();
             } else if ($status === 'aberta') {
-                return self::$fatura_servicos_aberta;
+                return self::$fatura_aberta->get_servicos();
             }
         }
         

@@ -37,7 +37,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         }
         
         /**
-         * Armazena o objeto do orçamento a sermostrado na view html.
+         * Armazena o objeto do orçamento a ser mostrado na view html.
          * 
          * @var OBJ_Orcamento $obj_orcamento
          */

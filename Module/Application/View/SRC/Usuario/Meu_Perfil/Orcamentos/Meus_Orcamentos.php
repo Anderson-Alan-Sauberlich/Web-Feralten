@@ -20,21 +20,21 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         /**
          * Armazena o codigo do status do usuario.
          * 
-         * @var int
+         * @var int $status_usuario
          */
         private static $status_usuario;
         
         /**
          * Lista de orçamentos.
          * 
-         * @var array
+         * @var array $orcamentos
          */
         private static $orcamentos;
         
         /**
          * Instancia da view menu lateral orçamento.
          * 
-         * @var View_Menu_Orcamento
+         * @var View_Menu_Orcamento $view_menu_orcamento
          */
         private static $view_menu_orcamento;
         

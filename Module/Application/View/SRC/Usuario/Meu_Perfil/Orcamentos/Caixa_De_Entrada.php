@@ -20,21 +20,21 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         /**
          * Status do usuario.
          * 
-         * @var int
+         * @var int $status_usuario
          */
         private static $status_usuario;
         
         /**
          * Lista de orçamentos.
          * 
-         * @var array
+         * @var array $orcamentos
          */
         private static $orcamentos;
         
         /**
          * objeto do menu lateral orçamento.
          * 
-         * @var View_Menu_Orcamento
+         * @var View_Menu_Orcamento $view_menu_orcamento
          */
         private static $view_menu_orcamento;
         
@@ -67,7 +67,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
         }
         
         /**
-         * Chama e inclie o codigo fonte do menu do usuario header.
+         * Chama e inclui o codigo fonte do header do usuario header.
          */
         public static function Incluir_Header_Usuario() : void
         {
