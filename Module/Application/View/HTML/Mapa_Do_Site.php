@@ -19,7 +19,7 @@
             		<i class="large angle double right middle aligned icon"></i>
             		<div class="content">
             			<a href="https://www.feralten.com.br/" class="header">Página Inicial</a>
-            			<div class="description">Voltar ao inicio do site.</div>
+            			<div class="description">Voltar ao início do site.</div>
             		</div>
             	</div>
             	<div class="item">
@@ -89,7 +89,7 @@
             		<i class="large angle double right middle aligned icon"></i>
             		<div class="content">
             			<a href="https://www.feralten.com.br/perguntas-frequentes/" class="header">Perguntas Frequentes</a>
-            			<div class="description">Algumas respostas a perguntas que podem ajudar você.</div>
+            			<div class="description">Algumas perguntas e respostas que podem ajudar você.</div>
             		</div>
             	</div>
             	<div class="item">

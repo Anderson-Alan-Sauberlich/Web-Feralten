@@ -39,6 +39,8 @@
                     <div class="title"><i class="dropdown icon"></i>Quais são as minhas vantagens?</div>
                     <div class="content">
                     	<p>São inúmeras vantagens, confira algumas delas abaixo:</p>
+                    	<p>- Seus anúncios são vinculados rapidamente nos maiores buscadores da internet: GOOGLE, YAHOO, BING...</p>
+                    	<p>- Tenha uma página com seus produtos e informações, além de um área de relacionamento com seus clientes, interaja e alavanque suas vendas.</p>
                     	<p>- Portal exclusivo para negociantes de peças usadas;</p>
                     	<p>- Único portal da área no Brasil;</p>
                     	<p>- Com menos de 1 café por dia você é visto pelo mês todo, lembre-se, quem é visto é  lembrado!</p>
@@ -48,8 +50,8 @@
                         <p>Para alterar seu e-mail siga as instruções:</p>
                         <p>1 - No menu superior clique em “Entrar”</p>
                         <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
-                        <p>3 - No menu do usuario clique em "Meus Dados" depois em "Editar Dados"</p>
-                        <p>4 - No formulario do usuario informe seu novo e-mail e clique em "Salvar"</p>
+                        <p>3 - No menu do usuário clique em "Meus Dados" depois em "Editar Dados"</p>
+                        <p>4 - No formulário do usuário informe seu novo e-mail e clique em "Salvar"</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Esqueci meu e-mail cadastrado no Feralten. Como posso recuperá-lo?</div>
                     <div class="content">
@@ -69,8 +71,8 @@
                         <p>Para alterar os dados pessoais, siga as instruções:</p>
                         <p>1 - Clique no menu superior "Entrar"</p>
                         <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
-                        <p>3 - No menu do usuario, clique em "Meus Dados" depois "Editar Dados"</p>
-                        <p>4 - Altere os dados que desejar nos formularios que desejar: Usuario, Entidade e Ebdereço</p>
+                        <p>3 - No menu do usuário, clique em "Meus Dados" depois "Editar Dados"</p>
+                        <p>4 - Altere os dados que desejar nos formulários que desejar: Usuario, Entidade e Endereço</p>
                         <p>5 - Clique em Salvar</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como desativar o bloqueador de pop-up no meu navegador?</div>
