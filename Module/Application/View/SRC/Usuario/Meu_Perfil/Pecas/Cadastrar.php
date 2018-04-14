@@ -274,7 +274,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                 
                 ob_end_flush();
             } else {
-                echo "Selecione a Categoria do Veiculo...";
+                echo 'Selecione a Categoria';
             }
         }
         
@@ -337,10 +337,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                     
                     ob_end_flush();
                 } else {
-                    echo "Selecione a Marca do Veiculo...";
+                    echo 'Selecione a Marca';
                 }
             } else {
-                echo "Selecione a Categoria e a Marca do Veiculo...";
+                echo 'Selecione a Categoria e a Marca';
             }
         }
 
@@ -407,13 +407,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                         
                         ob_end_flush();
                     } else {
-                        echo "Selecione o Modelo do Veiculo...";
+                        echo 'Selecione o Modelo';
                     }
                 } else {
-                    echo "Selecione a Marca e o Modelo do Veiculo...";
+                    echo 'Selecione a Marca e o Modelo';
                 }
             } else {
-                echo "Selecione a Categoria a Marca e o Modelo do Veiculo...";
+                echo 'Selecione a Categoria a Marca e o Modelo';
             }
         }
 
@@ -455,10 +455,10 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                         }
                     }
                 } else {
-                    echo "Selecione a Marca e o Modelo ou Versão do Veiculo...";
+                    echo 'Selecione a Marca o Modelo e a Versão';
                 }
             } else {
-                echo "Selecione a Categoria a Marca e o Modelo ou Versão do Veiculo...";
+                echo 'Selecione a Categoria a Marca o Modelo e a Versão';
             }
         }
 

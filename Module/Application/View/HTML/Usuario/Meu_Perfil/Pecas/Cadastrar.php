@@ -16,13 +16,13 @@
             <form id="form_cadastrar_pecas" name="form_cadastrar_pecas" data-toggle="validator" enctype="multipart/form-data" class="form-horizontal" action="/usuario/meu-perfil/pecas/cadastrar/<?php View_Cadastrar::MostrarURLOrcamento(); ?>" method="post" role="form">
                 <?php View_Cadastrar::Mostrar_Sucesso(); ?>
                 <?php View_Cadastrar::Mostrar_Erros(); ?>
-                <div class="panel panel-default sombra_painel">
-                    <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Compatibilidade Com Marcas e Modelos dos Veículos</label>
+                <div class="panel panel-default ">
+                    <div class="panel-heading centralizar">
+                    	<h3 class="ui header disabled">Compatibilidade da Peça</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row-fluid">
-                            <h4><label class="lbPanel">Categoria do Veículo Compatível:</label></h4>
+                            <h4><label class="lbPanel">Categoria:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_categoria" class="row">
@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4><label class="lbPanel">Marca do Veículo Compatível:</label></h4>
+                            <h4><label class="lbPanel">Marca:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_marca" class="row">
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4><label class="lbPanel">Modelo do Veículo Compatível:</label></h4>
+                            <h4><label class="lbPanel">Modelo:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_modelo" class="row">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4><label class="lbPanel">Versão do Veículo Compatível:</label></h4>
+                            <h4><label class="lbPanel">Versão:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_versao" class="row">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h4><label class="lbPanel">Ano do Veículo Compatível:</label></h4>
+                            <h4><label class="lbPanel">Ano:</label></h4>
                             <div class="well well-sm">
                                 <div class="container-fluid">
                                     <div id="div_ano" class="row">
@@ -65,9 +65,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default sombra_painel">
-                    <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Informações da Peça</label>
+                <div class="panel panel-default">
+                    <div class="panel-heading centralizar">
+                        <h3 class="ui header disabled">Informações da Peça</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row-fluid">
@@ -88,14 +88,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                   <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <label for="serie" class="lbPanel">Numero de Série da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("serie"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
                                         <input id="serie" name="serie" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("serie") ?>" placeholder="Numero de Serie da Peça" />
                                     </div>
                                 </div>
-                                   <div class="col-sm-3">
+                                <div class="col-sm-3">
                                     <label for="preco" class="lbPanel">Preço da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("preco"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
@@ -131,9 +131,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default sombra_painel">
-                    <div class="panel-heading sombra_painel centralizar">
-                        <label class="lbPanel">Adicionar Fotos</label>
+                <div class="panel panel-default">
+                    <div class="panel-heading centralizar">
+                    	<h3 class="ui header disabled">Adicionar Fotos</h3>
                     </div>
                     <div class="panel-body <?php View_Cadastrar::Incluir_Classe_Erros("imagem"); ?>">
                         <div id="drop_zone" class="row-fluid">
@@ -168,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default sombra_painel">
+                <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row-fluid">
                         	<div onclick="Submit_Salvar();" id="salvar" class="ui big green button"><i class="glyphicon glyphicon-floppy-saved"></i> Cadastrar Peça</div>
