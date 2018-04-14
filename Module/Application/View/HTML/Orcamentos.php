@@ -16,6 +16,18 @@
         	<div class="margem-inferior-minimo"></div>
         	<?php View_Orcamentos::Incluir_Elemento_Orcamento(); ?>
         </div>
+        <div class="hidden-xs">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Orcamentos -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6647185654470379"
+                 data-ad-slot="2515424577"
+                 data-ad-format="auto"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </section>
     <footer>
     	<script type="text/javascript" src="/application/js/orcamentos.js"></script>

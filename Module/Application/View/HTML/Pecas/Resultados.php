@@ -12,16 +12,18 @@
     </header>
     <section class="ui container" role="main">
         <div class="container-fluid margem-inferior-pouco">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Peças/Resultados -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6647185654470379"
-                 data-ad-slot="2240216118"
-                 data-ad-format="auto"></ins>
-            <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <div class="hidden-xs">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Peças/Resultados -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6647185654470379"
+                     data-ad-slot="2240216118"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             <form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
                 <div class="row">
                     <?php View_Resultados::Incluir_Menu_Pesquisa(); ?>
