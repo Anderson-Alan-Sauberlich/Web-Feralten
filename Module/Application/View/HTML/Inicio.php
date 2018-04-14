@@ -217,18 +217,21 @@
       	</div>
     </div>
     <div class="margem-superior-minimo"></div>
-    <div class="hidden-xs">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Início -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6647185654470379"
-             data-ad-slot="9701981152"
-             data-ad-format="auto"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
+    <section class="ui center aligned container" role="main">
+        <div class="hidden-xs">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Início -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6647185654470379"
+                 data-ad-slot="9701981152"
+                 data-ad-format="auto"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            <div class="margem-superior-minimo"></div>
+        </div>
+    </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>

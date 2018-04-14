@@ -27,6 +27,7 @@
             <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
+            <div class="margem-superior-minimo"></div>
         </div>
     </section>
     <footer>
