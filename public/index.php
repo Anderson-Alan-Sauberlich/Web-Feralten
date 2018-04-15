@@ -1101,6 +1101,16 @@
         });
     });
     
+    $app->group('/planos-mensais', function() use ($app) {
+        $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
+            $planos_mensais = new Module\Application\Controller\Planos_Mensais();
+            
+            $planos_mensais->Carregar_Pagina();
+            
+            return $response;
+        });
+    });
+    
     $app->group('/perguntas-frequentes', function() use ($app) {
         $app->get('[/]', function(Request $request, Response $response, $args) use ($app) {
             $perguntas_frequentes = new Module\Application\Controller\Perguntas_Frequentes();

@@ -21,6 +21,7 @@
                        	<a href="/vendedores/" class="item">Vendedores</a>
                        	<a href="/orcamentos/" class="item">Orçamentos</a>
                     	<a href="/pecas/resultados/" class="item">Peças Cadastradas</a>
+                    	<a href="/planos-mensais/" class="item">Planos Mensais</a>
                     </div>
                 </div>
             </div>
@@ -59,6 +60,7 @@
                         	<a href="/vendedores/" class="item">Vendedores</a>
                         	<a href="/orcamentos/" class="item">Orçamentos</a>
                     		<a href="/pecas/resultados/" class="item">Peças Cadastradas</a>
+                    		<a href="/planos-mensais/" class="item">Planos Mensais</a>
                         </div>
                     </div>
                 </div>
