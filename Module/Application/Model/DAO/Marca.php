@@ -69,14 +69,16 @@ namespace Module\Application\Model\DAO;
         public static function Deletar(int $id) : bool
         {
             try {
-                DAO_Marca_Compativel::Deletar($id);
-                
                 $sql = 'DELETE FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
 
-                return $p_sql->execute();
+                if ($p_sql->execute()) {
+                    return DAO_Marca_Compativel::Deletar($id);
+                } else {
+                    return false;
+                }
             } catch (PDOException | Exception $e) {
                 return false;
             }
