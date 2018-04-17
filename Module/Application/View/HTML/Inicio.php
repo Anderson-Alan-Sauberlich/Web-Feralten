@@ -56,7 +56,7 @@
        		</h2>
        		<h2 class="ui header">
        			<div class="sub header">
-       				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros-Velhos, Oficinas Mecânicas e Pessoas Interessadas em peças originais, usadas ou novas.
+       				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros-Velhos, Oficinas Mecânicas e Pessoas Interessadas em peças originais, novas e usadas.
        			</div>
        		</h2>
        		<div class="margem-inferior-minimo"></div>
@@ -231,6 +231,13 @@
             </script>
             <div class="margem-superior-minimo"></div>
         </div>
+        <h2 class="ui dividing header">Siga o Feralten nas redes sociais:</h2>
+        <a href="https://www.facebook.com/FeraltenOMundoDasPecasNaWeb/" class="ui facebook button"><i class="facebook icon"></i>Facebook</a>
+        <a href="https://twitter.com/feralten" class="ui twitter button"><i class="twitter icon"></i>Twitter</a>
+        <a href="https://plus.google.com/u/0/104720802526462232204" class="ui google plus button"><i class="google plus icon"></i>Google Plus</a>
+        <a href="https://www.linkedin.com/company/feralten/" class="ui linkedin button"><i class="linkedin icon"></i>LinkedIn</a>
+        <a href="https://www.instagram.com/feralten/" class="ui instagram button"><i class="instagram icon"></i>Instagram</a>
+        <div class="margem-superior-minimo"></div>
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
