@@ -250,7 +250,7 @@ namespace Module\Application\Model\DAO;
             try {
                 $sql = "SELECT entidade_id, entidade_usr_id, entidade_sts_ent_id, entidade_cpf_cnpj, entidade_nome_comercial,
                         entidade_imagem, entidade_site, entidade_data_cadastro, entidade_pln_id, entidade_int_pag_id, entidade_data_contratacao_plano
-                        FROM tb_entidade WHERE entidade_id IN (SELECT peca_ent_id FROM tb_peca)";
+                        FROM tb_entidade WHERE entidade_id IN (SELECT peca_ent_id FROM tb_peca) ORDER BY -(entidade_nome_comercial)";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->execute();
