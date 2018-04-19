@@ -148,7 +148,7 @@ namespace Module\Application\Model\DAO;
             }
             
             try {
-                $sql = "SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE ($query) AND fatura_ent_id = :ent_id";
+                $sql = "SELECT fatura_id, fatura_ent_id, fatura_valor_total, fatura_sts_ftr_id, fatura_data_emissao, fatura_data_vencimento, fatura_data_fechamento FROM tb_fatura WHERE ($query) AND fatura_ent_id = :ent_id ORDER BY fatura_data_emissao DESC";
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':ent_id', $entidade_id, PDO::PARAM_INT);
