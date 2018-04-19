@@ -114,13 +114,13 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaArrayTransacaos($p_sql->fetchAll(PDO::FETCH_ASSOC));
+                return self::PopulaArrayTransacoes($p_sql->fetchAll(PDO::FETCH_ASSOC));
             } catch (PDOException | Exception $e) {
                 return false;
             }
         }
         
-        public static function PopulaArrayTransacaos(array $rows) : array
+        public static function PopulaArrayTransacoes(array $rows) : array
         {
             $transacoes = array();
             

@@ -18,7 +18,7 @@
                 <div class="ui styled fluid accordion margem-inferior-pouco">
                     <div class="title"><i class="dropdown icon"></i>O que é o Grupo Feralten?</div>
                     <div class="content">
-                        <p>O grupo Feralten é o maior portal de Ferros-velhos do Brasil e nossa finalidade é aproximar consumidores e vendedores, sempre visando o melhor custo benefício para ambos os lados.</p>
+                        <p>O grupo Feralten é um portal de Ferros-Velhos do Brasil e nossa finalidade é aproximar consumidores e vendedores, sempre visando o melhor custo benefício para ambos os lados.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como funciona?</div>
                     <div class="content">
@@ -30,11 +30,15 @@
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como faço meu Cadastro?</div>
                     <div class="content">
-                        <p>Assim que efetuar a primeira etapa do cadastro nesse Link <a href="/usuario/cadastro/">aqui,</a> em alguns instantes um e-mail de confirmação será gerado e enviado. Ao clicar no link desse e-mail você será encaminhado para a escolha do pacote de adesão e em seguida poderá começar seus anúncios!</p>
+                        <p>Assim que efetuar a primeira etapa do cadastro nesse Link: <a href="/usuario/cadastro/">Cadastro</a>, você poderá solicitar e receber orçamentos de peças totalmente grátis de todos os nossos vendedores.</p>
+                        <p>Para ser um vendedor você só precisa concluir o cadastro informado seus dados de contato e endereço e já poderá cadastrar as peças que quiser.</p>
+                    	<p>Manual distribuido pela nossa equipe de divulgação <a href="/application/documentos/Manual_Feralten_Frente.pdf" target="_blank">Manual Feralten Frente</a> e <a href="/application/documentos/Manual_Feralten_Verso.pdf" target="_blank">Manual Feralten Verso</a>.</p>
+                    	<p>Confira os nossos <a href="/planos-mensais/" target="_blank">Planos Mensais</a>.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como vão me encontrar?</div>
                     <div class="content">
                         <p>A exibição dos anúncios é feito com base na cidade que foi cadastrada em seu perfil, ou seja, pessoas de localidades próximas a sua visualizarão seus anúncios e entrarão em contato primeiramente via E-mail. A partir desse ponto os envolvidos são livres para compartilharem novas formas de comunicação.</p>
+                    	<p>Também é possivel visualizar peças de qualquer localidade do Brasil. Basta selecionar o estado e a cidade desejados no menu de filtro(azul) logo abaixo do menu de pesquisa em: <a href="/pecas/resultados/" target="_blank">Lista de Peças</a>.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Quais são as minhas vantagens?</div>
                     <div class="content">
@@ -48,31 +52,31 @@
                     <div class="title"><i class="dropdown icon"></i>Como alterar meu e-mail?</div>
                     <div class="content">
                         <p>Para alterar seu e-mail siga as instruções:</p>
-                        <p>1 - No menu superior clique em “Entrar”</p>
-                        <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
+                        <p>1 - No menu superior clique em “<a href="/usuario/login/" target="_blank">Entrar</a>”</p>
+                        <p>2 - Informe seu e-mail e senha cadastrados e clique no botão "Entrar"</p>
                         <p>3 - No menu do usuário clique em "Meus Dados" depois em "Editar Dados"</p>
                         <p>4 - No formulário do usuário informe seu novo e-mail e clique em "Salvar"</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Esqueci meu e-mail cadastrado no Feralten. Como posso recuperá-lo?</div>
                     <div class="content">
-                        <p>Para realizar a recuperação do seu e-mail, preencha o formulário do Fale Conosco ao lado e informe seu CPF.</p>
+                        <p>Para realizar a recuperação do seu e-mail, preencha o formulário do <a href="/fale-conosco/" target="_blank">Fale Conosco</a> ao lado e informe seu CPF.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Tive problemas com minha senha. O que devo fazer?</div>
                     <div class="content">
                         <p>Se sua senha está inválida ou se você esqueceu sua senha, solicite uma nova senha de acesso, seguindo as instruções abaixo:</p>
-                        <p>1 - No menu superior clique em “Entrar”</p>
-                        <p>2 - Na caixa de login clique na opção "Esqueceu Sua Senha ou E-mail?"</p>
-                        <p>3 - Informe seu e-mail cadastrado e clique em "Enviar Link"</p>
+                        <p>1 - No menu superior clique em “<a href="/usuario/login/" target="_blank">Entrar</a>”</p>
+                        <p>2 - Na caixa de login clique na opção "<a href="/usuario/recuperar-senha/" target="_blank">Esqueceu Sua Senha ou E-mail?</a>"</p>
+                        <p>3 - Informe seu e-mail cadastrado e clique no botão "Enviar Link"</p>
                         <p>4 - Em até 20 minutos, você receberá em seu e-mail cadastrado no Feralten um link para criar uma nova senha</p>
                         <p>Caso você não receba a senha em até 20 minutos, provavelmente ela deverá estar bloqueada pelo anti-spam do seu provedor.</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como atualizar meus dados pessoais?</div>
                     <div class="content">
                         <p>Para alterar os dados pessoais, siga as instruções:</p>
-                        <p>1 - Clique no menu superior "Entrar"</p>
-                        <p>2 - Informe seu e-mail e senha cadastrados e clique em "Entrar"</p>
+                        <p>1 - Clique no menu superior "<a href="/usuario/login/" target="_blank">Entrar</a>"</p>
+                        <p>2 - Informe seu e-mail e senha cadastrados e clique no botão "Entrar"</p>
                         <p>3 - No menu do usuário, clique em "Meus Dados" depois "Editar Dados"</p>
-                        <p>4 - Altere os dados que desejar nos formulários que desejar: Usuario, Entidade e Endereço</p>
+                        <p>4 - Altere os dados que desejar nos formulários que desejar: Usuário, Entidade e Endereço</p>
                         <p>5 - Clique em Salvar</p>
                     </div>
                     <div class="title"><i class="dropdown icon"></i>Como desativar o bloqueador de pop-up no meu navegador?</div>

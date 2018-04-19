@@ -4,6 +4,7 @@ namespace Module\Application\Model\DAO;
     use Module\Application\Model\OBJ\Fatura as OBJ_Fatura;
     use Module\Application\Model\DAO\Status_Fatura as DAO_Status_Fatura;
     use Module\Application\Model\DAO\Fatura_Servico as DAO_Fatura_Servico;
+    use Module\Application\Model\DAO\Transacao as DAO_Transacao;
     use Module\Application\Model\Common\Util\Conexao;
     use \PDO;
     use \PDOException;
@@ -222,6 +223,8 @@ namespace Module\Application\Model\DAO;
                     $obj_fatura->set_id($row['fatura_id']);
                     
                     $obj_fatura->set_servicos(DAO_Fatura_Servico::BuscarPorCOD($row['fatura_id']));
+                    
+                    $obj_fatura->set_transacoes(DAO_Transacao::BuscarPorCOD($row['fatura_id']));
                 }
                 
                 if (isset($row['fatura_ent_id'])) {
@@ -262,6 +265,8 @@ namespace Module\Application\Model\DAO;
                 $obj_fatura->set_id($row['fatura_id']);
                 
                 $obj_fatura->set_servicos(DAO_Fatura_Servico::BuscarPorCOD($row['fatura_id']));
+                
+                $obj_fatura->set_transacoes(DAO_Transacao::BuscarPorCOD($row['fatura_id']));
             }
             
             if (isset($row['fatura_ent_id'])) {

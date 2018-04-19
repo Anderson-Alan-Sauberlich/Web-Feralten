@@ -277,6 +277,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 $pagseguro->set_ip($this->ip);
                 
                 $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 16);
+                
                 if (empty($fatura_fechada)) {
                     $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 32);
                     
@@ -308,7 +309,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 }
                 
                 if ($pagseguro->pagarCredito()) {
-                    GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
+                    DAO_Fatura::Atualizar_Status($fatura_fechada->get_id(), 128);
                     $this->sucessos[] = 'Dados de pagamentos recebidos com sucesso! Em breve o pagamento será confirmado.';
                 } else {
                     $this->erros[] = 'Erro ao tentar enviar solicitação de pagamento';
@@ -381,8 +382,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                 
                 $link_boleto = $pagseguro->pagarBoleto();
                 if (!empty($link_boleto)) {
-                    GerenciarFaturas::Aguardar_Pagamento_Fatura($fatura_fechada);
-                    $this->sucessos[] = 'Boleto gerado com sucesso! o pagamento será confirmado em até 1 dia após o pagamento.';
+                    DAO_Fatura::Atualizar_Status($fatura_fechada->get_id(), 128);
+                    $this->sucessos[] = 'Boleto gerado com sucesso! o pagamento será confirmado em até 3 dias após o pagamento.';
                 } else {
                     $this->erros[] = 'Erro ao tentar gerar solicitação de pagamento';
                 }
@@ -398,6 +399,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
         
         /**
          * Recebe o retorno do pagseguro para informar que o pagamento foi aprovado ou não.
+         * Achar documentação: https://pagseguro.uol.com.br/v2/guia-de-integracao/consulta-de-transacoes-por-codigo.html#!rmcl
          */
         public function RespostaPagSeguro() : void
         {
@@ -406,29 +408,76 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
             $response = $pagseguro->esperarResposta();
             
             if (!empty($response)) {
-                if ($response->getStatus() == 3) {
-                    $fatura_fechada = DAO_Fatura::BuscarPorCOD($response->getReference());
+                $obj_fatura = DAO_Fatura::BuscarPorCOD($response->getReference());
+                
+                if (!empty($obj_fatura)) {
+                    $obj_transacao = new OBJ_Transacao();
                     
-                    if (!empty($fatura_fechada)) {
-                        $obj_transacao = new OBJ_Transacao();
-                        
-                        $obj_transacao->set_fatura_id($fatura_fechada->get_id());
-                        $obj_transacao->set_datahora(date_format(date_create($response->getDate()), 'Y-m-d H:i:s'));
-                        
-                        if ($response->getPaymentMethod()->getType() == 1) {
-                            $obj_transacao->set_forma_pagamento('Crédito');
-                        } else if ($response->getPaymentMethod()->getType() == 2) {
-                            $obj_transacao->set_forma_pagamento('Boleto');
-                        } else if ($response->getPaymentMethod()->getType() == 3) {
-                            $obj_transacao->set_forma_pagamento('Débito');
+                    if ($response->getPaymentMethod()->getType() == 1) {
+                        $obj_transacao->set_forma_pagamento('Crédito');
+                    } else if ($response->getPaymentMethod()->getType() == 2) {
+                        $obj_transacao->set_forma_pagamento('Boleto');
+                    } else if ($response->getPaymentMethod()->getType() == 3) {
+                        $obj_transacao->set_forma_pagamento('Débito');
+                    }
+                    
+                    /**
+                     * Id do status da fatura.
+                     * 
+                     * @var ?int $fatura_status_id
+                     */
+                    $fatura_status_id = null;
+                    
+                    if ($response->getStatus() == 1) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 128) {
+                            $obj_transacao->set_status('Aguardado Confirmação de Pagamento');
+                            $fatura_status_id = 128; //Aguardado Confirmação de Pagamento.
                         }
-                        
-                        $obj_transacao->set_valor($response->getGrossAmount());
-                        $obj_transacao->set_status('Pago');
-                        $obj_transacao->set_pags_codigo($response->getCode());
-                        
-                        DAO_Transacao::Inserir($obj_transacao);
-                        GerenciarFaturas::Pagar_Fatura($fatura_fechada);
+                    } else if ($response->getStatus() == 2) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 128) {
+                            $obj_transacao->set_status('Em análise');
+                            $fatura_status_id = 128; //Aguardado Confirmação de Pagamento.
+                        }
+                    } else if ($response->getStatus() == 3) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 4) {
+                            $obj_transacao->set_status('Paga');
+                            $fatura_status_id = 4; //Paga.
+                        }
+                    } else if ($response->getStatus() == 4) {
+                        if ($obj_fatura->get_obj_status()->get_id() === 128 ||
+                            $obj_fatura->get_obj_status()->get_id() === 2 ||
+                            $obj_fatura->get_obj_status()->get_id() === 16 ||
+                            $obj_fatura->get_obj_status()->get_id() === 32) {
+                            
+                            $obj_transacao->set_status('Disponível');
+                            $fatura_status_id = 4; //Paga.
+                        }
+                    } else if ($response->getStatus() == 5) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 128) {
+                            $obj_transacao->set_status('Em disputa');
+                            $fatura_status_id = 128; //Aguardado Confirmação de Pagamento.
+                        }
+                    } else if ($response->getStatus() == 6) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 64) {
+                            $obj_transacao->set_status('Devolvida');
+                            $fatura_status_id = 64; //Reembolsada.
+                        }
+                    } else if ($response->getStatus() == 7) {
+                        if ($obj_fatura->get_obj_status()->get_id() !== 8) {
+                            $obj_transacao->set_status('Cancelada');
+                            $fatura_status_id = 8; //Cancelada.
+                        }
+                    }
+                    
+                    $obj_transacao->set_fatura_id($obj_fatura->get_id());
+                    $obj_transacao->set_datahora(date_format(date_create($response->getDate()), 'Y-m-d H:i:s'));
+                    $obj_transacao->set_valor($response->getGrossAmount());
+                    $obj_transacao->set_pags_codigo($response->getCode());
+                    
+                    if (!empty($fatura_status_id)) {
+                        if (DAO_Transacao::Inserir($obj_transacao)) {
+                            DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), $fatura_status_id);
+                        }
                     }
                 }
             }

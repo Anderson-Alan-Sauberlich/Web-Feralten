@@ -13,6 +13,7 @@ namespace Module\Application\Model\OBJ;
         private $data_vencimento;
         private $data_fechamento;
         private $servicos = [];
+        private $transacoes = [];
         
         function __constructor()
         {
@@ -97,5 +98,15 @@ namespace Module\Application\Model\OBJ;
         public function get_servicos() : ?array
         {
             return $this->servicos;
+        }
+        
+        public function set_transacoes(?array $transacoes) : void
+        {
+            $this->transacoes = $transacoes;
+        }
+        
+        public function get_transacoes() : ?array
+        {
+            return $this->transacoes;
         }
     }
