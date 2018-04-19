@@ -10,31 +10,38 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<div class="ui secondary segment">
-            <div class="ui doubling stackable grid">
-                <div class="sixteen wide column">
-                    <h1 class="ui huge red header"><?php View_Detalhes::Mostrar_Nome(); ?></h1>
-                </div>
-                <div class="sixteen wide column">
-                    <div class="ui doubling stackable two column grid">
-                        <div class="column">
-                            <h3 class="ui block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
-                        </div>
+        <div class="mrg-sup-det-pec"></div>
+        <div class="ui doubling stackable grid">
+            <div class="sixteen wide column">
+                <h1 class="ui huge red dividing header"><?php View_Detalhes::Mostrar_Nome(); ?></h1>
+            </div>
+            <div class="sixteen wide column">
+                <div class="ui doubling stackable two column grid">
+                    <div class="column">
+                        <h3 class="ui block header">Preço: <?php View_Detalhes::Mostrar_Preco(); ?></h3>
+                    </div>
+                    <?php if (View_Detalhes::Verificar_Fabricante()) { ?>
                         <div class="column">
                     		<h3 class="ui block header">Fabricante: <?php View_Detalhes::Mostrar_Fabricante(); ?></h3>
                 		</div>
+            		<?php } ?>
+            		<?php if (View_Detalhes::Verificar_Estado_Uso()) { ?>
                         <div class="column">
                             <h3 class="ui block header">Estado de Uso: <?php View_Detalhes::Mostrar_Estado_Uso(); ?></h3>
                         </div>
+                    <?php } ?>
+                    <?php if (View_Detalhes::Verificar_Serie()) { ?>
                         <div class="column">
                             <h3 class="ui block header">Número de Série: <?php View_Detalhes::Mostrar_Serie(); ?></h3>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
+            </div>
+            <?php if (View_Detalhes::Verificar_Descricao()) { ?>
                 <div class="sixteen wide column">
                     <h4 class="ui grey block header">Descrição: <?php View_Detalhes::Mostrar_Descricao(); ?></h4>
                 </div>
-            </div>
+            <?php } ?>
         </div>
         <div class="margem-inferior-minimo"></div>
         <div class="ui doubling stackable grid">
@@ -111,36 +118,50 @@
             </div>
         </div>
         <div class="margem-inferior-minimo"></div>
-        <div class="ui secondary segment">
-            <label>Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?>
-        </div>
-        <div class="ui doubling stackable three column center aligned segment grid">
-            <div class="column">
-                <p><?php View_Detalhes::Mostrar_Estado(); ?></p>
-                <p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
-                <?php if (View_Detalhes::Verificar_Preferencia_Entrega(1)) { ?>
-                    <p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
-                    <p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
-                    <p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
-                    <p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
-                    <p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
-                <?php } ?>
+        <?php if (View_Detalhes::Verificar_Preferencia_Entrega()) { ?>
+            <div class="ui secondary segment">
+                <p><label class="ui big horizontal label">Preferencia de Entrega:</label> <?php View_Detalhes::Mostrar_Preferencia_Entrega(); ?></p>
             </div>
-            <div class="column">
-                 <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
-                 <p>Site: <?php View_Detalhes::Mostrar_Site(); ?></p>
-                 <img width="100" height="75" onclick="" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
-            </div>
-            <div class="column">
-                <p>Telefone: <?php View_Detalhes::Mostrar_Fone_Responsavel(); ?></p>
-                <p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
-                <p>Telefone Alternativo: <?php View_Detalhes::Mostrar_Fone_Alternativo_Responsavel(); ?></p>
-                <p>E-mail Alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
-            </div>
-        </div>
+        <?php } ?>
         <div class="ui segment">
-            <?php View_Detalhes::Mostrar_Pativeis(); ?>
+            <div class="ui doubling stackable three column center aligned grid">
+                <div class="column">
+                    <p><?php View_Detalhes::Mostrar_Estado(); ?></p>
+                    <p><?php View_Detalhes::Mostrar_Cidade(); ?></p>
+                    <?php if (View_Detalhes::Validar_Preferencia_Entrega(1)) { ?>
+                        <p>Bairro: <?php View_Detalhes::Mostrar_Bairro(); ?></p>
+                        <p>Rua: <?php View_Detalhes::Mostrar_Rua(); ?></p>
+                        <p>Numero: <?php View_Detalhes::Mostrar_Numero(); ?></p>
+                        <p>Cep: <?php View_Detalhes::Mostrar_Cep(); ?></p>
+                        <?php if (View_Detalhes::Verificar_Complemento()) { ?>
+                        	<p>Complemento: <?php View_Detalhes::Mostrar_Complemento(); ?></p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+                <div class="column">
+                    <p>Telefone: <?php View_Detalhes::Mostrar_Fone_Responsavel(); ?></p>
+                    <p>E-mail: <?php View_Detalhes::Mostrar_Email_Responsavel(); ?></p>
+                    <?php if (View_Detalhes::Verificar_Fone_Alternativo_Responsavel()) { ?>
+                    	<p>Telefone Alternativo: <?php View_Detalhes::Mostrar_Fone_Alternativo_Responsavel(); ?></p>
+                    <?php } ?>
+                    <?php if (View_Detalhes::Verificar_Email_Alternativo_Responsavel()) { ?>
+                    	<p>E-mail Alternativo: <?php View_Detalhes::Mostrar_Email_Alternativo_Responsavel(); ?></p>
+                    <?php } ?>
+                </div>
+                <div class="column">
+                     <p><?php View_Detalhes::Mostrar_Nome_Comercial(); ?></p>
+                     <?php if (View_Detalhes::Verificar_Site()) { ?>
+                     	<p>Site: <?php View_Detalhes::Mostrar_Site(); ?></p>
+                     <?php } ?>
+                     <img class="ui centered small image" src="<?php View_Detalhes::Mostrar_Foto_Entidade(); ?>" onerror="this.src='/resources/img/imagem_indisponivel.png'">
+                </div>
+            </div>
         </div>
+        <?php if (View_Detalhes::Validar_Pativeis()) { ?>
+            <div class="ui segment">
+                <?php View_Detalhes::Mostrar_Pativeis(); ?>
+            </div>
+        <?php } ?>
         <div class="margem-inferior-minimo"></div>
     </section>
     <footer>

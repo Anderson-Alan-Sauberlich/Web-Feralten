@@ -62,6 +62,15 @@ namespace Module\Application\View\SRC\Pecas;
             echo self::$obj_peca->get_nome();
         }
         
+        public static function Mostrar_Preco() : void
+        {
+            if (empty(self::$obj_peca->get_preco()) OR self::$obj_peca->get_preco() == false) {
+                echo 'a negociar';
+            } else {
+                echo 'R$ '.number_format(self::$obj_peca->get_preco(), 2, ',', '.');
+            }
+        }
+        
         public static function Mostrar_Fabricante() : void
         {
             if (empty(self::$obj_peca->get_fabricante()) OR self::$obj_peca->get_fabricante() == false) {
@@ -71,13 +80,9 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
-        public static function Mostrar_Preco() : void
+        public static function Verificar_Fabricante() : bool
         {
-            if (empty(self::$obj_peca->get_preco()) OR self::$obj_peca->get_preco() == false) {
-                echo 'a negociar';
-            } else {
-                echo 'R$ '.number_format(self::$obj_peca->get_preco(), 2, ',', '.');
-            }
+            return !empty(self::$obj_peca->get_fabricante()) OR self::$obj_peca->get_fabricante() != false;
         }
         
         public static function Mostrar_Estado_Uso() : void
@@ -89,6 +94,11 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
+        public static function Verificar_Estado_Uso() : bool
+        {
+            return !empty(self::$obj_peca->get_estado_uso()) OR self::$obj_peca->get_estado_uso() != false;
+        }
+        
         public static function Mostrar_Serie() : void
         {
             if (empty(self::$obj_peca->get_serie()) OR self::$obj_peca->get_serie() == false) {
@@ -98,6 +108,11 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
+        public static function Verificar_Serie() : bool
+        {
+            return !empty(self::$obj_peca->get_serie()) OR self::$obj_peca->get_serie() != false;
+        }
+        
         public static function Mostrar_Descricao() : void
         {
             if (empty(self::$obj_peca->get_descricao()) OR self::$obj_peca->get_descricao() == false) {
@@ -105,6 +120,11 @@ namespace Module\Application\View\SRC\Pecas;
             } else {
                 echo self::$obj_peca->get_descricao();
             }
+        }
+        
+        public static function Verificar_Descricao() : bool
+        {
+            return !empty(self::$obj_peca->get_descricao()) OR self::$obj_peca->get_descricao() != false;
         }
         
         public static function Mostrar_Preferencia_Entrega() : void
@@ -117,14 +137,19 @@ namespace Module\Application\View\SRC\Pecas;
                 foreach (self::$obj_peca->get_preferencias_entrega(self::$obj_peca->get_preferencia_entrega()) as $valor) {
                     foreach ($preferencias_entrega as $valor2) {
                         if ($valor2->get_id() == $valor) {
-                            echo ' - <label>'.$valor2->get_nome().'</label>';
+                            echo '<label class="ui large basic horizontal label"> '.$valor2->get_nome().' </label> ';
                         }
                     }
                 }
             }
         }
         
-        public static function Verificar_Preferencia_Entrega(int $preferencia) : bool
+        public static function Verificar_Preferencia_Entrega() : bool
+        {
+            return !empty(self::$obj_peca->get_preferencia_entrega()) OR self::$obj_peca->get_preferencia_entrega() != false;
+        }
+        
+        public static function Validar_Preferencia_Entrega(int $preferencia) : bool
         {
             if (empty(self::$obj_peca->get_preferencia_entrega()) OR self::$obj_peca->get_preferencia_entrega() == false) {
                 return false;
@@ -205,6 +230,11 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
+        public static function Verificar_Complemento() : bool
+        {
+            return !empty(self::$obj_peca->get_endereco()->get_complemento()) OR self::$obj_peca->get_endereco()->get_complemento() != false;
+        }
+        
         public static function Mostrar_Nome_Comercial() : void
         {
             if (empty(self::$obj_peca->get_entidade()->get_nome_comercial()) OR self::$obj_peca->get_entidade()->get_nome_comercial() == false) {
@@ -225,6 +255,11 @@ namespace Module\Application\View\SRC\Pecas;
             } else {
                 echo self::$obj_peca->get_entidade()->get_site();
             }
+        }
+        
+        public static function Verificar_Site() : bool
+        {
+            return !empty(self::$obj_peca->get_entidade()->get_site()) OR self::$obj_peca->get_entidade()->get_site() != false;
         }
         
         public static function Mostrar_Foto_Entidade() : void
@@ -254,6 +289,11 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
+        public static function Verificar_Email_Alternativo_Responsavel() : bool
+        {
+            return !empty(self::$obj_peca->get_responsavel()->get_email_alternativo()) OR self::$obj_peca->get_responsavel()->get_email_alternativo() != false;
+        }
+        
         public static function Mostrar_Fone_Responsavel() : void
         {
             if (empty(self::$obj_peca->get_responsavel()->get_fone()) OR self::$obj_peca->get_responsavel()->get_fone() == false) {
@@ -270,6 +310,11 @@ namespace Module\Application\View\SRC\Pecas;
             } else {
                 echo self::$obj_peca->get_responsavel()->get_fone_alternativo();
             }
+        }
+        
+        public static function Verificar_Fone_Alternativo_Responsavel() : bool
+        {
+            return !empty(self::$obj_peca->get_responsavel()->get_fone_alternativo()) OR self::$obj_peca->get_responsavel()->get_fone_alternativo() != false;
         }
         
         public static function Mostrar_Pativeis() : void
@@ -331,5 +376,10 @@ namespace Module\Application\View\SRC\Pecas;
                     echo '<div class="ui divider"></div>';
                 }
             }
+        }
+        
+        public static function Validar_Pativeis() : bool
+        {
+            return !empty(self::$categorias_pativeis) AND self::$categorias_pativeis != false;
         }
     }
