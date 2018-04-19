@@ -267,7 +267,7 @@ namespace Module\Application\View\SRC\Pecas;
             if (empty(self::$obj_peca->get_entidade()->get_imagem()) OR self::$obj_peca->get_entidade()->get_imagem() == false) {
                 echo '/resources/img/imagem_indisponivel.png';
             } else {
-                echo str_replace('@', '100x75', self::$obj_peca->get_entidade()->get_imagem());
+                echo str_replace('@', '200x150', self::$obj_peca->get_entidade()->get_imagem());
             }
         }
         
