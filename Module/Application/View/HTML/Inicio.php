@@ -45,7 +45,22 @@
     		</div>
     	</div>
     </section>
-    <div class="margem-inferior-minimo"></div>
+    <div class="margem-inferior-pouco"></div>
+    <section class="ui container" role="main">
+    	<h1 class="ui disabled grey huge dividing header">Feralten News</h1>
+    </section>
+    <div class="ui middle aligned equal width stackable celled grid">
+    	<div class="center aligned row">
+        	<div class="column">
+          		<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FFeraltenOMundoDasPecasNaWeb%2Fposts%2F2082999891977747&width=350" width="350" height="200" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        	</div>
+        	<div class="column">
+          		<blockquote class="twitter-tweet" data-cards="hidden" data-lang="pt"><p lang="pt" dir="ltr">Solicite totalmente grátis a peça que você precisa! Suas solicitações são encaminhadas para todos os nossos vendedores.<br> <a href="https://t.co/z06dML9hl8">https://t.co/z06dML9hl8</a> <a href="https://t.co/fiA6sjdFju">pic.twitter.com/fiA6sjdFju</a></p>&mdash; Feralten (@feralten) <a href="https://twitter.com/feralten/status/986977380873981955?ref_src=twsrc%5Etfw">19 de abril de 2018</a></blockquote>
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        	</div>
+      	</div>
+    </div>
+    <div class="margem-superior-minimo"></div>
     <div class="ui basic secondary vertical segment">
     	<div class="margem-inferior-minimo"></div>
     	<section class="ui container" role="main">
@@ -216,7 +231,7 @@
         	</div>
       	</div>
     </div>
-    <div class="margem-superior-minimo"></div>
+    <div class="margem-superior-pouco"></div>
     <section class="ui center aligned container" role="main">
         <div class="hidden-xs">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -229,7 +244,7 @@
             <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-            <div class="margem-superior-minimo"></div>
+            <div class="margem-superior-pouco"></div>
         </div>
         <h2 class="ui dividing header">Siga o Feralten nas redes sociais:</h2>
         <a href="https://www.facebook.com/FeraltenOMundoDasPecasNaWeb/" target="_blank" class="ui facebook button"><i class="facebook icon"></i>Facebook</a>
