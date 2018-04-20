@@ -221,7 +221,6 @@ $(document).ready(function() {
 					data:data1,
 					processData:false,
 					contentType:false,
-					async: false,
 					type:'POST',
 					success:function(valor) {
 						document.getElementById('foto1').src = valor;
@@ -241,7 +240,6 @@ $(document).ready(function() {
 					data:data2,
 					processData:false,
 					contentType:false,
-					async: false,
 					type:'POST',
 					success:function(valor) {
 						document.getElementById('foto2').src = valor;
@@ -261,7 +259,6 @@ $(document).ready(function() {
 					data:data3,
 					processData:false,
 					contentType:false,
-					async: false,
 					type:'POST',
 					success:function(valor) {
 						document.getElementById('foto3').src = valor;

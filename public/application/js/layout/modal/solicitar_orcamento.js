@@ -72,7 +72,6 @@ function criarOrcamento() {
 	$.ajax({
 		method: "POST",
 		url: "/layout/modal/solicitar-orcamento/",
-		async: false,
 		data: { 
 			categoria_id : categoria,
 			marca_id : marca,
@@ -96,8 +95,8 @@ function criarOrcamento() {
 			$('#msg_list').html($data.content);
 			$('#div_msg').addClass('visible');
 			$('#div_msg').removeClass('hidden');
-			$('#div_orcamento').removeClass('loading');
 		}
+		$('#div_orcamento').removeClass('loading');
 	});
 }
 function cadastrarUsuario() {
@@ -127,11 +126,11 @@ function cadastrarUsuario() {
 		$('#cadastro_msg_list').html(erro);
 		$('#cadastro_msg').addClass('visible');
 		$('#cadastro_msg').removeClass('hidden');
+		$('#form_cadastro').removeClass('loading');
 	} else {
 		$.ajax({
 			method: "POST",
 			url: "/usuario/cadastro/ajax/",
-			async: false,
 			data: { 
 				nome : nome,
 				sobrenome : sobrenome,
@@ -152,9 +151,9 @@ function cadastrarUsuario() {
 				$('#cadastro_msg').addClass('visible');
 				$('#cadastro_msg').removeClass('hidden');
 			}
+			$('#form_cadastro').removeClass('loading');
 		});
 	}
-	$('#form_cadastro').removeClass('loading');
 }
 function logarUsuario() {
 	$('#form_login').addClass('loading');
@@ -175,11 +174,11 @@ function logarUsuario() {
 		$('#login_msg_list').html(erro);
 		$('#login_msg').addClass('visible');
 		$('#login_msg').removeClass('hidden');
+		$('#form_login').removeClass('loading');
 	} else {
 		$.ajax({
 			method: "POST",
 			url: "/usuario/login/ajax/",
-			async: false,
 			data: { 
 				email : email,
 				senha : senha,
@@ -198,7 +197,7 @@ function logarUsuario() {
 				$('#login_msg').addClass('visible');
 				$('#login_msg').removeClass('hidden');
 			}
+			$('#form_login').removeClass('loading');
 		});
 	}
-	$('#form_login').removeClass('loading');
 }

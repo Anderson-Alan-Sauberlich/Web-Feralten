@@ -18,7 +18,7 @@ function Enviar() {
 		$.ajax({
 			method: "POST",
 			url: "/usuario/recuperar-senha/enviar/",
-			async: false,
+			
 			data: { email:$email }
 		}).done(function(valor) {
 			var $valor = JSON.parse(valor);
@@ -32,14 +32,16 @@ function Enviar() {
 				$('#email').val('');
 				$('#btn_enviar').addClass('disabled');
 			}
+			
+			$('#sgm_recuperar_senha').removeClass('loading');
+			$('#mdl_enviar').modal('show');
 		});
 	} else {
 		$('#mdl_header').html('<h3>Erro!</h3>');
 		$('#mdl_content').html($erros);
+		$('#sgm_recuperar_senha').removeClass('loading');
+		$('#mdl_enviar').modal('show');
 	}
-	
-	$('#sgm_recuperar_senha').removeClass('loading');
-	$('#mdl_enviar').modal('show');
 }
 function Salvar($codigo) {
 	$('#sgm_recuperar_senha').addClass('loading');

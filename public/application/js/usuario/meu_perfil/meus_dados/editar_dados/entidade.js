@@ -22,11 +22,10 @@ function MostImgErr($this) {
 	$this.src='/resources/img/imagem_indisponivel.png';
 }
 var loadFile = function(event) {
+	$("#div_img").addClass("active");
 	if (event.target.files.length = 1) {
 		var imagem = event.target.files[0];
-		
 		if (imagem != null && imagem.type.match('image.*')) {
-			$("#div_img").addClass("active");
 			var data1 = new FormData();
 			data1.append('imagem',imagem);
 			$.ajax({
@@ -34,7 +33,6 @@ var loadFile = function(event) {
 				data:data1,
 				processData:false,
 				contentType:false,
-				async: false,
 				type:'POST',
 				success:function(valor) {
 					document.getElementById('foto').src = valor;
@@ -69,7 +67,6 @@ function SalvarEntidade() {
 	$.ajax({
 		method: "POST",
 		url: "/usuario/meu-perfil/meus-dados/editar-dados/entidade/",
-		async: false,
 		data: { 
 			nome_comercial : $nome_comercial,
 			site : $site
@@ -100,15 +97,14 @@ function SalvarEntidade() {
 				$('#div_entidade_site').addClass('error');
 			}
 		}
+		$('#form_entidade').removeClass('loading');
 	});
-	$('#form_entidade').removeClass('loading');
 }
 function RestaurarEntidade() {
 	$('#form_entidade').addClass('loading');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/meus-dados/editar-dados/entidade/",
-		async: false
+		url: "/usuario/meu-perfil/meus-dados/editar-dados/entidade/"
 	}).done(function(data) {
 		var $data = JSON.parse(data);
 		$('#entidade_cpf_cnpj').val($data.cpf_cnpj).trigger('input');
@@ -119,6 +115,6 @@ function RestaurarEntidade() {
 		$('#div_entidade_cpf_cnpj').removeClass('error');
 		$('#div_entidade_nome_comercial').removeClass('error');
 		$('#div_entidade_site').removeClass('error');
+		$('#form_entidade').removeClass('loading');
 	});
-	$('#form_entidade').removeClass('loading');
 }

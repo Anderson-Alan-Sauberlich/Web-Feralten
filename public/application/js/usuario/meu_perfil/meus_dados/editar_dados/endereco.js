@@ -76,7 +76,6 @@ function SalvarEndereco() {
 	$.ajax({
 		method: "POST",
 		url: "/usuario/meu-perfil/meus-dados/editar-dados/endereco/",
-		async: false,
 		data: {
 			cep : $cep,
 			estado : $estado,
@@ -124,15 +123,14 @@ function SalvarEndereco() {
 				$('#div_endereco_complemento').addClass('error');
 			}
 		}
+		$('#form_endereco').removeClass('loading');
 	});
-	$('#form_endereco').removeClass('loading');
 }
 function RestaurarEndereco() {
 	$('#form_endereco').addClass('loading');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/meus-dados/editar-dados/endereco/",
-		async: false
+		url: "/usuario/meu-perfil/meus-dados/editar-dados/endereco/"
 	}).done(function(data) {
 		var $data = JSON.parse(data);
 		$('#endereco_cep').val($data.cep).trigger('input');
@@ -153,6 +151,6 @@ function RestaurarEndereco() {
     	$('#div_endereco_rua').removeClass('error');
     	$('#div_endereco_numero').removeClass('error');
     	$('#div_endereco_complemento').removeClass('error');
+    	$('#form_endereco').removeClass('loading');
 	});
-	$('#form_endereco').removeClass('loading');
 }

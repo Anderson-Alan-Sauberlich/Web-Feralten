@@ -39,7 +39,6 @@ function SalvarUsuario() {
 	$.ajax({
 		method: "POST",
 		url: "/usuario/meu-perfil/meus-dados/editar-dados/usuario/",
-		async: false,
 		data: { 
 			nome : $nome,
 			sobrenome : $sobrenome,
@@ -83,15 +82,14 @@ function SalvarUsuario() {
 				$('#div_usuario_fone_alternativo').addClass('error');
 			}
 		}
+		$('#form_usuario').removeClass('loading');
 	});
-	$('#form_usuario').removeClass('loading');
 }
 function RestaurarUsuario() {
 	$('#form_usuario').addClass('loading');
 	$.ajax({
 		method: "GET",
-		url: "/usuario/meu-perfil/meus-dados/editar-dados/usuario/",
-		async: false
+		url: "/usuario/meu-perfil/meus-dados/editar-dados/usuario/"
 	}).done(function(data) {
 		var $data = JSON.parse(data);
 		$('#usuario_nome').val($data.nome);
@@ -108,6 +106,6 @@ function RestaurarUsuario() {
 		$('#div_usuario_email_alternativo').removeClass('error');
 		$('#div_usuario_fone').removeClass('error');
 		$('#div_usuario_fone_alternativo').removeClass('error');
+		$('#form_usuario').removeClass('loading');
 	});
-	$('#form_usuario').removeClass('loading');
 }

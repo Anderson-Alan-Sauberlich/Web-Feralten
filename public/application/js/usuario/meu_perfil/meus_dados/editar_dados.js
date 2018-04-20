@@ -40,7 +40,6 @@ function SalvarDados() {
 	$.ajax({
 		method: "POST",
 		url: "/usuario/meu-perfil/meus-dados/editar-dados/",
-		async: false,
 		data: { 
 			nome : $nome,
 			sobrenome : $sobrenome,
@@ -137,8 +136,8 @@ function SalvarDados() {
 				}
 			}
 		}
+		$('#form_usuario').removeClass('loading');
+		$('#form_entidade').removeClass('loading');
+		$('#form_endereco').removeClass('loading');
 	});
-	$('#form_usuario').removeClass('loading');
-	$('#form_entidade').removeClass('loading');
-	$('#form_endereco').removeClass('loading');
 }
