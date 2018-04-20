@@ -66,20 +66,37 @@ namespace Module\Application\Model\DAO;
             }
         }
         
+        /**
+         * Deleta em Casacade os elementos da compatibilidade.
+         * Deve ser alterado quando existir a pagina admin para as compatibilidades.
+         * Para que o usuario tenha que deletar manualemete todas as compatibilidades.
+         *
+         * @param int $id
+         * @return bool
+         */
         public static function Deletar(int $id) : bool
         {
+            Conexao::Conectar()->beginTransaction();
+            
             try {
                 $sql = 'DELETE FROM tb_marca WHERE marca_id = :id';
                 
                 $p_sql = Conexao::Conectar()->prepare($sql);
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
-
-                if ($p_sql->execute()) {
-                    return DAO_Marca_Compativel::Deletar($id);
+                
+                if (DAO_Marca_Compativel::Deletar($id)) {
+                    if ($p_sql->execute()) {
+                        return Conexao::$conection->commit();
+                    } else {
+                        Conexao::$conection->rollBack();
+                        return false;
+                    }
                 } else {
+                    Conexao::$conection->rollBack();
                     return false;
                 }
             } catch (PDOException | Exception $e) {
+                Conexao::$conection->rollBack();
                 return false;
             }
         }
