@@ -41,19 +41,19 @@
                                 </span>
                             </div>
                             <div class="ui buttons linha_inteira btnAtualizar">
-                                <div id="salvar" onclick="Salvar('<?php View_Recuperar_Senha::Mostrar_Codigo(); ?>');" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</div>
+                                <div id="salvar" onclick="Salvar('<?php View_Recuperar_Senha::Mostrar_Codigo(); ?>')" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</div>
                                 <div class="or" data-text="Ou"></div>
                                 <button id="restaurar" type="reset" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Limpar</button>
                             </div>
                         </form>
                     <?php } else { ?>
-                        <form class="ui form" data-toggle="validator" role="form">
+                        <div class="ui form" data-toggle="validator" role="form">
                             <div id="div_email" class="field">
                                 <label for="email">Digite seu e-mail. Em breve você receberá um link para redefinir sua senha</label>
                                 <input id="email" name="email" placeholder="E-Mail" type="email">
                             </div>
-                            <div id="btn_enviar" class="ui red button" onclick="Enviar();">Enviar Link</div>
-                        </form>
+                            <div id="btn_enviar" class="ui red button" onclick="Enviar()">Enviar Link</div>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
