@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="seven wide column">
-                <img class="ui centered medium image" src="/resources/img/Feralten_logo_Transparente_intertido.png"/>
+                <img class="ui centered medium image" src="/resources/img/Feralten_logo_Transparente_Invertido_Mini.png"/>
             </div>
         </div>
       	<div class="ui inverted section divider"></div>

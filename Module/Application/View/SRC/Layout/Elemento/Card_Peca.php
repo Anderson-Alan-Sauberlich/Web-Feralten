@@ -138,11 +138,11 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         {
             if (self::$obj_peca instanceof OBJ_Peca) {
                 if (!empty(self::$obj_peca->get_foto(1))) {
-                    return str_replace("@", "400x300", self::$obj_peca->get_foto(1)->get_endereco());
+                    return str_replace("@", "320x240", self::$obj_peca->get_foto(1)->get_endereco());
                 } else if (!empty(self::$obj_peca->get_foto(2))) {
-                    return str_replace("@", "400x300", self::$obj_peca->get_foto(2)->get_endereco());
+                    return str_replace("@", "320x240", self::$obj_peca->get_foto(2)->get_endereco());
                 } else if (!empty(self::$obj_peca->get_foto(3))) {
-                    return str_replace("@", "400x300", self::$obj_peca->get_foto(3)->get_endereco());
+                    return str_replace("@", "320x240", self::$obj_peca->get_foto(3)->get_endereco());
                 } else {
                     return '/resources/img/imagem_indisponivel.png';
                 }
