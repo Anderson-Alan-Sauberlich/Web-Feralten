@@ -24,20 +24,20 @@
                         <div class="fields">
                         	<div class="field">
                            		<label for="cadastro_nome">Seu Nome:</label>
-                           		<input id="cadastro_nome" name="cadastro_nome" placeholder="Nome" type="text">
+                           		<input id="cadastro_nome" placeholder="Nome" type="text">
                            	</div>
                            	<div class="field">
                            		<label for="cadastro_sobrenome">Seu Sobrenome:</label>
-                           		<input id="cadastro_sobrenome" name="cadastro_sobrenome" placeholder="Sobrenome" type="text">
+                           		<input id="cadastro_sobrenome" placeholder="Sobrenome" type="text">
                         	</div>
                         </div>
                     	<div class="field">
                            	<label for="cadastro_email">Seu E-Mail:</label>
-                           	<input id="cadastro_email" name="cadastro_email" placeholder="E-Mail" type="email">
+                           	<input id="cadastro_email" placeholder="E-Mail" type="email">
                     	</div>
                     	<div class="field">
                            	<label for="cadastro_senha">Crie uma senha:</label>
-                           	<input id="cadastro_senha" name="cadastro_senha" placeholder="Senha" type="password">
+                           	<input id="cadastro_senha" placeholder="Senha" type="password">
                     	</div>
                     	<div class="field">
                     		<div id="recaptcha" class="g-recaptcha" data-sitekey="6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ"></div>
@@ -55,15 +55,15 @@
                     	<h2 class="ui dividing header">Entrar com sua conta</h2>
                     	<div class="field">
                            	<label for="login_email">Seu E-Mail:</label>
-                           	<input id="login_email" name="login_email" placeholder="E-Mail" type="email">
+                           	<input id="login_email" placeholder="E-Mail" type="email">
                     	</div>
                     	<div class="field">
                            	<label for="login_senha">Sua senha:</label>
-                           	<input id="login_senha" name="login_senha" placeholder="Senha" type="password">
+                           	<input id="login_senha" placeholder="Senha" type="password">
                     	</div>
                         <div class="field">
                         	<div class="ui checked checkbox">
-                            	<input tabindex="0" checked="checked" name="login_manter" id="login_manter" class="hidden" type="checkbox">
+                            	<input tabindex="0" checked="checked" id="login_manter" class="hidden" type="checkbox">
                             	<label for="login_manter">Mantenha-me Conectado</label>
                         	</div>
                         </div>
@@ -82,7 +82,7 @@
         	</div>
         	<div class="field">
         		<label>Descrição: (Opcional)</label>
-           		<textarea id="descricao" name="descricao" rows="2"></textarea>
+           		<textarea id="descricao" rows="2"></textarea>
         	</div>
         	<button onclick="criarOrcamento()" class="ui big black button">Enviar Solicitação de Orçamentos</button>
 		</div>

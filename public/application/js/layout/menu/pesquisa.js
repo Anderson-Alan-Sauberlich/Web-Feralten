@@ -131,6 +131,8 @@ function Pesquisar($bool_p) {
 	$("#cidade").prop('disabled', true);
 	$("#cidade").prop('readonly', true);
 	
+	$("#recaptcha").remove();
+	
 	if (ano_de == 0 || ano_de == "" || ano_de == undefined) {
 		$("#ano_de").prop('disabled', true);
 		$("#ano_de").prop('readonly', true);
