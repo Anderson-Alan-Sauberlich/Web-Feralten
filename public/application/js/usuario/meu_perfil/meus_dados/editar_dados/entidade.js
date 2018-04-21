@@ -22,39 +22,37 @@ function MostImgErr($this) {
 	$this.src='/resources/img/imagem_indisponivel.png';
 }
 var loadFile = function(event) {
-	$("#div_img").addClass("active");
+	$('#div_img').addClass('active');
 	if (event.target.files.length = 1) {
 		var imagem = event.target.files[0];
 		if (imagem != null && imagem.type.match('image.*')) {
-			var data1 = new FormData();
-			data1.append('imagem',imagem);
+			var fd = new FormData();
+			fd.append('imagem', imagem);
 			$.ajax({
-				url:'/usuario/meu-perfil/meus-dados/editar-dados/entidade/imagem/',
-				data:data1,
-				processData:false,
-				contentType:false,
-				type:'POST',
+				url : '/usuario/meu-perfil/meus-dados/editar-dados/entidade/imagem/',
+				data : fd,
+				processData : false,
+				contentType : false,
+				type : 'POST',
 				success:function(valor) {
-					document.getElementById('foto').src = valor;
-					$("#div_img").removeClass("active");
+					$('#foto').attr('src', valor);
+					$('#div_img').removeClass('active');
 				}
 			});
 		} else {
-			$("#div_img").removeClass("active");
+			$('#div_img').removeClass('active');
 		}
 	}
-	
-	document.getElementById("imagens").value = "";
 };
 function limparCampoFile() {
-	$("#div_img").addClass("active");
+	$('#div_img').addClass('active');
 	$.ajax({
 		method: "DELETE",
 		url: "/usuario/meu-perfil/meus-dados/editar-dados/entidade/imagem/",
 	}).done(function() {
-		document.getElementById("imagem").value = "";
-		document.getElementById("foto").src = "/resources/img/imagem_indisponivel.png";
-		$("#div_img").removeClass("active");
+		$('#imagem').val = "";
+		$('#foto').attr('src', '/resources/img/imagem_indisponivel.png');
+		$('#div_img').removeClass('active');
 	});
 }
 function SalvarEntidade() {

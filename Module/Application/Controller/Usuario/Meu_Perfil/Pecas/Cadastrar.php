@@ -794,7 +794,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                             $_SESSION['imagens_tmp'][$key] = $imagens->get_nome();
                         }
                         
-                        echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-400x300.".$imagens->get_extensao());
+                        echo Gerenciar_Imagens::Gerar_Data_URL($imagens->get_caminho()."-320x240.".$imagens->get_extensao());
                     }
                 }  else {
                     echo "/resources/img/imagem_indisponivel.png";
@@ -894,7 +894,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         {
             $imagens = new Gerenciar_Imagens();
             
-            $caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-400x300");
+            $caminho_imagem = $imagens->Pegar_Caminho_Por_Nome_Imagem_TMP($nome_imagem."-320x240");
             
             if (!empty($caminho_imagem)) {
                 return Gerenciar_Imagens::Gerar_Data_URL($caminho_imagem);
