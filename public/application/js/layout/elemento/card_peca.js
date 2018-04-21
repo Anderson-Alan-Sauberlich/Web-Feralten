@@ -43,9 +43,10 @@ function Salvar_Opcoes_Peca($peca) {
 		$status = 'invisivel';
 	}
 	$.post('/layout/elemento/card-peca/opcoes/',
-	{deletar:$deletar,
-	 status:$status,
-	 peca:$peca},
+	{
+		deletar : $deletar,
+		status : $status,
+		peca : $peca},
 	function(valor){
 		Pesquisar(true);
 	});

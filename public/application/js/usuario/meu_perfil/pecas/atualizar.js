@@ -152,7 +152,7 @@ function limparCampoFile(img) {
 		$("#img1").addClass("active");
 		$.ajax({
 			method: "DELETE",
-			url: "/usuario/meu-perfil/pecas/atualizar/imagem/1",
+			url: "/usuario/meu-perfil/pecas/atualizar/imagem/1/",
 		}).done(function() {
 			document.getElementById("foto1").src = document.getElementById("foto2").src;
 			document.getElementById("foto2").src = document.getElementById("foto3").src;
@@ -163,7 +163,7 @@ function limparCampoFile(img) {
 		$("#img2").addClass("active");
 		$.ajax({
 			method: "DELETE",
-			url: "/usuario/meu-perfil/pecas/atualizar/imagem/2",
+			url: "/usuario/meu-perfil/pecas/atualizar/imagem/2/",
 		}).done(function() {
 			document.getElementById("foto2").src = document.getElementById("foto3").src;
 			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
@@ -173,7 +173,7 @@ function limparCampoFile(img) {
 		$("#img3").addClass("active");
 		$.ajax({
 			method: "DELETE",
-			url: "/usuario/meu-perfil/pecas/atualizar/imagem/3",
+			url: "/usuario/meu-perfil/pecas/atualizar/imagem/3/",
 		}).done(function() {
 			document.getElementById("foto3").src = "/resources/img/imagem_indisponivel.png";
 			$("#img3").removeClass("active");
@@ -185,7 +185,7 @@ function limparCampoFile(img) {
 		document.getElementById("imagens").value = "";
 		$.ajax({
 			method: "DELETE",
-			url: "/usuario/meu-perfil/pecas/atualizar/imagem/123",
+			url: "/usuario/meu-perfil/pecas/atualizar/imagem/123/",
 		}).done(function() {
 			document.getElementById("foto1").src = "/resources/img/imagem_indisponivel.png";
 			document.getElementById("foto2").src = "/resources/img/imagem_indisponivel.png";
