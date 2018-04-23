@@ -4,8 +4,10 @@
         <h2 class="ui header"><?= View_Orcamento::MostrarNome(); ?></h2>
     </div>
     <div class="ui raised secondary clearing segment">
-        <h4 class="ui header"><?= View_Orcamento::MostrarCMMV(); ?></h4>
-        <h4 class="ui header"><?= View_Orcamento::MostrarAnos(); ?></h4>
+        <h4 class="ui block header"><?= View_Orcamento::MostrarCompatibilidade(); ?></h4>
+        <?php if (View_Orcamento::VerificarAnos()) { ?>
+        	<h4 class="ui block header"><?= View_Orcamento::MostrarAnos(); ?></h4>
+        <?php } ?>
         <div class="ui fluid accordion">
         	<div class="title">
             	<h4>Mais Informações...

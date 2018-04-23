@@ -111,15 +111,46 @@ namespace Module\Application\View\SRC\Layout\Elemento;
          * 
          * @return string|NULL
          */
-        public static function MostrarCMMV() : ?string
+        public static function MostrarCompatibilidade() : ?string
         {
             if (self::$obj_orcamento instanceof OBJ_Orcamento) {
-                return self::$obj_orcamento->get_categoria()->get_nome().', '.
-                       self::$obj_orcamento->get_marca()->get_nome().', '.
-                       self::$obj_orcamento->get_modelo()->get_nome().', '.
-                       self::$obj_orcamento->get_versao()->get_nome();
+                $compatibilidade = '';
+                
+                if (!empty(self::$obj_orcamento->get_categoria())) {
+                    $compatibilidade .= self::$obj_orcamento->get_categoria()->get_nome();
+                    
+                    if (!empty(self::$obj_orcamento->get_marca())) {
+                        $compatibilidade .= ', '.self::$obj_orcamento->get_marca()->get_nome();
+                        
+                        if (!empty(self::$obj_orcamento->get_modelo())) {
+                            $compatibilidade .= ', '.self::$obj_orcamento->get_modelo()->get_nome();
+                            
+                            if (!empty(self::$obj_orcamento->get_versao()->get_nome())) {
+                                $compatibilidade .= ', '.self::$obj_orcamento->get_versao()->get_nome();
+                            }
+                        }
+                    }
+                } else {
+                    $compatibilidade = 'Compatibilidade ausente';
+                }
+                
+                return $compatibilidade;
             } else {
                 return null;
+            }
+        }
+        
+        /**
+         * Verifica se está setado pelomenos a categoria da compatibilidade.
+         *
+         * @return bool
+         */
+        public static function ValidarCompatibilidade() : bool
+        {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
+                return !empty(self::$obj_orcamento->get_categoria());
+            } else {
+                return false;;
             }
         }
         
@@ -155,7 +186,34 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         public static function MostrarAnos() : ?string
         {
             if (self::$obj_orcamento instanceof OBJ_Orcamento) {
-                return 'Ano: de '.self::$obj_orcamento->get_ano_de().' até '.self::$obj_orcamento->get_ano_ate();
+                if (!empty(self::$obj_orcamento->get_ano_de()) || !empty(self::$obj_orcamento->get_ano_ate())) {
+                    $anos = 'Ano';
+                    
+                    if (!empty(self::$obj_orcamento->get_ano_de())) {
+                        $anos .= ' de: '.self::$obj_orcamento->get_ano_de();
+                    }
+                    if (!empty(self::$obj_orcamento->get_ano_ate())) {
+                        $anos .= ' até: '.self::$obj_orcamento->get_ano_ate();
+                    }
+                    
+                    return $anos;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        }
+        
+        /**
+         * Verifica se um dos 2 anos foi informado.
+         *
+         * @return bool
+         */
+        public static function VerificarAnos() : bool
+        {
+            if (self::$obj_orcamento instanceof OBJ_Orcamento) {
+                return !empty(self::$obj_orcamento->get_ano_de()) || !empty(self::$obj_orcamento->get_ano_ate());
             } else {
                 return null;
             }

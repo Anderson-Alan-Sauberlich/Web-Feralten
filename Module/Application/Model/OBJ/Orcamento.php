@@ -69,7 +69,7 @@ namespace Module\Application\Model\OBJ;
             }
         }
         
-        public function set_categoria(OBJ_Categoria $categoria) : void
+        public function set_categoria(?OBJ_Categoria $categoria) : void
         {
             $this->categoria = $categoria;
         }
@@ -79,13 +79,15 @@ namespace Module\Application\Model\OBJ;
             return $this->categoria;
         }
         
-        public function set_categoria_id(int $categoria_id) : void
+        public function set_categoria_id(?int $categoria_id) : void
         {
-            if (!$this->categoria instanceof OBJ_Categoria) {
-                $this->categoria = new OBJ_Categoria();
+            if (!empty($categoria_id)) {
+                if (!$this->categoria instanceof OBJ_Categoria) {
+                    $this->categoria = new OBJ_Categoria();
+                }
+                
+                $this->categoria->set_id($categoria_id);
             }
-            
-            $this->categoria->set_id($categoria_id);
         }
         
         public function get_categoria_id() : ?int
@@ -97,7 +99,7 @@ namespace Module\Application\Model\OBJ;
             }
         }
         
-        public function set_marca(OBJ_Marca $marca) : void
+        public function set_marca(?OBJ_Marca $marca) : void
         {
             $this->marca = $marca;
         }
@@ -107,13 +109,15 @@ namespace Module\Application\Model\OBJ;
             return $this->marca;
         }
         
-        public function set_marca_id(int $marca_id) : void
+        public function set_marca_id(?int $marca_id) : void
         {
-            if (!$this->marca instanceof OBJ_Marca) {
-                $this->marca = new OBJ_Marca();
+            if (!empty($marca_id)) {
+                if (!$this->marca instanceof OBJ_Marca) {
+                    $this->marca = new OBJ_Marca();
+                }
+                
+                $this->marca->set_id($marca_id);
             }
-            
-            $this->marca->set_id($marca_id);
         }
         
         public function get_marca_id() : ?int
@@ -125,7 +129,7 @@ namespace Module\Application\Model\OBJ;
             }
         }
         
-        public function set_modelo(OBJ_Modelo $modelo) : void
+        public function set_modelo(?OBJ_Modelo $modelo) : void
         {
             $this->modelo = $modelo;
         }
@@ -135,13 +139,15 @@ namespace Module\Application\Model\OBJ;
             return $this->modelo;
         }
         
-        public function set_modelo_id(int $modelo_id) : void
+        public function set_modelo_id(?int $modelo_id) : void
         {
-            if (!$this->modelo instanceof OBJ_Modelo) {
-                $this->modelo = new OBJ_Modelo();
+            if (!empty($modelo_id)) {
+                if (!$this->modelo instanceof OBJ_Modelo) {
+                    $this->modelo = new OBJ_Modelo();
+                }
+                
+                $this->modelo->set_id($modelo_id);
             }
-            
-            $this->modelo->set_id($modelo_id);
         }
         
         public function get_modelo_id() : ?int
@@ -165,11 +171,13 @@ namespace Module\Application\Model\OBJ;
         
         public function set_versao_id(?int $versao_id) : void
         {
-            if (!$this->versao instanceof OBJ_Versao) {
-                $this->versao = new OBJ_Versao();
+            if (!empty($versao_id)) {
+                if (!$this->versao instanceof OBJ_Versao) {
+                    $this->versao = new OBJ_Versao();
+                }
+                
+                $this->versao->set_id($versao_id);
             }
-            
-            $this->versao->set_id($versao_id);
         }
         
         public function get_versao_id() : ?int

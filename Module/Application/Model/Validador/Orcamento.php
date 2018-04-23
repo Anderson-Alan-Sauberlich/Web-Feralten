@@ -13,12 +13,12 @@ namespace Module\Application\Model\Validador;
         public static function validar_indice($indice = null) : int
         {
             if (empty($indice)) {
-                throw new Exception("Informe um Índice para os Orçamentos");
+                throw new Exception("Informe um índice para os orçamentos");
             } else {
                 if (filter_var($indice, FILTER_VALIDATE_INT)) {
                     return $indice;
                 } else {
-                    throw new Exception("Informe um Índice Válido Para os Orçamentos");
+                    throw new Exception("Informe um índice válido para os orçamentos");
                 }
             }
         }
@@ -26,34 +26,66 @@ namespace Module\Application\Model\Validador;
         public static function validar_id($id = null) : int
         {
             if (empty($id)) {
-                throw new Exception("Informe um ID para o Orçamento");
+                throw new Exception("Informe um ID para o orçamento");
             } else {
                 if (filter_var($id, FILTER_VALIDATE_INT)) {
                     return $id;
                 } else {
-                    throw new Exception("Informe um ID Válido Para o Orçamento");
+                    throw new Exception("Informe um ID válido para o orçamento");
                 }
             }
         }
         
-        public static function validar_categoria_id($id = null) : int
+        public static function validar_categoria_id($id = null) : ?int
         {
-            return Categoria::validar_id($id);
+            if (empty($id)) {
+                return null;
+            } else {
+                if (filter_var($id, FILTER_VALIDATE_INT)) {
+                    return $id;
+                } else {
+                    throw new Exception('Selecione uma categoria válida');
+                }
+            }
         }
         
-        public static function validar_marca_id($id = null) : int
+        public static function validar_marca_id($id = null) : ?int
         {
-            return Marca::validar_id($id);
+            if (empty($id)) {
+                return null;
+            } else {
+                if (filter_var($id, FILTER_VALIDATE_INT)) {
+                    return $id;
+                } else {
+                    throw new Exception("Selecione uma marca válida");
+                }
+            }
         }
         
-        public static function validar_modelo_id($id = null) : int
+        public static function validar_modelo_id($id = null) : ?int
         {
-            return Modelo::validar_id($id);
+            if (empty($id)) {
+                return null;
+            } else {
+                if (filter_var($id, FILTER_VALIDATE_INT)) {
+                    return $id;
+                } else {
+                    throw new Exception("Selecione um modelo válido");
+                }
+            }
         }
         
-        public static function validar_versao_id($id = null) : int
+        public static function validar_versao_id($id = null) : ?int
         {
-            return Versao::validar_id($id);
+            if (empty($id)) {
+                return null;
+            } else {
+                if (filter_var($id, FILTER_VALIDATE_INT)) {
+                    return $id;
+                } else {
+                    throw new Exception("Selecione uma versão válida");
+                }
+            }
         }
         
         public static function validar_ano($ano = null) : void

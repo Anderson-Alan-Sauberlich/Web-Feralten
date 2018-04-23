@@ -27,7 +27,9 @@ namespace Module\Application\Model\Validador;
         
         public static function validar_ano_de($ano_de = null) : ?int
         {
-            if (!empty($ano_de)) {
+            if (empty($ano_de)) {
+                return null;
+            } else {
                 $ano_de = trim($ano_de);
                 
                 if (filter_var($ano_de, FILTER_VALIDATE_INT) !== false) {
@@ -35,14 +37,14 @@ namespace Module\Application\Model\Validador;
                 } else {
                     return null;
                 }
-            } else {
-                return null;
             }
         }
         
         public static function validar_ano_ate($ano_ate = null) : ?int
         {
-            if (!empty($ano_ate)) {
+            if (empty($ano_ate)) {
+                return null;
+            } else {
                 $ano_ate = trim($ano_ate);
                 
                 if (filter_var($ano_ate, FILTER_VALIDATE_INT) !== false) {
@@ -50,8 +52,6 @@ namespace Module\Application\Model\Validador;
                 } else {
                     return null;
                 }
-            } else {
-                return null;
             }
         }
         

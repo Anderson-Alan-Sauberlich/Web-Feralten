@@ -18,7 +18,7 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($id, FILTER_VALIDATE_INT)) {
                     return $id;
                 } else {
-                    throw new Exception("Selecione uma Marca Válida");
+                    throw new Exception("Selecione uma marca válida");
                 }
             }
         }
@@ -36,14 +36,14 @@ namespace Module\Application\Model\Validador;
         public static function validar_url($url_marca = null) : string
         {
             if (empty($url_marca)) {
-                throw new Exception('URL da Marca não Informado');
+                throw new Exception('URL da marca não informado');
             } else {
                 $url_marca = trim($url_marca);
                 
                 if (strip_tags($url_marca) === $url_marca) {
                     return $url_marca;
                 } else {
-                    throw new Exception('URL da Marca Inválida');
+                    throw new Exception('URL da marca inválida');
                 }
             }
         }

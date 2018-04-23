@@ -43,10 +43,27 @@ namespace Module\Email\View\SRC;
         public static function RetornarOrcamentoCMMV() : ?string
         {
             if (self::$obj_orcamento_peca instanceof OBJ_Orcamento_Peca) {
-                return self::$obj_orcamento_peca->get_orcamento()->get_categoria()->get_nome().', '.
-                       self::$obj_orcamento_peca->get_orcamento()->get_marca()->get_nome().', '.
-                       self::$obj_orcamento_peca->get_orcamento()->get_modelo()->get_nome().', '.
-                       self::$obj_orcamento_peca->get_orcamento()->get_versao()->get_nome();
+                $compatibilidade = '';
+                
+                if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_categoria())) {
+                    $compatibilidade .= self::$obj_orcamento_peca->get_orcamento()->get_categoria()->get_nome();
+                    
+                    if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_marca())) {
+                        $compatibilidade .= ', '.self::$obj_orcamento_peca->get_orcamento()->get_marca()->get_nome();
+                        
+                        if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_modelo())) {
+                            $compatibilidade .= ', '.self::$obj_orcamento_peca->get_orcamento()->get_modelo()->get_nome();
+                            
+                            if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_versao())) {
+                                $compatibilidade .= ', '.self::$obj_orcamento_peca->get_orcamento()->get_versao()->get_nome();
+                            }
+                        }
+                    }
+                } else {
+                    $compatibilidade = 'Compatibilidade ausente';
+                }
+                
+                return $compatibilidade;
             } else {
                 return null;
             }
@@ -55,7 +72,20 @@ namespace Module\Email\View\SRC;
         public static function RetornarOrcamentoAnos() : ?string
         {
             if (self::$obj_orcamento_peca instanceof OBJ_Orcamento_Peca) {
-                return 'Ano: de '.self::$obj_orcamento_peca->get_orcamento()->get_ano_de().' até '.self::$obj_orcamento_peca->get_orcamento()->get_ano_ate();
+                if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_ano_de()) || !empty(self::$obj_orcamento_peca->get_orcamento()->get_ano_ate())) {
+                    $anos = 'Ano';
+                    
+                    if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_ano_de())) {
+                        $anos .= ' de: '.self::$obj_orcamento_peca->get_orcamento()->get_ano_de();
+                    }
+                    if (!empty(self::$obj_orcamento_peca->get_orcamento()->get_ano_ate())) {
+                        $anos .= ' até: '.self::$obj_orcamento_peca->get_orcamento()->get_ano_ate();
+                    }
+                    
+                    return $anos;
+                } else {
+                    return null;
+                }
             } else {
                 return null;
             }

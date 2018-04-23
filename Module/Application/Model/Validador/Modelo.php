@@ -13,12 +13,12 @@ namespace Module\Application\Model\Validador;
         public static function validar_id($id = null) : int
         {
             if (empty($id)) {
-                throw new Exception("Selecione o Modelo");
+                throw new Exception("Selecione o modelo");
             } else {
                 if (filter_var($id, FILTER_VALIDATE_INT)) {
                     return $id;
                 } else {
-                    throw new Exception("Selecione um Modelo Válido");
+                    throw new Exception("Selecione um modelo válido");
                 }
             }
         }
@@ -36,14 +36,14 @@ namespace Module\Application\Model\Validador;
         public static function validar_url($url_modelo = null) : string
         {
             if (empty($url_modelo)) {
-                throw new Exception('URL do Modelo não Informado');
+                throw new Exception('URL do modelo não informado');
             } else {
                 $url_modelo = trim($url_modelo);
                 
                 if (strip_tags($url_modelo) === $url_modelo) {
                     return $url_modelo;
                 } else {
-                    throw new Exception('URL do Modelo Inválida');
+                    throw new Exception('URL do modelo inválida');
                 }
             }
         }

@@ -257,10 +257,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         private function SetarDadosDoOrcamento() : void
         {
             if ($this->orcamento instanceof OBJ_Orcamento) {
-                $_SESSION['compatibilidade']['categoria'][$this->orcamento->get_categoria_id()] = $this->orcamento->get_categoria_id();
-                $_SESSION['compatibilidade']['marca'][$this->orcamento->get_marca_id()] = $this->orcamento->get_marca_id();
-                $_SESSION['compatibilidade']['modelo'][$this->orcamento->get_modelo_id()] = $this->orcamento->get_modelo_id();
-                $_SESSION['compatibilidade']['versao'][$this->orcamento->get_versao_id()] = $this->orcamento->get_versao_id();
+                if (!empty($this->orcamento->get_categoria_id())) {
+                    $_SESSION['compatibilidade']['categoria'][$this->orcamento->get_categoria_id()] = $this->orcamento->get_categoria_id();
+                    
+                    if (!empty($this->orcamento->get_marca_id())) {
+                        $_SESSION['compatibilidade']['marca'][$this->orcamento->get_marca_id()] = $this->orcamento->get_marca_id();
+                        
+                        if (!empty($this->orcamento->get_modelo_id())) {
+                            $_SESSION['compatibilidade']['modelo'][$this->orcamento->get_modelo_id()] = $this->orcamento->get_modelo_id();
+                            
+                            if (!empty($this->orcamento->get_versao_id())) {
+                                $_SESSION['compatibilidade']['versao'][$this->orcamento->get_versao_id()] = $this->orcamento->get_versao_id();
+                            }
+                        }
+                    }
+                }
                 
                 $this->cadastrar_form['peca'] = $this->orcamento->get_peca_nome();;
                 $this->cadastrar_form['serie'] = $this->orcamento->get_numero_serie();

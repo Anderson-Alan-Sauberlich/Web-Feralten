@@ -22,21 +22,6 @@ function abrirModal() {
 	var estado_uso = $("#estado_uso").find("option:selected").val();
 	var preferencia_entrega = $("#preferencia_entrega").find("option:selected").val();
 	var erro = '';
-	if (categoria == 0 || categoria == "" || categoria == undefined) {
-		erro += '<li><h4>Categoria</h4></li>';
-	}
-	if (marca == 0 || marca == "" || marca == undefined) {
-		erro += '<li><h4>Marca</h4></li>';
-	}
-	if (modelo == 0 || modelo == "" || modelo == undefined) {
-		erro += '<li><h4>Modelo</h4></li>';
-	}
-	if (versao == 0 || versao == "" || versao == undefined) {
-		erro += '<li><h4>Versão</h4></li>';
-	}
-	if ((ano_de == 0 || ano_de == "" || ano_de == undefined) && (ano_ate == 0 || ano_ate == "" || ano_ate == undefined)) {
-		erro += '<li><h4>Selecione um Ano</h4></li>';
-	}
 	if (peca == 0 || peca == "" || peca == undefined) {
 		erro += '<li><h4>Informe o nome  da peça</h4></li>';
 	}
@@ -44,16 +29,45 @@ function abrirModal() {
 		$('#mdl_content').html(erro);
 		$('#mdl_enviar').modal('show');
 	} else {
-		$('#div_text_orc').html('<h3>'+$("input[name='categoria']:checked").data('nome')+', '+$("#marca").find("option:selected").text()+', '+$("#modelo").find("option:selected").text()+', '+$("#versao").find("option:selected").text()+'</h3>');
-		$('#div_text_orc').append('<h3>Nome da Peça: '+peca+'</h3>');
-		$('#div_text_orc').append('<h3>Ano: de '+ano_de+' até '+ano_ate+'</h3>');
+		if (categoria != 0 && categoria != "" && categoria != undefined) {
+			var $compatibilidade = $("input[name='categoria']:checked").data('nome');
+			
+			if (marca != 0 && marca != "" && marca != undefined) {
+				$compatibilidade += ', '+$("#marca").find("option:selected").text();
+			
+				if (modelo != 0 && modelo != "" && modelo != undefined) {
+					$compatibilidade += ', '+$("#modelo").find("option:selected").text();
+					
+					if (versao != 0 && versao != "" && versao != undefined) {
+						$compatibilidade += ', '+$("#versao").find("option:selected").text();
+					}
+				}
+			}
+			
+			$('#div_text_orc').html('<h3 class="ui block header">'+$compatibilidade+'</h3>');
+		}
+		if (peca != 0 && peca != "" && peca != undefined) {
+			$('#div_text_orc').append('<h3 class="ui block header">'+peca+'</h3>');
+		}
+		if ((ano_de != 0 && ano_de != "" && ano_de != undefined) || (ano_ate != 0 && ano_ate != "" && ano_ate != undefined)) {
+			var $anos = "";
+			
+			if (ano_de != 0 && ano_de != "" && ano_de != undefined) {
+				$anos = ' de: '+ano_de;
+			}
+			if (ano_ate != 0 && ano_ate != "" && ano_ate != undefined) {
+				$anos += ' até: '+ano_ate;
+			}
+			
+			$('#div_text_orc').append('<h3 class="ui block header">Ano'+$anos+'</h3>');
+		}
 		if (preferencia_entrega != 0) {
 			$('#div_text_orc').append('<h4>Preferência de Entrega: '+$("#preferencia_entrega").find("option:selected").text()+'</h4>');
 		}
 		if (estado_uso != 0) {
 			$('#div_text_orc').append('<h4>Estado de Conservação: '+$("#estado_uso").find("option:selected").text()+'</h4>');
 		}
-		$('.ui.large.long.modal').modal('show');
+		$('#mdl_orcamento').modal('show');
 	}
 }
 function criarOrcamento() {
