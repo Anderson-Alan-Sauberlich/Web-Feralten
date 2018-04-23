@@ -125,7 +125,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
                         if (!empty(self::$obj_orcamento->get_modelo())) {
                             $compatibilidade .= ', '.self::$obj_orcamento->get_modelo()->get_nome();
                             
-                            if (!empty(self::$obj_orcamento->get_versao()->get_nome())) {
+                            if (!empty(self::$obj_orcamento->get_versao())) {
                                 $compatibilidade .= ', '.self::$obj_orcamento->get_versao()->get_nome();
                             }
                         }
