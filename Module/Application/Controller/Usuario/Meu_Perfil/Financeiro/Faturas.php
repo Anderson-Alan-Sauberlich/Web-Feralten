@@ -232,7 +232,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         
                         if (empty($fatura_fechada)) {
                             $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 128);
-                        
+                            
                             if (empty($fatura_fechada)) {
                                 $fatura_fechada = GerenciarFaturas::Retornar_Fatura(Login_Session::get_entidade_id(), 2);
                             }
@@ -476,7 +476,21 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
                     if (!empty($fatura_status_id)) {
                         if (DAO_Transacao::Inserir($obj_transacao)) {
-                            DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), $fatura_status_id);
+                            if (DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), $fatura_status_id)) {
+                                if ($fatura_status_id === 4) {
+                                    $entidade = DAO_Entidade::BuscarPorCOD($obj_fatura->get_entidade_id());
+                                    if ($entidade instanceof OBJ_Entidade) {
+                                        //Status 2 = Pagamento Atrasado
+                                        if ($entidade->get_status_id() === 2) {
+                                            DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 1); // Status 1 = Ok
+                                            
+                                            GerenciarFaturas::Cancelar_Fatura_Aberta($entidade->get_id());
+                                            
+                                            GerenciarFaturas::Criar_Fatura($entidade->get_id(), $entidade->get_plano_id(), GerenciarFaturas::MENSAL);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

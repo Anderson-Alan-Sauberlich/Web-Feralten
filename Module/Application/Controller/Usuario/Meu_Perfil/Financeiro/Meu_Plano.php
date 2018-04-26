@@ -159,10 +159,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
                     echo json_encode($retorno);
                 }
-                
-                return $status;
-            } else {
-                return false;
             }
         }
         
@@ -224,10 +220,6 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     
                     echo json_encode($retorno);
                 }
-                
-                return $status;
-            } else {
-                return false;
             }
         }
     }

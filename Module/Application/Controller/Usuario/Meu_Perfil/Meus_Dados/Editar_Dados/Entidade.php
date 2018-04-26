@@ -188,7 +188,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                         $this->sucessos[] = 'Entidade Atualizada com Sucesso';
                         Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                     } else {
-                        $this->erros[] = 'Erro ao tentar Atualizar Entidade';
+                        $this->erros[] = 'Erro ao tentar atualizar entidade';
                     }
                 } else {
                     if ($entidade->get_imagem() == 'del') {
@@ -197,11 +197,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     }
                     
                     if (DAO_Entidade::Atualizar($entidade)) {
-                        $this->sucessos[] = 'Entidade Atualizada com Sucesso';
+                        $this->sucessos[] = 'Entidade atualizada com sucesso';
                         Login_Session::set_entidade_nome($entidade->get_nome_comercial());
                         Login_Session::set_entidade_imagem($entidade->get_imagem());
                     } else {
-                        $this->erros[] = 'Erro ao tentar Atualizar Entidade';
+                        $this->erros[] = 'Erro ao tentar atualizar entidade';
                     }
                 }
             }
@@ -253,7 +253,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                             return false;
                         }
                     } else {
-                        $this->erros[] = 'Erro ao tentar salvar dados da Entidade';
+                        $this->erros[] = 'Erro ao tentar salvar dados da entidade';
                         
                         return false;
                     }

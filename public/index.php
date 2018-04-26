@@ -625,7 +625,7 @@
                                 return $response->withRedirect('/usuario/login/');
                             } else if ($resposta === 'erro') {
                                 return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
-                            } else if ($resposta != 1) {
+                            } else if ($resposta !== 1 && $resposta !== 2) {
                                 return $response->withRedirect('/usuario/meu-perfil/');
                             } else {
                                 return $response;
@@ -695,7 +695,7 @@
                                 return $response->withRedirect('/usuario/login/');
                             } else if ($resposta === 'erro') {
                                 return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
-                            } else if ($resposta != 1) {
+                            } else if ($resposta !== 1 && $resposta !== 2) {
                                 return $response->withRedirect('/usuario/meu-perfil/');
                             } else {
                                 return $response;
@@ -738,10 +738,10 @@
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta === 1) {
-                            return $response->withRedirect('/usuario/meu-perfil/');
                         } else if ($resposta === 'erro') {
                             return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
+                        } else if ($resposta === 1 || $resposta === 2 || $resposta === 0) {
+                            return $response->withRedirect('/usuario/meu-perfil/');
                         } else {
                             return $response;
                         }
@@ -795,12 +795,12 @@
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta === 1) {
-                            return $response->withRedirect('/usuario/meu-perfil/');
                         } else if ($resposta === 'erro') {
                             return $response->withRedirect('/usuario/meu-perfil/pecas/visualizar/');
-                        } else {
+                        } else if ($resposta !== 1 && $resposta !== 2) {
                             return $response;
+                        } else {
+                            return $response->withRedirect('/usuario/meu-perfil/');
                         }
                     });
                 });
@@ -815,7 +815,7 @@
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta != 1) {
+                        } else if ($resposta !== 1 && $resposta !== 2) {
                             return $response->withRedirect('/usuario/meu-perfil/');
                         } else {
                             return $response;
@@ -861,7 +861,7 @@
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta != 1) {
+                        } else if ($resposta !== 1 && $resposta !== 2) {
                             return $response->withRedirect('/usuario/meu-perfil/');
                         } else {
                             return $response;
@@ -877,7 +877,7 @@
                         
                         if ($resposta === false) {
                             return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta != 1) {
+                        } else if ($resposta !== 1 && $resposta != 2) {
                             return $response->withRedirect('/usuario/meu-perfil/');
                         } else {
                             return $response;
@@ -889,15 +889,9 @@
                         
                         $meu_plano->set_plano_id(isset($_POST['plano']) ? $_POST['plano'] : null);
                         
-                        $resposta = $meu_plano->Salvar_Novo_Plano();
+                        $meu_plano->Salvar_Novo_Plano();
                         
-                        if ($resposta === false) {
-                            return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta != 1) {
-                            return $response->withRedirect('/usuario/meu-perfil/');
-                        } else {
-                            return $response;
-                        }
+                        return $response;
                     });
                     
                     $app->post('/cancelar-contratacao[/]', function(Request $request, Response $response, $args) use ($app) {
@@ -905,15 +899,9 @@
                         
                         $meu_plano->set_senha_usuario(isset($_POST['senha_usuario']) ? $_POST['senha_usuario'] : null);
                         
-                        $resposta = $meu_plano->Cancelar_Contratacao();
+                        $meu_plano->Cancelar_Contratacao();
                         
-                        if ($resposta === false) {
-                            return $response->withRedirect('/usuario/login/');
-                        } else if ($resposta != 1) {
-                            return $response->withRedirect('/usuario/meu-perfil/');
-                        } else {
-                            return $response;
-                        }
+                        return $response;
                     });
                 });
             });

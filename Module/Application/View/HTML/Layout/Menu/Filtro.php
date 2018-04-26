@@ -1,6 +1,6 @@
 <?php use Module\Application\View\SRC\Layout\Menu\Filtro as View_Filtro; ?>
 <aside class="row redutorMenuLateral">
-    <nav id="menu_filtro" class="ui vertical inverted left demo blue fluid sombra_painel menu">
+    <nav id="menu_filtro" class="ui vertical inverted blue left demo fluid menu sombra_painel">
         <div class="active item">
             <div class="ui grid">
                 <div class="eleven wide column">

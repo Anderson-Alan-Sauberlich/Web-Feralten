@@ -99,7 +99,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
-                if ($status == 1) {
+                if ($status !== 0) {
                     if (empty($this->erros_visualizar)) {
                         $this->controller_pesquisa->set_peca_usuario(Login_Session::get_entidade_id());
                         $this->controller_pesquisa->set_obj_controller_filtro($this->controller_filtro);

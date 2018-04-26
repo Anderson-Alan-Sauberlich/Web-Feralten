@@ -237,77 +237,77 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
-                if ($status == 1) {
-                    if (!empty($this->peca_id) AND $this->Verificar_Dono_Peca($this->peca_id)) {
-                        if (empty($this->atualizar_form)) {
-                            unset($_SESSION['compatibilidade']);
-                            $this->Deletar_Imagem(123);
-                            
-                            $obj_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
-                            
-                            if (!empty($obj_peca) AND $obj_peca !== false) {
-                                $this->set_form($obj_peca);
-                                
-                                $categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
-                                $marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
-                                $modelos = DAO_Modelo_Pativel::BuscarPorCOD($this->peca_id);
-                                $versoes = DAO_Versao_Pativel::BuscarPorCOD($this->peca_id);
-                                
-                                foreach ($categorias as $categoria) {
-                                    $_SESSION['compatibilidade']['categoria'][$categoria] = $categoria;
-                                }
-                                
-                                foreach ($marcas as $marca) {
-                                    $_SESSION['compatibilidade']['marca'][$marca->get_obj_marca()->get_id()] = $marca->get_obj_marca()->get_id();
-                                    
-                                    if (!empty($marca->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_obj_marca()->get_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
-                                    }
-                                }
-                                
-                                foreach ($modelos as $modelo) {
-                                    $_SESSION['compatibilidade']['modelo'][$modelo->get_obj_modelo()->get_id()] = $modelo->get_obj_modelo()->get_id();
-                                    
-                                    if (!empty($modelo->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_obj_modelo()->get_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
-                                    }
-                                }
-                                
-                                foreach ($versoes as $versao) {
-                                    $_SESSION['compatibilidade']['versao'][$versao->get_obj_versao()->get_id()] = $versao->get_obj_versao()->get_id();
-                                    
-                                    if (!empty($versao->get_ano_id())) {
-                                        $_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_obj_versao()->get_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
-                                    }
-                                }
-                            } else {
-                                return 'erro';
-                            }
-                        }
+                if ($status !== 1 && $status !== 2) {
+                    return $status;
+                }
+                
+                if (!empty($this->peca_id) AND $this->Verificar_Dono_Peca($this->peca_id)) {
+                    if (empty($this->atualizar_form)) {
+                        unset($_SESSION['compatibilidade']);
+                        $this->Deletar_Imagem(123);
                         
-                        if (!isset($_SESSION['imagens_cnst']) OR empty($_SESSION['imagens_cnst'])) {
-                            $fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+                        $obj_peca = DAO_Peca::BuscarPorCOD($this->peca_id);
+                        
+                        if (!empty($obj_peca) AND $obj_peca !== false) {
+                            $this->set_form($obj_peca);
                             
-                            if (!empty($fotos)) {
-                                foreach ($fotos as $foto) {
-                                    $_SESSION['imagens_cnst'][$foto->get_numero()] = $foto->get_nome();
+                            $categorias = DAO_Categoria_Pativel::Buscar_Id_Por_Id_Peca($this->peca_id);
+                            $marcas = DAO_Marca_Pativel::BuscarPorCOD($this->peca_id);
+                            $modelos = DAO_Modelo_Pativel::BuscarPorCOD($this->peca_id);
+                            $versoes = DAO_Versao_Pativel::BuscarPorCOD($this->peca_id);
+                            
+                            foreach ($categorias as $categoria) {
+                                $_SESSION['compatibilidade']['categoria'][$categoria] = $categoria;
+                            }
+                            
+                            foreach ($marcas as $marca) {
+                                $_SESSION['compatibilidade']['marca'][$marca->get_obj_marca()->get_id()] = $marca->get_obj_marca()->get_id();
+                                
+                                if (!empty($marca->get_ano_id())) {
+                                    $_SESSION['compatibilidade']['ano']['ano_mrc_'.$marca->get_obj_marca()->get_id()] = DAO_Marca_Pativel::Buscar_Ano_Por_Id_Ano($marca->get_ano_id());
                                 }
                             }
+                            
+                            foreach ($modelos as $modelo) {
+                                $_SESSION['compatibilidade']['modelo'][$modelo->get_obj_modelo()->get_id()] = $modelo->get_obj_modelo()->get_id();
+                                
+                                if (!empty($modelo->get_ano_id())) {
+                                    $_SESSION['compatibilidade']['ano']['ano_mdl_'.$modelo->get_obj_modelo()->get_id()] = DAO_Modelo_Pativel::Buscar_Ano_Por_Id_Ano($modelo->get_ano_id());
+                                }
+                            }
+                            
+                            foreach ($versoes as $versao) {
+                                $_SESSION['compatibilidade']['versao'][$versao->get_obj_versao()->get_id()] = $versao->get_obj_versao()->get_id();
+                                
+                                if (!empty($versao->get_ano_id())) {
+                                    $_SESSION['compatibilidade']['ano']['ano_vrs_'.$versao->get_obj_versao()->get_id()] = DAO_Versao_Pativel::Buscar_Ano_Por_Id_Ano($versao->get_ano_id());
+                                }
+                            }
+                        } else {
+                            return 'erro';
                         }
-                        
-                        $view = new View_Atualizar($status);
-                        
-                        $view->set_atualizar_campos($this->atualizar_campos);
-                        $view->set_atualizar_erros($this->atualizar_erros);
-                        $view->set_atualizar_form($this->atualizar_form);
-                        $view->set_atualizar_sucesso($this->atualizar_sucesso);
-                        
-                        $view->Executar();
-                    } else {
-                        return 'erro';
                     }
+                    
+                    if (!isset($_SESSION['imagens_cnst']) OR empty($_SESSION['imagens_cnst'])) {
+                        $fotos = DAO_Foto_Peca::Buscar_Fotos($this->peca_id);
+                        
+                        if (!empty($fotos)) {
+                            foreach ($fotos as $foto) {
+                                $_SESSION['imagens_cnst'][$foto->get_numero()] = $foto->get_nome();
+                            }
+                        }
+                    }
+                    
+                    $view = new View_Atualizar($status);
+                    
+                    $view->set_atualizar_campos($this->atualizar_campos);
+                    $view->set_atualizar_erros($this->atualizar_erros);
+                    $view->set_atualizar_form($this->atualizar_form);
+                    $view->set_atualizar_sucesso($this->atualizar_sucesso);
+                    
+                    $view->Executar();
                 } else {
-                    return 1;
+                    return 'erro';
                 }
             } else {
                 return false;
@@ -328,20 +328,20 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
-                if ($status == 1) {
-                    if (!empty($this->peca_id)) {
-                        if (isset($_POST['salvar'])) {
-                            $this->Atualizar_Peca();
-                        } else if (isset($_POST['restaurar'])) {
-                            unset($_SESSION['compatibilidade']);
-                            $this->Deletar_Imagem(123);
-                            $this->Carregar_Pagina();
-                        }
-                    } else {
-                        return 'erro';
+                if ($status !== 1 && $status !== 2) {
+                    return $status;
+                }
+                
+                if (!empty($this->peca_id)) {
+                    if (isset($_POST['salvar'])) {
+                        $this->Atualizar_Peca();
+                    } else if (isset($_POST['restaurar'])) {
+                        unset($_SESSION['compatibilidade']);
+                        $this->Deletar_Imagem(123);
+                        $this->Carregar_Pagina();
                     }
                 } else {
-                    return 1;
+                    return 'erro';
                 }
             } else {
                 return false;

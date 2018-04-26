@@ -210,7 +210,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados;
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
-                if ($status == 0) {
+                if ($status === 0) {
                     $retorno['usuario']['erros'] = [];
                     $retorno['usuario']['campos'] = [];
                     

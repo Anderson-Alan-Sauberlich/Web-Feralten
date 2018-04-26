@@ -212,10 +212,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
         {
             $view = new View_Usuario();
             
-            $obj_usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
-            
-            if ($obj_usuario instanceof OBJ_Usuario) {
-                $view->set_obj_usuario($obj_usuario);
+            if (Login_Session::Verificar_Login()) {
+                $obj_usuario = DAO_Usuario::Buscar_Usuario(Login_Session::get_usuario_id());
+                
+                if ($obj_usuario instanceof OBJ_Usuario) {
+                    $view->set_obj_usuario($obj_usuario);
+                }
             }
             
             return $view;
@@ -241,9 +243,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                 if (DAO_Usuario::Atualizar($usuario)) {
                     Login_Session::set_usuario_nome($usuario->get_nome());
                     
-                    $this->sucessos[] = "Usuario Atualizado com Sucesso";
+                    $this->sucessos[] = "Usuario atualizado com sucesso";
                 } else {
-                    $this->erros[] = "Erro ao tentar Atualizar Usuario";
+                    $this->erros[] = "Erro ao tentar atualizar usuario";
                 }
             }
             
@@ -261,29 +263,25 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function ConcluirCadastro() : bool
         {
-            if (Login_Session::Verificar_Login()) {
-                if (empty($this->erros)) {
-                    $usuario = new OBJ_Usuario();
+            if (empty($this->erros) && Login_Session::Verificar_Login()) {
+                $usuario = new OBJ_Usuario();
+                
+                $usuario->set_nome($this->nome);
+                $usuario->set_sobrenome($this->sobrenome);
+                $usuario->set_email($this->email);
+                $usuario->set_fone($this->fone);
+                $usuario->set_fone_alternativo($this->fone_alternativo);
+                $usuario->set_email_alternativo($this->email_alternativo);
+                $usuario->set_id(Login_Session::get_usuario_id());
+                
+                if (DAO_Usuario::Atualizar($usuario)) {
+                    Login_Session::set_usuario_nome($usuario->get_nome());
                     
-                    $usuario->set_nome($this->nome);
-                    $usuario->set_sobrenome($this->sobrenome);
-                    $usuario->set_email($this->email);
-                    $usuario->set_fone($this->fone);
-                    $usuario->set_fone_alternativo($this->fone_alternativo);
-                    $usuario->set_email_alternativo($this->email_alternativo);
-                    $usuario->set_id(Login_Session::get_usuario_id());
+                    $this->sucessos[] = "Usuario atualizado com sucesso";
                     
-                    if (DAO_Usuario::Atualizar($usuario)) {
-                        Login_Session::set_usuario_nome($usuario->get_nome());
-                        
-                        $this->sucessos[] = "Usuario Atualizado com Sucesso";
-                        
-                        return true;
-                    } else {
-                        $this->erros[] = "Erro ao tentar Atualizar Usuario";
-                        return false;
-                    }
+                    return true;
                 } else {
+                    $this->erros[] = "Erro ao tentar atualizar usuario";
                     return false;
                 }
             } else {

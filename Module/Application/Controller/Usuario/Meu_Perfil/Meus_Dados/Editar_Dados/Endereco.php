@@ -265,34 +265,28 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function SalvarDados() : void
         {
-            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
-                $status = Controller_Header_Usuario::Verificar_Status_Usuario();
+            if (empty($this->erros) && Login_Session::Verificar_Login()) {
+                $endereco = new OBJ_Endereco();
                 
-                if ($status == 1) {
-                    if (empty($this->erros)) {
-                        $endereco = new OBJ_Endereco();
-                        
-                        $endereco->set_entidade_id(Login_Session::get_entidade_id());
-                        $endereco->set_complemento($this->complemento);
-                        $endereco->set_rua($this->rua);
-                        $endereco->set_bairro($this->bairro);
-                        $endereco->set_cep($this->cep);
-                        $endereco->set_numero($this->numero);
-                        
-                        $obj_cidade = new OBJ_Cidade();
-                        $obj_cidade->set_id($this->cidade);
-                        $endereco->set_cidade($obj_cidade);
-                        
-                        $obj_estado = new OBJ_Estado();
-                        $obj_estado->set_id($this->estado);
-                        $endereco->set_estado($obj_estado);
-                        
-                        if (DAO_Endereco::Atualizar($endereco) === false) {
-                            $this->erros[] = "Erro ao tentar Atualizar Endereço";
-                        } else {
-                            $this->sucessos[] = "O Endereço do seu Usuario foi Atualizado com Sucesso!";
-                        }
-                    }
+                $endereco->set_entidade_id(Login_Session::get_entidade_id());
+                $endereco->set_complemento($this->complemento);
+                $endereco->set_rua($this->rua);
+                $endereco->set_bairro($this->bairro);
+                $endereco->set_cep($this->cep);
+                $endereco->set_numero($this->numero);
+                
+                $obj_cidade = new OBJ_Cidade();
+                $obj_cidade->set_id($this->cidade);
+                $endereco->set_cidade($obj_cidade);
+                
+                $obj_estado = new OBJ_Estado();
+                $obj_estado->set_id($this->estado);
+                $endereco->set_estado($obj_estado);
+                
+                if (DAO_Endereco::Atualizar($endereco) === false) {
+                    $this->erros[] = "Erro ao tentar atualizar endereço";
+                } else {
+                    $this->sucessos[] = "O Endereço do seu usuario foi atualizado com sucesso!";
                 }
             }
             
@@ -310,32 +304,28 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function ConcluirCadastro() : bool
         {
-            if (Login_Session::Verificar_Login()) {
-                if (empty($this->erros)) {
-                    $obj_estado = new OBJ_Estado();
-                    $obj_estado->set_id($this->estado);
-                    
-                    $obj_cidade = new OBJ_Cidade();
-                    $obj_cidade->set_id($this->cidade);
-                    
-                    $endereco = new OBJ_Endereco();
-                    $endereco->set_id(0);
-                    $endereco->set_entidade_id(Login_Session::get_entidade_id());
-                    $endereco->set_cidade($obj_cidade);
-                    $endereco->set_estado($obj_estado);
-                    $endereco->set_numero($this->numero);
-                    $endereco->set_cep($this->cep);
-                    $endereco->set_bairro($this->bairro);
-                    $endereco->set_rua($this->rua);
-                    $endereco->set_complemento($this->complemento);
-                    
-                    if (DAO_Endereco::Inserir($endereco)) {
-                        return true;
-                    } else {
-                        $this->erros[] = 'Erro ao tentar salvar dados do Endereço';
-                        return false;
-                    }
+            if (empty($this->erros) && Login_Session::Verificar_Login()) {
+                $obj_estado = new OBJ_Estado();
+                $obj_estado->set_id($this->estado);
+                
+                $obj_cidade = new OBJ_Cidade();
+                $obj_cidade->set_id($this->cidade);
+                
+                $endereco = new OBJ_Endereco();
+                $endereco->set_id(0);
+                $endereco->set_entidade_id(Login_Session::get_entidade_id());
+                $endereco->set_cidade($obj_cidade);
+                $endereco->set_estado($obj_estado);
+                $endereco->set_numero($this->numero);
+                $endereco->set_cep($this->cep);
+                $endereco->set_bairro($this->bairro);
+                $endereco->set_rua($this->rua);
+                $endereco->set_complemento($this->complemento);
+                
+                if (DAO_Endereco::Inserir($endereco)) {
+                    return true;
                 } else {
+                    $this->erros[] = 'Erro ao tentar salvar dados do endereço';
                     return false;
                 }
             } else {
@@ -378,13 +368,11 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function Retornar_Cidades_Por_Estado() : void
         {
-            if (Controller_Header_Usuario::Verificar_Autenticacao()) {
-                if (empty($this->erros)) {
-                    $cidades = DAO_Cidade::BuscarPorCOD($this->estado);
-                    
-                    if (!empty($cidades) && $cidades != false) {
-                        View_Endereco::MostrarCidades($cidades);
-                    }
+            if (empty($this->erros) && Login_Session::Verificar_Login()) {
+                $cidades = DAO_Cidade::BuscarPorCOD($this->estado);
+                
+                if (!empty($cidades) && $cidades != false) {
+                    View_Endereco::MostrarCidades($cidades);
                 }
             }
         }

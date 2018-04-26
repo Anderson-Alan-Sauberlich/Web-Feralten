@@ -60,7 +60,7 @@ namespace Module\Application\View\SRC\Layout\Header;
         public static function RetornarImagemEntidade() : ?string
         {
             if (!empty(Login_Session::get_entidade_imagem())) {
-                return str_replace("@", "200x150", Login_Session::get_entidade_imagem());
+                return str_replace("@", "100x75", Login_Session::get_entidade_imagem());
             } else {
                 return '/resources/img/imagem_indisponivel.png';
             }

@@ -188,7 +188,7 @@ namespace Module\Application\Controller\Common\Util;
             $valor_total = self::Recalcular_Valor_Total($obj_fatura->get_id());
             
             if ($valor_total !== null) {
-                if ($valor_total === 0) {
+                if ($valor_total <= 0) {
                     if (!DAO_Fatura::Atualizar_Status($obj_fatura->get_id(), 4)) {
                         return false;
                     }
@@ -261,6 +261,9 @@ namespace Module\Application\Controller\Common\Util;
             $faturas = DAO_Fatura::BuscarPorStatusDataFechamento(1, date('Y-m-d H:i:s'));
             
             foreach ($faturas as $fatura) {
+                //Quando for criada a tabela assinaturas, em vez de pegar o id usuario e então pegar o id do plano.
+                //tb_assinatura, tb_serviço
+                //https://github.com/Anderson-Alan-Sauberlich/Database-Feralten/projects/7
                 $id_plano = DAO_Entidade::Pegar_Plano_Id($fatura->get_entidade_id());
                 
                 if (!empty($id_plano) AND $id_plano != false) {
@@ -271,32 +274,17 @@ namespace Module\Application\Controller\Common\Util;
         
         /**
          * Function que deve ser chamada pelo Cron do linux e executada uma vez por dia durante a madrugada.
-         * 
-         * Quando o valor da fatura for fechado com menos de 5 reais e o usuário não realizar o pagamento.
-         * Em vez de bloquear a conta, adicionar esse valor na nova fatura.
          */
         public static function Gerenciar_Todas_Faturas_Fechadas() : void
         {
             $faturas = DAO_Fatura::BuscarPorStatusDataVencimento(2, date('Y-m-d H:i:s'));
             
             foreach ($faturas as $fatura) {
-                if ($fatura->get_valor_total() > 5) {
-                    self::Cancelar_Fatura_Aberta($fatura->get_entidade_id());
-                    
-                    DAO_Fatura::Atualizar_Status($fatura->get_id(), 32);
-                    
-                    DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 2);
-                } else {
-                    $id_plano = DAO_Entidade::Pegar_Plano_Id($fatura->get_entidade_id());
-                    
-                    if (!empty($id_plano) AND $id_plano != false) {
-                        DAO_Fatura::Atualizar_Status($fatura->get_id(), 4);
-                        
-                        self::Criar_Fatura($fatura->get_entidade_id(), $id_plano);
-                        
-                        self::Adicionar_Serviço_Fatura($fatura->get_entidade_id(), 'Valor da fatura antiga, por pagamento atrasado', $fatura->get_valor_total());
-                    }
-                }
+                self::Cancelar_Fatura_Aberta($fatura->get_entidade_id());
+                
+                DAO_Fatura::Atualizar_Status($fatura->get_id(), 32);
+                
+                DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 2);
             }
         }
     }
