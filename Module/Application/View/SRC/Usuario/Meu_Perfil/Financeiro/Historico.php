@@ -86,7 +86,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
                     $view_fatura->Executar();
                 }
             } else {
-                echo "<div class=\"ui container\"><h2><label class=\"lbPanel\">Nenhuma fatura foi encontrado.</label></h2></div>";
+                echo "<div class=\"ui container\"><h2><label class=\"lbPanel\">Nenhuma fatura foi encontrada.</label></h2></div>";
             }
         }
     }

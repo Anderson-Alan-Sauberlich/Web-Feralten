@@ -482,7 +482,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                                     if ($entidade instanceof OBJ_Entidade) {
                                         //Status 2 = Pagamento Atrasado
                                         if ($entidade->get_status_id() === 2) {
-                                            DAO_Entidade::Atualizar_Status($fatura->get_entidade_id(), 1); // Status 1 = Ok
+                                            DAO_Entidade::Atualizar_Status($obj_fatura->get_entidade_id(), 1); // Status 1 = Ok
                                             
                                             GerenciarFaturas::Cancelar_Fatura_Aberta($entidade->get_id());
                                             
