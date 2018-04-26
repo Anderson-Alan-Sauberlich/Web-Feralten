@@ -465,7 +465,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                     } else if ($response->getStatus() == 7) {
                         if ($obj_fatura->get_obj_status()->get_id() !== 8) {
                             $obj_transacao->set_status('Cancelada');
-                            $fatura_status_id = 8; //Cancelada.
+                            $fatura_status_id = 2; //Fechada.
                         }
                     }
                     
