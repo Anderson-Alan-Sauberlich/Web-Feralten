@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('#senha').attr('type', 'password');
 	$('.ui.checkbox').checkbox();
-	$(document).ready(function(){ $('[data-toggle="popover"]').popover(); });
+	$('[data-toggle="popover"]').popover();
 });
 function MostrarSenha() {
 	var passwordField = $('#senha');

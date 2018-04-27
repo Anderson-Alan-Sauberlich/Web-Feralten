@@ -99,7 +99,7 @@
                                     <label for="preco" class="lbPanel">Preço da Peça:</label>
                                     <div class="input-group <?php View_Cadastrar::Incluir_Classe_Erros("preco"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                        <input id="preco" name="preco" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("preco") ?>" placeholder="Preço da Peça" />
+                                        <input id="preco" name="preco" type="text" class="form-control" value="<?php View_Cadastrar::Manter_Valor("preco") ?>" placeholder="Preço da Peça" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Pratique Preço Justo! Lembre-se, o Feralten não cobra comissão!" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">

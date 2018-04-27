@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('.ui.checkbox').checkbox();
 	$('.ui.dropdown').dropdown();
+	$('[data-toggle="popover"]').popover();
 	$('#preco').mask('#.##0,00', {reverse: true});
 });
 function Carregar_Categoria(ca) {
