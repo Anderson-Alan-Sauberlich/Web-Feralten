@@ -52,7 +52,7 @@
     <div class="ui middle aligned equal width stackable celled grid">
     	<div class="center aligned row">
         	<div class="column">
-          		<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FFeraltenOMundoDasPecasNaWeb%2Fposts%2F2082999891977747&width=350" width="350" height="200" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        		<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FFeraltenOMundoDasPecasNaWeb%2Fposts%2F2090799064531163&width=350" width="350" height="200" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         	</div>
         	<div class="column">
           		<blockquote class="twitter-tweet" data-cards="hidden" data-lang="pt"><p lang="pt" dir="ltr">Solicite totalmente grátis a peça que você precisa! Suas solicitações são encaminhadas para todos os nossos vendedores.<br> <a href="https://t.co/z06dML9hl8">https://t.co/z06dML9hl8</a> <a href="https://t.co/fiA6sjdFju">pic.twitter.com/fiA6sjdFju</a></p>&mdash; Feralten (@feralten) <a href="https://twitter.com/feralten/status/986977380873981955?ref_src=twsrc%5Etfw">19 de abril de 2018</a></blockquote>
