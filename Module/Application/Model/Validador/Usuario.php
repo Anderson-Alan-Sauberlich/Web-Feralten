@@ -225,7 +225,7 @@ namespace Module\Application\Model\Validador;
             if (empty($senha)) {
                 throw new Exception('Preencha o Campo Senha');
             } else {
-                if (strlen($senha) >= 6 AND strlen($senha) <= 20) {
+                if (strlen($senha) >= 6 AND strlen($senha) <= 64) {
                     $valor = strip_tags($senha);
                     
                     if ($valor === $senha) {
@@ -234,7 +234,7 @@ namespace Module\Application\Model\Validador;
                         throw new Exception('A Senha Não pode conter Tags de Programação');
                     }
                 } else {
-                    throw new Exception('A Senha Deve conter de 6 a 20 caracteres');
+                    throw new Exception('A Senha Deve conter de 6 a 64 caracteres');
                 }
             }
         }
@@ -259,7 +259,7 @@ namespace Module\Application\Model\Validador;
             if (empty($senha_nova)) {
                 throw new Exception('Preencha o Campo Nova Senha');
             } else {
-                if (strlen($senha_nova) >= 6 AND strlen($senha_nova) <= 20) {
+                if (strlen($senha_nova) >= 6 AND strlen($senha_nova) <= 64) {
                     $valor = strip_tags($senha_nova);
                         
                     if ($valor === $senha_nova) {
@@ -268,7 +268,7 @@ namespace Module\Application\Model\Validador;
                         throw new Exception('A Senha Não pode conter Tags de Programação');
                     }
                 } else {
-                    throw new Exception('A Senha Deve conter de 6 a 20 caracteres');
+                    throw new Exception('A Senha Deve conter de 6 a 64 caracteres');
                 }
             }
         }
