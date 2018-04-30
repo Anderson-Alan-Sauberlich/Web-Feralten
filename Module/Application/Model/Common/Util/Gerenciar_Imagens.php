@@ -102,7 +102,7 @@ namespace Module\Application\Model\Common\Util;
         {
             $this->pasta_entidade = RAIZ.'/public/imagens/'.$this->entidade.'/';
             $this->diretorio = $this->pasta_entidade.'tmp/';
-
+            
             $this->Deletar_Imagem_Entidade();
             
             if (file_exists($this->diretorio)) {

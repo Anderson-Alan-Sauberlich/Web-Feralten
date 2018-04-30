@@ -217,18 +217,28 @@ $(document).ready(function() {
 			
 			if (imagem1 != null && imagem1.type.match('image.*')) {
 				$("#img1").addClass("active");
-				var data1 = new FormData();
-				data1.append('imagem1',imagem1);
-				$.ajax({
-					url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
-					data:data1,
-					processData:false,
-					contentType:false,
-					type:'POST',
-					success:function(valor) {
-						document.getElementById('foto1').src = valor;
-						$("#img1").removeClass("active");
-					}
+				resizeImage({
+				    file: imagem1,
+				    maxSize: 1024
+				}).then(function (resizedImage) {
+				    console.log("upload resized image");
+				    var data1 = new FormData();
+					data1.append('imagem1', resizedImage);
+					$.ajax({
+						url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
+						data:data1,
+						processData:false,
+						cache:false,
+						contentType:false,
+						type:'POST',
+						success:function(valor) {
+							document.getElementById('foto1').src = valor;
+							$("#img1").removeClass("active");
+						}
+					});
+				}).catch(function (err) {
+				    console.error(err);
+				    $("#img1").removeClass("active");
 				});
 			} else {
 				$("#img1").removeClass("active");
@@ -236,18 +246,28 @@ $(document).ready(function() {
 			
 			if (imagem2 != null &&imagem2.type.match('image.*')) {
 				$("#img2").addClass("active");
-				var data2 = new FormData();
-				data2.append('imagem2',imagem2);
-				$.ajax({
-					url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
-					data:data2,
-					processData:false,
-					contentType:false,
-					type:'POST',
-					success:function(valor) {
-						document.getElementById('foto2').src = valor;
-						$("#img2").removeClass("active");
-					}
+				resizeImage({
+				    file: imagem2,
+				    maxSize: 1024
+				}).then(function (resizedImage) {
+				    console.log("upload resized image");
+				    var data2 = new FormData();
+					data2.append('imagem2', resizedImage);
+					$.ajax({
+						url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
+						data:data2,
+						processData:false,
+						cache:false,
+						contentType:false,
+						type:'POST',
+						success:function(valor) {
+							document.getElementById('foto2').src = valor;
+							$("#img2").removeClass("active");
+						}
+					});
+				}).catch(function (err) {
+				    console.error(err);
+				    $("#img2").removeClass("active");
 				});
 			} else {
 				$("#img2").removeClass("active");
@@ -255,18 +275,28 @@ $(document).ready(function() {
 			
 			if (imagem3 != null && imagem3.type.match('image.*')) {
 				$("#img3").addClass("active");
-				var data3 = new FormData();
-				data3.append('imagem3',imagem3);
-				$.ajax({
-					url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
-					data:data3,
-					processData:false,
-					contentType:false,
-					type:'POST',
-					success:function(valor) {
-						document.getElementById('foto3').src = valor;
-						$("#img3").removeClass("active");
-					}
+				resizeImage({
+				    file: imagem3,
+				    maxSize: 1024
+				}).then(function (resizedImage) {
+				    console.log("upload resized image");
+				    var data3 = new FormData();
+					data3.append('imagem3', resizedImage);
+					$.ajax({
+						url:'/usuario/meu-perfil/pecas/atualizar/imagem/',
+						data:data3,
+						processData:false,
+						cache:false,
+						contentType:false,
+						type:'POST',
+						success:function(valor) {
+							document.getElementById('foto3').src = valor;
+							$("#img3").removeClass("active");
+						}
+					});
+				}).catch(function (err) {
+				    console.error(err);
+				    $("#img3").removeClass("active");
 				});
 			} else {
 				$("#img3").removeClass("active");
@@ -283,3 +313,53 @@ $(document).ready(function() {
 function MostImgErr($ths) {
 	$ths.src='/resources/img/imagem_indisponivel.png';
 }
+//----------------------------------
+var resizeImage = function (settings) {
+    var file = settings.file;
+    var maxSize = settings.maxSize;
+    var reader = new FileReader();
+    var image = new Image();
+    var canvas = document.createElement('canvas');
+    var dataURItoBlob = function (dataURI) {
+        var bytes = dataURI.split(',')[0].indexOf('base64') >= 0 ?
+            atob(dataURI.split(',')[1]) :
+            unescape(dataURI.split(',')[1]);
+        var mime = dataURI.split(',')[0].split(':')[1].split(';')[0];
+        var max = bytes.length;
+        var ia = new Uint8Array(max);
+        for (var i = 0; i < max; i++)
+            ia[i] = bytes.charCodeAt(i);
+        return new Blob([ia], { type: mime });
+    };
+    var resize = function () {
+        var width = image.width;
+        var height = image.height;
+        if (width > height) {
+            if (width > maxSize) {
+                height *= maxSize / width;
+                width = maxSize;
+            }
+        } else {
+            if (height > maxSize) {
+                width *= maxSize / height;
+                height = maxSize;
+            }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+        var dataUrl = canvas.toDataURL('image/jpeg');
+        return dataURItoBlob(dataUrl);
+    };
+    return new Promise(function (ok, no) {
+        if (!file.type.match(/image.*/)) {
+            no(new Error("Not an image"));
+            return;
+        }
+        reader.onload = function (readerEvent) {
+            image.onload = function () { return ok(resize()); };
+            image.src = readerEvent.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+};
