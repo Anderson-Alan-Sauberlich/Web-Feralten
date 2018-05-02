@@ -254,6 +254,7 @@
         <a href="https://www.instagram.com/feralten/" target="_blank" class="ui instagram button"><i class="instagram icon"></i>Instagram</a>
         <div class="margem-superior-minimo"></div>
     </section>
+    <?php View_Inicio::Carregar_Modal_Saindo(); ?>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>

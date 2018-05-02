@@ -12,7 +12,7 @@
         <div class="ui approve right labeled icon button">Continuar <i class="checkmark icon"></i></div>
     </div>
 </div>
-<div id="mdl_orcamento" class="ui modal">
+<div id="mdl_orcamento" class="ui long modal">
 	<i class="close icon"></i>
 	<div class="scrolling content">
 		<?php if (!View_Solicitar_Orcamento::Verificar_Logado()) { ?>
