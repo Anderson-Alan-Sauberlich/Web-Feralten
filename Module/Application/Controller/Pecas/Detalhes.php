@@ -83,7 +83,9 @@ namespace Module\Application\Controller\Pecas;
                 
                 $view->Executar();
             } else {
-                return 'erro';
+                $view = new View_Detalhes();
+                
+                $view->Executar();
             }
         }
         

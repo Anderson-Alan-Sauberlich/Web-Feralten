@@ -23,11 +23,17 @@
                     	<h2 class="ui dividing header">Entrar com sua conta</h2>
                     	<div class="field">
                            	<label for="login_email">Seu E-Mail:</label>
-                           	<input id="login_email" placeholder="E-Mail" type="email">
+                           	<div class="ui left icon input">
+                           		<i class="mail icon"></i>
+                           		<input id="login_email" placeholder="E-Mail" type="email">
+                           	</div>
                     	</div>
                     	<div class="field">
                            	<label for="login_senha">Sua senha:</label>
-                           	<input id="login_senha" placeholder="Senha" type="password">
+                           	<div class="ui left icon input">
+                           		<i class="unlock alternate icon"></i>
+                           		<input id="login_senha" placeholder="Senha" type="password">
+                           	</div>
                     	</div>
                         <div class="field">
                         	<div class="ui checked checkbox">
@@ -40,29 +46,41 @@
                         	<div id="login_msg_header" class="header"></div>
                         	<ul id="login_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="logarUsuario();" class="ui red big fluid button" type="submit">Entrar</button>
+                    	<button onclick="logarUsuario();" class="ui red big fluid button" type="submit"><i class="sign in icon"></i>Entrar</button>
                     </div>
                 </div>
         		<div class="column">
                     <div id="form_cadastro" class="ui equal width form">
                     	<h2 class="ui dividing header">Criar uma conta</h2>
-                        <div class="fields">
+                        <div class="two fields">
                         	<div class="field">
                            		<label for="cadastro_nome">Seu Nome:</label>
-                           		<input id="cadastro_nome" placeholder="Nome" type="text">
+                           		<div class="ui left icon input">
+                           			<i class="user icon"></i>
+                           			<input id="cadastro_nome" placeholder="Nome" type="text">
+                           		</div>
                            	</div>
                            	<div class="field">
                            		<label for="cadastro_sobrenome">Seu Sobrenome:</label>
-                           		<input id="cadastro_sobrenome" placeholder="Sobrenome" type="text">
+                           		<div class="ui left icon input">
+                           			<i class="user icon"></i>
+                           			<input id="cadastro_sobrenome" placeholder="Sobrenome" type="text">
+                           		</div>
                         	</div>
                         </div>
                     	<div class="field">
                            	<label for="cadastro_email">Seu E-Mail:</label>
-                           	<input id="cadastro_email" placeholder="E-Mail" type="email">
+                           	<div class="ui left icon input">
+                           		<i class="mail icon"></i>
+                           		<input id="cadastro_email" placeholder="E-Mail" type="email">
+                           	</div>
                     	</div>
                     	<div class="field">
                            	<label for="cadastro_senha">Crie uma senha:</label>
-                           	<input id="cadastro_senha" placeholder="Senha" type="password">
+                           	<div class="ui left icon input">
+                           		<i class="unlock alternate icon"></i>
+                           		<input id="cadastro_senha" placeholder="Senha" type="password">
+                           	</div>
                     	</div>
                     	<div class="field">
                     		<div id="recaptcha" class="g-recaptcha" data-sitekey="6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ"></div>
@@ -72,7 +90,7 @@
                         	<div id="cadastro_msg_header" class="header"></div>
                         	<ul id="cadastro_msg_list" class="list"></ul>
                         </div>
-                    	<button onclick="cadastrarUsuario()" class="ui green big fluid button" type="submit">Criar Conta</button>
+                    	<button onclick="cadastrarUsuario()" class="ui green big fluid button" type="submit"><i class="user plus icon"></i>Criar Conta</button>
                     </div>
                 </div>
             </div>

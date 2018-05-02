@@ -4,6 +4,7 @@ namespace Module\Application\View\SRC\Pecas;
     use Module\Application\Controller\Pecas\Detalhes as Controller_Detalhes;
     use Module\Application\Model\OBJ\Peca as OBJ_Peca;
     use Module\Application\View\SRC\Layout\Form\Contato_Anunciante as View_Contato_Anunciante;
+    use Module\Application\View\SRC\Layout\Menu\Pesquisa as View_Pesquisa;
     
     class Detalhes
     {
@@ -46,6 +47,16 @@ namespace Module\Application\View\SRC\Pecas;
         public function Executar()
         {
             require_once RAIZ.'/Module/Application/View/HTML/Pecas/Detalhes.php';
+        }
+        
+        public static function Verificar_Peca() : bool
+        {
+            return self::$obj_peca instanceof OBJ_Peca;
+        }
+        
+        public static function Incluir_Menu_Pesquisa()
+        {
+            new View_Pesquisa();
         }
         
         public static function Incluir_Form_Contato_Anunciante() : void

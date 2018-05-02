@@ -1,4 +1,4 @@
-$('.ui.checkbox').checkbox();
+$('#ui_whatsapp').checkbox();
 $(document).ready(function() {
 	var maskBehavior = function (val) {
 		  return val.replace(/\D/g, '').length === 11 ? '(00) 000-000-000' : '(00) 0000-00009';
