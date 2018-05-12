@@ -7,6 +7,7 @@ namespace Module\Application\Model\OBJ;
         private $valor_mensal;
         private $valor_anual;
         private $limite_pecas;
+        private $limite_pecas_vip;
         private $descricao;
         
         function __constructor()
@@ -52,6 +53,16 @@ namespace Module\Application\Model\OBJ;
         public function get_limite_pecas() : ?int
         {
             return $this->limite_pecas;
+        }
+        
+        public function set_limite_pecas_vip(int $limite_pecas_vip) : void
+        {
+            $this->limite_pecas_vip = $limite_pecas_vip;
+        }
+        
+        public function get_limite_pecas_vip() : ?int
+        {
+            return $this->limite_pecas_vip;
         }
         
         public function set_descricao(string $descricao) : void

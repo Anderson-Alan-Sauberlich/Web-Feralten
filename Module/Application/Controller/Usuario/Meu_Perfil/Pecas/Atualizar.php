@@ -61,18 +61,19 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         private $peca;
         private $serie;
         private $preco;
-        private $imagens = array();
-        private $atualizar_erros = array();
-        private $atualizar_sucesso = array();
-        private $atualizar_campos = array();
-        private $atualizar_form = array();
+        private $vip;
+        private $imagens = [];
+        private $erros = [];
+        private $sucesso = [];
+        private $campos = [];
+        private $form = [];
         
         public function set_peca_id($peca_id) : void
         {
             try {
                 $this->peca_id = Validador::Peca()::validar_id($peca_id);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->peca_id = Validador::Peca()::filtrar_id($peca_id);
             }
@@ -82,10 +83,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         {
             try {
                 $this->peca_url = Validador::Peca()::validar_url($peca_url);
-                
                 $this->set_peca_id(DAO_Peca::Retornar_Id_Por_URL($this->peca_url));
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->peca_url = Validador::Peca()::filtrar_url($peca_url);
             }
@@ -97,7 +97,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->categoria = Validador::Categoria()::validar_id($categoria);
                 $this->categoria = $categoria;
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->categoria = Validador::Categoria()::filtrar_id($categoria);
             }
@@ -109,7 +109,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->marca = Validador::Marca()::validar_id($marca);
                 $this->marca = $marca;
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->marca = Validador::Marca()::filtrar_id($marca);
             }
@@ -121,7 +121,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->modelo = Validador::Modelo()::validar_id($modelo);
                 $this->modelo = $modelo;
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->modelo = Validador::Modelo()::filtrar_id($modelo);
             }
@@ -133,7 +133,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->versao = Validador::Versao()::validar_id($versao);
                 $this->versao = $versao;
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->versao = Validador::Versao()::filtrar_id($versao);
             }
@@ -144,8 +144,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->descricao = Validador::Peca()::validar_descricao($descricao);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_descricao'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_descricao'] = 'erro';
                 
                 $this->descricao = Validador::Peca()::filtrar_descricao($descricao);
             }
@@ -156,8 +156,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->estado_uso = Validador::Peca()::validar_estado_uso($estado_uso);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_estado_uso'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_estado_uso'] = 'erro';
                 
                 $this->estado_uso = Validador::Peca()::filtrar_estado_uso($estado_uso);
             }
@@ -168,7 +168,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->preferencia_entrega = Validador::Peca()::validar_preferencia_entrega($preferencia_entrega);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->preferencia_entrega = Validador::Peca()::filtrar_preferencia_entrega($preferencia_entrega);
             }
@@ -179,8 +179,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->fabricante = Validador::Peca()::validar_fabricante($fabricante);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_fabricante'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_fabricante'] = 'erro';
                 
                 $this->fabricante = Validador::Peca()::filtrar_fabricante($fabricante);
             }
@@ -190,10 +190,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         {
             try {
                 $this->peca = Validador::Peca()::validar_nome($peca);
-                $this->atualizar_campos['erro_peca'] = 'certo';
+                $this->campos['erro_peca'] = 'certo';
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_peca'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_peca'] = 'erro';
                 
                 $this->peca = Validador::Peca()::filtrar_nome($peca);
             }
@@ -204,8 +204,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->serie = Validador::Peca()::validar_serie($serie);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_serie'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_serie'] = 'erro';
                 
                 $this->serie = Validador::Peca()::filtrar_serie($serie);
             }
@@ -216,10 +216,22 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->preco = Validador::Peca()::validar_preco($preco);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
-                $this->atualizar_campos['erro_preco'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_preco'] = 'erro';
                 
                 $this->preco = Validador::Peca()::filtrar_preco($preco);
+            }
+        }
+        
+        public function set_vip($vip) : void
+        {
+            try {
+                $this->vip = Validador::Peca()::validar_vip($vip, $this->peca_id);
+            } catch (Exception $e) {
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_vip'] = 'erro';
+                
+                $this->vip = Validador::Peca()::filtrar_vip($vip);
             }
         }
         
@@ -228,7 +240,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->imagens[$numero] = Validador::Foto_Peca()::validar_imagem($imagem, $numero);
             } catch (Exception $e) {
-                $this->atualizar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
             }
         }
         
@@ -242,7 +254,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 }
                 
                 if (!empty($this->peca_id) AND $this->Verificar_Dono_Peca($this->peca_id)) {
-                    if (empty($this->atualizar_form)) {
+                    if (empty($this->form)) {
                         unset($_SESSION['compatibilidade']);
                         $this->Deletar_Imagem(123);
                         
@@ -300,10 +312,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     
                     $view = new View_Atualizar($status);
                     
-                    $view->set_atualizar_campos($this->atualizar_campos);
-                    $view->set_atualizar_erros($this->atualizar_erros);
-                    $view->set_atualizar_form($this->atualizar_form);
-                    $view->set_atualizar_sucesso($this->atualizar_sucesso);
+                    $view->set_campos($this->campos);
+                    $view->set_erros($this->erros);
+                    $view->set_form($this->form);
+                    $view->set_sucesso($this->sucesso);
                     
                     $view->Executar();
                 } else {
@@ -391,13 +403,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         private function Salvar_Session_Compatibilidade() : void
         {
-            $compatibilidade = array();
+            $compatibilidade = [];
             
-            $compatibilidade['categoria'] = array();
-            $compatibilidade['marca'] = array();
-            $compatibilidade['modelo'] = array();
-            $compatibilidade['versao'] = array();
-            $compatibilidade['ano'] = array();
+            $compatibilidade['categoria'] = [];
+            $compatibilidade['marca'] = [];
+            $compatibilidade['modelo'] = [];
+            $compatibilidade['versao'] = [];
+            $compatibilidade['ano'] = [];
             
             if (isset($_SESSION['compatibilidade'])) {
                 $compatibilidade = $_SESSION['compatibilidade'];
@@ -521,10 +533,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             $modelos_compativeis = null;
             $versoes_compativeis = null;
             
-            $categorias_pativeis = array();
-            $marcas_pativeis = array();
-            $modelos_pativeis = array();
-            $versoes_pativeis = array();
+            $categorias_pativeis = [];
+            $marcas_pativeis = [];
+            $modelos_pativeis = [];
+            $versoes_pativeis = [];
             
             if (!empty($this->categoria)) {
                 $categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
@@ -612,7 +624,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 }
             }
             
-            if (empty($this->atualizar_erros)) {
+            if (empty($this->erros)) {
                 $obj_peca = new OBJ_Peca();
                 $obj_estado_uso = new OBJ_Estado_Uso_Peca();
                 $obj_status = new OBJ_Status_Peca();
@@ -636,6 +648,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $obj_peca->set_nome($this->peca);
                 $obj_peca->set_serie($this->serie);
                 $obj_peca->set_preco($this->preco);
+                $obj_peca->set_vip($this->vip);
                 
                 $entidade->set_id(Login_Session::get_entidade_id());
                 $entidade->set_usuario_id(Login_Session::get_usuario_id());
@@ -646,8 +659,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
                 
                 if ($id_endereco === false) {
-                    $this->atualizar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
-                    $this->atualizar_campos['erro_peca'] = "";
+                    $this->erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
+                    $this->campos['erro_peca'] = "";
                 } else {
                     $endereco = new OBJ_Endereco();
                     
@@ -722,8 +735,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     }
                     
                     if ($retorno === false) {
-                        $this->atualizar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
-                        $this->atualizar_campos['erro_peca'] = "";
+                        $this->erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+                        $this->campos['erro_peca'] = "";
                     }
                     
                     $gerenciar_imagens = new Gerenciar_Imagens();
@@ -736,14 +749,14 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 $novo_numero = array_search($imagem->get_nome(), $_SESSION['imagens_cnst']);
                                 
                                 if (!DAO_Foto_Peca::Atualizar_Por_Num($novo_numero, $imagem)) {
-                                    $this->atualizar_erros[] = "Erro ao tentar Atualizar Foto para a Peça";
-                                    $this->atualizar_campos['erro_peca'] = "";
+                                    $this->erros[] = "Erro ao tentar Atualizar Foto para a Peça";
+                                    $this->campos['erro_peca'] = "";
                                 }
                             } else {
                                 if ($gerenciar_imagens->Deletar_Imagem_Peca($imagem->get_endereco())) {
                                     if (!DAO_Foto_Peca::Deletar_Foto($imagem->get_peca_id(), $imagem->get_numero())) {
-                                        $this->atualizar_erros[] = "Erro ao tentar Atualizar Foto para a Peça";
-                                        $this->atualizar_campos['erro_peca'] = "";
+                                        $this->erros[] = "Erro ao tentar Atualizar Foto para a Peça";
+                                        $this->campos['erro_peca'] = "";
                                     }
                                 }
                             }
@@ -769,25 +782,25 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 if (!empty($del_foto) AND $del_foto !== false) {
                                     if ($gerenciar_imagens->Deletar_Imagem_Peca($del_foto->get_endereco())) {
                                         if (DAO_Foto_Peca::Atualizar($foto_peca) === false) {
-                                            $this->atualizar_erros[] = "Erro ao tentar Atualizar Foto $key para a Peça";
-                                            $this->atualizar_campos['erro_peca'] = "";
+                                            $this->erros[] = "Erro ao tentar Atualizar Foto $key para a Peça";
+                                            $this->campos['erro_peca'] = "";
                                         }
                                     } else {
-                                        $this->atualizar_erros[] = "Erro ao tentar Deletar Foto $key";
-                                        $this->atualizar_campos['erro_peca'] = "";
+                                        $this->erros[] = "Erro ao tentar Deletar Foto $key";
+                                        $this->campos['erro_peca'] = "";
                                     }
                                 } else {
                                     if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-                                        $this->atualizar_erros[] = "Erro ao tentar Adicionar Foto $key para a Peça";
-                                        $this->atualizar_campos['erro_peca'] = "";
+                                        $this->erros[] = "Erro ao tentar Adicionar Foto $key para a Peça";
+                                        $this->campos['erro_peca'] = "";
                                     }
                                 }
                             }
                             
                             unset($_SESSION['imagens_tmp']);
                         } else {
-                            $this->atualizar_erros[] = "Erro ao tentar Atualizar Fotos da Peça";
-                            $this->atualizar_campos['erro_peca'] = "";
+                            $this->erros[] = "Erro ao tentar Atualizar Fotos da Peça";
+                            $this->campos['erro_peca'] = "";
                         }
                     }
                     
@@ -803,14 +816,14 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     }
                     
                 } else {
-                    $this->atualizar_erros[] = "Erro ao tentar Atualizar Peça";
-                    $this->atualizar_campos['erro_peca'] = "";
+                    $this->erros[] = "Erro ao tentar Atualizar Peça";
+                    $this->campos['erro_peca'] = "";
                 }
+                
+                $this->set_form($obj_peca);
             }
             
-            $this->set_form($obj_peca);
-            
-            $anos = array();
+            $anos = [];
             
             if (!empty($this->marca)) {
                 foreach ($this->marca as $marca) {
@@ -838,9 +851,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             
             $_SESSION['compatibilidade']['ano'] = $anos;
             
-            if (empty($this->atualizar_erros)) {
-                $this->atualizar_sucesso[] = 'Peça Atualizada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
-                $this->atualizar_campos['erro_peca'] = '';
+            if (empty($this->erros)) {
+                $this->sucesso[] = 'Peça Atualizada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
+                $this->campos['erro_peca'] = '';
             }
             
             $this->Carregar_Pagina();
@@ -848,17 +861,18 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         
         public function get_form() : ?array
         {
-            $this->atualizar_form['peca_id'] = $this->peca_id;
-            $this->atualizar_form['peca_url'] = $this->peca_url;
-            $this->atualizar_form['peca'] = $this->peca;
-            $this->atualizar_form['fabricante'] = $this->fabricante;
-            $this->atualizar_form['serie'] = $this->serie;
-            $this->atualizar_form['preco'] = $this->preco;
-            $this->atualizar_form['estado_uso'] = $this->estado_uso;
-            $this->atualizar_form['descricao'] = $this->descricao;
-            $this->atualizar_form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->preferencia_entrega);
+            $this->form['peca_id'] = $this->peca_id;
+            $this->form['peca_url'] = $this->peca_url;
+            $this->form['peca'] = $this->peca;
+            $this->form['fabricante'] = $this->fabricante;
+            $this->form['serie'] = $this->serie;
+            $this->form['preco'] = $this->preco;
+            $this->form['vip'] = $this->vip;
+            $this->form['estado_uso'] = $this->estado_uso;
+            $this->form['descricao'] = $this->descricao;
+            $this->form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->preferencia_entrega);
             
-            return $this->atualizar_form;
+            return $this->form;
         }
         
         public function set_form(OBJ_Peca $obj_peca) : ?array
@@ -867,9 +881,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             $this->peca_url = $obj_peca->get_url();
             $this->fabricante = $obj_peca->get_fabricante();
             $this->serie = $obj_peca->get_serie();
-            $this->preco = $obj_peca->get_preco();
+            $this->preco = number_format($obj_peca->get_preco(), 2, ',', '.');
             $this->descricao = $obj_peca->get_descricao();
             $this->preferencia_entrega = $obj_peca->get_preferencia_entrega();
+            $this->vip = $obj_peca->get_vip();
             
             if (!empty($obj_peca->get_estado_uso())) {
                 $this->estado_uso = $obj_peca->get_estado_uso()->get_id();

@@ -13,30 +13,30 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         }
         
         private static $status_usuario;
-        private static $cadastrar_erros;
-        private static $cadastrar_campos;
-        private static $cadastrar_form;
-        private static $cadastrar_sucesso;
+        private static $erros;
+        private static $campos;
+        private static $form;
+        private static $sucesso;
         private static $orcamento;
         
-        public function set_cadastrar_erros(?array $cadastrar_erros = null) : void
+        public function set_erros(?array $erros = null) : void
         {
-            self::$cadastrar_erros = $cadastrar_erros;
+            self::$erros = $erros;
         }
         
-        public function set_cadastrar_campos(?array $cadastrar_campos = null) : void
+        public function set_campos(?array $campos = null) : void
         {
-            self::$cadastrar_campos = $cadastrar_campos;
+            self::$campos = $campos;
         }
         
-        public function set_cadastrar_form(?array $cadastrar_form = null) : void
+        public function set_form(?array $form = null) : void
         {
-            self::$cadastrar_form = $cadastrar_form;
+            self::$form = $form;
         }
         
-        public function set_cadastrar_sucesso(?array $cadastrar_sucesso = null) : void
+        public function set_sucesso(?array $sucesso = null) : void
         {
-            self::$cadastrar_sucesso = $cadastrar_sucesso;
+            self::$sucesso = $sucesso;
         }
         
         public function set_orcamento(?OBJ_Orcamento $obj_orcamento) : void
@@ -56,9 +56,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Mostrar_Sucesso() : void
         {
-            if (!empty(self::$cadastrar_sucesso)) {
+            if (!empty(self::$sucesso)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach (self::$cadastrar_sucesso as $value) {
+                foreach (self::$sucesso as $value) {
                     echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
@@ -67,9 +67,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
 
         public static function Mostrar_Erros() : void
         {
-            if (!empty(self::$cadastrar_erros)) {
+            if (!empty(self::$erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach (self::$cadastrar_erros as $value) {
+                foreach (self::$erros as $value) {
                     echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
@@ -78,63 +78,63 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Incluir_Classe_Erros(string $campo) : void
         {
-            if (!empty(self::$cadastrar_campos)) {
+            if (!empty(self::$campos)) {
                 switch ($campo) {
                     case "peca":
-                        if (isset(self::$cadastrar_campos['erro_peca'])) {
-                            if (self::$cadastrar_campos['erro_peca'] == "erro") {
+                        if (isset(self::$campos['erro_peca'])) {
+                            if (self::$campos['erro_peca'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_peca'] == "certo") {
+                            } else if (self::$campos['erro_peca'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "descricao":
-                           if (isset(self::$cadastrar_campos['erro_descricao'])) {
-                            if (self::$cadastrar_campos['erro_descricao'] == "erro") {
+                           if (isset(self::$campos['erro_descricao'])) {
+                            if (self::$campos['erro_descricao'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_descricao'] == "certo") {
+                            } else if (self::$campos['erro_descricao'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "estado_uso":
-                        if (isset(self::$cadastrar_campos['erro_estado_uso'])) {
-                            if (self::$cadastrar_campos['erro_estado_uso'] == "erro") {
+                        if (isset(self::$campos['erro_estado_uso'])) {
+                            if (self::$campos['erro_estado_uso'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_estado_uso'] == "certo") {
+                            } else if (self::$campos['erro_estado_uso'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "fabricante":
-                        if (isset(self::$cadastrar_campos['erro_fabricante'])) {
-                            if (self::$cadastrar_campos['erro_fabricante'] == "erro") {
+                        if (isset(self::$campos['erro_fabricante'])) {
+                            if (self::$campos['erro_fabricante'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_fabricante'] == "certo") {
+                            } else if (self::$campos['erro_fabricante'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "serie":
-                        if (isset(self::$cadastrar_campos['erro_serie'])) {
-                            if (self::$cadastrar_campos['erro_serie'] == "erro") {
+                        if (isset(self::$campos['erro_serie'])) {
+                            if (self::$campos['erro_serie'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_serie'] == "certo") {
+                            } else if (self::$campos['erro_serie'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "preco":
-                        if (isset(self::$cadastrar_campos['erro_preco'])) {
-                            if (self::$cadastrar_campos['erro_preco'] == "erro") {
+                        if (isset(self::$campos['erro_preco'])) {
+                            if (self::$campos['erro_preco'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$cadastrar_campos['erro_preco'] == "certo") {
+                            } else if (self::$campos['erro_preco'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
@@ -145,9 +145,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Manter_Valor(string $campo) : void
         {
-            if (!empty(self::$cadastrar_form)) {
-                if (isset(self::$cadastrar_form[$campo])) {
-                    echo self::$cadastrar_form[$campo];
+            if (!empty(self::$form)) {
+                if (isset(self::$form[$campo])) {
+                    if ($campo == 'vip') {
+                        echo 'checked="checked"';
+                    } else {
+                        echo self::$form[$campo];
+                    }
                 }
             }
         }
@@ -533,8 +537,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             $estado_uso_pecas = Controller_Cadastrar::Buscar_Estado_Uso_Pecas();
             
             foreach ($estado_uso_pecas as $estado_uso_peca) {
-                if (isset(self::$cadastrar_form['estado_uso'])) {
-                    if (self::$cadastrar_form['estado_uso'] == $estado_uso_peca->get_id()) {
+                if (isset(self::$form['estado_uso'])) {
+                    if (self::$form['estado_uso'] == $estado_uso_peca->get_id()) {
                         echo "<option selected value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
                     } else {
                         echo "<option value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
@@ -550,8 +554,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             $preferencias_entregas = Controller_Cadastrar::Buscar_Preferencia_Entrega();
             
             foreach ($preferencias_entregas as $preferencia_entrega) {
-                if (isset(self::$cadastrar_form['preferencia_entrega'])) {
-                    if (in_array($preferencia_entrega->get_id(), self::$cadastrar_form['preferencia_entrega'])) {
+                if (isset(self::$form['preferencia_entrega'])) {
+                    if (in_array($preferencia_entrega->get_id(), self::$form['preferencia_entrega'])) {
                         echo "<option selected value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
                     } else {
                         echo "<option value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";

@@ -12,17 +12,17 @@
     <section class="ui container" role="main">
     	<h2 class="ui red dividing header">Olá <?= View_Perfil::RetornarNomeUsuario(); ?>, seja bem vindo(a)!</h2>
         <div class="margem-inferior-minimo"></div>
-        <div class="ui stackable four column center aligned grid">
+        <div class="ui stackable doubling four column center aligned grid">
         	<div class="column">
             	<div class="ui tiny orange statistic">
-            		<div class="value"><?= View_Perfil::RetornarNumPecas(); ?></div>
+            		<div id="pecas_cadastradas" class="value"><?= View_Perfil::RetornarNumPecas(); ?> / <?= View_Perfil::RetornarNumLimitePecas(); ?></div>
             		<div class="label">Peças Cadastradas</div>
             	</div>
         	</div>
         	<div class="column">
             	<div class="ui tiny orange statistic">
-            		<div class="value"><?= View_Perfil::RetornarNumLimitePlano(); ?></div>
-            		<div class="label">Plano, Limite de Peças</div>
+            		<div class="value"><?= View_Perfil::RetornarNumPecasVip(); ?> / <?= View_Perfil::RetornarNumLimitePecasVip(); ?></div>
+            		<div class="label">Peças VIP Destacadas</div>
             	</div>
         	</div>
         	<div class="column">

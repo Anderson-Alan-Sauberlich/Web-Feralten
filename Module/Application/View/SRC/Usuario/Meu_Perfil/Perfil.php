@@ -14,7 +14,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
         
         private static $status_usuario;
         private static $num_pecas;
-        private static $num_limite_plano;
+        private static $num_pecas_vip;
+        private static $num_limite_pecas;
+        private static $num_limite_pecas_vip;
         private static $num_meus_orcamentos;
         private static $num_orcamentos_recebidos;
         
@@ -23,9 +25,19 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
             self::$num_pecas = $num_pecas;
         }
         
-        public function set_num_limite_plano(int $num_limite_plano) : void
+        public function set_num_pecas_vip(int $num_pecas_vip) : void
         {
-            self::$num_limite_plano = $num_limite_plano;
+            self::$num_pecas_vip = $num_pecas_vip;
+        }
+        
+        public function set_num_limite_pecas(int $num_limite_pecas) : void
+        {
+            self::$num_limite_pecas = $num_limite_pecas;
+        }
+        
+        public function set_num_limite_pecas_vip(int $num_limite_pecas_vip) : void
+        {
+            self::$num_limite_pecas_vip = $num_limite_pecas_vip;
         }
         
         public function set_num_meus_orcamentos(int $num_meus_orcamentos) : void
@@ -67,12 +79,34 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil;
             }
         }
         
-        public static function RetornarNumLimitePlano() : string
+        public static function RetornarNumPecasVip() : string
         {
-            if (empty(self::$num_limite_plano)) {
-                return '5';
+            if (empty(self::$num_pecas_vip)) {
+                return '0';
             } else {
-                return self::$num_limite_plano;
+                return self::$num_pecas_vip;
+            }
+        }
+        
+        public static function RetornarNumLimitePecas() : string
+        {
+            if (empty(self::$num_limite_pecas)) {
+                return '0';
+            } else {
+                if (self::$num_limite_pecas < 100000) {
+                    return self::$num_limite_pecas;
+                } else {
+                    return 'Sem Limites';
+                }
+            }
+        }
+        
+        public static function RetornarNumLimitePecasVip() : string
+        {
+            if (empty(self::$num_limite_pecas_vip)) {
+                return '0';
+            } else {
+                return self::$num_limite_pecas_vip;
             }
         }
         

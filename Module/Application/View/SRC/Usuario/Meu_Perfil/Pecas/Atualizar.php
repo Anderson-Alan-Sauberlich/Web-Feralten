@@ -12,29 +12,29 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         }
         
         private static $status_usuario;
-        private static $atualizar_erros;
-        private static $atualizar_campos;
-        private static $atualizar_form;
-        private static $atualizar_sucesso;
+        private static $erros;
+        private static $campos;
+        private static $form;
+        private static $sucesso;
         
-        public function set_atualizar_erros(?array $atualizar_erros = null) : void
+        public function set_erros(?array $erros = null) : void
         {
-            self::$atualizar_erros = $atualizar_erros;
+            self::$erros = $erros;
         }
         
-        public function set_atualizar_campos(?array $atualizar_campos = null) : void
+        public function set_campos(?array $campos = null) : void
         {
-            self::$atualizar_campos = $atualizar_campos;
+            self::$campos = $campos;
         }
         
-        public function set_atualizar_form(?array $atualizar_form = null) : void
+        public function set_form(?array $form = null) : void
         {
-            self::$atualizar_form = $atualizar_form;
+            self::$form = $form;
         }
         
-        public function set_atualizar_sucesso(?array $atualizar_sucesso = null) : void
+        public function set_sucesso(?array $sucesso = null) : void
         {
-            self::$atualizar_sucesso = $atualizar_sucesso;
+            self::$sucesso = $sucesso;
         }
         
         public function Executar()
@@ -49,9 +49,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Mostrar_Sucesso() : void
         {
-            if (!empty(self::$atualizar_sucesso)) {
+            if (!empty(self::$sucesso)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach (self::$atualizar_sucesso as $value) {
+                foreach (self::$sucesso as $value) {
                     echo "<div class=\"alert alert-success col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
@@ -60,9 +60,9 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Mostrar_Erros() : void
         {
-            if (!empty(self::$atualizar_erros)) {
+            if (!empty(self::$erros)) {
                 echo "<div class=\"container-fluid\"><div class=\"row\">";
-                foreach (self::$atualizar_erros as $value) {
+                foreach (self::$erros as $value) {
                     echo "<div class=\"alert alert-danger col-sm-6 col-md-4 fade in\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><b>".$value."</b></div>";
                 }
                 echo "</div></div>";
@@ -71,63 +71,63 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Incluir_Classe_Erros(string $campo) : void
         {
-            if (!empty(self::$atualizar_campos)) {
+            if (!empty(self::$campos)) {
                 switch ($campo) {
                     case "peca":
-                        if (isset(self::$atualizar_campos['erro_peca'])) {
-                            if (self::$atualizar_campos['erro_peca'] == "erro") {
+                        if (isset(self::$campos['erro_peca'])) {
+                            if (self::$campos['erro_peca'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_peca'] == "certo") {
+                            } else if (self::$campos['erro_peca'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "descricao":
-                        if (isset(self::$atualizar_campos['erro_descricao'])) {
-                            if (self::$atualizar_campos['erro_descricao'] == "erro") {
+                        if (isset(self::$campos['erro_descricao'])) {
+                            if (self::$campos['erro_descricao'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_descricao'] == "certo") {
+                            } else if (self::$campos['erro_descricao'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "estado_uso":
-                        if (isset(self::$atualizar_campos['erro_estado_uso'])) {
-                            if (self::$atualizar_campos['erro_estado_uso'] == "erro") {
+                        if (isset(self::$campos['erro_estado_uso'])) {
+                            if (self::$campos['erro_estado_uso'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_estado_uso'] == "certo") {
+                            } else if (self::$campos['erro_estado_uso'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "fabricante":
-                        if (isset(self::$atualizar_campos['erro_fabricante'])) {
-                            if (self::$atualizar_campos['erro_fabricante'] == "erro") {
+                        if (isset(self::$campos['erro_fabricante'])) {
+                            if (self::$campos['erro_fabricante'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_fabricante'] == "certo") {
+                            } else if (self::$campos['erro_fabricante'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "serie":
-                        if (isset(self::$atualizar_campos['erro_serie'])) {
-                            if (self::$atualizar_campos['erro_serie'] == "erro") {
+                        if (isset(self::$campos['erro_serie'])) {
+                            if (self::$campos['erro_serie'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_serie'] == "certo") {
+                            } else if (self::$campos['erro_serie'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
                         break;
                         
                     case "preco":
-                        if (isset(self::$atualizar_campos['erro_preco'])) {
-                            if (self::$atualizar_campos['erro_preco'] == "erro") {
+                        if (isset(self::$campos['erro_preco'])) {
+                            if (self::$campos['erro_preco'] == "erro") {
                                 echo "has-error has-feedback";
-                            } else if (self::$atualizar_campos['erro_preco'] == "certo") {
+                            } else if (self::$campos['erro_preco'] == "certo") {
                                 echo "has-success has-feedback";
                             }
                         }
@@ -138,9 +138,13 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Manter_Valor(string $campo) : void
         {
-            if (!empty(self::$atualizar_form)) {
-                if (isset(self::$atualizar_form[$campo])) {
-                    echo self::$atualizar_form[$campo];
+            if (!empty(self::$form)) {
+                if (isset(self::$form[$campo])) {
+                    if ($campo == 'vip' && self::$form[$campo]) {
+                        echo 'checked="checked"';
+                    } else {
+                        echo self::$form[$campo];
+                    }
                 }
             }
         }
@@ -150,7 +154,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             switch ($imagem) {
                 case "foto1":
                     if (isset($_SESSION['imagens_cnst'][1])) {
-                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][1], self::$atualizar_form['peca_id']);
+                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][1], self::$form['peca_id']);
                     } else if (isset($_SESSION['imagens_tmp'][1])) {
                         echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][1]);
                     } else {
@@ -160,7 +164,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                     
                 case "foto2":
                     if (isset($_SESSION['imagens_cnst'][2])) {
-                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][2], self::$atualizar_form['peca_id']);
+                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][2], self::$form['peca_id']);
                     } else if (isset($_SESSION['imagens_tmp'][2])) {
                         echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][2]);
                     } else {
@@ -170,7 +174,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
                     
                 case "foto3":
                     if (isset($_SESSION['imagens_cnst'][3])) {
-                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][3], self::$atualizar_form['peca_id']);
+                        echo Controller_Atualizar::Pegar_Imagem_CNST_URL($_SESSION['imagens_cnst'][3], self::$form['peca_id']);
                     } else if (isset($_SESSION['imagens_tmp'][3])) {
                         echo Controller_Atualizar::Pegar_Imagem_TMP_URL($_SESSION['imagens_tmp'][3]);
                     } else {
@@ -532,8 +536,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             $estado_uso_pecas = Controller_Atualizar::Buscar_Estado_Uso_Pecas();
             
             foreach ($estado_uso_pecas as $estado_uso_peca) {
-                if (isset(self::$atualizar_form['estado_uso'])) {
-                    if (self::$atualizar_form['estado_uso'] == $estado_uso_peca->get_id()) {
+                if (isset(self::$form['estado_uso'])) {
+                    if (self::$form['estado_uso'] == $estado_uso_peca->get_id()) {
                         echo "<option selected value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
                     } else {
                         echo "<option value=\"".$estado_uso_peca->get_id()."\">".$estado_uso_peca->get_nome()."</option>";
@@ -549,8 +553,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
             $preferencias_entregas = Controller_Atualizar::Buscar_Preferencia_Entrega();
             
             foreach ($preferencias_entregas as $preferencia_entrega) {
-                if (isset(self::$atualizar_form['preferencia_entrega'])) {
-                    if (in_array($preferencia_entrega->get_id(), self::$atualizar_form['preferencia_entrega'])) {
+                if (isset(self::$form['preferencia_entrega'])) {
+                    if (in_array($preferencia_entrega->get_id(), self::$form['preferencia_entrega'])) {
                         echo "<option selected=\"selected\" value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
                     } else {
                         echo "<option value=\"".$preferencia_entrega->get_id()."\">".$preferencia_entrega->get_nome()."</option>";
@@ -563,8 +567,8 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Pecas;
         
         public static function Mostrar_URL_Peca() : void
         {
-            if (isset(self::$atualizar_form['peca_url'])) {
-                echo self::$atualizar_form['peca_url'];
+            if (isset(self::$form['peca_url'])) {
+                echo self::$form['peca_url'];
             }
         }
         

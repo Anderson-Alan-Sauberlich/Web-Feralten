@@ -2,6 +2,7 @@
 namespace Module\Application\Controller;
     
     use Module\Application\View\SRC\Inicio as View_Inicio;
+    use Module\Application\Model\DAO\Peca as DAO_Peca;
     
     class Inicio
     {
@@ -13,6 +14,12 @@ namespace Module\Application\Controller;
         public function Carregar_Pagina()
         {
             $view = new View_Inicio();
+            
+            $pecas_vip = DAO_Peca::BuscarVips();
+            
+            if (!empty($pecas_vip) && $pecas_vip != false) {
+                $view->set_pecas_vip($pecas_vip);
+            }
             
             $view->Executar();
         }

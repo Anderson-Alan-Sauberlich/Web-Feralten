@@ -56,6 +56,8 @@ namespace Module\Application\Controller\Pecas;
                 
                 DAO_Visualizado::Inserir($obj_visualizado);
                 
+                DAO_Peca::Incrementar_Mais1_Visualizados($this->obj_peca->get_id());
+                
                 $categorias_pativeis = DAO_Categoria_Pativel::BuscarPorCOD($this->obj_peca->get_id());
                 $marcas_pativeis = DAO_Marca_Pativel::BuscarPorCOD($this->obj_peca->get_id());
                 $modelos_pativeis = DAO_Modelo_Pativel::BuscarPorCOD($this->obj_peca->get_id());

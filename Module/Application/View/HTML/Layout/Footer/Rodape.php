@@ -19,12 +19,12 @@
                 </div>
             </div>
             <div class="three wide column">
-                <h4 class="ui inverted header"><i class="shopping cart icon"></i>COMPRAR</h4>
+                <h4 class="ui inverted header"><i class="bullhorn icon"></i>ANUNCIAR</h4>
                 <div class="ui inverted relaxed large link list">
-                    <a href="/pecas/resultados/" class="item">Peças Cadastradas</a>
+                    <a href="/planos-mensais/" class="item">Planos Mensais</a>
                     <a href="/vendedores/" class="item">Vendedores</a>
                     <a href="/orcamentos/" class="item">Orçamentos</a>
-                    <a href="/planos-mensais/" class="item">Planos Mensais</a>
+                    <a href="/pecas/resultados/" class="item">Peças Cadastradas</a>
                 </div>
             </div>
             <div class="seven wide column">

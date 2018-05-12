@@ -48,6 +48,7 @@
             <div class="ui doubling stackable grid">
                 <div class="ten wide column">
                     <div class="ui center aligned segment">
+                    <div class="ui top attached large label"><?= View_Detalhes::Mostrar_Visualizacoes(); ?> Visualizações</div>
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>

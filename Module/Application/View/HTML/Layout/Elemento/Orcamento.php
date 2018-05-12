@@ -21,7 +21,7 @@
         	<div class="ui divider"></div>
         	<div class="ui fluid accordion">
         	<div class="title">
-            	<h4>Lista de peças recebidas...
+            	<h4>Lista de peças adicionadas...
             	<i class="dropdown icon"></i></h4>
         	</div>
         	<div class="content">

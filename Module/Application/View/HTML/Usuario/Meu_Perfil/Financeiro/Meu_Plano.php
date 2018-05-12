@@ -28,7 +28,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                	<p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(1); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -59,7 +60,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                    <p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(2); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -90,7 +92,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                    <p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(3); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -121,7 +124,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                    <p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(4); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -152,7 +156,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                    <p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(5); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">
@@ -183,7 +188,8 @@
                             </div>
                             <div class="content">
                                 <div class="description">
-                                    <b>Com orçamentos gratuitos</b>
+                                    <p><b>Com <label class="ui circular large label"><?php View_Meu_Plano::Mostrar_Limite_Pecas_Vip(6); ?></label> anúncios VIP</b></p>
+                                    <p><b>Com orçamentos gratuitos</b></p>
                                 </div>
                             </div>
                             <div class="center aligned content">

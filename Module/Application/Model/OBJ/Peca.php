@@ -26,6 +26,7 @@ namespace Module\Application\Model\OBJ;
         private $fotos = [];
         private $num_visualizado;
         private $preferencia_entrega;
+        private $vip;
         
         function __constructor()
         {
@@ -195,6 +196,16 @@ namespace Module\Application\Model\OBJ;
         public function get_num_visualizado() : ?int
         {
             return $this->num_visualizado;
+        }
+        
+        public function set_vip(bool $vip) : void
+        {
+            $this->vip = $vip;
+        }
+        
+        public function get_vip() : ?bool
+        {
+            return $this->vip;
         }
         
         public function set_preferencia_entrega(?int $preferencia_entrega = null) : void

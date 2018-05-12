@@ -15,7 +15,7 @@
             	<a href="/"><i class="home icon"></i>INÍCIO</a>
             </div>
             <div class="ui inverted accordion item">
-            	<div class="title"><i class="cart arrow down icon"></i>COMPRAR</div>
+            	<div class="title"><i class="bullhorn icon"></i>ANUNCIAR</div>
                 <div class="content field">
                     <div class="ui inverted link large relaxed list">
                        	<a href="/vendedores/" class="item">Vendedores</a>
@@ -47,13 +47,9 @@
 	</nav>
     <nav id="pc_header" class="ui borderless red inverted stackable top fixed menu main" role="navigation">
     	<div class="ui container">
-        	<a href="/quem-somos/" class="header item">
-        		<img class="ui mini image header_logo" src="/resources/img/favicon.png"/>
-        		FERALTEN
-            </a>
            	<div class="left menu">
                	<a href="/" class="item"><i class="home icon"></i>INÍCIO</a>
-               	<a id="comprar_item" class="item"><i class="cart arrow down icon"></i>COMPRAR</a>
+               	<a id="comprar_item" class="item"><i class="bullhorn icon"></i>ANUNCIAR</a>
                 <div id="popup_comprar" class="ui popup">
             		<div class="ui basic segment">
                 		<div class="ui link divided large very relaxed list">
@@ -64,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+                <a href="/planos-mensais/" class="item"><i class="money bill alternate icon"></i>PLANOS</a>
                	<a href="/fale-conosco/" class="item"><i class="envelope icon"></i>CONTATO</a>
             </div>
            	<div class="right menu">

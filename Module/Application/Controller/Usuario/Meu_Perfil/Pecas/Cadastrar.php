@@ -69,18 +69,19 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         private $peca;
         private $serie;
         private $preco;
-        private $imagens = array();
-        private $cadastrar_erros = array();
-        private $cadastrar_sucesso = array();
-        private $cadastrar_campos = array();
-        private $cadastrar_form = array();
+        private $vip;
+        private $imagens = [];
+        private $erros = [];
+        private $sucesso = [];
+        private $campos = [];
+        private $form = [];
         
         public function set_orcamento_id($orcamento_id) : void
         {
             try {
                 $this->orcamento = DAO_Orcamento::BuscarPorCOD(Validador::Orcamento()::validar_id($orcamento_id));
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
             }
         }
         
@@ -90,7 +91,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->categoria = Validador::Categoria()::validar_id($categoria);
                 $this->categoria = $categoria;
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->categoria = Validador::Categoria()::filtrar_id($categoria);
             }
@@ -102,7 +103,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->marca = Validador::Marca()::validar_id($marca);
                 $this->marca = $marca;
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->marca = Validador::Marca()::filtrar_id($marca);
             }
@@ -114,7 +115,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->modelo = Validador::Modelo()::validar_id($modelo);
                 $this->modelo = $modelo;
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->modelo = Validador::Modelo()::filtrar_id($modelo);
             }
@@ -126,7 +127,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 //$this->versao = Validador::Versao()::validar_id($versao);
                 $this->versao = $versao;
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->versao = Validador::Versao()::filtrar_id($versao);
             }
@@ -137,8 +138,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->descricao = Validador::Peca()::validar_descricao($descricao);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_descricao'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_descricao'] = 'erro';
                 
                 $this->descricao = Validador::Peca()::filtrar_descricao($descricao);
             }
@@ -149,8 +150,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->estado_uso = Validador::Peca()::validar_estado_uso($estado_uso);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_estado_uso'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_estado_uso'] = 'erro';
                 
                 $this->estado_uso = Validador::Peca()::filtrar_estado_uso($estado_uso);
             }
@@ -161,7 +162,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->preferencia_entrega = Validador::Peca()::validar_preferencia_entrega($preferencia_entrega);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
                 
                 $this->preferencia_entrega = Validador::Peca()::filtrar_preferencia_entrega($preferencia_entrega);
             }
@@ -172,8 +173,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->fabricante = Validador::Peca()::validar_fabricante($fabricante);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_fabricante'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_fabricante'] = 'erro';
                 
                 $this->fabricante = Validador::Peca()::filtrar_fabricante($fabricante);
             }
@@ -183,10 +184,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         {
             try {
                 $this->peca = Validador::Peca()::validar_nome($peca);
-                $this->cadastrar_campos['erro_peca'] = 'certo';
+                $this->campos['erro_peca'] = 'certo';
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_peca'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_peca'] = 'erro';
                 
                 $this->peca = Validador::Peca()::filtrar_nome($peca);
             }
@@ -197,8 +198,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->serie = Validador::Peca()::validar_serie($serie);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_serie'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_serie'] = 'erro';
                 
                 $this->serie = Validador::Peca()::filtrar_serie($serie);
             }
@@ -209,10 +210,22 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->preco = Validador::Peca()::validar_preco($preco);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
-                $this->cadastrar_campos['erro_preco'] = 'erro';
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_preco'] = 'erro';
                 
                 $this->preco = Validador::Peca()::filtrar_preco($preco);
+            }
+        }
+        
+        public function set_vip($vip) : void
+        {
+            try {
+                $this->vip = Validador::Peca()::validar_vip($vip);
+            } catch (Exception $e) {
+                $this->erros[] = $e->getMessage();
+                $this->campos['erro_vip'] = 'erro';
+                
+                $this->vip = Validador::Peca()::filtrar_vip($vip);
             }
         }
         
@@ -221,7 +234,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
             try {
                 $this->imagens[$numero] = Validador::Foto_Peca()::validar_imagem($imagem, $numero);
             } catch (Exception $e) {
-                $this->cadastrar_erros[] = $e->getMessage();
+                $this->erros[] = $e->getMessage();
             }
         }
         
@@ -231,7 +244,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
-                    if (empty($this->cadastrar_form)) {
+                    if (empty($this->form)) {
                         unset($_SESSION['compatibilidade']);
                         $this->Deletar_Imagem(123);
                         $this->SetarDadosDoOrcamento();
@@ -240,10 +253,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $view = new View_Cadastrar($status);
                     
                     $view->set_orcamento($this->orcamento);
-                    $view->set_cadastrar_campos($this->cadastrar_campos);
-                    $view->set_cadastrar_erros($this->cadastrar_erros);
-                    $view->set_cadastrar_form($this->cadastrar_form);
-                    $view->set_cadastrar_sucesso($this->cadastrar_sucesso);
+                    $view->set_campos($this->campos);
+                    $view->set_erros($this->erros);
+                    $view->set_form($this->form);
+                    $view->set_sucesso($this->sucesso);
                      
                     $view->Executar();
                 }
@@ -273,10 +286,10 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     }
                 }
                 
-                $this->cadastrar_form['peca'] = $this->orcamento->get_peca_nome();;
-                $this->cadastrar_form['serie'] = $this->orcamento->get_numero_serie();
-                $this->cadastrar_form['estado_uso'] = $this->orcamento->get_estado_uso_id();
-                $this->cadastrar_form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->orcamento->get_preferencia_entrega_id());
+                $this->form['peca'] = $this->orcamento->get_peca_nome();;
+                $this->form['serie'] = $this->orcamento->get_numero_serie();
+                $this->form['estado_uso'] = $this->orcamento->get_estado_uso_id();
+                $this->form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->orcamento->get_preferencia_entrega_id());
             }
         }
         
@@ -330,13 +343,13 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
          */
         private function Salvar_Session_Compatibilidade() : void
         {
-            $compatibilidade = array();
+            $compatibilidade = [];
             
-            $compatibilidade['categoria'] = array();
-            $compatibilidade['marca'] = array();
-            $compatibilidade['modelo'] = array();
-            $compatibilidade['versao'] = array();
-            $compatibilidade['ano'] = array();
+            $compatibilidade['categoria'] = [];
+            $compatibilidade['marca'] = [];
+            $compatibilidade['modelo'] = [];
+            $compatibilidade['versao'] = [];
+            $compatibilidade['ano'] = [];
             
             if (isset($_SESSION['compatibilidade'])) {
                 $compatibilidade = $_SESSION['compatibilidade'];
@@ -463,19 +476,19 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                     $count_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
                     
                     if ($count_pecas >= $count_limite) {
-                        $this->cadastrar_erros[] = "Erro: Você atingiu o limite de peças para o seu plano";
+                        $this->erros[] = "Erro: Você atingiu o limite de peças para o seu plano";
                     }
                     
-                    if (empty($this->cadastrar_erros)) {
-                        $categorias_compativeis = array();
-                        $marcas_compativeis = array();
-                        $modelos_compativeis = array();
-                        $versoes_compativeis = array();
+                    if (empty($this->erros)) {
+                        $categorias_compativeis = [];
+                        $marcas_compativeis = [];
+                        $modelos_compativeis = [];
+                        $versoes_compativeis = [];
                         
-                        $categorias_pativeis = array();
-                        $marcas_pativeis = array();
-                        $modelos_pativeis = array();
-                        $versoes_pativeis = array();
+                        $categorias_pativeis = [];
+                        $marcas_pativeis = [];
+                        $modelos_pativeis = [];
+                        $versoes_pativeis = [];
                         
                         if (!empty($this->categoria)) {
                             $categorias_compativeis = self::Buscar_Categorias_Compativeis(current($this->categoria));
@@ -585,6 +598,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         $obj_peca->set_nome($this->peca);
                         $obj_peca->set_serie($this->serie);
                         $obj_peca->set_preco($this->preco);
+                        $obj_peca->set_vip($this->vip);
                         
                         $entidade->set_id(Login_Session::get_entidade_id());
                         $entidade->set_usuario_id(Login_Session::get_usuario_id());
@@ -595,8 +609,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         $id_endereco = DAO_Endereco::Buscar_Id_Por_Id_Entidade(Login_Session::get_entidade_id());
                         
                         if ($id_endereco === false) {
-                            $this->cadastrar_erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
-                            $this->cadastrar_campos['erro_peca'] = "";
+                            $this->erros[] = "Erro ao tentar adicionar o Endereço do Usuario para a Peça";
+                            $this->campos['erro_peca'] = "";
                         } else {
                             $endereco = new OBJ_Endereco();
                             
@@ -677,8 +691,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                             }
                             
                             if ($retorno === false) {
-                                $this->cadastrar_erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
-                                $this->cadastrar_campos['erro_peca'] = "";
+                                $this->erros[] = "Erro ao tentar adicionar a Lista Compativel para a Peça";
+                                $this->campos['erro_peca'] = "";
                             }
                             
                             if (isset($_SESSION['imagens_tmp']) AND !empty($_SESSION['imagens_tmp'])) {
@@ -696,8 +710,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                         $foto_peca->set_nome(str_replace('img_tmp_', 'img_'.$peca_url.'_', $_SESSION['imagens_tmp'][$key]));
                                         
                                         if (DAO_Foto_Peca::Inserir($foto_peca) === false) {
-                                            $this->cadastrar_erros[] = "Erro ao tentar adicionar Foto $key para a Peça";
-                                            $this->cadastrar_campos['erro_peca'] = "";
+                                            $this->erros[] = "Erro ao tentar adicionar Foto $key para a Peça";
+                                            $this->campos['erro_peca'] = "";
                                         }
                                     }
                                     
@@ -708,12 +722,12 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                                 }
                             }
                         } else {
-                            $this->cadastrar_erros[] = "Erro ao tentar Cadastrar Peça";
-                            $this->cadastrar_campos['erro_peca'] = "";
+                            $this->erros[] = "Erro ao tentar Cadastrar Peça";
+                            $this->campos['erro_peca'] = "";
                         }
                     }
                     
-                    if (empty($this->cadastrar_erros)) {
+                    if (empty($this->erros)) {
                         $entidade = new OBJ_Entidade();
                         $entidade->set_id(Login_Session::get_entidade_id());
                         
@@ -727,21 +741,22 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                         
                         DAO_Adicionado::Inserir($obj_adicionado);
                         
-                        $this->cadastrar_sucesso[] = 'Peça Cadastrada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
-                        $this->cadastrar_campos['erro_peca'] = '';
+                        $this->sucesso[] = 'Peça Cadastrada Com Sucesso - <a href="/usuario/meu-perfil/pecas/visualizar/">Visualizar Peças</a>';
+                        $this->campos['erro_peca'] = '';
                     } else {
-                        $this->cadastrar_form['peca'] = $this->peca;
-                        $this->cadastrar_form['fabricante'] = $this->fabricante;
-                        $this->cadastrar_form['serie'] = $this->serie;
-                        $this->cadastrar_form['preco'] = $this->preco;
-                        $this->cadastrar_form['estado_uso'] = $this->estado_uso;
-                        $this->cadastrar_form['descricao'] = $this->descricao;
-                        $this->cadastrar_form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->preferencia_entrega);
+                        $this->form['peca'] = $this->peca;
+                        $this->form['fabricante'] = $this->fabricante;
+                        $this->form['serie'] = $this->serie;
+                        $this->form['preco'] = $this->preco;
+                        $this->form['estado_uso'] = $this->estado_uso;
+                        $this->form['descricao'] = $this->descricao;
+                        $this->form['vip'] = $this->vip;
+                        $this->form['preferencia_entrega'] = OBJ_Peca::get_preferencias_entrega($this->preferencia_entrega);
                         
                         $marcas = null;
                         $modelos = null;
                         $versoes = null;
-                        $anos = array();
+                        $anos = [];
                         
                         if (!empty($_SESSION['compatibilidade']['marca'])) {
                             $marcas = $_SESSION['compatibilidade']['marca'];
@@ -884,7 +899,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
         {
             if (Controller_Header_Usuario::Verificar_Autenticacao()) {
                 if (Controller_Header_Usuario::Verificar_Status_Usuario() == 1) {
-                    $retorno = array();
+                    $retorno = [];
                     
                     $retorno['limite'] = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
                     $retorno['pecas'] = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());

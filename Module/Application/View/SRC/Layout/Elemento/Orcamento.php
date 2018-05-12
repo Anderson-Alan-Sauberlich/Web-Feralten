@@ -164,7 +164,7 @@ namespace Module\Application\View\SRC\Layout\Elemento;
             $pecas = [];
             
             if (self::$obj_orcamento instanceof OBJ_Orcamento) {
-                if (self::$pagina === self::RESPONDIDOS) {
+                if (self::$pagina === self::RESPONDIDOS && !empty(self::$obj_orcamento->get_pecas())) {
                     foreach (self::$obj_orcamento->get_pecas() as $peca) {
                         if ($peca->get_entidade()->get_id() === Login_Session::get_entidade_id()) {
                             $pecas[] = $peca;

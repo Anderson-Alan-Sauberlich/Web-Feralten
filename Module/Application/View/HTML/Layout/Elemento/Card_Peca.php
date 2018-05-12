@@ -1,26 +1,21 @@
 <?php use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca ?>
 <div class="ui card">
     <div class="extra content">
+    	<?php if (View_Card_Peca::VerificarPecaVip()) { ?>
+    		<div class="ui red ribbon label">VIP</div>
+    	<?php } ?>
         <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/"><?= View_Card_Peca::RetornarPecaNome(); ?></a>
     </div>
-    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui bordered image">
-        <img class="ui <?= View_Card_Peca::RetonrarStatusPecaImagem(); ?> image" onerror="this.src='/resources/img/imagem_indisponivel.png'" src="<?= View_Card_Peca::RetornarPecaImagem(); ?>">
+    <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui bordered <?= View_Card_Peca::RetonrarStatusPecaImagem(); ?> image">
+        <img onerror="this.src='/resources/img/imagem_indisponivel.png'" src="<?= View_Card_Peca::RetornarPecaImagem(); ?>">
+    	<div class="ui basic black large right ribbon label">R$: <?= View_Card_Peca::RetornarPecaPreco(); ?></div>
     </a>
     <div class="content">
-        <?php if (View_Card_Peca::VerificarPecaPreco() AND View_Card_Peca::VerificaPecaEstadoUso()) { ?>
-            <div class="right floated header">R$: <?= View_Card_Peca::RetornarPecaPreco(); ?></div>
+    	<div class="header"><?= View_Card_Peca::RetornarPecaEndereco(); ?></div>
+        <?php if (View_Card_Peca::VerificaPecaEstadoUso()) { ?>
             <div class="meta">
-                <span class="date"><?= View_Card_Peca::RetornarPecaEstadoUso(); ?></span>
+            	<span class="date"><?= View_Card_Peca::RetornarPecaEstadoUso(); ?></span>
             </div>
-        <?php } else if (View_Card_Peca::VerificarPecaPreco() AND !View_Card_Peca::VerificaPecaEstadoUso()) { ?>
-            <div class="header">R$: <?= View_Card_Peca::RetornarPecaPreco(); ?></div>
-        <?php } else if (!View_Card_Peca::VerificarPecaPreco() AND View_Card_Peca::VerificaPecaEstadoUso()) { ?>
-            <div class="header">R$: A Negociar</div>
-            <div class="meta">
-            <span class="date"><?= View_Card_Peca::RetornarPecaEstadoUso(); ?></span>
-            </div>
-        <?php } else if (!View_Card_Peca::VerificarPecaPreco()) { ?>
-            <div class="header">R$: A Negociar</div>
         <?php } ?>
         <?php if (View_Card_Peca::VerificaPecaFabricante()) { ?>
             <div class="description"><?= View_Card_Peca::RetornarPecaFabricante(); ?></div>

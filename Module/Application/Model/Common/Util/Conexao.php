@@ -27,14 +27,14 @@ namespace Module\Application\Model\Common\Util;
         private static $DB_USER = 'web-feralten';
         private static $DB_PASS = '$My?Fer!Vel@Bank#1024';
         private static $DB_NAME = 'FERALTEN_BD';
-        private static $DB_CHRS = 'utf8';
+        private static $DB_CHRS = 'utf8mb4';
         
         public static function Conectar() : PDO
         {
             if (!isset(self::$conection)) {
                 self::$conection = new PDO(
                         
-                self::$DB_TYPE.":host=".self::$DB_HOST.";port=".self::$DB_PORT.";dbname=".self::$DB_NAME.";charset=".self::$DB_CHRS, self::$DB_USER, self::$DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+                self::$DB_TYPE.":host=".self::$DB_HOST.";port=".self::$DB_PORT.";dbname=".self::$DB_NAME.";charset=".self::$DB_CHRS, self::$DB_USER, self::$DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"));
                 
                 self::$conection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }

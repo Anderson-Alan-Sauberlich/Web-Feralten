@@ -1,6 +1,9 @@
 <?php
 namespace Module\Application\Model\Validador;
     
+    use Module\Application\Model\DAO\Peca as DAO_Peca;
+    use Module\Application\Model\DAO\Plano as DAO_Plano;
+    Use Module\Application\Model\Common\Util\Login_Session;
     use \Exception;
     
     class Peca
@@ -309,6 +312,42 @@ namespace Module\Application\Model\Validador;
             }
         }
         
+        /**
+         * Valida o parametro bool para se e vip, e o segundo parametro sempre para verificar se a peça já é vip,
+         * Se for, nesse caso ele tem que permitir atualizar mesmo já tendo atingido o limite de peças vip.
+         * 
+         * @param bool $vip
+         * @param int $peca_id
+         * @throws Exception
+         * @return bool
+         */
+        public static function validar_vip($vip = null, $peca_id = null) : bool
+        {
+            if (!empty($vip) || $vip != false) {
+                $limite_vip = DAO_Plano::BuscarLimitePecasVipPorId(Login_Session::get_entidade_plano());
+                
+                if ($limite_vip >= 1) {
+                    $peca_vip = false;
+                    
+                    if (!empty($peca_id)) {
+                        $peca_vip = DAO_Peca::BuscarVipPorPeca($peca_id);
+                    }
+                    
+                    $anuncios_vip = DAO_Peca::BuscarNumVipPorEntidade(Login_Session::get_entidade_id(), true);
+                    
+                    if ($anuncios_vip < $limite_vip || $peca_vip) {
+                        return true;
+                    } else {
+                        throw new Exception("Você atingiu o limite máximo de anúncios com destaque. Seu plano atual permite cadastrar $limite_vip anúncios Vip");
+                    }
+                } else {
+                    throw new Exception('Seu plano atual não permite anúncios Vip. Você pode migrar para um plano superior acessando: <a href="/usuario/meu-perfil/financeiro/meu-plano/">Meu-Plano</a>');
+                }
+            } else {
+                return false;
+            }
+        }
+        
         public static function filtrar_pesquisa($pesquisa = null) : ?string
         {
             $valor = null;
@@ -490,5 +529,14 @@ namespace Module\Application\Model\Validador;
         public static function filtrar_preferencia_entrega($preferencia_entrega = null) : void
         {
             
+        }
+        
+        public static function filtrar_vip($vip = null) : bool
+        {
+            if ($vip === true) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }

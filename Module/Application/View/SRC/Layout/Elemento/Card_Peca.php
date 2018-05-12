@@ -97,22 +97,22 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         public static function RetornarPecaPreco() : ?string
         {
             if (self::$obj_peca instanceof OBJ_Peca) {
-                return number_format(self::$obj_peca->get_preco(), 2, ',', '.');
+                if (empty(self::$obj_peca->get_preco())) {
+                    return 'A Negociar';
+                } else {
+                    return number_format(self::$obj_peca->get_preco(), 2, ',', '.');
+                }
             } else {
                 return null;
             }
         }
         
-        public static function VerificarPecaPreco() : bool
+        public static function RetornarPecaEndereco() : ?string
         {
             if (self::$obj_peca instanceof OBJ_Peca) {
-                if (empty(self::$obj_peca->get_preco())) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return self::$obj_peca->get_endereco()->get_cidade()->get_nome().' - '.self::$obj_peca->get_endereco()->get_estado()->get_uf();
             } else {
-                return false;
+                return null;
             }
         }
         
@@ -168,6 +168,15 @@ namespace Module\Application\View\SRC\Layout\Elemento;
         {
             if (self::$obj_peca instanceof OBJ_Peca) {
                 return Login_Session::Verificar_Login() AND self::$obj_peca->get_entidade()->get_usuario_id() === Login_Session::get_usuario_id();
+            } else {
+                return false;
+            }
+        }
+        
+        public static function VerificarPecaVip() : ?bool
+        {
+            if (self::$obj_peca instanceof OBJ_Peca) {
+                return self::$obj_peca->get_vip();
             } else {
                 return false;
             }

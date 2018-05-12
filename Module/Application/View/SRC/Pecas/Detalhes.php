@@ -73,10 +73,15 @@ namespace Module\Application\View\SRC\Pecas;
             echo self::$obj_peca->get_nome();
         }
         
+        public static function Mostrar_Visualizacoes() : ?int
+        {
+            return self::$obj_peca->get_num_visualizado();
+        }
+        
         public static function Mostrar_Preco() : void
         {
             if (empty(self::$obj_peca->get_preco()) OR self::$obj_peca->get_preco() == false) {
-                echo 'a negociar';
+                echo 'R$ A Negociar';
             } else {
                 echo 'R$ '.number_format(self::$obj_peca->get_preco(), 2, ',', '.');
             }

@@ -33,10 +33,22 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
                         $view->set_num_pecas($num_pecas);
                     }
                     
-                    $num_plano = DAO_Plano::Buscar_Limite_Por_Id(Login_Session::get_entidade_plano());
+                    $num_pecas_vip = DAO_Peca::BuscarNumVipPorEntidade(Login_Session::get_entidade_id(), true);
                     
-                    if (!empty($num_plano) && $num_plano != false) {
-                        $view->set_num_limite_plano($num_plano);
+                    if (!empty($num_pecas_vip) && $num_pecas_vip != false) {
+                        $view->set_num_pecas_vip($num_pecas_vip);
+                    }
+                    
+                    $num_limite_pecas_vip = DAO_Plano::BuscarLimitePecasVipPorId(Login_Session::get_entidade_plano());
+                    
+                    if (!empty($num_limite_pecas_vip) && $num_limite_pecas_vip != false) {
+                        $view->set_num_limite_pecas_vip($num_limite_pecas_vip);
+                    }
+                    
+                    $num_limite_pecas = DAO_Plano::Buscar_Limite_Pecas_Por_Id(Login_Session::get_entidade_plano());
+                    
+                    if (!empty($num_limite_pecas) && $num_limite_pecas != false) {
+                        $view->set_num_limite_pecas($num_limite_pecas);
                     }
                 }
                 

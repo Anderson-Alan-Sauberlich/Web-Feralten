@@ -26,7 +26,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(1); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -57,7 +58,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(2); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -88,7 +90,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(3); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -119,7 +122,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(4); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -150,7 +154,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(5); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -181,7 +186,8 @@
                     </div>
                     <div class="content">
                         <div class="description">
-                            <b>Com orçamentos gratuitos</b>
+                            <p><b>Com <label class="ui circular large label"><?php View_Planos_Mensais::Mostrar_Limite_Pecas_Vip(6); ?></label> anúncios VIP</b></p>
+                            <p><b>Com orçamentos gratuitos</b></p>
                         </div>
                     </div>
                     <div class="center aligned content">
@@ -203,6 +209,29 @@
                 </div>
             </div>
         </div>
+        <div class="margem-inferior-pouco"></div>
+        <h1 class="ui center aligned red dividing header">Uma plataforma mais do que completa</h1>
+        <h2 class="ui red header">
+        	<i class="chart line icon"></i>
+        	<div class="content">
+        		Maior Visibilidade
+        		<div class="sub header">Sua marca e suas peças com os melhores resultados no Google</div>
+        	</div>
+        </h2>
+        <h2 class="ui red header">
+        	<i class="sitemap icon"></i>
+        	<div class="content">
+        		Painel de Controle
+        		<div class="sub header">Gerencie todos os seus anúncios e mensagens</div>
+        	</div>
+        </h2>
+        <h2 class="ui red header">
+        	<i class="comments icon"></i>
+        	<div class="content">
+        		Contato por WhatsApp e Email
+        		<div class="sub header">Seu cliente negocia diretamente com você</div>
+        	</div>
+        </h2>
         <div class="margem-inferior-pouco"></div>
     </section>
     <footer>

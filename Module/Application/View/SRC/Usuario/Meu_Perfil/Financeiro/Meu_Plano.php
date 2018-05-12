@@ -101,6 +101,18 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Financeiro;
         }
         
         /**
+         * Retorna o limite de peças vip do plano.
+         *
+         * @param int $id
+         */
+        public static function Mostrar_Limite_Pecas_Vip(int $id) : void
+        {
+            if (self::$planos[$id] instanceof OBJ_Plano) {
+                echo self::$planos[$id]->get_limite_pecas_vip();
+            }
+        }
+        
+        /**
          * Verifica se é o plano ativo.
          * 
          * @param int $id

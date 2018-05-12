@@ -4,6 +4,7 @@
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
     <title>Peças Novas e Usadas de Carros, Motos, Caminhões, Ônibus e Muito Mais em Ferro Velho, Oficinas e Lojas | Feralten</title>
+	<script type="text/javascript" src="/application/js/layout/elemento/card_peca.js"></script>
 	<?php include_once RAIZ.'/Module/Application/View/HTML/Common/Util/Gtag.php'; ?>
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
@@ -60,6 +61,13 @@
         	</div>
       	</div>
     </div>
+    <div class="margem-inferior-minimo"></div>
+    <section class="ui container" role="main">
+        <h1 class="ui red huge dividing header">Anúncios em Destaque</h1>
+        <div class="ui four stackable doubling raised cards" id="div_pecas">
+        	<?php View_Inicio::Mostrar_Cards_Pecas_Vip(); ?>
+        </div>
+    </section>
     <div class="margem-superior-minimo"></div>
     <div class="ui basic secondary vertical segment">
     	<div class="margem-inferior-minimo"></div>
@@ -67,11 +75,6 @@
        		<h2 class="ui red header">
        			<div class="content">
        				Chega de perder tempo correndo atrás de peças, encontre e anuncie todas aqui no Feralten.
-       			</div>
-       		</h2>
-       		<h2 class="ui header">
-       			<div class="sub header">
-       				O site Feralten é um portal de anúncios, que visa aumentar os lucros e facilitar as vendas entre Ferros-Velhos, Oficinas Mecânicas e Pessoas Interessadas em peças originais, novas e usadas.
        			</div>
        		</h2>
        		<div class="margem-inferior-minimo"></div>

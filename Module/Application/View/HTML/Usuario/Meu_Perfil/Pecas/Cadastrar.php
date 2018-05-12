@@ -128,6 +128,12 @@
                                     <?php View_Cadastrar::Mostrar_Preferencia_Entrega(); ?>
                                 </select>
                             </div>
+                            <div class="row-fluid">
+                                <div class="ui toggle checkbox">
+                                	<input name="vip" <?php View_Cadastrar::Manter_Valor('vip'); ?> type="checkbox">
+                                	<label class="lbPanel"><b>Anúncio VIP.</b> A peça será destacada das demais e compartilhadas nas redes sociais.</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
