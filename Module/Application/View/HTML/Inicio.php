@@ -19,7 +19,8 @@
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
     </header>
-    <img class="ui fluid image headIMG" src="/resources/img/header_fundo.jpg"/>
+    <img id="logo_header_fundo" class="ui hidden image headLogo" src="/resources/img/Feralten_logo_Transparente_Invertido_Mini.png"/>
+    <img id="img_header_fundo" class="ui fluid image headIMG" src="/resources/img/header_fundo.jpg"/>
     <section class="ui container" role="main">
         <form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
             <?php View_Inicio::Incluir_Menu_Pesquisa(); ?>
@@ -260,6 +261,7 @@
     <?php View_Inicio::Carregar_Modal_Saindo(); ?>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/js/inicio.js"></script>
     </footer>
 </body>
 </html>
