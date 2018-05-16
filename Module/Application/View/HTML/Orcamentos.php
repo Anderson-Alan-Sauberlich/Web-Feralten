@@ -10,7 +10,7 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
+    	<img id="header_logo_fundo" class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
     	<h1 class="ui red huge dividing header">Orçamentos Solicitados</h1>
         <div id="div_orcamentos" class="ui text container margem-inferior-pouco">
         	<div class="margem-inferior-minimo"></div>

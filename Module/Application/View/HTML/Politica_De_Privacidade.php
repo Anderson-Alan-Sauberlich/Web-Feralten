@@ -10,7 +10,7 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
+    	<img id="header_logo_fundo" class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
     	<h1 class="ui red huge dividing header">Política de Privacidade</h1>
         <div class="ui text container margem-inferior-pouco">
         	<p>A presente Política regula as condições gerais de coleta, uso, armazenamento, tratamento e proteção de dados no site Feralten (www.feralten.com.br), em conformidade com a Lei 12.965/2014 (Marco Civil da Internet).</p>
@@ -70,6 +70,7 @@
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/js/politica_de_privacidade.js"></script>
     </footer>
 </body>
 </html>

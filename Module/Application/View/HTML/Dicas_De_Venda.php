@@ -10,7 +10,7 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
+    	<img id="header_logo_fundo" class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
     	<h1 class="ui red huge dividing header">Dicas de Venda</h1>
         <div class="ui text container">
         	<div class="margem-inferior-medio margem-superior-minimo">
@@ -25,6 +25,7 @@
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/js/fale_conosco.js"></script>
     </footer>
 </body>
 </html>

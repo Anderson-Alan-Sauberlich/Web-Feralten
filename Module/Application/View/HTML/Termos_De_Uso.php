@@ -10,7 +10,7 @@
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>    
     </header>
     <section class="ui container" role="main">
-    	<img class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
+    	<img id="header_logo_fundo" class="ui large image margem-inferior-pouco" src="/resources/img/Feralten_logo_Transparente_lateral.png"/>
     	<h1 class="ui red huge dividing header">Termos de Uso</h1>
     	<div class="ui text container margem-inferior-pouco">
     		<p>Por este instrumento, CONTRATADA: Sauber Sistemas LTDA-ME., pessoa jurídica de direito privado, inscrita no CNPJ sob nº 23.827.328/0001-81, com sede em Blumenau, na Rua Paul Draeger, 2272, Bairro Vila Itoupava, CEP 89095-490, SC; e o <b>ANUNCIANTE</b>.</p>
@@ -40,6 +40,7 @@
     </section>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
+        <script type="text/javascript" src="/application/js/termos_de_uso.js"></script>
     </footer>
 </body>
 </html>
