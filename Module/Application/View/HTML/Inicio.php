@@ -15,7 +15,7 @@
 	</script>
 </head>
 <body>
-    <?php View_Inicio::Carregar_Loader(); ?>
+    <?php View_Inicio::CarregarLoader(); ?>
     <header>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Header/Cabecalho.php'; ?>
     </header>
@@ -23,7 +23,7 @@
     <img id="img_header_fundo" class="ui fluid image headIMG" src="/resources/img/header_fundo.jpg"/>
     <section class="ui container" role="main">
         <form id="searschform" class="form-horizontal" name="searschform" action="/pecas/resultados/" method="get" role="form">
-            <?php View_Inicio::Incluir_Menu_Pesquisa(); ?>
+            <?php View_Inicio::IncluirMenuPesquisa(); ?>
         </form>
     </section>
     <div class="margem-inferior-minimo"></div>
@@ -66,7 +66,14 @@
     <section class="ui container" role="main">
         <h1 class="ui red huge dividing header">Anúncios em Destaque</h1>
         <div class="ui four stackable doubling raised cards" id="div_pecas">
-        	<?php View_Inicio::Mostrar_Cards_Pecas_Vip(); ?>
+        	<?php View_Inicio::MostrarCardsPecasVip(); ?>
+        </div>
+    </section>
+    <div class="margem-inferior-minimo"></div>
+    <section class="ui container" role="main">
+        <h1 class="ui red huge dividing header">Ultimas Solicitações</h1>
+        <div class="ui three column stackable grid">
+        	<?php View_Inicio::MostrarUltimosOrcamentos(); ?>
         </div>
     </section>
     <div class="margem-superior-minimo"></div>
@@ -258,7 +265,7 @@
         <a href="https://www.instagram.com/feralten/" target="_blank" class="ui instagram button"><i class="instagram icon"></i>Instagram</a>
         <div class="margem-superior-minimo"></div>
     </section>
-    <?php View_Inicio::Carregar_Modal_Saindo(); ?>
+    <?php View_Inicio::CarregarModalSaindo(); ?>
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
         <script type="text/javascript" src="/application/js/inicio.js"></script>
