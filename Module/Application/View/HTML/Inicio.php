@@ -72,7 +72,7 @@
     <div class="margem-inferior-minimo"></div>
     <section class="ui container" role="main">
         <h1 class="ui red huge dividing header">Últimas Solicitações</h1>
-        <div class="ui three column stackable grid">
+        <div id="div_orcamentos" class="ui three column stackable grid">
         	<?php View_Inicio::MostrarUltimosOrcamentos(); ?>
         </div>
     </section>
@@ -269,6 +269,7 @@
     <footer>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
         <script type="text/javascript" src="/application/js/inicio.js"></script>
+        <script type="text/javascript" src="/application/js/layout/elemento/orcamento.js"></script>
     </footer>
 </body>
 </html>
