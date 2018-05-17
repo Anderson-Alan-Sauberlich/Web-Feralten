@@ -308,7 +308,7 @@
                         <p>Agora você pode escolher um <a href="https://www.feralten.com.br/usuario/meu-perfil/financeiro/meu-plano/">plano</a> e ficar de olho nas <a href="https://www.feralten.com.br/usuario/meu-perfil/orcamentos/caixa-de-entrada/">solicitações de peças</a>.</p>
                         <p>E solicitar quantos <a href="https://www.feralten.com.br/usuario/meu-perfil/orcamentos/meus-orcamentos/">orçamentos</a> de peças que você quiser inteiramente grátis!</p>
                         <p>Lembrando que sempre colocamos-nos inteiramente à disposição para esclarecer eventuais dúvidas.</p>
-                        <p>Bons Negocios! :)</p>
+                        <p>Bons Negócios! :)</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary btn-perfil">
                           <tbody>
                             <tr>

@@ -4,6 +4,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
     use Module\Application\View\SRC\Layout\Header\Usuario as View_Header_Usuario;
     use Module\Application\View\SRC\Layout\Elemento\Orcamento as View_Orcamento;
     use Module\Application\View\SRC\Layout\Menu\Orcamento as View_Menu_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     
     class Meus_Orcamentos
     {
@@ -98,12 +99,14 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos;
             
             if (!empty(self::$orcamentos)) {
                 foreach (self::$orcamentos as $obj_orcamento) {
-                    $view_orcamento = new View_Orcamento();
-                    
-                    $view_orcamento->set_obj_orcamento($obj_orcamento);
-                    $view_orcamento->set_pagina(View_Orcamento::MEUS_ORCAMENTOS);
-                    
-                    $view_orcamento->Executar();
+                    if ($obj_orcamento instanceof OBJ_Orcamento) {
+                        $view_orcamento = new View_Orcamento();
+                        
+                        $view_orcamento->set_obj_orcamento($obj_orcamento);
+                        $view_orcamento->set_pagina(View_Orcamento::MEUS_ORCAMENTOS);
+                        
+                        $view_orcamento->Executar();
+                    }
                 }
             } else {
                 echo "<div class=\"ui container\"><h2><label class=\"lbPanel\">Nenhum orçamento foi encontrado.</label></h2></div>";

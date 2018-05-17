@@ -71,7 +71,7 @@
     </section>
     <div class="margem-inferior-minimo"></div>
     <section class="ui container" role="main">
-        <h1 class="ui red huge dividing header">Ultimas Solicitações</h1>
+        <h1 class="ui red huge dividing header">Últimas Solicitações</h1>
         <div class="ui three column stackable grid">
         	<?php View_Inicio::MostrarUltimosOrcamentos(); ?>
         </div>

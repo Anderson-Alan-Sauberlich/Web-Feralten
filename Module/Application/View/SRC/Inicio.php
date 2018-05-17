@@ -6,6 +6,7 @@ namespace Module\Application\View\SRC;
     use Module\Application\View\SRC\Layout\Modal\Saindo as View_Saindo;
     use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca;
     use Module\Application\View\SRC\Layout\Elemento\Orcamento as View_Orcamento;
+    use Module\Application\Model\OBJ\Orcamento as OBJ_Orcamento;
     
     class Inicio
     {
@@ -67,15 +68,17 @@ namespace Module\Application\View\SRC;
         public static function MostrarUltimosOrcamentos() : void
         {
             if (!empty(self::$ultimos_orcamentos)) {
-                foreach (self::$ultimos_orcamentos as $orcamento) {
-                    $view_orcamento = new View_Orcamento();
-                    
-                    $view_orcamento->set_obj_orcamento($orcamento);
-                    $view_orcamento->set_pagina(View_Orcamento::ORCAMENTOS);
-                    
-                    echo '<div class="column">';
-                    $view_orcamento->Executar();
-                    echo '</div>';
+                foreach (self::$ultimos_orcamentos as $obj_orcamento) {
+                    if ($obj_orcamento instanceof OBJ_Orcamento) {
+                        $view_orcamento = new View_Orcamento();
+                        
+                        $view_orcamento->set_obj_orcamento($obj_orcamento);
+                        $view_orcamento->set_pagina(View_Orcamento::ORCAMENTOS);
+                        
+                        echo '<div class="column">';
+                        $view_orcamento->Executar();
+                        echo '</div>';
+                    }
                 }
             }
         }

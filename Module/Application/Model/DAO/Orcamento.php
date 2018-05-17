@@ -119,7 +119,12 @@ namespace Module\Application\Model\DAO;
                 $p_sql->bindValue(':id', $id, PDO::PARAM_INT);
                 $p_sql->execute();
                 
-                return self::PopulaOrcamento($p_sql->fetch(PDO::FETCH_ASSOC));
+                $orcamento = $p_sql->fetch(PDO::FETCH_ASSOC);
+                if (!empty($orcamento) && $orcamento != false) {
+                    return self::PopulaOrcamento($orcamento);
+                } else {
+                    return false;
+                }
             } catch (PDOException | Exception $e) {
                 return false;
             }
