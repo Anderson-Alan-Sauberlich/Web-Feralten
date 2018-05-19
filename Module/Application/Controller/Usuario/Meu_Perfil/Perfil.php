@@ -45,7 +45,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil;
                         $view->set_num_limite_pecas_vip($num_limite_pecas_vip);
                     }
                     
-                    $num_limite_pecas = DAO_Plano::Buscar_Limite_Pecas_Por_Id(Login_Session::get_entidade_plano());
+                    $num_limite_pecas = DAO_Plano::BuscarLimitePecasPorId(Login_Session::get_entidade_plano());
                     
                     if (!empty($num_limite_pecas) && $num_limite_pecas != false) {
                         $view->set_num_limite_pecas($num_limite_pecas);

@@ -12,6 +12,7 @@ namespace Module\Email\Controller\Common\Util;
     use Module\Email\View\SRC\Recuperar_Senha as View_Recuperar_Senha;
     use Module\Email\View\SRC\Contato_Anunciante as View_Contato_Anunciante;
     use Module\Email\View\SRC\Orcamento_Peca as View_Orcamento_Peca;
+    use Module\Email\View\SRC\Mensagem as View_Mensagem;
     
     class Email
     {
@@ -213,6 +214,45 @@ namespace Module\Email\Controller\Common\Util;
                 //Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Feralten - Nova Peça Adicionada';
+                $mail->Body    = $body_html;
+                $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
+                
+                return $mail->send();
+            } catch (Mail_Exception $e) {
+                return false;
+            }
+        }
+        
+        public static function Enviar_Mensagem(string $email_para) : bool
+        {
+            $mail = new PHPMailer(true);
+            
+            try {
+                //Server settings
+                $mail->CharSet = 'UTF-8';
+                $mail->SMTPDebug = 0;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'anderson.alan@feralten.com';
+                $mail->Password = '$NdrsN#494';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                
+                //Recipients
+                $mail->setFrom('contato@feralten.com', 'Contato Feralten');
+                $mail->addAddress($email_para);
+                $mail->addReplyTo('contato@feralten.com', 'Contato Feralten');
+                
+                $view_mensagem = new View_Mensagem();
+                ob_start();
+                $view_mensagem->Executar();
+                $body_html = ob_get_contents();
+                ob_end_clean();
+                
+                //Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Feralten - Solicitação: Caixa De Fusível - Carro/Camioneta, Chrysler, PT Cruiser';
                 $mail->Body    = $body_html;
                 $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 

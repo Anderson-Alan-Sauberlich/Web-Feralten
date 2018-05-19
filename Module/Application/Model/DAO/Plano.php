@@ -120,7 +120,7 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        public static function Buscar_Limite_Pecas_Por_Id(int $id)
+        public static function BuscarLimitePecasPorId(int $id)
         {
             try {
                 $sql = 'SELECT plano_limite_pecas FROM tb_plano WHERE plano_id = :id';

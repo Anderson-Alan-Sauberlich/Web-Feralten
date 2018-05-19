@@ -25,7 +25,7 @@ namespace Module\Application\Model\Validador;
                         
                         if (count($faturas_pendentes) === 0) {
                             if ($id < Login_Session::get_entidade_plano()) {
-                                $limite = DAO_Plano::Buscar_Limite_Por_Id($id);
+                                $limite = DAO_Plano::BuscarLimitePecasPorId($id);
                                 $pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
                                 
                                 if ($pecas > $limite) {

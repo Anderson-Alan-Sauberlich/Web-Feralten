@@ -472,7 +472,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
-                    $count_limite = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
+                    $count_limite = DAO_Plano::BuscarLimitePecasPorId(Login_session::get_entidade_plano());
                     $count_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
                     
                     if ($count_pecas >= $count_limite) {
@@ -901,7 +901,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Pecas;
                 if (Controller_Header_Usuario::Verificar_Status_Usuario() == 1) {
                     $retorno = [];
                     
-                    $retorno['limite'] = DAO_Plano::Buscar_Limite_Por_Id(Login_session::get_entidade_plano());
+                    $retorno['limite'] = DAO_Plano::BuscarLimitePecasPorId(Login_session::get_entidade_plano());
                     $retorno['pecas'] = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_session::get_entidade_id());
                     
                     echo json_encode($retorno);

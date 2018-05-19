@@ -137,6 +137,20 @@ namespace Module\Application\Model\Common\Util;
         }
         
         /**
+         * Deleta orçamento pelo id informado por parametro.
+         *
+         * Retorna False em caso de falha e True quando executado com sucesso, ou nenhum elemento precisar ser deletado.
+         * @param int $id_orcamento
+         * @return bool
+         */
+        public function Deletar_Orcamento(int $id_orcamento) : bool
+        {
+            $sql = "DELETE FROM tb_orcamento WHERE orcamento_orc_id = $id_orcamento;";
+            
+            return $this->exec($sql);
+        }
+        
+        /**
          * Retorna em TimeStamp a ultima data inserida do ultimo orçamento.
          * 
          * @return string|NULL
@@ -218,7 +232,13 @@ namespace Module\Application\Model\Common\Util;
             
             while($row = $ret->fetchArray(SQLITE3_ASSOC)) {
                 if (isset($row['orcamento_orc_id']) && !empty($row['orcamento_orc_id'])) {
-                    $orcamentos[] = DAO_Orcamento::BuscarPorCOD($row['orcamento_orc_id']);
+                    $orcamento = DAO_Orcamento::BuscarPorCOD($row['orcamento_orc_id']);
+                    
+                    if (!empty($orcamento) && $orcamento) {
+                        $orcamentos[] = $orcamento;
+                    } else {
+                        $this->Deletar_Orcamento($row['orcamento_orc_id']);
+                    }
                 }
             }
             
