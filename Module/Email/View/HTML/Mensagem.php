@@ -1,10 +1,10 @@
-<?php use Module\Email\View\SRC\Mensagem as View_Mensagem; ?>
+<?php //use Module\Email\View\SRC\Mensagem as View_Mensagem; ?>
 <!doctype html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Feralten - Solicitação: Caixa De Fusível - Carro/Camioneta, Chrysler, PT Cruiser</title>
+    <title>Feralten - Solicitação: Nome da Peça - Categoria, Marca, Modelo, Versão</title>
     <style>
       
       .logo {
@@ -305,7 +305,7 @@
                         <img class="logo" src="https://www.feralten.com.br/email/img/Feralten_logo_Transparente_lateral.png"/>
                         <h2>Olá, boa tarde</h2>
                         <p>Um dos nossos clientes está solicitando orçamentos para a peça:</p>
-                        <p><b>Caixa De Fusível</b> para: <b>Carro/Camioneta, Chrysler, PT Cruiser</b></p>
+                        <p><b>Nome da Peça</b> para: <b>Categoria, Marca, Modelo, Versão</b></p>
                         <p>Se tiver a peça, acesse 'orçamentos recebidos' e a cadastre clicando no botão azul "Sim Tenho".</p>
                         <p>Você será direcionados para a página de cadastro com alguns dados da peça já preenchidos de acordo com a solicitação.</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary btn-perfil">

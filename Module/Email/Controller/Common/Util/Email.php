@@ -252,7 +252,7 @@ namespace Module\Email\Controller\Common\Util;
                 
                 //Content
                 $mail->isHTML(true);
-                $mail->Subject = 'Feralten - Solicitação: Caixa De Fusível - Carro/Camioneta, Chrysler, PT Cruiser';
+                $mail->Subject = 'Feralten - Solicitação: Nome da Peça - Categoria, Marca, Modelo, Versão';
                 $mail->Body    = $body_html;
                 $mail->AltBody = '2018 - Feralten. Todos os direitos reservados.';
                 

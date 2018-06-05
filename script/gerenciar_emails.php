@@ -7,4 +7,6 @@
         
     if (Email::Enviar_Mensagem('')) {
         echo 'true';
+    } else {
+        echo 'false';
     }
