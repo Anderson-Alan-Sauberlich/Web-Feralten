@@ -1,10 +1,12 @@
 <?php use Module\Application\View\SRC\Layout\Elemento\Card_Peca as View_Card_Peca ?>
 <div class="ui card">
     <div class="extra content">
-    	<?php if (View_Card_Peca::VerificarPecaVip()) { ?>
-    		<div class="ui red ribbon label">VIP</div>
-    	<?php } ?>
-        <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/"><?= View_Card_Peca::RetornarPecaNome(); ?></a>
+        <div class="header">
+        	<?php if (View_Card_Peca::VerificarPecaVip()) { ?>
+        		<div class="ui red ribbon label">VIP</div>
+        	<?php } ?>
+        	<a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/"><?= View_Card_Peca::RetornarPecaNome(); ?></a>
+        </div>
     </div>
     <a href="/pecas/detalhes/<?= View_Card_Peca::RetornarPecaURL(); ?>/" class="ui bordered <?= View_Card_Peca::RetonrarStatusPecaImagem(); ?> image">
         <img onerror="this.src='/resources/img/imagem_indisponivel.png'" src="<?= View_Card_Peca::RetornarPecaImagem(); ?>">
