@@ -14,7 +14,7 @@
     	<h1 class="ui red huge dividing header">Planos Mensais</h1>
         <div class="margem-inferior-minimo"></div>
 		<div class="ui secondary segment">
-            <div class="ui doubling raised inverted grey stackable link three cards">
+            <div class="ui doubling raised inverted orange stackable link three cards">
                 <div onclick="btn_plano(1);" class="card">
                     <div class="content">
                         <div class="center aligned header">

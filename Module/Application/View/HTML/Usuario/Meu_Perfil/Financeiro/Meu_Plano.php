@@ -16,7 +16,7 @@
         	</div>
         	<div class="thirteen wide column">
                 <div class="ui secondary segment">
-                    <div class="ui doubling raised inverted grey stackable link three cards">
+                    <div class="ui doubling raised inverted orange stackable link three cards">
                         <div onclick="btn_plano(1);" class="card">
                             <div class="content">
                                 <div class="center aligned header">
