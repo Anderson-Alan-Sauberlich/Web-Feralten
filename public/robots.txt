@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/login/
+
+Sitemap: https://www.feralten.com.br/sitemap.xml
+Sitemap: https://www.feralten.com.br/sitemap.php
