@@ -175,7 +175,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
          */
         public function SalvarDados() : void
         {
-            if (empty($this->erros) && Login_Session::Verificar_Login()) {
+            if (empty($this->erros) && Login_Session::Verificar_Login() && Login_Session::Verificar_Entidade()) {
                 $entidade = new OBJ_Entidade();
                 
                 $entidade->set_site($this->site);

@@ -309,11 +309,8 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Meus_Dados\Editar_Dad
                     $usuario['sobrenome'] = $obj_usuario->get_sobrenome();
                     $usuario['email'] = $obj_usuario->get_email();
                     $usuario['email_alternativo'] = $obj_usuario->get_email_alternativo();
+                    $usuario['fone'] = $obj_usuario->get_fone();
                     $usuario['fone_alternativo'] = $obj_usuario->get_fone_alternativo();
-                    
-                    if (Login_Session::Verificar_Entidade()) {
-                        $usuario['fone'] = $obj_usuario->get_fone();
-                    }
                 }
             }
             

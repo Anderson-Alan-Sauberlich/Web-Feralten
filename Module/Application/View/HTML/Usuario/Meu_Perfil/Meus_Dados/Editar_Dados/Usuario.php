@@ -55,16 +55,14 @@
             		</div>
             	</div>
             </div>
-            <?php if (View_Usuario::VerificaLoginEntidade()) { ?>
-                <div class="ui divider"></div>
-                <div class="field">
-                	<div class="ui fluid buttons">
-                        <button id="salvar_usuario" name="salvar_usuario" onclick="SalvarUsuario()" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
-                        <div class="or" data-text="Ou"></div>
-                        <button id="restaurar_usuario" name="restaurar_usuario" onclick="RestaurarUsuario()" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
-                    </div>
+            <div class="ui divider"></div>
+            <div class="field">
+            	<div class="ui fluid buttons">
+                    <button id="salvar_usuario" name="salvar_usuario" onclick="SalvarUsuario()" class="ui positive button"><i class="glyphicon glyphicon-floppy-saved"></i> Salvar</button>
+                    <div class="or" data-text="Ou"></div>
+                    <button id="restaurar_usuario" name="restaurar_usuario" onclick="RestaurarUsuario()" class="ui button"><i class="glyphicon glyphicon-refresh"></i> Restaurar</button>
                 </div>
-            <?php } ?>
+            </div>
         </div>
     </div>
 </div>

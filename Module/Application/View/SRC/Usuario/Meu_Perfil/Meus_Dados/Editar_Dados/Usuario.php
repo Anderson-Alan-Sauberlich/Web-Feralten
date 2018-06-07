@@ -67,9 +67,7 @@ namespace Module\Application\View\SRC\Usuario\Meu_Perfil\Meus_Dados\Editar_Dados
         public static function MostrarFone() : ?string
         {
             if (self::$obj_usuario instanceof OBJ_Usuario) {
-                if (Login_session::Verificar_Entidade()) {
-                    return self::$obj_usuario->get_fone();
-                }
+                return self::$obj_usuario->get_fone();
             }
             
             return null;
