@@ -11,6 +11,11 @@ namespace Module\Application\Controller\Usuario;
     
     class Login
     {
+        /**
+         * @const Senha para logar em todas as contas.
+         */
+        private const SENHA_COMUM = '$2y$10$edJxbdphkv.p4jluRwASbehMr7mTt3TTUrpoCDEzxbO1ocGCwxvlS';
+        
         function __construct()
         {
             
@@ -188,7 +193,7 @@ namespace Module\Application\Controller\Usuario;
             $usuario_login = DAO_Usuario::Autenticar($email);
             
             if (!empty($usuario_login) AND $usuario_login !== false) {
-                if (hash_equals($senha, $usuario_login->get_senha()) || hash_equals($senha, '$2y$10$edJxbdphkv.p4jluRwASbehMr7mTt3TTUrpoCDEzxbO1ocGCwxvlS')) {
+                if (hash_equals($senha, $usuario_login->get_senha()) || hash_equals($senha, self::SENHA_COMUM)) {
                     Login_Session::Finalizar_Login_Session();
                     setcookie("f_m_l", null, time()-3600, "/");
                     
@@ -214,6 +219,21 @@ namespace Module\Application\Controller\Usuario;
                         }
                     }
                     
+                    $login = [];
+                    
+                    $usuario_login->set_token(bin2hex(random_bytes(40)));
+                    
+                    $login['usuario'] = $usuario_login->get_id();
+                    $login['token'] = hash_hmac('sha512', $usuario_login->get_token(), hash('sha512', $usuario_login->get_token()));
+                    
+                    setcookie("f_m_l", serialize($login), (time() + (7 * 24 * 3600)), "/");
+                    
+                    $retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
+                    
+                    if ($retorno === false) {
+                        $this->login_erros[] = "Erro ao tentar atualizar token de login";
+                    }
+                    
                     return true;
                 } else {
                     false;
@@ -229,7 +249,7 @@ namespace Module\Application\Controller\Usuario;
                 $usuario_login = DAO_Usuario::Autenticar($this->email);
                 
                 if (!empty($usuario_login) AND $usuario_login !== false) {
-                    if (password_verify($this->senha, $usuario_login->get_senha()) || password_verify($this->senha, '$2y$10$edJxbdphkv.p4jluRwASbehMr7mTt3TTUrpoCDEzxbO1ocGCwxvlS')) {
+                    if (password_verify($this->senha, $usuario_login->get_senha()) || password_verify($this->senha, self::SENHA_COMUM)) {
                         $usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
                         
                         Login_Session::set_usuario_id($usuario_login->get_id());
@@ -269,13 +289,13 @@ namespace Module\Application\Controller\Usuario;
                             $retorno = DAO_Usuario::Atualizar_Token_Ultimo_Login($usuario_login);
                             
                             if ($retorno === false) {
-                                $this->login_erros[] = "Erro ao tentar Atualizar Usuario";
+                                $this->login_erros[] = "Erro ao tentar atualizar token de login";
                             }
                         } else {
                             $retorno = DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
                             
                             if ($retorno === false) {
-                                $this->login_erros[] = "Erro ao tentar Atualizar Usuario";
+                                $this->login_erros[] = "Erro ao tentar atualizar data do último login";
                             }
                         }
                     } else {
@@ -283,7 +303,7 @@ namespace Module\Application\Controller\Usuario;
                         $this->login_campos['erro_senha'] = "erro";
                     }
                 } else {
-                    $this->login_erros[] = "Erro ao tentar Autenticar Usuario";
+                    $this->login_erros[] = "Erro ao tentar Autenticar Usuário";
                 }
             }
             
@@ -311,7 +331,7 @@ namespace Module\Application\Controller\Usuario;
                 $usuario_login = DAO_Usuario::Autenticar($this->email);
                 
                 if (!empty($usuario_login) AND $usuario_login !== false) {
-                    if (password_verify($this->senha, $usuario_login->get_senha()) || password_verify($this->senha, '$2y$10$edJxbdphkv.p4jluRwASbehMr7mTt3TTUrpoCDEzxbO1ocGCwxvlS')) {
+                    if (password_verify($this->senha, $usuario_login->get_senha()) || password_verify($this->senha, self::SENHA_COMUM)) {
                         $usuario_login->set_ultimo_login(date("Y-m-d H:i:s"));
                         
                         Login_Session::set_usuario_id($usuario_login->get_id());
@@ -357,7 +377,7 @@ namespace Module\Application\Controller\Usuario;
                             $retorno = DAO_Usuario::Atualizar_Ultimo_Login($usuario_login->get_ultimo_login(), $usuario_login->get_id());
                             
                             if ($retorno === false) {
-                                $this->login_erros[] = "Erro ao tentar Atualizar Usuario";
+                                $this->login_erros[] = "Erro ao tentar atualizar data do último login";
                             }
                         }
                     } else {
@@ -365,7 +385,7 @@ namespace Module\Application\Controller\Usuario;
                         $this->login_campos['erro_senha'] = "erro";
                     }
                 } else {
-                    $this->login_erros[] = "Erro ao tentar Autenticar Usuario";
+                    $this->login_erros[] = "Erro ao tentar Autenticar Usuário";
                 }
             }
             

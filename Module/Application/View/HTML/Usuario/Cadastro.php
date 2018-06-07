@@ -3,7 +3,6 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <script type="text/javascript" src="/application/js/usuario/cadastro.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=pt" async defer></script>
     <title>Cadastro | Feralten</title>
 </head>
@@ -34,6 +33,15 @@
                                     <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("sobrenome"); ?>">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="sobrenome" name="sobrenome" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("sobrenome") ?>" placeholder="Sobrenome" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite seu Sobrenome. (Campo Obrigatório)" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label for="telefone" class="lbPanel">Seu Telefone:</label>
+                                    <div class="input-group <?php View_Cadastro::Incluir_Classe_Erros("telefone"); ?>">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                                        <input id="telefone" name="telefone" type="text" class="form-control" value="<?php View_Cadastro::Manter_Valor("telefone") ?>" placeholder="Ex.: (00) 0000-0000" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Digite Apenas os Números (Campo Obrigatório)" />
                                     </div>
                                 </div>
                             </div>
@@ -68,6 +76,8 @@
         </div>
     </section>
     <footer>
+    	<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
+    	<script type="text/javascript" src="/application/js/usuario/cadastro.js"></script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
 </body>

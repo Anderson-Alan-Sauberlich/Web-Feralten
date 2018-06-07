@@ -240,6 +240,7 @@
                     
                 $cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
                 $cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                $cadastro->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
                 $cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
                 $cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
                 $cadastro->set_recaptcha_response(isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : null);
@@ -258,6 +259,7 @@
                     
                 $cadastro->set_nome(isset($_POST['nome']) ? $_POST['nome'] : null);
                 $cadastro->set_sobrenome(isset($_POST['sobrenome']) ? $_POST['sobrenome'] : null);
+                $cadastro->set_telefone(isset($_POST['telefone']) ? $_POST['telefone'] : null);
                 $cadastro->set_email(isset($_POST['email']) ? $_POST['email'] : null);
                 $cadastro->set_senha(isset($_POST['senha']) ? $_POST['senha'] : null);
                 $cadastro->set_recaptcha_response(isset($_POST['token']) ? $_POST['token'] : null);
