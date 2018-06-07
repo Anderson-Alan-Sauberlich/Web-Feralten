@@ -12,12 +12,13 @@
         <div class="ui approve right labeled icon button">Continuar <i class="checkmark icon"></i></div>
     </div>
 </div>
-<div id="mdl_orcamento" class="ui long modal">
+<div id="mdl_orcamento" class="ui fullscreen modal">
 	<i class="close icon"></i>
 	<div class="scrolling content">
 		<?php if (!View_Solicitar_Orcamento::Verificar_Logado()) { ?>
+			<script type="text/javascript" src="/resources/packages/jquery/jquery.mask-1.14.11.min.js"></script>
 			<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=pt" async defer></script>
-        	<div id="div_autenticacao" class="ui two column relaxed stackable internally celled grid">
+        	<div id="div_autenticacao" class="ui two column very relaxed stackable internally celled  grid">
         		<div class="column">
             		<div id="form_login" class="ui equal width form">
                     	<h2 class="ui dividing header">Entrar com sua conta</h2>
@@ -66,6 +67,13 @@
                            			<i class="user icon"></i>
                            			<input id="cadastro_sobrenome" placeholder="Sobrenome" type="text">
                            		</div>
+                        	</div>
+                        </div>
+                        <div class="field">
+                        	<label for="cadastro_telefone">Seu Telefone:</label>
+                        	<div class="ui left icon input">
+                        		<i class="user icon"></i>
+                        		<input id="cadastro_telefone" placeholder="Ex.: (00) 0000-0000" type="text">
                         	</div>
                         </div>
                     	<div class="field">

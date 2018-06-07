@@ -2,6 +2,18 @@ $('.ui.checkbox').checkbox();
 $('.message .close').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
+SetarMascarasUsuario();
+function SetarMascarasUsuario() {
+	var maskBehavior = function(val) {
+		  return val.replace(/\D/g, '').length === 11 ? '(00) 000-000-000' : '(00) 0000-00009';
+		},
+		options = {onChange: function(val, e, field, options) {
+		        field.mask(maskBehavior.apply({}, arguments), options);
+		    }
+		};
+		
+	$('#cadastro_telefone').mask(maskBehavior, options);
+}
 var onloadCallback = function() { grecaptcha.render('recaptcha', { 'sitekey' : '6LeGszcUAAAAAJe8rA1Id_3ecGcA5GvceGO572jQ', 'size' : tamanhoTela() }); };
 function tamanhoTela() {
 	var scren = $("body").width();
@@ -117,6 +129,7 @@ function cadastrarUsuario() {
 	$('#form_cadastro').addClass('loading');
 	var nome = $('#cadastro_nome').val();
 	var sobrenome = $('#cadastro_sobrenome').val();
+	var telefone = $('#cadastro_telefone').val();
 	var email = $('#cadastro_email').val();
 	var senha = $('#cadastro_senha').val();
 	var token = $("#g-recaptcha-response").val();
@@ -126,6 +139,9 @@ function cadastrarUsuario() {
 	}
 	if (sobrenome == 0 || sobrenome == "" || sobrenome == undefined) {
 		erro += '<li>Digite seu sobrenome</li>';
+	}
+	if (telefone == 0 || telefone == "" || telefone == undefined) {
+		erro += '<li>Digite seu Número de Telefone</li>';
 	}
 	if (email == 0 || email == "" || email == undefined) {
 		erro += '<li>Digite seu E-mail</li>';
@@ -148,6 +164,7 @@ function cadastrarUsuario() {
 			data: { 
 				nome : nome,
 				sobrenome : sobrenome,
+				telefone : telefone,
 				email : email,
 				senha : senha,
 				token : token
