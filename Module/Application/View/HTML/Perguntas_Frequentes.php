@@ -3,7 +3,6 @@
 <html lang="PT-BR">
 <head>
     <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Head/Default.php'; ?>
-    <script type="text/javascript" src="/application/js/perguntas_frequentes.js"></script>
     <title>Perguntas Frequentes | Feralten</title>
 </head>
 <body>
@@ -131,15 +130,12 @@
                 <div id="div_contato" class="ui secondary segment">
                     <?php View_Perguntas_Frequentes::Incluir_Form_Contato(); ?>
                 </div>
-                <div id="msg_contato" class="ui hidden message">
-                    <i class="close icon"></i>
-                    <ul id="ul_contato"></ul>
-                </div>
             </div>
         </div>
         <div class="margem-inferior-pouco"></div>
     </section>
     <footer>
+    	<script type="text/javascript" src="/application/js/perguntas_frequentes.js"></script>
         <?php include_once RAIZ.'/Module/Application/View/HTML/Layout/Footer/Rodape.php'; ?>
     </footer>
 </body>

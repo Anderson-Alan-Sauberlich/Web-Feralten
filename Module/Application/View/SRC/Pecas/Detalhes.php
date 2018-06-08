@@ -63,7 +63,7 @@ namespace Module\Application\View\SRC\Pecas;
          *
          * @param View_Contato_Anunciante $view_contato_anunciante
          */
-        public function set_view_menu_orcamento(View_Contato_Anunciante $view_contato_anunciante) : void
+        public function set_view_contato_anunciante(View_Contato_Anunciante $view_contato_anunciante) : void
         {
             self::$view_contato_anunciante = $view_contato_anunciante;
         }

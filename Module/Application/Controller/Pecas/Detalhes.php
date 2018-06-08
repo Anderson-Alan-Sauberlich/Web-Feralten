@@ -116,7 +116,7 @@ namespace Module\Application\Controller\Pecas;
                 
                 $controller_contato_anunciante = new Controller_Contato_Anunciante();
                 
-                $view->set_view_menu_orcamento($controller_contato_anunciante->Retornar_Pagina());
+                $view->set_view_contato_anunciante($controller_contato_anunciante->Retornar_Pagina());
                 
                 $view->Executar();
             } else {

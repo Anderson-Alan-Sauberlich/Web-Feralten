@@ -5,6 +5,7 @@ namespace Module\Application\Controller\Layout\Form;
     use Module\Application\Model\OBJ\Contato as OBJ_Contato;
     use Module\Application\Model\Common\Util\Validador;
     use Module\Email\Controller\Common\Util\Email;
+    use Module\Application\Model\Common\Util\Login_Session;
     use \Exception;
 
     class Contato
@@ -133,9 +134,27 @@ namespace Module\Application\Controller\Layout\Form;
          */
         public function Carregar_Pagina() : void
         {
-            $view = new View_Contato();
+            $view = $this->Retornar_Pagina();
             
             $view->Executar();
+        }
+        
+        /**
+         * Retorna a pagina view src.
+         *
+         * @return View_Contato
+         */
+        public function Retornar_Pagina() : View_Contato
+        {
+            $view = new View_Contato();
+            
+            if (Login_Session::Verificar_Login()) {
+                $view->set_nome(Login_Session::get_usuario_nome());
+                $view->set_email(Login_Session::get_usuario_email());
+                $view->set_telefone(Login_Session::get_usuario_telefone());
+            }
+            
+            return $view;
         }
         
         /**

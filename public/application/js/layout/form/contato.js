@@ -1,4 +1,7 @@
 $('#ui_whatsapp').checkbox();
+$('#msg_contato').on('click', function() {
+	$(this).closest('.message').transition('fade');
+});
 $(document).ready(function() {
 	var maskBehavior = function (val) {
 		  return val.replace(/\D/g, '').length === 11 ? '(00) 000-000-000' : '(00) 0000-00009';
@@ -61,7 +64,6 @@ function Enviar() {
 		$.ajax({
 			method: "POST",
 			url: "/layout/form/contato/",
-			async: false,
 			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, assunto:$assunto, mensagem:$mensagem }
 		}).done(function(valor) {
 			var $valor = JSON.parse(valor);
@@ -106,6 +108,8 @@ function Enviar() {
 			
 			$('#msg_contato').removeClass('hidden');
 			$('#msg_contato').addClass('visible');
+			$('#btn_submit').removeClass('loading');
+			$('#div_contato').removeClass('loading');
 		});
 	} else {
 		$('#ul_contato').html($erros);
@@ -113,8 +117,7 @@ function Enviar() {
 		$('#msg_contato').removeClass('success');
 		$('#msg_contato').removeClass('hidden');
 		$('#msg_contato').addClass('visible');
+		$('#btn_submit').removeClass('loading');
+		$('#div_contato').removeClass('loading');
 	}
-	
-	$('#btn_submit').removeClass('loading');
-	$('#div_contato').removeClass('loading');
 }

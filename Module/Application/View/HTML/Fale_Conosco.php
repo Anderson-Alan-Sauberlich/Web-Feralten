@@ -17,10 +17,6 @@
                 <div id="div_contato" class="ui secondary segment">
                     <?php View_Fale_Conosco::Incluir_Form_Contato(); ?>
                 </div>
-                <div id="msg_contato" class="ui hidden message">
-                    <i class="close icon"></i>
-                    <ul id="ul_contato"></ul>
-                </div>
             </div>
         </div>
         <div class="margem-inferior-pouco"></div>
