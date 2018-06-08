@@ -6,6 +6,7 @@ namespace Module\Application\Controller\Layout\Form;
     use Module\Email\Controller\Common\Util\Email;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\Common\Util\Validador;
+    use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\View\SRC\Layout\Form\Contato_Anunciante as View_Contato_Anunciante;
     use \Exception;
     
@@ -134,11 +135,29 @@ namespace Module\Application\Controller\Layout\Form;
          */
         public function Carregar_Pagina() : void
         {
-            $view = new View_Contato_Anunciante();
+            $view = $this->Retornar_Pagina();
             
             $view->set_peca_id($this->obj_contato_anunciante->get_obj_peca()->get_id());
             
             $view->Executar();
+        }
+        
+        /**
+         * Retorna a pagina view src.
+         * 
+         * @return View_Contato_Anunciante
+         */
+        public function Retornar_Pagina() : View_Contato_Anunciante
+        {
+            $view = new View_Contato_Anunciante();
+            
+            if (Login_Session::Verificar_Login()) {
+                $view->set_nome(Login_Session::get_usuario_nome());
+                $view->set_email(Login_Session::get_usuario_email());
+                $view->set_telefone(Login_Session::get_usuario_telefone());
+            }
+            
+            return $view;
         }
         
         /**

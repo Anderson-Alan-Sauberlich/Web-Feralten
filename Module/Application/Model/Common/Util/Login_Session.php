@@ -141,6 +141,32 @@ namespace Module\Application\Model\Common\Util;
         }
         
         /**
+         * Function Set_Usuario_Telefone
+         *
+         * @param string $usuario_telefone 'Telefone do usuario'
+         * @return void
+         */
+        public static function set_usuario_telefone(string $usuario_telefone) : void
+        {
+            $_SESSION['login']['usuario']['telefone'] = $usuario_telefone;
+        }
+        
+        /**
+         * Function Get_Usuario_Telefone
+         *
+         * @param none
+         * @return ?string 'Telefone do usuario'
+         */
+        public static function get_usuario_telefone() : ?string
+        {
+            if (isset($_SESSION['login']['usuario']['telefone'])) {
+                return $_SESSION['login']['usuario']['telefone'];
+            } else {
+                return null;
+            }
+        }
+        
+        /**
          * Function Set_Usuario_Status
          * 
          * @param int $usuario_status 'Status do usuario'

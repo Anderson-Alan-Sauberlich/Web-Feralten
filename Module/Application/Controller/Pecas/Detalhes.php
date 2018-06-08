@@ -11,6 +11,7 @@ namespace Module\Application\Controller\Pecas;
     use Module\Application\Model\DAO\Versao_Pativel as DAO_Versao_Pativel;
     use Module\Application\Model\DAO\Visualizado as DAO_Visualizado;
     use Module\Application\Model\OBJ\Visualizado as OBJ_Visualizado;
+    use Module\Application\Controller\Layout\Form\Contato_Anunciante as Controller_Contato_Anunciante;
     use \Exception;
     
     class Detalhes
@@ -20,10 +21,32 @@ namespace Module\Application\Controller\Pecas;
             
         }
         
+        /**
+         * Armazena uma instancia do objeto peça
+         * 
+         * @var DAO_Peca
+         */
         private $obj_peca;
+        
+        /**
+         * Armazena a url da peça.
+         * 
+         * @var string
+         */
         private $peca_url;
+        
+        /**
+         * Armazena o id da peça.
+         * 
+         * @var int
+         */
         private $peca_id;
         
+        /**
+         * Seta id da peça para a variavel $peca_id.
+         * 
+         * @param int $peca_id
+         */
         public function set_peca_id($peca_id)
         {
             try {
@@ -35,6 +58,11 @@ namespace Module\Application\Controller\Pecas;
             }
         }
         
+        /**
+         * Seta a url da peça para a variavel $peca_url.
+         * 
+         * @param string $peca_url
+         */
         public function set_peca_url($peca_url)
         {
             try {
@@ -46,6 +74,9 @@ namespace Module\Application\Controller\Pecas;
             }
         }
         
+        /**
+         * Instancia um novo objeto view src e o executa.
+         */
         public function Carregar_Pagina()
         {
             if (!empty($this->obj_peca) AND $this->obj_peca != false) {
@@ -83,6 +114,10 @@ namespace Module\Application\Controller\Pecas;
                    $view->set_versoes_pativeis($versoes_pativeis);
                 }
                 
+                $controller_contato_anunciante = new Controller_Contato_Anunciante();
+                
+                $view->set_view_menu_orcamento($controller_contato_anunciante->Retornar_Pagina());
+                
                 $view->Executar();
             } else {
                 $view = new View_Detalhes();
@@ -91,6 +126,9 @@ namespace Module\Application\Controller\Pecas;
             }
         }
         
+        /**
+         * @return boolean|array|\Module\Application\Model\OBJ\Preferencia_Entrega[]
+         */
         public static function Retornar_Preferencias_Entrega()
         {
             return DAO_Preferencia_Entrega::Buscar_Todos_Masivos();

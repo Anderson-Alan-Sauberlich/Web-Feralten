@@ -13,42 +13,109 @@ namespace Module\Application\View\SRC\Pecas;
             
         }
         
+        /**
+         * 
+         * @var OBJ_Peca
+         */
         private static $obj_peca;
+        
+        /**
+         * 
+         * @var View_Contato_Anunciante
+         */
+        private static $view_contato_anunciante;
+        
+        /**
+         * 
+         * @var array
+         */
         private static $categorias_pativeis;
+        
+        /**
+         * 
+         * @var array
+         */
         private static $marcas_pativeis;
+        
+        /**
+         * 
+         * @var array
+         */
         private static $modelos_pativeis;
+        
+        /**
+         * 
+         * @var array
+         */
         private static $versoes_pativeis;
         
+        /**
+         * 
+         * @param OBJ_Peca $obj_peca
+         */
         public function set_obj_peca(OBJ_Peca $obj_peca) : void
         {
             self::$obj_peca = $obj_peca;
         }
         
+        /**
+         * Seta o objeto do form contato anunciante.
+         *
+         * @param View_Contato_Anunciante $view_contato_anunciante
+         */
+        public function set_view_menu_orcamento(View_Contato_Anunciante $view_contato_anunciante) : void
+        {
+            self::$view_contato_anunciante = $view_contato_anunciante;
+        }
+        
+        /**
+         * 
+         * @param array $categorias_pativeis
+         */
         public function set_categorias_pativeis(array $categorias_pativeis) : void
         {
             self::$categorias_pativeis = $categorias_pativeis;
         }
         
+        /**
+         * 
+         * @param array $marcas_pativeis
+         */
         public function set_marcas_pativeis(array $marcas_pativeis) : void
         {
             self::$marcas_pativeis = $marcas_pativeis;
         }
         
+        /**
+         * 
+         * @param array $modelos_pativeis
+         */
         public function set_modelos_pativeis(array $modelos_pativeis) : void
         {
             self::$modelos_pativeis = $modelos_pativeis;
         }
         
+        /**
+         * 
+         * @param array $versoes_pativeis
+         */
         public function set_versoes_pativeis(array $versoes_pativeis) : void
         {
             self::$versoes_pativeis = $versoes_pativeis;
         }
         
+        /**
+         * Executa o html que puxa todas as variaveis staticas.
+         */
         public function Executar()
         {
             require_once RAIZ.'/Module/Application/View/HTML/Pecas/Detalhes.php';
         }
         
+        /**
+         * 
+         * @return bool
+         */
         public static function Verificar_Peca() : bool
         {
             return self::$obj_peca instanceof OBJ_Peca;
@@ -61,18 +128,21 @@ namespace Module\Application\View\SRC\Pecas;
         
         public static function Incluir_Form_Contato_Anunciante() : void
         {
-            $view_contato_anunciante = new View_Contato_Anunciante();
+            if (self::$view_contato_anunciante instanceof View_Contato_Anunciante) {
+                self::$view_contato_anunciante->set_peca_id(self::$obj_peca->get_id());
             
-            $view_contato_anunciante->set_peca_id(self::$obj_peca->get_id());
-            
-            $view_contato_anunciante->Executar();
+                self::$view_contato_anunciante->Executar();
+            }
         }
         
         public static function Mostrar_Nome() : void
         {
             echo self::$obj_peca->get_nome();
         }
-        
+        /**
+         * 
+         * @return int|NULL
+         */
         public static function Mostrar_Visualizacoes() : ?int
         {
             return self::$obj_peca->get_num_visualizado();
@@ -394,6 +464,10 @@ namespace Module\Application\View\SRC\Pecas;
             }
         }
         
+        /**
+         * 
+         * @return bool
+         */
         public static function Validar_Pativeis() : bool
         {
             return !empty(self::$categorias_pativeis) AND self::$categorias_pativeis != false;

@@ -5,21 +5,21 @@
         <label for="nome">Seu Nome</label>
         <div class="ui left icon input">
         	<i class="user icon"></i>
-        	<input type="text" id="nome" name="nome" placeholder="Nome">
+        	<input type="text" id="nome" name="nome" value="<?= View_Contato_Anunciante::RetornarUsuarioNome(); ?>" placeholder="Nome">
         </div>
     </div>
     <div id="div_email" class="field">
         <label for="email">Seu E-Mail</label>
         <div class="ui left icon input">
         	<i class="mail icon"></i>
-        	<input type="email" id="email" name="email" placeholder="E-Mail">
+        	<input type="email" id="email" name="email" value="<?= View_Contato_Anunciante::RetornarUsuarioEmail(); ?>" placeholder="E-Mail">
         </div>
     </div>
     <div id="div_telefone" class="field">
         <label for="telefone">Seu Telefone</label>
         <div class="ui left icon input">
         	<i class="tty icon"></i>
-        	<input type="text" id="telefone" name="telefone" placeholder="Telefone">
+        	<input type="text" id="telefone" name="telefone" value="<?= View_Contato_Anunciante::RetornarUsuarioTelefone(); ?>" placeholder="Telefone">
         </div>
     </div>
     <div id="div_whatsapp" class="field">

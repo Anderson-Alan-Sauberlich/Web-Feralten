@@ -58,7 +58,6 @@ function Submit($peca_id) {
 		$.ajax({
 			method: "POST",
 			url: "/layout/form/contato-anunciante/",
-			async: false,
 			data: { nome:$nome, email:$email, telefone:$telefone, whatsapp:$whatsapp, mensagem:$mensagem, peca_id:$peca_id }
 		}).done(function(valor) {
 			var $valor = JSON.parse(valor);
@@ -97,6 +96,8 @@ function Submit($peca_id) {
 			
 			$('#msg_cnt_anc').removeClass('hidden');
 			$('#msg_cnt_anc').addClass('visible');
+			$('#btn_submit').removeClass('loading');
+			$('#div_cnt_anc').removeClass('loading');
 		});
 	} else {
 		$('#ul_cnt_anc').html($erros);
@@ -104,8 +105,7 @@ function Submit($peca_id) {
 		$('#msg_cnt_anc').removeClass('success');
 		$('#msg_cnt_anc').removeClass('hidden');
 		$('#msg_cnt_anc').addClass('visible');
+		$('#btn_submit').removeClass('loading');
+		$('#div_cnt_anc').removeClass('loading');
 	}
-	
-	$('#btn_submit').removeClass('loading');
-	$('#div_cnt_anc').removeClass('loading');
 }

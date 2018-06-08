@@ -109,6 +109,8 @@ namespace Module\Application\Controller\Usuario;
                     
                     Login_Session::set_usuario_id($usuario_login->get_id());
                     Login_Session::set_usuario_nome($usuario_login->get_nome());
+                    Login_Session::set_usuario_email($usuario_login->get_email());
+                    Login_Session::set_usuario_telefone($usuario_login->get_fone());
                     Login_Session::set_usuario_status($usuario_login->get_status_id());
                     
                     $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
@@ -162,6 +164,8 @@ namespace Module\Application\Controller\Usuario;
             if (!empty($usuario_login) AND $usuario_login !== false) {
                 Login_Session::set_usuario_id($usuario_login->get_id());
                 Login_Session::set_usuario_nome($usuario_login->get_nome());
+                Login_Session::set_usuario_email($usuario_login->get_email());
+                Login_Session::set_usuario_telefone($usuario_login->get_fone());
                 Login_Session::set_usuario_status($usuario_login->get_status_id());
                 
                 $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
@@ -199,6 +203,8 @@ namespace Module\Application\Controller\Usuario;
                     
                     Login_Session::set_usuario_id($usuario_login->get_id());
                     Login_Session::set_usuario_nome($usuario_login->get_nome());
+                    Login_Session::set_usuario_email($usuario_login->get_email());
+                    Login_Session::set_usuario_telefone($usuario_login->get_fone());
                     Login_Session::set_usuario_status($usuario_login->get_status_id());
                     
                     $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
@@ -254,6 +260,8 @@ namespace Module\Application\Controller\Usuario;
                         
                         Login_Session::set_usuario_id($usuario_login->get_id());
                         Login_Session::set_usuario_nome($usuario_login->get_nome());
+                        Login_Session::set_usuario_email($usuario_login->get_email());
+                        Login_Session::set_usuario_telefone($usuario_login->get_fone());
                         Login_Session::set_usuario_status($usuario_login->get_status_id());
                         
                         $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
@@ -336,6 +344,8 @@ namespace Module\Application\Controller\Usuario;
                         
                         Login_Session::set_usuario_id($usuario_login->get_id());
                         Login_Session::set_usuario_nome($usuario_login->get_nome());
+                        Login_Session::set_usuario_email($usuario_login->get_email());
+                        Login_Session::set_usuario_telefone($usuario_login->get_fone());
                         Login_Session::set_usuario_status($usuario_login->get_status_id());
                         
                         $entidade_login = DAO_Entidade::Buscar_Por_Id_Usuario($usuario_login->get_id());
