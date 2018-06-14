@@ -1,4 +1,13 @@
 $('#ui_whatsapp').checkbox();
+if (($('#nome').val() == "" || $('#nome').val() == null) && localStorage.getItem("usuario_nome")) {
+	$('#nome').val(localStorage.getItem("usuario_nome"));
+}
+if (($('#email').val() == "" || $('#email').val() == null) && localStorage.getItem("usuario_email")) {
+	$('#email').val(localStorage.getItem("usuario_email"));
+}
+if (($('#telefone').val() == "" || $('#telefone').val() == null) && localStorage.getItem("usuario_telefone")) {
+	$('#telefone').val(localStorage.getItem("usuario_telefone"));
+}
 $(document).ready(function() {
 	var maskBehavior = function (val) {
 		  return val.replace(/\D/g, '').length === 11 ? '(00) 000-000-000' : '(00) 0000-00009';
@@ -99,6 +108,10 @@ function Submit($peca_id) {
 			$('#btn_submit').removeClass('loading');
 			$('#div_cnt_anc').removeClass('loading');
 		});
+		
+		localStorage.setItem("usuario_nome", $nome);
+		localStorage.setItem("usuario_email", $email);
+		localStorage.setItem("usuario_telefone", $telefone);
 	} else {
 		$('#ul_cnt_anc').html($erros);
 		$('#msg_cnt_anc').addClass('error');

@@ -1,6 +1,15 @@
 $('#senha').attr('type', 'password');
 $('.ui.checkbox.passCheck').checkbox();
 $('[data-toggle="popover"]').popover();
+if (($('#nome').val() == "" || $('#nome').val() == null) && localStorage.getItem("usuario_nome")) {
+	$('#nome').val(localStorage.getItem("usuario_nome"));
+}
+if (($('#email').val() == "" || $('#email').val() == null) && localStorage.getItem("usuario_email")) {
+	$('#email').val(localStorage.getItem("usuario_email"));
+}
+if (($('#telefone').val() == "" || $('#telefone').val() == null) && localStorage.getItem("usuario_telefone")) {
+	$('#telefone').val(localStorage.getItem("usuario_telefone"));
+}
 SetarMascarasUsuario();
 function SetarMascarasUsuario() {
 	var maskBehavior = function(val) {

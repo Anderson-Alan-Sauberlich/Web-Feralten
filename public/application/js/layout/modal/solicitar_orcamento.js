@@ -2,6 +2,15 @@ $('.ui.checkbox').checkbox();
 $('.message .close').on('click', function() {
 	$(this).closest('.message').transition('fade');
 });
+if (($('#cadastro_nome').val() == "" || $('#cadastro_nome').val() == null) && localStorage.getItem("usuario_nome")) {
+	$('#cadastro_nome').val(localStorage.getItem("usuario_nome"));
+}
+if (($('#cadastro_email').val() == "" || $('#cadastro_email').val() == null) && localStorage.getItem("usuario_email")) {
+	$('#cadastro_email').val(localStorage.getItem("usuario_email"));
+}
+if (($('#cadastro_telefone').val() == "" || $('#cadastro_telefone').val() == null) && localStorage.getItem("usuario_telefone")) {
+	$('#cadastro_telefone').val(localStorage.getItem("usuario_telefone"));
+}
 SetarMascarasUsuario();
 function SetarMascarasUsuario() {
 	var maskBehavior = function(val) {
