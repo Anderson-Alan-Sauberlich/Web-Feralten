@@ -85,6 +85,7 @@ namespace Module\Application\View\SRC\Pecas;
                 echo "<div class=\"ui container\"><h2><label class=\"lbPanel\">Nenhuma peça foi encontrada.</label></h2></div>";
                 echo "<div class=\"ui container\"><h3><label class=\"lbPanel\">Você pode Cadastrar suas Peças </label><a href=\"/usuario/meu-perfil/pecas/cadastrar/\"> Clicando Aqui!</a></h3></div>";
                 
+                $view_solicitar_orcamento->set_abrir_autocaticamente(true);
                 $view_solicitar_orcamento->Executar();
             }
         }

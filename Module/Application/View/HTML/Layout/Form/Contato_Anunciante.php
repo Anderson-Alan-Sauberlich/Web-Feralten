@@ -30,7 +30,7 @@
     </div>
     <div id="div_mensagem" class="field">
         <label for="mensagem">Mensagem</label>
-        <textarea rows="4" id="mensagem" name="mensagem" placeholder="Mensagem">Olá, tenho interesse nesta peça, gostaria de receber mais informações...</textarea>
+        <textarea rows="6" id="mensagem" name="mensagem" placeholder="Mensagem">Olá, tenho interesse nesta peça, gostaria de receber mais informações...</textarea>
     </div>
     <div id="btn_submit" class="ui fluid big teal button" onclick="Submit(<?php View_Contato_Anunciante::Mostrar_Peca_Id(); ?>);"><i class="paper plane icon"></i>Enviar ao Anunciante</div>
 </form>

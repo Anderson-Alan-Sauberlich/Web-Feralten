@@ -120,3 +120,8 @@
 	</div>
 </div>
 <script type="text/javascript" src="/application/js/layout/modal/solicitar_orcamento.js"></script>
+<?php if (View_Solicitar_Orcamento::Verificar_Abertura_Autocatica()) { ?>
+	<script type="text/javascript">
+		$('#mdl_orcamento').modal('show');
+	</script>
+<?php } ?>
