@@ -19,10 +19,10 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($id, FILTER_VALIDATE_INT) !== false) {
                     return $id;
                 } else {
-                    throw new Exception('Id da Peça Invalido');
+                    throw new Exception('Id da peça inválido');
                 }
             } else {
-                throw new Exception('Id da Peça Não Informado');
+                throw new Exception('Id da peça não informado');
             }
         }
         
@@ -37,10 +37,10 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($usuario_responsavel, FILTER_VALIDATE_INT) !== false) {
                     return $usuario_responsavel;
                 } else {
-                    throw new Exception('Usuario Responsavel Invalido');
+                    throw new Exception('Usuario responsavel inválido');
                 }
             } else {
-                throw new Exception('Usuario Responsavel Não Informado');
+                throw new Exception('Usuario responsavel não informado');
             }
         }
         
@@ -56,13 +56,13 @@ namespace Module\Application\Model\Validador;
                     if (strlen($nome) <= 100) {
                         return ucwords(strtolower($nome));
                     } else {
-                        throw new Exception('Peça Nome, Não pode conter mais de 100 Caracteres');
+                        throw new Exception('Peça Nome, não pode conter mais de 100 caracteres');
                     }
                 } else {
-                    throw new Exception('Peça Nome, Não pode conter Tags de Programação');
+                    throw new Exception('Peça Nome, não pode conter tags de programação');
                 }
             } else {
-                throw new Exception('Digite o Nome da Peça');
+                throw new Exception('Digite o nome da peça');
             }
         }
         
@@ -78,13 +78,13 @@ namespace Module\Application\Model\Validador;
                     if (strlen($url) <= 150) {
                         return ucwords(strtolower($url));
                     } else {
-                        throw new Exception('Peça URL, Não pode conter mais de 150 Caracteres');
+                        throw new Exception('Peça URL, não pode conter mais de 150 caracteres');
                     }
                 } else {
-                    throw new Exception('Peça URL, Não pode conter Tags de Programação');
+                    throw new Exception('Peça URL, não pode conter tags de programação');
                 }
             } else {
-                throw new Exception('Informa a URL da Peça');
+                throw new Exception('Informa a URL da peça');
             }
         }
         
@@ -100,10 +100,10 @@ namespace Module\Application\Model\Validador;
                     if (strlen($fabricante) <= 50) {
                         return ucwords(strtolower($fabricante));
                     } else {
-                        throw new Exception('Fabricante, Não pode conter mais de 50 Caracteres');
+                        throw new Exception('Fabricante, não pode conter mais de 50 caracteres');
                     }
                 } else {
-                    throw new Exception('Fabricante, Não pode conter Tags de Programação');
+                    throw new Exception('Fabricante, não pode conter tags de programação');
                 }
             } else {
                 return null;
@@ -122,10 +122,10 @@ namespace Module\Application\Model\Validador;
                     if (strlen($serie) <= 150) {
                         return $serie;
                     } else {
-                        throw new Exception('Numero de Serie, Não pode conter mais de 150 Caracteres');
+                        throw new Exception('Numero de Serie, não pode conter mais de 150 caracteres');
                     }
                 } else {
-                    throw new Exception('Numero de Serie, Não pode conter Tags de Programação');
+                    throw new Exception('Numero de Serie, não pode conter tags de programação');
                 }
             } else {
                 return null;
@@ -141,12 +141,12 @@ namespace Module\Application\Model\Validador;
         {
             if (!empty($preco)) {
                 $preco = str_replace('.', '', $preco);
-                $preco = str_replace(',', '.', $preco);
+                $preco = (float) str_replace(',', '.', $preco);
                 
-                if (filter_var($preco, FILTER_VALIDATE_FLOAT)) {
+                if (filter_var($preco, FILTER_VALIDATE_FLOAT) !== false) {
                     return $preco;
                 } else {
-                    throw new Exception('Digite um Preço Valido para a peça');
+                    throw new Exception('Digite um preço válido para a peça');
                 }
             } else {
                 return null;
@@ -163,7 +163,7 @@ namespace Module\Application\Model\Validador;
                     
                     return strtolower($ordem_preco);
                 } else {
-                    throw new Exception('Ordem do Preço, Não pode conter Tags de Programação');
+                    throw new Exception('Ordem do Preço, não pode conter tags de programação');
                 }
             } else {
                 return null;
@@ -185,7 +185,7 @@ namespace Module\Application\Model\Validador;
                     
                     return strtolower($ordem_data);
                 } else {
-                    throw new Exception('Ordem da Data, Não pode conter Tags de Programação');
+                    throw new Exception('Ordem da Data, não pode conter tags de programação');
                 }
             } else {
                 return null;
@@ -204,10 +204,10 @@ namespace Module\Application\Model\Validador;
                     if (strlen($descricao) <= 1000) {
                         return ucfirst($descricao);
                     } else {
-                        throw new Exception('Descricao, Não pode conter mais de 1000 Caracteres');
+                        throw new Exception('Descricao, não pode conter mais de 1000 caracteres');
                     }
                 } else {
-                    throw new Exception('Descricao, Não pode conter Tags de Programação');
+                    throw new Exception('Descricao, não pode conter tags de programação');
                 }
             } else {
                 return null;
@@ -229,7 +229,7 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($status, FILTER_VALIDATE_INT)) {
                     return $status;
                 } else {
-                    throw new Exception('Selecione um Status Valido.');
+                    throw new Exception('Selecione um status válido.');
                 }
             } else {
                 return null;
@@ -242,7 +242,7 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($estado_uso, FILTER_VALIDATE_INT)) {
                     return $estado_uso;
                 } else {
-                    throw new Exception('Selecione um Estado de Uso Valido.');
+                    throw new Exception('Selecione um estado de uso válido.');
                 }
             } else {
                 return null;
@@ -265,7 +265,7 @@ namespace Module\Application\Model\Validador;
                 if (filter_var($num_visualizado, FILTER_VALIDATE_INT)) {
                     return $num_visualizado;
                 } else {
-                    throw new Exception('Numero de Visualizações Invalido.');
+                    throw new Exception('Numero de visualizações inválido.');
                 }
             } else {
                 return null;
