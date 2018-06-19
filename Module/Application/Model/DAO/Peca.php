@@ -194,60 +194,6 @@ namespace Module\Application\Model\DAO;
             }
         }
         
-        /**
-         * DEPRECATED
-         * TODO Deletar esta function que não é mais nescesaria, pois agr as dependencias são deletadas por Cascade.
-         * 
-         * @param int $id
-         * @return bool
-         */
-        public static function DeletarComTransaction(int $id) : bool
-        {
-            Conexao::Conectar()->beginTransaction();
-            
-            if (DAO_Categoria_Pativel::Deletar($id)) {
-                if (DAO_Marca_Pativel::Deletar($id)) {
-                    if (DAO_Modelo_Pativel::Deletar($id)) {
-                        if (DAO_Versao_Pativel::Deletar($id)) {
-                            if (DAO_Foto_Peca::Deletar_Fotos($id)) {
-                                if (DAO_Contato_Anunciante::Deletar_Por_Peca($id)) {
-                                    if (DAO_Orcamento_Peca::DeletarPorPeca($id)) {
-                                        if (self::Deletar($id)) {
-                                            return Conexao::$conection->commit();
-                                        } else {
-                                            Conexao::$conection->rollBack();
-                                            return false;
-                                        }
-                                    } else {
-                                        Conexao::$conection->rollBack();
-                                        return false;
-                                    }
-                                } else {
-                                    Conexao::$conection->rollBack();
-                                    return false;
-                                }
-                            } else {
-                                Conexao::$conection->rollBack();
-                                return false;
-                            }
-                        } else {
-                            Conexao::$conection->rollBack();
-                            return false;
-                        }
-                    } else {
-                        Conexao::$conection->rollBack();
-                        return false;
-                    }
-                } else {
-                    Conexao::$conection->rollBack();
-                    return false;
-                }
-            } else {
-                Conexao::$conection->rollBack();
-                return false;
-            }
-        }
-        
         public static function Achar_ID_Livre() : ?int
         {
             try {

@@ -9,6 +9,9 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
     use Module\Application\Model\DAO\Peca as DAO_Peca;
     use Module\Application\Model\DAO\Entidade as DAO_Entidade;
     use Module\Application\Model\OBJ\Entidade as OBJ_Entidade;
+    use Module\Application\Model\OBJ\Usuario as OBJ_Usuario;
+    use Module\Application\Model\DAO\Removido as DAO_Removido;
+    use Module\Application\Model\OBJ\Removido as OBJ_Removido;
     use Module\Application\Controller\Common\Util\GerenciarFaturas;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
@@ -180,8 +183,26 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Financeiro;
                         if (empty($this->erros)) {
                             if (Login_Session::get_entidade_plano() > 1) {
                                 if (password_verify($this->senha_usuario, DAO_Usuario::Buscar_Senha_Usuario(Login_Session::get_usuario_id()))) {
+                                    
+                                    $num_pecas = DAO_Peca::Buscar_Quantidade_Pecas_Por_Entidade(Login_Session::get_entidade_id());
+                                    
                                     if (DAO_Peca::DeletarPorEntidade(Login_Session::get_entidade_id())) {
                                         $this->sucessos[] = 'Peças Deletadas com sucesso';
+                                        
+                                        $entidade = new OBJ_Entidade();
+                                        $entidade->set_id(Login_Session::get_entidade_id());
+                                        
+                                        $usuario_responsavel = new OBJ_Usuario();
+                                        $usuario_responsavel->set_id(Login_Session::get_usuario_id());
+                                        
+                                        $obj_removido = new OBJ_Removido();
+                                        $obj_removido->set_obj_entidade($entidade);
+                                        $obj_removido->set_obj_usuario($usuario_responsavel);
+                                        $obj_removido->set_datahora(date('Y-m-d H:i:s'));
+                                        
+                                        for ($i=0; $i < $num_pecas; $i++) {
+                                            DAO_Removido::Inserir($obj_removido);
+                                        }
                                         
                                         if (GerenciarFaturas::Criar_Fatura(Login_Session::get_entidade_id(), 1, GerenciarFaturas::IMEDIATA)) {
                                             $obj_entidade = new OBJ_Entidade();
