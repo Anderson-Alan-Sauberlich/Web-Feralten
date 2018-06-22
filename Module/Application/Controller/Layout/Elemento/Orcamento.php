@@ -2,6 +2,7 @@
 namespace Module\Application\Controller\Layout\Elemento;
     
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
+    use Module\Application\View\SRC\Layout\Elemento\Orcamento as View_Orcamento;
     use Module\Application\Model\Common\Util\Entidade_BD;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
@@ -9,6 +10,31 @@ namespace Module\Application\Controller\Layout\Elemento;
     
     class Orcamento
     {
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const MEUS_ORCAMENTOS = 'meus-orcamentos';
+        
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const CAIXA_DE_ENTRADA = 'caixa-de-entrada';
+        
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const RESPONDIDOS = 'respondidos';
+        
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const NAO_TENHO = 'nao-tenho';
+        
+        /**
+         * @const Parametro Funcionalidade
+         */
+        public const ORCAMENTOS = 'orcamentos';
+        
         function __construct()
         {
             
@@ -40,6 +66,20 @@ namespace Module\Application\Controller\Layout\Elemento;
             } catch (Exception $e) {
                 $this->erros[] = $e->getMessage();
             }
+        }
+        
+        public function Carregar_Pagina()
+        {
+            $view = $this->Retornar_Pagina();
+            
+            $view->Executar();
+        }
+        
+        public function Retornar_Pagina() : View_Orcamento
+        {
+            $view = new View_Orcamento();
+            
+            return $view;
         }
         
         /**

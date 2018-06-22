@@ -15,8 +15,26 @@ namespace Module\Application\View\SRC;
             
         }
         
+        /**
+         * Lista de objetos de peças vip.
+         * 
+         * @var array
+         */
         private static $pecas_vip;
+        
+        /**
+         * Lista dos ultimos orçamentos solicitados.
+         * 
+         * @var array
+         */
         private static $ultimos_orcamentos;
+        
+        /**
+         * Objeto do elemento de orçamento.
+         *
+         * @var View_Orcamento $view_orcamento
+         */
+        private static $view_orcamento;
         
         public function set_pecas_vip(array $pecas_vip) : void
         {
@@ -26,6 +44,16 @@ namespace Module\Application\View\SRC;
         public function set_ultimos_orcamentos(array $ultimos_orcamentos) : void
         {
             self::$ultimos_orcamentos = $ultimos_orcamentos;
+        }
+        
+        /**
+         * Seta objeto do elemento de orçamento.
+         *
+         * @param View_Orcamento $view_orcamento
+         */
+        public function set_view_orcamento(View_Orcamento $view_orcamento) : void
+        {
+            self::$view_orcamento = $view_orcamento;
         }
         
         public function Executar()
@@ -57,9 +85,7 @@ namespace Module\Application\View\SRC;
             if (!empty(self::$pecas_vip)) {
                 foreach (self::$pecas_vip as $peca) {
                     $card_peca = new View_Card_Peca();
-                    
                     $card_peca->set_obj_peca($peca);
-                    
                     $card_peca->Executar();
                 }
             }
@@ -68,16 +94,14 @@ namespace Module\Application\View\SRC;
         public static function MostrarUltimosOrcamentos() : void
         {
             if (!empty(self::$ultimos_orcamentos)) {
-                foreach (self::$ultimos_orcamentos as $obj_orcamento) {
-                    if ($obj_orcamento instanceof OBJ_Orcamento) {
-                        $view_orcamento = new View_Orcamento();
-                        
-                        $view_orcamento->set_obj_orcamento($obj_orcamento);
-                        $view_orcamento->set_pagina(View_Orcamento::ORCAMENTOS);
-                        
-                        echo '<div class="column">';
-                        $view_orcamento->Executar();
-                        echo '</div>';
+                if (self::$view_orcamento instanceof View_Orcamento) {
+                    foreach (self::$ultimos_orcamentos as $obj_orcamento) {
+                        if ($obj_orcamento instanceof OBJ_Orcamento) {
+                            self::$view_orcamento->set_obj_orcamento($obj_orcamento);
+                            echo '<div class="column">';
+                            self::$view_orcamento->Executar();
+                            echo '</div>';
+                        }
                     }
                 }
             }

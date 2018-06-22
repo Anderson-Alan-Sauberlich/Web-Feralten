@@ -4,6 +4,7 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
     use Module\Application\View\SRC\Usuario\Meu_Perfil\Orcamentos\Respondidos as View_Respondidos;
     use Module\Application\Controller\Layout\Header\Usuario as Controller_Header_Usuario;
     use Module\Application\Controller\Layout\Menu\Orcamento as Controller_Menu_Orcamento;
+    use Module\Application\Controller\Layout\Elemento\Orcamento as Controller_Orcamento;
     use Module\Application\Model\Common\Util\Entidade_BD;
     use Module\Application\Model\Common\Util\Login_Session;
     use Module\Application\Model\Common\Util\Validador;
@@ -38,15 +39,16 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
                     
                     $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
                     $obj_entidade_bd->Atualizar_Orcamentos();
-                    
                     $orcamentos = $obj_entidade_bd->RetornaOrcamentosPorStatus(Entidade_BD::RESPONDIDO, $this->indice);
-                    
                     if (!empty($orcamentos)) {
+                        $controller_orcamento = new Controller_Orcamento();
+                        $view_orcamento = $controller_orcamento->Retornar_Pagina();
+                        $view_orcamento->set_pagina(Controller_Orcamento::RESPONDIDOS);
+                        $view->set_view_orcamento($view_orcamento);
                         $view->set_orcamentos($orcamentos);
                     }
                     
                     $controller_menu_orcamento = new Controller_Menu_Orcamento();
-                    
                     $view->set_view_menu_orcamento($controller_menu_orcamento->Retornar_Pagina());
                     
                     $view->Executar();
@@ -64,12 +66,17 @@ namespace Module\Application\Controller\Usuario\Meu_Perfil\Orcamentos;
                 $status = Controller_Header_Usuario::Verificar_Status_Usuario();
                 
                 if ($status == 1) {
+                    $view = new View_Respondidos($status);
+                    
                     $obj_entidade_bd = new Entidade_BD(Login_Session::get_entidade_id());
-                    
                     $orcamentos = $obj_entidade_bd->RetornaOrcamentosPorStatus(Entidade_BD::RESPONDIDO, $this->indice);
-                    
                     if (!empty($orcamentos)) {
-                        View_Respondidos::Incluir_Elemento_Orcamento($orcamentos);
+                        $controller_orcamento = new Controller_Orcamento();
+                        $view_orcamento = $controller_orcamento->Retornar_Pagina();
+                        $view_orcamento->set_pagina(Controller_Orcamento::RESPONDIDOS);
+                        $view->set_view_orcamento($view_orcamento);
+                        $view->set_orcamentos($orcamentos);
+                        $view::Incluir_Elemento_Orcamento();
                     }
                 }
                 

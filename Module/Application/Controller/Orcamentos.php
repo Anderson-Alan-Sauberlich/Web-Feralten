@@ -2,6 +2,7 @@
 namespace Module\Application\Controller;
     
     use Module\Application\View\SRC\Orcamentos as View_Orcamentos;
+    use Module\Application\Controller\Layout\Elemento\Orcamento as Controller_Orcamento;
     use Module\Application\Model\DAO\Orcamento as DAO_Orcamento;
     use Module\Application\Model\Common\Util\Validador;
     use \Exception;
@@ -51,8 +52,11 @@ namespace Module\Application\Controller;
             $view = new View_Orcamentos();
             
             $orcamentos = DAO_Orcamento::BuscarIndiceTodos($this->indice);
-            
             if (!empty($orcamentos)) {
+                $controller_orcamento = new Controller_Orcamento();
+                $view_orcamento = $controller_orcamento->Retornar_Pagina();
+                $view_orcamento->set_pagina(Controller_Orcamento::ORCAMENTOS);
+                $view->set_view_orcamento($view_orcamento);
                 $view->set_orcamentos($orcamentos);
             }
             
@@ -66,10 +70,16 @@ namespace Module\Application\Controller;
          */
         public function Carregar_Orcamentos()
         {
-            $orcamentos = DAO_Orcamento::BuscarIndiceTodos($this->indice);
+            $view = new View_Orcamentos();
             
+            $orcamentos = DAO_Orcamento::BuscarIndiceTodos($this->indice);
             if (!empty($orcamentos)) {
-                View_Orcamentos::Incluir_Elemento_Orcamento($orcamentos);
+                $controller_orcamento = new Controller_Orcamento();
+                $view_orcamento = $controller_orcamento->Retornar_Pagina();
+                $view_orcamento->set_pagina(Controller_Orcamento::ORCAMENTOS);
+                $view->set_view_orcamento($view_orcamento);
+                $view->set_orcamentos($orcamentos);
+                $view::Incluir_Elemento_Orcamento();
             }
         }
     }

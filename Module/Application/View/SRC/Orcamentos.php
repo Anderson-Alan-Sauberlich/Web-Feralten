@@ -19,6 +19,13 @@ namespace Module\Application\View\SRC;
         private static $orcamentos;
         
         /**
+         * Objeto do elemento de orçamento.
+         *
+         * @var View_Orcamento $view_orcamento
+         */
+        private static $view_orcamento;
+        
+        /**
          * Seta a lista de orçamentos.
          *
          * @param array $orcamentos
@@ -26,6 +33,16 @@ namespace Module\Application\View\SRC;
         public function set_orcamentos(array $orcamentos) : void
         {
             self::$orcamentos = $orcamentos;
+        }
+        
+        /**
+         * Seta objeto do elemento de orçamento.
+         *
+         * @param View_Orcamento $view_orcamento
+         */
+        public function set_view_orcamento(View_Orcamento $view_orcamento) : void
+        {
+            self::$view_orcamento = $view_orcamento;
         }
         
         /**
@@ -38,24 +55,16 @@ namespace Module\Application\View\SRC;
         
         /**
          * Chama o codigo fonte dos elementos dos orçamentos.
-         *
-         * @param array $orcamentos
          */
-        public static function Incluir_Elemento_Orcamento(?array $orcamentos = null) : void
+        public static function Incluir_Elemento_Orcamento() : void
         {
-            if (!empty($orcamentos)) {
-                self::$orcamentos = $orcamentos;
-            }
-            
             if (!empty(self::$orcamentos)) {
-                foreach (self::$orcamentos as $obj_orcamento) {
-                    if ($obj_orcamento instanceof OBJ_Orcamento) {
-                        $view_orcamento = new View_Orcamento();
-                        
-                        $view_orcamento->set_obj_orcamento($obj_orcamento);
-                        $view_orcamento->set_pagina(View_Orcamento::ORCAMENTOS);
-                        
-                        $view_orcamento->Executar();
+                if (self::$view_orcamento instanceof View_Orcamento) {
+                    foreach (self::$orcamentos as $obj_orcamento) {
+                        if ($obj_orcamento instanceof OBJ_Orcamento) {
+                            self::$view_orcamento->set_obj_orcamento($obj_orcamento);
+                            self::$view_orcamento->Executar();
+                        }
                     }
                 }
             } else {
