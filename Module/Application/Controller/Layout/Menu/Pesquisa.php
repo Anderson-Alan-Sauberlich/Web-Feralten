@@ -272,7 +272,53 @@ namespace Module\Application\Controller\Layout\Menu;
         public static function Buscar_Marca_Por_Id_Categoria(?int $categoria)
         {
             if (!empty($categoria)) {
-                return DAO_Marca::Buscar_Por_ID_Categorai($categoria);
+                /*
+                 * Esse cloco de codigo para ordenar as principais marcas pode ser substituido por
+                 * Alguma inplementação no model ou na view e pode ser puxado de uma tabela no bando de dados
+                 * no schema ADMIN. Quando for alterado a interfase grafica do site, isso pode ser aprimodaro.
+                 */
+                $principais_marcas = [
+                    //carros
+                    100011 => '0',  //Audi
+                    100016 => '1',  //BMW
+                    100003 => '2',  //Chevrolet
+                    100008 => '3',  //Citroën
+                    100010 => '4',  //Dodge
+                    100000 => '5',  //Fiat
+                    100001 => '6',  //Ford
+                    100012 => '7',  //Honda
+                    100014 => '8',  //Hyundai
+                    100019 => '9',  //Jeep
+                    100007 => '10', //Kia Motors
+                    100020 => '11', //Mercedes-Benz
+                    100015 => '12', //Mitsubishi
+                    100009 => '13', //Nissan
+                    100004 => '14', //Peugeot
+                    100005 => '15', //Renault
+                    100006 => '16', //Toyota
+                    100002 => '17', //Volkswagen
+                    //motos
+                    200005 => '0', //BMW
+                    200004 => '1', //Dafra
+                    200010 => '2', //Ducati
+                    200000 => '3', //Honda
+                    200129 => '4', //Indian
+                    200008 => '5', //Kawasaki
+                    200002 => '6', //Sundown
+                    200003 => '7', //Suzuki
+                    200001 => '8'  //Yamaha  
+                ];
+                
+                $marcas = DAO_Marca::Buscar_Por_ID_Categorai($categoria);
+                
+                foreach ($marcas as $key => $obj_marca) {
+                    if (array_key_exists($obj_marca->get_id(), $principais_marcas)) {
+                        $marcas[$principais_marcas[$obj_marca->get_id()]] = $obj_marca;
+                        unset($marcas[$key]);
+                    }
+                }
+                
+                return $marcas;
             } else {
                 return null;
             }
