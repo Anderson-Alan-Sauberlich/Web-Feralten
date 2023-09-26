@@ -1,8 +1,6 @@
 # Web-Feralten
 
-A Empresa Sauber Sistemas LTDA-ME CNPJ: 23.827.328/0001-81 está registrada como Simples Nacional com os categorias: Desenvolvimento de Software por Licença e Desenvolvimento de Paginas Web para Comercio e Publicidade.
-A nossa Empresa está trabalhando no Site em questão. A Marca refere-se apenas a este Site.
-O nosso Site é um site de anúncios de peças usadas, que visa melhorar a comunicação entre ferros velho, oficinas mecânicas e eventualmente pessoas interessadas no assunto que estejam a procura de peças raras ou antigas para seus carros raros ou antigos. Assim como também veículos de: rally, motocross, agricultura, transportes, etc.
+Site de anúncios de peças usadas, que visa melhorar a comunicação entre ferros velho, oficinas mecânicas e eventualmente pessoas interessadas no assunto que estejam a procura de peças raras ou antigas para seus carros raros ou antigos. Assim como também veículos de: rally, motocross, agricultura, transportes, etc.
 
 O Site como se trata de um site de anúncios, não terá “botão comprar”. A compra será realizada entre o Cliente que Procura pelas Peças e o Dono que a Cadastrou.
 
